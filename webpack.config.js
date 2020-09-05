@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 
 module.exports = {
@@ -42,11 +43,17 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
+                // use: [
+                //     'style-loader',
+                //     'css-loader',
+                //     'sass-loader',
+                // ],
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
-                    'sass-loader',
-                ],
+                    'resolve-url-loader',
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.pug$/,
@@ -79,6 +86,11 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
+        }),
+
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css"
         }),
 
 
@@ -138,6 +150,8 @@ module.exports = {
         compress: true,
         port: 9000
     },
+
+    devtool: 'inline-source-map',
 
     optimization: {
         splitChunks: {
