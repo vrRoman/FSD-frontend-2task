@@ -43,11 +43,6 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                // use: [
-                //     'style-loader',
-                //     'css-loader',
-                //     'sass-loader',
-                // ],
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
@@ -64,11 +59,10 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]'
+                }
             },
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
