@@ -64,11 +64,10 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ],
+                loader: 'file-loader',
+                options: {
+                    name: 'images/[name].[ext]'
+                }
             },
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
