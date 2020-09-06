@@ -148,14 +148,14 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 9000
+        port: 9000,
+        hot: true
     },
 
-    devtool: 'inline-source-map',
-
     optimization: {
-        splitChunks: {
-            chunks: 'all'
-        }
+        // splitChunks: {
+        //     chunks: 'all'
+        // }
+        minimize: false
     }
 }
