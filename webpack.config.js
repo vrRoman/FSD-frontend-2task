@@ -25,7 +25,8 @@ module.exports = {
     resolve: {
         alias: {
             '@ui-kit': path.resolve(__dirname, 'src/pages/ui-kit'),
-            '@web-pages': path.resolve(__dirname, 'src/pages/website-pages')
+            '@web-pages': path.resolve(__dirname, 'src/pages/website-pages'),
+            '@': path.resolve(__dirname, 'src'),
         }
     },
 
@@ -43,17 +44,18 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                // use: [
-                //     'style-loader',
-                //     'css-loader',
-                //     'sass-loader',
-                // ],
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: true,
+                            reloadAll: true
+                        }
+                    },
                     'css-loader',
                     'resolve-url-loader',
                     'sass-loader'
-                ]
+                ],
             },
             {
                 test: /\.pug$/,

@@ -1,2 +1,89 @@
+@import '@/sass/colors.sass'
+
+
 body
-  background-color: #000
+    width: 1440px
+    margin: 0 auto
+
+
+.container
+    padding: 145px 190px 0 150px
+    display: flex
+    justify-content: space-between
+    margin-left: auto
+    margin-right: auto
+
+
+
+.color
+    font:
+        family: 'Quicksand', sans-serif
+        size: 19px
+        style: normal
+        weight: normal
+    line-height: 29px
+
+    display: flex
+    align-items: center
+
+    margin-top: 20px
+    &:first-child
+        margin: 0
+
+.color__name
+    font-weight: bold
+
+.color__info
+    margin-left: 40px
+    color: $dark-shade-100
+
+.color__demo
+    width: 70px
+    height: 70px
+    border-radius: 6px
+
+.color__demo_dark-shade-100
+    background-color: $dark-shade-100
+
+.color__demo_dark-shade-75
+    background-color: $dark-shade-75
+
+.color__demo_dark-shade-50
+    background-color: $dark-shade-50
+
+.color__demo_dark-shade-25
+    background-color: $dark-shade-25
+
+.color__demo_dark-shade-5
+    background-color: $dark-shade-5
+
+.color__demo_purple
+    background-color: $purple
+
+.color__demo_green
+    background-color: $green
+
+
+
+.type
+    display: flex
+    justify-content: space-between
+
+    width: 405px
+    margin-top: 50px
+    &:first-child
+        margin: 0
+
+.type__text
+    width: 340px
+
+.type__name
+    width: 40px
+    text-align: right
+    color: $dark-shade-25
+    font:
+        family: Montserrat, sans-serif
+        style: normal
+        weight: normal
+
+    margin-right: 30px
