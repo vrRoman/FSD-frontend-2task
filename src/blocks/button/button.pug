@@ -1,0 +1,5 @@
+mixin button(className, text, arrow)
+    button(class=`${className} button`)
+        a.h3= text
+        if arrow
+            i.button__arrow.material-icons arrow_forward

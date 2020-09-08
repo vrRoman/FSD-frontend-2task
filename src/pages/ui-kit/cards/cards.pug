@@ -1,1 +1,17 @@
- 
+extends ../../../templates/ui-kit.pug
+
+
+block vars
+    - let name = "cards"
+
+
+block content
+    .cards
+        .cards__column
+            include ../../../blocks/cards/search/search-card
+            include ../../../blocks/cards/signup/signup-card
+
+        .cards__column
+        .cards__column
+
+

@@ -33,7 +33,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',
@@ -61,6 +61,8 @@ module.exports = {
                 test: /\.pug$/,
                 loader: 'pug-loader',
                 options: {
+                    hmr: true,
+                    reloadAll: true,
                     pretty: true
                 }
             },
