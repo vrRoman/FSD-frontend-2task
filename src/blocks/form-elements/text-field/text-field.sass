@@ -1,0 +1,55 @@
+@import '@/sass/colors.sass'
+
+
+@mixin on-hover
+    border-color: $dark-shade-50
+    color: $dark-shade-75
+    line-height: 24px
+    &::placeholder
+        color: $dark-shade-75
+
+
+.container
+    padding: 150px 140px 0 140px
+
+.text-field
+    width: 320px
+
+.text-field__info
+    display: flex
+    justify-content: space-between
+    margin-bottom: 8px
+
+.text-field__state
+    text-transform: uppercase
+    font-size: 12px
+    line-height: 15px
+    color: $dark-shade-50
+
+.text-field__input
+    width: 100%
+    height: 44px
+
+    font:
+        family: inherit
+        size: inherit
+    line-height: 18px
+    color: inherit
+
+    border: 1px solid $dark-shade-25
+    box-sizing: border-box
+    border-radius: 4px
+    outline: none
+
+    padding: 0 15px
+
+    transition: 200ms
+    &:hover, &:focus
+        @include on-hover
+    &::placeholder
+        color: $dark-shade-25
+        transition: 200ms
+
+.text-field_active
+    .text-field__input
+        @include on-hover

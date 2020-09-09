@@ -1,1 +1,22 @@
- 
+extends ../../../templates/ui-kit
+
+include ../../../blocks/form-elements/text-field/text-field.pug
+include ../../../blocks/dropdowns/guests-dropdown/guests-dropdown
+include ../../../blocks/dropdowns/date-dropdown/date-dropdown
+
+
+block vars
+    - let name = 'form-elements'
+
+block content
+    .fields
+        +text-field("Email", "default", "", "Text field")
+        +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field")
+        +guests-dropdown("", "Dropdown", "default")
+        +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field")
+
+
+
+    script
+
+

@@ -1,4 +1,4 @@
-include ../../dropdown/dropdown.pug
+include ../../dropdowns/date-dropdown/date-dropdown
 include ../../button/button
 
 
@@ -8,15 +8,15 @@ include ../../button/button
     .search-card__date.date
         .search-card__coming
             h3.date__title Прибытие
-            +dropdown("date-dropdown", "ДД.ММ.ГГГГ")
+            +date-dropdown("date-dropdown", "ДД.ММ.ГГГГ")
 
         .search-card__departure
             h3.date__title Выезд
-            +dropdown("date-dropdown", "ДД.ММ.ГГГГ")
+            +date-dropdown("date-dropdown", "ДД.ММ.ГГГГ")
 
     .search-card__guests
         h3.guests__title Гости
-        +dropdown("guests-dropdown", "Гости")
+        +date-dropdown("guests-dropdown", "Гости")
 
     +button("search-card__button", "Подобрать номер", true)
 

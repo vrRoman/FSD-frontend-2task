@@ -1,0 +1,9 @@
+mixin date-dropdown(className, title, state)
+    .dropdown(class=`${className ? className : ''}`)
+        .dropdown__info
+            h3.dropdown__title= title
+            if state
+                span.dropdown__state= state
+        .dropdown__input
+            .dropdown__text ДД.ММ.ГГГГ
+            i.dropdown__arrow.material-icons expand_more

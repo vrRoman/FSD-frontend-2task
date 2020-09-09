@@ -59,12 +59,22 @@ module.exports = {
             },
             {
                 test: /\.pug$/,
-                loader: 'pug-loader',
-                options: {
-                    hmr: true,
-                    reloadAll: true,
-                    pretty: true
-                }
+                use: [
+                    {
+                        loader: 'pug-loader',
+                        options: {
+                            hmr: true,
+                            reloadAll: true,
+                            pretty: true
+                        }
+                    }
+                ]
+                // loader: 'pug-loader',
+                // options: {
+                //     hmr: true,
+                //     reloadAll: true,
+                //     pretty: true
+                // }
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
@@ -156,9 +166,6 @@ module.exports = {
     },
 
     optimization: {
-        // splitChunks: {
-        //     chunks: 'all'
-        // }
         minimize: false
     }
 }

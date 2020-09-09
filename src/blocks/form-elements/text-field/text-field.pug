@@ -1,0 +1,7 @@
+mixin text-field(text, state, className, title)
+    .text-field(class=className)
+        .text-field__info
+            h3.text-field__title= title
+            if state
+                span.text-field__state= state
+        input(type="text" placeholder=text).text-field__input
