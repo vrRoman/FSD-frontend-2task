@@ -1,0 +1,15 @@
+mixin popup(options)
+    .items-popup(class=options.className)
+        each val in options
+            each item in val
+                if item.list
+                    .items-popup__item
+                        h3.items-popup__title #{item.name}
+
+                        .items-popup__value
+                            .items-popup__change-value -
+                            h3 #{item.value}
+                            .items-popup__change-value +
+        .items-popup__clear Очистить
+        .items-popup__confirm Применить
+

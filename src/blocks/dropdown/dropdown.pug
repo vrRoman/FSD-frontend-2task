@@ -1,0 +1,14 @@
+mixin dropdown(text, title, popupMixin, popupMixinParams, className, description)
+    .dropdown(class=`${className ? className : ''}`)
+        .dropdown__info
+            h3.dropdown__title= title
+            if description
+                span.dropdown__description= description
+
+        .dropdown__input
+            .dropdown__text= text
+            i.dropdown__arrow.material-icons expand_more
+
+        .dropdown__popup
+            +#{popupMixin}(popupMixinParams)
+

@@ -17,3 +17,12 @@ html(lang="ru")
 
 
         script(src="ui-"+name+".js")
+
+        script
+            include ../js/dropdown.js
+
+        script.
+            document.addEventListener('DOMContentLoaded', () => {
+                dropdown(document.querySelector('.dropdown__input'), document.querySelector('.dropdown__popup'),
+                    'dropdown__popup_open')
+            })

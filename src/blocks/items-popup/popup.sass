@@ -1,0 +1,50 @@
+@import '@/sass/colors.sass'
+
+.items-popup
+    border: 1px solid $dark-shade-25
+        bottom-left-radius: 4px
+        bottom-right-radius: 4px
+
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+    padding: 7px
+    box-sizing: border-box
+    background-color: #fff
+
+.items-popup__item
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.items-popup__title
+    margin-left: 8px
+
+.items-popup__value
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 92px
+
+
+.items-popup__change-value
+    width: 30px
+    height: 30px
+    border: 1px solid $dark-shade-50
+        radius: 50%
+    display: flex
+    justify-content: center
+    align-items: center
+    color: $dark-shade-50
+    cursor: pointer
+    box-sizing: border-box
+
+.items-popup__change-value_not-active
+    opacity: 38%
+
+
+.items-popup_small
+    height: 119px
+    .items-popup__clear, .items-popup__confirm
+        display: none
