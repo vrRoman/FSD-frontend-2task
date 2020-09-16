@@ -7,9 +7,11 @@ mixin popup(options)
                         h3.items-popup__title #{item.name}
 
                         .items-popup__value
-                            .items-popup__change-value -
+                            .items-popup__change-value.items-popup__remove-value -
                             h3 #{item.value}
-                            .items-popup__change-value +
+                            .items-popup__change-value.items-popup__add-value +
         .items-popup__clear Очистить
         .items-popup__confirm Применить
 
+
+            

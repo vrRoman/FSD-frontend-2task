@@ -4,6 +4,7 @@ include ../../../blocks/text-field/text-field.pug
 
 include ../../../blocks/dropdown/dropdown.pug
 include ../../../blocks/items-popup/popup
+include ../../../blocks/calendar/calendar.pug
 
 
 block vars
@@ -15,29 +16,32 @@ block content
         +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field")
         +dropdown("Сколько гостей", "Dropdown", "popup",
             {
-            "className": "guests items-popup_small",
-            "items": {
-                "item1": {
-                    "name": "Спальни",
-                    "value": "2",
-                    "list": true
-                },
-                "item2": {
-                    "name": "Кровати",
-                    "value": "2",
-                    "list": true
-                },
-                "item3": {
-                    "name": "Ванные комнаты",
-                    "value": "0",
-                    "list": true
-                },
+                "className": "guests items-popup_small",
+                "items": {
+                    "item1": {
+                        "name": "Спальни",
+                        "value": "2",
+                        "list": true
+                    },
+                    "item2": {
+                        "name": "Кровати",
+                        "value": "2",
+                        "list": true
+                    },
+                    "item3": {
+                        "name": "Ванные комнаты",
+                        "value": "0",
+                        "list": true
+                    },
 
-                "list": true
-            },
+                    "list": true
+                },
             },
             "", "default")
         +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field")
+
+        +dropdown("ДД.ММ.ГГГГ", "date dropdown", "calendar", "", "", "")
+        +dropdown("ДД.ММ.ГГГГ", "date dropdown", "calendar", "", "", "")
 
 
 
