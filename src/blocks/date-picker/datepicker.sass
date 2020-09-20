@@ -1,0 +1,49 @@
+@import '@/sass/colors'
+
+.date-picker
+    display: flex
+    justify-content: space-between
+
+.date-picker__input_double, .date-picker__input_single
+    font-family: Montserrat, sans-serif
+    font-size: 14px
+    line-height: 24px
+    color: $dark-shade-75
+
+    padding-left: 15px
+    border: 1px solid $dark-shade-25
+    box-sizing: border-box
+    border-radius: 4px
+    height: 44px
+    width: 150px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    transition: 200ms
+    background-color: transparent
+    cursor: pointer
+    &:hover
+        border-color: $dark-shade-50
+
+
+.date-picker__text-field
+    position: relative
+    display: inline-block
+    width: 100%
+
+.date-picker__arrow
+    color: $dark-shade-50
+    position: absolute
+    right: 0
+    top: 0
+    z-index: -1
+
+.date-picker__title
+    margin-bottom: 5px
+
+.date-picker_single
+    .date-picker__date
+        width: 100%
+
+.date-picker__input_single
+    width: 100%

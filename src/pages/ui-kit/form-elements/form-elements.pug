@@ -4,7 +4,7 @@ include ../../../blocks/text-field/text-field.pug
 
 include ../../../blocks/dropdown/dropdown.pug
 include ../../../blocks/items-popup/popup
-include ../../../blocks/calendar/calendar.pug
+include ../../../blocks/date-picker/datepicker
 
 
 block vars
@@ -12,36 +12,41 @@ block vars
 
 block content
     .fields
-        +text-field("Email", "default", "", "Text field")
-        +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field")
-        +dropdown("Сколько гостей", "Dropdown", "popup",
-            {
-                "className": "guests items-popup_small",
-                "items": {
-                    "item1": {
-                        "name": "Спальни",
-                        "value": "2",
-                        "list": true
-                    },
-                    "item2": {
-                        "name": "Кровати",
-                        "value": "2",
-                        "list": true
-                    },
-                    "item3": {
-                        "name": "Ванные комнаты",
-                        "value": "0",
-                        "list": true
-                    },
+        .fields__field
+            +text-field("Email", "default", "", "Text field")
+        .fields__field
+            +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field")
+        .fields__field
+            +dropdown("Сколько гостей", "Dropdown", "popup",
+                {
+                    "className": "guests items-popup_small",
+                    "items": {
+                        "item1": {
+                            "name": "Спальни",
+                            "value": "2",
+                            "list": true
+                        },
+                        "item2": {
+                            "name": "Кровати",
+                            "value": "2",
+                            "list": true
+                        },
+                        "item3": {
+                            "name": "Ванные комнаты",
+                            "value": "0",
+                            "list": true
+                        },
 
-                    "list": true
+                        "list": true
+                    },
                 },
-            },
-            "", "default")
-        +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field")
-
-        +dropdown("ДД.ММ.ГГГГ", "date dropdown", "calendar", "", "", "")
-        +dropdown("ДД.ММ.ГГГГ", "date dropdown", "calendar", "", "", "")
+                "", "default")
+        .fields__field
+            +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field")
+        .fields__field
+            +datepicker(true, "Date dropdown")
+        .fields__field
+            +datepicker(false, "Filter date dropdown", "")
 
 
 
