@@ -37,7 +37,7 @@ export const countedItems = (dropdownElems, textSelector, itemSelector,
                 itemNum = _counter
 
             itemsInfo.push({
-                name: nameElem.innerText,
+                name: nameElem.innerText.toLowerCase(),
                 value: Number(valueElem.innerText)
             })
 
@@ -58,6 +58,11 @@ export const countedItems = (dropdownElems, textSelector, itemSelector,
                         fullText += item.value + ' ' + item.name + ', '
                     }
                 }
+                fullText = fullText.slice(0, -2)
+
+                if (fullText === '') {
+                    fullText = defaultText
+                }
 
                 changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText.toLowerCase(), maxLength)
 
@@ -77,8 +82,13 @@ export const countedItems = (dropdownElems, textSelector, itemSelector,
                         fullText += item.value + ' ' + item.name + ', '
                     }
                 }
+                fullText = fullText.slice(0, -2)
 
-                changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText.toLowerCase(), maxLength)
+                if (fullText === '') {
+                    fullText = defaultText
+                }
+
+                changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText, maxLength)
             }
 
             _counter ++
