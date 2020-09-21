@@ -13,9 +13,9 @@ block vars
 block content
     .fields
         .fields__field
-            +text-field("Email", "default", "", "Text field")
+            +text-field("Email", "default", "", "Text field", "email")
         .fields__field
-            +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field")
+            +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field", "text")
         .fields__field
             +dropdown("Сколько гостей", "Dropdown", "popup",
                 {
@@ -42,11 +42,13 @@ block content
                 },
                 "", "default")
         .fields__field
-            +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field")
+            +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field", "text")
         .fields__field
-            +datepicker(true, "Date dropdown")
+            +datepicker(true, "Date dropdown", "")
         .fields__field
-            +datepicker(false, "Filter date dropdown", "")
+            +datepicker(false, "Filter date dropdown", "19 авг - 23 авг")
+        .fields__field
+            +text-field("Email", "", "subscription-text-field", "subscription text field", "email", true)
 
 
 

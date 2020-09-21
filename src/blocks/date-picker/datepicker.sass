@@ -22,8 +22,11 @@
     transition: 200ms
     background-color: transparent
     cursor: pointer
+    outline: none
     &:hover
         border-color: $dark-shade-50
+    &::placeholder
+        color: $dark-shade-25
 
 
 .date-picker__text-field
@@ -42,6 +45,7 @@
     margin-bottom: 5px
 
 .date-picker_single
+    width: 266px
     .date-picker__date
         width: 100%
 

@@ -5,8 +5,6 @@
     border-color: $dark-shade-50
     color: $dark-shade-75
     line-height: 24px
-    &::placeholder
-        color: $dark-shade-75
 
 
 .container
@@ -53,3 +51,14 @@
 .text-field_active
     .text-field__input
         @include on-hover
+
+.text-field__field
+    position: relative
+.text-field__arrow
+    position: absolute
+    right: 0
+    background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+.subscription-text-field
+    width: 266px
