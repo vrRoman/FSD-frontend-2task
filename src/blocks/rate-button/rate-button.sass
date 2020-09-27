@@ -1,0 +1,15 @@
+@import '@/sass/colors'
+.rate-button
+    display: inline-block
+    margin-right: 20px
+
+.rate-button__star
+    &:after
+        content: 'star_border'
+        background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%)
+        -webkit-text-fill-color: transparent
+        -webkit-background-clip: text
+
+.rate-button__star_active
+    &:after
+        content: 'star'
