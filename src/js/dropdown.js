@@ -1,19 +1,19 @@
 export const dropdown = (dropdownElems, popupSelector, inputSelector, classNameToToggle) => {
-    window.onclick = evt => {
+    window.addEventListener('click', evt => {
         for (let elem of dropdownElems) {
-            let input = elem.querySelector(inputSelector),
+            let inputs = elem.querySelectorAll(inputSelector),
                 popup = elem.querySelector(popupSelector)
 
-            if (evt.composedPath().includes(popup))
-                return
+        if (evt.composedPath().includes(popup))
+            return
 
-            else if (evt.composedPath().includes(input))
-                elem.classList.toggle(classNameToToggle)
+        else if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1]))
+            elem.classList.toggle(classNameToToggle)
 
-            else
-                elem.classList.remove(classNameToToggle)
+        else
+            elem.classList.remove(classNameToToggle)
         }
-    }
+    })
 }
 
 

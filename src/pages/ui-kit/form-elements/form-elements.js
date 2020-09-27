@@ -22,27 +22,9 @@ import '../../../blocks/date-picker/datepicker'
 
 
 
-$('.date-picker__input_single').datepicker({
-    range: 'period',
-    dateFormat: 'd M',
-    monthNamesShort: ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
-    onSelect: function(dateText, inst, extensionRange) {
-        if (extensionRange.startDateText !== extensionRange.endDateText) {
-            $('[name="all-dates"]').val(extensionRange.startDateText + " - " + extensionRange.endDateText)
-        }
-    }
-})
 
-$('.date-picker__input_double').datepicker({
-    range: 'period',
-    dateFormat: 'dd.mm.yy',
-    onSelect: function(dateText, inst, extensionRange) {
-        if (extensionRange.startDateText !== extensionRange.endDateText) {
-            $('[name="start-date"]').val(extensionRange.startDateText)
-            $('[name="end-date"]').val(extensionRange.endDateText)
-        }
-    }
-})
+
+
 
 
 $('.masked-date input').mask('99.99.9999')
