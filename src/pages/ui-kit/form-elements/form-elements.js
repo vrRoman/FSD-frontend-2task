@@ -22,6 +22,8 @@ import '@/blocks/date-picker/datepicker'
 
 
 import '@blocks/checkbox-buttons/checkbox-buttons.js'
+import '@blocks/radio-buttons/radio-buttons'
+import '@blocks/toggle-buttons/toggle-buttons'
 
 
 

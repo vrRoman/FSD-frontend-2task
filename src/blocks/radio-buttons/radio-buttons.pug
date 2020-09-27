@@ -1,0 +1,15 @@
+mixin radio-buttons(title, buttons, inputsName)
+    .radio-buttons
+        h3.radio-buttons__title= title
+
+        .radio-buttons__buttons
+            each buttonName, buttonIndex in buttons
+                - let checked = buttonIndex === 0;
+
+                label.radio-buttons__button.radio-button
+                    input.radio-button__input(
+                        type="radio",
+                        name= inputsName,
+                        checked= checked
+                    )
+                    span.radio-button__name= buttonName

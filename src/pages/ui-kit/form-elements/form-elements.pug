@@ -6,6 +6,8 @@ include ../../../blocks/dropdown/dropdown.pug
 include ../../../blocks/items-popup/popup
 include ../../../blocks/date-picker/datepicker
 include ../../../blocks/checkbox-buttons/checkbox-buttons
+include ../../../blocks/radio-buttons/radio-buttons
+include ../../../blocks/toggle-buttons/toggle-buttons
 
 
 block vars
@@ -55,7 +57,7 @@ block content
 
     .column-2
         .switches
-            .switches__checkbox-buttons
+            .switches__switch
                 +checkbox-buttons('checkbox buttons',
                     [
                         {
@@ -71,6 +73,21 @@ block content
                             checked: true
                         }
                     ])
+            .switches__switch
+                +radio-buttons('Radio buttons', ['Мужчина', 'Женщина'], 'gender')
+
+            .switches__switch
+                +toggle-buttons('Toggle buttons', [
+                    {
+                        name: 'Получать спецпредложения',
+                        checked: true
+                    },
+                    {
+                        name: 'Получать спецпредложения',
+                        checked: false
+                    }
+                ])
+
 
 
 

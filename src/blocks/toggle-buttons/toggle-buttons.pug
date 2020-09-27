@@ -1,0 +1,12 @@
+mixin toggle-buttons(title, buttons)
+    .toggle-buttons
+        h3.toggle-buttons__title= title
+
+        .toggle-buttons__buttons
+            each button in buttons
+                label.toggle-buttons__label.toggle-button
+                    input.toggle-button__input(
+                        type="checkbox",
+                        checked=button.checked
+                    )
+                    span.toggle-button__name= button.name
