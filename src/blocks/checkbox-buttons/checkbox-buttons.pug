@@ -1,0 +1,15 @@
+mixin checkbox-buttons(title, checkboxesNames)
+    .checkboxes
+        h3.checkboxes__title= title
+
+        .checkboxes__buttons
+            each elem in checkboxesNames
+                label.checkboxes__button.checkbox-button
+                    input.checkbox-button__input(
+                        type="checkbox",
+                        checked= elem.checked
+                    )
+                    span.checkbox-button__name !{elem.name}
+
+
+

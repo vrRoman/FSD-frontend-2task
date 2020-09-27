@@ -17,9 +17,11 @@ import 'jquery-ui/themes/base/all.css'
 
 import '@/js/jquery.datepicker.extension.range.min'
 
-import '../../../blocks/dropdown/dropdown.js'
-import '../../../blocks/date-picker/datepicker'
+import '@/blocks/dropdown/dropdown.js'
+import '@/blocks/date-picker/datepicker'
 
+
+import '@blocks/checkbox-buttons/checkbox-buttons.js'
 
 
 

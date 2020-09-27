@@ -1,0 +1,46 @@
+@import '@/sass/colors'
+
+.checkbox-button > input
+    position: absolute
+    z-index: -1
+    opacity: 0
+
+    border: 1px solid $dark-shade-25
+    border-radius: 4px
+    &:checked + span::before
+        border: 1px solid $purple
+        background-image: url(../../images/done.svg)
+
+.checkbox-button > span
+    display: inline-flex
+    user-select: none
+    position: relative
+    font-family: Montserrat, sans-serif
+    font-size: 14px
+    line-height: 18px
+    color: $dark-shade-50
+    &:before
+        content: ''
+        display: inline-block
+        width: 20px
+        height: 20px
+        border: 1px solid #adb5bd
+        border-radius: 0.25em
+        margin-right: 0.5em
+        cursor: pointer
+        background-repeat: no-repeat
+        background-position: 50% 40%
+
+
+.checkboxes__buttons
+    display: flex
+    flex-direction: column
+
+
+.checkboxes__title
+    margin-bottom: 16px
+
+.checkbox-button
+    margin-bottom: 10px
+    display: inline-block
+    height: 20px

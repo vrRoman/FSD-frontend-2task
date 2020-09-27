@@ -27,6 +27,7 @@ module.exports = {
             '@ui-kit': path.resolve(__dirname, 'src/pages/ui-kit'),
             '@web-pages': path.resolve(__dirname, 'src/pages/website-pages'),
             '@': path.resolve(__dirname, 'src'),
+            '@blocks': path.resolve(__dirname, 'src/blocks')
         }
     },
 

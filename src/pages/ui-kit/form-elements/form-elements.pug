@@ -5,50 +5,72 @@ include ../../../blocks/text-field/text-field.pug
 include ../../../blocks/dropdown/dropdown.pug
 include ../../../blocks/items-popup/popup
 include ../../../blocks/date-picker/datepicker
+include ../../../blocks/checkbox-buttons/checkbox-buttons
 
 
 block vars
     - let name = 'form-elements'
 
 block content
-    .fields
-        .fields__field
-            +text-field("Email", "default", "", "Text field", "email")
-        .fields__field
-            +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field", "text")
-        .fields__field
-            +dropdown("Сколько гостей", "Dropdown", "popup",
-                {
-                    "className": "guests items-popup_small",
-                    "items": {
-                        "item1": {
-                            "name": "Спальни",
-                            "value": "2",
-                            "list": true
-                        },
-                        "item2": {
-                            "name": "Кровати",
-                            "value": "2",
-                            "list": true
-                        },
-                        "item3": {
-                            "name": "Ванные комнаты",
-                            "value": "0",
-                            "list": true
-                        },
+    .column-1
+        .fields
+            .fields__field
+                +text-field("Email", "default", "", "Text field", "email")
+            .fields__field
+                +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field", "text")
+            .fields__field
+                +dropdown("Сколько гостей", "Dropdown", "popup",
+                    {
+                        "className": "guests items-popup_small",
+                        "items": {
+                            "item1": {
+                                "name": "Спальни",
+                                "value": "2",
+                                "list": true
+                            },
+                            "item2": {
+                                "name": "Кровати",
+                                "value": "2",
+                                "list": true
+                            },
+                            "item3": {
+                                "name": "Ванные комнаты",
+                                "value": "0",
+                                "list": true
+                            },
 
-                        "list": true
+                            "list": true
+                        },
                     },
-                },
-                "", "default")
-        .fields__field
-            +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field", "text")
-        .fields__field
-            +datepicker(true, "Date dropdown", "")
-        .fields__field
-            +datepicker(false, "Filter date dropdown", "19 авг - 23 авг")
-        .fields__field
-            +text-field("Email", "", "subscription-text-field", "subscription text field", "email", true)
+                    "", "default")
+            .fields__field
+                +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field", "text")
+            .fields__field
+                +datepicker(true, "Date dropdown", "")
+            .fields__field
+                +datepicker(false, "Filter date dropdown", "19 авг - 23 авг")
+            .fields__field
+                +text-field("Email", "", "subscription-text-field", "subscription text field", "email", true)
+
+
+    .column-2
+        .switches
+            .switches__checkbox-buttons
+                +checkbox-buttons('checkbox buttons',
+                    [
+                        {
+                            name: 'Можно курить',
+                            checked: false
+                        },
+                        {
+                            name: 'Можно с питомцами',
+                            checked: true
+                        },
+                        {
+                            name: 'Можно пригласить гостей<br>(до 10 человек)',
+                            checked: true
+                        }
+                    ])
 
 
 
