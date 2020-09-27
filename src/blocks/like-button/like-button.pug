@@ -1,0 +1,7 @@
+mixin like-button(title, likeELems)
+    .like-button
+        h3.like-button__title= title
+        each elem in likeELems
+            .like-button__button(class=`${elem.active ? 'like-button__button_active' : ''}`)
+                .like-button__heart.material-icons
+                .like-button__like-num= elem.number

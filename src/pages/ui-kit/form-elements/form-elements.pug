@@ -1,14 +1,5 @@
 extends ../../../templates/ui-kit
 
-include ../../../blocks/text-field/text-field.pug
-
-include ../../../blocks/dropdown/dropdown.pug
-include ../../../blocks/items-popup/popup
-include ../../../blocks/date-picker/datepicker
-include ../../../blocks/checkbox-buttons/checkbox-buttons
-include ../../../blocks/radio-buttons/radio-buttons
-include ../../../blocks/toggle-buttons/toggle-buttons
-
 
 block vars
     - let name = 'form-elements'
@@ -85,6 +76,18 @@ block content
                     {
                         name: 'Получать спецпредложения',
                         checked: false
+                    }
+                ])
+
+            .switches__switch
+                +like-button('Like button', [
+                    {
+                        number: 2,
+                        active: false
+                    },
+                    {
+                        number: 12,
+                        active: true
                     }
                 ])
 
