@@ -1,6 +1,6 @@
 import 'jquery-ui/ui/widgets/datepicker'
 import '@/js/jquery.datepicker.extension.range.min'
-import 'jquery-ui/themes/base/all.css'
+
 
 let clearBtn     = '<button class="ui-datepicker-current ' +
     'ui-state-default ui-corner-all ' +
