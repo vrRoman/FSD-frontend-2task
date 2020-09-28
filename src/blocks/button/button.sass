@@ -1,20 +1,80 @@
 @import '@/sass/colors.sass'
 
+
 .button
     border: none
-    background: $purple-gradient
     border-radius: 22px
     position: relative
-
+    background: $purple-gradient
+    width: 99px
     height: 44px
     display: flex
-    a
-        color: #FFFFFF
+    align-items: center
+    box-sizing: border-box
+    transition: .4s
+    outline: none
+    .button__text
+        color: #fff
         width: 100%
-        text-align: center
-        margin: auto 0
+        height: 100%
+        display: flex
+        align-items: center
+        justify-content: center
+        cursor: pointer
 
-.button__arrow
-    position: absolute
-    right: 0
-    color: #fff
+    .button__arrow
+        position: absolute
+        right: 0
+        color: #fff
+        display: none
+    &:hover
+        opacity: .5
+
+
+.button_default-hover
+    opacity: .5
+
+
+.button_secondary, .button_secondary-hover
+    background: $purple-gradient
+    .button__text
+        color: $purple
+        z-index: 1
+    &:before
+        content: ''
+        position: absolute
+        top: 2px
+        bottom: 2px
+        left: 2px
+        right: 2px
+        background: #fff
+        border-radius: 20px
+        z-index: 0
+    &:hover
+        background: linear-gradient(180deg, #BC9CFF80 0%, #8BA4F980 100%)
+        opacity: 1
+
+.button_secondary-hover
+    background: linear-gradient(180deg, #BC9CFF80 0%, #8BA4F980 100%)
+    opacity: 1
+
+
+
+.button_icon-link-primary, .button_icon-link-secondary
+    background: transparent
+    width: auto
+    height: auto
+
+.button_icon-link-primary
+    .button__text
+        color: $purple
+
+.button_icon-link-secondary
+    .button__text
+        color: $dark-shade-50
+
+.button_extended
+    width: 320px
+    .button__arrow
+        display: inline-block
+        padding: 10px

@@ -92,8 +92,22 @@ block content
 
     .column-3
         .other-elems
-            .other-elems__range-slider
+            .other-elems__slider
                 +range-slider('Range slider')
+
+            .other-elems__buttons
+                h3.other-elems__title Buttons
+                .default-buttons
+                    +button('click me', false)
+                    +button('click me', 'button_default-hover')
+                    +button('click me', 'button_secondary')
+                    +button('click me', 'button_secondary-hover')
+                .icon-link-buttons
+                    +button('click me', 'button_icon-link-primary')
+                    +button('click me', 'button_icon-link-secondary')
+                .extended-button
+                    +button('Перейти к оплате', 'button_extended')
+
 
 
 
