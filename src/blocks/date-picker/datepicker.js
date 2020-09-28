@@ -1,5 +1,5 @@
 import 'jquery-ui/ui/widgets/datepicker'
-import '@/js/jquery.datepicker.extension.range.min'
+import '@blocks/date-picker/jquery.datepicker.extension.range.min'
 
 
 let clearBtn     = '<button class="ui-datepicker-current ' +

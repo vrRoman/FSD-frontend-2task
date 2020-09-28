@@ -1,0 +1,51 @@
+.pagination__desc
+    margin-left: 7px
+    font-family: Montserrat, sans-serif
+    font-size: 14px
+    line-height: 24px
+
+    color: $dark-shade-75
+
+
+.pagination__pages
+    min-width: 240px
+    padding: 0
+    margin: 0 0 10px 0
+    ul
+        li
+            width: 40px
+            height: 40px
+            display: flex
+            justify-content: center
+            align-items: center
+            span, a, .current
+                margin: 0
+                padding: 0
+                box-sizing: border-box
+                background: none
+                border: none
+                box-shadow: none
+                width: 100%
+                height: 100%
+                display: flex
+                justify-content: center
+                align-items: center
+
+                font-family: Montserrat, sans-serif
+                font-size: 12px
+
+                color: $dark-shade-50
+
+        .active
+            background: $purple-gradient
+            border-radius: 50%
+            .current
+                color: #fff
+
+.pagination__arrow
+    color: #fff
+    background: $green-gradient
+    border-radius: 50%
+    line-height: 40px
+    width: 40px
+    height: 40px
