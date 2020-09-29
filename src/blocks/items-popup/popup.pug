@@ -1,17 +1,16 @@
 mixin popup(options)
-    .items-popup(class=options.className)
-        each val in options
-            each item in val
-                if item.list
-                    .items-popup__item
-                        h3.items-popup__title #{item.name}
+    .items-popup(class=`${options.className ? options.className : ''}`)
+        .items-popup__items
+            each val in options
+                each item in val
+                    if item.name
+                        .items-popup__item
+                            h3.items-popup__title #{item.name}
 
-                        .items-popup__value
-                            .items-popup__change-value.items-popup__remove-value -
-                            h3 #{item.value}
-                            .items-popup__change-value.items-popup__add-value +
-        .items-popup__clear Очистить
-        .items-popup__confirm Применить
-
-
-            
+                            .items-popup__value
+                                .items-popup__change-value.items-popup__remove-value -
+                                h3 #{item.value}
+                                .items-popup__change-value.items-popup__add-value +
+        .items-popup__button-pane
+            h3.items-popup__clear Очистить
+            h3.items-popup__confirm Применить

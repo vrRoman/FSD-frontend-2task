@@ -12,11 +12,15 @@
     padding: 7px
     box-sizing: border-box
     background-color: #fff
+    height: 100%
 
 .items-popup__item
     display: flex
     justify-content: space-between
     align-items: center
+    margin-top: 7px
+    &:nth-child(1)
+        margin-top: 0
 
 .items-popup__title
     margin-left: 8px
@@ -43,11 +47,27 @@
 .items-popup__change-value_not-active
     opacity: 38%
 
-
-.items-popup_small
-    height: 119px
-    .items-popup__clear, .items-popup__confirm
-        display: none
-
 .items-popup__change-value_inactive
     opacity: 0.5
+
+
+
+.items-popup__button-pane
+    position: relative
+    display: flex
+    justify-content: space-between
+
+    margin-bottom: 6px
+    padding-left: 8px
+
+.items-popup__clear
+    color: $dark-shade-50
+    cursor: pointer
+.items-popup__confirm
+    color: $purple
+    cursor: pointer
+
+.items-popup__clear_disabled
+    visibility: hidden
+
+

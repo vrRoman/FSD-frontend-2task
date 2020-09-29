@@ -46,8 +46,21 @@
 
 .dropdown_expanded
     .dropdown__popup
-        height: 119px
+        height: 159px
     .dropdown__input
         border:
             bottom-right-radius: unset
             bottom-left-radius: unset
+
+
+.dropdown_small
+    width: 266px
+    .dropdown__popup
+        .items-popup
+            .items-popup__clear, .items-popup__confirm
+                display: none
+
+.dropdown_small.dropdown_expanded
+    .dropdown__popup
+        height: 119px
+

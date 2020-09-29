@@ -2,115 +2,176 @@ extends ../../../templates/ui-kit
 
 
 block vars
-    - let name = 'form-elements'
+    - const name = 'form-elements'
 
 block content
-    .column-1
-        .fields
-            .fields__field
-                +text-field("Email", "default", "", "Text field", "email")
-            .fields__field
-                +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field", "text")
-            .fields__field
-                +dropdown("Сколько гостей", "Dropdown", "popup",
-                    {
-                        "className": "guests items-popup_small",
-                        "items": {
-                            "item1": {
-                                "name": "Спальни",
-                                "value": "2",
-                                "list": true
-                            },
-                            "item2": {
-                                "name": "Кровати",
-                                "value": "2",
-                                "list": true
-                            },
-                            "item3": {
-                                "name": "Ванные комнаты",
-                                "value": "0",
-                                "list": true
-                            },
-
-                            "list": true
-                        },
+    -
+        const facilitiesDropdownItems =
+                {
+                    item1: {
+                        name: 'Спальни',
+                        value: '2'
                     },
-                    "", "default")
-            .fields__field
-                +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field", "text")
-            .fields__field
-                +datepicker(true, "Date dropdown", "")
-            .fields__field
-                +datepicker(false, "Filter date dropdown", "19 авг - 23 авг")
-            .fields__field
-                +text-field("Email", "", "subscription-text-field", "subscription text field", "email", true)
+                    item2: {
+                        name: 'Кровати',
+                        value: '2'
+                    },
+                    item3: {
+                        name: 'Ванные комнаты',
+                        value: '0'
+                    }
+                }
 
-
-    .column-2
-        .switches
-            .switches__switch
-                +checkbox-buttons('checkbox buttons',
-                    [
+    .container
+        .container__column
+            .fields
+                .fields__field
+                    +text-field("Email", "default", "", "Text field", "email")
+                .fields__field
+                    +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field", "text")
+                .fields__field
+                    +dropdown("Сколько гостей", "Dropdown", "popup",
                         {
-                            name: 'Можно курить',
+                            "className": "",
+                            "items": facilitiesDropdownItems,
+                        },
+                        "", "default")
+                .fields__field
+                    +text-field("ДД.ММ.ГГГГ", "default", 'masked-date', "Masked text field", "text")
+                .fields__field
+                    +datepicker(true, "Date dropdown", "")
+                .fields__field
+                    +datepicker(false, "Filter date dropdown", "19 авг - 23 авг")
+                .fields__field
+                    +text-field("Email", "", "subscription-text-field", "subscription text field", "email", true)
+
+
+        .container__column
+            .switches
+                .switches__switch
+                    +checkbox-buttons('checkbox buttons',
+                        [
+                            {
+                                name: 'Можно курить',
+                                checked: false
+                            },
+                            {
+                                name: 'Можно с питомцами',
+                                checked: true
+                            },
+                            {
+                                name: 'Можно пригласить гостей<br>(до 10 человек)',
+                                checked: true
+                            }
+                        ])
+                .switches__switch
+                    +radio-buttons('Radio buttons', ['Мужчина', 'Женщина'], 'gender')
+
+                .switches__switch
+                    +toggle-buttons('Toggle buttons', [
+                        {
+                            name: 'Получать спецпредложения',
+                            checked: true
+                        },
+                        {
+                            name: 'Получать спецпредложения',
                             checked: false
-                        },
-                        {
-                            name: 'Можно с питомцами',
-                            checked: true
-                        },
-                        {
-                            name: 'Можно пригласить гостей<br>(до 10 человек)',
-                            checked: true
                         }
                     ])
-            .switches__switch
-                +radio-buttons('Radio buttons', ['Мужчина', 'Женщина'], 'gender')
 
-            .switches__switch
-                +toggle-buttons('Toggle buttons', [
-                    {
-                        name: 'Получать спецпредложения',
-                        checked: true
-                    },
-                    {
-                        name: 'Получать спецпредложения',
-                        checked: false
-                    }
-                ])
+                .switches__switch.like-buttons
+                    h3.like-buttons__title Like buttons
+                    +like-button(2, false)
+                    +like-button(12, true)
 
-            .switches__switch.like-buttons
-                h3.like-buttons__title Like buttons
-                +like-button(2, false)
-                +like-button(12, true)
-
-            .switches__switch.rate-buttons
-                h3.rate-buttons__title Rate buttons
-                +rate-button(4)
-                +rate-button(5)
+                .switches__switch.rate-buttons
+                    h3.rate-buttons__title Rate buttons
+                    +rate-button(4)
+                    +rate-button(5)
 
 
-    .column-3
-        .other-elems
-            .other-elems__slider
-                +range-slider('Range slider')
+        .container__column
+            .other-elems
+                .other-elems__slider
+                    +range-slider('Range slider')
 
-            .other-elems__buttons
-                h3.other-elems__title Buttons
-                .default-buttons
-                    +button('click me', false)
-                    +button('click me', 'button_default-hover')
-                    +button('click me', 'button_secondary')
-                    +button('click me', 'button_secondary-hover')
-                .icon-link-buttons
-                    +button('click me', 'button_icon-link-primary')
-                    +button('click me', 'button_icon-link-secondary')
-                .extended-button
-                    +button('Перейти к оплате', 'button_extended')
+                .other-elems__buttons
+                    h3.other-elems__title Buttons
+                    .default-buttons
+                        +button('click me', false)
+                        +button('click me', 'button_default-hover')
+                        +button('click me', 'button_secondary')
+                        +button('click me', 'button_secondary-hover')
+                    .icon-link-buttons
+                        +button('click me', 'button_icon-link-primary')
+                        +button('click me', 'button_icon-link-secondary')
+                    .extended-button
+                        +button('Перейти к оплате', 'button_extended')
 
-            .other-elems__pagination
-                h3.other-elems__title Pagination
-                +pagination('1 - 12 из 100+ вариантов аренды')
+                .other-elems__pagination
+                    h3.other-elems__title Pagination
+                    +pagination('1 - 12 из 100+ вариантов аренды')
+
+
+    .container
+        .container__column
+            .facilities-dropdowns
+                .facilities-dropdowns__dropdown
+                    +dropdown('2 спальни, 2 кровати...', 'Dropdown', 'popup', {
+                        className: '',
+                        items: facilitiesDropdownItems,
+                    }, 'facilities-dropdown dropdown_small ', 'default')
+                .facilities-dropdowns__dropdown
+                    +dropdown('2 спальни, 2 кровати...', 'Dropdown', 'popup', {
+                        className: 'items-popup_small',
+                        items: facilitiesDropdownItems,
+                    }, 'facilities-dropdown dropdown_small dropdown_expanded', 'expanded')
+
+        .container__column
+            .guests-dropdowns
+                .guests-dropdowns__dropdown
+                    +dropdown('Сколько гостей', 'Dropdown', 'popup', {
+                        className: '',
+                        items: {
+                            item1: {
+                                name: 'Взрослые',
+                                value: '0'
+                            },
+                            item2: {
+                                name: 'Дети',
+                                value: '0'
+                            },
+                            item3: {
+                                name: 'Младенцы',
+                                value: '0'
+                            }
+                        }
+                    })
+        .container__column
+            .guests-dropdowns
+                .guests-dropdowns__dropdown
+                    +dropdown('3 гостя', 'Dropdown', 'popup', {
+                        className: '',
+                        items: {
+                            item1: {
+                                name: 'Взрослые',
+                                value: '2'
+                            },
+                            item2: {
+                                name: 'Дети',
+                                value: '1'
+                            },
+                            item3: {
+                                name: 'Младенцы',
+                                value: '0'
+                            }
+                        }
+                    })
+
+
+
+
+
 
 
 
