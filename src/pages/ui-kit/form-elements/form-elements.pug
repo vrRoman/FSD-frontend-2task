@@ -22,6 +22,34 @@ block content
                     }
                 }
 
+        const listCheckboxes =
+                [
+                    {
+                        name: 'Завтрак',
+                        checked: false
+                    },
+                    {
+                        name: 'Письменный стол',
+                        checked: true
+                    },
+                    {
+                        name: 'Стул для кормления',
+                        checked: true
+                    },
+                    {
+                        name: 'Кроватка',
+                        checked: true
+                    },
+                    {
+                        name: 'Телевизор',
+                        checked: false
+                    },
+                    {
+                        name: 'Шампунь',
+                        checked: false
+                    },
+                ]
+
     .container
         .container__column
             .fields
@@ -167,6 +195,21 @@ block content
                             }
                         }
                     })
+
+
+    .container
+        .container__column
+            .expandable-lists
+                .expandable-lists__list
+                    +list("Expandable checkbox list", listCheckboxes, false)
+                .expandable-lists__list
+                    +list("Expandable checkbox list", listCheckboxes, 'list_expanded')
+
+
+
+
+
+
 
 
 

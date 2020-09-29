@@ -1,0 +1,10 @@
+include ../checkbox-buttons/checkbox-buttons
+
+mixin list(title, checkboxes, className)
+    .list(class=`${className ? className : ''}`)
+        .list__title
+            h3.list__text= title
+            .material-icons.list__arrow expand_more
+        .list__checkboxes
+            +checkbox-buttons(false, checkboxes)
+

@@ -1,9 +1,10 @@
-mixin checkbox-buttons(title, checkboxesNames)
+mixin checkbox-buttons(title, checkboxes)
     .checkboxes
-        h3.checkboxes__title= title
+        if title
+            h3.checkboxes__title= title
 
         .checkboxes__buttons
-            each elem in checkboxesNames
+            each elem in checkboxes
                 label.checkboxes__button.checkbox-button
                     input.checkbox-button__input(
                         type="checkbox",

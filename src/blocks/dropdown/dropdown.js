@@ -169,7 +169,6 @@ const countedItems = (dropdownElems, textSelector, itemSelector,
 
 
 
-
 $(document).ready(() => {
     dropdown($('.dropdown'), '.dropdown__popup',
         '.dropdown__input', 'dropdown_expanded', '.items-popup__confirm')
