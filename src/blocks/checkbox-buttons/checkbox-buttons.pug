@@ -1,5 +1,5 @@
-mixin checkbox-buttons(title, checkboxes)
-    .checkboxes
+mixin checkbox-buttons(title, checkboxes, rich)
+    .checkboxes(class=`${rich ? 'checkboxes_rich' : ''}`)
         if title
             h3.checkboxes__title= title
 
@@ -11,6 +11,8 @@ mixin checkbox-buttons(title, checkboxes)
                         checked= elem.checked
                     )
                     span.checkbox-button__name !{elem.name}
+                    if (rich)
+                        span.checkbox-button__description !{elem.description}
 
 
 

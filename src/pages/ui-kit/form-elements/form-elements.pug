@@ -205,6 +205,21 @@ block content
                 .expandable-lists__list
                     +list("Expandable checkbox list", listCheckboxes, 'list_expanded')
 
+        .container__column
+            .rich-checkboxes-buttons
+                +checkbox-buttons('Rich checkbox buttons', [
+                    {
+                        name: 'Широкий коридор',
+                        description: 'Ширина коридоров в номере<br>не менее 91 см.',
+                        checked: false
+                    },
+                    {
+                        name: 'Помощник для инвалидов',
+                        description: 'На 1 этаже вас встретит специалист<br>и проводит до номера.',
+                        checked: false
+                    }
+                ], true)
+
 
 
 
