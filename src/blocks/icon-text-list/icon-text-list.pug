@@ -1,0 +1,9 @@
+mixin icon-text-list(items)
+    .icon-text-list
+        each item in items
+            .icon-text-list__item.icon-text
+                i.icon-text__icon.material-icons= item.iconName
+
+                .icon-text__info
+                    .icon-text__title= item.name
+                    .icon-text__description= item.description

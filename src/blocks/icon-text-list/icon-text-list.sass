@@ -1,0 +1,39 @@
+.icon-text-list__item
+    width: 280px
+    position: relative
+    padding-bottom: 20px
+    display: flex
+    align-items: center
+    margin-top: 20px
+    &:after
+        content: ''
+        height: 1px
+        width: 100%
+        background-color: $dark-shade-10
+        position: absolute
+        bottom: 0
+        display: block
+    &:nth-child(1)
+        margin-top: 0
+
+
+.icon-text__icon
+    font-size: 48px
+    line-height: 41px
+    background: $purple-gradient
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    height: 48px
+    display: inline-flex
+    align-items: center
+
+.icon-text__info
+    display: inline-block
+    margin-left: 10px
+
+.icon-text__title
+    font-family: Montserrat, sans-serif
+    font-weight: bold
+    font-size: 14px
+
+    color: $dark-shade-75
