@@ -51,12 +51,13 @@ block content
                 ]
 
     .container
-        .container__column
+        .container__column-1
             .fields
                 .fields__field
                     +text-field("Email", "default", "", "Text field", "email")
                 .fields__field
-                    +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field", "text")
+                    +text-field("This is pretty awesome", "hover / focus", 'text-field_active', "Text field", "text",
+                    false, "This is pretty awesome")
                 .fields__field
                     +dropdown("Сколько гостей", "Dropdown", "popup",
                         {
@@ -74,7 +75,7 @@ block content
                     +text-field("Email", "", "subscription-text-field", "subscription text field", "email", true)
 
 
-        .container__column
+        .container__column-2
             .switches
                 .switches__switch
                     +checkbox-buttons('checkbox buttons',
@@ -96,7 +97,7 @@ block content
                     +radio-buttons('Radio buttons', ['Мужчина', 'Женщина'], 'gender')
 
                 .switches__switch
-                    +toggle-buttons('Toggle buttons', [
+                    +toggle-buttons('Toggle', [
                         {
                             name: 'Получать спецпредложения',
                             checked: true
@@ -108,17 +109,17 @@ block content
                     ])
 
                 .switches__switch.like-buttons
-                    h3.like-buttons__title Like buttons
+                    h3.like-buttons__title Like button
                     +like-button(2, false)
                     +like-button(12, true)
 
                 .switches__switch.rate-buttons
-                    h3.rate-buttons__title Rate buttons
+                    h3.rate-buttons__title Rate button
                     +rate-button(4)
                     +rate-button(5)
 
 
-        .container__column
+        .container__column-3
             .other-elems
                 .other-elems__slider
                     +range-slider('Range slider')
@@ -142,7 +143,7 @@ block content
 
 
     .container.container_dropdowns
-        .container__column
+        .container__column-1
             .facilities-dropdowns
                 .facilities-dropdowns__dropdown
                     +dropdown('2 спальни, 2 кровати...', 'Dropdown', 'popup', {
@@ -155,7 +156,7 @@ block content
                         items: facilitiesDropdownItems,
                     }, 'facilities-dropdown dropdown_small dropdown_expanded', 'expanded')
 
-        .container__column
+        .container__column-2
             .guests-dropdowns
                 .guests-dropdowns__dropdown
                     +dropdown('Сколько гостей', 'Dropdown', 'popup', {
@@ -174,8 +175,8 @@ block content
                                 value: '0'
                             }
                         }
-                    })
-        .container__column
+                    }, 'dropdown_expanded')
+        .container__column-3
             .guests-dropdowns
                 .guests-dropdowns__dropdown
                     +dropdown('3 гостя', 'Dropdown', 'popup', {
@@ -194,18 +195,18 @@ block content
                                 value: '0'
                             }
                         }
-                    })
+                    }, 'dropdown_expanded')
 
 
     .container.container_lists
-        .container__column
+        .container__column-1
             .expandable-lists
                 .expandable-lists__list
                     +list("Expandable checkbox list", listCheckboxes, false)
                 .expandable-lists__list
                     +list("Expandable checkbox list", listCheckboxes, 'list_expanded')
 
-        .container__column
+        .container__column-2
             .rich-checkboxes-buttons
                 +checkbox-buttons('Rich checkbox buttons', [
                     {
@@ -220,15 +221,16 @@ block content
                     }
                 ], true)
 
-        .container__column
+        .container__column-3
             .bullet-lists
                 +bullet-list('Bullet list',
-                    ['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00, а выезд до 12:00'])
+                    ['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00,<br>а выезд ' +
+                    'до 12:00'])
 
 
 
     .container.container_last
-        .container__column
+        .container__column-1
             .icon-text-lists
                 +icon-text-list([
                     {
@@ -243,9 +245,24 @@ block content
                     }
                 ])
 
-        .container__column
+        .container__column-2
             .comment
-                
+                +comment(
+                    {
+                        name: 'Мурад Сарафанов',
+                        avatarLink: 'images/avatar_murad.png'
+                    },
+                    {
+                        likeNum: 12,
+                        active: true
+                    },
+                    {
+                        time: '5 дней назад',
+                        text: 'Великолепный матрас на кровати в основной спальне! ' +
+                            'А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. ' +
+                            'Выкрикивал комплименты повару — никто не жаловался из соседей.'
+                    }
+                )
 
 
 

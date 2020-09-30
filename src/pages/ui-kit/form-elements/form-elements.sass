@@ -3,15 +3,19 @@
     top: 30px
     left: 30px
 
-
-
 .container
     display: flex
-    justify-content: space-between
     position: relative
+    padding: 143px 138px 0 138px
 
-.container__column
-    width: 320px
+.container__column-1, .container__column-2, .container__column-3
+    min-width: 320px
+
+.container__column-2
+    margin-left: 126px
+
+.container__column-3
+    margin-left: 72px
 
 
 .fields
@@ -20,23 +24,31 @@
 
 .fields__field
     margin-top: 20px
-    &:nth-child(5), &:nth-child(6), &:nth-child(7)
+    &:nth-child(4)
+        margin-top: 22.5px
+    &:nth-child(5), &:nth-child(6)
         margin-top: 40px
+    &:nth-child(7)
+        margin-top: 41px
     &:nth-child(1)
         margin-top: 0
 
 
 .switches__switch
-    margin-top: 40px
+    margin-top: 33px
     &:nth-child(1)
         margin-top: 0
+    &:nth-child(3)
+        margin-top: 40px
+    &:nth-child(4)
+        margin-top: 40px
 
 .like-buttons__title, .rate-buttons__title
     margin-bottom: 16px
 
 
 .other-elems__buttons
-    margin-top: 40px
+    margin-top: 43px
 
 .other-elems__title
     margin-bottom: 16px
@@ -72,6 +84,7 @@
 
 .container_dropdowns
     height: 267px
+    padding-top: 100px
 .container_lists
     padding-top: 55px
 
@@ -81,10 +94,16 @@
         margin-top: 0
 
 .expandable-lists__list
-    margin-top: 48px
+    margin-top: 32px
     &:nth-child(1)
         margin-top: 0
 
 
 .container_last
     padding-top: 100px
+    padding-bottom: 130px
+.icon-text-lists
+    margin-top: -10px
+
+
+

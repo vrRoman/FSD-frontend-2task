@@ -17,9 +17,16 @@ $(sliderSelector).slider({
     slide: function(event, ui) {
         $(this).parent()
             .find(valueSelector)
-            .text(ui.values[0] + rubSymbol + ' - ' + ui.values[1] + rubSymbol)
+            .text(numPrettify(ui.values[0]) + rubSymbol + ' - ' + numPrettify(ui.values[1]) + rubSymbol)
     }
 })
 
 $(sliderSelector).parent().find(valueSelector)
-    .text(values[0] + rubSymbol + ' - ' + values[1] + rubSymbol)
+    .text(numPrettify(values[0]) + rubSymbol + ' - ' + numPrettify(values[1]) + rubSymbol)
+
+
+function numPrettify(num) {
+    let n = num.toString()
+    let separator = " "
+    return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + separator);
+}

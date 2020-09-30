@@ -1,0 +1,16 @@
+include ../like-button/like-button
+
+mixin comment(userInfo, likeInfo, commentInfo)
+    .comment
+        .comment__info
+            .comment__user-avatar(
+                style=`background-image: url(${userInfo.avatarLink})`
+            )
+            .comment__user-name= userInfo.name
+            .comment__time= commentInfo.time
+
+        .comment__content
+            .comment__likes
+                +like-button(likeInfo.likeNum, likeInfo.active)
+
+            .comment__text= commentInfo.text
