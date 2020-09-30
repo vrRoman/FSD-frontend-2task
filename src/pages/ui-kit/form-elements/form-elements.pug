@@ -141,7 +141,7 @@ block content
                     +pagination('1 - 12 из 100+ вариантов аренды')
 
 
-    .container
+    .container.container_dropdowns
         .container__column
             .facilities-dropdowns
                 .facilities-dropdowns__dropdown
@@ -197,7 +197,7 @@ block content
                     })
 
 
-    .container
+    .container.container_lists
         .container__column
             .expandable-lists
                 .expandable-lists__list
@@ -219,6 +219,15 @@ block content
                         checked: false
                     }
                 ], true)
+
+        .container__column
+            .bullet-lists
+                +bullet-list('Bullet list',
+                    ['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00, а выезд до 12:00'])
+
+
+
+    .container
 
 
 
