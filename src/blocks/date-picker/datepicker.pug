@@ -1,17 +1,17 @@
-mixin datepicker(double, title, value, className)
+mixin datepicker(double, titles, values, className)
     .date-picker(class=`${double ? "date-picker_double" : "date-picker_single"} ${className ? className : ''}`)
         .date-picker__date
-            h3.date-picker__title= title
+            h3.date-picker__title= titles[0]
             .date-picker__text-field
                 input(class=`date-picker__input ${double ? "date-picker__input_double" : "date-picker__input_single"}`,
                     placeholder="ДД.ММ.ГГГГ",
-                    value= value,
+                    value= values[0] ? values[0] : '',
                     name=`${double ? "start-date" : "all-dates"}`)
                 i.date-picker__arrow.material-icons expand_more
         if (double)
             .date-picker__date
-                h3.date-picker__title= title
+                h3.date-picker__title= titles[1]
                 .date-picker__text-field
-                    input.date-picker__input.date-picker__input_double(name="end-date", value="19.08.2019",
+                    input.date-picker__input.date-picker__input_double(name="end-date", value=values[1] ? values[1] : '',
                         placeholder="ДД.ММ.ГГГГ")
                     i.date-picker__arrow.material-icons expand_more

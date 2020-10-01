@@ -1,6 +1,7 @@
 mixin toggle-buttons(title, buttons)
     .toggle-buttons
-        h3.toggle-buttons__title= title
+        if (title)
+            h3.toggle-buttons__title= title
 
         .toggle-buttons__buttons
             each button in buttons

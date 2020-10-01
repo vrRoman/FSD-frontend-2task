@@ -1,1 +1,39 @@
-.signup-card
+include ../../../blocks/text-field/text-field
+include ../../../blocks/radio-buttons/radio-buttons
+include ../../../blocks/toggle-buttons/toggle-buttons
+include ../../../blocks/button/button
+
+mixin signup-card
+    .signup-card
+        h1.signup-card__title Регистрация аккаунта
+
+        .signup-card__general-info
+            .signup-card__name
+                +text-field('Имя', 'text')
+            .signup-card__surname
+                +text-field('Фамилия', 'text')
+            .signup-card__gender
+                +radio-buttons(false, ['Мужчина', 'Женщина'], 'gender')
+        .signup-card__birth
+            +text-field('ДД.ММ.ГГГГ', 'text', 'Дата рождения')
+
+        .signup-card__login-details
+            h3 Данные для входа в сервис
+            +text-field('Email', 'email', false, false, 'signup-card__email')
+            +text-field('Пароль', 'password', false, false, 'signup-card__password')
+
+        .signup-card__offers
+            +toggle-buttons(false, [{
+                name: 'Получать спецпредложения',
+                checked: false
+            }])
+
+        .signup-card__signup-btn
+            +button('Перейти к оплате', 'button_extended')
+
+        .signup-card__account-exists
+            span Уже есть аккаунт на Toxin
+            +button('Войти', 'button_secondary')
+
+
+

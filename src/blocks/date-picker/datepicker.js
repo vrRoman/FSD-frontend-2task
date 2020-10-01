@@ -12,6 +12,12 @@ let applyBtn     = '<button class="ui-datepicker-current ' +
     'ui-datepicker-custom-button ui-datepicker-apply-button" '+
     'type="button">Применить</button> '
 
+const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+const monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
+const dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
+const dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+const dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
+
 
 
 $('.date-picker_single').datepicker({
@@ -22,10 +28,14 @@ $('.date-picker_single').datepicker({
     showOtherMonths: true,
     selectOtherMonths: true,
     dateFormat: 'd M',
-    monthNamesShort: ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
+    monthNames, monthNamesShort,
+    dayNames, dayNamesShort, dayNamesMin,
+
     onSelect: function(dateText, inst, extensionRange) {
+        const datePickerElem = inst.input
+
         if (extensionRange.startDateText !== extensionRange.endDateText) {
-            $('[name="all-dates"]').val(extensionRange.startDateText + " - " + extensionRange.endDateText)
+            datePickerElem.find('[name="all-dates"]').val(extensionRange.startDateText + " - " + extensionRange.endDateText)
         }
 
         setTimeout(function (){
@@ -45,11 +55,15 @@ $('.date-picker_double').datepicker({
     showOtherMonths: true,
     selectOtherMonths: true,
     dateFormat: 'dd.mm.yy',
+    monthNames, monthNamesShort,
+    dayNames, dayNamesShort, dayNamesMin,
 
     onSelect: function(dateText, inst, extensionRange) {
-        $('[name="start-date"]').val(extensionRange.startDateText)
+        const datePickerElem = inst.input
 
-        $('[name="end-date"]').val(extensionRange.endDateText)
+        datePickerElem.find('[name="start-date"]').val(extensionRange.startDateText)
+
+        datePickerElem.find('[name="end-date"]').val(extensionRange.endDateText)
 
         setTimeout(function (){
             $('.ui-datepicker-apply-button').click(closeDatepicker);
@@ -57,6 +71,7 @@ $('.date-picker_double').datepicker({
         }, 100)
     }
 })
+
 
 
 

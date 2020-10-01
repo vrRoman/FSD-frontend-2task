@@ -1,0 +1,53 @@
+include ../../date-picker/datepicker
+include ../../dropdown/dropdown
+include ../../items-popup/popup
+include  ../../button/button
+
+
+mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
+    .booking-card
+        .booking-card__room-info
+            .booking-card__room-name
+                h1.booking-card__room-number
+                    span №
+                    div= roomInfo.number
+                h3.booking-card__room-type= ' ' + roomInfo.type
+            .booking-card__room-price= roomInfo.price
+                span &nbspв сутки
+
+        .booking-card__dates
+            +datepicker(true, ['Прибытие', 'Выезд'], datepickerDates, false)
+
+        .booking-card__guests
+            +dropdown('3 гостя', 'Гости', 'popup',
+                {
+                    items: {
+                        item1: {
+                            name: 'Взрослые',
+                            value: '2'
+                        },
+                        item2: {
+                            name: 'Дети',
+                            value: '1'
+                        },
+                        item3: {
+                            name: 'Младенцы',
+                            value: '0'
+                        }
+                    }
+                })
+
+        .booking-card__items
+            each item in bookingItems
+                .booking-card__item
+                    span.booking-card__item-name !{item.name}
+                    span.booking-card__item-price= item.price
+
+        .booking-card__total
+            h2.booking-card__total-text Итого
+            h2.booking-card__total-price= roomFullPrice
+
+        .booking-card__button
+            +button('Забронировать', 'button_extended')
+
+

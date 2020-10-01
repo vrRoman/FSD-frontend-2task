@@ -1,10 +1,11 @@
-mixin text-field(text, state, className, title, type, arrow, value)
-    .text-field(class=className)
-        .text-field__info
-            h3.text-field__title= title
-            if state
-                span.text-field__state= state
+mixin text-field(placeholder, type, title, state, className, arrow, value)
+    .text-field(class=`${className ? className : ''}`)
+        if title
+            .text-field__info
+                h3.text-field__title= title
+                if state
+                    span.text-field__state= state
         .text-field__field
-            input(type= type placeholder=text value=`${value ? value : ''}`).text-field__input
+            input(type= type placeholder=placeholder value=`${value ? value : ''}`).text-field__input
             if arrow
                 i.text-field__arrow.material-icons arrow_forward

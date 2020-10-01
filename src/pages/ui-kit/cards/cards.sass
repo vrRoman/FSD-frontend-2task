@@ -1,15 +1,34 @@
 @import '@/sass/colors.sass'
 
-//.container
-//    padding: 150px 140px 0 140px
+
+@import '@blocks/cards/search/search-card'
+@import '@blocks/cards/signup/signup-card'
+@import '@blocks/cards/booking/booking-card'
+
+
+
+.logo
+    position: absolute
+    top: 30px
+    left: 30px
+
+
+.container
+    padding: 150px 140px 0 140px
+    display: flex
+    justify-content: space-between
+
+.container__column-1, .container__column-2
+    width: 380px
+.container__column-3
+    width: 320px
+
 
 body
     background-color: #F4F4F6
 
-.cards
-    display: flex
+.card-elem
+    margin-top: 40px
+    &:nth-child(1)
+        margin-top: 0
 
-.cards__column
-    margin-right: 40px
-    &:last-child
-        margin-right: 0

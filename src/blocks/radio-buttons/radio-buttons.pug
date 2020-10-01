@@ -1,6 +1,7 @@
 mixin radio-buttons(title, buttons, inputsName)
     .radio-buttons
-        h3.radio-buttons__title= title
+        if (title)
+            h3.radio-buttons__title= title
 
         .radio-buttons__buttons
             each buttonName, buttonIndex in buttons
