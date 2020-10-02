@@ -4,6 +4,8 @@ extends ../../../templates/ui-kit.pug
 include ../../../blocks/cards/search/search-card
 include ../../../blocks/cards/signup/signup-card
 include ../../../blocks/cards/booking/booking-card
+include ../../../blocks/cards/signin/signin-card
+include ../../../blocks/cards/room/room-card
 
 
 block vars
@@ -43,8 +45,32 @@ block content
                     ['19.08.2019', '23.08.2019'],
                     '38 081₽'
                 )
+            .card-elem
+                +signin-card
 
         .container__column-3
+            .card-elem
+                .date-picker-example
 
-
-
+            .card-elem
+                +room-card(['images/room-img_1.jpg', 'images/room-img_2.jpg',
+                            'images/room-img_3.jpg', 'images/room-img_4.jpg'],
+                    {
+                        number: 888,
+                        type: 'Люкс',
+                        rating: 5,
+                        price: '9 900₽'
+                    },
+                    145
+                )
+            .card-elem
+                +room-card(['images/room-img_2.jpg', 'images/room-img_3.jpg',
+                            'images/room-img_4.jpg', 'images/room-img_5.jpg'],
+                    {
+                        number: 840,
+                        type: false,
+                        rating: 4,
+                        price: '9 900₽'
+                    },
+                    65
+                )

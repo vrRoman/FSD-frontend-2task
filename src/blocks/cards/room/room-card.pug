@@ -1,0 +1,27 @@
+include ../../rate-button/rate-button
+
+
+mixin room-card(roomImagesSrc, roomInfo, numOfComments)
+    .room-card
+        .room-card__slider
+            each imgSrc in roomImagesSrc
+                img.room-card__img(
+                    src= imgSrc
+                    alt='room-img'
+                )
+        .room-card__content
+            .room-card__room-info
+                .room-card__name
+                    span №&nbsp;
+                    h2= roomInfo.number
+                    if roomInfo.type
+                        h3.room-card__type &nbsp;#{roomInfo.type}
+                .room-card__price= roomInfo.price
+                    span &nbsp;в сутки
+
+            .room-card__rating-and-comments
+                .room-card__rating
+                    +rate-button(roomInfo.rating)
+
+                .room-card__comments= numOfComments
+                    span &nbsp;Отзывов

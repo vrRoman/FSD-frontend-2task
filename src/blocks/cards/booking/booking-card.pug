@@ -13,7 +13,7 @@ mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
                     div= roomInfo.number
                 h3.booking-card__room-type= ' ' + roomInfo.type
             .booking-card__room-price= roomInfo.price
-                span &nbspв сутки
+                span &nbsp;в сутки
 
         .booking-card__dates
             +datepicker(true, ['Прибытие', 'Выезд'], datepickerDates, false)

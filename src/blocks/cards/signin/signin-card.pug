@@ -1,0 +1,15 @@
+include ../../text-field/text-field
+include ../../button/button
+
+mixin signin-card
+    .signin-card
+        h1.signin-card__title Войти
+        .signin-card__email
+            +text-field('Email', 'email')
+        .signin-card__password
+            +text-field('Пароль', 'password')
+        .signin-card__button
+            +button('Войти', 'button_extended')
+        .signin-card__account-not-exists
+            span Нет аккаунта на Toxin?
+            +button('Создать', 'button_secondary')

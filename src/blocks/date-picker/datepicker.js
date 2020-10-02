@@ -92,3 +92,20 @@ function clearInputs() {
         input.value = ''
     }
 }
+
+
+
+
+$('.date-picker-example').datepicker({
+    range: 'period',
+    showButtonPanel: true,
+    currentText: clearBtn + applyBtn,
+    firstDay: 1,
+    showOtherMonths: true,
+    selectOtherMonths: true,
+    dateFormat: 'dd.mm.yy',
+    monthNames, monthNamesShort,
+    dayNames, dayNamesShort, dayNamesMin,
+})
+
+$('.date-picker-example').datepicker('setDate', [new Date(2019, 7, 19), new Date(2019, 7, 23)])

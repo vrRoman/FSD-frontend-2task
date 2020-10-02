@@ -43,6 +43,7 @@
     "jquery-ui": "^1.12.1",
     "jquery.maskedinput": "^1.4.1",
     "material-design-icons": "^3.0.1",
-    "simple-pagination.js": "^1.6.0"
+    "simple-pagination.js": "^1.6.0",
+    "slick-carousel": "^1.8.1"
   }
 }
