@@ -66,3 +66,60 @@
 
 .signin-button
     min-width: 87px
+
+
+.header__hamburger
+    display: none
+    flex-direction: column
+    justify-content: space-between
+    height: 30px
+    span
+        width: 40px
+        height: 2px
+        background-color: $dark-shade-25
+
+@media screen and (max-width: 1470px)
+    .header__container
+        width: 100%
+
+@media screen and (max-width: 1200px)
+    .header__hamburger
+        display: flex
+    .header__menu
+        display: none
+        flex-direction: column
+        min-width: 250px
+    .header
+        position: relative
+    .header__menu
+        position: absolute
+        padding: 10px
+        top: 100%
+        right: 140px
+        z-index: 1
+        background-color: #fff
+        border: 1px solid $dark-shade-25
+    .header__nav
+        ul
+            flex-direction: column
+            li
+                margin-top: 10px
+                height: 24px
+                margin-right: 0
+
+    .header__buttons
+        margin-top: 10px
+        flex-direction: column
+        align-items: center
+        .button
+            margin: 0
+            margin-top: 10px
+    .header__user
+        margin-top: 20px
+        justify-content: center
+        padding: 5px
+        &:before
+            top: 0
+            width: 100%
+            height: 1px
+

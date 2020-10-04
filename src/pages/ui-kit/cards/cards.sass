@@ -38,3 +38,32 @@ body
     .ui-datepicker-inline
         position: relative
 
+
+
+@media screen and (max-width: 1200px)
+    .cards
+        flex-wrap: wrap
+        justify-content: center
+
+    .cards__column-2
+        margin: 0 40px
+
+    .cards__column-1
+        margin-bottom: 50px
+
+@media screen and (max-width: 801px)
+    .cards__column-2
+        margin-bottom: 50px
+    .cards
+        width: 100%
+
+    .cards__column-1, .cards__column-2, .cards__column-3
+        width: 90%
+        margin: 0 auto
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        margin-top: 40px
+    .card-elem
+        width: 100%

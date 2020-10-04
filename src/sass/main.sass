@@ -33,6 +33,7 @@ button
 
 body
     margin: 0 auto
+    //overflow: hidden
 
 .container
     width: 1160px
@@ -59,4 +60,13 @@ body
     text-rendering: optimizeLegibility
     -moz-osx-font-smoothing: grayscale
     font-feature-settings: 'liga'
+
+
+
+@media screen and (max-width: 1160px)
+    .container
+        width: 100%
+        min-width: 280px
+
+@media screen and (max-width: 801px)
 
