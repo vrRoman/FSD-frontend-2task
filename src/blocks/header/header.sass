@@ -7,6 +7,7 @@
     padding: 0 140px
     box-sizing: border-box
     box-shadow: 0 10px 20px 0 $dark-shade-5
+    z-index: 1
 
 .header__logo
     margin-bottom: -5px
@@ -96,7 +97,7 @@
         padding: 10px
         top: 100%
         right: 140px
-        z-index: 1
+        z-index: 2
         background-color: #fff
         border: 1px solid $dark-shade-25
     .header__nav
@@ -123,3 +124,6 @@
             width: 100%
             height: 1px
 
+@media screen and (max-width: 700px)
+    .header
+        padding: 0 35px

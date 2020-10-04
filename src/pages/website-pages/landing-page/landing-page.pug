@@ -1,2 +1,17 @@
-script(src="./landing-page.js")
-link(rel="stylesheet", href="landing-page.css", type="text/css")
+extends ../../../templates/website-pages
+
+include ../../../blocks/cards/search/search-card
+
+
+block vars
+    - const title = 'Landing page'
+    - const fileName = 'landing-page'
+
+
+block content
+    .landing-page
+        img.landing-page__bg-img(src='images/landing-page-bg.jpg' alt='bg-img')
+        .container
+            .landing-page__search-card
+                +search-card
+            p.landing-page__tagline Лучшие номера для вашей работы,<br>отдыха и просто вдохновения

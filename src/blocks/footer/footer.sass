@@ -2,6 +2,7 @@
     width: 100%
     background-color: #fff
     box-shadow: 0 10px 20px 0 $dark-shade-5
+    z-index: 1
 
 .footer__body
     display: flex
@@ -101,3 +102,7 @@
 @media screen and (max-width: 500px)
     .footer__menu
         display: none
+@media screen and (max-width: 400px)
+    .footer__bottom
+        flex-direction: column
+

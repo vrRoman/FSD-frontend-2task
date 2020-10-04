@@ -14,3 +14,4 @@ import '../images/room-img_8.jpg'
 import '../images/room-img_9.jpg'
 import '../images/room-img_10.jpg'
 
+import '../images/landing-page-bg.jpg'

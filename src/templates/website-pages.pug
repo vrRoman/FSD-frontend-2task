@@ -1,0 +1,23 @@
+include ../blocks/header/header
+include ../blocks/footer/footer
+
+
+block vars
+
+
+doctype html
+html(lang='ru')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='initial-scale=1.0, width=device-width')
+        link(rel="shortcut icon" href="images/logo-icon.svg")
+        link(rel="stylesheet" type="text/css" href=fileName + ".css")
+        title= title
+    body
+        +header(false, false)
+
+        block content
+
+        +footer
+
+        script(src=fileName + '.js')
