@@ -1,0 +1,55 @@
+include ../button/button
+
+
+mixin header(user, activeLink)
+    -
+        const navItems = [
+            {
+                name: 'О нас',
+                dropdown: false
+            },
+            {
+                name: 'Услуги',
+                dropdown: true
+            },
+            {
+                name: 'Вакансии',
+                dropdown: false
+            },
+            {
+                name: 'Новости',
+                dropdown: false
+            },
+            {
+                name: 'Соглашения',
+                dropdown: true
+            }
+        ]
+
+    header.header
+        .header__container
+            a.header__logo
+                img(src='images/logo.svg', alt='logo')
+            .header__menu
+                nav.header__nav
+                    ul
+                        - for (let i = 0; i < navItems.length; i++)
+                            - let active = (i === activeLink)
+
+                            li.header__nav-item(class= `${active ? 'header__nav-item_active': ''} ${
+                                navItems[i].dropdown ? 'header__nav-item_dropdown-item': ''}`)
+
+                                if (navItems[i].dropdown)
+                                    div= navItems[i].name
+                                    i.header__item-arrow.material-icons expand_more
+
+                                else
+                                    a= navItems[i].name
+
+                if user
+                    .header__user= user
+                else
+                    .header__buttons
+                        +button('Войти', 'button_secondary signin-button')
+                        +button('Зарегестрироваться', 'signup-button')
+

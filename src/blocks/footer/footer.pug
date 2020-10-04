@@ -1,0 +1,54 @@
+include ../text-field/text-field
+
+
+mixin footer
+    -
+        const navLinks = ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
+        const aboutLinks = ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
+        const supportLinks = ['Соглашения', 'Сообщества', 'Связь с нами']
+
+
+    footer.footer
+        .footer__body
+            .footer__main-info
+                img.footer__logo(src='images/logo.svg', alt='logo')
+                .footer__text Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»
+
+
+            .footer__menu
+                .footer__menu-nav
+                    h3.footer__title Навигация
+                    ul
+                        each link in navLinks
+                            li.footer__menu-link
+                                a= link
+                .footer__menu-about
+                    h3.footer__title О нас
+                    ul
+                        each link in aboutLinks
+                            li.footer__menu-link
+                                a= link
+                .footer__menu-support
+                    h3.footer__title Служба поддержки
+                    ul
+                        each link in supportLinks
+                            li.footer__menu-link
+                                a= link
+
+            .footer__subscription
+                h3.footer__title Подписка
+                .footer__subscription-text Получайте специальные<br>предложения и новости сервиса
+                .footer__subscription-input
+                    +text-field('Email', 'email', false, false, 'subscription-text-field', true)
+
+        .footer__line
+
+        .footer__bottom
+            .footer__copyright Copyright © 2018 Toxin отель. Все права зачищены.
+            .footer__social
+                a
+                    i(class="footer__social-link fab fa-twitter")
+                a
+                    i(class="footer__social-link fab fa-facebook-square")
+                a
+                    i(class="footer__social-link fab fa-instagram")
