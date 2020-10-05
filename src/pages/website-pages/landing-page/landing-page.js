@@ -7,3 +7,6 @@ import './landing-page.pug'
 
 import '@blocks/date-picker/datepicker'
 import '@blocks/dropdown/dropdown'
+
+
+import './images/landing-page-bg.jpg'

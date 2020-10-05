@@ -17,3 +17,6 @@ import '@blocks/rate-button/rate-button'
 import '@blocks/range-slider/range-slider'
 import '@blocks/pagination/pagination'
 import '@blocks/list/list'
+
+
+import './images/avatar_murad.png'
