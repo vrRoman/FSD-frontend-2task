@@ -38,6 +38,7 @@
     "webpack-split-by-path": "^2.0.0"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "jquery": "^3.5.1",
     "jquery-mask-plugin": "^1.14.16",
     "jquery-ui": "^1.12.1",

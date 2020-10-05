@@ -1,5 +1,144 @@
 @import '@blocks/header/header'
 @import '@blocks/footer/footer'
 
+@import '@blocks/cards/booking/booking-card'
+@import '@blocks/donut-chart/donut-chart'
 
 
+.room-details
+    position: relative
+    width: 100%
+    &:after
+        content: ''
+        background-color: #e5e5e5
+        height: 1px
+        width: 100%
+        position: absolute
+        bottom: 0
+
+
+.room-details__room-images
+    display: flex
+    height: 485px
+    overflow: hidden
+
+.room-details__main-image
+    width: 100%
+    display: flex
+    align-items: center
+    img
+        min-width: 100%
+        min-height: 100%
+        z-index: -1
+
+.room-details__side-images
+    width: 461px
+    height: 100%
+    position: relative
+    img
+        min-width: 100%
+        min-height: 50%
+        z-index: -1
+        position: absolute
+        &:nth-child(2)
+            bottom: 0
+
+.room-details__container
+    display: flex
+    justify-content: space-between
+    overflow: visible
+    padding-bottom: 70px
+    flex-wrap: wrap
+
+
+.room-details__info-container
+    width: 710px
+    margin-top: 70px
+    margin-right: 70px
+    display: inline-flex
+    justify-content: space-between
+    flex-wrap: wrap
+
+.room-details__comments
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    margin-top: 15px
+    margin-bottom: 30px
+    .comment
+        margin-top: 20px
+
+.room-details__comments-title
+    margin-bottom: 2px
+    letter-spacing: 0.5px
+
+.room-details__comments-number
+    color: $dark-shade-50
+
+.room-details__booking-card
+    display: inline-block
+    margin-top: 70px
+
+.room-details__cancel
+    width: 341px
+    margin-right: 10px
+.room-details__cancel-title
+    letter-spacing: 1px
+.room-details__cancel-text
+    color: $dark-shade-75
+    display: block
+    margin-top: 20px
+
+.room-details__expressions
+    margin-right: 38px
+
+.room-details__expressions-title, .room-details__features-title
+    margin-bottom: 20px
+    letter-spacing: 0.5px
+.room-details__expressions-title
+    letter-spacing: 1px
+
+.room-details__rules-title
+    letter-spacing: .5px
+    margin-bottom: 20px
+    margin-left: 20px
+
+@media screen and (max-width: 1340px)
+    .room-details__room-images
+        flex-direction: column
+        height: unset
+    .room-details__side-images
+        width: 100%
+        display: flex
+        justify-content: space-around
+        img
+            min-width: unset
+            min-height: unset
+            position: relative
+
+@media screen and (max-width: 1160px)
+    .room-details__container
+        justify-content: center
+
+@media screen and (max-width: 935px)
+    .room-details__side-images
+        display: none
+
+@media screen and (max-width: 935px)
+    .room-details__info-container
+        width: 100%
+        margin: 0
+@media screen and (max-width: 870px)
+    .room-details__comments
+        width: 100%
+
+@media screen and (max-width: 672px)
+    .room-details__cancel
+        margin-top: 30px
+    .room-details__main-image
+        display: flex
+        justify-content: center
+        img
+            height: 100%
+            width: unset
+            min-width: unset

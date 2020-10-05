@@ -1,6 +1,7 @@
 mixin bullet-list(title, items)
     .bullet-list
-        h3.bullet-list__title= title
+        if (title)
+            h3.bullet-list__title= title
         ul.bullet-list__list
             each item in items
                 li.bullet-list__item !{item}
