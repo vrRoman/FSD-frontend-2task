@@ -16,6 +16,7 @@ ul, ol, li
 
 a
     text-decoration: none
+    color: inherit
 
 body
     min-height: 100vh
@@ -33,6 +34,8 @@ button
 
 body
     margin: 0 auto
+
+body, html
     overflow-x: hidden
 
 .container
@@ -40,6 +43,7 @@ body
     margin: 0 auto
     position: relative
     height: 100%
+    overflow: hidden
 
 
 .material-icons
@@ -69,5 +73,6 @@ body
         min-width: 280px
         position: relative
 
-@media screen and (max-width: 801px)
-
+@media screen and (max-width: 310px)
+    body, html
+        overflow-x: visible

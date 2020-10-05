@@ -1,6 +1,8 @@
-mixin range-slider(title)
+mixin range-slider(title, description)
     .range-slider
         .range-slider__info
             h3.range-slider__title= title
             span.range-slider__value
         .range-slider__slider
+        if description
+            .range-slider__description= description

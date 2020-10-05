@@ -13,5 +13,7 @@ import '../images/room-img_7.jpg'
 import '../images/room-img_8.jpg'
 import '../images/room-img_9.jpg'
 import '../images/room-img_10.jpg'
+import '../images/room-img_11.jpg'
+import '../images/room-img_12.jpg'
 
 import '../images/landing-page-bg.jpg'

@@ -1,0 +1,84 @@
+@import '@blocks/header/header'
+@import '@blocks/footer/footer'
+
+@import '@blocks/cards/room/room-card'
+
+
+.search-room
+    position: relative
+    &:after
+        content: ''
+        height: 1px
+        width: 100%
+        position: absolute
+        left: 0
+        bottom: 0
+        background-color: $dark-shade-25
+
+.search-room__container
+    display: flex
+
+
+.search-room__params
+    width: 266px
+    height: 100%
+    margin-right: 60px
+    display: inline-block
+
+.search-room__params-date, .search-room__params-price, .search-room__params-checkboxes
+    margin-top: 30px
+
+.search-room__params-guests
+    margin-top: 20px
+
+.search-room__params-rich-checkboxes
+    margin-top: 23px
+
+.search-room__params-facilities
+    margin-top: 21px
+
+.search-room__params-list
+    margin-top: 29px
+
+
+.search-room__rooms-section
+    display: inline-block
+    height: 100%
+
+.search-room__title
+    margin-top: 30px
+    letter-spacing: 0.7px
+
+.search-room__room-cards
+    margin-top: 21px
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    justify-content: space-between
+    margin-bottom: 20px
+    .room-card
+        margin-bottom: 20.5px
+
+.search-room__pagination
+    width: 100%
+    display: flex
+    justify-content: center
+    margin-bottom: 70px
+    box-sizing: border-box
+    padding-right: 12px
+
+
+@media screen and (max-width: 990px)
+    .search-room__container
+        flex-direction: column
+    .search-room__params
+        width: 100%
+    .search-room__params-date, .search-room__params-guests, .search-room__params-price, .search-room__params-checkboxes,
+    .search-room__params-rich-checkboxes, .search-room__params-facilities, .search-room__params-list
+        display: flex
+        justify-content: center
+
+@media screen and (max-width: 626px)
+    .search-room__room-cards
+        flex-direction: column
+        align-items: center
