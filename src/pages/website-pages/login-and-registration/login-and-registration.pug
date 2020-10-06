@@ -1,1 +1,17 @@
- 
+extends ../../../templates/website-pages
+
+include ../../../blocks/cards/signup/signup-card
+include ../../../blocks/cards/signin/signin-card
+
+
+block vars
+    - const title = 'Login and registration'
+    - const fileName = 'login-and-registration'
+
+block content
+    main.login-and-registration
+        img.login-and-registration__bg-img(src='images/login-registration-bg.jpg' alt='bg-img')
+        .login-and-registration__signup-card
+            +signup-card
+        .login-and-registration__signin-card
+            +signin-card

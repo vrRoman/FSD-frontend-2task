@@ -50,8 +50,8 @@ mixin header(user, activeLink)
                     .header__user= user
                 else
                     .header__buttons
-                        +button('Войти', 'button_secondary signin-button')
-                        +button('Зарегестрироваться', 'signup-button')
+                        +button('Войти', 'button_secondary login-button', 'login-and-registration.html')
+                        +button('Зарегестрироваться', 'signup-button', 'login-and-registration.html')
             .header__hamburger
                 span
                 span

@@ -1,4 +1,4 @@
-mixin button(text, className)
+mixin button(text, className, link)
     button(class=`button ${className ? className : ''}`)
-        a.h3.button__text= text
+        a(href=link ? link: false).h3.button__text= text
         i.button__arrow.material-icons arrow_forward
