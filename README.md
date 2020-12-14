@@ -12,3 +12,26 @@
     - [Cards](https://vrroman.github.io/FSD-frontend-2task/cards.html)
     - [Headers and footers](https://vrroman.github.io/FSD-frontend-2task/headers-and-footers.html)
     
+## Развертывание
+#### Установка библиотек
+```
+npm install
+```
+#### Команды для компиляции
+_Запустить webpack-dev-server:_  
+```
+npm run start
+```  
+_Загрузить на gh-pages:_  
+```
+npm run deploy
+```  
+_Скомпилировать код в режиме development:_  
+```
+npm run dev
+```  
+_Скомпилировать код в режиме production:_  
+```
+npm run build
+```      
+    
