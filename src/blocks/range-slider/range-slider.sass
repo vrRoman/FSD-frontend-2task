@@ -22,8 +22,12 @@
     align-items: center
     box-sizing: border-box
 
-.ui-slider-range
-    background: $green-gradient
+.ui-slider
+    .ui-slider-range
+        top: -1px
+        height: 6px
+        background: $green-gradient
+        z-index: 0
 
 .ui-slider-handle.ui-state-default
     width: 12px
@@ -31,6 +35,7 @@
     border-radius: 50%
     background: $green-gradient
     border: 2px solid #fff
+    z-index: 0
 
     top: -6px
 
