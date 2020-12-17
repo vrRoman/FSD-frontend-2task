@@ -44,15 +44,23 @@ let donutChart = new Chart(ctx, {
 })
 
 
-drawValue($('.donut-chart__list li'), document.querySelector('.donut-chart__value'))
+drawValue($('.donut-chart__list li'), document.querySelector('.donut-chart__value'), 2)
 
-function drawValue(listItems, valueItem) {
+function drawValue(listItems, valueItem, defaultItem = false) {
+    let defaultValueHTML = ''
+    if (defaultItem) {
+        defaultValueHTML = `<h1 style="color: ${listItems[defaultItem].dataset.color}">${listItems[defaultItem].dataset.value}</h1>
+                               <h3 style="color: ${listItems[defaultItem].dataset.color}">голосов</h3>`
+    }
+    valueItem.innerHTML = defaultValueHTML
+
     for (let item of listItems) {
         item.onmouseover = () => {
-            valueItem.innerHTML = `<h1 style="color: ${item.dataset.color}">${item.dataset.value}</h1><h3 style="color: ${item.dataset.color}">голосов</h3>`
+            valueItem.innerHTML = `<h1 style="color: ${item.dataset.color}">${item.dataset.value}</h1>
+                                   <h3 style="color: ${item.dataset.color}">голосов</h3>`
         }
         item.onmouseout = () => {
-            valueItem.innerHTML = ''
+            valueItem.innerHTML = defaultValueHTML
         }
     }
 }
