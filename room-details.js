@@ -14966,9 +14966,18 @@ var donutChart = new Chart(ctx, {
     cutoutPercentage: 87
   }
 });
-drawValue($('.donut-chart__list li'), document.querySelector('.donut-chart__value'));
+drawValue($('.donut-chart__list li'), document.querySelector('.donut-chart__value'), 2);
 
 function drawValue(listItems, valueItem) {
+  var defaultItem = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var defaultValueHTML = '';
+
+  if (defaultItem) {
+    defaultValueHTML = "<h1 style=\"color: ".concat(listItems[defaultItem].dataset.color, "\">").concat(listItems[defaultItem].dataset.value, "</h1>\n                               <h3 style=\"color: ").concat(listItems[defaultItem].dataset.color, "\">\u0433\u043E\u043B\u043E\u0441\u043E\u0432</h3>");
+  }
+
+  valueItem.innerHTML = defaultValueHTML;
+
   var _iterator = _createForOfIteratorHelper(listItems),
       _step;
 
@@ -14977,11 +14986,11 @@ function drawValue(listItems, valueItem) {
       var item = _step.value;
 
       item.onmouseover = function () {
-        valueItem.innerHTML = "<h1 style=\"color: ".concat(item.dataset.color, "\">").concat(item.dataset.value, "</h1><h3 style=\"color: ").concat(item.dataset.color, "\">\u0433\u043E\u043B\u043E\u0441\u043E\u0432</h3>");
+        valueItem.innerHTML = "<h1 style=\"color: ".concat(item.dataset.color, "\">").concat(item.dataset.value, "</h1>\n                                   <h3 style=\"color: ").concat(item.dataset.color, "\">\u0433\u043E\u043B\u043E\u0441\u043E\u0432</h3>");
       };
 
       item.onmouseout = function () {
-        valueItem.innerHTML = '';
+        valueItem.innerHTML = defaultValueHTML;
       };
     };
 
