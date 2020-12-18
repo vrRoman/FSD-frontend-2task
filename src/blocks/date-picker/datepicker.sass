@@ -66,6 +66,7 @@
     width: 320px
     min-height: 369px
     padding: 20px
+    padding-bottom: 18px
     border: 1px solid $dark-shade-25 !important
     box-shadow: 0 10px 20px 0 $dark-shade-5
     border-radius: 4px
@@ -122,16 +123,20 @@
 
 
         .ui-datepicker-title
-            font-family: Quicksand, sans-serif
+            font-family: Montserrat, sans-serif
             font-weight: bold
             font-size: 19px
-            line-height: 24px
+            line-height: 23px
 
             color: $dark-shade-100
+            .ui-datepicker-year
+                display: block
+            .ui-datepicker-month
+                margin-left: 3px
 
 
     .ui-datepicker-calendar
-        margin-top: 30px
+        margin-top: 8px
         margin-bottom: 20px
         thead tr th span
             font-family: Montserrat, sans-serif
@@ -140,6 +145,8 @@
             line-height: 15px
 
             color: $purple
+        tbody
+            transform: translateY(-2px)
         tbody tr
             td
                 position: relative

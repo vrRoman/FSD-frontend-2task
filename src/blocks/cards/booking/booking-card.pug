@@ -9,9 +9,9 @@ mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
         .booking-card__room-info
             .booking-card__room-name
                 h1.booking-card__room-number
-                    span №
-                    div= roomInfo.number
-                h3.booking-card__room-type= ' ' + roomInfo.type
+                    div №
+                    span= roomInfo.number
+                span.booking-card__room-type= ' ' + roomInfo.type
             .booking-card__room-price= roomInfo.price
                 span &nbsp;в сутки
 

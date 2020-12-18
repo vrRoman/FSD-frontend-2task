@@ -1,8 +1,8 @@
 include ../../rate-button/rate-button
 
 
-mixin room-card(roomImagesSrc, roomInfo, numOfComments)
-    .room-card
+mixin room-card(roomImagesSrc, roomInfo, numOfComments, arrows)
+    .room-card(class=`${arrows ? 'room-card_with-arrows' : ''}`)
         .room-card__slider
             each imgSrc in roomImagesSrc
                 img.room-card__img(

@@ -5,5 +5,7 @@ import '../../rate-button/rate-button'
 
 $('.room-card__slider').slick({
     dots: true,
-    arrows: false
+    arrows: true,
+    prevArrow: '<i class="slick-prev slick-arrow material-icons" aria-label="Next"></i>',
+    nextArrow: '<i class="slick-next slick-arrow material-icons" aria-label="Next"></i>',
 })
