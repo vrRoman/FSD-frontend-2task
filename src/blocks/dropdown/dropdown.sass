@@ -30,7 +30,7 @@
     color: $dark-shade-50
 
 .dropdown__text
-    margin-left: 15px
+    margin-left: 14px
 
 .dropdown__arrow
     color: $dark-shade-50
@@ -48,7 +48,7 @@
 .dropdown_expanded
     .dropdown__popup
         height: 159px
-        box-shadow: 0 2px 10px $dark-shade-5
+        box-shadow: 0 10px 15px $dark-shade-5
         .items-popup
             border-color: $dark-shade-50
     .dropdown__input
@@ -60,6 +60,10 @@
 
 .dropdown_small
     width: 266px
+    .dropdown__input
+        border:
+            bottom-right-radius: unset
+            bottom-left-radius: unset
     .dropdown__popup
         .items-popup
             .items-popup__clear, .items-popup__confirm

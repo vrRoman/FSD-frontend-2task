@@ -18,6 +18,8 @@
     line-height: 18px
     color: $dark-shade-50
     padding-left: 30px
+    padding-top: 1px
+    box-sizing: border-box
     min-height: 20px
     &:before
         content: ''
@@ -25,13 +27,14 @@
         width: 20px
         height: 20px
         border: 1px solid #adb5bd
-        border-radius: 0.25em
+        border-radius: 4px
         margin-right: 0.5em
         cursor: pointer
         background-repeat: no-repeat
         background-position: 50% 40%
         position: absolute
         left: 0
+        top: 0
 
 
 
@@ -41,7 +44,7 @@
 
 
 .checkboxes__title
-    margin-bottom: 16px
+    margin-bottom: 17px
 
 .checkbox-button
     margin-bottom: 10px
@@ -51,6 +54,8 @@
     
     
 .checkboxes_rich
+    .checkboxes__title
+        margin-bottom: 15px
     .checkboxes__buttons
         .checkbox-button
             height: unset

@@ -65,9 +65,9 @@ block content
                                 "className": "",
                                 "items": facilitiesDropdownItems,
                             },
-                            "", "default")
+                            "")
                     .fields__field
-                        +text-field("ДД.ММ.ГГГГ", "text", "Masked text field", "default", 'masked-date')
+                        +text-field("ДД.ММ.ГГГГ", "text", "Masked text field", false, 'masked-date')
                     .fields__field
                         +datepicker(true, ["Date dropdown", "Date dropdown"], ['', '19.08.2019'])
                     .fields__field
@@ -116,8 +116,10 @@ block content
 
                     .switches__switch.rate-buttons
                         h3.rate-buttons__title Rate button
-                        +rate-button(4)
-                        +rate-button(5)
+                        .rate-buttons__rate
+                            +rate-button(4)
+                        .rate-buttons__rate
+                            +rate-button(5)
 
 
             .form-elements-container__column-3
@@ -140,7 +142,7 @@ block content
 
                     .other-elems__pagination
                         h3.other-elems__title Pagination
-                        +pagination('1 - 12 из 100+ вариантов аренды')
+                        +pagination('1 &ndash; 12 из 100+ вариантов аренды')
 
 
         .form-elements-container.container_dropdowns
@@ -247,7 +249,7 @@ block content
                     ])
 
             .form-elements-container__column-2
-                .comment
+                .comments
                     +comment(
                         {
                             name: 'Мурад Сарафанов',
