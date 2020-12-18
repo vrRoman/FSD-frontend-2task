@@ -117,10 +117,10 @@
 @media screen and (max-width: 1200px)
     .form-elements-container
         flex-direction: column
-        align-items: center
         width: 100%
-    .form-elements-container__column-1
-        margin-bottom: 50px
+
+    .form-elements-container__column-1, .form-elements-container__column-2, .form-elements-container__column-3
+        margin: 0 0 50px 0
 
     .facilities-dropdowns
         margin-bottom: 170px
@@ -129,3 +129,13 @@
 
     .container_dropdowns
         margin-bottom: 600px
+        padding: 0
+    .container_last
+        padding: 0
+
+@media screen and (max-width: 356px)
+    .form-elements-container__column-1, .form-elements-container__column-2, .form-elements-container__column-3
+        width: 100%
+        min-width: unset
+    .fields
+        width: 100%
