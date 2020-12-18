@@ -1,24 +1,13 @@
 @import '@/sass/colors.sass'
 
-.logo
-    position: absolute
-    top: 30px
-    left: 30px
 
 .colors-and-type
     display: flex
     justify-content: space-between
-    padding: 145px 50px 0 10px
+    padding: 145px 17px 0 10px
 
 
 .color
-    font:
-        family: 'Quicksand', sans-serif
-        size: 19px
-        style: normal
-        weight: normal
-    line-height: 29px
-
     display: flex
     align-items: center
 
@@ -26,11 +15,18 @@
     &:first-child
         margin: 0
 
-.color__name
-    font-weight: bold
+.color__hex
+    font:
+        family: 'Montserrat', sans-serif
+        size: 19px
+        style: normal
+        weight: normal
+    line-height: 28px
+    margin-top: 2px
+
 
 .color__info
-    margin-left: 40px
+    margin: 5px 0 0 40px
     color: $dark-shade-100
 
 .color__demo
@@ -65,13 +61,17 @@
     display: flex
     justify-content: space-between
 
-    width: 405px
-    margin-top: 50px
+    width: 436px
+    margin-top: 53px
     &:first-child
         margin: 0
+    &:nth-child(3)
+        margin-top: 52px
+    &:nth-child(4)
+        margin-top: 47px
 
 .type__text
-    width: 340px
+    width: 400px
 
 .type__name
     width: 40px
@@ -85,13 +85,13 @@
     margin-right: 30px
 
 
-@media screen and (max-width: 820px)
+@media screen and (max-width: 850px)
     .colors-and-type
         flex-direction: column
     .types
         margin-top: 100px
 
-@media screen and (max-width: 450px)
+@media screen and (max-width: 510px)
     .colors-and-type
         padding-right: 0
     .type
