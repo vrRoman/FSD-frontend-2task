@@ -47,7 +47,7 @@
     display: flex
     justify-content: space-between
     overflow: visible
-    padding-bottom: 70px
+    padding-bottom: 73px
     flex-wrap: wrap
 
 
@@ -63,14 +63,15 @@
     display: flex
     flex-wrap: wrap
     justify-content: space-between
-    margin-top: 15px
-    margin-bottom: 30px
+    margin-top: 13px
+    margin-bottom: 32px
     .comment
-        margin-top: 20px
+        margin-top: 18px
+        &:nth-of-type(2)
+            margin-top: 22px
 
 .room-details__comments-title
     margin-bottom: 2px
-    letter-spacing: 0.5px
 
 .room-details__comments-number
     color: $dark-shade-50
@@ -81,27 +82,27 @@
 
 .room-details__cancel
     width: 341px
-    margin-right: 10px
-.room-details__cancel-title
-    letter-spacing: 1px
+    margin-right: 8px
 .room-details__cancel-text
     color: $dark-shade-75
     display: block
-    margin-top: 20px
+    margin-top: 18px
 
 .room-details__expressions
     margin-right: 38px
+.room-details__expressions-title
+    margin-left: 5px
 
 .room-details__expressions-title, .room-details__features-title
     margin-bottom: 20px
-    letter-spacing: 0.5px
-.room-details__expressions-title
-    letter-spacing: 1px
 
 .room-details__rules-title
-    letter-spacing: .5px
-    margin-bottom: 20px
+    margin-bottom: 18px
     margin-left: 20px
+
+.room-details__rules
+    .bullet-list
+        transform: translateX(-2px)
 
 @media screen and (max-width: 1340px)
     .room-details__room-images
