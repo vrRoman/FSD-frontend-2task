@@ -10,7 +10,7 @@ import '@blocks/range-slider/range-slider'
 import '@blocks/list/list'
 import '@blocks/cards/room/room-card'
 import '@blocks/pagination/pagination'
-
+import '@blocks/header/header'
 
 import './images/room-img_1.jpg'
 import './images/room-img_2.jpg'

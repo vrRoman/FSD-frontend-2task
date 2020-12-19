@@ -13,7 +13,7 @@ import '@blocks/cards/booking/booking-card'
 import '@blocks/dropdown/dropdown'
 import '@blocks/donut-chart/donut-chart'
 import '@blocks/like-button/like-button'
-
+import '@blocks/header/header'
 
 import './images/room_1.jpg'
 import './images/room_2.jpg'
