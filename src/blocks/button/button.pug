@@ -1,4 +1,15 @@
-mixin button(text, className, link)
-    button(class=`button ${className ? className : ''}`)
-        a(href=link ? link: false).h3.button__text= text
+mixin button(text, modName, link)
+    -
+        let additionalClassName = '';
+        if (modName) {
+            if (Array.isArray(modName)) {
+                modName.forEach((val) => {
+                  additionalClassName += `button_${val}`;
+                });
+            } else {
+                additionalClassName = `button_${modName}`;
+            }
+        }
+    button(class=`button ${additionalClassName}`)
+        a(href=link ? link: 'change-me').h3.button__text= text
         i.button__arrow.material-icons arrow_forward
