@@ -174,7 +174,7 @@ const countedItems = ({
     clearBtn.onclick = () => {
       counter = 0;
       for (let n = 0; n < items.length; n += 1) {
-        const item = items[i];
+        const item = items[n];
 
         const itemNum = counter;
         const removeBtn = item.querySelector(removeBtnSelector);
@@ -182,7 +182,9 @@ const countedItems = ({
 
         itemsInfo[itemNum].value = 0;
 
-        if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
+        if (inactiveBtnClass) {
+          removeBtn.classList.add(inactiveBtnClass);
+        }
 
         changeValue(itemsInfo[itemNum].value, textElem, valueElem, defaultText, maxLength);
 
@@ -203,10 +205,10 @@ $(document).ready(() => {
     classNameToToggle: 'dropdown_expanded',
   });
   countedItems({
-    dropdownElems: $('.js-dropdown.facilities-dropdown'),
+    dropdownElems: $('.js-dropdown.dropdown_facilities'),
   });
   countedItems({
-    dropdownElems: $('.js-dropdown:not(.facilities-dropdown)'),
+    dropdownElems: $('.js-dropdown:not(.dropdown_facilities)'),
     defaultElemText: 'Сколько гостей',
   });
 

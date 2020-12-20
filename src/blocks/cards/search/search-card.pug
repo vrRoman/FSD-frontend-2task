@@ -8,11 +8,10 @@ mixin search-card
         h1.search-card__title Найдём номера под<br>ваши пожелания
 
         .search-card__date
-            +datepicker(true, ['Прибытие', 'Выезд'], false, false)
+            +datepicker(true, ['Прибытие', 'Выезд'], false)
 
         .search-card__guests
             +dropdown('Сколько гостей', 'Гости', {
-                className: false,
                 items: {
                     item1: {
                         name: 'Взрослые',

@@ -1,7 +1,7 @@
-mixin datepicker(double, titles, values, className)
+mixin datepicker(double, titles, values)
     .date-picker.js-date-picker(class=`${
       double ? "date-picker_double js-date-picker_double" : "date-picker_single js-date-picker_single"
-    } ${className ? className : ''}`)
+    }`)
         .date-picker__date
             h3.date-picker__title= titles[0]
             .date-picker__text-field

@@ -15,7 +15,7 @@ mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
                 span &nbsp;в сутки
 
         .booking-card__dates.js-booking-card__dates
-            +datepicker(true, ['Прибытие', 'Выезд'], datepickerDates, false)
+            +datepicker(true, ['Прибытие', 'Выезд'], datepickerDates)
 
         .booking-card__guests
             +dropdown('3 гостя', 'Гости',

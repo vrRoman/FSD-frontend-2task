@@ -1,7 +1,18 @@
 include ../checkbox-buttons/checkbox-buttons
 
-mixin list(title, checkboxes, className)
-    .list(class=`${className ? className : ''}`)
+mixin list(title, checkboxes, modName)
+    -
+        let additionalClassName = '';
+        if (modName) {
+            if (Array.isArray(modName)) {
+                modName.forEach((val) => {
+                    additionalClassName += `list_${val}`;
+                });
+            } else {
+                additionalClassName = `list_${modName}`;
+            }
+        }
+    .list(class=additionalClassName)
         .list__title
             h3.list__text= title
             .material-icons.list__arrow expand_more

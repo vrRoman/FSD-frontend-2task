@@ -22,7 +22,6 @@ block content
                     +datepicker(false, ['Даты пребывания в отеле'], ['19 авг - 23 авг'])
                 .search-room__params-guests
                     +dropdown('3 гостя, 1 младенец', 'Гости', {
-                        className: false,
                         items: {
                             item1: {
                                 name: 'Гости',
@@ -37,7 +36,7 @@ block content
                                 value: '1'
                             }
                         }
-                    }, 'dropdown_small')
+                    }, 'small')
                 .search-room__params-price
                     +range-slider('Диапазон цены', 'Стоимость за сутки пребывания в номере')
                 .search-room__params-checkboxes
@@ -70,7 +69,6 @@ block content
                     ], true)
                 .search-room__params-facilities
                     +dropdown('2 спальни, 2 кровати...', 'Удобства номера', {
-                        className: '',
                         items: {
                             item1: {
                                 name: 'Спальни',
@@ -85,7 +83,7 @@ block content
                                 value: '0'
                             }
                         },
-                    }, 'dropdown_small')
+                    }, 'small')
                 .search-room__params-list
                     +list('Дополнительные удобства', [
                         {

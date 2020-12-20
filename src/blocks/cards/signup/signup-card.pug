@@ -25,20 +25,21 @@ mixin signup-card
               placeholder: 'ДД.ММ.ГГГГ',
               type: 'text',
               title: 'Дата рождения',
+              className: 'js-masked-date',
             })
 
         .signup-card__login-details
             h3 Данные для входа в сервис
-            +text-field({
-              placeholder: 'Email',
-              type: 'email',
-              className: 'signup-card__email',
-            })
-            +text-field({
-              placeholder: 'Пароль',
-              type: 'password',
-              className: 'signup-card__password',
-            })
+            .signup-card__email
+                +text-field({
+                  placeholder: 'Email',
+                  type: 'email',
+                })
+            .signup-card__password
+                +text-field({
+                  placeholder: 'Пароль',
+                  type: 'password',
+                })
 
         .signup-card__offers
             +toggle-buttons(false, [{
@@ -51,4 +52,4 @@ mixin signup-card
 
         .signup-card__account-exists
             span Уже есть аккаунт на Toxin
-            +button('Войти', 'secondary')
+            +button('Войти', 'secondary', '#')

@@ -1,5 +1,19 @@
-mixin text-field({placeholder, type, title, state, className, arrow, value})
-    .text-field(class=`${className ? className : ''}`)
+mixin text-field({placeholder, type, title, state, modName, className, arrow, value})
+    -
+        let additionalClassName = '';
+        if (modName) {
+            if (Array.isArray(modName)) {
+                modName.forEach((val, index) => {
+                    additionalClassName += `text-field_${val}`;
+                    if (index !== modName.length - 1) {
+                        additionalClassName += ' ';
+                    }
+                });
+            } else {
+                additionalClassName = `text-field_${modName}`;
+            }
+        }
+    .text-field(class=`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`)
         if title
             .text-field__info
                 h3.text-field__title= title

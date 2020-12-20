@@ -3,8 +3,11 @@ mixin button(text, modName, link)
         let additionalClassName = '';
         if (modName) {
             if (Array.isArray(modName)) {
-                modName.forEach((val) => {
+                modName.forEach((val, index) => {
                   additionalClassName += `button_${val}`;
+                  if (index !== modName.length - 1) {
+                      additionalClassName += ' ';
+                  }
                 });
             } else {
                 additionalClassName = `button_${modName}`;

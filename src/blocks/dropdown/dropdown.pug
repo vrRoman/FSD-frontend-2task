@@ -1,7 +1,21 @@
 include ./items-popup/popup
 
-mixin dropdown(text, title, popupParams, className, description)
-    .dropdown.js-dropdown(class=`${className ? className : ''}`)
+mixin dropdown(text, title, popupParams, modName, description)
+    -
+        let additionalClassName = '';
+        if (modName) {
+            if (Array.isArray(modName)) {
+                modName.forEach((val, index) => {
+                    additionalClassName += `dropdown_${val}`;
+                    if (index !== modName.length - 1) {
+                        additionalClassName += ' ';
+                    }
+                });
+            } else {
+                additionalClassName = `dropdown_${modName}`;
+            }
+        }
+    .dropdown.js-dropdown(class=additionalClassName)
         .dropdown__info
             h3.dropdown__title= title
             if description

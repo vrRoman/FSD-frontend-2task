@@ -21,19 +21,19 @@ mixin footer
                     ul
                         each link in navLinks
                             li.footer__menu-link
-                                a= link
+                                a(href='change-me')= link
                 .footer__menu-about
                     h3.footer__title О нас
                     ul
                         each link in aboutLinks
                             li.footer__menu-link
-                                a= link
+                                a(href='change-me')= link
                 .footer__menu-support
                     h3.footer__title Служба поддержки
                     ul
                         each link in supportLinks
                             li.footer__menu-link
-                                a= link
+                                a(href='change-me')= link
 
             .footer__subscription
                 h3.footer__title Подписка
@@ -51,9 +51,9 @@ mixin footer
         .footer__bottom
             .footer__copyright Copyright © 2018 Toxin отель. Все права зачищены.
             .footer__social
-                a
+                a(href='change-me')
                     i(class="footer__social-link fab fa-twitter")
-                a
+                a(href='change-me')
                     i(class="footer__social-link fab fa-facebook-square")
-                a
+                a(href='change-me')
                     i(class="footer__social-link fab fa-instagram")

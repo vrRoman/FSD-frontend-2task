@@ -67,16 +67,15 @@ block content
                           type: "text",
                           title: "Text field",
                           state: "hover / focus",
-                          className: 'text-field_active',
+                          modName: 'active',
                           value: "This is pretty awesome",
                         })
                     .fields__field
                         +dropdown("Сколько гостей", "Dropdown",
                             {
-                                "className": "",
                                 "items": facilitiesDropdownItems,
                             },
-                            "")
+                        )
                     .fields__field
                         +text-field({
                           placeholder: "ДД.ММ.ГГГГ",
@@ -93,7 +92,7 @@ block content
                           placeholder: "Email",
                           type: "email",
                           title: "subscription text field",
-                          className: "subscription-text-field",
+                          modName: "subscription",
                           arrow: true,
                         })
 
@@ -172,20 +171,17 @@ block content
                 .facilities-dropdowns
                     .facilities-dropdowns__dropdown
                         +dropdown('2 спальни, 2 кровати...', 'Dropdown', {
-                            className: '',
                             items: facilitiesDropdownItems,
-                        }, 'facilities-dropdown dropdown_small ', 'default')
+                        }, ['facilities', 'small'], 'default')
                     .facilities-dropdowns__dropdown
                         +dropdown('2 спальни, 2 кровати...', 'Dropdown', {
-                            className: 'items-popup_small',
                             items: facilitiesDropdownItems,
-                        }, 'facilities-dropdown dropdown_small dropdown_expanded', 'expanded')
+                        }, ['facilities', 'small', 'expanded'], 'expanded')
 
             .form-elements-container__column-2
                 .guests-dropdowns
                     .guests-dropdowns__dropdown
                         +dropdown('Сколько гостей', 'Dropdown', {
-                            className: '',
                             items: {
                                 item1: {
                                     name: 'Взрослые',
@@ -200,12 +196,11 @@ block content
                                     value: '0'
                                 }
                             }
-                        }, 'dropdown_expanded')
+                        }, 'expanded')
             .form-elements-container__column-3
                 .guests-dropdowns
                     .guests-dropdowns__dropdown
                         +dropdown('3 гостя', 'Dropdown', {
-                            className: '',
                             items: {
                                 item1: {
                                     name: 'Взрослые',
@@ -220,7 +215,7 @@ block content
                                     value: '0'
                                 }
                             }
-                        }, 'dropdown_expanded')
+                        }, 'expanded')
 
 
         .form-elements-container.container_lists
@@ -229,7 +224,7 @@ block content
                     .expandable-lists__list
                         +list("Expandable checkbox list", listCheckboxes, false)
                     .expandable-lists__list
-                        +list("Expandable checkbox list", listCheckboxes, 'list_expanded')
+                        +list("Expandable checkbox list", listCheckboxes, 'expanded')
 
             .form-elements-container__column-2
                 .rich-checkboxes-buttons
