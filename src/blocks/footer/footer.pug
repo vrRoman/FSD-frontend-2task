@@ -39,7 +39,12 @@ mixin footer
                 h3.footer__title Подписка
                 .footer__subscription-text Получайте специальные<br>предложения и новости сервиса
                 .footer__subscription-input
-                    +text-field('Email', 'email', false, false, 'subscription-text-field', true)
+                    +text-field({
+                      placeholder: 'Email',
+                      type: 'email',
+                      className: 'subscription-text-field',
+                      arrow: true,
+                    })
 
         .footer__line
 

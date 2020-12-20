@@ -5,9 +5,15 @@ mixin signin-card
     .signin-card
         h1.signin-card__title Войти
         .signin-card__email
-            +text-field('Email', 'email')
+            +text-field({
+              placeholder: 'Email',
+              type: 'email'
+            })
         .signin-card__password
-            +text-field('Пароль', 'password')
+            +text-field({
+              placeholder: 'Пароль',
+              type: 'password',
+            })
         .signin-card__button
             +button('Войти', 'button_extended')
         .signin-card__account-not-exists

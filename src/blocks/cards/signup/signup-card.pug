@@ -9,18 +9,36 @@ mixin signup-card
 
         .signup-card__general-info
             .signup-card__name
-                +text-field('Имя', 'text')
+                +text-field({
+                  placeholder: 'Имя',
+                  type: 'text',
+                })
             .signup-card__surname
-                +text-field('Фамилия', 'text')
+                +text-field({
+                  placeholder: 'Фамилия',
+                  type: 'text',
+                })
             .signup-card__gender
                 +radio-buttons(false, ['Мужчина', 'Женщина'], 'gender')
         .signup-card__birth
-            +text-field('ДД.ММ.ГГГГ', 'text', 'Дата рождения')
+            +text-field({
+              placeholder: 'ДД.ММ.ГГГГ',
+              type: 'text',
+              title: 'Дата рождения',
+            })
 
         .signup-card__login-details
             h3 Данные для входа в сервис
-            +text-field('Email', 'email', false, false, 'signup-card__email')
-            +text-field('Пароль', 'password', false, false, 'signup-card__password')
+            +text-field({
+              placeholder: 'Email',
+              type: 'email',
+              className: 'signup-card__email',
+            })
+            +text-field({
+              placeholder: 'Пароль',
+              type: 'password',
+              className: 'signup-card__password',
+            })
 
         .signup-card__offers
             +toggle-buttons(false, [{
@@ -34,6 +52,3 @@ mixin signup-card
         .signup-card__account-exists
             span Уже есть аккаунт на Toxin
             +button('Войти', 'button_secondary')
-
-
-

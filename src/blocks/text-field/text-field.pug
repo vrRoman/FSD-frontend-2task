@@ -1,4 +1,4 @@
-mixin text-field(placeholder, type, title, state, className, arrow, value)
+mixin text-field({placeholder, type, title, state, className, arrow, value})
     .text-field(class=`${className ? className : ''}`)
         if title
             .text-field__info

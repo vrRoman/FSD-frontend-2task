@@ -55,10 +55,21 @@ block content
             .form-elements-container__column-1
                 .fields
                     .fields__field
-                        +text-field("Email", "email", "Text field", "default", "")
+                        +text-field({
+                          placeholder: "Email",
+                          type: "email",
+                          title: "Text field",
+                          state: "default",
+                        })
                     .fields__field
-                        +text-field("This is pretty awesome", "text", "Text field", "hover / focus", 'text-field_active',
-                        false, "This is pretty awesome")
+                        +text-field({
+                          placeholder: "This is pretty awesome",
+                          type: "text",
+                          title: "Text field",
+                          state: "hover / focus",
+                          className: 'text-field_active',
+                          value: "This is pretty awesome",
+                        })
                     .fields__field
                         +dropdown("Сколько гостей", "Dropdown",
                             {
@@ -67,14 +78,24 @@ block content
                             },
                             "")
                     .fields__field
-                        +text-field("ДД.ММ.ГГГГ", "text", "Masked text field", false,
-                          'js-masked-date')
+                        +text-field({
+                          placeholder: "ДД.ММ.ГГГГ",
+                          type: "text",
+                          title: "Masked text field",
+                          className: 'js-masked-date',
+                        })
                     .fields__field
                         +datepicker(true, ["Date dropdown", "Date dropdown"], ['', '19.08.2019'])
                     .fields__field
                         +datepicker(false, ["Filter date dropdown"], ["19 авг - 23 авг"])
                     .fields__field
-                        +text-field("Email", "email", "subscription text field", "", "subscription-text-field", true)
+                        +text-field({
+                          placeholder: "Email",
+                          type: "email",
+                          title: "subscription text field",
+                          className: "subscription-text-field",
+                          arrow: true,
+                        })
 
 
             .form-elements-container__column-2
