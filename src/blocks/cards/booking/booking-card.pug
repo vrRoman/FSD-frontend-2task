@@ -15,7 +15,7 @@ mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
             .booking-card__room-price= roomInfo.price
                 span &nbsp;в сутки
 
-        .booking-card__dates
+        .booking-card__dates.js-booking-card__dates
             +datepicker(true, ['Прибытие', 'Выезд'], datepickerDates, false)
 
         .booking-card__guests

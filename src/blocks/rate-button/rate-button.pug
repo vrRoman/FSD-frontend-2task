@@ -1,7 +1,7 @@
 mixin rate-button(currentRating)
     .rate-button(data-current-rating= currentRating)
         - for (let i = 1; i <= 5; i++)
-            .rate-button__star.material-icons(
+            .rate-button__star.js-rate-button__star.material-icons(
                 class=`${i <= currentRating ? 'rate-button__star_active' : ''}`
             )
 

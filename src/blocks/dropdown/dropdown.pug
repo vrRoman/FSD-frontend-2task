@@ -1,5 +1,5 @@
 mixin dropdown(text, title, popupMixin, popupMixinParams, className, description)
-    .dropdown(class=`${className ? className : ''}`)
+    .dropdown.js-dropdown(class=`${className ? className : ''}`)
         .dropdown__info
             h3.dropdown__title= title
             if description

@@ -1,3 +1,3 @@
-import 'jquery'
+import 'jquery';
 
-import './images'
+import './images';

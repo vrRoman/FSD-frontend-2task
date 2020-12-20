@@ -1,3 +1,3 @@
-import 'jquery-mask-plugin'
+import 'jquery-mask-plugin';
 
-$('.masked-date input').mask('99.99.9999')
+$('.js-masked-date input').mask('99.99.9999');

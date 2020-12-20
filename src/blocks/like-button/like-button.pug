@@ -1,4 +1,4 @@
 mixin like-button(likesNum, active)
-    .like-button(class=`${active ? 'like-button_active' : ''}`)
+    .like-button.js-like-button(class=`${active ? 'like-button_active' : ''}`)
         .like-button__heart.material-icons
         .like-button__like-num= likesNum

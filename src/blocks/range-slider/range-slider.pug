@@ -2,7 +2,7 @@ mixin range-slider(title, description)
     .range-slider
         .range-slider__info
             h3.range-slider__title= title
-            span.range-slider__value
-        .range-slider__slider
+            span.range-slider__value.js-range-slider__value
+        .range-slider__slider.js-range-slider__slider
         if description
             .range-slider__description= description

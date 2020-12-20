@@ -30,7 +30,7 @@ mixin header(user, activeLink)
         .header__container
             a.header__logo(href='landing-page.html')
                 img(src='images/logo.svg', alt='logo')
-            .header__menu
+            .header__menu.js-header__menu
                 nav.header__nav
                     ul
                         - for (let i = 0; i < navItems.length; i++)
@@ -52,7 +52,7 @@ mixin header(user, activeLink)
                     .header__buttons
                         +button('Войти', 'button_secondary login-button', 'login-and-registration.html')
                         +button('Зарегистрироваться', 'signup-button', 'login-and-registration.html')
-            .header__hamburger
+            .header__hamburger.js-header__hamburger
                 span
                 span
                 span
