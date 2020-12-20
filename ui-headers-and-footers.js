@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 56);
+/******/ 	return __webpack_require__(__webpack_require__.s = 67);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10967,6 +10967,40 @@ return jQuery;
 /***/ }),
 
 /***/ 14:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {var hamburgerSelector = '.js-header__hamburger';
+var menuSelector = '.js-header__menu';
+var displayStyle = 'flex';
+var hamburgerActiveClass = 'header__hamburger_active';
+var showOn = 1200;
+$(hamburgerSelector).click(function handlerHamburgerClick() {
+  var menu = $(this).parent().find(menuSelector);
+  $(this).toggleClass(hamburgerActiveClass);
+
+  if (menu.css('display') !== 'none') {
+    menu.css('display', 'none');
+  } else {
+    menu.css('display', displayStyle);
+  }
+});
+
+var handlerWindowResize = function handlerWindowResize() {
+  if (window.innerWidth >= showOn) {
+    if ($(menuSelector).css('display') === 'none') {
+      $(menuSelector).css('display', displayStyle);
+    } else {
+      $(menuSelector).css('display', '');
+    }
+  }
+};
+
+window.addEventListener('resize', handlerWindowResize);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 15:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11295,21 +11329,28 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 56:
+/***/ 6:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 67:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
 /* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(57);
+/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(68);
 /* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(58);
+/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(69);
 /* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(59);
+/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(14);
 /* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_header_header__WEBPACK_IMPORTED_MODULE_5__);
 
 
@@ -11320,7 +11361,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 57:
+/***/ 68:
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(5);
@@ -11328,13 +11369,26 @@ var pug = __webpack_require__(5);
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (pug_indent) {
+    (function (Array, pug_indent) {
       var pug_indent = [];
-pug_mixins["button"] = pug_interp = function(text, className, link){
+pug_mixins["button"] = pug_interp = function(text, modName, link){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+          additionalClassName += `button_${val}`;
+          if (index !== modName.length - 1) {
+              additionalClassName += ' ';
+          }
+        });
+    } else {
+        additionalClassName = `button_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${className ? className : ''}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: false, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
 };
 pug_mixins["header"] = pug_interp = function(user, activeLink){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -11367,7 +11421,7 @@ pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E\n      ";
+pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav class=\"header__nav\"\u003E\n        ";
 pug_html = pug_html + pug_indent.join("");
@@ -11385,7 +11439,7 @@ pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"header__item-arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E";
 }
 else {
-pug_html = pug_html + "\u003Ca href=\"something\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+pug_html = pug_html + "\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 }
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
@@ -11406,10 +11460,10 @@ pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
 pug_indent.push('        ');
-pug_mixins["button"]('Войти', 'button_secondary login-button', 'login-and-registration.html');
+pug_mixins["button"]('Войти', 'secondary', 'login-and-registration.html');
 pug_indent.pop();
 pug_indent.push('        ');
-pug_mixins["button"]('Зарегестрироваться', 'signup-button', 'login-and-registration.html');
+pug_mixins["button"]('Зарегистрироваться', false, 'login-and-registration.html');
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
@@ -11419,17 +11473,30 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fheader\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function(placeholder, type, title, state, className, arrow, value){
+pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+            additionalClassName += `text-field_${val}`;
+            if (index !== modName.length - 1) {
+                additionalClassName += ' ';
+            }
+        });
+    } else {
+        additionalClassName = `text-field_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
 if (title) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11491,7 +11558,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index0];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -11500,7 +11567,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index0];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -11524,7 +11591,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index1];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -11533,7 +11600,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index1];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -11557,7 +11624,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index2];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -11566,7 +11633,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index2];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -11587,7 +11654,12 @@ pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПол
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-input\"\u003E";
 pug_indent.push('        ');
-pug_mixins["text-field"]('Email', 'email', false, false, 'subscription-text-field', true);
+pug_mixins["text-field"]({
+                      placeholder: 'Email',
+                      type: 'email',
+                      className: 'subscription-text-field',
+                      arrow: true,
+                    });
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
@@ -11603,7 +11675,7 @@ pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"footer__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -11617,15 +11689,28 @@ pug_html = pug_html + "\u003Cdiv class=\"footer-creative\"\u003E\u003Cimg class=
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"footer-creative__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer-creative__social\"\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n";
+pug_html = pug_html + "\u003Cdiv class=\"footer-creative__social\"\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function(placeholder, type, title, state, className, arrow, value){
+pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+            additionalClassName += `text-field_${val}`;
+            if (index !== modName.length - 1) {
+                additionalClassName += ' ';
+            }
+        });
+    } else {
+        additionalClassName = `text-field_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
 if (title) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11653,43 +11738,11 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown"] = pug_interp = function(text, title, popupMixin, popupMixinParams, className, description){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"dropdown__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-if (description) {
-pug_html = pug_html + "\u003Cspan class=\"dropdown__description\"\u003E" + (pug.escape(null == (pug_interp = description) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__input\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"dropdown__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__popup\"\u003E";
-pug_indent.push('    ');
-pug_mixins[popupMixin](popupMixinParams);
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
 pug_mixins["popup"] = pug_interp = function(options){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["items-popup",`${options.className ? options.className : ''}`], [false,true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"items-popup\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-popup__items\"\u003E";
 // iterate options
@@ -11830,42 +11883,75 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["datepicker"] = pug_interp = function(double, titles, values, className){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["date-picker",`${double ? "date-picker_double" : "date-picker_single"} ${className ? className : ''}`], [false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__date\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"date-picker__title\"\u003E" + (pug.escape(null == (pug_interp = titles[0]) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__text-field\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([`date-picker__input ${double ? "date-picker__input_double" : "date-picker__input_single"}`], [true]), false, true)+" placeholder=\"ДД.ММ.ГГГГ\""+pug.attr("value", values[0] ? values[0] : '', true, true)+pug.attr("name", `${double ? "start-date" : "all-dates"}`, true, true)) + "\u003E\u003Ci class=\"date-picker__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-if ((double)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__date\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"date-picker__title\"\u003E" + (pug.escape(null == (pug_interp = titles[1]) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__text-field\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"date-picker__input date-picker__input_double\""+" name=\"end-date\""+pug.attr("value", values[1] ? values[1] : '', true, true)+" placeholder=\"ДД.ММ.ГГГГ\"") + "\u003E\u003Ci class=\"date-picker__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 pug_mixins["checkbox-buttons"] = pug_interp = function(title, checkboxes, rich){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
@@ -11923,111 +12009,91 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["radio-buttons"] = pug_interp = function(title, buttons, inputsName){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"radio-buttons\"\u003E";
-if ((title)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"radio-buttons__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"radio-buttons__buttons\"\u003E";
-// iterate buttons
-;(function(){
-  var $$obj = buttons;
-  if ('number' == typeof $$obj.length) {
-      for (var buttonIndex = 0, $$l = $$obj.length; buttonIndex < $$l; buttonIndex++) {
-        var buttonName = $$obj[buttonIndex];
-let checked = buttonIndex === 0;
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"radio-buttons__button radio-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"radio-button__input\""+" type=\"radio\""+pug.attr("name", inputsName, true, true)+pug.attr("checked", checked, true, true)) + "\u003E\u003Cspan class=\"radio-button__name\"\u003E" + (pug.escape(null == (pug_interp = buttonName) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var buttonIndex in $$obj) {
-      $$l++;
-      var buttonName = $$obj[buttonIndex];
-let checked = buttonIndex === 0;
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"radio-buttons__button radio-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"radio-button__input\""+" type=\"radio\""+pug.attr("name", inputsName, true, true)+pug.attr("checked", checked, true, true)) + "\u003E\u003Cspan class=\"radio-button__name\"\u003E" + (pug.escape(null == (pug_interp = buttonName) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-    }
-  }
-}).call(this);
 
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["toggle-buttons"] = pug_interp = function(title, buttons){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"toggle-buttons\"\u003E";
-if ((title)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"toggle-buttons__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"toggle-buttons__buttons\"\u003E";
-// iterate buttons
-;(function(){
-  var $$obj = buttons;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index8 = 0, $$l = $$obj.length; pug_index8 < $$l; pug_index8++) {
-        var button = $$obj[pug_index8];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"toggle-buttons__label toggle-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"toggle-button__input\""+" type=\"checkbox\""+pug.attr("checked", button.checked, true, true)) + "\u003E\u003Cspan class=\"toggle-button__name\"\u003E" + (pug.escape(null == (pug_interp = button.name) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index8 in $$obj) {
-      $$l++;
-      var button = $$obj[pug_index8];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"toggle-buttons__label toggle-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"toggle-button__input\""+" type=\"checkbox\""+pug.attr("checked", button.checked, true, true)) + "\u003E\u003Cspan class=\"toggle-button__name\"\u003E" + (pug.escape(null == (pug_interp = button.name) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-    }
-  }
-}).call(this);
 
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 pug_mixins["like-button"] = pug_interp = function(likesNum, active){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["like-button",`${active ? 'like-button_active' : ''}`], [false,true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["like-button","js-like-button",`${active ? 'like-button_active' : ''}`], [false,false,true]), false, true)) + "\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"like-button__heart material-icons\"\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -12035,59 +12101,72 @@ pug_html = pug_html + "\u003Cdiv class=\"like-button__like-num\"\u003E" + (pug.e
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["rate-button"] = pug_interp = function(currentRating){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pug_mixins["button"] = pug_interp = function(text, modName, link){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (" class=\"rate-button\""+pug.attr("data-current-rating", currentRating, true, true)) + "\u003E";
-for (let i = 1; i <= 5; i++)
-{
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["rate-button__star","material-icons",`${i <= currentRating ? 'rate-button__star_active' : ''}`], [false,false,true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+          additionalClassName += `button_${val}`;
+          if (index !== modName.length - 1) {
+              additionalClassName += ' ';
+          }
+        });
+    } else {
+        additionalClassName = `button_${modName}`;
+    }
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
 };
-pug_mixins["range-slider"] = pug_interp = function(title, description){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"range-slider__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\u003Cspan class=\"range-slider__value\"\u003E\u003C\u002Fspan\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider__slider\"\u003E\u003C\u002Fdiv\u003E";
-if (description) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider__description\"\u003E" + (pug.escape(null == (pug_interp = description) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["button"] = pug_interp = function(text, className, link){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${className ? className : ''}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: false, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
-};
-pug_mixins["pagination"] = pug_interp = function(desc){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"pagination\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"pagination__pages\"\u003E\u003C\u002Fdiv\u003E\u003Cspan class=\"pagination__desc\"\u003E" + (pug.escape(null == (pug_interp = desc) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
+
+
+
+
+
+
+
+
+
+
 pug_mixins["checkbox-buttons"] = pug_interp = function(title, checkboxes, rich){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
@@ -12145,127 +12224,108 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["list"] = pug_interp = function(title, checkboxes, className){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["list",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"list__title\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"list__text\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"material-icons list__arrow\"\u003Eexpand_more\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"list__checkboxes\"\u003E";
-pug_indent.push('    ');
-pug_mixins["checkbox-buttons"](false, checkboxes);
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["bullet-list"] = pug_interp = function(title, items){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"bullet-list\"\u003E";
-if ((title)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"bullet-list__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul class=\"bullet-list__list\"\u003E";
-// iterate items
-;(function(){
-  var $$obj = items;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index10 = 0, $$l = $$obj.length; pug_index10 < $$l; pug_index10++) {
-        var item = $$obj[pug_index10];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"bullet-list__item\"\u003E" + (null == (pug_interp = item) ? "" : pug_interp) + "\u003C\u002Fli\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index10 in $$obj) {
-      $$l++;
-      var item = $$obj[pug_index10];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"bullet-list__item\"\u003E" + (null == (pug_interp = item) ? "" : pug_interp) + "\u003C\u002Fli\u003E";
-    }
-  }
-}).call(this);
 
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["icon-text-list"] = pug_interp = function(items){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text-list\"\u003E";
-// iterate items
-;(function(){
-  var $$obj = items;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index11 = 0, $$l = $$obj.length; pug_index11 < $$l; pug_index11++) {
-        var item = $$obj[pug_index11];
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text-list__item icon-text\"\u003E\u003Ci class=\"icon-text__icon material-icons\"\u003E" + (pug.escape(null == (pug_interp = item.iconName) ? "" : pug_interp)) + "\u003C\u002Fi\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text__info\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text__title\"\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text__description\"\u003E" + (pug.escape(null == (pug_interp = item.description) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index11 in $$obj) {
-      $$l++;
-      var item = $$obj[pug_index11];
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text-list__item icon-text\"\u003E\u003Ci class=\"icon-text__icon material-icons\"\u003E" + (pug.escape(null == (pug_interp = item.iconName) ? "" : pug_interp)) + "\u003C\u002Fi\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text__info\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text__title\"\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"icon-text__description\"\u003E" + (pug.escape(null == (pug_interp = item.description) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-    }
-  }
-}).call(this);
 
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 pug_mixins["like-button"] = pug_interp = function(likesNum, active){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["like-button",`${active ? 'like-button_active' : ''}`], [false,true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["like-button","js-like-button",`${active ? 'like-button_active' : ''}`], [false,false,true]), false, true)) + "\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"like-button__heart material-icons\"\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -12273,40 +12333,40 @@ pug_html = pug_html + "\u003Cdiv class=\"like-button__like-num\"\u003E" + (pug.e
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["comment"] = pug_interp = function(userInfo, likeInfo, commentInfo){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"comment\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"comment__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (" class=\"comment__user-avatar\""+pug.attr("style", pug.style(`background-image: url(${userInfo.avatarLink})`), true, true)) + "\u003E\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"comment__user-name\"\u003E" + (pug.escape(null == (pug_interp = userInfo.name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"comment__time\"\u003E" + (pug.escape(null == (pug_interp = commentInfo.time) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"comment__content\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"comment__likes\"\u003E";
-pug_indent.push('      ');
-pug_mixins["like-button"](likeInfo.likeNum, likeInfo.active);
-pug_indent.pop();
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"comment__text\"\u003E" + (pug.escape(null == (pug_interp = commentInfo.text) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const name = 'headers-and-footers'
-pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", "ui-"+name+".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E\u003Cimg class=\"logo\" src=\"images\u002Flogo-icon.svg\" alt=\"logo\"\u003E\n    \u003Cdiv class=\"headers-and-footers\"\u003E\n      \u003Cdiv class=\"headers-and-footers__header\"\u003E";
+pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", "ui-"+name+".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E\n    \u003Cdiv class=\"ui-logo-container\"\u003E\u003Cimg class=\"ui-logo-container__logo\" src=\"images\u002Flogo-icon.svg\" alt=\"logo\"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv class=\"headers-and-footers\"\u003E\n      \u003Cdiv class=\"headers-and-footers__header\"\u003E";
 pug_indent.push('        ');
 pug_mixins["header"](false, 0);
 pug_indent.pop();
@@ -12323,7 +12383,9 @@ pug_indent.push('        ');
 pug_mixins["footer-creative"]();
 pug_indent.pop();
 pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cscript" + (pug.attr("src", "ui-"+name+".js", true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
-    }.call(this, "pug_indent" in locals_for_with ?
+    }.call(this, "Array" in locals_for_with ?
+        locals_for_with.Array :
+        typeof Array !== 'undefined' ? Array : undefined, "pug_indent" in locals_for_with ?
         locals_for_with.pug_indent :
         typeof pug_indent !== 'undefined' ? pug_indent : undefined));
     ;;return pug_html;};
@@ -12331,39 +12393,12 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 58:
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
     if(false) { var cssReload; }
   
-
-/***/ }),
-
-/***/ 59:
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {var hamburgerSelector = '.header__hamburger';
-var menuSelector = '.header__menu';
-var displayStyle = 'flex';
-var hamburgerActiveClass = 'header__hamburger_active';
-var showOn = 1200;
-$(hamburgerSelector).click(function () {
-  var menu = $(this).parent().find(menuSelector);
-  $(this).toggleClass(hamburgerActiveClass);
-  if (menu.css('display') !== 'none') menu.css('display', 'none');else menu.css('display', displayStyle);
-});
-window.addEventListener('resize', function () {
-  if (window.innerWidth >= showOn) if ($(menuSelector).css('display') === 'none') $(menuSelector).css('display', displayStyle);else $(menuSelector).css('display', '');
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, exports) {
-
-/* (ignored) */
 
 /***/ })
 

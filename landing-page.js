@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 81);
+/******/ 	return __webpack_require__(__webpack_require__.s = 87);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10997,22 +10997,30 @@ return $.ui.version = "1.12.1";
 /* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
 /* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
-
-var clearBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
-var applyBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
+var clearBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
+var applyBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
 var monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 var monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
 var dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 var dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 var dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-$('.date-picker_single').datepicker({
+
+function closeDatepicker() {
+  var datepickerElem = this.closest('.date-picker');
+  datepickerElem.classList.remove('date-picker_expanded');
+}
+
+function clearInputs() {
+  var inputs = this.closest('.date-picker').querySelectorAll('.date-picker__input');
+
+  for (var i = 0; i < inputs.length; i += 1) {
+    inputs[i].value = '';
+  }
+}
+
+$('.js-date-picker_single').datepicker({
   range: 'period',
   showButtonPanel: true,
   currentText: clearBtn + applyBtn,
@@ -11029,16 +11037,16 @@ $('.date-picker_single').datepicker({
     var datePickerElem = inst.input;
 
     if (extensionRange.startDateText !== extensionRange.endDateText) {
-      datePickerElem.find('[name="all-dates"]').val(extensionRange.startDateText + " - " + extensionRange.endDateText);
+      datePickerElem.find('[name="all-dates"]').val("".concat(extensionRange.startDateText, " - ").concat(extensionRange.endDateText));
     }
 
     setTimeout(function () {
-      $('.ui-datepicker-apply-button').click(closeDatepicker);
-      $('.ui-datepicker-clear-button').click(clearInputs);
+      $('.js-ui-datepicker-apply-button').click(closeDatepicker);
+      $('.js-ui-datepicker-clear-button').click(clearInputs);
     }, 100);
   }
 });
-$('.date-picker_double').datepicker({
+$('.js-date-picker_double').datepicker({
   range: 'period',
   showButtonPanel: true,
   currentText: clearBtn + applyBtn,
@@ -11056,52 +11064,13 @@ $('.date-picker_double').datepicker({
     datePickerElem.find('[name="start-date"]').val(extensionRange.startDateText);
     datePickerElem.find('[name="end-date"]').val(extensionRange.endDateText);
     setTimeout(function () {
-      $('.ui-datepicker-apply-button').click(closeDatepicker);
-      $('.ui-datepicker-clear-button').click(clearInputs);
+      $('.js-ui-datepicker-apply-button').click(closeDatepicker);
+      $('.js-ui-datepicker-clear-button').click(clearInputs);
     }, 100);
   }
 });
-$('.ui-datepicker-apply-button').click(closeDatepicker);
-$('.ui-datepicker-clear-button').click(clearInputs);
-
-function closeDatepicker() {
-  var datepickerElem = this.closest('.date-picker');
-  datepickerElem.classList.remove('date-picker_expanded');
-}
-
-function clearInputs() {
-  var inputs = this.closest('.date-picker').querySelectorAll('.date-picker__input');
-
-  var _iterator = _createForOfIteratorHelper(inputs),
-      _step;
-
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var input = _step.value;
-      input.value = '';
-    }
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
-}
-
-$('.date-picker-example').datepicker({
-  range: 'period',
-  showButtonPanel: true,
-  currentText: clearBtn + applyBtn,
-  firstDay: 1,
-  showOtherMonths: true,
-  selectOtherMonths: true,
-  dateFormat: 'dd.mm.yy',
-  monthNames: monthNames,
-  monthNamesShort: monthNamesShort,
-  dayNames: dayNames,
-  dayNamesShort: dayNamesShort,
-  dayNamesMin: dayNamesMin
-});
-$('.date-picker-example').datepicker('setDate', [new Date(2019, 7, 19), new Date(2019, 7, 23)]);
+$('.js-ui-datepicker-apply-button').click(closeDatepicker);
+$('.js-ui-datepicker-clear-button').click(clearInputs);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
@@ -13404,266 +13373,286 @@ var _datepickerExtension = function _datepickerExtension() {
 /***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-var dropdown = function dropdown(dropdownElems, popupSelector, inputSelector, classNameToToggle, applyBtnSelector) {
+/* WEBPACK VAR INJECTION */(function($) {var dropdownInit = function dropdownInit(_ref) {
+  var dropdownElems = _ref.dropdownElems,
+      popupSelector = _ref.popupSelector,
+      inputSelector = _ref.inputSelector,
+      classNameToToggle = _ref.classNameToToggle,
+      applyBtnSelector = _ref.applyBtnSelector;
   var activeDropdowns = [];
-  window.addEventListener('click', function (evt) {
-    var _iterator = _createForOfIteratorHelper(dropdownElems),
-        _step;
 
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var elem = _step.value;
-        var inputs = elem.querySelectorAll(inputSelector);
-        if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1])) if (!activeDropdowns.includes(elem)) activeDropdowns.push(elem);
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-  });
-  window.addEventListener('click', function (evt) {
-    var _iterator2 = _createForOfIteratorHelper(activeDropdowns),
-        _step2;
+  var handleWindowClick = function handleWindowClick(evt) {
+    for (var i = 0; i < dropdownElems.length; i += 1) {
+      var elem = dropdownElems[i];
+      var inputs = elem.querySelectorAll(inputSelector);
 
-    try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var elem = _step2.value;
-        var inputs = elem.querySelectorAll(inputSelector),
-            popup = elem.querySelector(popupSelector);
-        if (evt.composedPath().includes(popup)) return;else if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1])) elem.classList.toggle(classNameToToggle);else elem.classList.remove(classNameToToggle);
+      if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1])) {
+        if (!activeDropdowns.includes(elem)) {
+          activeDropdowns.push(elem);
+        }
       }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
     }
-  });
+
+    for (var _i = 0; _i < activeDropdowns.length; _i += 1) {
+      var _elem = activeDropdowns[_i];
+
+      var _inputs = _elem.querySelectorAll(inputSelector);
+
+      var popup = _elem.querySelector(popupSelector);
+
+      if (evt.composedPath().includes(popup)) return;
+
+      if (evt.composedPath().includes(_inputs[0]) || evt.composedPath().includes(_inputs[1])) {
+        _elem.classList.toggle(classNameToToggle);
+      } else {
+        _elem.classList.remove(classNameToToggle);
+      }
+    }
+  };
+
+  window.addEventListener('click', handleWindowClick);
 
   if (applyBtnSelector) {
-    var _iterator3 = _createForOfIteratorHelper(dropdownElems),
-        _step3;
+    var _loop = function _loop(i) {
+      var elem = dropdownElems[i];
+      var applyBtn = elem.querySelector(applyBtnSelector);
 
-    try {
-      var _loop = function _loop() {
-        var elem = _step3.value;
-        var applyBtn = elem.querySelector(applyBtnSelector);
-
-        applyBtn.onclick = function () {
-          elem.classList.remove(classNameToToggle);
-        };
+      applyBtn.onclick = function () {
+        elem.classList.remove(classNameToToggle);
       };
+    };
 
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        _loop();
-      }
-    } catch (err) {
-      _iterator3.e(err);
-    } finally {
-      _iterator3.f();
+    for (var i = 0; i < dropdownElems.length; i += 1) {
+      _loop(i);
     }
   }
 };
 
-var countedItems = function countedItems(dropdownElems, textSelector, itemSelector, addBtnSelector, removeBtnSelector, nameSelector, valueSelector, clearBtnSelector, clearBtnDisabledClass) {
-  var inactiveBtnClass = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : '';
-  var defaultElemText = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : false;
-  var maxLength = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : 27;
+var changeValue = function changeValue(newValue, textElem, valueElem, fullText) {
+  var maxLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 27;
+  var text = fullText;
+  var input = textElem;
+  var value = valueElem;
 
-  var _iterator4 = _createForOfIteratorHelper(dropdownElems),
-      _step4;
-
-  try {
-    var _loop2 = function _loop2() {
-      var dropdown = _step4.value;
-      var textElem = dropdown.querySelector(textSelector),
-          items = dropdown.querySelectorAll(itemSelector),
-          defaultText = defaultElemText ? defaultElemText : textElem.innerText,
-          clearBtn = dropdown.querySelector(clearBtnSelector),
-          itemsInfo = [],
-          _counter = 0;
-
-      var _iterator5 = _createForOfIteratorHelper(items),
-          _step5;
-
-      try {
-        var _loop3 = function _loop3() {
-          var item = _step5.value;
-          var addBtn = item.querySelector(addBtnSelector),
-              removeBtn = item.querySelector(removeBtnSelector),
-              nameElem = item.querySelector(nameSelector),
-              valueElem = item.querySelector(valueSelector),
-              itemNum = _counter;
-          itemsInfo.push({
-            name: nameElem.innerText.toLowerCase(),
-            value: Number(valueElem.innerText)
-          });
-          var sumOfValues = 0;
-
-          for (var i = 0; i <= itemsInfo.length - 1; i++) {
-            sumOfValues += itemsInfo[i].value;
-          }
-
-          if (sumOfValues === 0) {
-            clearBtn.classList.add(clearBtnDisabledClass);
-          }
-
-          if (itemsInfo[itemNum].value === 0) {
-            if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
-          }
-
-          addBtn.onclick = function () {
-            if (itemsInfo[itemNum].value >= 0) {
-              if (inactiveBtnClass) removeBtn.classList.remove(inactiveBtnClass);
-            }
-
-            itemsInfo[itemNum].value++;
-            var fullText = '';
-
-            var _iterator7 = _createForOfIteratorHelper(itemsInfo),
-                _step7;
-
-            try {
-              for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-                var _item = _step7.value;
-
-                if (_item.value !== 0) {
-                  fullText += _item.value + ' ' + _item.name + ', ';
-                }
-              }
-            } catch (err) {
-              _iterator7.e(err);
-            } finally {
-              _iterator7.f();
-            }
-
-            fullText = fullText.slice(0, -2);
-
-            if (fullText === '') {
-              fullText = defaultText;
-            }
-
-            changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText.toLowerCase(), maxLength);
-            clearBtn.classList.remove(clearBtnDisabledClass);
-          };
-
-          removeBtn.onclick = function () {
-            if (itemsInfo[itemNum].value === 0) return;
-
-            if (itemsInfo[itemNum].value === 1) {
-              if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
-            }
-
-            itemsInfo[itemNum].value--;
-            var fullText = '';
-
-            var _iterator8 = _createForOfIteratorHelper(itemsInfo),
-                _step8;
-
-            try {
-              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-                var _item2 = _step8.value;
-
-                if (_item2.value !== 0) {
-                  fullText += _item2.value + ' ' + _item2.name + ', ';
-                }
-              }
-            } catch (err) {
-              _iterator8.e(err);
-            } finally {
-              _iterator8.f();
-            }
-
-            fullText = fullText.slice(0, -2);
-
-            if (fullText === '') {
-              fullText = defaultText;
-            }
-
-            changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText, maxLength);
-            var sumOfValues = 0;
-
-            for (var _i = 0; _i <= itemsInfo.length - 1; _i++) {
-              sumOfValues += itemsInfo[_i].value;
-            }
-
-            if (sumOfValues === 0) {
-              clearBtn.classList.add(clearBtnDisabledClass);
-            }
-          };
-
-          _counter++;
-        };
-
-        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          _loop3();
-        }
-      } catch (err) {
-        _iterator5.e(err);
-      } finally {
-        _iterator5.f();
-      }
-
-      clearBtn.onclick = function () {
-        _counter = 0;
-
-        var _iterator6 = _createForOfIteratorHelper(items),
-            _step6;
-
-        try {
-          for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-            var item = _step6.value;
-            var itemNum = _counter,
-                removeBtn = item.querySelector(removeBtnSelector),
-                valueElem = item.querySelector(valueSelector);
-            itemsInfo[itemNum].value = 0;
-            if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
-            changeValue(itemsInfo[itemNum].value, textElem, valueElem, defaultText, maxLength);
-            _counter++;
-          }
-        } catch (err) {
-          _iterator6.e(err);
-        } finally {
-          _iterator6.f();
-        }
-
-        clearBtn.classList.add(clearBtnDisabledClass);
-      };
-    };
-
-    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      _loop2();
-    }
-  } catch (err) {
-    _iterator4.e(err);
-  } finally {
-    _iterator4.f();
+  if (fullText.length > maxLength) {
+    text = "".concat(fullText.slice(0, maxLength), "...").toLowerCase();
   }
 
-  function changeValue(newValue, textElem, valueElem, fullText) {
-    var maxLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 27;
+  input.innerText = text;
+  value.innerText = newValue;
+};
 
-    if (fullText.length > maxLength) {
-      fullText = (fullText.slice(0, maxLength) + '...').toLowerCase();
+var countedItems = function countedItems(_ref2) {
+  var dropdownElems = _ref2.dropdownElems,
+      _ref2$textSelector = _ref2.textSelector,
+      textSelector = _ref2$textSelector === void 0 ? '.dropdown__text' : _ref2$textSelector,
+      _ref2$itemSelector = _ref2.itemSelector,
+      itemSelector = _ref2$itemSelector === void 0 ? '.items-popup__item' : _ref2$itemSelector,
+      _ref2$addBtnSelector = _ref2.addBtnSelector,
+      addBtnSelector = _ref2$addBtnSelector === void 0 ? '.items-popup__add-value' : _ref2$addBtnSelector,
+      _ref2$removeBtnSelect = _ref2.removeBtnSelector,
+      removeBtnSelector = _ref2$removeBtnSelect === void 0 ? '.items-popup__remove-value' : _ref2$removeBtnSelect,
+      _ref2$nameSelector = _ref2.nameSelector,
+      nameSelector = _ref2$nameSelector === void 0 ? '.items-popup__title' : _ref2$nameSelector,
+      _ref2$valueSelector = _ref2.valueSelector,
+      valueSelector = _ref2$valueSelector === void 0 ? '.items-popup__value h3' : _ref2$valueSelector,
+      _ref2$clearBtnSelecto = _ref2.clearBtnSelector,
+      clearBtnSelector = _ref2$clearBtnSelecto === void 0 ? '.items-popup__clear' : _ref2$clearBtnSelecto,
+      _ref2$clearBtnDisable = _ref2.clearBtnDisabledClass,
+      clearBtnDisabledClass = _ref2$clearBtnDisable === void 0 ? 'items-popup__clear_disabled' : _ref2$clearBtnDisable,
+      _ref2$inactiveBtnClas = _ref2.inactiveBtnClass,
+      inactiveBtnClass = _ref2$inactiveBtnClas === void 0 ? 'items-popup__change-value_inactive' : _ref2$inactiveBtnClas,
+      _ref2$defaultElemText = _ref2.defaultElemText,
+      defaultElemText = _ref2$defaultElemText === void 0 ? false : _ref2$defaultElemText,
+      _ref2$maxLength = _ref2.maxLength,
+      maxLength = _ref2$maxLength === void 0 ? 27 : _ref2$maxLength;
+
+  var _loop2 = function _loop2(i) {
+    var dropdown = dropdownElems[i];
+    var textElem = dropdown.querySelector(textSelector);
+    var items = dropdown.querySelectorAll(itemSelector);
+    var defaultText = defaultElemText || textElem.innerText;
+    var clearBtn = dropdown.querySelector(clearBtnSelector);
+    var itemsInfo = [];
+    var counter = 0;
+
+    var _loop3 = function _loop3(n) {
+      var item = items[n];
+      var addBtn = item.querySelector(addBtnSelector);
+      var removeBtn = item.querySelector(removeBtnSelector);
+      var nameElem = item.querySelector(nameSelector);
+      var valueElem = item.querySelector(valueSelector);
+      var itemNum = counter;
+      itemsInfo.push({
+        name: nameElem.innerText.toLowerCase(),
+        value: Number(valueElem.innerText)
+      });
+      var sumOfValues = 0;
+
+      for (var x = 0; x <= itemsInfo.length - 1; x += 1) {
+        sumOfValues += itemsInfo[x].value;
+      }
+
+      if (sumOfValues === 0) {
+        clearBtn.classList.add(clearBtnDisabledClass);
+      }
+
+      if (itemsInfo[itemNum].value === 0) {
+        if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
+      }
+
+      addBtn.onclick = function () {
+        if (itemsInfo[itemNum].value >= 0) {
+          if (inactiveBtnClass) removeBtn.classList.remove(inactiveBtnClass);
+        }
+
+        itemsInfo[itemNum].value += 1;
+        var fullText = '';
+
+        for (var a = 0; a < itemsInfo.length; a += 1) {
+          var itemInfo = itemsInfo[a];
+
+          if (itemInfo.value !== 0) {
+            fullText += "".concat(itemInfo.value, " ").concat(itemInfo.name, ", ");
+          }
+        }
+
+        fullText = fullText.slice(0, -2);
+
+        if (fullText === '') {
+          fullText = defaultText;
+        }
+
+        changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText.toLowerCase(), maxLength);
+        clearBtn.classList.remove(clearBtnDisabledClass);
+      };
+
+      removeBtn.onclick = function () {
+        if (itemsInfo[itemNum].value === 0) return;
+
+        if (itemsInfo[itemNum].value === 1) {
+          if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
+        }
+
+        itemsInfo[itemNum].value -= 1;
+        var fullText = '';
+
+        for (var a = 0; a < itemsInfo.length; a += 1) {
+          var itemInfo = itemsInfo[a];
+
+          if (itemInfo.value !== 0) {
+            fullText += "".concat(itemInfo.value, " ").concat(itemInfo.name, ", ");
+          }
+        }
+
+        fullText = fullText.slice(0, -2);
+
+        if (fullText === '') {
+          fullText = defaultText;
+        }
+
+        changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText, maxLength);
+
+        for (var _a = 0; _a <= itemsInfo.length - 1; _a += 1) {
+          sumOfValues += itemsInfo[_a].value;
+        }
+
+        if (sumOfValues === 0) {
+          clearBtn.classList.add(clearBtnDisabledClass);
+        }
+      };
+
+      counter += 1;
+    };
+
+    for (var n = 0; n < items.length; n += 1) {
+      _loop3(n);
     }
 
-    textElem.innerText = fullText;
-    valueElem.innerText = newValue;
+    clearBtn.onclick = function () {
+      counter = 0;
+
+      for (var _n = 0; _n < items.length; _n += 1) {
+        var item = items[_n];
+        var itemNum = counter;
+        var removeBtn = item.querySelector(removeBtnSelector);
+        var valueElem = item.querySelector(valueSelector);
+        itemsInfo[itemNum].value = 0;
+
+        if (inactiveBtnClass) {
+          removeBtn.classList.add(inactiveBtnClass);
+        }
+
+        changeValue(itemsInfo[itemNum].value, textElem, valueElem, defaultText, maxLength);
+        counter += 1;
+      }
+
+      clearBtn.classList.add(clearBtnDisabledClass);
+    };
+  };
+
+  for (var i = 0; i < dropdownElems.length; i += 1) {
+    _loop2(i);
   }
 };
 
 $(document).ready(function () {
-  dropdown($('.dropdown'), '.dropdown__popup', '.dropdown__input', 'dropdown_expanded', '.items-popup__confirm');
-  countedItems($('.dropdown.facilities-dropdown'), '.dropdown__text', '.items-popup__item', '.items-popup__add-value', '.items-popup__remove-value', '.items-popup__title', '.items-popup__value h3', '.items-popup__clear', 'items-popup__clear_disabled', 'items-popup__change-value_inactive');
-  countedItems($('.dropdown:not(.facilities-dropdown)'), '.dropdown__text', '.items-popup__item', '.items-popup__add-value', '.items-popup__remove-value', '.items-popup__title', '.items-popup__value h3', '.items-popup__clear', 'items-popup__clear_disabled', 'items-popup__change-value_inactive', 'Сколько гостей');
-  dropdown($('.date-picker'), '.ui-datepicker-inline', '.date-picker__date', 'date-picker_expanded', false);
+  dropdownInit({
+    dropdownElems: $('.js-dropdown'),
+    popupSelector: '.dropdown__popup',
+    inputSelector: '.dropdown__input',
+    applyBtnSelector: '.items-popup__confirm',
+    classNameToToggle: 'dropdown_expanded'
+  });
+  countedItems({
+    dropdownElems: $('.js-dropdown.dropdown_facilities')
+  });
+  countedItems({
+    dropdownElems: $('.js-dropdown:not(.dropdown_facilities)'),
+    defaultElemText: 'Сколько гостей'
+  });
+  dropdownInit({
+    dropdownElems: $('.js-date-picker'),
+    popupSelector: '.ui-datepicker-inline',
+    inputSelector: '.date-picker__date',
+    applyBtnSelector: false,
+    classNameToToggle: 'date-picker_expanded'
+  });
 });
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {var hamburgerSelector = '.js-header__hamburger';
+var menuSelector = '.js-header__menu';
+var displayStyle = 'flex';
+var hamburgerActiveClass = 'header__hamburger_active';
+var showOn = 1200;
+$(hamburgerSelector).click(function handlerHamburgerClick() {
+  var menu = $(this).parent().find(menuSelector);
+  $(this).toggleClass(hamburgerActiveClass);
+
+  if (menu.css('display') !== 'none') {
+    menu.css('display', 'none');
+  } else {
+    menu.css('display', displayStyle);
+  }
+});
+
+var handlerWindowResize = function handlerWindowResize() {
+  if (window.innerWidth >= showOn) {
+    if ($(menuSelector).css('display') === 'none') {
+      $(menuSelector).css('display', displayStyle);
+    } else {
+      $(menuSelector).css('display', '');
+    }
+  }
+};
+
+window.addEventListener('resize', handlerWindowResize);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
@@ -13983,7 +13972,7 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 64:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -13992,7 +13981,7 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 65:
+/***/ 73:
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(5);
@@ -14000,13 +13989,15 @@ var pug = __webpack_require__(5);
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (pug_indent) {
+    (function (Array, pug_indent) {
       var pug_indent = [];
-pug_mixins["datepicker"] = pug_interp = function(double, titles, values, className){
+pug_mixins["datepicker"] = pug_interp = function(double, titles, values){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["date-picker",`${double ? "date-picker_double" : "date-picker_single"} ${className ? className : ''}`], [false,true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["date-picker","js-date-picker",`${
+      double ? "date-picker_double js-date-picker_double" : "date-picker_single js-date-picker_single"
+    }`], [false,false,true]), false, true)) + "\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"date-picker__date\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -14038,43 +14029,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown"] = pug_interp = function(text, title, popupMixin, popupMixinParams, className, description){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"dropdown__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-if (description) {
-pug_html = pug_html + "\u003Cspan class=\"dropdown__description\"\u003E" + (pug.escape(null == (pug_interp = description) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__input\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"dropdown__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__popup\"\u003E";
-pug_indent.push('    ');
-pug_mixins[popupMixin](popupMixinParams);
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
 pug_mixins["popup"] = pug_interp = function(options){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["items-popup",`${options.className ? options.className : ''}`], [false,true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"items-popup\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-popup__items\"\u003E";
 // iterate options
@@ -14215,11 +14174,69 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button"] = pug_interp = function(text, className, link){
+pug_mixins["dropdown"] = pug_interp = function(text, title, popupParams, modName, description){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+            additionalClassName += `dropdown_${val}`;
+            if (index !== modName.length - 1) {
+                additionalClassName += ' ';
+            }
+        });
+    } else {
+        additionalClassName = `dropdown_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${className ? className : ''}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: false, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown","js-dropdown",additionalClassName], [false,false,true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__info\"\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Ch3 class=\"dropdown__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
+if (description) {
+pug_html = pug_html + "\u003Cspan class=\"dropdown__description\"\u003E" + (pug.escape(null == (pug_interp = description) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
+}
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__input\"\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"dropdown__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__popup\"\u003E";
+pug_indent.push('    ');
+pug_mixins["popup"](popupParams);
+pug_indent.pop();
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button"] = pug_interp = function(text, modName, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+          additionalClassName += `button_${val}`;
+          if (index !== modName.length - 1) {
+              additionalClassName += ' ';
+          }
+        });
+    } else {
+        additionalClassName = `button_${modName}`;
+    }
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
 };
 pug_mixins["search-card"] = pug_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -14231,7 +14248,7 @@ pug_html = pug_html + "\u003Ch1 class=\"search-card__title\"\u003EНайдём �
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"search-card__date\"\u003E";
 pug_indent.push('    ');
-pug_mixins["datepicker"](true, ['Прибытие', 'Выезд'], false, false);
+pug_mixins["datepicker"](true, ['Прибытие', 'Выезд'], false);
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -14239,8 +14256,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"search-card__guests\"\u003E";
 pug_indent.push('    ');
-pug_mixins["dropdown"]('Сколько гостей', 'Гости', 'popup', {
-                className: false,
+pug_mixins["dropdown"]('Сколько гостей', 'Гости', {
                 items: {
                     item1: {
                         name: 'Взрослые',
@@ -14263,7 +14279,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"search-card__button\"\u003E";
 pug_indent.push('    ');
-pug_mixins["button"]('Подобрать номер', 'button_extended');
+pug_mixins["button"]('Подобрать номер', 'extended');
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -14271,11 +14287,24 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button"] = pug_interp = function(text, className, link){
+pug_mixins["button"] = pug_interp = function(text, modName, link){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+          additionalClassName += `button_${val}`;
+          if (index !== modName.length - 1) {
+              additionalClassName += ' ';
+          }
+        });
+    } else {
+        additionalClassName = `button_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${className ? className : ''}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: false, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
 };
 pug_mixins["header"] = pug_interp = function(user, activeLink){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -14308,7 +14337,7 @@ pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E\n      ";
+pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav class=\"header__nav\"\u003E\n        ";
 pug_html = pug_html + pug_indent.join("");
@@ -14326,7 +14355,7 @@ pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"header__item-arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E";
 }
 else {
-pug_html = pug_html + "\u003Ca href=\"something\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+pug_html = pug_html + "\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 }
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
@@ -14347,10 +14376,10 @@ pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
 pug_indent.push('        ');
-pug_mixins["button"]('Войти', 'button_secondary login-button', 'login-and-registration.html');
+pug_mixins["button"]('Войти', 'secondary', 'login-and-registration.html');
 pug_indent.pop();
 pug_indent.push('        ');
-pug_mixins["button"]('Зарегестрироваться', 'signup-button', 'login-and-registration.html');
+pug_mixins["button"]('Зарегистрироваться', false, 'login-and-registration.html');
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
@@ -14360,17 +14389,30 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fheader\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function(placeholder, type, title, state, className, arrow, value){
+pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+            additionalClassName += `text-field_${val}`;
+            if (index !== modName.length - 1) {
+                additionalClassName += ' ';
+            }
+        });
+    } else {
+        additionalClassName = `text-field_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
 if (title) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -14432,7 +14474,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index3];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -14441,7 +14483,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index3];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -14465,7 +14507,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index4];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -14474,7 +14516,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index4];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -14498,7 +14540,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index5];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -14507,7 +14549,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index5];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -14528,7 +14570,12 @@ pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПол
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-input\"\u003E";
 pug_indent.push('        ');
-pug_mixins["text-field"]('Email', 'email', false, false, 'subscription-text-field', true);
+pug_mixins["text-field"]({
+                      placeholder: 'Email',
+                      type: 'email',
+                      className: 'subscription-text-field',
+                      arrow: true,
+                    });
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
@@ -14544,7 +14591,7 @@ pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"footer__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -14556,7 +14603,7 @@ pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n
 pug_indent.push('    ');
 pug_mixins["header"](false, false);
 pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cmain class=\"landing-page\"\u003E\u003Cimg class=\"landing-page__bg-img\" src=\"images\u002Flanding-page-bg.jpg\" alt=\"bg-img\"\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"landing-page__search-card\"\u003E";
+pug_html = pug_html + "\n    \u003Cmain class=\"landing-page\"\u003E\n      \u003Cdiv class=\"landing-page__bg-img\"\u003E\u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"landing-page__search-card\"\u003E";
 pug_indent.push('          ');
 pug_mixins["search-card"]();
 pug_indent.pop();
@@ -14565,7 +14612,9 @@ pug_indent.push('    ');
 pug_mixins["footer"]();
 pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
-    }.call(this, "pug_indent" in locals_for_with ?
+    }.call(this, "Array" in locals_for_with ?
+        locals_for_with.Array :
+        typeof Array !== 'undefined' ? Array : undefined, "pug_indent" in locals_for_with ?
         locals_for_with.pug_indent :
         typeof pug_indent !== 'undefined' ? pug_indent : undefined));
     ;;return pug_html;};
@@ -14624,7 +14673,7 @@ return $.ui.keyCode = {
 
 /***/ }),
 
-/***/ 81:
+/***/ 87:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14638,10 +14687,10 @@ var main = __webpack_require__(3);
 var ui_kit = __webpack_require__(4);
 
 // EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.sass
-var landing_page = __webpack_require__(64);
+var landing_page = __webpack_require__(72);
 
 // EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.pug
-var landing_page_landing_page = __webpack_require__(65);
+var landing_page_landing_page = __webpack_require__(73);
 
 // EXTERNAL MODULE: ./src/blocks/date-picker/datepicker.js
 var datepicker = __webpack_require__(10);
@@ -14649,9 +14698,13 @@ var datepicker = __webpack_require__(10);
 // EXTERNAL MODULE: ./src/blocks/dropdown/dropdown.js
 var dropdown = __webpack_require__(13);
 
+// EXTERNAL MODULE: ./src/blocks/header/header.js
+var header = __webpack_require__(14);
+
 // CONCATENATED MODULE: ./src/pages/website-pages/landing-page/images/landing-page-bg.jpg
 /* harmony default export */ var landing_page_bg = (__webpack_require__.p + "images/landing-page-bg.jpg");
 // CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
+
 
 
 

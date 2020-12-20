@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 73);
+/******/ 	return __webpack_require__(__webpack_require__.s = 80);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10967,6 +10967,40 @@ return jQuery;
 /***/ }),
 
 /***/ 14:
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {var hamburgerSelector = '.js-header__hamburger';
+var menuSelector = '.js-header__menu';
+var displayStyle = 'flex';
+var hamburgerActiveClass = 'header__hamburger_active';
+var showOn = 1200;
+$(hamburgerSelector).click(function handlerHamburgerClick() {
+  var menu = $(this).parent().find(menuSelector);
+  $(this).toggleClass(hamburgerActiveClass);
+
+  if (menu.css('display') !== 'none') {
+    menu.css('display', 'none');
+  } else {
+    menu.css('display', displayStyle);
+  }
+});
+
+var handlerWindowResize = function handlerWindowResize() {
+  if (window.innerWidth >= showOn) {
+    if ($(menuSelector).css('display') === 'none') {
+      $(menuSelector).css('display', displayStyle);
+    } else {
+      $(menuSelector).css('display', '');
+    }
+  }
+};
+
+window.addEventListener('resize', handlerWindowResize);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 15:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10987,6 +11021,628 @@ var jquery = __webpack_require__(0);
 
 /***/ }),
 
+/***/ 24:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
+/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__);
+
+$('.js-masked-date input').mask('99.99.9999');
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 25:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
+ * jquery.mask.js
+ * @version: v1.14.16
+ * @author: Igor Escobar
+ *
+ * Created by Igor Escobar on 2012-03-10. Please report any bug at github.com/igorescobar/jQuery-Mask-Plugin
+ *
+ * Copyright (c) 2012 Igor Escobar http://igorescobar.com
+ *
+ * The MIT License (http://www.opensource.org/licenses/mit-license.php)
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+/* jshint laxbreak: true */
+/* jshint maxcomplexity:17 */
+/* global define */
+
+// UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.
+// https://github.com/umdjs/umd/blob/master/templates/jqueryPlugin.js
+(function (factory, jQuery, Zepto) {
+
+    if (true) {
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    } else {}
+
+}(function ($) {
+    'use strict';
+
+    var Mask = function (el, mask, options) {
+
+        var p = {
+            invalid: [],
+            getCaret: function () {
+                try {
+                    var sel,
+                        pos = 0,
+                        ctrl = el.get(0),
+                        dSel = document.selection,
+                        cSelStart = ctrl.selectionStart;
+
+                    // IE Support
+                    if (dSel && navigator.appVersion.indexOf('MSIE 10') === -1) {
+                        sel = dSel.createRange();
+                        sel.moveStart('character', -p.val().length);
+                        pos = sel.text.length;
+                    }
+                    // Firefox support
+                    else if (cSelStart || cSelStart === '0') {
+                        pos = cSelStart;
+                    }
+
+                    return pos;
+                } catch (e) {}
+            },
+            setCaret: function(pos) {
+                try {
+                    if (el.is(':focus')) {
+                        var range, ctrl = el.get(0);
+
+                        // Firefox, WebKit, etc..
+                        if (ctrl.setSelectionRange) {
+                            ctrl.setSelectionRange(pos, pos);
+                        } else { // IE
+                            range = ctrl.createTextRange();
+                            range.collapse(true);
+                            range.moveEnd('character', pos);
+                            range.moveStart('character', pos);
+                            range.select();
+                        }
+                    }
+                } catch (e) {}
+            },
+            events: function() {
+                el
+                .on('keydown.mask', function(e) {
+                    el.data('mask-keycode', e.keyCode || e.which);
+                    el.data('mask-previus-value', el.val());
+                    el.data('mask-previus-caret-pos', p.getCaret());
+                    p.maskDigitPosMapOld = p.maskDigitPosMap;
+                })
+                .on($.jMaskGlobals.useInput ? 'input.mask' : 'keyup.mask', p.behaviour)
+                .on('paste.mask drop.mask', function() {
+                    setTimeout(function() {
+                        el.keydown().keyup();
+                    }, 100);
+                })
+                .on('change.mask', function(){
+                    el.data('changed', true);
+                })
+                .on('blur.mask', function(){
+                    if (oldValue !== p.val() && !el.data('changed')) {
+                        el.trigger('change');
+                    }
+                    el.data('changed', false);
+                })
+                // it's very important that this callback remains in this position
+                // otherwhise oldValue it's going to work buggy
+                .on('blur.mask', function() {
+                    oldValue = p.val();
+                })
+                // select all text on focus
+                .on('focus.mask', function (e) {
+                    if (options.selectOnFocus === true) {
+                        $(e.target).select();
+                    }
+                })
+                // clear the value if it not complete the mask
+                .on('focusout.mask', function() {
+                    if (options.clearIfNotMatch && !regexMask.test(p.val())) {
+                       p.val('');
+                   }
+                });
+            },
+            getRegexMask: function() {
+                var maskChunks = [], translation, pattern, optional, recursive, oRecursive, r;
+
+                for (var i = 0; i < mask.length; i++) {
+                    translation = jMask.translation[mask.charAt(i)];
+
+                    if (translation) {
+
+                        pattern = translation.pattern.toString().replace(/.{1}$|^.{1}/g, '');
+                        optional = translation.optional;
+                        recursive = translation.recursive;
+
+                        if (recursive) {
+                            maskChunks.push(mask.charAt(i));
+                            oRecursive = {digit: mask.charAt(i), pattern: pattern};
+                        } else {
+                            maskChunks.push(!optional && !recursive ? pattern : (pattern + '?'));
+                        }
+
+                    } else {
+                        maskChunks.push(mask.charAt(i).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+                    }
+                }
+
+                r = maskChunks.join('');
+
+                if (oRecursive) {
+                    r = r.replace(new RegExp('(' + oRecursive.digit + '(.*' + oRecursive.digit + ')?)'), '($1)?')
+                         .replace(new RegExp(oRecursive.digit, 'g'), oRecursive.pattern);
+                }
+
+                return new RegExp(r);
+            },
+            destroyEvents: function() {
+                el.off(['input', 'keydown', 'keyup', 'paste', 'drop', 'blur', 'focusout', ''].join('.mask '));
+            },
+            val: function(v) {
+                var isInput = el.is('input'),
+                    method = isInput ? 'val' : 'text',
+                    r;
+
+                if (arguments.length > 0) {
+                    if (el[method]() !== v) {
+                        el[method](v);
+                    }
+                    r = el;
+                } else {
+                    r = el[method]();
+                }
+
+                return r;
+            },
+            calculateCaretPosition: function(oldVal) {
+                var newVal = p.getMasked(),
+                    caretPosNew = p.getCaret();
+                if (oldVal !== newVal) {
+                    var caretPosOld = el.data('mask-previus-caret-pos') || 0,
+                        newValL = newVal.length,
+                        oldValL = oldVal.length,
+                        maskDigitsBeforeCaret = 0,
+                        maskDigitsAfterCaret = 0,
+                        maskDigitsBeforeCaretAll = 0,
+                        maskDigitsBeforeCaretAllOld = 0,
+                        i = 0;
+
+                    for (i = caretPosNew; i < newValL; i++) {
+                        if (!p.maskDigitPosMap[i]) {
+                            break;
+                        }
+                        maskDigitsAfterCaret++;
+                    }
+
+                    for (i = caretPosNew - 1; i >= 0; i--) {
+                        if (!p.maskDigitPosMap[i]) {
+                            break;
+                        }
+                        maskDigitsBeforeCaret++;
+                    }
+
+                    for (i = caretPosNew - 1; i >= 0; i--) {
+                        if (p.maskDigitPosMap[i]) {
+                            maskDigitsBeforeCaretAll++;
+                        }
+                    }
+
+                    for (i = caretPosOld - 1; i >= 0; i--) {
+                        if (p.maskDigitPosMapOld[i]) {
+                            maskDigitsBeforeCaretAllOld++;
+                        }
+                    }
+
+                    // if the cursor is at the end keep it there
+                    if (caretPosNew > oldValL) {
+                      caretPosNew = newValL * 10;
+                    } else if (caretPosOld >= caretPosNew && caretPosOld !== oldValL) {
+                        if (!p.maskDigitPosMapOld[caretPosNew])  {
+                          var caretPos = caretPosNew;
+                          caretPosNew -= maskDigitsBeforeCaretAllOld - maskDigitsBeforeCaretAll;
+                          caretPosNew -= maskDigitsBeforeCaret;
+                          if (p.maskDigitPosMap[caretPosNew])  {
+                            caretPosNew = caretPos;
+                          }
+                        }
+                    }
+                    else if (caretPosNew > caretPosOld) {
+                        caretPosNew += maskDigitsBeforeCaretAll - maskDigitsBeforeCaretAllOld;
+                        caretPosNew += maskDigitsAfterCaret;
+                    }
+                }
+                return caretPosNew;
+            },
+            behaviour: function(e) {
+                e = e || window.event;
+                p.invalid = [];
+
+                var keyCode = el.data('mask-keycode');
+
+                if ($.inArray(keyCode, jMask.byPassKeys) === -1) {
+                    var newVal = p.getMasked(),
+                        caretPos = p.getCaret(),
+                        oldVal = el.data('mask-previus-value') || '';
+
+                    // this is a compensation to devices/browsers that don't compensate
+                    // caret positioning the right way
+                    setTimeout(function() {
+                      p.setCaret(p.calculateCaretPosition(oldVal));
+                    }, $.jMaskGlobals.keyStrokeCompensation);
+
+                    p.val(newVal);
+                    p.setCaret(caretPos);
+                    return p.callbacks(e);
+                }
+            },
+            getMasked: function(skipMaskChars, val) {
+                var buf = [],
+                    value = val === undefined ? p.val() : val + '',
+                    m = 0, maskLen = mask.length,
+                    v = 0, valLen = value.length,
+                    offset = 1, addMethod = 'push',
+                    resetPos = -1,
+                    maskDigitCount = 0,
+                    maskDigitPosArr = [],
+                    lastMaskChar,
+                    check;
+
+                if (options.reverse) {
+                    addMethod = 'unshift';
+                    offset = -1;
+                    lastMaskChar = 0;
+                    m = maskLen - 1;
+                    v = valLen - 1;
+                    check = function () {
+                        return m > -1 && v > -1;
+                    };
+                } else {
+                    lastMaskChar = maskLen - 1;
+                    check = function () {
+                        return m < maskLen && v < valLen;
+                    };
+                }
+
+                var lastUntranslatedMaskChar;
+                while (check()) {
+                    var maskDigit = mask.charAt(m),
+                        valDigit = value.charAt(v),
+                        translation = jMask.translation[maskDigit];
+
+                    if (translation) {
+                        if (valDigit.match(translation.pattern)) {
+                            buf[addMethod](valDigit);
+                             if (translation.recursive) {
+                                if (resetPos === -1) {
+                                    resetPos = m;
+                                } else if (m === lastMaskChar && m !== resetPos) {
+                                    m = resetPos - offset;
+                                }
+
+                                if (lastMaskChar === resetPos) {
+                                    m -= offset;
+                                }
+                            }
+                            m += offset;
+                        } else if (valDigit === lastUntranslatedMaskChar) {
+                            // matched the last untranslated (raw) mask character that we encountered
+                            // likely an insert offset the mask character from the last entry; fall
+                            // through and only increment v
+                            maskDigitCount--;
+                            lastUntranslatedMaskChar = undefined;
+                        } else if (translation.optional) {
+                            m += offset;
+                            v -= offset;
+                        } else if (translation.fallback) {
+                            buf[addMethod](translation.fallback);
+                            m += offset;
+                            v -= offset;
+                        } else {
+                          p.invalid.push({p: v, v: valDigit, e: translation.pattern});
+                        }
+                        v += offset;
+                    } else {
+                        if (!skipMaskChars) {
+                            buf[addMethod](maskDigit);
+                        }
+
+                        if (valDigit === maskDigit) {
+                            maskDigitPosArr.push(v);
+                            v += offset;
+                        } else {
+                            lastUntranslatedMaskChar = maskDigit;
+                            maskDigitPosArr.push(v + maskDigitCount);
+                            maskDigitCount++;
+                        }
+
+                        m += offset;
+                    }
+                }
+
+                var lastMaskCharDigit = mask.charAt(lastMaskChar);
+                if (maskLen === valLen + 1 && !jMask.translation[lastMaskCharDigit]) {
+                    buf.push(lastMaskCharDigit);
+                }
+
+                var newVal = buf.join('');
+                p.mapMaskdigitPositions(newVal, maskDigitPosArr, valLen);
+                return newVal;
+            },
+            mapMaskdigitPositions: function(newVal, maskDigitPosArr, valLen) {
+              var maskDiff = options.reverse ? newVal.length - valLen : 0;
+              p.maskDigitPosMap = {};
+              for (var i = 0; i < maskDigitPosArr.length; i++) {
+                p.maskDigitPosMap[maskDigitPosArr[i] + maskDiff] = 1;
+              }
+            },
+            callbacks: function (e) {
+                var val = p.val(),
+                    changed = val !== oldValue,
+                    defaultArgs = [val, e, el, options],
+                    callback = function(name, criteria, args) {
+                        if (typeof options[name] === 'function' && criteria) {
+                            options[name].apply(this, args);
+                        }
+                    };
+
+                callback('onChange', changed === true, defaultArgs);
+                callback('onKeyPress', changed === true, defaultArgs);
+                callback('onComplete', val.length === mask.length, defaultArgs);
+                callback('onInvalid', p.invalid.length > 0, [val, e, el, p.invalid, options]);
+            }
+        };
+
+        el = $(el);
+        var jMask = this, oldValue = p.val(), regexMask;
+
+        mask = typeof mask === 'function' ? mask(p.val(), undefined, el,  options) : mask;
+
+        // public methods
+        jMask.mask = mask;
+        jMask.options = options;
+        jMask.remove = function() {
+            var caret = p.getCaret();
+            if (jMask.options.placeholder) {
+                el.removeAttr('placeholder');
+            }
+            if (el.data('mask-maxlength')) {
+                el.removeAttr('maxlength');
+            }
+            p.destroyEvents();
+            p.val(jMask.getCleanVal());
+            p.setCaret(caret);
+            return el;
+        };
+
+        // get value without mask
+        jMask.getCleanVal = function() {
+           return p.getMasked(true);
+        };
+
+        // get masked value without the value being in the input or element
+        jMask.getMaskedVal = function(val) {
+           return p.getMasked(false, val);
+        };
+
+       jMask.init = function(onlyMask) {
+            onlyMask = onlyMask || false;
+            options = options || {};
+
+            jMask.clearIfNotMatch  = $.jMaskGlobals.clearIfNotMatch;
+            jMask.byPassKeys       = $.jMaskGlobals.byPassKeys;
+            jMask.translation      = $.extend({}, $.jMaskGlobals.translation, options.translation);
+
+            jMask = $.extend(true, {}, jMask, options);
+
+            regexMask = p.getRegexMask();
+
+            if (onlyMask) {
+                p.events();
+                p.val(p.getMasked());
+            } else {
+                if (options.placeholder) {
+                    el.attr('placeholder' , options.placeholder);
+                }
+
+                // this is necessary, otherwise if the user submit the form
+                // and then press the "back" button, the autocomplete will erase
+                // the data. Works fine on IE9+, FF, Opera, Safari.
+                if (el.data('mask')) {
+                  el.attr('autocomplete', 'off');
+                }
+
+                // detect if is necessary let the user type freely.
+                // for is a lot faster than forEach.
+                for (var i = 0, maxlength = true; i < mask.length; i++) {
+                    var translation = jMask.translation[mask.charAt(i)];
+                    if (translation && translation.recursive) {
+                        maxlength = false;
+                        break;
+                    }
+                }
+
+                if (maxlength) {
+                    el.attr('maxlength', mask.length).data('mask-maxlength', true);
+                }
+
+                p.destroyEvents();
+                p.events();
+
+                var caret = p.getCaret();
+                p.val(p.getMasked());
+                p.setCaret(caret);
+            }
+        };
+
+        jMask.init(!el.is('input'));
+    };
+
+    $.maskWatchers = {};
+    var HTMLAttributes = function () {
+        var input = $(this),
+            options = {},
+            prefix = 'data-mask-',
+            mask = input.attr('data-mask');
+
+        if (input.attr(prefix + 'reverse')) {
+            options.reverse = true;
+        }
+
+        if (input.attr(prefix + 'clearifnotmatch')) {
+            options.clearIfNotMatch = true;
+        }
+
+        if (input.attr(prefix + 'selectonfocus') === 'true') {
+           options.selectOnFocus = true;
+        }
+
+        if (notSameMaskObject(input, mask, options)) {
+            return input.data('mask', new Mask(this, mask, options));
+        }
+    },
+    notSameMaskObject = function(field, mask, options) {
+        options = options || {};
+        var maskObject = $(field).data('mask'),
+            stringify = JSON.stringify,
+            value = $(field).val() || $(field).text();
+        try {
+            if (typeof mask === 'function') {
+                mask = mask(value);
+            }
+            return typeof maskObject !== 'object' || stringify(maskObject.options) !== stringify(options) || maskObject.mask !== mask;
+        } catch (e) {}
+    },
+    eventSupported = function(eventName) {
+        var el = document.createElement('div'), isSupported;
+
+        eventName = 'on' + eventName;
+        isSupported = (eventName in el);
+
+        if ( !isSupported ) {
+            el.setAttribute(eventName, 'return;');
+            isSupported = typeof el[eventName] === 'function';
+        }
+        el = null;
+
+        return isSupported;
+    };
+
+    $.fn.mask = function(mask, options) {
+        options = options || {};
+        var selector = this.selector,
+            globals = $.jMaskGlobals,
+            interval = globals.watchInterval,
+            watchInputs = options.watchInputs || globals.watchInputs,
+            maskFunction = function() {
+                if (notSameMaskObject(this, mask, options)) {
+                    return $(this).data('mask', new Mask(this, mask, options));
+                }
+            };
+
+        $(this).each(maskFunction);
+
+        if (selector && selector !== '' && watchInputs) {
+            clearInterval($.maskWatchers[selector]);
+            $.maskWatchers[selector] = setInterval(function(){
+                $(document).find(selector).each(maskFunction);
+            }, interval);
+        }
+        return this;
+    };
+
+    $.fn.masked = function(val) {
+        return this.data('mask').getMaskedVal(val);
+    };
+
+    $.fn.unmask = function() {
+        clearInterval($.maskWatchers[this.selector]);
+        delete $.maskWatchers[this.selector];
+        return this.each(function() {
+            var dataMask = $(this).data('mask');
+            if (dataMask) {
+                dataMask.remove().removeData('mask');
+            }
+        });
+    };
+
+    $.fn.cleanVal = function() {
+        return this.data('mask').getCleanVal();
+    };
+
+    $.applyDataMask = function(selector) {
+        selector = selector || $.jMaskGlobals.maskElements;
+        var $selector = (selector instanceof $) ? selector : $(selector);
+        $selector.filter($.jMaskGlobals.dataMaskAttr).each(HTMLAttributes);
+    };
+
+    var globals = {
+        maskElements: 'input,td,span,div',
+        dataMaskAttr: '*[data-mask]',
+        dataMask: true,
+        watchInterval: 300,
+        watchInputs: true,
+        keyStrokeCompensation: 10,
+        // old versions of chrome dont work great with input event
+        useInput: !/Chrome\/[2-4][0-9]|SamsungBrowser/.test(window.navigator.userAgent) && eventSupported('input'),
+        watchDataMask: false,
+        byPassKeys: [9, 16, 17, 18, 36, 37, 38, 39, 40, 91],
+        translation: {
+            '0': {pattern: /\d/},
+            '9': {pattern: /\d/, optional: true},
+            '#': {pattern: /\d/, recursive: true},
+            'A': {pattern: /[a-zA-Z0-9]/},
+            'S': {pattern: /[a-zA-Z]/}
+        }
+    };
+
+    $.jMaskGlobals = $.jMaskGlobals || {};
+    globals = $.jMaskGlobals = $.extend(true, {}, globals, $.jMaskGlobals);
+
+    // looking for inputs with data-mask attribute
+    if (globals.dataMask) {
+        $.applyDataMask();
+    }
+
+    setInterval(function() {
+        if ($.jMaskGlobals.watchDataMask) {
+            $.applyDataMask();
+        }
+    }, globals.watchInterval);
+}, window.jQuery, window.Zepto));
+
+
+/***/ }),
+
 /***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11002,6 +11658,15 @@ var jquery = __webpack_require__(0);
 // extracted by mini-css-extract-plugin
     if(false) { var cssReload; }
   
+
+/***/ }),
+
+/***/ 41:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _text_field_text_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+
 
 /***/ }),
 
@@ -11302,48 +11967,58 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 73:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
 /* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(74);
+/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(81);
 /* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(75);
+/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(82);
 /* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(76);
+/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(83);
+/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(14);
+/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_header_header__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _blocks_cards_signup_signup_card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(41);
 
 
 
 
 
 
-var loginButtons = $('.signup-card__account-exists .button'),
-    signupButtons = $('.signin-card__account-not-exists .button');
-var signinCard = $('.login-and-registration__signin-card'),
-    signupCard = $('.login-and-registration__signup-card');
-loginButtons.click(showSigninCard);
-signupButtons.click(showSignupCard);
+
+
+var loginButtons = $('.signup-card__account-exists .button');
+var signupButtons = $('.signin-card__account-not-exists .button');
+var signinCard = $('.login-and-registration__signin-card');
+var signupCard = $('.login-and-registration__signup-card');
+var pageElem = $('.login-and-registration');
+var pageElemLoginClass = 'login-and-registration_login';
 
 function showSigninCard() {
   signupCard.hide();
   signinCard.show();
+  pageElem.toggleClass(pageElemLoginClass);
 }
 
 function showSignupCard() {
   signupCard.show();
   signinCard.hide();
+  pageElem.toggleClass(pageElemLoginClass);
 }
+
+loginButtons.click(showSigninCard);
+signupButtons.click(showSignupCard);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 74:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(5);
@@ -11351,13 +12026,26 @@ var pug = __webpack_require__(5);
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (pug_indent) {
+    (function (Array, pug_indent) {
       var pug_indent = [];
-pug_mixins["text-field"] = pug_interp = function(placeholder, type, title, state, className, arrow, value){
+pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+            additionalClassName += `text-field_${val}`;
+            if (index !== modName.length - 1) {
+                additionalClassName += ' ';
+            }
+        });
+    } else {
+        additionalClassName = `text-field_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
 if (title) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11485,11 +12173,24 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button"] = pug_interp = function(text, className, link){
+pug_mixins["button"] = pug_interp = function(text, modName, link){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+          additionalClassName += `button_${val}`;
+          if (index !== modName.length - 1) {
+              additionalClassName += ' ';
+          }
+        });
+    } else {
+        additionalClassName = `button_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${className ? className : ''}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: false, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
 };
 pug_mixins["signup-card"] = pug_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -11503,7 +12204,10 @@ pug_html = pug_html + "\u003Cdiv class=\"signup-card__general-info\"\u003E\n    
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signup-card__name\"\u003E";
 pug_indent.push('      ');
-pug_mixins["text-field"]('Имя', 'text');
+pug_mixins["text-field"]({
+                  placeholder: 'Имя',
+                  type: 'text',
+                });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -11511,7 +12215,10 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signup-card__surname\"\u003E";
 pug_indent.push('      ');
-pug_mixins["text-field"]('Фамилия', 'text');
+pug_mixins["text-field"]({
+                  placeholder: 'Фамилия',
+                  type: 'text',
+                });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -11529,7 +12236,12 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signup-card__birth\"\u003E";
 pug_indent.push('    ');
-pug_mixins["text-field"]('ДД.ММ.ГГГГ', 'text', 'Дата рождения');
+pug_mixins["text-field"]({
+              placeholder: 'ДД.ММ.ГГГГ',
+              type: 'text',
+              title: 'Дата рождения',
+              className: 'js-masked-date',
+            });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11537,14 +12249,29 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signup-card__login-details\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3\u003EДанные для входа в сервис\u003C\u002Fh3\u003E";
-pug_indent.push('    ');
-pug_mixins["text-field"]('Email', 'email', false, false, 'signup-card__email');
+pug_html = pug_html + "\u003Ch3\u003EДанные для входа в сервис\u003C\u002Fh3\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__email\"\u003E";
+pug_indent.push('      ');
+pug_mixins["text-field"]({
+                  placeholder: 'Email',
+                  type: 'email',
+                });
 pug_indent.pop();
-pug_indent.push('    ');
-pug_mixins["text-field"]('Пароль', 'password', false, false, 'signup-card__password');
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__password\"\u003E";
+pug_indent.push('      ');
+pug_mixins["text-field"]({
+                  placeholder: 'Пароль',
+                  type: 'password',
+                });
 pug_indent.pop();
-pug_html = pug_html + "\n  ";
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11561,7 +12288,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signup-card__signup-btn\"\u003E";
 pug_indent.push('    ');
-pug_mixins["button"]('Перейти к оплате', 'button_extended');
+pug_mixins["button"]('Перейти к оплате', 'extended');
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11569,7 +12296,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signup-card__account-exists\"\u003E\u003Cspan\u003EУже есть аккаунт на Toxin\u003C\u002Fspan\u003E";
 pug_indent.push('    ');
-pug_mixins["button"]('Войти', 'button_secondary');
+pug_mixins["button"]('Войти', 'secondary', '#');
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11577,11 +12304,24 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function(placeholder, type, title, state, className, arrow, value){
+pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+            additionalClassName += `text-field_${val}`;
+            if (index !== modName.length - 1) {
+                additionalClassName += ' ';
+            }
+        });
+    } else {
+        additionalClassName = `text-field_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
 if (title) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11609,11 +12349,24 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button"] = pug_interp = function(text, className, link){
+pug_mixins["button"] = pug_interp = function(text, modName, link){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+          additionalClassName += `button_${val}`;
+          if (index !== modName.length - 1) {
+              additionalClassName += ' ';
+          }
+        });
+    } else {
+        additionalClassName = `button_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${className ? className : ''}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: false, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
 };
 pug_mixins["signin-card"] = pug_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -11625,7 +12378,10 @@ pug_html = pug_html + "\u003Ch1 class=\"signin-card__title\"\u003EВойти\u00
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signin-card__email\"\u003E";
 pug_indent.push('    ');
-pug_mixins["text-field"]('Email', 'email');
+pug_mixins["text-field"]({
+              placeholder: 'Email',
+              type: 'email'
+            });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11633,7 +12389,10 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signin-card__password\"\u003E";
 pug_indent.push('    ');
-pug_mixins["text-field"]('Пароль', 'password');
+pug_mixins["text-field"]({
+              placeholder: 'Пароль',
+              type: 'password',
+            });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11641,7 +12400,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signin-card__button\"\u003E";
 pug_indent.push('    ');
-pug_mixins["button"]('Войти', 'button_extended');
+pug_mixins["button"]('Войти', 'extended');
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11649,7 +12408,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"signin-card__account-not-exists\"\u003E\u003Cspan\u003EНет аккаунта на Toxin?\u003C\u002Fspan\u003E";
 pug_indent.push('    ');
-pug_mixins["button"]('Создать', 'button_secondary');
+pug_mixins["button"]('Создать', 'secondary', '#');
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11657,11 +12416,24 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button"] = pug_interp = function(text, className, link){
+pug_mixins["button"] = pug_interp = function(text, modName, link){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+          additionalClassName += `button_${val}`;
+          if (index !== modName.length - 1) {
+              additionalClassName += ' ';
+          }
+        });
+    } else {
+        additionalClassName = `button_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${className ? className : ''}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: false, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
 };
 pug_mixins["header"] = pug_interp = function(user, activeLink){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -11694,7 +12466,7 @@ pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E\n      ";
+pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav class=\"header__nav\"\u003E\n        ";
 pug_html = pug_html + pug_indent.join("");
@@ -11712,7 +12484,7 @@ pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"header__item-arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E";
 }
 else {
-pug_html = pug_html + "\u003Ca href=\"something\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+pug_html = pug_html + "\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 }
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
@@ -11733,10 +12505,10 @@ pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
 pug_indent.push('        ');
-pug_mixins["button"]('Войти', 'button_secondary login-button', 'login-and-registration.html');
+pug_mixins["button"]('Войти', 'secondary', 'login-and-registration.html');
 pug_indent.pop();
 pug_indent.push('        ');
-pug_mixins["button"]('Зарегестрироваться', 'signup-button', 'login-and-registration.html');
+pug_mixins["button"]('Зарегистрироваться', false, 'login-and-registration.html');
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
@@ -11746,17 +12518,30 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fheader\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function(placeholder, type, title, state, className, arrow, value){
+pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
+let additionalClassName = '';
+if (modName) {
+    if (Array.isArray(modName)) {
+        modName.forEach((val, index) => {
+            additionalClassName += `text-field_${val}`;
+            if (index !== modName.length - 1) {
+                additionalClassName += ' ';
+            }
+        });
+    } else {
+        additionalClassName = `text-field_${modName}`;
+    }
+}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
 if (title) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -11818,7 +12603,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index2];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -11827,7 +12612,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index2];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -11851,7 +12636,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index3];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -11860,7 +12645,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index3];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -11884,7 +12669,7 @@ pug_html = pug_html + "\u003Cul\u003E";
         var link = $$obj[pug_index4];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
       }
   } else {
     var $$l = 0;
@@ -11893,7 +12678,7 @@ pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" 
       var link = $$obj[pug_index4];
 pug_html = pug_html + "\n          ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
+pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
     }
   }
 }).call(this);
@@ -11914,7 +12699,12 @@ pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПол
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-input\"\u003E";
 pug_indent.push('        ');
-pug_mixins["text-field"]('Email', 'email', false, false, 'subscription-text-field', true);
+pug_mixins["text-field"]({
+                      placeholder: 'Email',
+                      type: 'email',
+                      className: 'subscription-text-field',
+                      arrow: true,
+                    });
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
 pug_html = pug_html + pug_indent.join("");
@@ -11930,7 +12720,7 @@ pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"footer__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -11955,7 +12745,9 @@ pug_indent.push('    ');
 pug_mixins["footer"]();
 pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
-    }.call(this, "pug_indent" in locals_for_with ?
+    }.call(this, "Array" in locals_for_with ?
+        locals_for_with.Array :
+        typeof Array !== 'undefined' ? Array : undefined, "pug_indent" in locals_for_with ?
         locals_for_with.pug_indent :
         typeof pug_indent !== 'undefined' ? pug_indent : undefined));
     ;;return pug_html;};
@@ -11963,7 +12755,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 75:
+/***/ 82:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -11972,7 +12764,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 76:
+/***/ 83:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
