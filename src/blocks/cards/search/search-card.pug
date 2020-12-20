@@ -1,6 +1,5 @@
 include ../../date-picker/datepicker
-include ../../dropdown/dropdown.pug
-include ../../items-popup/popup
+include ../../dropdown/dropdown
 include ../../button/button
 
 
@@ -12,7 +11,7 @@ mixin search-card
             +datepicker(true, ['Прибытие', 'Выезд'], false, false)
 
         .search-card__guests
-            +dropdown('Сколько гостей', 'Гости', 'popup', {
+            +dropdown('Сколько гостей', 'Гости', {
                 className: false,
                 items: {
                     item1: {

@@ -1,4 +1,6 @@
-mixin dropdown(text, title, popupMixin, popupMixinParams, className, description)
+include ./items-popup/popup
+
+mixin dropdown(text, title, popupParams, className, description)
     .dropdown.js-dropdown(class=`${className ? className : ''}`)
         .dropdown__info
             h3.dropdown__title= title
@@ -10,5 +12,4 @@ mixin dropdown(text, title, popupMixin, popupMixinParams, className, description
             i.dropdown__arrow.material-icons expand_more
 
         .dropdown__popup
-            +#{popupMixin}(popupMixinParams)
-
+            +popup(popupParams)

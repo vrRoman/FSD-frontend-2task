@@ -1,6 +1,5 @@
 include ../../date-picker/datepicker
 include ../../dropdown/dropdown
-include ../../items-popup/popup
 include  ../../button/button
 
 
@@ -19,7 +18,7 @@ mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
             +datepicker(true, ['Прибытие', 'Выезд'], datepickerDates, false)
 
         .booking-card__guests
-            +dropdown('3 гостя', 'Гости', 'popup',
+            +dropdown('3 гостя', 'Гости',
                 {
                     items: {
                         item1: {

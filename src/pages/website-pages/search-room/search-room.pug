@@ -2,7 +2,6 @@ extends ../../../templates/website-pages
 
 include ../../../blocks/date-picker/datepicker
 include ../../../blocks/dropdown/dropdown
-include ../../../blocks/items-popup/popup
 include ../../../blocks/range-slider/range-slider
 include ../../../blocks/checkbox-buttons/checkbox-buttons
 include ../../../blocks/list/list
@@ -22,7 +21,7 @@ block content
                 .search-room__params-date
                     +datepicker(false, ['Даты пребывания в отеле'], ['19 авг - 23 авг'])
                 .search-room__params-guests
-                    +dropdown('3 гостя, 1 младенец', 'Гости', 'popup', {
+                    +dropdown('3 гостя, 1 младенец', 'Гости', {
                         className: false,
                         items: {
                             item1: {
@@ -70,7 +69,7 @@ block content
                         }
                     ], true)
                 .search-room__params-facilities
-                    +dropdown('2 спальни, 2 кровати...', 'Удобства номера', 'popup', {
+                    +dropdown('2 спальни, 2 кровати...', 'Удобства номера', {
                         className: '',
                         items: {
                             item1: {
