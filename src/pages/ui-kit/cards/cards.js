@@ -6,7 +6,7 @@ import '@/sass/main.sass';
 import '@/sass/ui-kit.sass';
 import './cards.sass';
 
-import '@blocks/date-picker/datepicker';
+import { setDatepickerDate, onSelect } from '@blocks/date-picker/datepicker';
 import '@blocks/dropdown/dropdown';
 import '@blocks/rate-button/rate-button';
 
@@ -49,4 +49,7 @@ $('.js-date-picker-example').datepicker({
   dayNames,
   dayNamesShort,
   dayNamesMin,
-}).datepicker('setDate', [new Date(2019, 7, 19), new Date(2019, 7, 23)]);
+  onSelect,
+});
+
+setDatepickerDate($('.js-date-picker-example'), [new Date(2019, 7, 19), new Date(2019, 7, 23)]);

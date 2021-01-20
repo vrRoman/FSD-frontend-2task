@@ -4,7 +4,7 @@ import '@/sass/ui-kit.sass';
 import './search-room.pug';
 import './search-room.sass';
 
-import '@blocks/date-picker/datepicker';
+import { setDatepickerDate } from '@blocks/date-picker/datepicker';
 import '@blocks/dropdown/dropdown';
 import '@blocks/range-slider/range-slider';
 import '@blocks/list/list';
@@ -24,3 +24,5 @@ import './images/room-img_9.jpg';
 import './images/room-img_10.jpg';
 import './images/room-img_11.jpg';
 import './images/room-img_12.jpg';
+
+setDatepickerDate($('.js-date-picker'), [new Date(2019, 7, 19), new Date(2019, 7, 23)]);

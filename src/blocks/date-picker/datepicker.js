@@ -17,53 +17,67 @@ const dayNames = ['Воскресенье', 'Понедельник', 'Втор�
 const dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 const dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 
-function applyDates($dropdown, dates) {
-  const $inputs = $dropdown.find('.date-picker__input');
-  if (dates) {
+function applyDate($datepicker, dateTexts, datesObjects) {
+  const $inputs = $datepicker.find('.date-picker__input');
+  if (dateTexts) {
     if ($inputs.length === 1) {
-      if (dates[0] && dates[1]) {
-        $inputs.val(`${dates[0]} - ${dates[1]}`);
+      if (dateTexts[0] && dateTexts[1]) {
+        $inputs.val(`${dateTexts[0]} - ${dateTexts[1]}`);
       }
     } else if ($inputs.length === 2) {
       $inputs.each((i, elem) => {
-        $(elem).val(dates[i]);
+        $(elem).val(dateTexts[i]);
       });
     }
 
-    $dropdown.datepicker('setDate', dates);
+    $datepicker.datepicker('setDate', datesObjects || dateTexts);
   }
 
-  $dropdown.removeClass('date-picker_expanded');
+  $datepicker.removeClass('date-picker_expanded');
 }
 
-function clearDate($dropdown) {
-  const inputs = $dropdown.find('.date-picker__input');
+function clearDate($datepicker) {
+  const inputs = $datepicker.find('.date-picker__input');
   inputs.val('');
 
-  $dropdown.datepicker('setDate', [null, null]);
+  $datepicker.datepicker('setDate', [null, null]);
 }
 
 function onSelect(dateText, inst, extensionRange) {
-  const $dropdown = inst.dpDiv.parent();
+  const $datepicker = inst.dpDiv.parent();
   let dates = [extensionRange.startDateText, extensionRange.endDateText];
 
   function handleApplyButtonClick() {
-    applyDates($dropdown, dates);
-    $('.js-ui-datepicker-clear-button').click(() => {
-      clearDate($dropdown);
+    applyDate($datepicker, dates, [extensionRange.startDate, extensionRange.endDate]);
+    $($datepicker.find('.js-ui-datepicker-clear-button')).click(() => {
+      clearDate($datepicker);
       dates = [null, null];
-      $('.js-ui-datepicker-apply-button').click(handleApplyButtonClick);
+      $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
     });
   }
 
   setTimeout(() => {
-    $('.js-ui-datepicker-apply-button').click(handleApplyButtonClick);
-    $('.js-ui-datepicker-clear-button').click(() => {
-      clearDate($dropdown);
+    $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
+    $($datepicker.find('.js-ui-datepicker-clear-button')).click(() => {
+      clearDate($datepicker);
       dates = [null, null];
-      $('.js-ui-datepicker-apply-button').click(handleApplyButtonClick);
+      $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
     });
   }, 100);
+}
+
+function setDatepickerDate($datepicker, dates) {
+  $datepicker.datepicker('setDate', dates);
+
+  const $applyBtn = $datepicker.find('.js-ui-datepicker-apply-button');
+  const $clearBtn = $datepicker.find('.js-ui-datepicker-clear-button');
+
+  $applyBtn.click(function handleApplyButtonClick() {
+    applyDate($(this.closest('.js-date-picker')), false);
+  });
+  $clearBtn.click(function handleClearButtonClick() {
+    clearDate($(this.closest('.js-date-picker')));
+  });
 }
 
 $('.js-date-picker_single').datepicker({
@@ -100,8 +114,10 @@ $('.js-date-picker_double').datepicker({
 });
 
 $('.js-ui-datepicker-apply-button').click(function handleApplyButtonClick() {
-  applyDates($(this.closest('.js-date-picker')), false);
+  applyDate($(this.closest('.js-date-picker')), false);
 });
 $('.js-ui-datepicker-clear-button').click(function handleClearButtonClick() {
   clearDate($(this.closest('.js-date-picker')));
 });
+
+export { setDatepickerDate, onSelect };
