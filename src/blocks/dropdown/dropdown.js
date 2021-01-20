@@ -160,6 +160,7 @@ const countedItems = ({
 
         changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText, maxLength);
 
+        sumOfValues = 0;
         for (let a = 0; a <= itemsInfo.length - 1; a += 1) {
           sumOfValues += itemsInfo[a].value;
         }
