@@ -27,6 +27,7 @@
     background-color: transparent
     cursor: pointer
     outline: none
+
     &:hover
         border-color: $dark-shade-50
     &::placeholder
@@ -59,17 +60,19 @@
 
 
 .ui-datepicker.ui-datepicker-inline
+    min-height: 369px
+    height: unset
+    overflow: visible
     top: 100%
     position: absolute
     z-index: 10
     box-sizing: border-box
     width: 320px
-    min-height: 369px
+    box-shadow: 0 10px 20px 0 $dark-shade-5
+    border-radius: 4px
     padding: 20px
     padding-bottom: 18px
     border: 1px solid $dark-shade-25
-    box-shadow: 0 10px 20px 0 $dark-shade-5
-    border-radius: 4px
     .ui-datepicker-header
         background-color: transparent
         border: none
@@ -244,6 +247,9 @@
             line-height: 15px
             text-transform: uppercase
             outline: none
+            transition: opacity .4s
+            &:hover
+                opacity: .5
 
         .ui-datepicker-clear-button
             color: $dark-shade-50
@@ -257,13 +263,14 @@
     display: none
 
 
-.date-picker
+.date-picker:not(.date-picker_expanded)
     .ui-datepicker
-        display: none !important
+        min-height: 0
+        height: 0
+        overflow: hidden
+        padding: 0
+        border: none
 
-.date-picker_expanded
-    .ui-datepicker
-        display: block !important
 
 
 @media screen and (max-width: 438px)
