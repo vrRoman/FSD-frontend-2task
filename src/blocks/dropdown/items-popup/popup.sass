@@ -65,10 +65,14 @@
 
 .items-popup__clear
     color: $dark-shade-50
-    cursor: pointer
 .items-popup__confirm
     color: $purple
+
+.items-popup__clear, .items-popup__confirm
+    transition: opacity .4s
     cursor: pointer
+    &:hover
+        opacity: .5
 
 .items-popup__clear_disabled
     visibility: hidden
