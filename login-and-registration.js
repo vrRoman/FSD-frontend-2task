@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 80);
+/******/ 	return __webpack_require__(__webpack_require__.s = 95);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11643,15 +11643,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 3:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-
 /***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11671,6 +11662,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ }),
 
 /***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11924,7 +11924,7 @@ function pug_rethrow(err, filename, lineno, str) {
     throw err;
   }
   try {
-    str = str || __webpack_require__(6).readFileSync(filename, 'utf8');
+    str = str || __webpack_require__(7).readFileSync(filename, 'utf8');
   } catch (ex) {
     pug_rethrow(err, null, lineno);
   }
@@ -11960,28 +11960,28 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 80:
+/***/ 95:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
+/* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
 /* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(81);
+/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(96);
 /* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(82);
+/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(97);
 /* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(83);
+/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(98);
 /* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(14);
 /* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_header_header__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _blocks_cards_signup_signup_card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(41);
@@ -12018,10 +12018,10 @@ signupButtons.click(showSignupCard);
 
 /***/ }),
 
-/***/ 81:
+/***/ 96:
 /***/ (function(module, exports, __webpack_require__) {
 
-var pug = __webpack_require__(5);
+var pug = __webpack_require__(6);
 
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
@@ -12755,7 +12755,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 82:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -12764,7 +12764,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 83:
+/***/ 98:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

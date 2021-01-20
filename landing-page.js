@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 87);
+/******/ 	return __webpack_require__(__webpack_require__.s = 100);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10989,89 +10989,45 @@ return $.ui.version = "1.12.1";
 
 /***/ }),
 
-/***/ 10:
+/***/ 100:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
-/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
-/* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./src/sass/main.sass
+var main = __webpack_require__(4);
+
+// EXTERNAL MODULE: ./src/sass/ui-kit.sass
+var ui_kit = __webpack_require__(5);
+
+// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.sass
+var landing_page = __webpack_require__(74);
+
+// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.pug
+var landing_page_landing_page = __webpack_require__(75);
+
+// EXTERNAL MODULE: ./src/blocks/date-picker/datepicker.js
+var datepicker = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/blocks/dropdown/dropdown.js
+var dropdown = __webpack_require__(13);
+
+// EXTERNAL MODULE: ./src/blocks/header/header.js
+var header = __webpack_require__(14);
+
+// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/images/landing-page-bg.jpg
+/* harmony default export */ var landing_page_bg = (__webpack_require__.p + "images/landing-page-bg.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
 
 
-var clearBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
-var applyBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
-var monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-var monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-var dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-var dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-var dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 
-function closeDatepicker() {
-  var datepickerElem = this.closest('.date-picker');
-  datepickerElem.classList.remove('date-picker_expanded');
-}
 
-function clearInputs() {
-  var inputs = this.closest('.date-picker').querySelectorAll('.date-picker__input');
 
-  for (var i = 0; i < inputs.length; i += 1) {
-    inputs[i].value = '';
-  }
-}
 
-$('.js-date-picker_single').datepicker({
-  range: 'period',
-  showButtonPanel: true,
-  currentText: clearBtn + applyBtn,
-  firstDay: 1,
-  showOtherMonths: true,
-  selectOtherMonths: true,
-  dateFormat: 'd M',
-  monthNames: monthNames,
-  monthNamesShort: monthNamesShort,
-  dayNames: dayNames,
-  dayNamesShort: dayNamesShort,
-  dayNamesMin: dayNamesMin,
-  onSelect: function onSelect(dateText, inst, extensionRange) {
-    var datePickerElem = inst.input;
 
-    if (extensionRange.startDateText !== extensionRange.endDateText) {
-      datePickerElem.find('[name="all-dates"]').val("".concat(extensionRange.startDateText, " - ").concat(extensionRange.endDateText));
-    }
 
-    setTimeout(function () {
-      $('.js-ui-datepicker-apply-button').click(closeDatepicker);
-      $('.js-ui-datepicker-clear-button').click(clearInputs);
-    }, 100);
-  }
-});
-$('.js-date-picker_double').datepicker({
-  range: 'period',
-  showButtonPanel: true,
-  currentText: clearBtn + applyBtn,
-  firstDay: 1,
-  showOtherMonths: true,
-  selectOtherMonths: true,
-  dateFormat: 'dd.mm.yy',
-  monthNames: monthNames,
-  monthNamesShort: monthNamesShort,
-  dayNames: dayNames,
-  dayNamesShort: dayNamesShort,
-  dayNamesMin: dayNamesMin,
-  onSelect: function onSelect(dateText, inst, extensionRange) {
-    var datePickerElem = inst.input;
-    datePickerElem.find('[name="start-date"]').val(extensionRange.startDateText);
-    datePickerElem.find('[name="end-date"]').val(extensionRange.endDateText);
-    setTimeout(function () {
-      $('.js-ui-datepicker-apply-button').click(closeDatepicker);
-      $('.js-ui-datepicker-clear-button').click(clearInputs);
-    }, 100);
-  }
-});
-$('.js-ui-datepicker-apply-button').click(closeDatepicker);
-$('.js-ui-datepicker-clear-button').click(clearInputs);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
 
@@ -11105,7 +11061,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
 			__webpack_require__(1),
-			__webpack_require__(8)
+			__webpack_require__(9)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -13552,6 +13508,7 @@ var countedItems = function countedItems(_ref2) {
         }
 
         changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText, maxLength);
+        sumOfValues = 0;
 
         for (var _a = 0; _a <= itemsInfo.length - 1; _a += 1) {
           sumOfValues += itemsInfo[_a].value;
@@ -13657,12 +13614,135 @@ window.addEventListener('resize', handlerWindowResize);
 
 /***/ }),
 
-/***/ 3:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ 2:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return setDatepickerDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return onSelect; });
+/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var clearBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
+var applyBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
+var monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+var monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+var dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+var dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+var dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+
+function checkDateAndUpdateClearBtn($datepicker) {
+  $datepicker.each(function (i, elem) {
+    if ($(elem).datepicker('getDate')) {
+      $($(elem).find('.js-ui-datepicker-clear-button')).removeClass('ui-datepicker-clear-button_disabled');
+    } else {
+      $($(elem).find('.js-ui-datepicker-clear-button')).addClass('ui-datepicker-clear-button_disabled');
+    }
+  });
+}
+
+function applyDate($datepicker, dateTexts, datesObjects) {
+  var $inputs = $datepicker.find('.date-picker__input');
+
+  if (dateTexts) {
+    if ($inputs.length === 1) {
+      if (dateTexts[0] && dateTexts[1]) {
+        $inputs.val("".concat(dateTexts[0], " - ").concat(dateTexts[1]));
+      }
+    } else if ($inputs.length === 2) {
+      $inputs.each(function (i, elem) {
+        $(elem).val(dateTexts[i]);
+      });
+    }
+
+    $datepicker.datepicker('setDate', datesObjects || dateTexts);
+    checkDateAndUpdateClearBtn($datepicker);
+  }
+
+  $datepicker.removeClass('date-picker_expanded');
+}
+
+function clearDate($datepicker) {
+  var $inputs = $datepicker.find('.date-picker__input');
+  $inputs.val('');
+  $datepicker.datepicker('setDate', [null, null]);
+  checkDateAndUpdateClearBtn($datepicker);
+}
+
+function onSelect(dateText, inst, extensionRange) {
+  var $datepicker = inst.dpDiv.parent();
+  var dates = [extensionRange.startDateText, extensionRange.endDateText];
+
+  function handleApplyButtonClick() {
+    applyDate($datepicker, dates, [extensionRange.startDate, extensionRange.endDate]);
+    $($datepicker.find('.js-ui-datepicker-clear-button')).click(function () {
+      clearDate($datepicker);
+      dates = [null, null];
+      $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
+    });
+    $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
+  }
+
+  setTimeout(function () {
+    $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
+    $($datepicker.find('.js-ui-datepicker-clear-button')).click(function () {
+      clearDate($datepicker);
+      dates = [null, null];
+      $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
+    });
+  }, 100);
+}
+
+function setDatepickerDate($datepicker, dates) {
+  $datepicker.datepicker('setDate', dates);
+  $datepicker.find('.js-ui-datepicker-apply-button').click(function () {
+    applyDate($datepicker, false);
+  });
+  $datepicker.find('.js-ui-datepicker-clear-button').click(function () {
+    clearDate($datepicker);
+    $datepicker.find('.js-ui-datepicker-apply-button').click(function () {
+      applyDate($datepicker, false);
+    });
+  });
+  checkDateAndUpdateClearBtn($datepicker);
+}
+
+$('.js-date-picker_single').datepicker({
+  range: 'period',
+  showButtonPanel: true,
+  currentText: clearBtn + applyBtn,
+  firstDay: 1,
+  showOtherMonths: true,
+  selectOtherMonths: true,
+  dateFormat: 'd M',
+  monthNames: monthNames,
+  monthNamesShort: monthNamesShort,
+  dayNames: dayNames,
+  dayNamesShort: dayNamesShort,
+  dayNamesMin: dayNamesMin,
+  onSelect: onSelect
+});
+$('.js-date-picker_double').datepicker({
+  range: 'period',
+  showButtonPanel: true,
+  currentText: clearBtn + applyBtn,
+  firstDay: 1,
+  showOtherMonths: true,
+  selectOtherMonths: true,
+  dateFormat: 'dd.mm.yy',
+  monthNames: monthNames,
+  monthNamesShort: monthNamesShort,
+  dayNames: dayNames,
+  dayNamesShort: dayNamesShort,
+  dayNamesMin: dayNamesMin,
+  onSelect: onSelect
+});
+setDatepickerDate($('.js-date-picker'), [null, null]);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
 
@@ -13676,6 +13756,15 @@ window.addEventListener('resize', handlerWindowResize);
 /***/ }),
 
 /***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13929,7 +14018,7 @@ function pug_rethrow(err, filename, lineno, str) {
     throw err;
   }
   try {
-    str = str || __webpack_require__(6).readFileSync(filename, 'utf8');
+    str = str || __webpack_require__(7).readFileSync(filename, 'utf8');
   } catch (ex) {
     pug_rethrow(err, null, lineno);
   }
@@ -13965,14 +14054,14 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 72:
+/***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -13981,10 +14070,10 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 73:
+/***/ 75:
 /***/ (function(module, exports, __webpack_require__) {
 
-var pug = __webpack_require__(5);
+var pug = __webpack_require__(6);
 
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
@@ -14622,7 +14711,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14669,48 +14758,6 @@ return $.ui.keyCode = {
 };
 
 } ) );
-
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./src/sass/main.sass
-var main = __webpack_require__(3);
-
-// EXTERNAL MODULE: ./src/sass/ui-kit.sass
-var ui_kit = __webpack_require__(4);
-
-// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.sass
-var landing_page = __webpack_require__(72);
-
-// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.pug
-var landing_page_landing_page = __webpack_require__(73);
-
-// EXTERNAL MODULE: ./src/blocks/date-picker/datepicker.js
-var datepicker = __webpack_require__(10);
-
-// EXTERNAL MODULE: ./src/blocks/dropdown/dropdown.js
-var dropdown = __webpack_require__(13);
-
-// EXTERNAL MODULE: ./src/blocks/header/header.js
-var header = __webpack_require__(14);
-
-// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/images/landing-page-bg.jpg
-/* harmony default export */ var landing_page_bg = (__webpack_require__.p + "images/landing-page-bg.jpg");
-// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
-
-
-
-
-
-
-
 
 
 /***/ })
