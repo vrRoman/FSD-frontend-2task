@@ -14,68 +14,73 @@
         left: 0
         bottom: 0
         background-color: $dark-shade-25
-
-.search-room__container
-    display: flex
-
-
-.search-room__params
-    width: 266px
-    height: 100%
-    margin-right: 60px
-    display: inline-block
-
-.search-room__params-date, .search-room__params-price, .search-room__params-checkboxes
-    margin-top: 30px
-
-.search-room__params-guests
-    margin-top: 20px
-
-.search-room__params-rich-checkboxes
-    margin-top: 22px
-
-.search-room__params-facilities
-    margin-top: 21px
-
-.search-room__params-list
-    margin-top: 29px
+    &__container
+        display: flex
 
 
-.search-room__rooms-section
-    display: inline-block
-    height: 100%
+    &__params
+        width: 266px
+        height: 100%
+        margin-right: 60px
+        display: inline-block
 
-.search-room__title
-    margin-top: 30px
+    &__params-date, &__params-price, &__params-checkboxes
+        margin-top: 30px
 
-.search-room__room-cards
-    margin-top: 21px
-    display: flex
-    flex-wrap: wrap
-    width: 100%
-    justify-content: space-between
-    margin-bottom: 20px
-    .room-card
-        margin-bottom: 19.5px
+    &__params-guests
+        margin-top: 20px
 
-.search-room__pagination
-    width: 100%
-    display: flex
-    justify-content: center
-    margin-bottom: 73px
-    box-sizing: border-box
-    padding-right: 12px
+    &__params-rich-checkboxes
+        margin-top: 22px
+
+    &__params-facilities
+        margin-top: 21px
+
+    &__params-list
+        margin-top: 29px
+
+
+    &__rooms-section
+        display: inline-block
+        height: 100%
+
+    &__title
+        margin-top: 30px
+
+    &__room-cards
+        margin-top: 21px
+        display: flex
+        flex-wrap: wrap
+        width: 100%
+        justify-content: space-between
+        margin-bottom: 20px
+        .room-card
+            margin-bottom: 19.5px
+
+    &__pagination
+        width: 100%
+        display: flex
+        justify-content: center
+        margin-bottom: 73px
+        box-sizing: border-box
+        padding-right: 12px
 
 
 @media screen and (max-width: 990px)
-    .search-room__container
-        flex-direction: column
-    .search-room__params
-        width: 100%
-    .search-room__params-date, .search-room__params-guests, .search-room__params-price, .search-room__params-checkboxes,
-    .search-room__params-rich-checkboxes, .search-room__params-facilities, .search-room__params-list
-        display: flex
-        justify-content: center
+    .search-room
+        &__container
+            flex-direction: column
+        &__params
+            width: 100%
+        &__params-date,
+        &__params-guests,
+        &__params-price,
+        &__params-checkboxes,
+        &__params-rich-checkboxes,
+        &__params-facilities,
+        &__params-list
+            display: flex
+            justify-content: center
 
 @media screen and (max-width: 626px)
     .search-room__room-cards

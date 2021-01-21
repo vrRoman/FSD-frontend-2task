@@ -15,66 +15,66 @@
     height: 100%
     z-index: 3
 
-.items-popup__item
-    display: flex
-    justify-content: space-between
-    align-items: center
-    margin-top: 7px
-    &:nth-child(1)
-        margin-top: 0
+    &__item
+        display: flex
+        justify-content: space-between
+        align-items: center
+        margin-top: 7px
+        &:nth-child(1)
+            margin-top: 0
 
-.items-popup__title
-    margin-left: 8px
-    margin-bottom: 1px
-
-.items-popup__value
-    display: flex
-    justify-content: space-between
-    align-items: center
-    width: 92px
-    h3
+    &__title
+        margin-left: 8px
         margin-bottom: 1px
 
-.items-popup__change-value
-    width: 30px
-    height: 30px
-    border: 1px solid $dark-shade-25
-        radius: 50%
-    display: flex
-    justify-content: center
-    align-items: center
-    color: $dark-shade-50
-    cursor: pointer
-    box-sizing: border-box
+    &__value
+        display: flex
+        justify-content: space-between
+        align-items: center
+        width: 92px
+        h3
+            margin-bottom: 1px
 
-.items-popup__change-value_not-active
-    opacity: 38%
+    &__change-value
+        width: 30px
+        height: 30px
+        border: 1px solid $dark-shade-25
+            radius: 50%
+        display: flex
+        justify-content: center
+        align-items: center
+        color: $dark-shade-50
+        cursor: pointer
+        box-sizing: border-box
 
-.items-popup__change-value_inactive
-    opacity: 0.5
+    &__change-value_not-active
+        opacity: 38%
+
+    &__change-value_inactive
+        opacity: 0.5
 
 
 
-.items-popup__button-pane
-    position: relative
-    display: flex
-    justify-content: space-between
+    &__button-pane
+        position: relative
+        display: flex
+        justify-content: space-between
 
-    margin-bottom: 6px
-    padding-left: 8px
+        margin-bottom: 6px
+        padding-left: 8px
 
-.items-popup__clear
-    color: $dark-shade-50
-.items-popup__confirm
-    color: $purple
+    &__clear
+        color: $dark-shade-50
+    &__confirm
+        color: $purple
 
-.items-popup__clear, .items-popup__confirm
-    transition: opacity .4s
-    cursor: pointer
-    &:hover
-        opacity: .5
+    &__clear, &__confirm
+        transition: opacity .4s
+        cursor: pointer
+        &:hover
+            opacity: .5
 
-.items-popup__clear_disabled
-    visibility: hidden
+    &__clear_disabled
+        visibility: hidden
 
 

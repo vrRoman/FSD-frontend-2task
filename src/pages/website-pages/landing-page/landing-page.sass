@@ -9,30 +9,28 @@
     position: relative
     display: flex
     align-items: center
-
-.landing-page__bg-img
-    min-width: 100%
-    position: absolute
-    z-index: -1
-    background: url("images/landing-page-bg.jpg")
-    height: 100%
-    background-position: center center
-    background-repeat: no-repeat
-    background-size: cover
-
-.landing-page__search-card
-    position: absolute
-    left: 0
-    top: 70px
-
-.landing-page__tagline
-    position: absolute
-    bottom: 21px
-    right: -6px
-    text-align: right
+    &__bg-img
+        min-width: 100%
+        position: absolute
+        z-index: -1
+        background: url("images/landing-page-bg.jpg")
+        height: 100%
+        background-position: center center
+        background-repeat: no-repeat
+        background-size: cover
+    &__search-card
+        position: absolute
+        left: 0
+        top: 70px
+    &__tagline
+        position: absolute
+        bottom: 21px
+        right: -6px
+        text-align: right
 
 @media screen and (max-width: 438px)
-    .landing-page__search-card
-        width: 100%
-    .landing-page__tagline
-        right: 5px
+    .landing-page
+        &__search-card
+            width: 100%
+        &__tagline
+            right: 5px

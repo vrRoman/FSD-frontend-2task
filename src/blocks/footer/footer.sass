@@ -1,105 +1,95 @@
 .footer
+    $selector: &
     width: 100%
     background-color: #fff
     box-shadow: 0 10px 20px 0 $dark-shade-5
     z-index: 1
-
-.footer__body
-    display: flex
-    width: 1160px
-    padding: 100px 140px 96px 140px
-    margin: 0 auto
-
-.footer__main-info
-    width: 260px
-
-.footer__text
-    margin-top: 10px
-
-
-.footer__menu
-    display: flex
-    justify-content: space-between
-    margin: 4px 0 4px 40px
-
-.footer__menu-about
-    margin-left: 58px
-    margin-right: 93px
-
-.footer__title
-    margin-bottom: 22px
-
-.footer__menu-link
-    margin-bottom: 21px
-    color: $dark-shade-50
-    font-size: 14px
-    line-height: 17px
-    cursor: pointer
-    &:last-child
-        margin-bottom: 0
-
-.footer__subscription
-    margin-top: 4px
-    margin-left: 51px
-    display: flex
-    flex-direction: column
-    .footer__title
-        margin-bottom: 19px
-
-.footer__subscription-input
-    margin-top: 22px
-    .text-field
+    &__body
+        display: flex
+        width: 1160px
+        padding: 100px 140px 96px 140px
+        margin: 0 auto
+    &__main-info
         width: 260px
+    &__text
+        margin-top: 10px
+    &__menu
+        display: flex
+        justify-content: space-between
+        margin: 4px 0 4px 40px
+    &__menu-about
+        margin-left: 58px
+        margin-right: 93px
+    &__title
+        margin-bottom: 22px
+    &__menu-link
+        margin-bottom: 21px
+        color: $dark-shade-50
+        font-size: 14px
+        line-height: 17px
+        cursor: pointer
+        &:last-child
+            margin-bottom: 0
+    &__subscription
+        margin-top: 4px
+        margin-left: 51px
+        display: flex
+        flex-direction: column
+        #{$selector}__title
+            margin-bottom: 19px
+    &__subscription-input
+        margin-top: 22px
+        .text-field
+            width: 260px
 
-
-.footer__bottom
-    height: 70px
-    width: 1160px
-    margin: auto
-    display: flex
-    justify-content: space-between
-    align-items: center
-    padding: 0 140px
-    position: relative
-
-.footer__line
-    height: 1px
-    width: 100%
-    background-color: #e5e5e5
-
-.footer__social
-    margin-right: 2px
-    margin-top: 2px
-.footer__social-link
-    margin-left: 22px
-    cursor: pointer
-    &:before
-        background: $purple-gradient
-        color: transparent
-        -webkit-background-clip: text
-        font-size: 24px
+    &__bottom
+        height: 70px
+        width: 1160px
+        margin: auto
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 0 140px
+        position: relative
+    &__line
+        height: 1px
+        width: 100%
+        background-color: #e5e5e5
+    &__social
+        margin-right: 2px
+        margin-top: 2px
+    &__social-link
+        margin-left: 22px
+        cursor: pointer
+        &:before
+            background: $purple-gradient
+            color: transparent
+            -webkit-background-clip: text
+            font-size: 24px
 
 
 @media screen and (max-width: 1470px)
-    .footer__body, .footer__bottom
-        width: 100%
-        box-sizing: border-box
-        justify-content: center
-    .footer__subscription
-        margin-top: 60px
-    .footer__main-info
-        margin-bottom: 60px
-    .footer__body
-        flex-wrap: wrap
+    .footer
+        &__body, &__bottom
+            width: 100%
+            box-sizing: border-box
+            justify-content: center
+        &__subscription
+            margin-top: 60px
+        &__main-info
+            margin-bottom: 60px
+        &__body
+            flex-wrap: wrap
 @media screen and (max-width: 800px)
-    .footer__body
-        padding: 50px 0
-        width: 90%
-    .footer__subscription
-        margin: 0
-    .footer__bottom
-        width: 90%
-        padding: 0
+    .footer
+        &__body
+            padding: 50px 0
+            width: 90%
+        &__subscription
+            margin: 0
+        &__bottom
+            width: 90%
+            padding: 0
 @media screen and (max-width: 500px)
     .footer__menu
         display: none
@@ -107,5 +97,3 @@
     .footer__bottom
         flex-direction: column
         height: unset
-
-

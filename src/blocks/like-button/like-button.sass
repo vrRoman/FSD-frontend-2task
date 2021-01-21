@@ -1,4 +1,5 @@
 .like-button
+    $selector: &
     width: 40px
     height: 20px
     border: 1px solid $dark-shade-25
@@ -8,40 +9,33 @@
     margin-right: 6px
     cursor: pointer
     box-sizing: border-box
-
-
-.like-button__like-num
-    position: absolute
-    right: 4px
-
-.like-button__heart
-    position: absolute
-    left: 4px
-    top: -55%
-    &:after
-        content: 'favorite_border'
-        font-size: 10px
-        color: $dark-shade-25
-
-.like-button__like-num
-    width: 20px
-    font-family: Montserrat, sans-serif
-    font-size: 10px
-    line-height: 12px
-    display: flex
-    align-items: center
-    justify-content: center
-    height: 100%
-
-    color: $dark-shade-25
-
-
-
-.like-button_active
-    border-color: $purple
-    .like-button__heart
+    &__like-num
+        position: absolute
+        right: 4px
+    &__heart
+        position: absolute
+        left: 4px
+        top: -55%
         &:after
-            content: 'favorite'
+            content: 'favorite_border'
+            font-size: 10px
+            color: $dark-shade-25
+    &__like-num
+        width: 20px
+        font-family: Montserrat, sans-serif
+        font-size: 10px
+        line-height: 12px
+        display: flex
+        align-items: center
+        justify-content: center
+        height: 100%
+
+        color: $dark-shade-25
+    &_active
+        border-color: $purple
+        #{$selector}__heart
+            &:after
+                content: 'favorite'
+                color: $purple
+        #{$selector}__like-num
             color: $purple
-    .like-button__like-num
-        color: $purple

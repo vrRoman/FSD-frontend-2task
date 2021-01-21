@@ -1,31 +1,24 @@
 .list
+    $selector: &
     width: 266px
-
-.list__title
-    display: flex
-    align-items: center
-    justify-content: space-between
-    width: 100%
-
-.list__text
-    display: inline-block
-
-
-.list__arrow
-    padding: 0 10px
-    transition: .4s
-    line-height: 15px
-
-
-.list__checkboxes
-    max-height: 0
-    transition: .4s
-    overflow: hidden
-    margin-top: 18px
-
-
-.list_expanded
-    .list__checkboxes
-        max-height: 200px
-    .list__arrow
-        transform: rotate(180deg)
+    &__title
+        display: flex
+        align-items: center
+        justify-content: space-between
+        width: 100%
+    &__text
+        display: inline-block
+    &__arrow
+        padding: 0 10px
+        transition: .4s
+        line-height: 15px
+    &__checkboxes
+        max-height: 0
+        transition: .4s
+        overflow: hidden
+        margin-top: 18px
+    &_expanded
+        #{$selector}__checkboxes
+            max-height: 200px
+        #{$selector}__arrow
+            transform: rotate(180deg)

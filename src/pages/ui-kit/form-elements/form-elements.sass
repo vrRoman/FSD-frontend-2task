@@ -2,36 +2,32 @@
     display: flex
     position: relative
     padding: 143px 0 0 0
+    &__column-1,
+    &__column-2,
+    &__column-3
+        min-width: 320px
 
-.form-elements-container__column-1, .form-elements-container__column-2, .form-elements-container__column-3
-    min-width: 320px
-
-.form-elements-container__column-2
-    margin-left: 126px
-
-.form-elements-container__column-3
-    margin-left: 72px
-
+    &__column-2
+        margin-left: 126px
+    &__column-3
+        margin-left: 72px
 
 .fields
     width: 320px
-
-
-.fields__field
-    margin-top: 20px
-    &:nth-child(2)
-        margin-top: 21px
-    &:nth-child(4)
-        margin-top: 22px
-    &:nth-child(5)
-        margin-top: 41px
-    &:nth-child(6)
-        margin-top: 40px
-    &:nth-child(7)
-        margin-top: 41px
-    &:nth-child(1)
-        margin-top: 0
-
+    &__field
+        margin-top: 20px
+        &:nth-child(2)
+            margin-top: 21px
+        &:nth-child(4)
+            margin-top: 22px
+        &:nth-child(5)
+            margin-top: 41px
+        &:nth-child(6)
+            margin-top: 40px
+        &:nth-child(7)
+            margin-top: 41px
+        &:nth-child(1)
+            margin-top: 0
 
 .switches__switch
     margin-top: 32px
@@ -44,19 +40,27 @@
     &:nth-child(5)
         margin-top: 33px
 
-.like-buttons__title, .rate-buttons__title
+
+.rate-buttons
+    &__rate
+        display: inline
+        margin-right: 16px
+
+.like-buttons__title,
+.rate-buttons__title
     margin-bottom: 16px
-.rate-buttons__rate
-    display: inline
-    margin-right: 16px
+
 
 .other-elems
     padding-top: 1px
-.other-elems__buttons
-    margin-top: 43px
-
-.other-elems__title
-    margin-bottom: 16px
+    &__buttons
+        margin-top: 43px
+    &__title
+        margin-bottom: 16px
+    &__pagination
+        margin-top: 39px
+        margin-left: 1px
+        min-width: 240px
 
 .default-buttons
     display: flex
@@ -77,23 +81,20 @@
 .extended-button
     margin-top: 30px
 
-
-.other-elems__pagination
-    margin-top: 39px
-    margin-left: 1px
-    min-width: 240px
-
-
 .facilities-dropdowns__dropdown
     margin-top: 20px
     &:nth-child(1)
         margin-top: 0
 
-.container_dropdowns
-    height: 267px
-    padding-top: 100px
-.container_lists
-    padding-top: 54px
+.container
+    &_dropdowns
+        height: 267px
+        padding-top: 100px
+    &_lists
+        padding-top: 54px
+    &_last
+        padding-top: 90px
+        padding-bottom: 130px
 
 .lists__list
     margin-top: 20px
@@ -105,11 +106,6 @@
     &:nth-child(1)
         margin-top: 0
 
-
-.container_last
-    padding-top: 90px
-    padding-bottom: 130px
-
 .comments
     margin-top: 10px
 
@@ -118,15 +114,15 @@
     .form-elements-container
         flex-direction: column
         width: 100%
-
-    .form-elements-container__column-1, .form-elements-container__column-2, .form-elements-container__column-3
-        margin: 0 0 50px 0
+        &__column-1,
+        &__column-2,
+        &__column-3
+            margin: 0 0 50px 0
 
     .facilities-dropdowns
         margin-bottom: 170px
     .guests-dropdowns
         margin-bottom: 170px
-
     .container_dropdowns
         margin-bottom: 600px
         padding: 0
@@ -134,8 +130,11 @@
         padding: 0
 
 @media screen and (max-width: 356px)
-    .form-elements-container__column-1, .form-elements-container__column-2, .form-elements-container__column-3
-        width: 100%
-        min-width: unset
+    .form-elements-container
+        &__column-1,
+        &__column-2,
+        &__column-3
+            width: 100%
+            min-width: unset
     .fields
         width: 100%

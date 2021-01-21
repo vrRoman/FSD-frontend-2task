@@ -10,51 +10,47 @@
 .color
     display: flex
     align-items: center
-
     margin-top: 20px
     &:first-child
         margin: 0
+    &__hex
+        font:
+            family: 'Montserrat', sans-serif
+            size: 19px
+            style: normal
+            weight: normal
+        line-height: 28px
+        margin-top: 2px
 
-.color__hex
-    font:
-        family: 'Montserrat', sans-serif
-        size: 19px
-        style: normal
-        weight: normal
-    line-height: 28px
-    margin-top: 2px
+    &__info
+        margin: 5px 0 0 40px
+        color: $dark-shade-100
 
+    &__demo
+        width: 70px
+        height: 70px
+        border-radius: 6px
 
-.color__info
-    margin: 5px 0 0 40px
-    color: $dark-shade-100
+    &__demo_dark-shade-100
+        background-color: $dark-shade-100
 
-.color__demo
-    width: 70px
-    height: 70px
-    border-radius: 6px
+    &__demo_dark-shade-75
+        background-color: $dark-shade-75
 
-.color__demo_dark-shade-100
-    background-color: $dark-shade-100
+    &__demo_dark-shade-50
+        background-color: $dark-shade-50
 
-.color__demo_dark-shade-75
-    background-color: $dark-shade-75
+    &__demo_dark-shade-25
+        background-color: $dark-shade-25
 
-.color__demo_dark-shade-50
-    background-color: $dark-shade-50
+    &__demo_dark-shade-5
+        background-color: $dark-shade-5
 
-.color__demo_dark-shade-25
-    background-color: $dark-shade-25
+    &__demo_purple
+        background-color: $purple
 
-.color__demo_dark-shade-5
-    background-color: $dark-shade-5
-
-.color__demo_purple
-    background-color: $purple
-
-.color__demo_green
-    background-color: $green
-
+    &__demo_green
+        background-color: $green
 
 
 .type
@@ -70,19 +66,19 @@
     &:nth-child(4)
         margin-top: 47px
 
-.type__text
-    width: 400px
+    &__text
+        width: 400px
 
-.type__name
-    width: 40px
-    text-align: right
-    color: $dark-shade-25
-    font:
-        family: Montserrat, sans-serif
-        style: normal
-        weight: normal
+    &__name
+        width: 40px
+        text-align: right
+        color: $dark-shade-25
+        font:
+            family: Montserrat, sans-serif
+            style: normal
+            weight: normal
 
-    margin-right: 30px
+        margin-right: 30px
 
 
 @media screen and (max-width: 850px)

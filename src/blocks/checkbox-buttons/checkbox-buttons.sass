@@ -1,79 +1,74 @@
 @import '@/sass/colors'
 
-.checkbox-button > input
-    position: absolute
-    z-index: -1
-    opacity: 0
-    &:checked + .checkbox-button__name::before
-        border: 1px solid $purple
-        background-image: url(../images/done.svg)
-
-.checkbox-button > .checkbox-button__name
-    display: inline-flex
-    width: 100%
-    user-select: none
-    position: relative
-    font-family: Montserrat, sans-serif
-    font-size: 14px
-    line-height: 18px
-    color: $dark-shade-50
-    padding-left: 30px
-    padding-top: 1px
-    box-sizing: border-box
-    min-height: 20px
-    &:before
-        content: ''
-        display: inline-block
-        width: 20px
-        height: 20px
-        border: 1px solid #adb5bd
-        border-radius: 4px
-        margin-right: 0.5em
-        cursor: pointer
-        background-repeat: no-repeat
-        background-position: 50% 40%
-        position: absolute
-        left: 0
-        top: 0
-
-
-
-.checkboxes__buttons
-    display: flex
-    flex-direction: column
-
-
-.checkboxes__title
-    margin-bottom: 17px
-
 .checkbox-button
     margin-bottom: 10px
     display: inline-flex
+    & > input
+        position: absolute
+        z-index: -1
+        opacity: 0
+        &:checked + .checkbox-button__name::before
+            border: 1px solid $purple
+            background-image: url(../images/done.svg)
 
+    & > &__name
+        display: inline-flex
+        width: 100%
+        user-select: none
+        position: relative
+        font-family: Montserrat, sans-serif
+        font-size: 14px
+        line-height: 18px
+        color: $dark-shade-50
+        padding-left: 30px
+        padding-top: 1px
+        box-sizing: border-box
+        min-height: 20px
+        &:before
+            content: ''
+            display: inline-block
+            width: 20px
+            height: 20px
+            border: 1px solid #adb5bd
+            border-radius: 4px
+            margin-right: 0.5em
+            cursor: pointer
+            background-repeat: no-repeat
+            background-position: 50% 40%
+            position: absolute
+            left: 0
+            top: 0
 
-    
-    
-.checkboxes_rich
-    .checkboxes__title
-        margin-bottom: 15px
-    .checkboxes__buttons
-        .checkbox-button
-            height: unset
-            display: flex
-            justify-content: space-between
-            flex-direction: column
-            .checkbox-button__name
-                font-family: Montserrat, sans-serif
-                font-weight: bold
-                font-size: 14px
-                line-height: 18px
-                color: $dark-shade-75
-                height: 20px
-            .checkbox-button__description
-                font-family: Montserrat, sans-serif
-                font-size: 12px
-                line-height: 14px
-                color: $dark-shade-50
-                display: block
-                padding-left: 30px
-                margin-top: 4px
+.checkboxes
+    $selector: &
+
+    &__buttons
+        display: flex
+        flex-direction: column
+    &__title
+        margin-bottom: 17px
+
+    &_rich
+        #{$selector}__title
+            margin-bottom: 15px
+        #{$selector}__buttons
+            .checkbox-button
+                height: unset
+                display: flex
+                justify-content: space-between
+                flex-direction: column
+                &__name
+                    font-family: Montserrat, sans-serif
+                    font-weight: bold
+                    font-size: 14px
+                    line-height: 18px
+                    color: $dark-shade-75
+                    height: 20px
+                &__description
+                    font-family: Montserrat, sans-serif
+                    font-size: 12px
+                    line-height: 14px
+                    color: $dark-shade-50
+                    display: block
+                    padding-left: 30px
+                    margin-top: 4px

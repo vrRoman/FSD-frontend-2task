@@ -6,142 +6,137 @@
     border: 1px solid rgba(0, 0, 0, 0.12)
     padding: 39px 29px 29px 29px
     box-sizing: border-box
-
-.booking-card__room-info
-    position: relative
-    display: flex
-    justify-content: space-between
-
-.booking-card__room-name
-    font-family: Quicksand,sans-serif
-    font-weight: bold
-    font-size: 14px
-    line-height: 17px
-    color: $dark-shade-100
-    display: inline-block
-
-.booking-card__room-number
-    display: inline-block
-    div
+    &__room-info
+        position: relative
+        display: flex
+        justify-content: space-between
+    &__room-name
+        font-family: Quicksand,sans-serif
+        font-weight: bold
         font-size: 14px
         line-height: 17px
-        display: inline
-    span
-        display: inline
-        margin-left: 4px
-
-.booking-card__room-type
-    display: inline-block
-    color: $purple
-    margin-left: 8px
-    margin-bottom: 2px
-    font-size: 12px
-    line-height: 15px
-    font-family: 'Montserrat', sans-serif
-    text-transform: uppercase
-    vertical-align: bottom
-
-.booking-card__room-price
-    font-weight: bold
-    line-height: 18px
-    color: $dark-shade-50
-    display: inline-flex
-    align-items: flex-end
-    span
-        font-weight: normal
-        font-size: 12px
-
-.booking-card__dates
-    margin-top: 22px
-
-.booking-card__guests
-    margin-top: 20px
-
-.booking-card__items
-    margin-top: 20px
-
-.booking-card__item
-    display: flex
-    justify-content: space-between
-    margin-top: 10px
-    color: $dark-shade-75
-    line-height: 18px
-    min-height: 24px
-    &:nth-child(1)
-        margin-top: 0
-    &:nth-child(2), &:nth-child(3)
+        color: $dark-shade-100
+        display: inline-block
+    &__room-number
+        display: inline-block
+        div
+            font-size: 14px
+            line-height: 17px
+            display: inline
         span
-            position: relative
-            &:nth-child(1)
-                &:after
-                    content: 'i'
-                    width: 20px
-                    height: 20px
-                    border-radius: 50%
-                    border: 1px solid $dark-shade-25
-                    position: absolute
-                    left: 214 + 5px
-                    top: 0
-                    display: flex
-                    align-items: center
-                    justify-content: center
-                    color: $dark-shade-25
-                    cursor: pointer
+            display: inline
+            margin-left: 4px
+    &__room-type
+        display: inline-block
+        color: $purple
+        margin-left: 8px
+        margin-bottom: 2px
+        font-size: 12px
+        line-height: 15px
+        font-family: 'Montserrat', sans-serif
+        text-transform: uppercase
+        vertical-align: bottom
+    &__room-price
+        font-weight: bold
+        line-height: 18px
+        color: $dark-shade-50
+        display: inline-flex
+        align-items: flex-end
+        span
+            font-weight: normal
+            font-size: 12px
 
+    &__dates
+        margin-top: 22px
+    &__guests
+        margin-top: 20px
+    &__items
+        margin-top: 20px
+    &__item
+        display: flex
+        justify-content: space-between
+        margin-top: 10px
+        color: $dark-shade-75
+        line-height: 18px
+        min-height: 24px
+        &:nth-child(1)
+            margin-top: 0
+        &:nth-child(2), &:nth-child(3)
+            span
+                position: relative
+                &:nth-child(1)
+                    &:after
+                        content: 'i'
+                        width: 20px
+                        height: 20px
+                        border-radius: 50%
+                        border: 1px solid $dark-shade-25
+                        position: absolute
+                        left: 214 + 5px
+                        top: 0
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        color: $dark-shade-25
+                        cursor: pointer
 
-.booking-card__total
-    margin-top: 30px
-    display: flex
-    justify-content: space-between
-    width: calc(100% + 10px)
+    &__total
+        margin-top: 30px
+        display: flex
+        justify-content: space-between
+        width: calc(100% + 10px)
+    &__total-text
+        position: relative
+        &:after
+            content: ''
+            width: 190px
+            position: absolute
+            right: -188 - 5px
+            bottom: 5px
+            border-bottom: 1px dotted $dark-shade-25
 
-.booking-card__total-text
-    position: relative
-    &:after
-        content: ''
-        width: 190px
-        position: absolute
-        right: -188 - 5px
-        bottom: 5px
-        border-bottom: 1px dotted $dark-shade-25
-
-.booking-card__button
-    margin-top: 20px
+    &__button
+        margin-top: 20px
 
 @media screen and (max-width: 438px)
     .booking-card
         width: 100%
         box-sizing: border-box
-
-    .booking-card__total
-        position: relative
-    .booking-card__total-text
-        position: static
-        &:after
-            content: ''
-            left: 61px
-            right: 77px
-            width: unset
+        &__total
+            position: relative
+        &__total-text
+            position: static
+            &:after
+                content: ''
+                left: 61px
+                right: 77px
+                width: unset
 
 @media screen and (max-width: 417px)
-    .booking-card__item-price
-        margin-left: 45px
-    .booking-card__item
-        &:nth-child(2), &:nth-child(3)
-            span.booking-card__item-name
-                &:after
-                    left: 190px
+    .booking-card
+        $selector: &
+        &__item-price
+            margin-left: 45px
+        &__item
+            &:nth-child(2), &:nth-child(3)
+                span#{$selector}__item-name
+                    &:after
+                        left: 185px
 
 @media screen and (max-width: 380px)
-    .booking-card__item
-        &:nth-child(2), &:nth-child(3)
-            span.booking-card__item-name
-                &:after
-                    left: 177px
+    .booking-card
+        $selector: &
+        &__item
+            &:nth-child(2), &:nth-child(3)
+                span#{$selector}__item-name
+                    &:after
+                        left: 170px
 
 @media screen and (max-width: 358px)
-    .booking-card__item
-        &:nth-child(2), &:nth-child(3)
-            span.booking-card__item-name
-                &:after
-                    left: 150px
+    .booking-card
+        $selector: &
+        &__item
+            &:nth-child(2), &:nth-child(3)
+                span#{$selector}__item-name
+                    &:after
+                        left: 150px

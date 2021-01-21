@@ -1,63 +1,58 @@
 @import '@/sass/colors'
 
-.toggle-buttons__title
-    margin-bottom: 14px
+.toggle-buttons
+    &__title
+        margin-bottom: 14px
+    &__buttons
+        display: flex
+        flex-direction: column
+
 
 .toggle-button
+    $selector: &
     margin-top: 10px
     &:nth-child(1)
         margin-top: 0
+    &__name
+        position: relative
+        display: flex
+        align-items: center
+        user-select: none
 
-.toggle-button__name
-    position: relative
-    display: flex
-    align-items: center
-    user-select: none
 
+        font-family: Montserrat, sans-serif
+        font-size: 14px
+        line-height: 24px
 
-    font-family: Montserrat, sans-serif
-    font-size: 14px
-    line-height: 24px
-
-    color: $dark-shade-75
-    padding-left: 50px
-
-    &:before
-        content: ''
-        width: 40px
-        height: 20px
-        border: 1px solid $dark-shade-25
-        border-radius: 10px
-        cursor: pointer
-        position: absolute
-        left: 0
-    &:after
-        content: ''
-        position: absolute
-        width: 12px
-        height: 12px
-        left: 4px
-        background-color: $dark-shade-25
-        -webkit-transition: 400ms
-        transition: 400ms
-        border-radius: 50%
-        cursor: pointer
-
-.toggle-button__input
-    opacity: 0
-    position: absolute
-    z-index: -1
-    &:checked + .toggle-button__name
+        color: $dark-shade-75
+        padding-left: 50px
         &:before
-            border-color: $purple
+            content: ''
+            width: 40px
+            height: 20px
+            border: 1px solid $dark-shade-25
+            border-radius: 10px
+            cursor: pointer
+            position: absolute
+            left: 0
         &:after
-            transform: translateX(20px)
-            background-color: $purple
-
-
-
-
-
-.toggle-buttons__buttons
-    display: flex
-    flex-direction: column
+            content: ''
+            position: absolute
+            width: 12px
+            height: 12px
+            left: 4px
+            background-color: $dark-shade-25
+            -webkit-transition: 400ms
+            transition: 400ms
+            border-radius: 50%
+            cursor: pointer
+    &__input
+        opacity: 0
+        position: absolute
+        z-index: -1
+        &:checked + #{$selector}__name
+            &:before
+                border-color: $purple
+            &:after
+                transform: translateX(20px)
+                background-color: $purple

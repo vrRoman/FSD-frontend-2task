@@ -1,62 +1,58 @@
 @import '@/sass/colors'
 
-
-.radio-buttons__title
-    margin-bottom: 15px
-
-
-.radio-buttons__button
-    position: relative
-    margin-left: 20px
-    height: 20px
-    display: flex
-    align-items: center
-    cursor: pointer
-    &:nth-child(1)
-        margin-left: 0
-
-.radio-buttons__buttons
-    height: 20px
-    display: flex
-
-
-.radio-buttons__button > input
-    position: absolute
-    z-index: -1
-    opacity: 0
-
-.radio-buttons__button > span
-    display: inline-flex
-    align-items: center
-    user-select: none
-    position: relative
-    padding-left: 30px
-    color: $dark-shade-50
-    &:before
-        content: ''
-        display: inline-block
-        width: 20px
+.radio-buttons
+    &__title
+        margin-bottom: 15px
+    &__button
+        position: relative
+        margin-left: 20px
         height: 20px
-        border: 1px solid $dark-shade-25
-        border-radius: 50%
-        margin-right: 0.5em
-        position: absolute
-        left: 0
+        display: flex
+        align-items: center
+        cursor: pointer
+        &:nth-child(1)
+            margin-left: 0
 
-.radio-buttons__button > input:checked + span
-    color: $dark-shade-75
-    &:before
-        border-color: $purple
-    &:after
-        content: ''
-        display: inline-block
-        width: 12px
-        height: 12px
-        background: $purple-gradient
-        border-radius: 50%
-        position: absolute
-        left: 4px
+    &__buttons
+        height: 20px
+        display: flex
 
+    &__button > input
+        position: absolute
+        z-index: -1
+        opacity: 0
+
+    &__button > span
+        display: inline-flex
+        align-items: center
+        user-select: none
+        position: relative
+        padding-left: 30px
+        color: $dark-shade-50
+        &:before
+            content: ''
+            display: inline-block
+            width: 20px
+            height: 20px
+            border: 1px solid $dark-shade-25
+            border-radius: 50%
+            margin-right: 0.5em
+            position: absolute
+            left: 0
+
+    &__button > input:checked + span
+        color: $dark-shade-75
+        &:before
+            border-color: $purple
+        &:after
+            content: ''
+            display: inline-block
+            width: 12px
+            height: 12px
+            background: $purple-gradient
+            border-radius: 50%
+            position: absolute
+            left: 4px
 
 .radio-button__name
     line-height: 20px

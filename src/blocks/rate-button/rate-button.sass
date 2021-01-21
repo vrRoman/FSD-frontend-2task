@@ -3,14 +3,12 @@
     display: inline-flex
     width: 120px
     justify-content: space-between
-
-.rate-button__star
-    &:after
-        content: 'star_border'
-        background: $purple-gradient
-        -webkit-text-fill-color: transparent
-        -webkit-background-clip: text
-
-.rate-button__star_active
-    &:after
-        content: 'star'
+    &__star
+        &:after
+            content: 'star_border'
+            background: $purple-gradient
+            -webkit-text-fill-color: transparent
+            -webkit-background-clip: text
+    &__star_active
+        &:after
+            content: 'star'
