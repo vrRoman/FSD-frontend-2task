@@ -11,22 +11,26 @@ mixin search-card
             +datepicker(true, ['Прибытие', 'Выезд'], false)
 
         .search-card__guests
-            +dropdown('Сколько гостей', 'Гости', {
-                items: {
-                    item1: {
-                        name: 'Взрослые',
-                        value: '2'
-                    },
-                    item2: {
-                        name: 'Дети',
-                        value: '1'
-                    },
-                    item3: {
-                        name: 'Младенцы',
-                        value: '0'
+            +dropdown({
+                text: 'Сколько гостей',
+                title: 'Гости',
+                popupParams: {
+                    items: {
+                        item1: {
+                            name: 'Взрослые',
+                            value: '0'
+                        },
+                        item2: {
+                            name: 'Дети',
+                            value: '0'
+                        },
+                        item3: {
+                            name: 'Младенцы',
+                            value: '0'
+                        }
                     }
                 }
-            }, false, false)
+            })
 
         .search-card__button
             +button('Подобрать номер', 'extended')

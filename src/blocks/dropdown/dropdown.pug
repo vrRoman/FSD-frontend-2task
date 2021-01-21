@@ -1,6 +1,6 @@
 include ./items-popup/popup
 
-mixin dropdown(text, title, popupParams, modName, description)
+mixin dropdown({text, title, popupParams, modName, description})
     -
         let additionalClassName = '';
         if (modName) {

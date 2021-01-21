@@ -71,11 +71,13 @@ block content
                           value: "This is pretty awesome",
                         })
                     .fields__field
-                        +dropdown("Сколько гостей", "Dropdown",
-                            {
-                                "items": facilitiesDropdownItems,
-                            },
-                        )
+                        +dropdown({
+                            text: 'Сколько гостей',
+                            title: 'Dropdown',
+                            popupParams: {
+                                items: facilitiesDropdownItems,
+                            }
+                        })
                     .fields__field
                         +text-field({
                           placeholder: "ДД.ММ.ГГГГ",
@@ -170,52 +172,74 @@ block content
             .form-elements-container__column-1
                 .facilities-dropdowns
                     .facilities-dropdowns__dropdown
-                        +dropdown('2 спальни, 2 кровати...', 'Dropdown', {
-                            items: facilitiesDropdownItems,
-                        }, ['facilities', 'small'], 'default')
+                        +dropdown({
+                            text: '2 спальни, 2 кровати...',
+                            title: 'Dropdown',
+                            popupParams: {
+                                items: facilitiesDropdownItems,
+                            },
+                            modName: ['facilities', 'small'],
+                            description: 'default',
+                        })
                     .facilities-dropdowns__dropdown
-                        +dropdown('2 спальни, 2 кровати...', 'Dropdown', {
-                            items: facilitiesDropdownItems,
-                        }, ['facilities', 'small', 'expanded'], 'expanded')
+                        +dropdown({
+                            text: '2 спальни, 2 кровати...',
+                            title: 'Dropdown',
+                            popupParams: {
+                                items: facilitiesDropdownItems,
+                            },
+                            modName: ['facilities', 'small', 'expanded'],
+                            description: 'expanded',
+                        })
 
             .form-elements-container__column-2
                 .guests-dropdowns
                     .guests-dropdowns__dropdown
-                        +dropdown('Сколько гостей', 'Dropdown', {
-                            items: {
-                                item1: {
-                                    name: 'Взрослые',
-                                    value: '0'
+                        +dropdown({
+                            text: 'Сколько гостей',
+                            title: 'Dropdown',
+                            popupParams: {
+                                items: {
+                                    item1: {
+                                        name: 'Взрослые',
+                                        value: '0'
+                                    },
+                                    item2: {
+                                        name: 'Дети',
+                                        value: '0'
+                                    },
+                                    item3: {
+                                        name: 'Младенцы',
+                                        value: '0'
+                                    }
                                 },
-                                item2: {
-                                    name: 'Дети',
-                                    value: '0'
-                                },
-                                item3: {
-                                    name: 'Младенцы',
-                                    value: '0'
-                                }
-                            }
-                        }, 'expanded')
+                            },
+                            modName: 'expanded',
+                        })
             .form-elements-container__column-3
                 .guests-dropdowns
                     .guests-dropdowns__dropdown
-                        +dropdown('3 гостя', 'Dropdown', {
-                            items: {
-                                item1: {
-                                    name: 'Взрослые',
-                                    value: '2'
+                        +dropdown({
+                            text: '3 гостя',
+                            title: 'Dropdown',
+                            popupParams: {
+                                items: {
+                                    item1: {
+                                        name: 'Взрослые',
+                                        value: '2'
+                                    },
+                                    item2: {
+                                        name: 'Дети',
+                                        value: '1'
+                                    },
+                                    item3: {
+                                        name: 'Младенцы',
+                                        value: '0'
+                                    }
                                 },
-                                item2: {
-                                    name: 'Дети',
-                                    value: '1'
-                                },
-                                item3: {
-                                    name: 'Младенцы',
-                                    value: '0'
-                                }
-                            }
-                        }, 'expanded')
+                            },
+                            modName: 'expanded',
+                        })
 
 
         .form-elements-container.container_lists

@@ -3,7 +3,7 @@ include ../../dropdown/dropdown
 include  ../../button/button
 
 
-mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
+mixin booking-card({roomInfo, bookingItems, datepickerDates, roomFullPrice})
     .booking-card
         .booking-card__room-info
             .booking-card__room-name
@@ -18,8 +18,10 @@ mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
             +datepicker(true, ['Прибытие', 'Выезд'], datepickerDates)
 
         .booking-card__guests
-            +dropdown('3 гостя', 'Гости',
-                {
+            +dropdown({
+                text: '3 гостя',
+                title: 'Гости',
+                popupParams: {
                     items: {
                         item1: {
                             name: 'Взрослые',
@@ -34,7 +36,8 @@ mixin booking-card(roomInfo, bookingItems, datepickerDates, roomFullPrice)
                             value: '0'
                         }
                     }
-                })
+                }
+            })
 
         .booking-card__items
             each item in bookingItems
