@@ -22,20 +22,20 @@ mixin booking-card({roomInfo, bookingItems, datepickerDates, roomFullPrice})
                 text: '3 гостя',
                 title: 'Гости',
                 popupParams: {
-                    items: {
-                        item1: {
+                    items: [
+                        {
                             name: 'Взрослые',
                             value: '2'
                         },
-                        item2: {
+                        {
                             name: 'Дети',
                             value: '1'
                         },
-                        item3: {
+                        {
                             name: 'Младенцы',
                             value: '0'
                         }
-                    }
+                    ]
                 }
             })
 
