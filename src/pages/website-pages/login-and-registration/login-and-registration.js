@@ -10,8 +10,8 @@ import './images/login-registration-bg.jpg';
 import '@blocks/header/header';
 import '@blocks/cards/signup-card/signup-card';
 
-const loginButtons = $('.signup-card-card__account-exists .button');
-const signupButtons = $('.signin-card-card__account-not-exists .button');
+const loginButtons = $('.signup-card__account-exists .button');
+const signupButtons = $('.signin-card__account-not-exists .button');
 const signinCard = $('.login-and-registration__signin-card');
 const signupCard = $('.login-and-registration__signup-card');
 const pageElem = $('.login-and-registration');
