@@ -4,11 +4,11 @@ import '@/sass/ui-kit.sass';
 import './search-room.pug';
 import './search-room.sass';
 
-import { setDatepickerDate } from '@blocks/date-picker/datepicker';
+import { setDatepickerDate } from '@blocks/date-picker/date-picker';
 import '@blocks/dropdown/dropdown';
 import '@blocks/range-slider/range-slider';
 import '@blocks/list/list';
-import '@blocks/cards/room/room-card';
+import '@blocks/cards/room-card/room-card';
 import '@blocks/pagination/pagination';
 import '@blocks/header/header';
 

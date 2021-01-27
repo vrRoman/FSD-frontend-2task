@@ -1,11 +1,11 @@
 extends ../../../templates/website-pages
 
-include ../../../blocks/date-picker/datepicker
+include ../../../blocks/date-picker/date-picker
 include ../../../blocks/dropdown/dropdown
 include ../../../blocks/range-slider/range-slider
 include ../../../blocks/checkbox-buttons/checkbox-buttons
 include ../../../blocks/list/list
-include ../../../blocks/cards/room/room-card
+include ../../../blocks/cards/room-card/room-card
 include ../../../blocks/pagination/pagination
 
 
@@ -19,7 +19,7 @@ block content
         .container.search-room__container
             aside.search-room__params
                 .search-room__params-date
-                    +datepicker(false, ['Даты пребывания в отеле'], ['19 авг - 23 авг'])
+                    +date-picker(false, ['Даты пребывания в отеле'], ['19 авг - 23 авг'])
                 .search-room__params-guests
                     +dropdown({
                         text: '3 гостя, 1 младенец',

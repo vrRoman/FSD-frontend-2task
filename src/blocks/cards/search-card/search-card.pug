@@ -1,4 +1,4 @@
-include ../../date-picker/datepicker
+include ../../date-picker/date-picker
 include ../../dropdown/dropdown
 include ../../button/button
 
@@ -8,7 +8,7 @@ mixin search-card
         h1.search-card__title Найдём номера под<br>ваши пожелания
 
         .search-card__date
-            +datepicker(true, ['Прибытие', 'Выезд'], false)
+            +date-picker(true, ['Прибытие', 'Выезд'], false)
 
         .search-card__guests
             +dropdown({

@@ -1,4 +1,4 @@
-include ./items-popup/popup
+include items-popup/items-popup
 
 mixin dropdown({text, title, popupParams, modName, description})
     -
@@ -26,4 +26,4 @@ mixin dropdown({text, title, popupParams, modName, description})
             i.dropdown__arrow.material-icons expand_more
 
         .dropdown__popup
-            +popup(popupParams)
+            +items-popup(popupParams)
