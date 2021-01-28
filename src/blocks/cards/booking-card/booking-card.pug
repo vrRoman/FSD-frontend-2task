@@ -8,11 +8,11 @@ mixin booking-card({roomInfo, bookingItems, datepickerDates, roomFullPrice})
         .booking-card__room-info
             .booking-card__room-name
                 h1.booking-card__room-number
-                    div №
-                    span= roomInfo.number
+                    span.booking-card__number-sign №
+                    != roomInfo.number
                 span.booking-card__room-type= ' ' + roomInfo.type
             .booking-card__room-price= roomInfo.price
-                span &nbsp;в сутки
+                span.booking-card__room-price-measure &nbsp;в сутки
 
         .booking-card__dates.js-booking-card__dates
             +date-picker(true, ['Прибытие', 'Выезд'], datepickerDates)

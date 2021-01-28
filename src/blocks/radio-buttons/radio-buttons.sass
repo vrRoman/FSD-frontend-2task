@@ -4,12 +4,7 @@
     &__title
         margin-bottom: 15px
     &__button
-        position: relative
         margin-left: 20px
-        height: 20px
-        display: flex
-        align-items: center
-        cursor: pointer
         &:nth-child(1)
             margin-left: 0
 
@@ -17,12 +12,33 @@
         height: 20px
         display: flex
 
-    &__button > input
+
+    &__button > input:checked + .radio-button__name
+        color: $dark-shade-75
+        &:before
+            border-color: $purple
+        &:after
+            content: ''
+            display: inline-block
+            width: 12px
+            height: 12px
+            background: $purple-gradient
+            border-radius: 50%
+            position: absolute
+            left: 4px
+
+.radio-button
+    height: 20px
+    display: flex
+    align-items: center
+    cursor: pointer
+    position: relative
+    &__input
         position: absolute
         z-index: -1
         opacity: 0
-
-    &__button > span
+    &__name
+        line-height: (20rem / 14)
         display: inline-flex
         align-items: center
         user-select: none
@@ -39,20 +55,3 @@
             margin-right: 0.5em
             position: absolute
             left: 0
-
-    &__button > input:checked + span
-        color: $dark-shade-75
-        &:before
-            border-color: $purple
-        &:after
-            content: ''
-            display: inline-block
-            width: 12px
-            height: 12px
-            background: $purple-gradient
-            border-radius: 50%
-            position: absolute
-            left: 4px
-
-.radio-button__name
-    line-height: (20rem / 14)

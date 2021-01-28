@@ -20,18 +20,17 @@
             position: absolute
             right: 15px
             bottom: 19px
-            li
-                button
-                    color: transparent
-                    border: 1px solid #fff
-                    background: none
-                    width: 7.5px
-                    height: 7.5px
-                    border-radius: 50%
-                    outline: none
-                    cursor: pointer
-            li#{$sliderSelector}-active
-                button
+            [role='tab']
+                color: transparent
+                border: 1px solid #fff
+                background: none
+                width: 7.5px
+                height: 7.5px
+                border-radius: 50%
+                outline: none
+                cursor: pointer
+            #{$sliderSelector}-active
+                [role='tab']
                     background: #fff
         #{$sliderSelector}-arrow
             display: none
@@ -87,21 +86,19 @@
 
     &__name
         display: flex
-        span
-            font-family: Quicksand, Arial, sans-serif
-            font-weight: bold
-            font-size: 1rem
-            line-height: (17.5rem / 14)
-            color: $dark-shade-100
-            display: flex
-            align-items: flex-end
-            padding-bottom: 2px
-        div
-            display: inline-block
-        h3
-            display: flex
-            align-items: flex-end
-            padding-bottom: 2px
+    &__number-sign
+        font-family: Quicksand, Arial, sans-serif
+        font-weight: bold
+        font-size: 1rem
+        line-height: (17.5rem / 14)
+        color: $dark-shade-100
+        display: flex
+        align-items: flex-end
+        padding-bottom: 2px
+    &__type
+        display: flex
+        align-items: flex-end
+        padding-bottom: 2px
 
     &__type
         color: $purple
@@ -117,9 +114,9 @@
         display: flex
         align-items: center
         transform: translate(3px, 3px)
-        span
-            font-weight: normal
-            font-size: (12rem / 14)
+    &__price-measure
+        font-weight: normal
+        font-size: (12rem / 14)
 
     &__rating-and-comments
         margin-top: 10px
@@ -136,8 +133,8 @@
         display: flex
         align-items: center
         transform: translateY(1px)
-        span
-            font-weight: normal
-            font-size: 1rem
+    &__comments-measure
+        font-weight: normal
+        font-size: 1rem
     &__rating
         height: 24px

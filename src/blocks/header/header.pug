@@ -31,8 +31,8 @@ mixin header(user, activeLink)
             a.header__logo(href='landing-page.html')
                 img(src='images/logo.svg', alt='logo')
             .header__menu.js-header__menu
-                nav.header__nav
-                    ul
+                nav.header__nav-container
+                    ul.header__nav-list
                         - for (let i = 0; i < navItems.length; i++)
                             - let active = (i === activeLink)
 
@@ -53,6 +53,6 @@ mixin header(user, activeLink)
                         +button('Войти', 'secondary', 'login-and-registration.html')
                         +button('Зарегистрироваться', false, 'login-and-registration.html')
             .header__hamburger.js-header__hamburger
-                span
-                span
-                span
+                span.header__hamburger-line
+                span.header__hamburger-line
+                span.header__hamburger-line

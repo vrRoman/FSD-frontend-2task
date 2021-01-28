@@ -1,4 +1,5 @@
 .booking-card
+    $selector: &
     width: 380px
     min-height: 511px
     background-color: #fff
@@ -19,13 +20,10 @@
         display: inline-block
     &__room-number
         display: inline-block
-        div
-            font-size: 1rem
-            line-height: (17rem / 14)
-            display: inline
-        span
-            display: inline
-            margin-left: 4px
+    &__number-sign
+        font-size: 1rem
+        line-height: (17rem / 14)
+        margin-right: 4px
     &__room-type
         display: inline-block
         color: $purple
@@ -42,9 +40,9 @@
         color: $dark-shade-50
         display: inline-flex
         align-items: flex-end
-        span
-            font-weight: normal
-            font-size: (12rem / 14)
+    &__room-price-measure
+        font-weight: normal
+        font-size: (12rem / 14)
 
     &__dates
         margin-top: 22px
@@ -61,24 +59,26 @@
         min-height: 24px
         &:nth-child(1)
             margin-top: 0
-        &:nth-child(2), &:nth-child(3)
-            span
-                position: relative
-                &:nth-child(1)
-                    &:after
-                        content: 'i'
-                        width: 20px
-                        height: 20px
-                        border-radius: 50%
-                        border: 1px solid $dark-shade-25
-                        position: absolute
-                        left: 214 + 5px
-                        top: 0
-                        display: flex
-                        align-items: center
-                        justify-content: center
-                        color: $dark-shade-25
-                        cursor: pointer
+            #{$selector}__item-name
+                &:after
+                    display: none
+    &__item-name, &__item-price
+        position: relative
+        &:nth-child(1)
+            &:after
+                content: 'i'
+                width: 20px
+                height: 20px
+                border-radius: 50%
+                border: 1px solid $dark-shade-25
+                position: absolute
+                left: 214 + 5px
+                top: 0
+                display: flex
+                align-items: center
+                justify-content: center
+                color: $dark-shade-25
+                cursor: pointer
 
     &__total
         margin-top: 30px
@@ -119,7 +119,7 @@
             margin-left: 45px
         &__item
             &:nth-child(2), &:nth-child(3)
-                span#{$selector}__item-name
+                #{$selector}__item-name
                     &:after
                         left: 185px
 
@@ -128,7 +128,7 @@
         $selector: &
         &__item
             &:nth-child(2), &:nth-child(3)
-                span#{$selector}__item-name
+                #{$selector}__item-name
                     &:after
                         left: 170px
 
@@ -137,6 +137,6 @@
         $selector: &
         &__item
             &:nth-child(2), &:nth-child(3)
-                span#{$selector}__item-name
+                #{$selector}__item-name
                     &:after
                         left: 150px

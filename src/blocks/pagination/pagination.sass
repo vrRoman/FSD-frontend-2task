@@ -11,36 +11,35 @@
         min-width: 240px
         padding: 0
         margin: 0 0 8px 0
-        ul
-            li
-                width: 40px
-                height: 40px
+        li
+            width: 40px
+            height: 40px
+            display: flex
+            justify-content: center
+            align-items: center
+            span, a, .current
+                margin: 0
+                padding: 0
+                box-sizing: border-box
+                background: none
+                border: none
+                box-shadow: none
+                width: 100%
+                height: 100%
                 display: flex
                 justify-content: center
                 align-items: center
-                span, a, .current
-                    margin: 0
-                    padding: 0
-                    box-sizing: border-box
-                    background: none
-                    border: none
-                    box-shadow: none
-                    width: 100%
-                    height: 100%
-                    display: flex
-                    justify-content: center
-                    align-items: center
 
-                    font-family: Montserrat, Arial, sans-serif
-                    font-size: (12rem / 14)
+                font-family: Montserrat, Arial, sans-serif
+                font-size: (12rem / 14)
 
-                    color: $dark-shade-50
-            .active
-                background: $purple-gradient
-                border-radius: 50%
-                .current
-                    color: #fff
-                    font-weight: bold
+                color: $dark-shade-50
+        .active
+            background: $purple-gradient
+            border-radius: 50%
+            .current
+                color: #fff
+                font-weight: bold
     &__arrow
         color: #fff
         background: $green-gradient
