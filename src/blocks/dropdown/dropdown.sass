@@ -1,10 +1,15 @@
-@import '@/sass/colors.sass'
+@import '@/sass/colors'
+@import '@/sass/headings'
 @import 'items-popup/items-popup'
 
 .dropdown
     $selector: &
     position: relative
     width: 320px
+
+    &__title
+        +h3
+
     &__input
         border: 1px solid $dark-shade-25
         box-sizing: border-box

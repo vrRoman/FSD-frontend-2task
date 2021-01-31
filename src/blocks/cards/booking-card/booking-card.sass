@@ -1,3 +1,6 @@
+@import '@/sass/headings'
+
+
 .booking-card
     $selector: &
     width: 380px
@@ -19,6 +22,7 @@
         color: $dark-shade-100
         display: inline-block
     &__room-number
+        +h1
         display: inline-block
     &__number-sign
         font-size: 1rem
@@ -86,6 +90,7 @@
         justify-content: space-between
         width: calc(100% + 10px)
     &__total-text
+        +h2
         position: relative
         &:after
             content: ''
@@ -94,6 +99,8 @@
             right: -188 - 5px
             bottom: 5px
             border-bottom: 1px dotted $dark-shade-25
+    &__total-price
+        +h2
 
     &__button
         margin-top: 20px

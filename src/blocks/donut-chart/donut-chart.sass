@@ -1,10 +1,14 @@
+@import '@/sass/headings'
+
+
 .donut-chart
     display: flex
     align-items: flex-end
     position: relative
     &__list
-        margin-left: 27px
-        margin-bottom: 3px
+        padding: 0
+        margin: 0 0 3px 27px
+        list-style: none
     &__list-item
         display: flex
         align-items: center
@@ -34,6 +38,10 @@
         bottom: 44px
         text-align: center
         z-index: -1
+        &-number
+            +h1
+        &-measure
+            +h3
 
 @media screen and (max-width: 350px)
     .donut-chart

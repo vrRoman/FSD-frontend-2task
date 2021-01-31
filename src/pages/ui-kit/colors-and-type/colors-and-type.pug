@@ -12,10 +12,17 @@ mixin color(name, hex, className)
             .color__hex= hex
 
 
-mixin type(name, text, tag)
-    .type
-        #{tag}.type__name= name
-        #{tag}.type__text !{text}
+mixin type(name, text, mods)
+    -
+        let additionalClassName = '';
+        if (mods) {
+            if (mods.size) {
+                additionalClassName += `type_size_${mods.size}`
+            }
+        }
+    .type(class=additionalClassName)
+        .type__name= name
+        .type__text !{text}
 
 block content
     .container
@@ -32,14 +39,19 @@ block content
             .types
                 +type("H1",
                     "This one is the sub-section or widget title",
-                    "h1")
+                    {
+                        size: '1'
+                    })
                 +type("H2",
                     "Next one is the item title inside widgets",
-                    "h2")
+                    {
+                        size: '2'
+                    })
                 +type("H3",
                     "This is a label or CTA text",
-                    "h3")
+                    {
+                        size: 3
+                    })
                 +type("Body",
-                    "This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.",
-                    "p")
+                    "This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.")
 

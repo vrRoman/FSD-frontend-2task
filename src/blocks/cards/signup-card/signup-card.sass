@@ -1,3 +1,6 @@
+@import '@/sass/headings'
+
+
 .signup-card
     width: 380px
     height: 646px
@@ -6,6 +9,9 @@
     border: 1px solid rgba(0, 0, 0, 0.12)
     padding: 39px 29px 29px 29px
     box-sizing: border-box
+
+    &__title
+        +h1
 
     &__general-info
         margin-top: 20px
@@ -21,6 +27,8 @@
 
     &__login-details
         margin-top: 20px
+        &-title
+            +h3
 
 
     &__email

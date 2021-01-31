@@ -44,7 +44,7 @@ mixin header(user, activeLink)
                                     i.header__item-arrow.material-icons expand_more
 
                                 else
-                                    a(href='change-me')= navItems[i].name
+                                    a.header__nav-item-link(href='change-me')= navItems[i].name
 
                 if user
                     .header__user= user

@@ -1,3 +1,6 @@
+@import '@/sass/headings'
+
+
 .footer
     $selector: &
     width: 100%
@@ -21,8 +24,13 @@
         margin-left: 58px
         margin-right: 93px
     &__title
+        +h3
         margin-bottom: 22px
-    &__menu-link
+    &__list
+        margin: 0
+        padding: 0
+        list-style: none
+    &__menu-item
         margin-bottom: 21px
         color: $dark-shade-50
         font-size: (14rem / 14)
@@ -30,6 +38,9 @@
         cursor: pointer
         &:last-child
             margin-bottom: 0
+    &__menu-link
+        color: $dark-shade-50
+        text-decoration: none
     &__subscription
         margin-top: 4px
         margin-left: 51px

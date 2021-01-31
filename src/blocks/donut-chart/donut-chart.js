@@ -5,16 +5,16 @@ function drawValue(listItems, valueItem, defaultItem = false) {
 
   let defaultValueHTML = '';
   if (defaultItem) {
-    defaultValueHTML = `<h1 style="color: ${listItems[defaultItem].dataset.color}">${listItems[defaultItem].dataset.value}</h1>
-                           <h3 style="color: ${listItems[defaultItem].dataset.color}">голосов</h3>`;
+    defaultValueHTML = `<h1 class="donut-chart__value-number" style="color: ${listItems[defaultItem].dataset.color}">${listItems[defaultItem].dataset.value}</h1>
+                           <h3 class="donut-chart__value-measure" style="color: ${listItems[defaultItem].dataset.color}">голосов</h3>`;
   }
   val.innerHTML = defaultValueHTML;
 
   for (let i = 0; i < listItems.length; i += 1) {
     const item = listItems[i];
     item.onmouseover = () => {
-      val.innerHTML = `<h1 style="color: ${item.dataset.color}">${item.dataset.value}</h1>
-                               <h3 style="color: ${item.dataset.color}">голосов</h3>`;
+      val.innerHTML = `<h1 class="donut-chart__value-number" style="color: ${item.dataset.color}">${item.dataset.value}</h1>
+                               <h3 class="donut-chart__value-measure" style="color: ${item.dataset.color}">голосов</h3>`;
     };
     item.onmouseout = () => {
       val.innerHTML = defaultValueHTML;

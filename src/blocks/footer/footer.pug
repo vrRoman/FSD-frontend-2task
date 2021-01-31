@@ -18,22 +18,22 @@ mixin footer
             .footer__menu
                 .footer__menu-nav
                     h3.footer__title Навигация
-                    ul
+                    ul.footer__list
                         each link in navLinks
-                            li.footer__menu-link
-                                a(href='change-me')= link
+                            li.footer__menu-item
+                                a.footer__menu-link(href='change-me')= link
                 .footer__menu-about
                     h3.footer__title О нас
-                    ul
+                    ul.footer__list
                         each link in aboutLinks
-                            li.footer__menu-link
-                                a(href='change-me')= link
+                            li.footer__menu-item
+                                a.footer__menu-link(href='change-me')= link
                 .footer__menu-support
                     h3.footer__title Служба поддержки
-                    ul
+                    ul.footer__list
                         each link in supportLinks
-                            li.footer__menu-link
-                                a(href='change-me')= link
+                            li.footer__menu-item
+                                a.footer__menu-link(href='change-me')= link
 
             .footer__subscription
                 h3.footer__title Подписка

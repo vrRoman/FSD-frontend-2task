@@ -1,5 +1,5 @@
 @import '@/sass/colors.sass'
-
+@import '@/sass/headings.sass'
 
 .colors-and-type
     display: flex
@@ -25,6 +25,9 @@
     &__info
         margin: 5px 0 0 40px
         color: $dark-shade-100
+
+    &__name
+        +h2
 
     &__demo
         width: 70px
@@ -54,6 +57,19 @@
 
 
 .type
+    $selector: &
+
+    &_size
+        &_1
+            #{$selector}__name,  #{$selector}__text
+                +h1
+        &_2
+            #{$selector}__name,  #{$selector}__text
+                +h2
+        &_3
+            #{$selector}__name,  #{$selector}__text
+                +h3
+
     display: flex
     justify-content: space-between
 
@@ -66,10 +82,10 @@
     &:nth-child(4)
         margin-top: 47px
 
-    &__text
+    #{$selector}__text
         width: 400px
 
-    &__name
+    #{$selector}__name
         width: 40px
         text-align: right
         color: $dark-shade-25

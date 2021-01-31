@@ -1,52 +1,30 @@
 @import 'fonts.sass'
+@import "colors.sass"
+@import "headings"
 
-*::before,
-*::after
-    box-sizing: border-box
-
-ul, ol
-    padding: 0
-    list-style: none
-
-body,
-h1, h2, h3, h4,
-p,
-ul, ol, li
-    margin: 0
-
-a
-    text-decoration: none
-    color: inherit
+body, html
+    overflow-x: hidden
 
 html
     background-color: #fff
 
+    font:
+        family: 'Montserrat', Arial, sans-serif
+        size: 14px
+    line-height: (24 / 14)
+    color: $dark-shade-75
+
 body
     min-height: 100vh
     text-rendering: optimizeLegibility
-
-input
-    padding: 0
-
-button
-    padding: 0
-
-@import "colors.sass"
-
-@import "type.sass"
-
-body
     margin: 0 auto
 
-body, html
-    overflow-x: hidden
 
 .container
     width: 1160px
     margin: 0 auto
     position: relative
     height: 100%
-    //overflow: hidden
 
 .ui-logo-container
     position: absolute

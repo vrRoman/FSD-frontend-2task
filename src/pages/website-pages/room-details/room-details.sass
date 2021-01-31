@@ -1,3 +1,5 @@
+@import '@/sass/headings'
+
 @import '@blocks/header/header'
 @import '@blocks/footer/footer'
 
@@ -46,7 +48,7 @@
         display: flex
         justify-content: space-between
         overflow: visible
-        padding-bottom: 73px
+        padding-bottom: 60px
         flex-wrap: wrap
 
 
@@ -70,6 +72,7 @@
                 margin-top: 22px
 
     &__comments-title
+        +h2
         margin-bottom: 2px
 
     &__comments-number
@@ -87,17 +90,22 @@
         display: block
         margin-top: 18px
 
+    &__expressions-title, &__features-title
+        +h2
+        margin-bottom: 20px
+
     &__expressions
         margin-right: 38px
     &__expressions-title
         margin-left: 5px
 
-    &__expressions-title, &__features-title
-        margin-bottom: 20px
-
     &__rules-title
+        +h2
         margin-bottom: 18px
         margin-left: 20px
+
+    &__cancel-title
+        +h2
 
     &__rules
         .bullet-list
