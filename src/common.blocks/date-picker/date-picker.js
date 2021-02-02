@@ -1,5 +1,5 @@
 import 'jquery-ui/ui/widgets/datepicker';
-import '@blocks/date-picker/jquery.datepicker.extension.range.min';
+import '@common.blocks/date-picker/jquery.datepicker.extension.range.min';
 
 const clearBtn = '<button class="ui-datepicker-current '
   + 'ui-state-default ui-corner-all '

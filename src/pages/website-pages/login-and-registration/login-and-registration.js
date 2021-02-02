@@ -7,8 +7,8 @@ import './login-and-registration.sass';
 
 import './images/login-registration-bg.jpg';
 
-import '@blocks/header/header';
-import '@blocks/cards/signup-card/signup-card';
+import '@common.blocks/header/header';
+import '@common.blocks/cards/signup-card/signup-card';
 
 const loginButtons = $('.signup-card__account-exists .button');
 const signupButtons = $('.signin-card__account-not-exists .button');

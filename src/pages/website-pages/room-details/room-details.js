@@ -6,12 +6,12 @@ import '@/sass/ui-kit.sass';
 import './room-details.pug';
 import './room-details.sass';
 
-import '@blocks/date-picker/date-picker';
-import '@blocks/cards/booking-card/booking-card';
-import '@blocks/dropdown/dropdown';
-import '@blocks/donut-chart/donut-chart';
-import '@blocks/like-button/like-button';
-import '@blocks/header/header';
+import '@common.blocks/date-picker/date-picker';
+import '@common.blocks/cards/booking-card/booking-card';
+import '@common.blocks/dropdown/dropdown';
+import '@common.blocks/donut-chart/donut-chart';
+import '@common.blocks/like-button/like-button';
+import '@common.blocks/header/header';
 
 import './images/room_1.jpg';
 import './images/room_2.jpg';

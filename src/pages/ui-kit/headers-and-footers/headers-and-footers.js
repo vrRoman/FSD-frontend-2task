@@ -6,4 +6,4 @@ import '@/sass/ui-kit.sass';
 import './headers-and-footers.pug';
 import './headers-and-footers.sass';
 
-import '@blocks/header/header';
+import '@common.blocks/header/header';

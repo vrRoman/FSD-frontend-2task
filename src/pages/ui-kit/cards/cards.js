@@ -6,13 +6,13 @@ import '@/sass/main.sass';
 import '@/sass/ui-kit.sass';
 import './cards.sass';
 
-import { setDatepickerDate, onSelect } from '@blocks/date-picker/date-picker';
-import '@blocks/dropdown/dropdown';
-import '@blocks/rate-button/rate-button';
+import { setDatepickerDate, onSelect } from '@common.blocks/date-picker/date-picker';
+import '@common.blocks/dropdown/dropdown';
+import '@common.blocks/rate-button/rate-button';
 
-import '@blocks/cards/booking-card/booking-card';
-import '@blocks/cards/room-card/room-card';
-import '@blocks/cards/signup-card/signup-card';
+import '@common.blocks/cards/booking-card/booking-card';
+import '@common.blocks/cards/room-card/room-card';
+import '@common.blocks/cards/signup-card/signup-card';
 
 import './images/room-img_1.jpg';
 import './images/room-img_2.jpg';

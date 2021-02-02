@@ -6,14 +6,14 @@ import '@/sass/main.sass';
 import '@/sass/ui-kit.sass';
 import './form-elements.sass';
 
-import '@blocks/dropdown/dropdown';
-import { setDatepickerDate } from '@blocks/date-picker/date-picker';
-import '@blocks/text-field/text-field';
-import '@blocks/like-button/like-button';
-import '@blocks/rate-button/rate-button';
-import '@blocks/range-slider/range-slider';
-import '@blocks/pagination/pagination';
-import '@blocks/list/list';
+import '@common.blocks/dropdown/dropdown';
+import { setDatepickerDate } from '@common.blocks/date-picker/date-picker';
+import '@common.blocks/text-field/text-field';
+import '@common.blocks/like-button/like-button';
+import '@common.blocks/rate-button/rate-button';
+import '@common.blocks/range-slider/range-slider';
+import '@common.blocks/pagination/pagination';
+import '@common.blocks/list/list';
 
 import './images/avatar_murad.png';
 

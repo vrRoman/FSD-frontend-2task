@@ -1,4 +1,4 @@
-import { setDatepickerDate } from '@blocks/date-picker/date-picker';
+import { setDatepickerDate } from '@common.blocks/date-picker/date-picker';
 
 setDatepickerDate(
   $('.js-booking-card-card__dates .js-date-picker_double'),

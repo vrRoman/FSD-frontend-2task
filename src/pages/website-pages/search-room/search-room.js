@@ -4,13 +4,13 @@ import '@/sass/ui-kit.sass';
 import './search-room.pug';
 import './search-room.sass';
 
-import { setDatepickerDate } from '@blocks/date-picker/date-picker';
-import '@blocks/dropdown/dropdown';
-import '@blocks/range-slider/range-slider';
-import '@blocks/list/list';
-import '@blocks/cards/room-card/room-card';
-import '@blocks/pagination/pagination';
-import '@blocks/header/header';
+import { setDatepickerDate } from '@common.blocks/date-picker/date-picker';
+import '@common.blocks/dropdown/dropdown';
+import '@common.blocks/range-slider/range-slider';
+import '@common.blocks/list/list';
+import '@common.blocks/cards/room-card/room-card';
+import '@common.blocks/pagination/pagination';
+import '@common.blocks/header/header';
 
 import './images/room-img_1.jpg';
 import './images/room-img_2.jpg';
