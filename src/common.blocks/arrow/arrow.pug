@@ -1,0 +1,24 @@
+mixin arrow({type, color} = {})
+    -
+        let className = 'arrow';
+
+        switch (type) {
+            case 'expand-less':
+                className += ' arrow_type_expand-less';
+                break;
+            case 'forward':
+                className += ' arrow_type_forward';
+                break;
+            default:
+                break;
+        }
+
+        switch (color) {
+            case 'white':
+                className += ' arrow_color_white';
+                break;
+            default:
+                break;
+        }
+
+    div(class=className)
