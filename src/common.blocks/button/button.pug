@@ -1,18 +1,47 @@
-mixin button(text, modName, link)
+include ../arrow/arrow
+include ../heading/heading
+
+include __arrow/button__arrow
+include __link/button__link
+
+
+mixin button({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {})
     -
-        let additionalClassName = '';
-        if (modName) {
-            if (Array.isArray(modName)) {
-                modName.forEach((val, index) => {
-                  additionalClassName += `button_${val}`;
-                  if (index !== modName.length - 1) {
-                      additionalClassName += ' ';
-                  }
-                });
-            } else {
-                additionalClassName = `button_${modName}`;
-            }
+        let className = 'button';
+        let headingOptions = {
+            text,
+            type: 'h3',
+            color: 'white'
+        };
+
+        if (modifiers.secondary) {
+            className += ' button_secondary';
+            headingOptions.color = 'purple';
         }
-    button(class=`button ${additionalClassName}`)
-        a(href=link ? link: 'change-me').button__text= text
-        i.button__arrow.material-icons arrow_forward
+        if (modifiers.noFrame) {
+            headingOptions.color = 'purple';
+            className += ' button_no-frame';
+        }
+        if (modifiers.long) {
+            className += ' button_long';
+        }
+        if (modifiers.hovered) {
+            className += ' button_hovered';
+        }
+        switch (modifiers.textColor) {
+            case 'white':
+                headingOptions.color = 'white';
+                break;
+            case 'purple':
+                headingOptions.color = 'purple';
+                break;
+            case 'gray':
+                headingOptions.color = 'gray';
+                break;
+            default:
+                break;
+        }
+
+    button(class=className)
+        +button__link(headingOptions)
+        +button__arrow

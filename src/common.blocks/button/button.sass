@@ -1,89 +1,27 @@
 @import '@/sass/colors.sass'
-@import '@/sass/headings'
+@import '@/common.blocks/arrow/arrow'
+@import '@/common.blocks/heading/heading'
 
 
 .button
-    $selector: &
+  display: flex
+  position: relative
+  box-sizing: border-box
+  padding: 0
+  border: none
+  outline: none
+  border-radius: 22px
+  background: $purple-gradient
+  transition: .2s
 
-    border: none
-    border-radius: 22px
-    position: relative
-    background: $purple-gradient
-    min-width: 99px
-    padding: 0 20px
-    height: 44px
-    display: flex
-    align-items: center
-    box-sizing: border-box
-    transition: .4s
-    outline: none
-    &__text
-        +h3
-        text-decoration: none
-        color: #fff
-        width: 100%
-        height: 100%
-        display: flex
-        align-items: center
-        justify-content: center
-        cursor: pointer
-    &__arrow
-        position: absolute
-        right: 0
-        color: #fff
-        display: none
-    &:hover
-        opacity: .5
-
-    &_default-hover
-        opacity: .5
-
-    &_extended
-        width: 320px
-        #{$selector}__arrow
-            display: inline-block
-            padding: 10px
-
-    &_secondary,
-    &_secondary-hover
-        background: $purple-gradient
-        &:before
-            content: ''
-            position: absolute
-            top: 2px
-            bottom: 2px
-            left: 2px
-            right: 2px
-            background: #fff
-            border-radius: 20px
-            z-index: 0
-        &:hover
-            background: linear-gradient(180deg, #BC9CFF80 0%, #8BA4F980 100%)
-            opacity: 1
-        #{$selector}__text
-            color: $purple
-            z-index: 1
-    &_secondary-hover
-        background: linear-gradient(180deg, #BC9CFF80 0%, #8BA4F980 100%)
-        opacity: 1
-
-    &_icon-link-primary,
-    &_icon-link-secondary
-        background: transparent
-        width: auto
-        height: auto
-        padding: 0
-        display: inline-block
-        min-width: 61px
-    &_icon-link-primary
-        #{$selector}__text
-            color: $purple
-    &_icon-link-secondary
-        #{$selector}__text
-            color: $dark-shade-50
+  &:hover
+    opacity: .5
 
 
-@media screen and (max-width: 438px)
-    .button
-        &_extended
-            width: 100%
+@import '__arrow/button__arrow'
+@import '__link/button__link'
+
+@import '_hovered/button_hovered'
+@import '_long/button_long'
+@import '_secondary/button_secondary'
+@import '_no-frame/button_no-frame'
