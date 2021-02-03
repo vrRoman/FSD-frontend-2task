@@ -1,0 +1,33 @@
+mixin heading({text = '', type = 'h3', color})
+    -
+        let className = 'heading';
+        let tag;
+
+        switch (type) {
+            case 'h3':
+                className += ' heading_type_h3';
+                tag = 'h3';
+                break;
+            case 'h2':
+                className += ' heading_type_h2';
+                tag = 'h2';
+                break;
+            default:
+                tag = 'h1';
+                break;
+        }
+        switch (color) {
+            case 'white':
+                className += ' heading_color_white';
+                break;
+            case 'purple':
+                className += ' heading_color_purple';
+                break;
+            case 'gray':
+                className += ' heading_color_gray';
+                break;
+            default:
+                break;
+        }
+
+    #{tag}(class=className)= text
