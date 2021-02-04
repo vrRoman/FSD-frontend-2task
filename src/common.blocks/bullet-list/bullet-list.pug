@@ -1,4 +1,9 @@
-mixin bullet-list(itemTextsArray)
+include __item/bullet-list__item
+
+
+//-
+    itemTexts: Array<string>
+mixin bullet-list(itemTexts)
     ul.bullet-list
-        each text in itemTextsArray
-            li.bullet-list__item !{text}
+        each text in itemTexts
+            +bullet-list__item(text)
