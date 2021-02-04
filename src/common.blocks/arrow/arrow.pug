@@ -1,3 +1,6 @@
+//-
+    type: 'expand-less' | 'forward'
+    color: 'white' | 'purple-gradient'
 mixin arrow({type, color} = {})
     -
         let className = 'arrow';
@@ -16,6 +19,9 @@ mixin arrow({type, color} = {})
         switch (color) {
             case 'white':
                 className += ' arrow_color_white';
+                break;
+            case 'purple-gradient':
+                className += ' arrow_color_purple-gradient';
                 break;
             default:
                 break;
