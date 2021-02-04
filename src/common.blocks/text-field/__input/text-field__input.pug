@@ -1,0 +1,14 @@
+mixin text-field__input({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {})
+    -
+        let className = 'text-field__input';
+        if (maskedDate) {
+            className += ' text-field__input_masked-date js-text-field__input_masked-date'
+        }
+
+    input(
+        class=className,
+        type=type,
+        placeholder=placeholder,
+        value=value,
+        readonly=readonly
+    )

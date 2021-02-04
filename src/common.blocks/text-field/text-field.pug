@@ -1,25 +1,34 @@
-mixin text-field({placeholder, type, title, state, modName, className, arrow, value})
+include __input/text-field__input
+include __arrow/text-field__arrow
+
+//-
+    inputOptions: {
+        placeholder: string
+        type: string
+        value: string
+        readonly: boolean
+        maskedDate: boolean
+    }
+    arrowOptions: {
+        type: string
+        color: string
+    }
+    modifiers: {
+        focused: boolean
+        short: boolean
+    }
+mixin text-field({inputOptions = {}, arrowOptions = false, modifiers = {}} = {})
     -
-        let additionalClassName = '';
-        if (modName) {
-            if (Array.isArray(modName)) {
-                modName.forEach((val, index) => {
-                    additionalClassName += `text-field_${val}`;
-                    if (index !== modName.length - 1) {
-                        additionalClassName += ' ';
-                    }
-                });
-            } else {
-                additionalClassName = `text-field_${modName}`;
-            }
+        let className = 'text-field';
+
+        if (modifiers.focused) {
+            className += ' text-field_focused';
         }
-    .text-field(class=`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`)
-        if title
-            .text-field__info
-                h3.text-field__title= title
-                if state
-                    span.text-field__state= state
-        .text-field__field
-            input(type= type placeholder=placeholder value=`${value ? value : ''}`).text-field__input
-            if arrow
-                i.text-field__arrow.material-icons arrow_forward
+        if (modifiers.short) {
+            className += ' text-field_short';
+        }
+
+    div(class=className)
+        +text-field__input(inputOptions)
+        if (arrowOptions)
+            +text-field__arrow(arrowOptions)
