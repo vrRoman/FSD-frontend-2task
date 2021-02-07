@@ -1,0 +1,6 @@
+include ../../counting-item/counting-item
+
+
+mixin items-counter__item({ name = '', value = 0 } = {})
+    .items-counter__item
+        +counting-item({ name, value })

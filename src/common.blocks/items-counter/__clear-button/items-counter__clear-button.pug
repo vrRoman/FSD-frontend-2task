@@ -1,0 +1,13 @@
+include ../../button/button
+
+
+mixin items-counter__clear-button
+    .items-counter__clear-button
+        +button({
+            text: 'Очистить',
+            link: false,
+            modifiers: {
+                noFrame: true,
+                textColor: 'gray'
+          }
+        })

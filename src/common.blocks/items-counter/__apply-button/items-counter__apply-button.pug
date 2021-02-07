@@ -1,0 +1,13 @@
+include ../../button/button
+
+
+mixin items-counter__apply-button
+    .items-counter__apply-button
+        +button({
+            text: 'Применить',
+            link: false,
+            modifiers: {
+                noFrame: true,
+                color: 'purple'
+            }
+        })

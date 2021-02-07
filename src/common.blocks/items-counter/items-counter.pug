@@ -1,0 +1,21 @@
+include __items-list/items-counter__items-list
+include __button-panel/items-counter__button-panel
+
+
+//-
+    {
+        items: Array<{
+            name: string,
+            value: number
+        }>,
+        withoutButtons: boolean
+    }
+mixin items-counter({items, withoutButtons = false})
+    -
+        let className = 'items-counter';
+        if (withoutButtons) {
+            className += ' items-counter_without-buttons';
+        }
+    div(class=className)
+        +items-counter__items-list(items)
+        +items-counter__button-panel

@@ -1,0 +1,7 @@
+include ../__item/items-counter__item
+
+
+mixin items-counter__items-list(items)
+    .items-counter__items-list
+        each item in items
+            +items-counter__item(item)
