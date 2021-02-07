@@ -5,6 +5,16 @@ include __arrow/button__arrow
 include __link/button__link
 
 
+//-
+    text: string
+    link: string | false
+    modifiers: {
+        secondary: boolean
+        noFrame: boolean
+        long: boolean
+        hovered: boolean
+        textColor: 'white' | 'purple' | 'gray'
+    }
 mixin button({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {})
     -
         let className = 'button';
