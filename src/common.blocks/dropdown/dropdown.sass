@@ -1,84 +1,12 @@
-@import '@/sass/colors'
-@import '@/sass/headings'
-@import 'items-popup/items-popup'
-
 .dropdown
-    $selector: &
+    max-width: 320px
+    width: 100%
     position: relative
-    width: 320px
-
-    &__title
-        +h3
-
-    &__input
-        border: 1px solid $dark-shade-25
-        box-sizing: border-box
-        border-radius: 4px
-        height: 44px
-        display: flex
-        align-items: center
-        justify-content: space-between
-        transition: 200ms
-        &:hover
-            border-color: $dark-shade-50
-            color: $dark-shade-75
-            line-height: (24rem / 14)
-
-    &__info
-        display: flex
-        justify-content: space-between
-        margin-bottom: 5px
-
-    &__description
-        text-transform: uppercase
-        font-size: (12rem / 14)
-        line-height: (15rem / 14)
-        color: $dark-shade-50
-
-    &__text
-        margin-left: 14px
-
-    &__arrow
-        color: $dark-shade-50
-        padding: 10px
-
-    &__popup
-        overflow: hidden
-        transition: all 200ms
-        top: calc(100% - 1px)
-        width: 100%
-        height: 0
-        position: absolute
-        z-index: 2
-
-    &_expanded
-        #{$selector}__popup
-            height: 159px
-            box-shadow: 0 10px 15px $dark-shade-5
-            .items-popup
-                border-color: $dark-shade-50
-        #{$selector}__input
-            border:
-                bottom-right-radius: unset
-                bottom-left-radius: unset
-            border-color: $dark-shade-50
-
-    &_small
-        width: 266px
-        #{$selector}__input
-            border:
-                bottom-right-radius: unset
-                bottom-left-radius: unset
-        #{$selector}__popup
-            .items-popup
-                &__clear, &__confirm
-                    display: none
-
-    &_small#{$selector}_expanded
-        #{$selector}__popup
-            height: 119px
+    z-index: 1
 
 
-@media screen and (max-width: 438px)
-    .dropdown
-        width: 100%
+@import '__popup/dropdown__popup'
+@import '__text-field/dropdown__text-field'
+@import '__title/dropdown__title'
+
+@import '_double/dropdown_double'

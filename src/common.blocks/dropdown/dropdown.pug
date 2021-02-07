@@ -1,29 +1,60 @@
-include items-popup/items-popup
+include __text-field/dropdown__text-field
+include __popup/dropdown__popup
 
-mixin dropdown({text, title, popupParams, modName, description})
+
+//-
+    inputOptions: {
+        value: string
+        placeholder: string
+    } | [
+        {
+            value: string
+            placeholder: string
+        },
+        {
+            value: string
+            placeholder: string
+        }
+    ]
+    popupMixinOptions: {
+        name: string
+        params: mixinParameters
+    } !Mixin must be included in the file where +dropdown is called
+    hiddenPopup: boolean
+    title: string | Array<string> | false
+    double: boolean
+mixin dropdown({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false} = {})
     -
-        let additionalClassName = '';
-        if (modName) {
-            if (Array.isArray(modName)) {
-                modName.forEach((val, index) => {
-                    additionalClassName += `dropdown_${val}`;
-                    if (index !== modName.length - 1) {
-                        additionalClassName += ' ';
-                    }
-                });
-            } else {
-                additionalClassName = `dropdown_${modName}`;
+        let className = 'dropdown';
+        if (double) {
+            className += ' dropdown_double';
+        }
+
+        if (double) {
+            if (!Array.isArray(title)) {
+                title = [title, title];
+            }
+            if (!Array.isArray(inputOptions)) {
+                inputOptions = [inputOptions, inputOptions];
             }
         }
-    .dropdown.js-dropdown(class=additionalClassName)
-        .dropdown__info
-            h3.dropdown__title= title
-            if description
-                span.dropdown__description= description
-
-        .dropdown__input
-            .dropdown__text= text
-            i.dropdown__arrow.material-icons expand_more
-
-        .dropdown__popup
-            +items-popup(popupParams)
+    div(class=className)
+        if (double)
+            +dropdown__text-field({
+                inputOptions: inputOptions[0],
+                title: title[0],
+            })
+            +dropdown__text-field({
+                inputOptions: inputOptions[1],
+                title: title[1],
+            })
+        else
+            +dropdown__text-field({
+                inputOptions,
+                title,
+            })
+        +dropdown__popup({
+            mixinName: popupMixinOptions.name,
+            mixinParams: popupMixinOptions.params,
+            hidden: hiddenPopup
+        })

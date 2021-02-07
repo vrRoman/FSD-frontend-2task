@@ -1,0 +1,9 @@
+mixin dropdown__popup({mixinName, mixinParams = {}, hidden = true} = {})
+    -
+        let className = 'dropdown__popup';
+        if (hidden) {
+            className += ' dropdown__popup_hidden';
+        }
+    div(class=className)
+        if (mixinName)
+            +#{mixinName}(mixinParams)

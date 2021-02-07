@@ -1,223 +1,127 @@
-const dropdownInit = ({
-  dropdownElems, popupSelector, inputSelector, classNameToToggle, applyBtnSelector,
-}) => {
-  const activeDropdowns = [];
-  const handleWindowClick = (evt) => {
-    for (let i = 0; i < dropdownElems.length; i += 1) {
-      const elem = dropdownElems[i];
-      const inputs = elem.querySelectorAll(inputSelector);
+class Dropdown {
+  constructor(elem, blockInPopupInstance = false, defaultInputValue = '') {
+    this.elem = elem;
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.defaultValue = defaultInputValue;
+    this.popup = this.getPopup();
+    this.hiddenPopupClass = 'dropdown__popup_hidden';
+    this.doubleDropdownClass = 'dropdown_double';
+    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
+    this.listening = false;
 
-      if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1])) {
-        if (!activeDropdowns.includes(elem)) {
-          activeDropdowns.push(elem);
-        }
-      }
-    }
-
-    for (let i = 0; i < activeDropdowns.length; i += 1) {
-      const elem = activeDropdowns[i];
-      const inputs = elem.querySelectorAll(inputSelector);
-      const popup = elem.querySelector(popupSelector);
-
-      if (evt.composedPath().includes(popup)) return;
-
-      if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1])) {
-        elem.classList.toggle(classNameToToggle);
-      } else {
-        elem.classList.remove(classNameToToggle);
-      }
-    }
-  };
-
-  window.addEventListener('click', handleWindowClick);
-
-  if (applyBtnSelector) {
-    for (let i = 0; i < dropdownElems.length; i += 1) {
-      const elem = dropdownElems[i];
-      const applyBtn = elem.querySelector(applyBtnSelector);
-
-      applyBtn.onclick = () => {
-        elem.classList.remove(classNameToToggle);
-      };
-    }
-  }
-};
-
-const changeValue = (newValue, textElem, valueElem, fullText, maxLength = 27) => {
-  let text = fullText;
-  const input = textElem;
-  const value = valueElem;
-
-  if (fullText.length > maxLength) {
-    text = (`${fullText.slice(0, maxLength)}...`).toLowerCase();
-  }
-
-  input.innerText = text;
-  value.innerText = newValue;
-};
-
-const countedItems = ({
-  dropdownElems,
-  textSelector = '.dropdown__text',
-  itemSelector = '.items-popup__item',
-  addBtnSelector = '.items-popup__change-value_add',
-  removeBtnSelector = '.items-popup__change-value_remove',
-  nameSelector = '.items-popup__title',
-  valueSelector = '.items-popup__value h3',
-  clearBtnSelector = '.items-popup__clear',
-  clearBtnDisabledClass = 'items-popup__clear_disabled',
-  inactiveBtnClass = 'items-popup__change-value_inactive',
-  defaultElemText = false,
-  maxLength = 27,
-}) => {
-  for (let i = 0; i < dropdownElems.length; i += 1) {
-    const dropdown = dropdownElems[i];
-
-    const textElem = dropdown.querySelector(textSelector);
-    const items = dropdown.querySelectorAll(itemSelector);
-    const defaultText = defaultElemText || textElem.innerText;
-
-    const clearBtn = dropdown.querySelector(clearBtnSelector);
-
-    const itemsInfo = [];
-
-    let counter = 0;
-    for (let n = 0; n < items.length; n += 1) {
-      const item = items[n];
-
-      const addBtn = item.querySelector(addBtnSelector);
-      const removeBtn = item.querySelector(removeBtnSelector);
-      const nameElem = item.querySelector(nameSelector);
-      const valueElem = item.querySelector(valueSelector);
-
-      const itemNum = counter;
-
-      itemsInfo.push({
-        name: nameElem.innerText.toLowerCase(),
-        value: Number(valueElem.innerText),
+    if (!this.isPopupHidden()) {
+      this.textFields.forEach((el) => {
+        el.classList.add(...this.activeTextFieldClasses);
       });
-
-      let sumOfValues = 0;
-      for (let x = 0; x <= itemsInfo.length - 1; x += 1) {
-        sumOfValues += itemsInfo[x].value;
-      }
-      if (sumOfValues === 0) {
-        clearBtn.classList.add(clearBtnDisabledClass);
-      }
-
-      if (itemsInfo[itemNum].value === 0) {
-        if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
-      }
-
-      addBtn.onclick = () => {
-        if (itemsInfo[itemNum].value >= 0) {
-          if (inactiveBtnClass) removeBtn.classList.remove(inactiveBtnClass);
-        }
-
-        itemsInfo[itemNum].value += 1;
-
-        let fullText = '';
-        for (let a = 0; a < itemsInfo.length; a += 1) {
-          const itemInfo = itemsInfo[a];
-          if (itemInfo.value !== 0) {
-            fullText += `${itemInfo.value} ${itemInfo.name}, `;
-          }
-        }
-
-        fullText = fullText.slice(0, -2);
-
-        if (fullText === '') {
-          fullText = defaultText;
-        }
-
-        changeValue(
-          itemsInfo[itemNum].value, textElem, valueElem, fullText.toLowerCase(), maxLength,
-        );
-
-        clearBtn.classList.remove(clearBtnDisabledClass);
-      };
-      removeBtn.onclick = () => {
-        if (itemsInfo[itemNum].value === 0) return;
-
-        if (itemsInfo[itemNum].value === 1) {
-          if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
-        }
-
-        itemsInfo[itemNum].value -= 1;
-
-        let fullText = '';
-        for (let a = 0; a < itemsInfo.length; a += 1) {
-          const itemInfo = itemsInfo[a];
-          if (itemInfo.value !== 0) {
-            fullText += `${itemInfo.value} ${itemInfo.name}, `;
-          }
-        }
-        fullText = fullText.slice(0, -2);
-
-        if (fullText === '') {
-          fullText = defaultText;
-        }
-
-        changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText, maxLength);
-
-        sumOfValues = 0;
-        for (let a = 0; a <= itemsInfo.length - 1; a += 1) {
-          sumOfValues += itemsInfo[a].value;
-        }
-        if (sumOfValues === 0) {
-          clearBtn.classList.add(clearBtnDisabledClass);
-        }
-      };
-
-      counter += 1;
     }
 
-    clearBtn.onclick = () => {
-      counter = 0;
-      for (let n = 0; n < items.length; n += 1) {
-        const item = items[n];
+    this.handleWindowClick = this.handleWindowClick.bind(this);
 
-        const itemNum = counter;
-        const removeBtn = item.querySelector(removeBtnSelector);
-        const valueElem = item.querySelector(valueSelector);
+    this.addWindowListener();
 
-        itemsInfo[itemNum].value = 0;
+    if (blockInPopupInstance) {
+      this.blockInPopupInstance = blockInPopupInstance;
 
-        if (inactiveBtnClass) {
-          removeBtn.classList.add(inactiveBtnClass);
-        }
-
-        changeValue(itemsInfo[itemNum].value, textElem, valueElem, defaultText, maxLength);
-
-        counter += 1;
+      try {
+        this.blockInPopupInstance.subscribe(this);
+      } catch (err) {
+        throw new Error('blockInPopupInstance must have a subscribe method');
       }
-
-      clearBtn.classList.add(clearBtnDisabledClass);
-    };
+    }
   }
-};
 
-$(document).ready(() => {
-  dropdownInit({
-    dropdownElems: $('.js-dropdown'),
-    popupSelector: '.dropdown__popup',
-    inputSelector: '.dropdown__input',
-    applyBtnSelector: '.items-popup__confirm',
-    classNameToToggle: 'dropdown_expanded',
-  });
-  countedItems({
-    dropdownElems: $('.js-dropdown.dropdown_facilities'),
-  });
-  countedItems({
-    dropdownElems: $('.js-dropdown:not(.dropdown_facilities)'),
-    defaultElemText: 'Сколько гостей',
-  });
+  update(action) {
+    this.changeTextFieldValue(action.valueText);
 
-  dropdownInit({
-    dropdownElems: $('.js-date-picker'),
-    popupSelector: '.ui-datepicker-inline',
-    inputSelector: '.date-picker__date',
-    applyBtnSelector: false,
-    classNameToToggle: 'date-picker_expanded',
-  });
-});
+    if (action.type === 'CLICK_APPLY-BUTTON') {
+      this.popup.classList.add(this.hiddenPopupClass);
+      this.textFields.forEach((el) => {
+        el.classList.remove(...this.activeTextFieldClasses);
+      });
+    }
+  }
+
+  changeTextFieldValue(text) {
+    if (this.isDropdownDouble()) {
+      if (Array.isArray(text)) {
+        text.forEach((value, i) => {
+          if (!value) {
+            this.textFieldInputs[i].value = this.defaultValue;
+          } else {
+            this.textFieldInputs[i].value = value;
+          }
+        });
+      } else {
+        this.textFieldInputs.forEach((input, i) => {
+          if (!text) {
+            this.textFieldInputs[i].value = this.defaultValue;
+          } else {
+            this.textFieldInputs[i].value = text;
+          }
+        });
+      }
+    } else if (!text) {
+      this.textFieldInputs[0].value = this.defaultValue;
+    } else {
+      this.textFieldInputs[0].value = text;
+    }
+  }
+
+  getPopup() {
+    const popupSelector = '.dropdown__popup';
+    return this.elem.querySelector(popupSelector);
+  }
+
+  getTextFields() {
+    const textFieldSelector = '.dropdown__text-field .text-field';
+    return this.elem.querySelectorAll(textFieldSelector);
+  }
+
+  getTextFieldInputs() {
+    const inputSelector = '.text-field__input';
+    const inputs = [];
+    this.textFields.forEach((elem) => {
+      inputs.push(elem.querySelector(inputSelector));
+    });
+    return inputs;
+  }
+
+  isPopupHidden() {
+    return this.popup.classList.contains(this.hiddenPopupClass);
+  }
+
+  isDropdownDouble() {
+    return this.elem.classList.contains(this.doubleDropdownClass);
+  }
+
+  addWindowListener() {
+    window.addEventListener('click', this.handleWindowClick);
+  }
+
+  handleWindowClick(evt) {
+    if (evt.path.includes(this.elem)) {
+      this.listening = true;
+      if (!evt.path.includes(this.popup)) {
+        if (this.isPopupHidden()) {
+          this.popup.classList.remove(this.hiddenPopupClass);
+          this.textFields.forEach((el) => {
+            el.classList.add(...this.activeTextFieldClasses);
+          });
+        } else {
+          this.popup.classList.add(this.hiddenPopupClass);
+          this.textFields.forEach((el) => {
+            el.classList.remove(...this.activeTextFieldClasses);
+          });
+        }
+      }
+    } else if (this.listening) {
+      this.popup.classList.add(this.hiddenPopupClass);
+      this.textFields.forEach((el) => {
+        el.classList.remove(...this.activeTextFieldClasses);
+      });
+    }
+  }
+}
+
+export default Dropdown;
