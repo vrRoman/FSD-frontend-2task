@@ -1,289 +1,218 @@
 @import '@/sass/colors'
-@import '@/sass/headings'
+
 
 .date-picker
-    $selector: &
-    display: flex
-    justify-content: space-between
-    position: relative
-    &:not(&_expanded)
-        .ui-datepicker
-            min-height: 0
-            height: 0
-            overflow: hidden
-            padding: 0
-            border: none
-
-    &_double
-        width: 320px
-
-    &__input_double, &__input_single
-        font-family: Montserrat, Arial, sans-serif
-        font-size: 1rem
-        line-height: (24rem / 14)
-        color: $dark-shade-75
-
-        padding-left: 15px
-        border: 1px solid $dark-shade-25
-        box-sizing: border-box
-        border-radius: 4px
-        height: 44px
-        width: 150px
-        display: flex
-        align-items: center
-        justify-content: space-between
-        transition: 200ms
-        background-color: transparent
-        cursor: pointer
-        outline: none
-
-        &:hover
-            border-color: $dark-shade-50
-        &::placeholder
-            color: $dark-shade-75
-
-
-    &__text-field
-        position: relative
-        display: inline-block
-        width: 100%
-
-    &__arrow
-        color: $dark-shade-50
-        position: absolute
-        right: 0
-        top: 0
-        z-index: 0
-        padding: 10px
-
-    &__title
-        +h3
-        margin-bottom: 5px
-
-    &_single
-        width: 266px
-        #{$selector}__date
-            width: 100%
-
-    &__input_single
-        width: 100%
+  position: relative
+  z-index: 1
 
 
 .ui-datepicker
-    $selector: &
-    &-inline
-        min-height: 369px
-        height: unset
-        overflow: visible
-        top: 100%
-        position: absolute
-        z-index: 10
-        box-sizing: border-box
-        width: 320px
-        box-shadow: 0 10px 20px 0 $dark-shade-5
-        border-radius: 4px
-        padding: 20px
-        padding-bottom: 18px
-        border: 1px solid $dark-shade-25
-    #{$selector}-header
-        background-color: transparent
-        border: none
-        padding: 0
-    #{$selector}-prev, #{$selector}-next
-        top: 0
-        .ui-icon
-            display: none
-        &:after
-            cursor: pointer
+  $selector: &
 
-            font-family: 'Material Icons'
-            font-weight: normal
-            font-style: normal
-            font-size: 24px
-            display: inline-block
-            line-height: 1
-            text-transform: none
-            letter-spacing: normal
-            word-wrap: normal
-            white-space: nowrap
-            direction: ltr
+  &#{$selector}-inline
+    border: none
+    position: relative
+    box-sizing: border-box
+    max-width: 320px
+    width: 100%
+    padding: 20px
+    padding-bottom: 18px
+  #{$selector}-header
+    background-color: transparent
+    border: none
+    padding: 0
+  #{$selector}-prev, #{$selector}-next
+    top: -2px
+    .ui-icon
+      display: none
+    &:after
+      cursor: pointer
+      color: $purple
 
-            -webkit-font-smoothing: antialiased
-            text-rendering: optimizeLegibility
-            -moz-osx-font-smoothing: grayscale
-            font-feature-settings: 'liga'
+      font-family: 'Material Icons'
+      font-weight: normal
+      font-style: normal
+      font-size: 24px
+      display: inline-block
+      line-height: 1
+      text-transform: none
+      letter-spacing: normal
+      word-wrap: normal
+      white-space: nowrap
+      direction: ltr
+      -webkit-font-smoothing: antialiased
+      text-rendering: optimizeLegibility
+      -moz-osx-font-smoothing: grayscale
+      font-feature-settings: 'liga'
+    &.ui-state-hover
+      border: none
+      background-color: transparent
+      top: 0
 
+  #{$selector}-prev
+    left: 0
+    &:after
+      content: 'arrow_back'
 
-            color: $purple
-        &.ui-state-hover
-            border: none
-            background-color: transparent
-            top: 0
+    &.ui-state-hover
+      left: 0
 
-    #{$selector}-prev
-        left: 0
-        &:after
-            content: 'arrow_back'
+  #{$selector}-next
+    top: -2px
+    right: -2px
+    &:after
+      content: 'arrow_forward'
 
-        &.ui-state-hover
-            left: 0
-
-    #{$selector}-next
-        right: 0
-        &:after
-            content: 'arrow_forward'
-
-        &.ui-state-hover
-            right: 0
+    &.ui-state-hover
+      right: 0
 
 
-    #{$selector}-title
+  #{$selector}-title
+    font-family: Montserrat, Arial, sans-serif
+    font-weight: bold
+    font-size: (19rem / 14)
+    line-height: (23rem / 14)
+
+    color: $dark-shade-100
+    #{$selector}-year
+      display: block
+    #{$selector}-month
+      margin-left: 4px
+
+
+  #{$selector}-calendar
+    margin-top: 8px
+    margin-bottom: 22px
+    thead
+      span
         font-family: Montserrat, Arial, sans-serif
         font-weight: bold
-        font-size: (19rem / 14)
-        line-height: (23rem / 14)
+        font-size: (12rem / 14)
+        line-height: (15rem / 14)
 
-        color: $dark-shade-100
-        #{$selector}-year
-            display: block
-        #{$selector}-month
-            margin-left: 3px
-
-
-    #{$selector}-calendar
-        margin-top: 8px
-        margin-bottom: 20px
-        thead
-            span
-                font-family: Montserrat, Arial, sans-serif
-                font-weight: bold
-                font-size: (12rem / 14)
-                line-height: (15rem / 14)
-
-                color: $purple
-        tbody
-            td
-                position: relative
-                padding: 0
-                a
-                    height: 40px
-                    width: 40px
-                    box-sizing: border-box
-                    display: flex
-                    justify-content: center
-                    align-items: center
-                    background-color: transparent
-                    border: none
-
-                    font-family: Montserrat, Arial, sans-serif
-                    font-style: normal
-                    font-weight: normal
-                    font-size: (12rem / 14)
-                    line-height: (15rem / 14)
-                    text-align: center
-                    color: $dark-shade-50
-                .ui-state-hover
-                    background: $purple-gradient
-                    border-radius: 50%
-                    color: #fff
-                    font-weight: bold
-                    opacity: 0.7
-
-            #{$selector}-other-month a
-                color: $dark-shade-25
-            #{$selector}-today
-                a
-                    background: $green-gradient
-                    border-radius: 50%
-                    color: #fff
-                    font-weight: bold
-
-            .selected-start:not(#{$selector}-today), .selected-end:not(#{$selector}-today)
-                a
-                    background: $purple-gradient
-                    border-radius: 50%
-                    color: #fff
-                    font-weight: bold
-
-            .selected-start:not(.selected-end)
-                &:after
-                    content: ''
-                    background-color: rgba(188,156,255,0.25)
-                    position: absolute
-                    border-bottom-left-radius: 50%
-                    border-top-left-radius: 50%
-                    width: 100%
-                    height: 100%
-                    right: 0
-                    top: 0
-            .selected-end:not(.selected-start)
-                &:before
-                    content: ''
-                    background-color: rgba(188,156,255,0.25)
-                    position: absolute
-                    border-bottom-right-radius: 50%
-                    border-top-right-radius: 50%
-                    width: 100%
-                    height: 100%
-                    left: 0
-                    top: 0
-
-            .selected:not(.selected-start):not(.selected-end)
-                &:after
-                    content: ''
-                    background-color: rgba(188,156,255,0.25)
-                    position: absolute
-                    width: 100%
-                    height: 100%
-                    right: 0
-                    top: 0
-                    z-index: -1
-
-
-    #{$selector}-buttonpane
-        border: none
-        display: flex
-        justify-content: space-between
+        color: $purple
+    tbody
+      td
+        position: relative
         padding: 0
-        margin-top: auto
-        #{$selector}-current
-            background-color: unset
-            border: none
-            margin: 0
-            padding: 0
+        a
+          height: 40px
+          width: 40px
+          box-sizing: border-box
+          display: flex
+          justify-content: center
+          align-items: center
+          background-color: transparent
+          border: none
 
-            font-family: Montserrat, Arial, sans-serif
-            font-weight: bold
-            font-size: (12rem / 14)
-            line-height: (15rem / 14)
-            text-transform: uppercase
-            outline: none
-            transition: opacity .4s
-            &:hover
-                opacity: .5
+          font-family: Montserrat, Arial, sans-serif
+          font-style: normal
+          font-weight: normal
+          font-size: (12rem / 14)
+          line-height: (15rem / 14)
+          text-align: center
+          color: $dark-shade-50
+        .ui-state-hover
+          background: $purple-gradient
+          border-radius: 50%
+          color: #fff
+          font-weight: bold
+          opacity: 0.7
 
-        #{$selector}-clear-button
-            color: $dark-shade-50
-            &_disabled
-                visibility: hidden
+      #{$selector}-other-month a
+        color: $dark-shade-25
+      #{$selector}-today
+        a
+          background: $green-gradient
+          border-radius: 50%
+          color: #fff
+          font-weight: bold
 
-        #{$selector}-apply-button
-            color: $purple
+      .selected-start:not(#{$selector}-today), .selected-end:not(#{$selector}-today)
+        a
+          background: $purple-gradient
+          border-radius: 50%
+          color: #fff
+          font-weight: bold
 
-    &-current:not(&-custom-button)
-        display: none
+      .selected-start:not(.selected-end)
+        &:after
+          content: ''
+          background-color: rgba(188,156,255,0.25)
+          position: absolute
+          border-bottom-left-radius: 50%
+          border-top-left-radius: 50%
+          width: 100%
+          height: 100%
+          right: 0
+          top: 0
+          z-index: 0
+        .ui-state-default
+          position: relative
+          z-index: 1
+      .selected-end:not(.selected-start)
+        &:before
+          content: ''
+          background-color: rgba(188,156,255,0.25)
+          position: absolute
+          border-bottom-right-radius: 50%
+          border-top-right-radius: 50%
+          width: 100%
+          height: 100%
+          left: 0
+          top: 0
+          z-index: 0
+        .ui-state-default
+          position: relative
+          z-index: 1
+
+      .selected:not(.selected-start):not(.selected-end)
+        &:after
+          content: ''
+          background-color: rgba(188,156,255,0.25)
+          position: absolute
+          width: 100%
+          height: 100%
+          right: 0
+          top: 0
+          z-index: 0
+        .ui-state-default
+          position: relative
+          z-index: 1
 
 
-@media screen and (max-width: 438px)
-    .date-picker
-        width: 100%
-        &__date
-            width: 45%
-        &__input_double
-            width: 100%
-        &__arrow
-            background-color: #fff
-            padding: 9px
-            top: 1px
-            right: 1px
-            border-radius: 3px
+  #{$selector}-buttonpane
+    border: none
+    display: flex
+    justify-content: space-between
+    padding: 0
+    margin-top: auto
+    #{$selector}-current
+      background-color: unset
+      border: none
+      margin: 0
+      padding: 0
+
+      font-family: Montserrat, Arial, sans-serif
+      font-weight: bold
+      font-size: (12rem / 14)
+      line-height: (15rem / 14)
+      text-transform: uppercase
+      outline: none
+      transition: opacity .4s
+      &:hover
+        opacity: .5
+
+    #{$selector}-clear-button
+      color: $dark-shade-50
+      &_disabled
+        visibility: hidden
+
+    #{$selector}-apply-button
+      color: $purple
+
+  &-current:not(&-custom-button)
+    display: none
+
+
+@import '_with-border/date-picker_with-border'

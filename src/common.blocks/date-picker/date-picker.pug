@@ -1,19 +1,7 @@
-mixin date-picker(double, titles, values)
-    .date-picker.js-date-picker(class=`${
-      double ? "date-picker_double js-date-picker_double" : "date-picker_single js-date-picker_single"
-    }`)
-        .date-picker__date
-            h3.date-picker__title= titles[0]
-            .date-picker__text-field
-                input(class=`date-picker__input ${double ? "date-picker__input_double" : "date-picker__input_single"}`,
-                    placeholder="ДД.ММ.ГГГГ",
-                    value= values[0] ? values[0] : '',
-                    name=`${double ? "start-date" : "all-dates"}`)
-                i.date-picker__arrow.material-icons expand_more
-        if (double)
-            .date-picker__date
-                h3.date-picker__title= titles[1]
-                .date-picker__text-field
-                    input.date-picker__input.date-picker__input_double(name="end-date", value=values[1] ? values[1] : '',
-                        placeholder="ДД.ММ.ГГГГ")
-                    i.date-picker__arrow.material-icons expand_more
+mixin date-picker({withBorder = false} = {})
+    -
+        let className = 'date-picker js-date-picker';
+        if (withBorder) {
+            className += ' date-picker_with-border';
+        }
+    div(class=className)
