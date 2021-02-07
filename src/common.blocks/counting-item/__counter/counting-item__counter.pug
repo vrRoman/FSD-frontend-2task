@@ -1,0 +1,9 @@
+include ../__change-button/counting-item__change-button
+include ../__value/counting-item__value
+
+
+mixin counting-item__counter(currentValue)
+    .counting-item__counter
+        +counting-item__change-button('-')
+        +counting-item__value(currentValue)
+        +counting-item__change-button('+')

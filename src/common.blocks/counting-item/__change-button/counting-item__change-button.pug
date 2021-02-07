@@ -1,0 +1,9 @@
+mixin counting-item__change-button(sign)
+    -
+        let className = 'counting-item__change-button';
+        if (sign === '+') {
+            className += ' counting-item__change-button_plus';
+        } else if (sign === '-') {
+            className += ' counting-item__change-button_minus';
+        }
+    div(class=className)= sign
