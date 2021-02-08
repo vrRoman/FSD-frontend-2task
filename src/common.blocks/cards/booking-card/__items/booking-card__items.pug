@@ -1,0 +1,7 @@
+include ../__item/booking-card__item
+
+
+mixin booking-card__items(items)
+    .booking-card__items
+        each item in items
+            +booking-card__item(item)

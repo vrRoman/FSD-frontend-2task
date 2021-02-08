@@ -1,0 +1,11 @@
+include ../__room-name/booking-card__room-name
+include ../__room-price/booking-card__room-price
+
+
+mixin booking-card__room-info(roomInfo)
+    .booking-card__room-info
+        +booking-card__room-name({
+            number: roomInfo.number,
+            type: roomInfo.type,
+        })
+        +booking-card__room-price(roomInfo.price)

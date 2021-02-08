@@ -1,53 +1,36 @@
-include ../../date-picker/date-picker
-include ../../dropdown/dropdown
-include  ../../button/button
+include __room-info/booking-card__room-info
+include __dates/booking-card__dates
+include __guests/booking-card__guests
+include __items/booking-card__items
+include __total/booking-card__total
+
+include ../../button/button
 
 
-mixin booking-card({roomInfo, bookingItems, datepickerDates, roomFullPrice})
+//-
+    roomInfo: {
+        number: number
+        price: string | number
+        type: string
+    }
+    bookingItems: Array<{
+        text: string
+        price: string | number
+        tooltip: boolean
+    }>
+    totalPrice: string | number
+mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
     .booking-card
-        .booking-card__room-info
-            .booking-card__room-name
-                h1.booking-card__room-number
-                    span.booking-card__number-sign №
-                    != roomInfo.number
-                span.booking-card__room-type= ' ' + roomInfo.type
-            .booking-card__room-price= roomInfo.price
-                span.booking-card__room-price-measure &nbsp;в сутки
-
-        .booking-card__dates.js-booking-card__dates
-            +date-picker(true, ['Прибытие', 'Выезд'], datepickerDates)
-
-        .booking-card__guests
-            +dropdown({
-                text: '3 гостя',
-                title: 'Гости',
-                popupParams: {
-                    items: [
-                        {
-                            name: 'Взрослые',
-                            value: '2'
-                        },
-                        {
-                            name: 'Дети',
-                            value: '1'
-                        },
-                        {
-                            name: 'Младенцы',
-                            value: '0'
-                        }
-                    ]
-                }
-            })
-
-        .booking-card__items
-            each item in bookingItems
-                .booking-card__item
-                    span.booking-card__item-name !{item.name}
-                    span.booking-card__item-price= item.price
-
-        .booking-card__total
-            h2.booking-card__total-text Итого
-            h2.booking-card__total-price= roomFullPrice
-
-        .booking-card__button
-            +button('Забронировать', 'extended')
+        +booking-card__room-info(roomInfo)
+        +booking-card__dates
+        +booking-card__guests
+        +booking-card__items(bookingItems)
+        +booking-card__total(totalPrice)
+        +button({
+            text: 'Забронировать',
+            link: false,
+            modifiers: {
+                long: true,
+                textColor: 'white',
+            }
+        })

@@ -1,149 +1,20 @@
-@import '@/sass/headings'
+@import '@/common.blocks/items-counter/items-counter'
+@import '@/common.blocks/date-picker/date-picker'
+@import '@/common.blocks/dropdown/dropdown'
 
 
 .booking-card
-    $selector: &
-    width: 380px
-    min-height: 511px
-    background-color: #fff
-    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2)
-    border: 1px solid rgba(0, 0, 0, 0.12)
-    padding: 39px 29px 29px 29px
-    box-sizing: border-box
-    &__room-info
-        position: relative
-        display: flex
-        justify-content: space-between
-    &__room-name
-        font-family: Quicksand, Arial, sans-serif
-        font-weight: bold
-        font-size: 1rem
-        line-height: (17rem / 14)
-        color: $dark-shade-100
-        display: inline-block
-    &__room-number
-        +h1
-        display: inline-block
-    &__number-sign
-        font-size: 1rem
-        line-height: (17rem / 14)
-        margin-right: 4px
-    &__room-type
-        display: inline-block
-        color: $purple
-        margin-left: 8px
-        margin-bottom: 2px
-        font-size: (12rem / 14)
-        line-height: (15rem / 14)
-        font-family: 'Montserrat', Arial, sans-serif
-        text-transform: uppercase
-        vertical-align: bottom
-    &__room-price
-        font-weight: bold
-        line-height: (18rem / 14)
-        color: $dark-shade-50
-        display: inline-flex
-        align-items: flex-end
-    &__room-price-measure
-        font-weight: normal
-        font-size: (12rem / 14)
+  width: 100%
+  max-width: 380px
+  box-sizing: border-box
+  border: 1px solid rgba(0, 0, 0, 0.12)
+  padding: 39px 29px 29px
+  background-color: #fff
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2)
 
-    &__dates
-        margin-top: 22px
-    &__guests
-        margin-top: 20px
-    &__items
-        margin-top: 20px
-    &__item
-        display: flex
-        justify-content: space-between
-        margin-top: 10px
-        color: $dark-shade-75
-        line-height: (18rem / 14)
-        min-height: 24px
-        &:nth-child(1)
-            margin-top: 0
-            #{$selector}__item-name
-                &:after
-                    display: none
-    &__item-name, &__item-price
-        position: relative
-        &:nth-child(1)
-            &:after
-                content: 'i'
-                width: 20px
-                height: 20px
-                border-radius: 50%
-                border: 1px solid $dark-shade-25
-                position: absolute
-                left: 214 + 5px
-                top: 0
-                display: flex
-                align-items: center
-                justify-content: center
-                color: $dark-shade-25
-                cursor: pointer
 
-    &__total
-        margin-top: 30px
-        display: flex
-        justify-content: space-between
-        width: calc(100% + 10px)
-    &__total-text
-        +h2
-        position: relative
-        &:after
-            content: ''
-            width: 190px
-            position: absolute
-            right: -188 - 5px
-            bottom: 5px
-            border-bottom: 1px dotted $dark-shade-25
-    &__total-price
-        +h2
-
-    &__button
-        margin-top: 20px
-
-@media screen and (max-width: 438px)
-    .booking-card
-        width: 100%
-        box-sizing: border-box
-        &__total
-            position: relative
-        &__total-text
-            position: static
-            &:after
-                content: ''
-                left: 61px
-                right: 77px
-                width: unset
-
-@media screen and (max-width: 417px)
-    .booking-card
-        $selector: &
-        &__item-price
-            margin-left: 45px
-        &__item
-            &:nth-child(2), &:nth-child(3)
-                #{$selector}__item-name
-                    &:after
-                        left: 185px
-
-@media screen and (max-width: 380px)
-    .booking-card
-        $selector: &
-        &__item
-            &:nth-child(2), &:nth-child(3)
-                #{$selector}__item-name
-                    &:after
-                        left: 170px
-
-@media screen and (max-width: 358px)
-    .booking-card
-        $selector: &
-        &__item
-            &:nth-child(2), &:nth-child(3)
-                #{$selector}__item-name
-                    &:after
-                        left: 150px
+@import '__room-info/booking-card__room-info'
+@import '__dates/booking-card__dates'
+@import '__guests/booking-card__guests'
+@import '__items/booking-card__items'
+@import '__total/booking-card__total'

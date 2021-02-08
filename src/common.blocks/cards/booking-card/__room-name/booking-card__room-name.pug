@@ -1,0 +1,11 @@
+include ../__number-sign/booking-card__number-sign
+include ../__room-number/booking-card__room-number
+include ../__room-type/booking-card__room-type
+
+
+mixin booking-card__room-name({number, type})
+    .booking-card__room-name
+        +booking-card__number-sign
+        +booking-card__room-number(number)
+        if (type)
+            +booking-card__room-type(type)
