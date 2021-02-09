@@ -1,9 +1,17 @@
 include ../../heading/heading
 
 
-mixin room-info__number(number)
-    .room-info__number
-        +heading({
-            text: number,
-            type: 'h1'
-        })
+mixin room-info__number(number, small = false)
+    -
+        let className = 'room-info__number';
+        let text = '';
+        if (small) {
+            className += ' room-info__number_small';
+            text = number;
+        }
+    div(class=className)= text
+        if (!small)
+            +heading({
+                text: number,
+                type: 'h1'
+            })
