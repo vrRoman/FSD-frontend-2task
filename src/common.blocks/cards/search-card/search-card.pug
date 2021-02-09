@@ -1,39 +1,23 @@
-include ../../date-picker/date-picker
-include ../../dropdown/dropdown
+include ../../heading/heading
 include ../../button/button
+
+include __dates/search-card__dates
+include __guests/search-card__guests
 
 
 mixin search-card
     .search-card
-        h1.search-card__title Найдём номера под<br>ваши пожелания
-
-        .search-card__date
-            +date-picker(true, ['Прибытие', 'Выезд'], false)
-
-        .search-card__guests
-            +dropdown({
-                text: 'Сколько гостей',
-                title: 'Гости',
-                popupParams: {
-                    items: [
-                        {
-                            name: 'Взрослые',
-                            value: '0'
-                        },
-                        {
-                            name: 'Дети',
-                            value: '0'
-                        },
-                        {
-                            name: 'Младенцы',
-                            value: '0'
-                        }
-                    ]
-                }
-            })
-
-        .search-card__button
-            +button('Подобрать номер', 'extended')
-
-
-
+        +heading({
+            type: 'h1',
+            text: 'Найдём номера под ваши пожелания'
+        })
+        +search-card__dates
+        +search-card__guests
+        +button({
+            text: 'Подобрать номер',
+            link: 'search-room.html',
+            modifiers: {
+                long: true,
+                textColor: 'white',
+            }
+        })

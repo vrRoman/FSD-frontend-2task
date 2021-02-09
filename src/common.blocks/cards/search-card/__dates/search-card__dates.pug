@@ -1,0 +1,20 @@
+include ../../../date-picker/date-picker
+include ../../../dropdown/dropdown
+
+
+mixin search-card__dates
+    .search-card__dates
+        +dropdown({
+            inputOptions: {
+                value: 'ДД.ММ.ГГГГ',
+                placeholder: 'ДД.ММ.ГГГГ'
+            },
+            popupMixinOptions: {
+                name: 'date-picker',
+                params: {
+
+                }
+            },
+            title: ['Прибытие', 'Выезд'],
+            double: true
+        })

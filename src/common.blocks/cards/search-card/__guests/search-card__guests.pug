@@ -1,0 +1,32 @@
+include ../../../items-counter/items-counter
+include ../../../dropdown/dropdown
+
+
+mixin search-card__guests
+    .search-card__guests
+        +dropdown({
+            inputOptions: {
+                value: 'Сколько гостей',
+                placeholder: 'Сколько гостей',
+            },
+            popupMixinOptions: {
+                name: 'items-counter',
+                params: {
+                    items: [
+                        {
+                            name: 'Взрослые',
+                            value: '0'
+                        },
+                        {
+                            name: 'Дети',
+                            value: '0'
+                        },
+                        {
+                            name: 'Младенцы',
+                            value: '0'
+                        }
+                    ]
+                }
+            },
+            title: 'Гости'
+        })
