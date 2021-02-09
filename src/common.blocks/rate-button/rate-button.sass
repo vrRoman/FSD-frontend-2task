@@ -1,14 +1,11 @@
 @import '@/sass/colors'
+
+
 .rate-button
-    display: inline-flex
-    width: 120px
-    justify-content: space-between
-    &__star
-        &:after
-            content: 'star_border'
-            background: $purple-gradient
-            -webkit-text-fill-color: transparent
-            -webkit-background-clip: text
-    &__star_active
-        &:after
-            content: 'star'
+  max-width: 120px
+  width: 100%
+  display: inline-flex
+  justify-content: space-between
+
+
+@import '__star/rate-button__star'
