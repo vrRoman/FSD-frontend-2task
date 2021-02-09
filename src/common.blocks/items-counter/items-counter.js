@@ -8,11 +8,14 @@ class ItemsCounter {
     this.itemElems = this.getItemElems();
     this.countingItemInstances = this.createCountingItemInstances();
     this.wordToValueTextReplace = wordToValueTextReplace;
+    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
 
     this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
     this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
 
     this.addListenersToButtons();
+
+    this.updateClearButton();
 
     this.observers = [];
     this.subscribeToItems();
@@ -27,6 +30,7 @@ class ItemsCounter {
   update(action) {
     if (action.type === 'UPDATE_VALUE') {
       if (this.isWithoutButtons()) {
+        this.updateClearButton();
         this.notify({
           type: 'UPDATE_VALUE',
           value: this.getValues(),
@@ -71,10 +75,23 @@ class ItemsCounter {
     return this.elem.classList.contains(withoutButtonsClass);
   }
 
+  updateClearButton() {
+    let valuesSum = 0;
+    this.getValues().forEach((val) => {
+      valuesSum += val;
+    });
+    if (valuesSum === 0) {
+      this.clearBtn.classList.add(this.clearBtnDisabledClass);
+    } else {
+      this.clearBtn.classList.remove(this.clearBtnDisabledClass);
+    }
+  }
+
   handleClearBtnClick() {
     this.countingItemInstances.forEach((inst) => {
       inst.setValue(0);
     });
+    this.updateClearButton();
     this.notify({
       type: 'CLICK_CLEAR-BUTTON',
       value: this.getValues(),
@@ -83,6 +100,7 @@ class ItemsCounter {
   }
 
   handleApplyBtnClick() {
+    this.updateClearButton();
     this.notify({
       type: 'CLICK_APPLY-BUTTON',
       value: this.getValues(),
