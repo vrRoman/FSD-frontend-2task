@@ -1,0 +1,11 @@
+include ../__number-sign/room-info__number-sign
+include ../__number/room-info__number
+include ../__type/room-info__type
+
+
+mixin room-info__name({number, type = false})
+    .room-info__name
+        +room-info__number-sign
+        +room-info__number(number)
+        if (type)
+            +room-info__type(type)

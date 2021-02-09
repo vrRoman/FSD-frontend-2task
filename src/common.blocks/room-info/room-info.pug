@@ -1,0 +1,12 @@
+include __name/room-info__name
+include __price/room-info__price
+
+
+//-
+    number: number
+    type: string | false
+    price: string | number
+mixin room-info({number, type = false, price})
+    .room-info
+        +room-info__name({ number, type })
+        +room-info__price(price)
