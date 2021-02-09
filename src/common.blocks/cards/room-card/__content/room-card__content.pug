@@ -1,0 +1,11 @@
+include ../__room-info/room-card__room-info
+include ../__rating-and-comments/room-card__rating-and-comments
+
+
+mixin room-card__content({roomInfo, rating, numOfComments, link = 'room-details.html'})
+    a.room-card__content(href=link)
+        +room-card__room-info(roomInfo)
+        +room-card__rating-and-comments({
+            rating,
+            numOfComments
+        })

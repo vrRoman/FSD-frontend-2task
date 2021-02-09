@@ -1,27 +1,23 @@
-include ../../rate-button/rate-button
+include __slider/room-card__slider
+include __content/room-card__content
 
 
-mixin room-card({roomImagesSrc, roomInfo, numOfComments, arrows})
-    .room-card(class=`${arrows ? 'room-card_with-arrows' : ''}`)
-        .room-card__slider.js-room-card__slider
-            each imgSrc in roomImagesSrc
-                img.room-card__img(
-                    src= imgSrc
-                    alt='room-img'
-                )
-        .room-card__content
-            .room-card__room-info
-                .room-card__name
-                    span.room-card__number-sign №&nbsp;
-                    h2.room-card__number= roomInfo.number
-                    if roomInfo.type
-                        h3.room-card__type &nbsp;#{roomInfo.type}
-                .room-card__price= roomInfo.price
-                    span.room-card__price-measure &nbsp;в сутки
-
-            .room-card__rating-and-comments
-                .room-card__rating
-                    +rate-button(roomInfo.rating)
-
-                .room-card__comments= numOfComments
-                    span.room-card__comments-measure &nbsp;Отзывов
+//-
+    {
+        roomImagesSrc: Array<string>
+        sliderArrows: boolean
+        roomInfo: {
+            number: number
+            type: string | false
+            price: string | number
+        }
+        rating: number
+        numOfComments: number
+    }
+mixin room-card({imagesSrc, sliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'})
+    .room-card
+        +room-card__slider({
+          imagesSrc,
+          sliderArrows
+        })
+        +room-card__content({roomInfo, rating, numOfComments, link})

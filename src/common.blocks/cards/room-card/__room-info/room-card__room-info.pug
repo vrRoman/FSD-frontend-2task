@@ -1,0 +1,9 @@
+include ../../../room-info/room-info
+
+
+mixin room-card__room-info(roomInfo)
+    .room-card__room-info
+        +room-info({
+            ...roomInfo,
+            smallName: true
+        })

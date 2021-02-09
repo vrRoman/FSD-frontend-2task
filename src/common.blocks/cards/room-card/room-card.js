@@ -1,6 +1,5 @@
 import 'slick-carousel/slick/slick.min';
 import 'slick-carousel/slick/slick.scss';
-import '../../rate-button/rate-button';
 
 $('.js-room-card__slider').slick({
   dots: true,

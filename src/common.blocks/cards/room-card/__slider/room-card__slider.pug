@@ -1,0 +1,12 @@
+include ../__img/room-card__img
+
+
+mixin room-card__slider({imagesSrc, sliderArrows = false})
+    -
+        let className = 'room-card__slider js-room-card__slider';
+        if (sliderArrows) {
+            className += ' room-card__slider_with-arrows';
+        }
+    div(class=className)
+        each src in imagesSrc
+            +room-card__img(src)
