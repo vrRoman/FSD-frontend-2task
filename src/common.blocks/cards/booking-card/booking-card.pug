@@ -1,4 +1,5 @@
-include __room-info/booking-card__room-info
+include ../../room-info/room-info
+
 include __dates/booking-card__dates
 include __guests/booking-card__guests
 include __items/booking-card__items
@@ -21,7 +22,7 @@ include ../../button/button
     totalPrice: string | number
 mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
     .booking-card
-        +booking-card__room-info(roomInfo)
+        +room-info(roomInfo)
         +booking-card__dates
         +booking-card__guests
         +booking-card__items(bookingItems)
