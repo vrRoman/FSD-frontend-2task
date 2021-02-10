@@ -1,0 +1,11 @@
+@import '__input/toggle-button__input'
+@import '__text/toggle-button__text'
+
+
+.toggle-button__input:checked
+  + .toggle-button__text
+    &:before
+      border-color: $purple
+    &:after
+      transform: translateX(20px)
+      background-color: $purple
