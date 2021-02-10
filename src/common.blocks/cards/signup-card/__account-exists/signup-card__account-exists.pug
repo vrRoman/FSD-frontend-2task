@@ -1,0 +1,13 @@
+include ../../../button/button
+
+
+mixin signup-card__account-exists
+    .signup-card__account-exists
+        span Уже есть аккаунт на Toxin
+        +button({
+            text: 'Войти',
+            link: false,
+            modifiers: {
+                secondary: true
+            }
+        })

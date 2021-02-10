@@ -1,58 +1,22 @@
-@import '@/sass/headings'
+@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/button/button'
 
 
 .signup-card
-    width: 380px
-    height: 646px
-    background-color: #fff
-    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2)
-    border: 1px solid rgba(0, 0, 0, 0.12)
-    padding: 39px 29px 29px 29px
-    box-sizing: border-box
-
-    &__title
-        +h1
-
-    &__general-info
-        margin-top: 20px
-
-    &__surname
-        margin-top: 10px
-
-    &__gender
-        margin-top: 10px
-
-    &__birth
-        margin-top: 25px
-
-    &__login-details
-        margin-top: 20px
-        &-title
-            +h3
+  width: 100%
+  max-width: 380px
+  box-sizing: border-box
+  background-color: #fff
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2)
+  border: 1px solid rgba(0, 0, 0, 0.12)
+  border-radius: 4px
+  padding: 39px 29px 29px 29px
 
 
-    &__email
-        margin-top: 5px
-    &__password
-        margin-top: 10px
-
-    &__offers
-        margin-top: 8px
-
-    &__signup-btn
-        margin-top: 22px
-
-    &__account-exists
-        display: flex
-        justify-content: space-between
-        align-items: center
-
-        margin-top: 30px
-        color: #000
-
-
-@media screen and (max-width: 438px)
-    .signup-card
-        width: 100%
-        min-height: 357px
-        height: unset
+@import '__name/signup-card__name'
+@import '__surname/signup-card__surname'
+@import '__gender/signup-card__gender'
+@import '__birth/signup-card__birth'
+@import '__login-details/signup-card__login-details'
+@import '__offers/signup-card__offers'
+@import '__account-exists/signup-card__account-exists'

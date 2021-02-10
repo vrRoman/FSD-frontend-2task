@@ -1,0 +1,9 @@
+include ../../../radio-buttons/radio-buttons
+
+
+mixin signup-card__gender
+    .signup-card__gender
+        +radio-buttons({
+            items: ['Мужчина', 'Женщина'],
+            itemsName: 'gender'
+        })

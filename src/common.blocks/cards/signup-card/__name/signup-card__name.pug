@@ -1,0 +1,11 @@
+include ../../../text-field/text-field
+
+
+mixin signup-card__name
+    .signup-card__name
+        +text-field({
+            inputOptions: {
+                type: 'text',
+                placeholder: 'Имя'
+            }
+        })
