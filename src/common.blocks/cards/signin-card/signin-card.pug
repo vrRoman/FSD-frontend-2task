@@ -1,21 +1,25 @@
-include ../../text-field/text-field
+include ../../heading/heading
 include ../../button/button
+
+include __email/signin-card__email
+include __password/signin-card__password
+include __account-not-exists/signin-card__account-not-exists
+
 
 mixin signin-card
     .signin-card
-        h1.signin-card__title Войти
-        .signin-card__email
-            +text-field({
-              placeholder: 'Email',
-              type: 'email'
-            })
-        .signin-card__password
-            +text-field({
-              placeholder: 'Пароль',
-              type: 'password',
-            })
-        .signin-card__button
-            +button('Войти', 'extended')
-        .signin-card__account-not-exists
-            span Нет аккаунта на Toxin?
-            +button('Создать', 'secondary', '#')
+        +heading({
+            type: 'h1',
+            text: 'Войти',
+        })
+        +signin-card__email
+        +signin-card__password
+        +button({
+            text: 'Войти',
+            link: 'landing-page.html',
+            modifiers: {
+                long: true,
+                textColor: 'white',
+            }
+        })
+        +signin-card__account-not-exists

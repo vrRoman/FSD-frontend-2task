@@ -1,0 +1,12 @@
+include ../../../button/button
+
+
+mixin signin-card__account-not-exists
+    .signin-card__account-not-exists
+        span Нет аккаунта на Toxin?
+        +button({
+            text: 'Создать',
+            modifiers: {
+                secondary: true
+            }
+        })

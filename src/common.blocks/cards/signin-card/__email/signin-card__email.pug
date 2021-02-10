@@ -1,0 +1,11 @@
+include ../../../text-field/text-field
+
+
+mixin signin-card__email
+    .signin-card__email
+        +text-field({
+            inputOptions: {
+                placeholder: 'Email',
+                type: 'email'
+            }
+        })

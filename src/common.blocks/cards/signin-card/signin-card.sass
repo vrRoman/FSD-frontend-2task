@@ -1,37 +1,17 @@
-@import '@/sass/headings'
+@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/button/button'
 
 
 .signin-card
-    width: 380px
-    height: 358px
-    background-color: #fff
-    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2)
-    border: 1px solid rgba(0, 0, 0, 0.12)
-    padding: 39px 29px 29px 29px
-    box-sizing: border-box
-
-    &__title
-        +h1
-
-    &__email
-        margin-top: 20px
-    &__password
-        margin-top: 10px
-
-    &__button
-        margin-top: 20px
-
-    &__account-not-exists
-        display: flex
-        justify-content: space-between
-        align-items: center
-
-        margin-top: 30px
-        color: #000
+  width: 100%
+  max-width: 380px
+  padding: 39px 29px 32px 29px
+  background-color: #fff
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2)
+  box-sizing: border-box
+  border: 1px solid rgba(0, 0, 0, 0.12)
 
 
-@media screen and (max-width: 438px)
-    .signin-card
-        width: 100%
-        min-height: 357px
-        height: unset
+@import '__email/signin-card__email'
+@import '__password/signin-card__password'
+@import '__account-not-exists/signin-card__account-not-exists'
