@@ -23,11 +23,15 @@ include __popup/dropdown__popup
     hiddenPopup: boolean
     title: string | Array<string> | false
     double: boolean
-mixin dropdown({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false} = {})
+    short: false
+mixin dropdown({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false, short = false} = {})
     -
         let className = 'dropdown';
         if (double) {
             className += ' dropdown_double';
+        }
+        if (short) {
+          className += ' dropdown_short';
         }
 
         if (double) {
