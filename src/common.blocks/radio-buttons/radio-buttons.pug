@@ -1,16 +1,17 @@
-mixin radio-buttons(title, buttons, inputsName)
+include __button/radio-buttons__button
+
+
+//-
+    {
+        items: Array<string>
+        itemsName: string
+    }
+mixin radio-buttons({items, itemsName})
     .radio-buttons
-        if (title)
-            h3.radio-buttons__title= title
-
-        .radio-buttons__buttons
-            each buttonName, buttonIndex in buttons
-                - let checked = buttonIndex === 0;
-
-                label.radio-buttons__button.radio-button
-                    input.radio-button__input(
-                        type="radio",
-                        name= inputsName,
-                        checked= checked
-                    )
-                    span.radio-button__name= buttonName
+        each text, index in items
+            - const checked = index === 0;
+            +radio-buttons__button({
+                text,
+                checked,
+                inputName: itemsName
+            })

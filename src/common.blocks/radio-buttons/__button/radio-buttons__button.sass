@@ -1,0 +1,28 @@
+@import '@/sass/colors'
+
+
+.radio-buttons__button
+  margin-left: 20px
+  position: relative
+  cursor: pointer
+  &:nth-child(1)
+    margin-left: 0
+
+.radio-buttons__input:checked
+  + .radio-buttons__button-text
+    color: $dark-shade-75
+    &:before
+      border-color: $purple
+    &:after
+      content: ''
+      width: 12px
+      height: 12px
+      position: absolute
+      left: 4px
+      display: inline-block
+      background: $purple-gradient
+      border-radius: 50%
+
+
+@import '../__input/radio-buttons__input'
+@import '../__button-text/radio-buttons__button-text'
