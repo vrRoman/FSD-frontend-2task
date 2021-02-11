@@ -1,18 +1,22 @@
-mixin checkbox-buttons(title, checkboxes, rich)
-    .checkboxes(class=`${rich ? 'checkboxes_rich' : ''}`)
-        if title
-            h3.checkboxes__title= title
-
-        .checkboxes__buttons
-            each elem in checkboxes
-                label.checkboxes__button.checkbox-button
-                    input.checkbox-button__input(
-                        type="checkbox",
-                        checked= elem.checked
-                    )
-                    span.checkbox-button__name !{elem.name}
-                    if (rich)
-                        span.checkbox-button__description !{elem.description}
+include __button/checkbox-buttons__button
 
 
-
+//-
+    items: Array<{
+        name: string,
+        description?: string,
+        checked: boolean
+    }>
+    rich: boolean
+mixin checkbox-buttons({items, rich = false})
+    -
+        let className = 'checkbox-buttons';
+        if (rich) {
+            className += ' checkbox-buttons_rich';
+        }
+    div(class=className)
+        each item in items
+            +checkbox-buttons__button({
+              item,
+              rich
+            })

@@ -1,0 +1,14 @@
+.checkbox-buttons__button
+  margin-bottom: 10px
+  display: flex
+  &:last-child
+    margin-bottom: 0
+
+.checkbox-buttons__input:checked
+  + .checkbox-buttons__name::before
+    border: 1px solid $purple
+    background-image: url(../images/done.svg)
+
+@import '../__input/checkbox-buttons__input'
+@import '../__name/checkbox-buttons__name'
+@import '../__description/checkbox-buttons__description'
