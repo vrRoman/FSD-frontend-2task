@@ -1,18 +1,31 @@
 @import '@/sass/colors.sass'
-@import '@/sass/headings.sass'
+@import '@/common.blocks/heading/heading'
+
 
 .colors-and-type
     display: flex
     justify-content: space-between
     padding: 145px 17px 0 10px
 
+.colors__color
+    margin-top: 20px
+    &:first-child
+        margin-top: 0
+
+.types__type
+    margin-top: 53px
+    &:first-child
+        margin-top: 0
+    &:nth-child(3)
+        margin-top: 51px
+    &:last-child
+        margin-top: 48px
+
 
 .color
     display: flex
     align-items: center
-    margin-top: 20px
-    &:first-child
-        margin: 0
+
     &__hex
         font:
             family: 'Montserrat', sans-serif
@@ -25,9 +38,6 @@
     &__info
         margin: 5px 0 0 40px
         color: $dark-shade-100
-
-    &__name
-        +h2
 
     &__demo
         width: 70px
@@ -57,35 +67,16 @@
 
 
 .type
-    $selector: &
-
-    &_size
-        &_1
-            #{$selector}__name,  #{$selector}__text
-                +h1
-        &_2
-            #{$selector}__name,  #{$selector}__text
-                +h2
-        &_3
-            #{$selector}__name,  #{$selector}__text
-                +h3
-
+    max-width: 436px
+    width: 100%
     display: flex
     justify-content: space-between
 
-    width: 436px
-    margin-top: 53px
-    &:first-child
-        margin: 0
-    &:nth-child(3)
-        margin-top: 52px
-    &:nth-child(4)
-        margin-top: 47px
+    &__text
+        max-width: 400px
+        width: 100%
 
-    #{$selector}__text
-        width: 400px
-
-    #{$selector}__name
+    &__name
         width: 40px
         text-align: right
         color: $dark-shade-25
@@ -95,6 +86,16 @@
             weight: normal
 
         margin-right: 30px
+        &_type
+            &_h1
+                font-size: 24px
+                line-height: 29px
+            &_h2
+                font-size: 19px
+                line-height: 23px
+            &_h3
+                font-size: 12px
+                line-height: 15px
 
 
 @media screen and (max-width: 850px)
@@ -102,9 +103,3 @@
         flex-direction: column
     .types
         margin-top: 100px
-
-@media screen and (max-width: 510px)
-    .colors-and-type
-        padding-right: 0
-    .type
-        width: 100%
