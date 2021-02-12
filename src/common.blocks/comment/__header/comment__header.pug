@@ -1,0 +1,10 @@
+include ../__avatar/comment__avatar
+include ../__user-name/comment__user-name
+include ../__date/comment__date
+
+
+mixin comment__header({avatarLink, userName, date})
+    .comment__header
+        +comment__avatar(avatarLink)
+        +comment__user-name(userName)
+        +comment__date(date)

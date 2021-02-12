@@ -1,16 +1,26 @@
-include ../like-button/like-button
+include __header/comment__header
+include __content/comment__content
 
-mixin comment(userInfo, likeInfo, commentInfo)
+
+//-
+    {
+        avatarLink: string
+        userName: string
+        date: string
+        text: string
+        likeOptions: {
+            likesNum: number
+            active: boolean
+        }
+    }
+mixin comment({avatarLink, userName, date, text, likeOptions})
     .comment
-        .comment__info
-            .comment__user-avatar(
-                style=`background-image: url(${userInfo.avatarLink})`
-            )
-            .comment__user-name= userInfo.name
-            .comment__time= commentInfo.time
-
-        .comment__content
-            .comment__likes
-                +like-button(likeInfo.likeNum, likeInfo.active)
-
-            .comment__text= commentInfo.text
+        +comment__header({
+            avatarLink,
+            userName,
+            date
+        })
+        +comment__content({
+            likeOptions,
+            text
+        })
