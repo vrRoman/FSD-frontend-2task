@@ -1,40 +1,19 @@
-.like-button
-    $selector: &
-    width: 40px
-    height: 20px
-    border: 1px solid $dark-shade-25
-    border-radius: 10px
-    position: relative
-    display: inline-block
-    cursor: pointer
-    box-sizing: border-box
-    &__like-num
-        position: absolute
-        right: 4px
-    &__heart
-        position: absolute
-        left: 4px
-        top: -55%
-        &:after
-            content: 'favorite_border'
-            font-size: (10rem / 14)
-            color: $dark-shade-25
-    &__like-num
-        width: 20px
-        font-family: Montserrat, Arial, sans-serif
-        font-size: (10rem / 14)
-        line-height: (12rem / 14)
-        display: flex
-        align-items: center
-        justify-content: center
-        height: 100%
+@import '@/sass/colors'
 
-        color: $dark-shade-25
-    &_active
-        border-color: $purple
-        #{$selector}__heart
-            &:after
-                content: 'favorite'
-                color: $purple
-        #{$selector}__like-num
-            color: $purple
+
+.like-button
+  width: 40px
+  height: 20px
+  position: relative
+  display: flex
+  align-items: center
+  box-sizing: border-box
+  border: 1px solid $dark-shade-25
+  border-radius: 10px
+  cursor: pointer
+
+
+@import '__heart/like-button__heart'
+@import '__number/like-button__number'
+
+@import '_active/like-button_active'

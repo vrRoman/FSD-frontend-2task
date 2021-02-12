@@ -1,4 +1,18 @@
-mixin like-button(likesNum, active)
-    .like-button.js-like-button(class=`${active ? 'like-button_active' : ''}`)
-        .like-button__heart.material-icons
-        .like-button__like-num= likesNum
+include __heart/like-button__heart
+include __number/like-button__number
+
+
+//-
+    {
+        likesNum?: number
+        active?: boolean
+    }
+mixin like-button({likesNum = 0, active = false})
+    -
+        let className = 'like-button js-like-button';
+        if (active) {
+            className += ' like-button_active';
+        }
+    div(class=className)
+        +like-button__heart
+        +like-button__number(likesNum)
