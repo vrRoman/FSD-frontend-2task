@@ -47,15 +47,18 @@ mixin dropdown({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, t
             +dropdown__text-field({
                 inputOptions: inputOptions[0],
                 title: title[0],
+                active: !hiddenPopup
             })
             +dropdown__text-field({
                 inputOptions: inputOptions[1],
                 title: title[1],
+                active: !hiddenPopup
             })
         else
             +dropdown__text-field({
                 inputOptions,
                 title,
+                active: !hiddenPopup
             })
         +dropdown__popup({
             mixinName: popupMixinOptions.name,
