@@ -1,9 +1,13 @@
 import '@/js/index';
 
 import '@/sass/main.sass';
-import '@/sass/ui-kit.sass';
 
 import './headers-and-footers.pug';
 import './headers-and-footers.sass';
 
-import '@common.blocks/header/header';
+import Header from '@/common.blocks/header/header';
+
+const $headers = $('.header');
+$headers.each(function init() {
+  const header = new Header(this);
+});
