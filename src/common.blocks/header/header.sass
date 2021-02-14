@@ -1,131 +1,20 @@
 @import '@/sass/colors'
 
+
 .header
-    $selector: &
-    width: 100%
-    height: 70px
-    background-color: #fff
-    padding: 0 140px
-    box-sizing: border-box
-    box-shadow: 0 10px 20px 0 $dark-shade-5
-    z-index: 1
-    &__logo
-        margin-top: 5px
-    &__container
-        width: 1160px
-        height: 100%
-        margin: 0 auto
-        display: flex
-        justify-content: space-between
-        align-items: center
-    &__menu
-        display: flex
-    &__nav-list
-        padding: 0
-        margin: 0
-        display: flex
-        align-items: center
-        height: 100%
-    &__nav-item
-        margin-right: 20.27px
-        display: flex
-        align-items: center
-        color: $dark-shade-50
-        font-size: 1rem
-        line-height: (17rem / 14)
-        &-link
-            color: $dark-shade-50
-            text-decoration: none
-    &__nav-item_active
-        font-weight: bold
-        color: $dark-shade-75
-    &__buttons
-        display: flex
-        .button
-            margin-right: 20px
-            height: 34px
-            &:last-child
-                margin-right: 0
-            &:first-child
-                min-width: 87px
-    &__item-arrow
-        margin-top: 2px
-    &__user
-        padding-left: 20px
-        position: relative
-        display: flex
-        align-items: center
-        font-size: 1rem
-        line-height: (17rem / 14)
-        color: $dark-shade-50
-        &:before
-            content: ''
-            height: 30px
-            width: 1px
-            background-color: $dark-shade-10
-            position: absolute
-            left: 0
+  width: 100%
+  height: 70px
+  box-sizing: border-box
+  padding: 0 140px
+  background-color: #fff
+  box-shadow: 0 10px 20px 0 $dark-shade-5
+  position: relative
+  z-index: 10
 
-    &__hamburger
-        display: none
-        flex-direction: column
-        justify-content: space-between
-        height: 30px
-        &-line
-            width: 40px
-            height: 2px
-            background-color: $dark-shade-25
 
-@media screen and (max-width: 1470px)
-    .header__container
-        width: 100%
+@media screen and (max-width: 500px)
+  .header
+    padding: 0 20px
 
-@media screen and (max-width: 1200px)
-    .header
-        position: relative
-        &__hamburger
-            display: flex
-        &__menu
-            display: none
-            flex-direction: column
-            min-width: 250px
-        &__menu
-            position: absolute
-            padding: 10px
-            top: 100%
-            right: 140px
-            z-index: 2
-            background-color: #fff
-            border: 1px solid $dark-shade-25
-        &__nav
-            &-list
-                flex-direction: column
-            &-item
-                margin-top: 10px
-                height: 24px
-                margin-right: 0
 
-        &__buttons
-            margin-top: 10px
-            flex-direction: column
-            align-items: center
-            .button
-                margin: 0
-                margin-top: 10px
-        &__user
-            margin-top: 20px
-            justify-content: center
-            padding: 5px
-            &:before
-                top: 0
-                width: 100%
-                height: 1px
-
-@media screen and (max-width: 700px)
-    .header
-        padding: 0 35px
-        &__menu
-            right: 35px
-@media screen and (max-width: 330px)
-    .header__menu
-        right: 5px
+@import '__container/header__container'

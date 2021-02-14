@@ -1,58 +1,6 @@
-include ../button/button
+include __container/header__container
 
 
-mixin header(user, activeLink)
-    -
-        const navItems = [
-            {
-                name: 'О нас',
-                dropdown: false
-            },
-            {
-                name: 'Услуги',
-                dropdown: true
-            },
-            {
-                name: 'Вакансии',
-                dropdown: false
-            },
-            {
-                name: 'Новости',
-                dropdown: false
-            },
-            {
-                name: 'Соглашения',
-                dropdown: true
-            }
-        ]
-
+mixin header(user, activeLink = 0)
     header.header
-        .header__container
-            a.header__logo(href='landing-page.html')
-                img(src='images/logo.svg', alt='logo')
-            .header__menu.js-header__menu
-                nav.header__nav-container
-                    ul.header__nav-list
-                        - for (let i = 0; i < navItems.length; i++)
-                            - let active = (i === activeLink)
-
-                            li.header__nav-item(class= `${active ? 'header__nav-item_active': ''} ${
-                                navItems[i].dropdown ? 'header__nav-item_dropdown-item': ''}`)
-
-                                if (navItems[i].dropdown)
-                                    div= navItems[i].name
-                                    i.header__item-arrow.material-icons expand_more
-
-                                else
-                                    a.header__nav-item-link(href='change-me')= navItems[i].name
-
-                if user
-                    .header__user= user
-                else
-                    .header__buttons
-                        +button('Войти', 'secondary', 'login-and-registration.html')
-                        +button('Зарегистрироваться', false, 'login-and-registration.html')
-            .header__hamburger.js-header__hamburger
-                span.header__hamburger-line
-                span.header__hamburger-line
-                span.header__hamburger-line
+        +header__container(user, activeLink)

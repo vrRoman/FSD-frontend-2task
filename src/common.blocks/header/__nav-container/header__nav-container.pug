@@ -1,0 +1,30 @@
+include ../../navigation/navigation
+
+
+mixin header__nav-container(activeLinkIndex)
+    nav.header__nav-container
+        +navigation({
+            activeLinkIndex,
+            items: [
+                {
+                    name: 'О нас',
+                    dropdown: false
+                },
+                {
+                    name: 'Услуги',
+                    dropdown: true
+                },
+                {
+                    name: 'Вакансии',
+                    dropdown: false
+                },
+                {
+                    name: 'Новости',
+                    dropdown: false
+                },
+                {
+                    name: 'Соглашения',
+                    dropdown: true
+                }
+            ]
+        })

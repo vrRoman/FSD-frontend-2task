@@ -1,0 +1,13 @@
+include ../__nav-container/header__nav-container
+include ../__buttons/header__buttons
+include ../__user/header__user
+
+
+mixin header__menu(userName, activeLink)
+    .header__menu
+        +header__nav-container(activeLink)
+
+        if userName
+            +header__user(userName)
+        else
+            +header__buttons

@@ -1,0 +1,10 @@
+include ../__menu/header__menu
+include ../__hamburger/header__hamburger
+include ../__logo/header__logo
+
+
+mixin header__container(user, activeLink)
+    .header__container
+        +header__logo
+        +header__menu(user, activeLink)
+        +header__hamburger

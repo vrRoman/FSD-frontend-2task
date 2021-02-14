@@ -1,0 +1,14 @@
+@import '@/common.blocks/button/button'
+
+
+.header__buttons
+  display: grid
+  grid-template-columns: auto auto
+  grid-column-gap: 20px
+
+
+@media screen and (max-width: 1200px)
+  .header__buttons
+    grid-template-columns: auto
+    grid-template-rows: auto auto
+    grid-row-gap: 20px

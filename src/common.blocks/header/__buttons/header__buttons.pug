@@ -1,0 +1,16 @@
+include ../../button/button
+
+
+mixin header__buttons
+    .header__buttons
+        +button({
+            text: 'Войти',
+            link: 'login-and-registration.html',
+            modifiers: {
+                secondary: true
+            }
+        })
+        +button({
+            text: 'Зарегистрироваться',
+            link: 'login-and-registration.html'
+        })
