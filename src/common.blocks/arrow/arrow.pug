@@ -1,7 +1,8 @@
 //-
     type: 'expand-less' | 'forward'
     color: 'white' | 'purple-gradient'
-mixin arrow({type, color} = {})
+    small: boolean
+mixin arrow({type, color, small = false} = {})
     -
         let className = 'arrow';
 
@@ -25,6 +26,10 @@ mixin arrow({type, color} = {})
                 break;
             default:
                 break;
+        }
+
+        if (small) {
+            className += ' arrow_small';
         }
 
     div(class=className)
