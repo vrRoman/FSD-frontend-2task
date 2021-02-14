@@ -1,0 +1,11 @@
+include __list/navigation__list
+
+
+mixin navigation({items, activeLinkIndex = false, inColumn = false})
+    -
+        let className = 'navigation';
+        if (inColumn) {
+            className += ' navigation_in-column';
+        }
+    nav(class=className)
+        +navigation__list(items, activeLinkIndex)
