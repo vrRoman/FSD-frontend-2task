@@ -1,11 +1,12 @@
 import '@/sass/main.sass';
-import '@/sass/ui-kit.sass';
 
 import './landing-page.sass';
 import './landing-page.pug';
 
-import '@common.blocks/date-picker/date-picker';
-import '@common.blocks/dropdown/dropdown';
-import '@common.blocks/header/header';
-
 import './images/landing-page-bg.jpg';
+
+import Header from '@/common.blocks/header/header';
+import SearchCard from '@/common.blocks/search-card/search-card';
+
+const header = new Header(document.querySelector('.header'));
+const searchCard = new SearchCard(document.querySelector('.search-card'));
