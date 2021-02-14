@@ -16,6 +16,7 @@ include __arrow/text-field__arrow
     modifiers: {
         focused: boolean
         short: boolean
+        flatBottom: boolean
     }
 mixin text-field({inputOptions = {}, arrowOptions = false, modifiers = {}} = {})
     -
@@ -26,6 +27,9 @@ mixin text-field({inputOptions = {}, arrowOptions = false, modifiers = {}} = {})
         }
         if (modifiers.short) {
             className += ' text-field_short';
+        }
+        if (modifiers.flatBottom) {
+            className += ' text-field_flat-bottom';
         }
 
     div(class=className)
