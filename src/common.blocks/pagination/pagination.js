@@ -1,13 +1,29 @@
-import 'simple-pagination.js';
+import 'simple-pagination.js/jquery.simplePagination';
 
-const items = 180;
-const itemsOnPage = 12;
+class Pagination {
+  constructor(elem) {
+    this.elem = elem;
+    this.pagesSelector = '.js-pagination__pages';
+    this.itemsNumber = 180;
+    this.itemsOnPage = 12;
 
-$('.js-pagination__pages').pagination({
-  items,
-  itemsOnPage,
-  displayedPages: 3,
-  edges: 1,
-  prevText: false,
-  nextText: '<i class="pagination__arrow material-icons">arrow_forward</i>',
-});
+    this.init();
+  }
+
+  init() {
+    $(this.getPagesElem()).pagination({
+      items: this.itemsNumber,
+      itemsOnPage: this.itemsOnPage,
+      displayedPages: 3,
+      edges: 1,
+      prevText: false,
+      nextText: '<i class="pagination__arrow material-icons">arrow_forward</i>',
+    });
+  }
+
+  getPagesElem() {
+    return this.elem.querySelector(this.pagesSelector);
+  }
+}
+
+export default Pagination;
