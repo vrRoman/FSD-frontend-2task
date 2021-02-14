@@ -47,13 +47,15 @@ class Header {
   }
 
   handleWindowClick(evt) {
-    if (evt.path.includes(this.hamburger)) {
-      this.menu.classList.toggle(this.hiddenMenuClass);
-    } else if (!evt.path.includes(this.menu)) {
-      if (!this.menu.classList.contains(this.hiddenMenuClass)) {
-        evt.stopPropagation();
-        evt.preventDefault();
-        this.menu.classList.add(this.hiddenMenuClass);
+    if (window.innerWidth < this.showHamburgerOn) {
+      if (evt.path.includes(this.hamburger)) {
+        this.menu.classList.toggle(this.hiddenMenuClass);
+      } else if (!evt.path.includes(this.menu)) {
+        if (!this.menu.classList.contains(this.hiddenMenuClass)) {
+          evt.stopPropagation();
+          evt.preventDefault();
+          this.menu.classList.add(this.hiddenMenuClass);
+        }
       }
     }
   }
