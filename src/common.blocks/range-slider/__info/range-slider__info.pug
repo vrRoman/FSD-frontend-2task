@@ -1,0 +1,9 @@
+include ../../heading/heading
+
+include ../__value/range-slider__value
+
+
+mixin range-slider__info(title)
+    .range-slider__info
+        +heading({ text: title })
+        +range-slider__value

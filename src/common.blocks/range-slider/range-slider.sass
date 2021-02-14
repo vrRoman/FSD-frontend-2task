@@ -1,49 +1,8 @@
-@import '@/sass/headings'
-
 .range-slider
-    width: 266px
-    &__title
-        +h3
-    &__info
-        margin-bottom: 23px
-        display: flex
-        justify-content: space-between
-    &__value
-        font-family: Montserrat, Arial, sans-serif
-        font-size: (12rem / 14)
-        line-height: (13rem / 14)
-        color: $dark-shade-50
-    &__slider
-        width: 100%
-        height: 6px
-        border: 1px solid $dark-shade-25
-        border-radius: 3px
-        display: flex
-        align-items: center
-        box-sizing: border-box
-        cursor: pointer
-    &__description
-        font-size: (12rem / 14)
-        line-height: 1rem
-        color: $dark-shade-50
-        margin-top: 14px
+  max-width: 266px
+  width: 100%
 
-.ui-slider
-    &-range
-        top: -1px
-        height: 6px
-        background: $green-gradient
-        z-index: 0
-    &-handle.ui-state-default
-        width: 12px
-        height: 12px
-        border-radius: 50%
-        background: $green-gradient
-        border: 2px solid #fff
-        z-index: 0
-        cursor: pointer
 
-        top: -6px
-
-.ui-state-focus
-    outline: none
+@import '__info/range-slider__info'
+@import '__slider/range-slider__slider'
+@import '__description/range-slider__description'
