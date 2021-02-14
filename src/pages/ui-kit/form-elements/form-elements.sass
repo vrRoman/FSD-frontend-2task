@@ -1,147 +1,144 @@
-@import '@/sass/headings'
+@import '@/sass/colors'
+@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/text-field/text-field'
+@import '@/common.blocks/dropdown/dropdown'
+@import '@/common.blocks/items-counter/items-counter'
+@import '@/common.blocks/date-picker/date-picker'
+@import '@/common.blocks/checkbox-buttons/checkbox-buttons'
+@import '@/common.blocks/radio-buttons/radio-buttons'
+@import '@/common.blocks/toggle-button/toggle-button'
+@import '@/common.blocks/like-button/like-button'
+@import '@/common.blocks/rate-button/rate-button'
+@import '@/common.blocks/range-slider/range-slider'
+@import '@/common.blocks/button/button'
+@import '@/common.blocks/pagination/pagination'
+@import '@/common.blocks/expandable-checkboxes/expandable-checkboxes'
+@import '@/common.blocks/bullet-list/bullet-list'
+@import '@/common.blocks/icon-text-list/icon-text-list'
+@import '@/common.blocks/comment/comment'
 
-.form-elements-container
-    display: flex
+
+.form-elements
+  display: grid
+  grid-template-columns: repeat(3, 320px)
+  justify-content: space-between
+  grid-row-gap: 100px
+  grid-template-areas: ". . ." ". . ." ". . ." "icon-text-list comment comment"
+
+  padding: 143px 0 130px
+
+  &__guests-dropdown
     position: relative
-    padding: 143px 0 0 0
-    &__column-1,
-    &__column-2,
-    &__column-3
-        min-width: 320px
+    z-index: 5
+  &__date-dropdown
+    position: relative
+    z-index: 4
+  &__filter-date-dropdown
+    position: relative
+    z-index: 3
+  &__facilities-dropdown
+    position: relative
+    z-index: 2
+    &_expanded
+      z-index: 1
 
-    &__column-2
-        margin-left: 126px
-    &__column-3
-        margin-left: 72px
+  &__elements-container
+    &_with-top-margin
+      margin-top: 72px
 
-.fields
-    width: 320px
-    &__field
-        margin-top: 20px
-        &:nth-child(2)
-            margin-top: 21px
-        &:nth-child(4)
-            margin-top: 22px
-        &:nth-child(5)
-            margin-top: 41px
-        &:nth-child(6)
-            margin-top: 40px
-        &:nth-child(7)
-            margin-top: 41px
-        &:nth-child(1)
-            margin-top: 0
+  &__icon-text-list-wrapper
+    grid-area: icon-text-list
 
-.switches__switch
-    margin-top: 32px
-    &:nth-child(1)
-        margin-top: 0
-    &:nth-child(3)
-        margin-top: 41px
-    &:nth-child(4)
-        margin-top: 42px
-    &:nth-child(5)
-        margin-top: 33px
+  &__comment-wrapper
+    grid-area: comment
+    padding-top: 10px
 
+  &__field-elem-info
+    margin-bottom: 5px
 
-.rate-buttons
-    &__rate
-        display: inline
-        margin-right: 16px
-
-.like-buttons__title,
-.rate-buttons__title
-    +h3
+  &__button-elem-info
     margin-bottom: 16px
+    grid-area: button-info
 
-.like-buttons__like-button
-    display: inline
-    margin-right: 6px
+  &__bullet-elem-info
+    margin-bottom: 12px
 
-.other-elems
-    padding-top: 1px
-    &__buttons
-        margin-top: 43px
-    &__title
-        +h3
-        margin-bottom: 16px
-    &__pagination
-        margin-top: 39px
-        margin-left: 1px
-        min-width: 240px
-
-.default-buttons
-    display: flex
-    height: 118px
-    width: 218px
-    flex-wrap: wrap
-    justify-content: space-between
-    align-content: space-between
-
-.icon-link-buttons
-    margin-top: 32px
-    margin-left: 1px
-    display: flex
-    .button
-        &:nth-child(1)
-            margin-right: 20px
-
-.extended-button
-    margin-top: 30px
-
-.facilities-dropdowns__dropdown
+  &__field-wrapper
     margin-top: 20px
-    &:nth-child(1)
-        margin-top: 0
+    &:first-child
+      margin-top: 0
 
-.container
-    &_dropdowns
-        height: 267px
-        padding-top: 100px
-    &_lists
-        padding-top: 54px
-    &_last
-        padding-top: 90px
-        padding-bottom: 130px
+  &__button-wrapper
+    margin-top: 40px
+    &:first-child
+      margin-top: 0
+    &_like
+      display: grid
+      grid-template-columns: 40px 40px
+      grid-column-gap: 10px
+      grid-template-areas: "button-info button-info" ". ."
+    &_rate
+      display: grid
+      grid-template-areas: "button-info button-info" ". ."
+      grid-template-columns: 120px 120px
+      grid-column-gap: 20px
 
-.lists__list
-    margin-top: 20px
-    &:nth-child(1)
-        margin-top: 0
+  &__dropdown-wrapper
+    margin: 42px 0
 
-.expandable-lists__list
-    margin-top: 31px
-    &:nth-child(1)
-        margin-top: 0
+  &__expandable-checkboxes-wrapper
+    margin-top: 5px
+    &:first-child
+      margin-top: 0
 
-.comments
+  &__toggle-button
     margin-top: 10px
+    &:first-child
+      margin-top: 0
+
+  &__button
+    display: inline-block
+    margin-bottom: 30px
+    &:nth-child(2n + 1)
+      margin-left: 18px
+      width: 150px
+    &:last-child
+      width: 100%
+      margin-bottom: 0
 
 
-@media screen and (max-width: 1200px)
-    .form-elements-container
-        flex-direction: column
-        width: 100%
-        &__column-1,
-        &__column-2,
-        &__column-3
-            margin: 0 0 50px 0
+.elem-info
+  display: flex
+  justify-content: space-between
+  &__state
+    font-family: Montserrat, Arial, sans-serif
+    font-size: 12px
+    line-height: 15px
+    text-transform: uppercase
+    color: $dark-shade-50
+  &_short
+    width: 266px
 
-    .facilities-dropdowns
-        margin-bottom: 170px
-    .guests-dropdowns
-        margin-bottom: 170px
-    .container_dropdowns
-        margin-bottom: 600px
-        padding: 0
-    .container_last
-        padding: 0
 
-@media screen and (max-width: 356px)
-    .form-elements-container
-        &__column-1,
-        &__column-2,
-        &__column-3
-            width: 100%
-            min-width: unset
-    .fields
-        width: 100%
+@media screen and (max-width: 1280px)
+  .form-elements
+    justify-content: center
+    grid-gap: 100px
+    grid-template-columns: repeat(2, 320px)
+    grid-template-areas: ". ." ". ." ". ." ". ." ". icon-text-list" "comment comment"
+    &__elements-container
+      &_with-top-margin
+        margin-top: 72px
+
+@media screen and (max-width: 800px)
+  .form-elements
+    display: flex
+    flex-direction: column
+    &__elements-container
+      display: flex
+      flex-direction: column
+      align-items: center
+      &:nth-child(5)
+        margin-top: 50px
+      &:nth-child(6)
+        margin-top: 100px
