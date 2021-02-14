@@ -1,0 +1,9 @@
+include ../../heading/heading
+
+include ../__arrow/expandable-checkboxes__arrow
+
+
+mixin expandable-checkboxes__title(title)
+    .expandable-checkboxes__title
+        +heading({ text: title })
+        +expandable-checkboxes__arrow

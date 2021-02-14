@@ -1,0 +1,13 @@
+include __title/expandable-checkboxes__title
+include __checkboxes/expandable-checkboxes__checkboxes
+
+
+mixin expandable-checkboxes({title='Expandable checkbox list', items, expanded = false})
+    -
+        let className = 'expandable-checkboxes';
+        if (expanded) {
+            className += ' expandable-checkboxes_expanded';
+        }
+    div(class=className)
+        +expandable-checkboxes__title(title)
+        +expandable-checkboxes__checkboxes(items)
