@@ -1,0 +1,20 @@
+.footer__body
+  padding: 100px 183px
+  display: grid
+  grid-template-columns: 260px 1fr 260px
+  grid-gap: 40px
+
+
+@media screen and (max-width: 1200px)
+  .footer__body
+    grid-template-columns: 1fr
+    grid-template-rows: auto auto auto
+
+@media screen and (max-width: 800px)
+  .footer__body
+    padding: 100px 20px
+
+
+@import '../__main-info/footer__main-info'
+@import '../__menu/footer__menu'
+@import '../__subscription/footer__subscription'

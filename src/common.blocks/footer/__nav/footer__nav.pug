@@ -1,0 +1,11 @@
+include ../../navigation/navigation
+include ../__subtitle/footer__subtitle
+
+
+mixin footer__nav(title, items)
+    .footer__nav
+        +footer__subtitle(title)
+        +navigation({
+            items,
+            inColumn: true
+        })

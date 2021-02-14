@@ -1,0 +1,23 @@
+include ../../text-field/text-field
+
+include ../__subtitle/footer__subtitle
+include ../__subscription-text/footer__subscription-text
+
+
+mixin footer__subscription
+    .footer__subscription
+        +footer__subtitle('Подписка')
+        +footer__subscription-text
+        +text-field({
+            inputOptions: {
+                placeholder: 'Email',
+                type: 'email'
+            },
+            modifiers: {
+                short: true
+            },
+            arrowOptions: {
+                type: 'forward',
+                color: 'purple'
+            }
+        })
