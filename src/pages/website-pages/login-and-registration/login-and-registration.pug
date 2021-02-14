@@ -1,7 +1,7 @@
 extends ../../../templates/website-pages
 
-include ../../../common.blocks/cards/signup-card/signup-card
-include ../../../common.blocks/cards/signin-card/signin-card
+include ../../../common.blocks/signup-card/signup-card
+include ../../../common.blocks/signin-card/signin-card
 
 
 block vars
@@ -10,7 +10,6 @@ block vars
 
 block content
     main.login-and-registration
-        img.login-and-registration__bg-img(src='images/login-registration-bg.jpg' alt='bg-img')
         .login-and-registration__signup-card
             +signup-card
         .login-and-registration__signin-card

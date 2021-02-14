@@ -1,7 +1,7 @@
-@import '@common.blocks/header/header'
-@import '@common.blocks/footer/footer'
-@import '@common.blocks/cards/signup-card/signup-card'
-@import '@common.blocks/cards/signin-card/signin-card'
+@import '@/common.blocks/header/header'
+@import '@/common.blocks/footer/footer'
+@import '@/common.blocks/signup-card/signup-card'
+@import '@/common.blocks/signin-card/signin-card'
 
 
 .login-and-registration
@@ -12,16 +12,15 @@
     justify-content: center
     overflow: hidden
     position: relative
+    background: url("images/login-registration-bg.jpg") no-repeat center center
+    background-size: cover
     &_login
         height: 702px
 
-    &__bg-img
-        z-index: -1
-        min-width: 100%
-        position: absolute
-
     &__signup-card
         margin-left: 5px
+        width: 380px
 
     &__signin-card
         display: none
+        width: 380px
