@@ -1,0 +1,10 @@
+include ../__icon/icon-text-list__icon
+include ../__title/icon-text-list__title
+include ../__description/icon-text-list__description
+
+
+mixin icon-text-list__item({iconName, title, description})
+    .icon-text-list__item
+        +icon-text-list__icon(iconName)
+        +icon-text-list__title(title)
+        +icon-text-list__description(description)

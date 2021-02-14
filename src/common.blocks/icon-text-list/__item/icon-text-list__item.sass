@@ -1,0 +1,30 @@
+@import '@/sass/colors'
+
+
+.icon-text-list__item
+  max-height: 48px
+  margin-top: 22px
+  padding-bottom: 20px
+  position: relative
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  align-content: flex-start
+  &:after
+    content: ''
+    height: 1px
+    width: 100%
+    background-color: $dark-shade-10
+    position: absolute
+    bottom: 0
+    display: block
+  &:first-child
+    margin-top: 0
+  &:last-child
+    &:after
+        display: none
+
+
+@import '../__icon/icon-text-list__icon'
+@import '../__title/icon-text-list__title'
+@import '../__description/icon-text-list__description'
