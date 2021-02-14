@@ -4,7 +4,7 @@ include ../__item/navigation__item
 mixin navigation__list(items, activeItem)
     ul.navigation__list
         each item, itemIndex in items
-            - const active = itemIndex === +activeItem;
+            - const active = itemIndex === activeItem;
             +navigation__item({
                 active,
                 name: item.name,
