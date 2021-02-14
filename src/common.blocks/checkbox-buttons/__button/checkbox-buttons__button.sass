@@ -1,3 +1,6 @@
+@import '@/sass/colors'
+
+
 .checkbox-buttons__button
   margin-bottom: 10px
   display: flex
@@ -7,7 +10,7 @@
 .checkbox-buttons__input:checked
   + .checkbox-buttons__name::before
     border: 1px solid $purple
-    background-image: url(../images/done.svg)
+    background-image: url(@/common.blocks/checkbox-buttons/images/done.svg)
 
 @import '../__input/checkbox-buttons__input'
 @import '../__name/checkbox-buttons__name'
