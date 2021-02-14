@@ -1,70 +1,61 @@
 @import 'fonts.sass'
-@import "colors.sass"
-@import "headings"
+@import 'colors.sass'
 
-body, html
-    overflow-x: hidden
 
 html
-    background-color: #fff
+  background-color: #fff
 
-    font:
-        family: 'Montserrat', Arial, sans-serif
-        size: 14px
-    line-height: (24 / 14)
-    color: $dark-shade-75
+  font:
+    family: 'Montserrat', Arial, sans-serif
+    size: 14px
+  line-height: (24 / 14)
+  color: $dark-shade-75
 
 body
-    min-height: 100vh
-    text-rendering: optimizeLegibility
-    margin: 0 auto
+  min-height: 100vh
+  text-rendering: optimizeLegibility
+  margin: 0 auto
 
 
 .container
-    width: 1160px
-    margin: 0 auto
-    position: relative
-    height: 100%
+  width: 1160px
+  margin: 0 auto
+  position: relative
+  height: 100%
 
 .ui-logo-container
-    position: absolute
-    width: 100%
-    max-width: 1440px
-    left: 50%
-    transform: translateX(-50%)
-    &__logo
-        position: relative
-        left: 30px
-        top: 30px
+  position: absolute
+  width: 100%
+  max-width: 1440px
+  left: 50%
+  transform: translateX(-50%)
+  &__logo
+    position: relative
+    left: 30px
+    top: 30px
 
 
 .material-icons
-    cursor: pointer
+  cursor: pointer
 
-    font-family: 'Material Icons'
-    font-weight: normal
-    font-style: normal
-    font-size: 24px
-    display: inline-block
-    line-height: 1
-    text-transform: none
-    letter-spacing: normal
-    word-wrap: normal
-    white-space: nowrap
-    direction: ltr
-
-    -webkit-font-smoothing: antialiased
-    text-rendering: optimizeLegibility
-    -moz-osx-font-smoothing: grayscale
-    font-feature-settings: 'liga'
+  font-family: 'Material Icons'
+  font-weight: normal
+  font-style: normal
+  font-size: 24px
+  display: inline-block
+  line-height: 1
+  text-transform: none
+  letter-spacing: normal
+  word-wrap: normal
+  white-space: nowrap
+  direction: ltr
+  -webkit-font-smoothing: antialiased
+  text-rendering: optimizeLegibility
+  -moz-osx-font-smoothing: grayscale
+  font-feature-settings: 'liga'
 
 
 @media screen and (max-width: 1160px)
-    .container
-        width: 90%
-        min-width: 280px
-        position: relative
-
-@media screen and (max-width: 310px)
-    body, html
-        overflow-x: visible
+  .container
+    width: 90%
+    min-width: 300px
