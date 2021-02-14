@@ -1,9 +1,18 @@
 .footer
   width: 100%
+  box-sizing: border-box
+  padding: 0 140px
+  position: relative
   background-color: #fff
   box-shadow: 0 10px 20px 0 $dark-shade-5
   z-index: 1
 
 
+@media screen and (max-width: 800px)
+  .footer
+    padding: 0 20px
+
+
 @import '__body/footer__body'
 @import '__bottom/footer__bottom'
+@import '__line/footer__line'

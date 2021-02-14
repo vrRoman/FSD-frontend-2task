@@ -2,27 +2,17 @@
 
 
 .footer__bottom
+  max-width: 1160px
+  margin: 0 auto
   box-sizing: border-box
-  padding: 23px 183px
+  padding: 23px 0
   position: relative
   display: flex
   justify-content: space-between
   align-items: center
-  &:before
-    content: ''
-    width: 100%
-    position: absolute
-    height: 1px
-    background-color: #e5e5e5
-    top: 0
-    left: 0
 
 
 @media screen and (max-width: 1200px)
   .footer__bottom
     flex-direction: column
     justify-content: center
-
-@media screen and (max-width: 800px)
-  .footer__bottom
-    padding: 23px 20px
