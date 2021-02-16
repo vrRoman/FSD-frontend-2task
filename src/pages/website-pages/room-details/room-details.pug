@@ -1,10 +1,11 @@
 extends ../../../templates/website-pages
 
+include ../../../common.blocks/heading/heading
 include ../../../common.blocks/icon-text-list/icon-text-list
 include ../../../common.blocks/donut-chart/donut-chart
 include ../../../common.blocks/comment/comment
-include ../../../common.blocks/cards/booking-card/booking-card
 include ../../../common.blocks/bullet-list/bullet-list
+include ../../../common.blocks/booking-card/booking-card
 
 
 block vars
@@ -17,102 +18,122 @@ block content
         .room-details__room-images
             .room-details__main-image-container
                 img.room-details__main-image(src='images/room_1.jpg' alt='room-card-img')
-            .room-details__side-images-container
+            .room-details__side-image-container
                 img.room-details__side-image(src='images/room_2.jpg' alt='room-card-img')
+            .room-details__side-image-container
                 img.room-details__side-image(src='images/room_3.jpg' alt='room-card-img')
 
-        .container.room-details__container
-            .room-details__info-container
-                .room-details__features
-                    h2.room-details__features-title Сведения о номере
+        .container
+            .room-details__container
+                .room-details__room-info
+                    .room-details__subtitle
+                        +heading({
+                            type: 'h2',
+                            text: 'Сведения о номере'
+                        })
                     +icon-text-list([
                         {
-                            name: 'Комфорт',
+                            title: 'Комфорт',
                             description: 'Шумопоглощающие стены',
                             iconName: 'insert_emoticon'
                         },
                         {
-                            name: 'Удобство',
+                            title: 'Удобство',
                             description: 'Окно в каждой из спален',
                             iconName: 'location_city'
                         },
                         {
-                            name: 'Уют',
+                            title: 'Уют',
                             description: 'Номер оснащён камином',
                             iconName: 'whatshot'
                         }
                     ])
                 .room-details__expressions
-                    h2.room-details__expressions-title Впечатления от номера
+                    .room-details__subtitle
+                        +heading({
+                            type: 'h2',
+                            text: 'Впечатления от номера'
+                        })
                     +donut-chart
                 .room-details__comments
-                    h2.room-details__comments-title Отзывы посетителей номера
+                    .room-details__subtitle
+                        +heading({
+                            type: 'h2',
+                            text: 'Отзывы посетителей номера'
+                        })
                     span.room-details__comments-number 2 отзыва
-                    +comment(
-                        {
-                            name: 'Мурад Сарафанов',
-                            avatarLink: 'images/avatar_murad.png'
-                        },
-                        {
-                            likeNum: 12,
-                            active: true
-                        },
-                        {
-                            time: '5 дней назад',
+                    .room-details__comment
+                        +comment({
+                            avatarLink: 'images/avatar_murad.png',
+                            userName: 'Мурад Сарафанов',
+                            date: '5 дней назад',
                             text: 'Великолепный матрас на кровати в основной спальне! ' +
                                 'А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. ' +
-                                'Выкрикивал комплименты повару — никто не жаловался из соседей.'
-                        }
-                    )
-                    +comment(
-                        {
-                            name: 'Патрисия Стёклышкова',
-                            avatarLink: 'images/avatar_patricia.png'
-                        },
-                        {
-                            likeNum: 2,
-                            active: false
-                        },
-                        {
-                            time: 'Неделю назад',
+                                'Выкрикивал комплименты повару — никто не жаловался из соседей.',
+                            likeOptions: {
+                                likesNum: 12,
+                                active: true
+                            }
+                        })
+                    .room-details__comment
+                        +comment({
+                            avatarLink: 'images/avatar_patricia.png',
+                            userName: 'Патрисия Стёклышкова',
+                            date: 'Неделю назад',
                             text: 'Обслуживание на высоте! Всё аккуратно, чисто. ' +
-                                'Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент'
-                        }
-                    )
+                              'Завтраки в номер советую заказать, каждый день новое блюдо и десерт ' +
+                              'как комплимент',
+                            likeOptions: {
+                                likesNum: 2,
+                                active: false
+                            }
+                        })
 
                 .room-details__rules
-                    h2.room-details__rules-title Правила
-                    +bullet-list(false,
-                        ['Нельзя с питомцами', 'Без вечеринок и мероприятий',
-                            'Время прибытия — после 13:00,<br>а выезд до 12:00'])
+                    .room-details__subtitle.room-details__subtitle_indented
+                        +heading({
+                          type: 'h2',
+                          text: 'Правила'
+                        })
+                    +bullet-list([
+                        'Нельзя с питомцами',
+                        'Без вечеринок и мероприятий',
+                        'Время прибытия — после 13:00,<br>а выезд до 12:00'
+                    ])
                 .room-details__cancel
-                    h2.room-details__cancel-title Отмена
-                    span.room-details__cancel-text
-                        | Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн.
+                    .room-details__subtitle
+                        +heading({
+                            type: 'h2',
+                            text: 'Отмена'
+                        })
+                    span
+                        | Бесплатная отмена в течение 48 ч. После<br>этого при отмене не позднее чем
+                        | за 5 дн.
                         | до прибытия вы получите полный возврат за вычетом сбора за услуги.
 
 
-            aside.room-details__booking-card
-                +booking-card({
-                    roomInfo: {
-                        number: 888,
-                        type: 'люкс',
-                        price: '9 990₽'
-                    },
-                    bookingItems: [
-                        {
-                            name: '9 990₽ х 4 суток',
-                            price: '39 960₽'
+                aside.room-details__booking-card
+                    +booking-card({
+                        roomInfo: {
+                            number: 888,
+                            type: 'люкс',
+                            price: '9 990'
                         },
-                        {
-                            name: 'Сбор за услуги: скидка 2 179₽',
-                            price: '0₽'
-                        },
-                        {
-                            name: 'Сбор за дополнительные<br>услуги',
-                            price: '300₽'
-                        }
-                    ],
-                    datepickerDates: ['19.08.2019', '23.08.2019'],
-                    roomFullPrice: '38 081₽',
-                })
+                        bookingItems: [
+                            {
+                                text: '9 990₽ х 4 суток',
+                                price: '39 960'
+                            },
+                            {
+                                  text: 'Сбор за услуги: скидка 2 179₽',
+                                  price: 0,
+                                  tooltip: true
+                            },
+                            {
+                                  text: 'Сбор за дополнительные услуги',
+                                  price: '300',
+                                  tooltip: true
+                            }
+                        ],
+                        totalPrice: '38 081',
+                    })

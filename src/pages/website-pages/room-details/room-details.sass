@@ -1,154 +1,106 @@
-@import '@/sass/headings'
-
-@import '@common.blocks/header/header'
-@import '@common.blocks/footer/footer'
-
-@import '@common.blocks/cards/booking-card/booking-card'
-@import '@common.blocks/donut-chart/donut-chart'
+@import '@/common.blocks/header/header'
+@import '@/common.blocks/footer/footer'
+@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/icon-text-list/icon-text-list'
+@import '@/common.blocks/donut-chart/donut-chart'
+@import '@/common.blocks/comment/comment'
+@import '@/common.blocks/bullet-list/bullet-list'
+@import '@/common.blocks/booking-card/booking-card'
 
 
 .room-details
-    position: relative
+  position: relative
+  &:after
+    content: ''
+    background-color: #e5e5e5
+    height: 1px
     width: 100%
-    &:after
-        content: ''
-        background-color: #e5e5e5
-        height: 1px
-        width: 100%
-        position: absolute
-        bottom: 0
+    position: absolute
+    bottom: 0
 
+  &__main-image-container
+    max-height: 485px
+    grid-area: main-img
+    display: flex
+    align-items: center
+    justify-content: center
+    overflow: hidden
+  &__side-image-container
+    max-height: 242.5px
+    display: flex
+    align-items: center
+    justify-content: center
+    overflow: hidden
+
+  &__room-images
+    display: grid
+    grid-template-columns: 1fr 461px
+    grid-template-areas: "main-img ." "main-img ."
+
+  &__main-image
+    width: 100%
+  &__side-image
+    width: 100%
+
+  &__subtitle
+    margin-bottom: 20px
+    &_indented
+      margin-left: 20px
+
+  &__comments
+    margin-top: 1px
+    position: relative
+    grid-area: comments
+  &__comments-number
+    position: absolute
+    right: 0
+    top: 3px
+  &__comment
+    margin-top: 23px
+    &:first-child
+      margin-top: 0
+
+  &__booking-card
+    grid-area: booking-card
+
+  &__container
+    padding: 70px 0 72px
+    display: grid
+    grid-template-columns: 290px 350px 380px
+    grid-row-gap: 30px
+    justify-content: space-between
+    grid-template-areas: ". . booking-card" "comments comments booking-card" ". . booking-card"
+
+
+@media screen and (max-width: 1460px)
+  .room-details
     &__room-images
-        display: flex
-        height: 485px
-        overflow: hidden
+      grid-template-columns: 1fr 1fr
+      grid-template-areas: "main-img main-img" ". ."
+    &__side-image-container
+      max-height: 300px
 
-    &__main-image-container
-        width: 100%
-        display: flex
-        align-items: center
-    &__main-image
-        min-width: 100%
-        min-height: 100%
-        z-index: -1
-
-    &__side-images-container
-        width: 461px
-        height: 100%
-        position: relative
-    &__side-image
-        min-width: 100%
-        min-height: 50%
-        z-index: -1
-        position: absolute
-        &:nth-child(2)
-            bottom: 0
-
+@media screen and (max-width: 1200px)
+  .room-details
     &__container
-        display: flex
-        justify-content: space-between
-        overflow: visible
-        padding-bottom: 60px
-        flex-wrap: wrap
+      grid-template-columns: auto 380px
+      grid-column-gap: 70px
+      justify-content: center
+      grid-template-areas: ". ." "comments booking-card" ". ." ". ."
 
+@media screen and (max-width: 950px)
+  .room-details
+    &__container
+      grid-template-columns: 1fr
+      grid-template-areas: "." "." "comments" "." "." "booking-card"
 
-    &__info-container
-        width: 710px
-        margin-top: 70px
-        margin-right: 70px
-        display: inline-flex
-        justify-content: space-between
-        flex-wrap: wrap
+@media screen and (max-width: 800px)
+  .room-details
+    &__room-images
+      grid-template-columns: 1fr
+      grid-template-areas: "main-img" "." "."
 
-    &__comments
-        display: flex
-        flex-wrap: wrap
-        justify-content: space-between
-        margin-top: 13px
-        margin-bottom: 32px
-        .comment
-            margin-top: 18px
-            &:nth-of-type(2)
-                margin-top: 22px
-
-    &__comments-title
-        +h2
-        margin-bottom: 2px
-
+@media screen and (max-width: 450px)
+  .room-details
     &__comments-number
-        color: $dark-shade-50
-
-    &__booking-card
-        display: inline-block
-        margin-top: 70px
-
-    &__cancel
-        width: 341px
-        margin-right: 8px
-    &__cancel-text
-        color: $dark-shade-75
-        display: block
-        margin-top: 18px
-
-    &__expressions-title, &__features-title
-        +h2
-        margin-bottom: 20px
-
-    &__expressions
-        margin-right: 38px
-    &__expressions-title
-        margin-left: 5px
-
-    &__rules-title
-        +h2
-        margin-bottom: 18px
-        margin-left: 20px
-
-    &__cancel-title
-        +h2
-
-    &__rules
-        .bullet-list
-            transform: translateX(-2px)
-
-@media screen and (max-width: 1340px)
-    .room-details
-        &__room-images
-            flex-direction: column
-            height: unset
-        &__side-images-container
-            width: 100%
-            display: flex
-            justify-content: space-around
-        &__side-image
-            min-width: unset
-            min-height: unset
-            position: relative
-
-@media screen and (max-width: 1160px)
-    .room-details__container
-        justify-content: center
-
-@media screen and (max-width: 935px)
-    .room-details__side-images-container
-        display: none
-
-@media screen and (max-width: 935px)
-    .room-details__info-container
-        width: 100%
-        margin: 0
-@media screen and (max-width: 870px)
-    .room-details__comments
-        width: 100%
-
-@media screen and (max-width: 672px)
-    .room-details
-        &__cancel
-            margin-top: 30px
-        &__main-image-container
-            display: flex
-            justify-content: center
-        &__main-image
-            height: 100%
-            width: unset
-            min-width: unset
+      top: 60px
