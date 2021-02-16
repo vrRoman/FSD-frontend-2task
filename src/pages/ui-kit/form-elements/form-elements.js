@@ -5,6 +5,8 @@ import './form-elements.pug';
 import '@/sass/main.sass';
 import './form-elements.sass';
 
+import './images/avatar_murad.png';
+
 import '@/common.blocks/text-field/text-field';
 import Dropdown from '@/common.blocks/dropdown/dropdown';
 import ItemsCounter from '@/common.blocks/items-counter/items-counter';
