@@ -1,1 +1,1 @@
-import '../text-field/text-field';
+import '@/common.blocks/text-field/text-field';

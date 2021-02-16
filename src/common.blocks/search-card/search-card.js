@@ -1,6 +1,6 @@
-import DatePicker from '@common.blocks/date-picker/date-picker';
-import Dropdown from '@common.blocks/dropdown/dropdown';
-import ItemsCounter from '@common.blocks/items-counter/items-counter';
+import DatePicker from '@/common.blocks/date-picker/date-picker';
+import Dropdown from '@/common.blocks/dropdown/dropdown';
+import ItemsCounter from '@/common.blocks/items-counter/items-counter';
 
 class SearchCard {
   constructor(elem) {
