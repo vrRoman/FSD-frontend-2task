@@ -1,11 +1,9 @@
+include ../social-links/social-links
+
+
 mixin footer-creative
     .footer-creative
         img.footer-creative__logo(src='images/logo.svg', alt='logo')
         .footer-creative__copyright Copyright © 2018 Toxin отель. Все права зачищены.
         .footer-creative__social
-            a.footer-creative__social-link(href='change-me')
-                i(class="footer-creative__social-icon fab fa-twitter")
-            a.footer-creative__social-link(href='change-me')
-                i(class="footer-creative__social-icon fab fa-facebook-square")
-            a.footer-creative__social-link(href='change-me')
-                i(class="footer-creative__social-icon fab fa-instagram")
+            +social-links
