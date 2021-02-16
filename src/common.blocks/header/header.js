@@ -35,7 +35,7 @@ class Header {
   }
 
   updateHeader() {
-    if (window.innerWidth >= this.showHamburgerOn) {
+    if (window.innerWidth > this.showHamburgerOn) {
       this.menu.classList.remove(this.hiddenMenuClass);
       this.hamburger.classList.remove(this.visibleHamburgerClass);
       this.getNav().classList.remove(this.columnNavClass);
@@ -47,7 +47,7 @@ class Header {
   }
 
   handleWindowClick(evt) {
-    if (window.innerWidth < this.showHamburgerOn) {
+    if (window.innerWidth <= this.showHamburgerOn) {
       if (evt.path.includes(this.hamburger)) {
         this.menu.classList.toggle(this.hiddenMenuClass);
       } else if (!evt.path.includes(this.menu)) {
@@ -62,33 +62,3 @@ class Header {
 }
 
 export default Header;
-
-
-
-// const hamburgerSelector = '.js-header__hamburger';
-// const menuSelector = '.js-header__menu';
-// const displayStyle = 'flex';
-// const hamburgerActiveClass = 'header__hamburger_active';
-// const showOn = 1200;
-//
-// $(hamburgerSelector).click(function handlerHamburgerClick() {
-//   const menu = $(this).parent().find(menuSelector);
-//
-//   $(this).toggleClass(hamburgerActiveClass);
-//   if (menu.css('display') !== 'none') {
-//     menu.css('display', 'none');
-//   } else {
-//     menu.css('display', displayStyle);
-//   }
-// });
-//
-// const handlerWindowResize = () => {
-//   if (window.innerWidth >= showOn) {
-//     if ($(menuSelector).css('display') === 'none') {
-//       $(menuSelector).css('display', displayStyle);
-//     } else {
-//       $(menuSelector).css('display', '');
-//     }
-//   }
-// };
-// window.addEventListener('resize', handlerWindowResize);
