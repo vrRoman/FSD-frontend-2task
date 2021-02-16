@@ -1,10 +1,8 @@
-mixin donut-chart
+include __chart/donut-chart__chart
+include __list/donut-chart__list
+
+
+mixin donut-chart()
     .donut-chart
-        .donut-chart__chart
-            canvas(width='127' height='127')
-        ul.donut-chart__list.js-donut-chart__list
-            li.donut-chart__list-item(data-value='520' data-color='#FFE39C') Великолепно
-            li.donut-chart__list-item(data-value='260' data-color='#6FCF97') Хорошо
-            li.donut-chart__list-item(data-value='260' data-color='#BC9CFF') Удовлетворительно
-            li.donut-chart__list-item(data-value='0' data-color='#909090') Разочарован
-        span.donut-chart__value.js-donut-chart__value
+        +donut-chart__chart
+        +donut-chart__list

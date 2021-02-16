@@ -1,53 +1,7 @@
-@import '@/sass/headings'
-
-
 .donut-chart
-    display: flex
-    align-items: flex-end
-    position: relative
-    &__list
-        padding: 0
-        margin: 0 0 3px 27px
-        list-style: none
-    &__list-item
-        display: flex
-        align-items: center
-        &:before
-            content: ''
-            height: 10px
-            width: 10px
-            margin-right: 5px
-            display: inline-block
-            border-radius: 50%
-        &:nth-child(1)
-            &:before
-                background: linear-gradient(180deg, #FFE39C 0%, #FFBA9C 100%)
-        &:nth-child(2)
-            &:before
-                background: $green-gradient
-        &:nth-child(3)
-            &:before
-                background: $purple-gradient
-        &:nth-child(4)
-            &:before
-                background: linear-gradient(180deg, #919191 0%, #3D4975 100%)
+  display: flex
+  align-items: flex-end
 
-    &__value
-        position: absolute
-        left: 31px
-        bottom: 44px
-        text-align: center
-        z-index: -1
-        &-number
-            +h1
-        &-measure
-            +h3
 
-@media screen and (max-width: 350px)
-    .donut-chart
-        flex-wrap: wrap
-        &__value
-            bottom: unset
-            top: 40px
-            left: 35px
-
+@import '__chart/donut-chart__chart'
+@import '__list/donut-chart__list'

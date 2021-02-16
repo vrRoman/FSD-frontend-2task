@@ -1,0 +1,9 @@
+include ../__item/donut-chart__item
+
+
+mixin donut-chart__list
+    ul.donut-chart__list
+        +donut-chart__item('Великолепно', 'orange')
+        +donut-chart__item('Хорошо', 'green')
+        +donut-chart__item('Удовлетворительно', 'purple')
+        +donut-chart__item('Разочарован', 'dark')
