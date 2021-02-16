@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 95);
+/******/ 	return __webpack_require__(__webpack_require__.s = 219);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10966,41 +10966,304 @@ return jQuery;
 
 /***/ }),
 
-/***/ 14:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var hamburgerSelector = '.js-header__hamburger';
-var menuSelector = '.js-header__menu';
-var displayStyle = 'flex';
-var hamburgerActiveClass = 'header__hamburger_active';
-var showOn = 1200;
-$(hamburgerSelector).click(function handlerHamburgerClick() {
-  var menu = $(this).parent().find(menuSelector);
-  $(this).toggleClass(hamburgerActiveClass);
+"use strict";
 
-  if (menu.css('display') !== 'none') {
-    menu.css('display', 'none');
-  } else {
-    menu.css('display', displayStyle);
+
+var pug_has_own_property = Object.prototype.hasOwnProperty;
+
+/**
+ * Merge two attribute objects giving precedence
+ * to values in object `b`. Classes are special-cased
+ * allowing for arrays and merging/joining appropriately
+ * resulting in a string.
+ *
+ * @param {Object} a
+ * @param {Object} b
+ * @return {Object} a
+ * @api private
+ */
+
+exports.merge = pug_merge;
+function pug_merge(a, b) {
+  if (arguments.length === 1) {
+    var attrs = a[0];
+    for (var i = 1; i < a.length; i++) {
+      attrs = pug_merge(attrs, a[i]);
+    }
+    return attrs;
   }
-});
 
-var handlerWindowResize = function handlerWindowResize() {
-  if (window.innerWidth >= showOn) {
-    if ($(menuSelector).css('display') === 'none') {
-      $(menuSelector).css('display', displayStyle);
+  for (var key in b) {
+    if (key === 'class') {
+      var valA = a[key] || [];
+      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
+    } else if (key === 'style') {
+      var valA = pug_style(a[key]);
+      valA = valA && valA[valA.length - 1] !== ';' ? valA + ';' : valA;
+      var valB = pug_style(b[key]);
+      valB = valB && valB[valB.length - 1] !== ';' ? valB + ';' : valB;
+      a[key] = valA + valB;
     } else {
-      $(menuSelector).css('display', '');
+      a[key] = b[key];
     }
   }
-};
 
-window.addEventListener('resize', handlerWindowResize);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+  return a;
+}
+
+/**
+ * Process array, object, or string as a string of classes delimited by a space.
+ *
+ * If `val` is an array, all members of it and its subarrays are counted as
+ * classes. If `escaping` is an array, then whether or not the item in `val` is
+ * escaped depends on the corresponding item in `escaping`. If `escaping` is
+ * not an array, no escaping is done.
+ *
+ * If `val` is an object, all the keys whose value is truthy are counted as
+ * classes. No escaping is done.
+ *
+ * If `val` is a string, it is counted as a class. No escaping is done.
+ *
+ * @param {(Array.<string>|Object.<string, boolean>|string)} val
+ * @param {?Array.<string>} escaping
+ * @return {String}
+ */
+exports.classes = pug_classes;
+function pug_classes_array(val, escaping) {
+  var classString = '',
+    className,
+    padding = '',
+    escapeEnabled = Array.isArray(escaping);
+  for (var i = 0; i < val.length; i++) {
+    className = pug_classes(val[i]);
+    if (!className) continue;
+    escapeEnabled && escaping[i] && (className = pug_escape(className));
+    classString = classString + padding + className;
+    padding = ' ';
+  }
+  return classString;
+}
+function pug_classes_object(val) {
+  var classString = '',
+    padding = '';
+  for (var key in val) {
+    if (key && val[key] && pug_has_own_property.call(val, key)) {
+      classString = classString + padding + key;
+      padding = ' ';
+    }
+  }
+  return classString;
+}
+function pug_classes(val, escaping) {
+  if (Array.isArray(val)) {
+    return pug_classes_array(val, escaping);
+  } else if (val && typeof val === 'object') {
+    return pug_classes_object(val);
+  } else {
+    return val || '';
+  }
+}
+
+/**
+ * Convert object or string to a string of CSS styles delimited by a semicolon.
+ *
+ * @param {(Object.<string, string>|string)} val
+ * @return {String}
+ */
+
+exports.style = pug_style;
+function pug_style(val) {
+  if (!val) return '';
+  if (typeof val === 'object') {
+    var out = '';
+    for (var style in val) {
+      /* istanbul ignore else */
+      if (pug_has_own_property.call(val, style)) {
+        out = out + style + ':' + val[style] + ';';
+      }
+    }
+    return out;
+  } else {
+    return val + '';
+  }
+}
+
+/**
+ * Render the given attribute.
+ *
+ * @param {String} key
+ * @param {String} val
+ * @param {Boolean} escaped
+ * @param {Boolean} terse
+ * @return {String}
+ */
+exports.attr = pug_attr;
+function pug_attr(key, val, escaped, terse) {
+  if (
+    val === false ||
+    val == null ||
+    (!val && (key === 'class' || key === 'style'))
+  ) {
+    return '';
+  }
+  if (val === true) {
+    return ' ' + (terse ? key : key + '="' + key + '"');
+  }
+  var type = typeof val;
+  if (
+    (type === 'object' || type === 'function') &&
+    typeof val.toJSON === 'function'
+  ) {
+    val = val.toJSON();
+  }
+  if (typeof val !== 'string') {
+    val = JSON.stringify(val);
+    if (!escaped && val.indexOf('"') !== -1) {
+      return ' ' + key + "='" + val.replace(/'/g, '&#39;') + "'";
+    }
+  }
+  if (escaped) val = pug_escape(val);
+  return ' ' + key + '="' + val + '"';
+}
+
+/**
+ * Render the given attributes object.
+ *
+ * @param {Object} obj
+ * @param {Object} terse whether to use HTML5 terse boolean attributes
+ * @return {String}
+ */
+exports.attrs = pug_attrs;
+function pug_attrs(obj, terse) {
+  var attrs = '';
+
+  for (var key in obj) {
+    if (pug_has_own_property.call(obj, key)) {
+      var val = obj[key];
+
+      if ('class' === key) {
+        val = pug_classes(val);
+        attrs = pug_attr(key, val, false, terse) + attrs;
+        continue;
+      }
+      if ('style' === key) {
+        val = pug_style(val);
+      }
+      attrs += pug_attr(key, val, false, terse);
+    }
+  }
+
+  return attrs;
+}
+
+/**
+ * Escape the given string of `html`.
+ *
+ * @param {String} html
+ * @return {String}
+ * @api private
+ */
+
+var pug_match_html = /["&<>]/;
+exports.escape = pug_escape;
+function pug_escape(_html) {
+  var html = '' + _html;
+  var regexResult = pug_match_html.exec(html);
+  if (!regexResult) return _html;
+
+  var result = '';
+  var i, lastIndex, escape;
+  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
+    switch (html.charCodeAt(i)) {
+      case 34:
+        escape = '&quot;';
+        break;
+      case 38:
+        escape = '&amp;';
+        break;
+      case 60:
+        escape = '&lt;';
+        break;
+      case 62:
+        escape = '&gt;';
+        break;
+      default:
+        continue;
+    }
+    if (lastIndex !== i) result += html.substring(lastIndex, i);
+    lastIndex = i + 1;
+    result += escape;
+  }
+  if (lastIndex !== i) return result + html.substring(lastIndex, i);
+  else return result;
+}
+
+/**
+ * Re-throw the given `err` in context to the
+ * the pug in `filename` at the given `lineno`.
+ *
+ * @param {Error} err
+ * @param {String} filename
+ * @param {String} lineno
+ * @param {String} str original source
+ * @api private
+ */
+
+exports.rethrow = pug_rethrow;
+function pug_rethrow(err, filename, lineno, str) {
+  if (!(err instanceof Error)) throw err;
+  if ((typeof window != 'undefined' || !filename) && !str) {
+    err.message += ' on line ' + lineno;
+    throw err;
+  }
+  try {
+    str = str || __webpack_require__(11).readFileSync(filename, 'utf8');
+  } catch (ex) {
+    pug_rethrow(err, null, lineno);
+  }
+  var context = 3,
+    lines = str.split('\n'),
+    start = Math.max(lineno - context, 0),
+    end = Math.min(lines.length, lineno + context);
+
+  // Error context
+  var context = lines
+    .slice(start, end)
+    .map(function(line, i) {
+      var curr = i + start + 1;
+      return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
+    })
+    .join('\n');
+
+  // Alter exception message
+  err.path = filename;
+  try {
+    err.message =
+      (filename || 'Pug') +
+      ':' +
+      lineno +
+      '\n' +
+      context +
+      '\n\n' +
+      err.message;
+  } catch (e) {}
+  throw err;
+}
+
 
 /***/ }),
 
-/***/ 15:
+/***/ 11:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11021,19 +11284,2785 @@ var jquery = __webpack_require__(0);
 
 /***/ }),
 
-/***/ 24:
+/***/ 219:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
-/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__);
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(220);
+/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(221);
+/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(222);
+/* harmony import */ var _common_blocks_signup_card_signup_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(82);
 
-$('.js-masked-date input').mask('99.99.9999');
+
+
+
+
+
+var $loginButtons = $('.signup-card__account-exists .button');
+var $signupButtons = $('.signin-card__account-not-exists .button');
+var $signinCard = $('.login-and-registration__signin-card');
+var $signupCard = $('.login-and-registration__signup-card');
+var $pageElem = $('.login-and-registration');
+var pageElemLoginClass = 'login-and-registration_login';
+
+function showSigninCard() {
+  $signupCard.hide();
+  $signinCard.show();
+  $pageElem.toggleClass(pageElemLoginClass);
+}
+
+function showSignupCard() {
+  $signupCard.show();
+  $signinCard.hide();
+  $pageElem.toggleClass(pageElemLoginClass);
+}
+
+$loginButtons.click(showSigninCard);
+$signupButtons.click(showSignupCard);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 25:
+/***/ 220:
+/***/ (function(module, exports, __webpack_require__) {
+
+var pug = __webpack_require__(10);
+
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
+    var locals_for_with = (locals || {});
+    
+    (function (hovered, long, noFrame, pug_indent, secondary, textColor) {
+      var pug_indent = [];
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card__name"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__name\"\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                type: 'text',
+                placeholder: 'Имя'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card__surname"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__surname\"\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                type: 'text',
+                placeholder: 'Фамилия'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["radio-buttons__input"] = pug_interp = function({inputName, checked}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (" class=\"radio-buttons__input\""+" type=\"radio\""+pug.attr("name", inputName, true, true)+pug.attr("checked", checked, true, true)) + "\u003E";
+};
+pug_mixins["radio-buttons__button-text"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"radio-buttons__button-text\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
+};
+pug_mixins["radio-buttons__button"] = pug_interp = function({inputName, checked, text}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Clabel class=\"radio-buttons__button\"\u003E";
+pug_indent.push('  ');
+pug_mixins["radio-buttons__input"]({ inputName, checked });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["radio-buttons__button-text"](text);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Flabel\u003E";
+};
+pug_mixins["radio-buttons"] = pug_interp = function({items, itemsName}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"radio-buttons\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var index = 0, $$l = $$obj.length; index < $$l; index++) {
+        var text = $$obj[index];
+const checked = index === 0;
+pug_indent.push('  ');
+pug_mixins["radio-buttons__button"]({
+                text,
+                checked,
+                inputName: itemsName
+            });
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var index in $$obj) {
+      $$l++;
+      var text = $$obj[index];
+const checked = index === 0;
+pug_indent.push('  ');
+pug_mixins["radio-buttons__button"]({
+                text,
+                checked,
+                inputName: itemsName
+            });
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card__gender"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__gender\"\u003E";
+pug_indent.push('  ');
+pug_mixins["radio-buttons"]({
+            items: ['Мужчина', 'Женщина'],
+            itemsName: 'gender'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["signup-card__subtitle"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__subtitle\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+            text,
+            type: 'h3'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card__birth"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__birth\"\u003E";
+pug_indent.push('  ');
+pug_mixins["signup-card__subtitle"]('Дата рождения');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                placeholder: 'ДД.ММ.ГГГГ',
+                type: 'text',
+                maskedDate: true
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["signup-card__subtitle"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__subtitle\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+            text,
+            type: 'h3'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card__email"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__email\"\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                type: 'email',
+                placeholder: 'Email'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card__password"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__password\"\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                type: 'password',
+                placeholder: 'Пароль'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card__login-details"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__login-details\"\u003E";
+pug_indent.push('  ');
+pug_mixins["signup-card__subtitle"]('Данные для входа в сервис');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__email"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__password"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["toggle-button__input"] = pug_interp = function(checked){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (" class=\"toggle-button__input\""+" type=\"checkbox\""+pug.attr("checked", checked, true, true)) + "\u003E";
+};
+pug_mixins["toggle-button__text"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"toggle-button__text\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
+};
+pug_mixins["toggle-button"] = pug_interp = function({text, checked = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Clabel class=\"toggle-button\"\u003E";
+pug_indent.push('  ');
+pug_mixins["toggle-button__input"](checked);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["toggle-button__text"](text);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Flabel\u003E";
+};
+pug_mixins["signup-card__offers"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__offers\"\u003E";
+pug_indent.push('  ');
+pug_mixins["toggle-button"]({ text: 'Получать спецпредложения' });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["signup-card__account-exists"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__account-exists\"\u003E\u003Cspan\u003EУже есть аккаунт на Toxin\u003C\u002Fspan\u003E";
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Войти',
+            link: false,
+            modifiers: {
+                secondary: true
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signup-card"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signup-card\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+            type: 'h1',
+            text: 'Регистрация аккаунта'
+        });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__name"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__surname"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__gender"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__birth"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__login-details"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__offers"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Перейти к оплате',
+            link: 'landing-page.html',
+            modifiers: {
+                long: true,
+                textColor: 'white'
+            }
+        });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signup-card__account-exists"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signin-card__email"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signin-card__email\"\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                placeholder: 'Email',
+                type: 'email'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signin-card__password"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signin-card__password\"\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                type: 'password',
+                placeholder: 'Пароль'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["signin-card__account-not-exists"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signin-card__account-not-exists\"\u003E\u003Cspan\u003EНет аккаунта на Toxin?\u003C\u002Fspan\u003E";
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Создать',
+            link: false,
+            modifiers: {
+                secondary: true
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["signin-card"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"signin-card\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+            type: 'h1',
+            text: 'Войти',
+        });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signin-card__email"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signin-card__password"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Войти',
+            link: 'landing-page.html',
+            modifiers: {
+                long: true,
+                textColor: 'white',
+            }
+        });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["signin-card__account-not-exists"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__item-arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({ small: true });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+};
+pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation__item';
+if (active) {
+    className += ' navigation__item_active';
+}
+if (dropdown) {
+    className += ' navigation__item_with-dropdown'
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+if ((dropdown)) {
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__item-arrow"]();
+pug_indent.pop();
+}
+else {
+pug_indent.push('  ');
+pug_mixins["navigation__link"](name, link);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+};
+pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
+        var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var itemIndex in $$obj) {
+      $$l++;
+      var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ful\u003E";
+};
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation';
+if (inColumn) {
+    className += ' navigation_in-column';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["header__nav-container"] = pug_interp = function(activeLinkIndex){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav class=\"header__nav-container\"\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation"]({
+            activeLinkIndex,
+            items: [
+                {
+                    name: 'О нас',
+                    dropdown: false
+                },
+                {
+                    name: 'Услуги',
+                    dropdown: true
+                },
+                {
+                    name: 'Вакансии',
+                    dropdown: false
+                },
+                {
+                    name: 'Новости',
+                    dropdown: false
+                },
+                {
+                    name: 'Соглашения',
+                    dropdown: true
+                }
+            ]
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["header__buttons"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Войти',
+            link: 'login-and-registration.html',
+            modifiers: {
+                secondary: true
+            }
+        });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Зарегистрироваться',
+            link: 'login-and-registration.html'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__user"] = pug_interp = function(name){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__user\"\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__menu"] = pug_interp = function(userName, activeLink){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__nav-container"](activeLink);
+pug_indent.pop();
+if (userName) {
+pug_indent.push('  ');
+pug_mixins["header__user"](userName);
+pug_indent.pop();
+}
+else {
+pug_indent.push('  ');
+pug_mixins["header__buttons"]();
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__hamburger-line"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E";
+};
+pug_mixins["header__hamburger"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__hamburger-line"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__hamburger-line"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__hamburger-line"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__logo"] = pug_interp = function(link = 'landing-page.html'){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"header__logo\""+pug.attr("href", link, true, true)) + "\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E";
+};
+pug_mixins["header__container"] = pug_interp = function(user, activeLink){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__logo"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__menu"](user, activeLink);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__hamburger"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header"] = pug_interp = function(user, activeLink = 0){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cheader class=\"header\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__container"](user, activeLink);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fheader\u003E";
+};
+pug_mixins["footer__description"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__description\"\u003EБронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__main-info"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__main-info\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__description"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__item-arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({ small: true });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+};
+pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation__item';
+if (active) {
+    className += ' navigation__item_active';
+}
+if (dropdown) {
+    className += ' navigation__item_with-dropdown'
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+if ((dropdown)) {
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__item-arrow"]();
+pug_indent.pop();
+}
+else {
+pug_indent.push('  ');
+pug_mixins["navigation__link"](name, link);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+};
+pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
+        var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var itemIndex in $$obj) {
+      $$l++;
+      var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ful\u003E";
+};
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation';
+if (inColumn) {
+    className += ' navigation_in-column';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["footer__subtitle"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({ text });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__nav"] = pug_interp = function(title, items){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__nav\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__subtitle"](title);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["navigation"]({
+            items,
+            inColumn: true
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__menu"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__menu\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__nav"]('Навигация', [
+            { name: 'О нас' },
+            { name: 'Новости' },
+            { name: 'Служба поддержки' },
+            { name: 'Услуги' }
+        ]);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__nav"]('О нас', [
+            { name: 'О сервисе' },
+            { name: 'Наша команда' },
+            { name: 'Вакансии' },
+            { name: 'Инвесторы' }
+        ]);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__nav"]('Служба поддержки', [
+          { name: 'Соглашения' },
+          { name: 'Сообщества' },
+          { name: 'Связь с нами' }
+        ]);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["footer__subtitle"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({ text });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__subscription-text"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПолучайте специальные предложения и новости сервиса\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__subscription"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subscription\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__subtitle"]('Подписка');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__subscription-text"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                placeholder: 'Email',
+                type: 'email'
+            },
+            modifiers: {
+                short: true
+            },
+            arrowOptions: {
+                type: 'forward',
+                color: 'purple'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__body"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__body\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__main-info"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__menu"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__subscription"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["social-links__icon"] = pug_interp = function(name){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ci" + (pug.attr("class", pug.classes(["social-links__icon","fab",`fa-${name}`], [false,false,true]), false, true)) + "\u003E\u003C\u002Fi\u003E";
+};
+pug_mixins["social-links__link"] = pug_interp = function(name, link = 'change-me'){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"social-links__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["social-links__icon"](name);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["social-links"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"social-links\"\u003E";
+pug_indent.push('  ');
+pug_mixins["social-links__link"]('twitter');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["social-links__link"]('facebook-square');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["social-links__link"]('instagram');
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__bottom"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\u003Cspan\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fspan\u003E";
+pug_indent.push('  ');
+pug_mixins["social-links"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__line"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__line\"\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+const navLinks = ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
+const aboutLinks = ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
+const supportLinks = ['Соглашения', 'Сообщества', 'Связь с нами']
+
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cfooter class=\"footer\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__body"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__line"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__bottom"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ffooter\u003E";
+};
+const title = 'Login and registration'
+const fileName = 'login-and-registration'
+pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
+pug_indent.push('    ');
+pug_mixins["header"](false, false);
+pug_indent.pop();
+pug_html = pug_html + "\n    \u003Cmain class=\"login-and-registration\"\u003E\n      \u003Cdiv class=\"login-and-registration__signup-card\"\u003E";
+pug_indent.push('        ');
+pug_mixins["signup-card"]();
+pug_indent.pop();
+pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"login-and-registration__signin-card\"\u003E";
+pug_indent.push('        ');
+pug_mixins["signin-card"]();
+pug_indent.pop();
+pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fmain\u003E";
+pug_indent.push('    ');
+pug_mixins["footer"]();
+pug_indent.pop();
+pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
+    }.call(this, "hovered" in locals_for_with ?
+        locals_for_with.hovered :
+        typeof hovered !== 'undefined' ? hovered : undefined, "long" in locals_for_with ?
+        locals_for_with.long :
+        typeof long !== 'undefined' ? long : undefined, "noFrame" in locals_for_with ?
+        locals_for_with.noFrame :
+        typeof noFrame !== 'undefined' ? noFrame : undefined, "pug_indent" in locals_for_with ?
+        locals_for_with.pug_indent :
+        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "secondary" in locals_for_with ?
+        locals_for_with.secondary :
+        typeof secondary !== 'undefined' ? secondary : undefined, "textColor" in locals_for_with ?
+        locals_for_with.textColor :
+        typeof textColor !== 'undefined' ? textColor : undefined));
+    ;;return pug_html;};
+module.exports = template;
+
+/***/ }),
+
+/***/ 221:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 222:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/login-registration-bg.jpg");
+
+/***/ }),
+
+/***/ 27:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
+/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__);
+
+$('.js-text-field__input_masked-date').mask('99.99.9999');
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 28:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -11643,1132 +14672,36 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 4:
+/***/ 30:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./src/common.blocks/text-field/__input/_masked-date/text-field__input_masked-date.js
+var text_field_input_masked_date = __webpack_require__(27);
+
+// CONCATENATED MODULE: ./src/common.blocks/text-field/__input/text-field__input.js
+
+// CONCATENATED MODULE: ./src/common.blocks/text-field/text-field.js
+
+
+/***/ }),
+
+/***/ 82:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _text_field_text_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(30);
+
+
+/***/ }),
+
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
     if(false) { var cssReload; }
   
-
-/***/ }),
-
-/***/ 41:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _text_field_text_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
-
-
-/***/ }),
-
-/***/ 5:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var pug_has_own_property = Object.prototype.hasOwnProperty;
-
-/**
- * Merge two attribute objects giving precedence
- * to values in object `b`. Classes are special-cased
- * allowing for arrays and merging/joining appropriately
- * resulting in a string.
- *
- * @param {Object} a
- * @param {Object} b
- * @return {Object} a
- * @api private
- */
-
-exports.merge = pug_merge;
-function pug_merge(a, b) {
-  if (arguments.length === 1) {
-    var attrs = a[0];
-    for (var i = 1; i < a.length; i++) {
-      attrs = pug_merge(attrs, a[i]);
-    }
-    return attrs;
-  }
-
-  for (var key in b) {
-    if (key === 'class') {
-      var valA = a[key] || [];
-      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
-    } else if (key === 'style') {
-      var valA = pug_style(a[key]);
-      valA = valA && valA[valA.length - 1] !== ';' ? valA + ';' : valA;
-      var valB = pug_style(b[key]);
-      valB = valB && valB[valB.length - 1] !== ';' ? valB + ';' : valB;
-      a[key] = valA + valB;
-    } else {
-      a[key] = b[key];
-    }
-  }
-
-  return a;
-}
-
-/**
- * Process array, object, or string as a string of classes delimited by a space.
- *
- * If `val` is an array, all members of it and its subarrays are counted as
- * classes. If `escaping` is an array, then whether or not the item in `val` is
- * escaped depends on the corresponding item in `escaping`. If `escaping` is
- * not an array, no escaping is done.
- *
- * If `val` is an object, all the keys whose value is truthy are counted as
- * classes. No escaping is done.
- *
- * If `val` is a string, it is counted as a class. No escaping is done.
- *
- * @param {(Array.<string>|Object.<string, boolean>|string)} val
- * @param {?Array.<string>} escaping
- * @return {String}
- */
-exports.classes = pug_classes;
-function pug_classes_array(val, escaping) {
-  var classString = '',
-    className,
-    padding = '',
-    escapeEnabled = Array.isArray(escaping);
-  for (var i = 0; i < val.length; i++) {
-    className = pug_classes(val[i]);
-    if (!className) continue;
-    escapeEnabled && escaping[i] && (className = pug_escape(className));
-    classString = classString + padding + className;
-    padding = ' ';
-  }
-  return classString;
-}
-function pug_classes_object(val) {
-  var classString = '',
-    padding = '';
-  for (var key in val) {
-    if (key && val[key] && pug_has_own_property.call(val, key)) {
-      classString = classString + padding + key;
-      padding = ' ';
-    }
-  }
-  return classString;
-}
-function pug_classes(val, escaping) {
-  if (Array.isArray(val)) {
-    return pug_classes_array(val, escaping);
-  } else if (val && typeof val === 'object') {
-    return pug_classes_object(val);
-  } else {
-    return val || '';
-  }
-}
-
-/**
- * Convert object or string to a string of CSS styles delimited by a semicolon.
- *
- * @param {(Object.<string, string>|string)} val
- * @return {String}
- */
-
-exports.style = pug_style;
-function pug_style(val) {
-  if (!val) return '';
-  if (typeof val === 'object') {
-    var out = '';
-    for (var style in val) {
-      /* istanbul ignore else */
-      if (pug_has_own_property.call(val, style)) {
-        out = out + style + ':' + val[style] + ';';
-      }
-    }
-    return out;
-  } else {
-    return val + '';
-  }
-}
-
-/**
- * Render the given attribute.
- *
- * @param {String} key
- * @param {String} val
- * @param {Boolean} escaped
- * @param {Boolean} terse
- * @return {String}
- */
-exports.attr = pug_attr;
-function pug_attr(key, val, escaped, terse) {
-  if (
-    val === false ||
-    val == null ||
-    (!val && (key === 'class' || key === 'style'))
-  ) {
-    return '';
-  }
-  if (val === true) {
-    return ' ' + (terse ? key : key + '="' + key + '"');
-  }
-  var type = typeof val;
-  if (
-    (type === 'object' || type === 'function') &&
-    typeof val.toJSON === 'function'
-  ) {
-    val = val.toJSON();
-  }
-  if (typeof val !== 'string') {
-    val = JSON.stringify(val);
-    if (!escaped && val.indexOf('"') !== -1) {
-      return ' ' + key + "='" + val.replace(/'/g, '&#39;') + "'";
-    }
-  }
-  if (escaped) val = pug_escape(val);
-  return ' ' + key + '="' + val + '"';
-}
-
-/**
- * Render the given attributes object.
- *
- * @param {Object} obj
- * @param {Object} terse whether to use HTML5 terse boolean attributes
- * @return {String}
- */
-exports.attrs = pug_attrs;
-function pug_attrs(obj, terse) {
-  var attrs = '';
-
-  for (var key in obj) {
-    if (pug_has_own_property.call(obj, key)) {
-      var val = obj[key];
-
-      if ('class' === key) {
-        val = pug_classes(val);
-        attrs = pug_attr(key, val, false, terse) + attrs;
-        continue;
-      }
-      if ('style' === key) {
-        val = pug_style(val);
-      }
-      attrs += pug_attr(key, val, false, terse);
-    }
-  }
-
-  return attrs;
-}
-
-/**
- * Escape the given string of `html`.
- *
- * @param {String} html
- * @return {String}
- * @api private
- */
-
-var pug_match_html = /["&<>]/;
-exports.escape = pug_escape;
-function pug_escape(_html) {
-  var html = '' + _html;
-  var regexResult = pug_match_html.exec(html);
-  if (!regexResult) return _html;
-
-  var result = '';
-  var i, lastIndex, escape;
-  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
-    switch (html.charCodeAt(i)) {
-      case 34:
-        escape = '&quot;';
-        break;
-      case 38:
-        escape = '&amp;';
-        break;
-      case 60:
-        escape = '&lt;';
-        break;
-      case 62:
-        escape = '&gt;';
-        break;
-      default:
-        continue;
-    }
-    if (lastIndex !== i) result += html.substring(lastIndex, i);
-    lastIndex = i + 1;
-    result += escape;
-  }
-  if (lastIndex !== i) return result + html.substring(lastIndex, i);
-  else return result;
-}
-
-/**
- * Re-throw the given `err` in context to the
- * the pug in `filename` at the given `lineno`.
- *
- * @param {Error} err
- * @param {String} filename
- * @param {String} lineno
- * @param {String} str original source
- * @api private
- */
-
-exports.rethrow = pug_rethrow;
-function pug_rethrow(err, filename, lineno, str) {
-  if (!(err instanceof Error)) throw err;
-  if ((typeof window != 'undefined' || !filename) && !str) {
-    err.message += ' on line ' + lineno;
-    throw err;
-  }
-  try {
-    str = str || __webpack_require__(7).readFileSync(filename, 'utf8');
-  } catch (ex) {
-    pug_rethrow(err, null, lineno);
-  }
-  var context = 3,
-    lines = str.split('\n'),
-    start = Math.max(lineno - context, 0),
-    end = Math.min(lines.length, lineno + context);
-
-  // Error context
-  var context = lines
-    .slice(start, end)
-    .map(function(line, i) {
-      var curr = i + start + 1;
-      return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
-    })
-    .join('\n');
-
-  // Alter exception message
-  err.path = filename;
-  try {
-    err.message =
-      (filename || 'Pug') +
-      ':' +
-      lineno +
-      '\n' +
-      context +
-      '\n\n' +
-      err.message;
-  } catch (e) {}
-  throw err;
-}
-
-
-/***/ }),
-
-/***/ 7:
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 95:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(96);
-/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_pug__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(97);
-/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_sass__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(98);
-/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(14);
-/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_blocks_header_header__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _blocks_cards_signup_signup_card__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(41);
-
-
-
-
-
-
-
-
-var loginButtons = $('.signup-card__account-exists .button');
-var signupButtons = $('.signin-card__account-not-exists .button');
-var signinCard = $('.login-and-registration__signin-card');
-var signupCard = $('.login-and-registration__signup-card');
-var pageElem = $('.login-and-registration');
-var pageElemLoginClass = 'login-and-registration_login';
-
-function showSigninCard() {
-  signupCard.hide();
-  signinCard.show();
-  pageElem.toggleClass(pageElemLoginClass);
-}
-
-function showSignupCard() {
-  signupCard.show();
-  signinCard.hide();
-  pageElem.toggleClass(pageElemLoginClass);
-}
-
-loginButtons.click(showSigninCard);
-signupButtons.click(showSignupCard);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-
-/***/ 96:
-/***/ (function(module, exports, __webpack_require__) {
-
-var pug = __webpack_require__(6);
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
-    var locals_for_with = (locals || {});
-    
-    (function (Array, pug_indent) {
-      var pug_indent = [];
-pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-            additionalClassName += `text-field_${val}`;
-            if (index !== modName.length - 1) {
-                additionalClassName += ' ';
-            }
-        });
-    } else {
-        additionalClassName = `text-field_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
-if (title) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"text-field__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-if (state) {
-pug_html = pug_html + "\u003Cspan class=\"text-field__state\"\u003E" + (pug.escape(null == (pug_interp = state) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__field\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"text-field__input\""+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", `${value ? value : ''}`, true, true)) + "\u003E";
-if (arrow) {
-pug_html = pug_html + "\u003Ci class=\"text-field__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["radio-buttons"] = pug_interp = function(title, buttons, inputsName){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"radio-buttons\"\u003E";
-if ((title)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"radio-buttons__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"radio-buttons__buttons\"\u003E";
-// iterate buttons
-;(function(){
-  var $$obj = buttons;
-  if ('number' == typeof $$obj.length) {
-      for (var buttonIndex = 0, $$l = $$obj.length; buttonIndex < $$l; buttonIndex++) {
-        var buttonName = $$obj[buttonIndex];
-let checked = buttonIndex === 0;
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"radio-buttons__button radio-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"radio-button__input\""+" type=\"radio\""+pug.attr("name", inputsName, true, true)+pug.attr("checked", checked, true, true)) + "\u003E\u003Cspan class=\"radio-button__name\"\u003E" + (pug.escape(null == (pug_interp = buttonName) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var buttonIndex in $$obj) {
-      $$l++;
-      var buttonName = $$obj[buttonIndex];
-let checked = buttonIndex === 0;
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"radio-buttons__button radio-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"radio-button__input\""+" type=\"radio\""+pug.attr("name", inputsName, true, true)+pug.attr("checked", checked, true, true)) + "\u003E\u003Cspan class=\"radio-button__name\"\u003E" + (pug.escape(null == (pug_interp = buttonName) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["toggle-buttons"] = pug_interp = function(title, buttons){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"toggle-buttons\"\u003E";
-if ((title)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"toggle-buttons__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"toggle-buttons__buttons\"\u003E";
-// iterate buttons
-;(function(){
-  var $$obj = buttons;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index1 = 0, $$l = $$obj.length; pug_index1 < $$l; pug_index1++) {
-        var button = $$obj[pug_index1];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"toggle-buttons__label toggle-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"toggle-button__input\""+" type=\"checkbox\""+pug.attr("checked", button.checked, true, true)) + "\u003E\u003Cspan class=\"toggle-button__name\"\u003E" + (pug.escape(null == (pug_interp = button.name) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index1 in $$obj) {
-      $$l++;
-      var button = $$obj[pug_index1];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"toggle-buttons__label toggle-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"toggle-button__input\""+" type=\"checkbox\""+pug.attr("checked", button.checked, true, true)) + "\u003E\u003Cspan class=\"toggle-button__name\"\u003E" + (pug.escape(null == (pug_interp = button.name) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["button"] = pug_interp = function(text, modName, link){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-          additionalClassName += `button_${val}`;
-          if (index !== modName.length - 1) {
-              additionalClassName += ' ';
-          }
-        });
-    } else {
-        additionalClassName = `button_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
-};
-pug_mixins["signup-card"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch1 class=\"signup-card__title\"\u003EРегистрация аккаунта\u003C\u002Fh1\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__general-info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__name\"\u003E";
-pug_indent.push('      ');
-pug_mixins["text-field"]({
-                  placeholder: 'Имя',
-                  type: 'text',
-                });
-pug_indent.pop();
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__surname\"\u003E";
-pug_indent.push('      ');
-pug_mixins["text-field"]({
-                  placeholder: 'Фамилия',
-                  type: 'text',
-                });
-pug_indent.pop();
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__gender\"\u003E";
-pug_indent.push('      ');
-pug_mixins["radio-buttons"](false, ['Мужчина', 'Женщина'], 'gender');
-pug_indent.pop();
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__birth\"\u003E";
-pug_indent.push('    ');
-pug_mixins["text-field"]({
-              placeholder: 'ДД.ММ.ГГГГ',
-              type: 'text',
-              title: 'Дата рождения',
-              className: 'js-masked-date',
-            });
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__login-details\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3\u003EДанные для входа в сервис\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__email\"\u003E";
-pug_indent.push('      ');
-pug_mixins["text-field"]({
-                  placeholder: 'Email',
-                  type: 'email',
-                });
-pug_indent.pop();
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__password\"\u003E";
-pug_indent.push('      ');
-pug_mixins["text-field"]({
-                  placeholder: 'Пароль',
-                  type: 'password',
-                });
-pug_indent.pop();
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__offers\"\u003E";
-pug_indent.push('    ');
-pug_mixins["toggle-buttons"](false, [{
-                name: 'Получать спецпредложения',
-                checked: false
-            }]);
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__signup-btn\"\u003E";
-pug_indent.push('    ');
-pug_mixins["button"]('Перейти к оплате', 'extended');
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__account-exists\"\u003E\u003Cspan\u003EУже есть аккаунт на Toxin\u003C\u002Fspan\u003E";
-pug_indent.push('    ');
-pug_mixins["button"]('Войти', 'secondary', '#');
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-            additionalClassName += `text-field_${val}`;
-            if (index !== modName.length - 1) {
-                additionalClassName += ' ';
-            }
-        });
-    } else {
-        additionalClassName = `text-field_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
-if (title) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"text-field__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-if (state) {
-pug_html = pug_html + "\u003Cspan class=\"text-field__state\"\u003E" + (pug.escape(null == (pug_interp = state) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__field\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"text-field__input\""+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", `${value ? value : ''}`, true, true)) + "\u003E";
-if (arrow) {
-pug_html = pug_html + "\u003Ci class=\"text-field__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["button"] = pug_interp = function(text, modName, link){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-          additionalClassName += `button_${val}`;
-          if (index !== modName.length - 1) {
-              additionalClassName += ' ';
-          }
-        });
-    } else {
-        additionalClassName = `button_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
-};
-pug_mixins["signin-card"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signin-card\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch1 class=\"signin-card__title\"\u003EВойти\u003C\u002Fh1\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signin-card__email\"\u003E";
-pug_indent.push('    ');
-pug_mixins["text-field"]({
-              placeholder: 'Email',
-              type: 'email'
-            });
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signin-card__password\"\u003E";
-pug_indent.push('    ');
-pug_mixins["text-field"]({
-              placeholder: 'Пароль',
-              type: 'password',
-            });
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signin-card__button\"\u003E";
-pug_indent.push('    ');
-pug_mixins["button"]('Войти', 'extended');
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signin-card__account-not-exists\"\u003E\u003Cspan\u003EНет аккаунта на Toxin?\u003C\u002Fspan\u003E";
-pug_indent.push('    ');
-pug_mixins["button"]('Создать', 'secondary', '#');
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["button"] = pug_interp = function(text, modName, link){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-          additionalClassName += `button_${val}`;
-          if (index !== modName.length - 1) {
-              additionalClassName += ' ';
-          }
-        });
-    } else {
-        additionalClassName = `button_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
-};
-pug_mixins["header"] = pug_interp = function(user, activeLink){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-const navItems = [
-    {
-        name: 'О нас',
-        dropdown: false
-    },
-    {
-        name: 'Услуги',
-        dropdown: true
-    },
-    {
-        name: 'Вакансии',
-        dropdown: false
-    },
-    {
-        name: 'Новости',
-        dropdown: false
-    },
-    {
-        name: 'Соглашения',
-        dropdown: true
-    }
-]
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cnav class=\"header__nav\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-for (let i = 0; i < navItems.length; i++)
-{
-let active = (i === activeLink)
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes(["header__nav-item",`${active ? 'header__nav-item_active': ''} ${
-                                navItems[i].dropdown ? 'header__nav-item_dropdown-item': ''}`], [false,true]), false, true)) + "\u003E";
-if ((navItems[i].dropdown)) {
-pug_html = pug_html + "\n            ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"header__item-arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E";
-}
-else {
-pug_html = pug_html + "\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
-}
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fli\u003E";
-}
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fnav\u003E";
-if (user) {
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__user\"\u003E" + (pug.escape(null == (pug_interp = user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-}
-else {
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
-pug_indent.push('        ');
-pug_mixins["button"]('Войти', 'secondary', 'login-and-registration.html');
-pug_indent.pop();
-pug_indent.push('        ');
-pug_mixins["button"]('Зарегистрироваться', false, 'login-and-registration.html');
-pug_indent.pop();
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fheader\u003E";
-};
-pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-            additionalClassName += `text-field_${val}`;
-            if (index !== modName.length - 1) {
-                additionalClassName += ' ';
-            }
-        });
-    } else {
-        additionalClassName = `text-field_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
-if (title) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"text-field__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-if (state) {
-pug_html = pug_html + "\u003Cspan class=\"text-field__state\"\u003E" + (pug.escape(null == (pug_interp = state) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__field\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"text-field__input\""+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", `${value ? value : ''}`, true, true)) + "\u003E";
-if (arrow) {
-pug_html = pug_html + "\u003Ci class=\"text-field__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-const navLinks = ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
-const aboutLinks = ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
-const supportLinks = ['Соглашения', 'Сообщества', 'Связь с нами']
-
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cfooter class=\"footer\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__body\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__main-info\"\u003E\u003Cimg class=\"footer__logo\" src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__text\"\u003EБронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu-nav\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EНавигация\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-// iterate navLinks
-;(function(){
-  var $$obj = navLinks;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index2 = 0, $$l = $$obj.length; pug_index2 < $$l; pug_index2++) {
-        var link = $$obj[pug_index2];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index2 in $$obj) {
-      $$l++;
-      var link = $$obj[pug_index2];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu-about\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EО нас\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-// iterate aboutLinks
-;(function(){
-  var $$obj = aboutLinks;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index3 = 0, $$l = $$obj.length; pug_index3 < $$l; pug_index3++) {
-        var link = $$obj[pug_index3];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index3 in $$obj) {
-      $$l++;
-      var link = $$obj[pug_index3];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu-support\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EСлужба поддержки\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-// iterate supportLinks
-;(function(){
-  var $$obj = supportLinks;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
-        var link = $$obj[pug_index4];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index4 in $$obj) {
-      $$l++;
-      var link = $$obj[pug_index4];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EПодписка\u003C\u002Fh3\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПолучайте специальные\u003Cbr\u003Eпредложения и новости сервиса\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-input\"\u003E";
-pug_indent.push('        ');
-pug_mixins["text-field"]({
-                      placeholder: 'Email',
-                      type: 'email',
-                      className: 'subscription-text-field',
-                      arrow: true,
-                    });
-pug_indent.pop();
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__line\"\u003E\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ffooter\u003E";
-};
-const title = 'Login and registration'
-const fileName = 'login-and-registration'
-pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
-pug_indent.push('    ');
-pug_mixins["header"](false, false);
-pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cmain class=\"login-and-registration\"\u003E\u003Cimg class=\"login-and-registration__bg-img\" src=\"images\u002Flogin-registration-bg.jpg\" alt=\"bg-img\"\u003E\n      \u003Cdiv class=\"login-and-registration__signup-card\"\u003E";
-pug_indent.push('        ');
-pug_mixins["signup-card"]();
-pug_indent.pop();
-pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"login-and-registration__signin-card\"\u003E";
-pug_indent.push('        ');
-pug_mixins["signin-card"]();
-pug_indent.pop();
-pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fmain\u003E";
-pug_indent.push('    ');
-pug_mixins["footer"]();
-pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
-    }.call(this, "Array" in locals_for_with ?
-        locals_for_with.Array :
-        typeof Array !== 'undefined' ? Array : undefined, "pug_indent" in locals_for_with ?
-        locals_for_with.pug_indent :
-        typeof pug_indent !== 'undefined' ? pug_indent : undefined));
-    ;;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ 97:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-
-/***/ 98:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/login-registration-bg.jpg");
 
 /***/ })
 

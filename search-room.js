@@ -81,11 +81,12 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 76);
+/******/ 	return __webpack_require__(__webpack_require__.s = 195);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10964,177 +10965,8 @@ return jQuery;
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
-	if ( true ) {
-
-		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
-} ( function( $ ) {
-
-$.ui = $.ui || {};
-
-return $.ui.version = "1.12.1";
-
-} ) );
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return setDatepickerDate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return onSelect; });
-/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
-/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
-/* harmony import */ var _blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_blocks_date_picker_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
-
-
-var clearBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
-var applyBtn = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
-var monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-var monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-var dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-var dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-var dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-
-function checkDateAndUpdateClearBtn($datepicker) {
-  $datepicker.each(function (i, elem) {
-    if ($(elem).datepicker('getDate')) {
-      $($(elem).find('.js-ui-datepicker-clear-button')).removeClass('ui-datepicker-clear-button_disabled');
-    } else {
-      $($(elem).find('.js-ui-datepicker-clear-button')).addClass('ui-datepicker-clear-button_disabled');
-    }
-  });
-}
-
-function applyDate($datepicker, dateTexts, datesObjects) {
-  var $inputs = $datepicker.find('.date-picker__input');
-
-  if (dateTexts) {
-    if ($inputs.length === 1) {
-      if (dateTexts[0] && dateTexts[1]) {
-        $inputs.val("".concat(dateTexts[0], " - ").concat(dateTexts[1]));
-      }
-    } else if ($inputs.length === 2) {
-      $inputs.each(function (i, elem) {
-        $(elem).val(dateTexts[i]);
-      });
-    }
-
-    $datepicker.datepicker('setDate', datesObjects || dateTexts);
-    checkDateAndUpdateClearBtn($datepicker);
-  }
-
-  $datepicker.removeClass('date-picker_expanded');
-}
-
-function clearDate($datepicker) {
-  var $inputs = $datepicker.find('.date-picker__input');
-  $inputs.val('');
-  $datepicker.datepicker('setDate', [null, null]);
-  checkDateAndUpdateClearBtn($datepicker);
-}
-
-function onSelect(dateText, inst, extensionRange) {
-  var $datepicker = inst.dpDiv.parent();
-  var dates = [extensionRange.startDateText, extensionRange.endDateText];
-
-  function handleApplyButtonClick() {
-    applyDate($datepicker, dates, [extensionRange.startDate, extensionRange.endDate]);
-    $($datepicker.find('.js-ui-datepicker-clear-button')).click(function () {
-      clearDate($datepicker);
-      dates = [null, null];
-      $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
-    });
-    $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
-  }
-
-  setTimeout(function () {
-    $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
-    $($datepicker.find('.js-ui-datepicker-clear-button')).click(function () {
-      clearDate($datepicker);
-      dates = [null, null];
-      $($datepicker.find('.js-ui-datepicker-apply-button')).click(handleApplyButtonClick);
-    });
-  }, 100);
-}
-
-function setDatepickerDate($datepicker, dates) {
-  $datepicker.datepicker('setDate', dates);
-  $datepicker.find('.js-ui-datepicker-apply-button').click(function () {
-    applyDate($datepicker, false);
-  });
-  $datepicker.find('.js-ui-datepicker-clear-button').click(function () {
-    clearDate($datepicker);
-    $datepicker.find('.js-ui-datepicker-apply-button').click(function () {
-      applyDate($datepicker, false);
-    });
-  });
-  checkDateAndUpdateClearBtn($datepicker);
-}
-
-$('.js-date-picker_single').datepicker({
-  range: 'period',
-  showButtonPanel: true,
-  currentText: clearBtn + applyBtn,
-  firstDay: 1,
-  showOtherMonths: true,
-  selectOtherMonths: true,
-  dateFormat: 'd M',
-  monthNames: monthNames,
-  monthNamesShort: monthNamesShort,
-  dayNames: dayNames,
-  dayNamesShort: dayNamesShort,
-  dayNamesMin: dayNamesMin,
-  onSelect: onSelect
-});
-$('.js-date-picker_double').datepicker({
-  range: 'period',
-  showButtonPanel: true,
-  currentText: clearBtn + applyBtn,
-  firstDay: 1,
-  showOtherMonths: true,
-  selectOtherMonths: true,
-  dateFormat: 'dd.mm.yy',
-  monthNames: monthNames,
-  monthNamesShort: monthNamesShort,
-  dayNames: dayNames,
-  dayNamesShort: dayNamesShort,
-  dayNamesMin: dayNamesMin,
-  onSelect: onSelect
-});
-setDatepickerDate($('.js-date-picker'), [null, null]);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 3 */,
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-/* 6 */
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11388,7 +11220,7 @@ function pug_rethrow(err, filename, lineno, str) {
     throw err;
   }
   try {
-    str = str || __webpack_require__(7).readFileSync(filename, 'utf8');
+    str = str || __webpack_require__(11).readFileSync(filename, 'utf8');
   } catch (ex) {
     pug_rethrow(err, null, lineno);
   }
@@ -11423,14 +11255,15 @@ function pug_rethrow(err, filename, lineno, str) {
 
 
 /***/ }),
-/* 7 */
+
+/***/ 11:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 8 */,
-/* 9 */
+
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11451,7 +11284,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(5) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -11480,8 +11313,117 @@ return $.ui.keyCode = {
 
 
 /***/ }),
-/* 10 */,
-/* 11 */
+
+/***/ 13:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
+var jquery = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/images/logo.svg
+/* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
+// CONCATENATED MODULE: ./src/images/logo-icon.svg
+/* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
+// CONCATENATED MODULE: ./src/js/images.js
+
+
+// CONCATENATED MODULE: ./src/js/index.js
+
+
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Header = /*#__PURE__*/function () {
+  function Header(elem) {
+    _classCallCheck(this, Header);
+
+    this.elem = elem;
+    this.menu = this.getMenu();
+    this.hamburger = this.getHamburger();
+    this.showHamburgerOn = 1200;
+    this.hiddenMenuClass = 'header__menu_hidden';
+    this.visibleHamburgerClass = 'header__hamburger_visible';
+    this.columnNavClass = 'navigation_in-column';
+    this.updateHeader = this.updateHeader.bind(this);
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.init();
+  }
+
+  _createClass(Header, [{
+    key: "getHamburger",
+    value: function getHamburger() {
+      var hamburgerSelector = '.header__hamburger';
+      return this.elem.querySelector(hamburgerSelector);
+    }
+  }, {
+    key: "getMenu",
+    value: function getMenu() {
+      var menuSelector = '.header__menu';
+      return this.elem.querySelector(menuSelector);
+    }
+  }, {
+    key: "getNav",
+    value: function getNav() {
+      var navSelector = '.navigation';
+      return this.elem.querySelector(navSelector);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      window.addEventListener('resize', this.updateHeader);
+      window.addEventListener('click', this.handleWindowClick);
+      window.addEventListener('load', this.updateHeader);
+    }
+  }, {
+    key: "updateHeader",
+    value: function updateHeader() {
+      if (window.innerWidth > this.showHamburgerOn) {
+        this.menu.classList.remove(this.hiddenMenuClass);
+        this.hamburger.classList.remove(this.visibleHamburgerClass);
+        this.getNav().classList.remove(this.columnNavClass);
+      } else {
+        this.menu.classList.add(this.hiddenMenuClass);
+        this.hamburger.classList.add(this.visibleHamburgerClass);
+        this.getNav().classList.add(this.columnNavClass);
+      }
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      if (window.innerWidth <= this.showHamburgerOn) {
+        if (evt.path.includes(this.hamburger)) {
+          this.menu.classList.toggle(this.hiddenMenuClass);
+        } else if (!evt.path.includes(this.menu)) {
+          if (!this.menu.classList.contains(this.hiddenMenuClass)) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            this.menu.classList.add(this.hiddenMenuClass);
+          }
+        }
+      }
+    }
+  }]);
+
+  return Header;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Header);
+
+/***/ }),
+
+/***/ 18:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// jscs:disable maximumLineLength
@@ -11510,8 +11452,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(1),
-			__webpack_require__(9)
+			__webpack_require__(5),
+			__webpack_require__(12)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -13606,7 +13548,8 @@ return $.datepicker;
 
 
 /***/ }),
-/* 12 */
+
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13774,325 +13717,3002 @@ var _datepickerExtension = function _datepickerExtension() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var dropdownInit = function dropdownInit(_ref) {
-  var dropdownElems = _ref.dropdownElems,
-      popupSelector = _ref.popupSelector,
-      inputSelector = _ref.inputSelector,
-      classNameToToggle = _ref.classNameToToggle,
-      applyBtnSelector = _ref.applyBtnSelector;
-  var activeDropdowns = [];
+/***/ 195:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-  var handleWindowClick = function handleWindowClick(evt) {
-    for (var i = 0; i < dropdownElems.length; i += 1) {
-      var elem = dropdownElems[i];
-      var inputs = elem.querySelectorAll(inputSelector);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(196);
+/* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_search_room_pug__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _search_room_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(197);
+/* harmony import */ var _search_room_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_search_room_sass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _images_room_img_1_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(198);
+/* harmony import */ var _images_room_img_2_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(199);
+/* harmony import */ var _images_room_img_3_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(200);
+/* harmony import */ var _images_room_img_4_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(201);
+/* harmony import */ var _images_room_img_5_jpg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(202);
+/* harmony import */ var _images_room_img_6_jpg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(203);
+/* harmony import */ var _images_room_img_7_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(204);
+/* harmony import */ var _images_room_img_8_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(205);
+/* harmony import */ var _images_room_img_9_jpg__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(206);
+/* harmony import */ var _images_room_img_10_jpg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(207);
+/* harmony import */ var _images_room_img_11_jpg__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(208);
+/* harmony import */ var _images_room_img_12_jpg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(209);
+/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(34);
+/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(33);
+/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(35);
+/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(14);
+/* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(8);
+/* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(3);
+/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(7);
+/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(36);
 
-      if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1])) {
-        if (!activeDropdowns.includes(elem)) {
-          activeDropdowns.push(elem);
-        }
-      }
-    }
 
-    for (var _i = 0; _i < activeDropdowns.length; _i += 1) {
-      var _elem = activeDropdowns[_i];
 
-      var _inputs = _elem.querySelectorAll(inputSelector);
 
-      var popup = _elem.querySelector(popupSelector);
 
-      if (evt.composedPath().includes(popup)) return;
 
-      if (evt.composedPath().includes(_inputs[0]) || evt.composedPath().includes(_inputs[1])) {
-        _elem.classList.toggle(classNameToToggle);
-      } else {
-        _elem.classList.remove(classNameToToggle);
-      }
-    }
-  };
 
-  window.addEventListener('click', handleWindowClick);
 
-  if (applyBtnSelector) {
-    var _loop = function _loop(i) {
-      var elem = dropdownElems[i];
-      var applyBtn = elem.querySelector(applyBtnSelector);
 
-      applyBtn.onclick = function () {
-        elem.classList.remove(classNameToToggle);
-      };
-    };
 
-    for (var i = 0; i < dropdownElems.length; i += 1) {
-      _loop(i);
-    }
-  }
-};
 
-var changeValue = function changeValue(newValue, textElem, valueElem, fullText) {
-  var maxLength = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 27;
-  var text = fullText;
-  var input = textElem;
-  var value = valueElem;
 
-  if (fullText.length > maxLength) {
-    text = "".concat(fullText.slice(0, maxLength), "...").toLowerCase();
-  }
 
-  input.innerText = text;
-  value.innerText = newValue;
-};
 
-var countedItems = function countedItems(_ref2) {
-  var dropdownElems = _ref2.dropdownElems,
-      _ref2$textSelector = _ref2.textSelector,
-      textSelector = _ref2$textSelector === void 0 ? '.dropdown__text' : _ref2$textSelector,
-      _ref2$itemSelector = _ref2.itemSelector,
-      itemSelector = _ref2$itemSelector === void 0 ? '.items-popup__item' : _ref2$itemSelector,
-      _ref2$addBtnSelector = _ref2.addBtnSelector,
-      addBtnSelector = _ref2$addBtnSelector === void 0 ? '.items-popup__add-value' : _ref2$addBtnSelector,
-      _ref2$removeBtnSelect = _ref2.removeBtnSelector,
-      removeBtnSelector = _ref2$removeBtnSelect === void 0 ? '.items-popup__remove-value' : _ref2$removeBtnSelect,
-      _ref2$nameSelector = _ref2.nameSelector,
-      nameSelector = _ref2$nameSelector === void 0 ? '.items-popup__title' : _ref2$nameSelector,
-      _ref2$valueSelector = _ref2.valueSelector,
-      valueSelector = _ref2$valueSelector === void 0 ? '.items-popup__value h3' : _ref2$valueSelector,
-      _ref2$clearBtnSelecto = _ref2.clearBtnSelector,
-      clearBtnSelector = _ref2$clearBtnSelecto === void 0 ? '.items-popup__clear' : _ref2$clearBtnSelecto,
-      _ref2$clearBtnDisable = _ref2.clearBtnDisabledClass,
-      clearBtnDisabledClass = _ref2$clearBtnDisable === void 0 ? 'items-popup__clear_disabled' : _ref2$clearBtnDisable,
-      _ref2$inactiveBtnClas = _ref2.inactiveBtnClass,
-      inactiveBtnClass = _ref2$inactiveBtnClas === void 0 ? 'items-popup__change-value_inactive' : _ref2$inactiveBtnClas,
-      _ref2$defaultElemText = _ref2.defaultElemText,
-      defaultElemText = _ref2$defaultElemText === void 0 ? false : _ref2$defaultElemText,
-      _ref2$maxLength = _ref2.maxLength,
-      maxLength = _ref2$maxLength === void 0 ? 27 : _ref2$maxLength;
 
-  var _loop2 = function _loop2(i) {
-    var dropdown = dropdownElems[i];
-    var textElem = dropdown.querySelector(textSelector);
-    var items = dropdown.querySelectorAll(itemSelector);
-    var defaultText = defaultElemText || textElem.innerText;
-    var clearBtn = dropdown.querySelector(clearBtnSelector);
-    var itemsInfo = [];
-    var counter = 0;
 
-    var _loop3 = function _loop3(n) {
-      var item = items[n];
-      var addBtn = item.querySelector(addBtnSelector);
-      var removeBtn = item.querySelector(removeBtnSelector);
-      var nameElem = item.querySelector(nameSelector);
-      var valueElem = item.querySelector(valueSelector);
-      var itemNum = counter;
-      itemsInfo.push({
-        name: nameElem.innerText.toLowerCase(),
-        value: Number(valueElem.innerText)
-      });
-      var sumOfValues = 0;
 
-      for (var x = 0; x <= itemsInfo.length - 1; x += 1) {
-        sumOfValues += itemsInfo[x].value;
-      }
 
-      if (sumOfValues === 0) {
-        clearBtn.classList.add(clearBtnDisabledClass);
-      }
 
-      if (itemsInfo[itemNum].value === 0) {
-        if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
-      }
 
-      addBtn.onclick = function () {
-        if (itemsInfo[itemNum].value >= 0) {
-          if (inactiveBtnClass) removeBtn.classList.remove(inactiveBtnClass);
-        }
 
-        itemsInfo[itemNum].value += 1;
-        var fullText = '';
 
-        for (var a = 0; a < itemsInfo.length; a += 1) {
-          var itemInfo = itemsInfo[a];
 
-          if (itemInfo.value !== 0) {
-            fullText += "".concat(itemInfo.value, " ").concat(itemInfo.name, ", ");
-          }
-        }
 
-        fullText = fullText.slice(0, -2);
-
-        if (fullText === '') {
-          fullText = defaultText;
-        }
-
-        changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText.toLowerCase(), maxLength);
-        clearBtn.classList.remove(clearBtnDisabledClass);
-      };
-
-      removeBtn.onclick = function () {
-        if (itemsInfo[itemNum].value === 0) return;
-
-        if (itemsInfo[itemNum].value === 1) {
-          if (inactiveBtnClass) removeBtn.classList.add(inactiveBtnClass);
-        }
-
-        itemsInfo[itemNum].value -= 1;
-        var fullText = '';
-
-        for (var a = 0; a < itemsInfo.length; a += 1) {
-          var itemInfo = itemsInfo[a];
-
-          if (itemInfo.value !== 0) {
-            fullText += "".concat(itemInfo.value, " ").concat(itemInfo.name, ", ");
-          }
-        }
-
-        fullText = fullText.slice(0, -2);
-
-        if (fullText === '') {
-          fullText = defaultText;
-        }
-
-        changeValue(itemsInfo[itemNum].value, textElem, valueElem, fullText, maxLength);
-        sumOfValues = 0;
-
-        for (var _a = 0; _a <= itemsInfo.length - 1; _a += 1) {
-          sumOfValues += itemsInfo[_a].value;
-        }
-
-        if (sumOfValues === 0) {
-          clearBtn.classList.add(clearBtnDisabledClass);
-        }
-      };
-
-      counter += 1;
-    };
-
-    for (var n = 0; n < items.length; n += 1) {
-      _loop3(n);
-    }
-
-    clearBtn.onclick = function () {
-      counter = 0;
-
-      for (var _n = 0; _n < items.length; _n += 1) {
-        var item = items[_n];
-        var itemNum = counter;
-        var removeBtn = item.querySelector(removeBtnSelector);
-        var valueElem = item.querySelector(valueSelector);
-        itemsInfo[itemNum].value = 0;
-
-        if (inactiveBtnClass) {
-          removeBtn.classList.add(inactiveBtnClass);
-        }
-
-        changeValue(itemsInfo[itemNum].value, textElem, valueElem, defaultText, maxLength);
-        counter += 1;
-      }
-
-      clearBtn.classList.add(clearBtnDisabledClass);
-    };
-  };
-
-  for (var i = 0; i < dropdownElems.length; i += 1) {
-    _loop2(i);
-  }
-};
-
-$(document).ready(function () {
-  dropdownInit({
-    dropdownElems: $('.js-dropdown'),
-    popupSelector: '.dropdown__popup',
-    inputSelector: '.dropdown__input',
-    applyBtnSelector: '.items-popup__confirm',
-    classNameToToggle: 'dropdown_expanded'
-  });
-  countedItems({
-    dropdownElems: $('.js-dropdown.dropdown_facilities')
-  });
-  countedItems({
-    dropdownElems: $('.js-dropdown:not(.dropdown_facilities)'),
-    defaultElemText: 'Сколько гостей'
-  });
-  dropdownInit({
-    dropdownElems: $('.js-date-picker'),
-    popupSelector: '.ui-datepicker-inline',
-    inputSelector: '.date-picker__date',
-    applyBtnSelector: false,
-    classNameToToggle: 'date-picker_expanded'
-  });
+var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"](document.querySelector('.header'));
+var range = new _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"](document.querySelector('.range-slider'));
+var $rooms = $('.room-card');
+$rooms.each(function init() {
+  var room = new _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"](this);
 });
+var pagination = new _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"](document.querySelector('.pagination'));
+var dateDropdownElem = document.querySelector('.search-room__params-date .dropdown');
+var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_22__[/* default */ "a"]({
+  element: dateDropdownElem.querySelector('.date-picker'),
+  options: {
+    dateFormat: 'd M'
+  }
+});
+var datedropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__[/* default */ "a"](dateDropdownElem, datePicker, 'Даты пребывания в отеле');
+var guestsDropdownElem = document.querySelector('.search-room__params-guests .dropdown');
+var guestsCounterElem = guestsDropdownElem.querySelector('.items-counter');
+var guestsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"](guestsCounterElem, 'гостя');
+var guestsDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__[/* default */ "a"](guestsDropdownElem, guestsCounter, 'Сколько гостей');
+var facilitiesDropdownElem = document.querySelector('.search-room__params-facilities .dropdown');
+var facilitiesCounterElem = facilitiesDropdownElem.querySelector('.items-counter');
+var facilitiesCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"](facilitiesCounterElem);
+var facilitiesDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__[/* default */ "a"](facilitiesDropdownElem, facilitiesCounter, 'Удобства');
+var expandableCheckboxes = new _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_23__[/* default */ "a"](document.querySelector('.expandable-checkboxes'));
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 14 */
+
+/***/ 196:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var hamburgerSelector = '.js-header__hamburger';
-var menuSelector = '.js-header__menu';
-var displayStyle = 'flex';
-var hamburgerActiveClass = 'header__hamburger_active';
-var showOn = 1200;
-$(hamburgerSelector).click(function handlerHamburgerClick() {
-  var menu = $(this).parent().find(menuSelector);
-  $(this).toggleClass(hamburgerActiveClass);
+var pug = __webpack_require__(10);
 
-  if (menu.css('display') !== 'none') {
-    menu.css('display', 'none');
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
+    var locals_for_with = (locals || {});
+    
+    (function (Array, hovered, long, noFrame, pug_indent, secondary, textColor) {
+      var pug_indent = [];
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["dropdown__title"] = pug_interp = function(title){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__title\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+          text: title,
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["dropdown__text-field"] = pug_interp = function({inputOptions, title = false, active = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+if ((title)) {
+pug_indent.push('  ');
+pug_mixins["dropdown__title"](title);
+pug_indent.pop();
+}
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                ...inputOptions,
+                maskedDate: false,
+                readonly: true
+            },
+            arrowOptions: true,
+            modifiers: {
+                focused: active,
+                flatBottom: active,
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["dropdown__popup"] = pug_interp = function({mixinName, mixinParams = {}, hidden = true} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'dropdown__popup';
+if (hidden) {
+    className += ' dropdown__popup_hidden';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+if ((mixinName)) {
+pug_indent.push('  ');
+pug_mixins[mixinName](mixinParams);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false, short = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'dropdown';
+if (double) {
+    className += ' dropdown_double';
+}
+if (short) {
+  className += ' dropdown_short';
+}
+
+if (double) {
+    if (!Array.isArray(title)) {
+        title = [title, title];
+    }
+    if (!Array.isArray(inputOptions)) {
+        inputOptions = [inputOptions, inputOptions];
+    }
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+if ((double)) {
+pug_indent.push('  ');
+pug_mixins["dropdown__text-field"]({
+                inputOptions: inputOptions[0],
+                title: title[0],
+                active: !hiddenPopup
+            });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["dropdown__text-field"]({
+                inputOptions: inputOptions[1],
+                title: title[1],
+                active: !hiddenPopup
+            });
+pug_indent.pop();
+}
+else {
+pug_indent.push('  ');
+pug_mixins["dropdown__text-field"]({
+                inputOptions,
+                title,
+                active: !hiddenPopup
+            });
+pug_indent.pop();
+}
+pug_indent.push('  ');
+pug_mixins["dropdown__popup"]({
+            mixinName: popupMixinOptions.name,
+            mixinParams: popupMixinOptions.params,
+            hidden: hiddenPopup
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["counting-item__name"] = pug_interp = function(name){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__name\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+            text: name
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["counting-item__change-button"] = pug_interp = function(sign){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'counting-item__change-button';
+if (sign === '+') {
+    className += ' counting-item__change-button_plus';
+} else if (sign === '-') {
+    className += ' counting-item__change-button_minus';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = sign) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["counting-item__value"] = pug_interp = function(value){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__value\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+            text: value
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["counting-item__counter"] = pug_interp = function(currentValue){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__counter\"\u003E";
+pug_indent.push('  ');
+pug_mixins["counting-item__change-button"]('-');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["counting-item__value"](currentValue);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["counting-item__change-button"]('+');
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"counting-item\"\u003E";
+pug_indent.push('  ');
+pug_mixins["counting-item__name"](name);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["counting-item__counter"](value);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["items-counter__item"] = pug_interp = function({ name = '', value = 0 } = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__item\"\u003E";
+pug_indent.push('  ');
+pug_mixins["counting-item"]({ name, value });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["items-counter__items-list"] = pug_interp = function(items){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__items-list\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var pug_index0 = 0, $$l = $$obj.length; pug_index0 < $$l; pug_index0++) {
+        var item = $$obj[pug_index0];
+pug_indent.push('  ');
+pug_mixins["items-counter__item"](item);
+pug_indent.pop();
+      }
   } else {
-    menu.css('display', displayStyle);
-  }
-});
-
-var handlerWindowResize = function handlerWindowResize() {
-  if (window.innerWidth >= showOn) {
-    if ($(menuSelector).css('display') === 'none') {
-      $(menuSelector).css('display', displayStyle);
-    } else {
-      $(menuSelector).css('display', '');
+    var $$l = 0;
+    for (var pug_index0 in $$obj) {
+      $$l++;
+      var item = $$obj[pug_index0];
+pug_indent.push('  ');
+pug_mixins["items-counter__item"](item);
+pug_indent.pop();
     }
   }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
 };
 
-window.addEventListener('resize', handlerWindowResize);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["items-counter__apply-button"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button\"\u003E";
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Применить',
+            link: false,
+            modifiers: {
+                noFrame: true,
+                color: 'purple'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["items-counter__clear-button"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button\"\u003E";
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Очистить',
+            link: false,
+            modifiers: {
+                noFrame: true,
+                textColor: 'gray'
+          }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["items-counter__button-panel"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__button-panel\"\u003E";
+pug_indent.push('  ');
+pug_mixins["items-counter__clear-button"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["items-counter__apply-button"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'items-counter';
+if (withoutButtons) {
+    className += ' items-counter_without-buttons';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["items-counter__items-list"](items);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["items-counter__button-panel"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["date-picker"] = pug_interp = function({withBorder = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'date-picker js-date-picker';
+if (withBorder) {
+    className += ' date-picker_with-border';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["range-slider__value"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"range-slider__value js-range-slider__value\"\u003E\u003C\u002Fspan\u003E";
+};
+pug_mixins["range-slider__info"] = pug_interp = function(title){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"range-slider__info\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({ text: title });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["range-slider__value"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["range-slider__slider"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"range-slider__slider js-range-slider__slider\"\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["range-slider__description"] = pug_interp = function(desc){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"range-slider__description\"\u003E" + (pug.escape(null == (pug_interp = desc) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["range-slider"] = pug_interp = function(title, description = false){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"range-slider\"\u003E";
+pug_indent.push('  ');
+pug_mixins["range-slider__info"](title);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["range-slider__slider"]();
+pug_indent.pop();
+if (description) {
+pug_indent.push('  ');
+pug_mixins["range-slider__description"](description);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["checkbox-buttons__input"] = pug_interp = function(checked){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (" class=\"checkbox-buttons__input\""+" type=\"checkbox\""+pug.attr("checked", checked, true, true)) + "\u003E";
+};
+pug_mixins["checkbox-buttons__name"] = pug_interp = function(name){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__name\"\u003E" + (null == (pug_interp = name) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
+};
+pug_mixins["checkbox-buttons__description"] = pug_interp = function(desc){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__description\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
+};
+pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, rich = false }){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Clabel class=\"checkbox-buttons__button\"\u003E";
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__input"](item.checked);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__name"](item.name);
+pug_indent.pop();
+if ((rich)) {
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__description"](item.description);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Flabel\u003E";
+};
+pug_mixins["checkbox-buttons"] = pug_interp = function({items, rich = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'checkbox-buttons';
+if (rich) {
+    className += ' checkbox-buttons_rich';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var pug_index1 = 0, $$l = $$obj.length; pug_index1 < $$l; pug_index1++) {
+        var item = $$obj[pug_index1];
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__button"]({
+              item,
+              rich
+            });
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var pug_index1 in $$obj) {
+      $$l++;
+      var item = $$obj[pug_index1];
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__button"]({
+              item,
+              rich
+            });
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["expandable-checkboxes__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"expandable-checkboxes__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["expandable-checkboxes__title"] = pug_interp = function(title){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"expandable-checkboxes__title\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({ text: title });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["expandable-checkboxes__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["checkbox-buttons__input"] = pug_interp = function(checked){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (" class=\"checkbox-buttons__input\""+" type=\"checkbox\""+pug.attr("checked", checked, true, true)) + "\u003E";
+};
+pug_mixins["checkbox-buttons__name"] = pug_interp = function(name){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__name\"\u003E" + (null == (pug_interp = name) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
+};
+pug_mixins["checkbox-buttons__description"] = pug_interp = function(desc){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__description\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
+};
+pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, rich = false }){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Clabel class=\"checkbox-buttons__button\"\u003E";
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__input"](item.checked);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__name"](item.name);
+pug_indent.pop();
+if ((rich)) {
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__description"](item.description);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Flabel\u003E";
+};
+pug_mixins["checkbox-buttons"] = pug_interp = function({items, rich = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'checkbox-buttons';
+if (rich) {
+    className += ' checkbox-buttons_rich';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var pug_index2 = 0, $$l = $$obj.length; pug_index2 < $$l; pug_index2++) {
+        var item = $$obj[pug_index2];
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__button"]({
+              item,
+              rich
+            });
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var pug_index2 in $$obj) {
+      $$l++;
+      var item = $$obj[pug_index2];
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons__button"]({
+              item,
+              rich
+            });
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["expandable-checkboxes__checkboxes"] = pug_interp = function(items){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"expandable-checkboxes__checkboxes\"\u003E";
+pug_indent.push('  ');
+pug_mixins["checkbox-buttons"]({ items });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["expandable-checkboxes"] = pug_interp = function({title='Expandable checkbox list', items, expanded = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'expandable-checkboxes';
+if (expanded) {
+    className += ' expandable-checkboxes_expanded';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["expandable-checkboxes__title"](title);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["expandable-checkboxes__checkboxes"](items);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-card__img"] = pug_interp = function(src){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cimg" + (" class=\"room-card__img\""+pug.attr("src", src, true, true)+" alt=\"room-image\"") + "\u003E";
+};
+pug_mixins["room-card__slider"] = pug_interp = function({imagesSrc, sliderArrows = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'room-card__slider js-room-card__slider';
+if (sliderArrows) {
+    className += ' room-card__slider_with-arrows';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+// iterate imagesSrc
+;(function(){
+  var $$obj = imagesSrc;
+  if ('number' == typeof $$obj.length) {
+      for (var pug_index3 = 0, $$l = $$obj.length; pug_index3 < $$l; pug_index3++) {
+        var src = $$obj[pug_index3];
+pug_indent.push('  ');
+pug_mixins["room-card__img"](src);
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var pug_index3 in $$obj) {
+      $$l++;
+      var src = $$obj[pug_index3];
+pug_indent.push('  ');
+pug_mixins["room-card__img"](src);
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-info__number-sign"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"room-info__number-sign\"\u003E№\u003C\u002Fspan\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["room-info__number"] = pug_interp = function(number, small = false){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'room-info__number';
+let text = '';
+if (small) {
+    className += ' room-info__number_small';
+    text = number;
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + ("\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)));
+if ((!small)) {
+pug_indent.push('  ');
+pug_mixins["heading"]({
+                text: number,
+                type: 'h1'
+            });
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-info__type"] = pug_interp = function(type){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"room-info__type\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({
+            text: type,
+            color: 'purple',
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-info__name"] = pug_interp = function({number, type = false, small = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"room-info__name\"\u003E";
+pug_indent.push('  ');
+pug_mixins["room-info__number-sign"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["room-info__number"](number, small);
+pug_indent.pop();
+if ((type)) {
+pug_indent.push('  ');
+pug_mixins["room-info__type"](type);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-info__price-measure"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"room-info__price-measure\"\u003Eв сутки\u003C\u002Fspan\u003E";
+};
+pug_mixins["room-info__price"] = pug_interp = function(price){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + ("\u003Cdiv class=\"room-info__price\"\u003E" + (pug.escape(null == (pug_interp = price + '₽') ? "" : pug_interp)));
+pug_indent.push('  ');
+pug_mixins["room-info__price-measure"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-info"] = pug_interp = function({number, type = false, price, smallName = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"room-info\"\u003E";
+pug_indent.push('  ');
+pug_mixins["room-info__name"]({ number, type, small: smallName });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["room-info__price"](price);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-card__room-info"] = pug_interp = function(roomInfo){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"room-card__room-info\"\u003E";
+pug_indent.push('  ');
+pug_mixins["room-info"]({
+            ...roomInfo,
+            smallName: true
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["rate-button__star"] = pug_interp = function(active){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'material-icons rate-button__star';
+if (active) {
+    className += ' rate-button__star_active';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["rate-button"] = pug_interp = function(currentRating){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"rate-button\"\u003E";
+for (let i = 1; i <= 5; i++)
+{
+pug_indent.push('  ');
+pug_mixins["rate-button__star"](i <= currentRating);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-card__comments"] = pug_interp = function(numOfComments){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + ("\u003Cdiv class=\"room-card__comments\"\u003E" + (pug.escape(null == (pug_interp = numOfComments) ? "" : pug_interp)));
+pug_indent.push('  ');
+pug_mixins["room-card__comments-measure"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-card__comments-measure"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"room-card__comments-measure\"\u003EОтзывов\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-card__rating-and-comments"] = pug_interp = function({rating, numOfComments}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"room-card__rating-and-comments\"\u003E";
+pug_indent.push('  ');
+pug_mixins["rate-button"](rating);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["room-card__comments"](numOfComments);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["room-card__content"] = pug_interp = function({roomInfo, rating, numOfComments, link = 'room-details.html'}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"room-card__content\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["room-card__room-info"](roomInfo);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["room-card__rating-and-comments"]({
+            rating,
+            numOfComments
+        });
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["room-card"] = pug_interp = function({imagesSrc, sliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"room-card\"\u003E";
+pug_indent.push('  ');
+pug_mixins["room-card__slider"]({
+          imagesSrc,
+          sliderArrows
+        });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["room-card__content"]({roomInfo, rating, numOfComments, link});
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["pagination"] = pug_interp = function(desc){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"pagination\"\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"pagination__pages js-pagination__pages\"\u003E\u003C\u002Fdiv\u003E\u003Cspan class=\"pagination__desc\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__item-arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({ small: true });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+};
+pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation__item';
+if (active) {
+    className += ' navigation__item_active';
+}
+if (dropdown) {
+    className += ' navigation__item_with-dropdown'
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+if ((dropdown)) {
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__item-arrow"]();
+pug_indent.pop();
+}
+else {
+pug_indent.push('  ');
+pug_mixins["navigation__link"](name, link);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+};
+pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
+        var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var itemIndex in $$obj) {
+      $$l++;
+      var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ful\u003E";
+};
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation';
+if (inColumn) {
+    className += ' navigation_in-column';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["header__nav-container"] = pug_interp = function(activeLinkIndex){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav class=\"header__nav-container\"\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation"]({
+            activeLinkIndex,
+            items: [
+                {
+                    name: 'О нас',
+                    dropdown: false
+                },
+                {
+                    name: 'Услуги',
+                    dropdown: true
+                },
+                {
+                    name: 'Вакансии',
+                    dropdown: false
+                },
+                {
+                    name: 'Новости',
+                    dropdown: false
+                },
+                {
+                    name: 'Соглашения',
+                    dropdown: true
+                }
+            ]
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button__arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({
+            type: 'forward',
+            color: 'white'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.secondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.noFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_no-frame';
+}
+if (modifiers.long) {
+    className += ' button_long';
+}
+if (modifiers.hovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["button__link"](headingOptions, link);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button__arrow"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["header__buttons"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Войти',
+            link: 'login-and-registration.html',
+            modifiers: {
+                secondary: true
+            }
+        });
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["button"]({
+            text: 'Зарегистрироваться',
+            link: 'login-and-registration.html'
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__user"] = pug_interp = function(name){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__user\"\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__menu"] = pug_interp = function(userName, activeLink){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__nav-container"](activeLink);
+pug_indent.pop();
+if (userName) {
+pug_indent.push('  ');
+pug_mixins["header__user"](userName);
+pug_indent.pop();
+}
+else {
+pug_indent.push('  ');
+pug_mixins["header__buttons"]();
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__hamburger-line"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E";
+};
+pug_mixins["header__hamburger"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__hamburger-line"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__hamburger-line"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__hamburger-line"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header__logo"] = pug_interp = function(link = 'landing-page.html'){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"header__logo\""+pug.attr("href", link, true, true)) + "\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E";
+};
+pug_mixins["header__container"] = pug_interp = function(user, activeLink){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__logo"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__menu"](user, activeLink);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["header__hamburger"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["header"] = pug_interp = function(user, activeLink = 0){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cheader class=\"header\"\u003E";
+pug_indent.push('  ');
+pug_mixins["header__container"](user, activeLink);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fheader\u003E";
+};
+pug_mixins["footer__description"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__description\"\u003EБронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__main-info"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__main-info\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__description"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__item-arrow"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"]({ small: true });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+};
+pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation__item';
+if (active) {
+    className += ' navigation__item_active';
+}
+if (dropdown) {
+    className += ' navigation__item_with-dropdown'
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+if ((dropdown)) {
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__item-arrow"]();
+pug_indent.pop();
+}
+else {
+pug_indent.push('  ');
+pug_mixins["navigation__link"](name, link);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+};
+pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
+        var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+      }
+  } else {
+    var $$l = 0;
+    for (var itemIndex in $$obj) {
+      $$l++;
+      var item = $$obj[itemIndex];
+const active = itemIndex === activeItem;
+pug_indent.push('  ');
+pug_mixins["navigation__item"]({
+                active,
+                name: item.name,
+                dropdown: item.dropdown
+            });
+pug_indent.pop();
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ful\u003E";
+};
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation';
+if (inColumn) {
+    className += ' navigation_in-column';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["footer__subtitle"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({ text });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__nav"] = pug_interp = function(title, items){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__nav\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__subtitle"](title);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["navigation"]({
+            items,
+            inColumn: true
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__menu"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__menu\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__nav"]('Навигация', [
+            { name: 'О нас' },
+            { name: 'Новости' },
+            { name: 'Служба поддержки' },
+            { name: 'Услуги' }
+        ]);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__nav"]('О нас', [
+            { name: 'О сервисе' },
+            { name: 'Наша команда' },
+            { name: 'Вакансии' },
+            { name: 'Инвесторы' }
+        ]);
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__nav"]('Служба поддержки', [
+          { name: 'Соглашения' },
+          { name: 'Сообщества' },
+          { name: 'Связь с нами' }
+        ]);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field__input';
+if (maskedDate) {
+    className += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (small) {
+    className += ' arrow_small';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('  ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.focused) {
+    className += ' text-field_focused';
+}
+if (modifiers.short) {
+    className += ' text-field_short';
+}
+if (modifiers.flatBottom) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["text-field__input"](inputOptions);
+pug_indent.pop();
+if ((arrowOptions)) {
+pug_indent.push('  ');
+pug_mixins["text-field__arrow"](arrowOptions);
+pug_indent.pop();
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["footer__subtitle"] = pug_interp = function(text){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('  ');
+pug_mixins["heading"]({ text });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__subscription-text"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПолучайте специальные предложения и новости сервиса\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__subscription"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subscription\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__subtitle"]('Подписка');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__subscription-text"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["text-field"]({
+            inputOptions: {
+                placeholder: 'Email',
+                type: 'email'
+            },
+            modifiers: {
+                short: true
+            },
+            arrowOptions: {
+                type: 'forward',
+                color: 'purple'
+            }
+        });
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__body"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__body\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__main-info"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__menu"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__subscription"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["social-links__icon"] = pug_interp = function(name){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ci" + (pug.attr("class", pug.classes(["social-links__icon","fab",`fa-${name}`], [false,false,true]), false, true)) + "\u003E\u003C\u002Fi\u003E";
+};
+pug_mixins["social-links__link"] = pug_interp = function(name, link = 'change-me'){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\u003Ca" + (" class=\"social-links__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_indent.push('  ');
+pug_mixins["social-links__icon"](name);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E";
+};
+pug_mixins["social-links"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"social-links\"\u003E";
+pug_indent.push('  ');
+pug_mixins["social-links__link"]('twitter');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["social-links__link"]('facebook-square');
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["social-links__link"]('instagram');
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__bottom"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\u003Cspan\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fspan\u003E";
+pug_indent.push('  ');
+pug_mixins["social-links"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer__line"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__line\"\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+const navLinks = ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
+const aboutLinks = ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
+const supportLinks = ['Соглашения', 'Сообщества', 'Связь с нами']
+
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cfooter class=\"footer\"\u003E";
+pug_indent.push('  ');
+pug_mixins["footer__body"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__line"]();
+pug_indent.pop();
+pug_indent.push('  ');
+pug_mixins["footer__bottom"]();
+pug_indent.pop();
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ffooter\u003E";
+};
+const title = 'Search room'
+const fileName = 'search-room'
+pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
+pug_indent.push('    ');
+pug_mixins["header"](false, false);
+pug_indent.pop();
+pug_html = pug_html + "\n    \u003Cmain class=\"search-room\"\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"search-room__container\"\u003E\n          \u003Caside class=\"search-room__params\"\u003E\n            \u003Cdiv class=\"search-room__params-date\"\u003E";
+pug_indent.push('              ');
+pug_mixins["dropdown"]({
+                            title: 'Даты пребывания в отеле',
+                            inputOptions: {
+                                value: '19 авг - 23 авг',
+                                placeholder: 'Дата'
+                            },
+                            popupMixinOptions: {
+                                name: 'date-picker'
+                            },
+                            short: true
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-guests\"\u003E";
+pug_indent.push('              ');
+pug_mixins["dropdown"]({
+                            title: 'Гости',
+                            inputOptions: {
+                                value: '3 гостя, 1 младенец',
+                                placeholder: 'Удобства'
+                            },
+                            popupMixinOptions: {
+                                name: 'items-counter',
+                                params: {
+                                    items: [
+                                        {
+                                            name: 'Взрослые',
+                                            value: 3
+                                        },
+                                        {
+                                            name: 'Дети',
+                                            value: 0
+                                        },
+                                        {
+                                            name: 'Младенцы',
+                                            value: 1
+                                        }
+                                    ],
+                                    withoutButtons: true
+                                }
+                            },
+                            short: true
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-price\"\u003E";
+pug_indent.push('              ');
+pug_mixins["range-slider"]('Диапазон цены', 'Стоимость за сутки пребывания в номере');
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-rules\"\u003E\n              \u003Cdiv class=\"search-room__subtitle\"\u003E";
+pug_indent.push('                ');
+pug_mixins["heading"]({ text: 'Правила дома' });
+pug_indent.pop();
+pug_html = pug_html + "\n              \u003C\u002Fdiv\u003E";
+pug_indent.push('              ');
+pug_mixins["checkbox-buttons"]({
+                            items: [
+                                {
+                                    name: 'Можно курить',
+                                    checked: false
+                                },
+                                {
+                                    name: 'Можно с питомцами',
+                                    checked: true
+                                },
+                                {
+                                    name: 'Можно пригласить гостей<br>(до 10 человек)',
+                                    checked: true
+                                }
+                            ],
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-availability\"\u003E\n              \u003Cdiv class=\"search-room__subtitle\"\u003E";
+pug_indent.push('                ');
+pug_mixins["heading"]({ text: 'Доступность' });
+pug_indent.pop();
+pug_html = pug_html + "\n              \u003C\u002Fdiv\u003E";
+pug_indent.push('              ');
+pug_mixins["checkbox-buttons"]({
+                            items: [
+                                {
+                                    name: 'Широкий коридор',
+                                    description: 'Ширина коридоров в номере<br>не менее 91 см.',
+                                    checked: false
+                                },
+                                {
+                                    name: 'Помощник для инвалидов',
+                                    description: 'На 1 этаже вас встретит специалист<br>и ' +
+                                      'проводит до номера.',
+                                    checked: false
+                                }
+                            ],
+                            rich: true
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-facilities\"\u003E";
+pug_indent.push('              ');
+pug_mixins["dropdown"]({
+                            title: 'Удобства номера',
+                            inputOptions: {
+                                value: '2 спальни, 2 кровати...',
+                                placeholder: 'Удобства'
+                            },
+                            popupMixinOptions: {
+                                name: 'items-counter',
+                                params: {
+                                    items: [
+                                        {
+                                            name: 'Спальни',
+                                            value: '2'
+                                        },
+                                        {
+                                            name: 'Кровати',
+                                            value: '2'
+                                        },
+                                        {
+                                            name: 'Ванные комнаты',
+                                            value: '0'
+                                        }
+                                    ],
+                                    withoutButtons: true
+                                }
+                            },
+                            short: true,
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-list\"\u003E";
+pug_indent.push('              ');
+pug_mixins["expandable-checkboxes"]({
+                            title: 'Дополнительные удобства',
+                            items: [
+                                {
+                                    name: 'Завтрак',
+                                    checked: false
+                                },
+                                {
+                                    name: 'Письменный стол',
+                                    checked: true
+                                },
+                                {
+                                    name: 'Стул для кормления',
+                                    checked: true
+                                },
+                                {
+                                    name: 'Кроватка',
+                                    checked: true
+                                },
+                                {
+                                    name: 'Телевизор',
+                                    checked: false
+                                },
+                                {
+                                    name: 'Шампунь',
+                                    checked: false
+                                }
+                            ]
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n          \u003C\u002Faside\u003E\n          \u003Csection class=\"search-room__rooms-section\"\u003E\n            \u003Cdiv class=\"search-room__rooms-section-title\"\u003E";
+pug_indent.push('              ');
+pug_mixins["heading"]({
+                            type: 'h1',
+                            text: 'Номера, которые мы для вас подобрали'
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__room-cards\"\u003E";
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_1.jpg', 'images/room-img_2.jpg',
+                                'images/room-img_3.jpg', 'images/room-img_4.jpg'
+                            ],
+                            roomInfo: {
+                                number: 888,
+                                type: 'Люкс',
+                                price: '9 990'
+                            },
+                            numOfComments: 145,
+                            sliderArrows: true,
+                            rating: 5,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_2.jpg', 'images/room-img_3.jpg',
+                                'images/room-img_4.jpg', 'images/room-img_5.jpg'
+                            ],
+                            roomInfo: {
+                                number: 840,
+                                type: false,
+                                price: '9 900'
+                            },
+                            numOfComments: 65,
+                            rating: 4,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_3.jpg', 'images/room-img_4.jpg',
+                                'images/room-img_5.jpg', 'images/room-img_6.jpg'
+                            ],
+                            roomInfo: {
+                                number: 980,
+                                type: 'Люкс',
+                                price: '8 500'
+                            },
+                            numOfComments: 35,
+                            rating: 3,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_4.jpg', 'images/room-img_5.jpg',
+                                'images/room-img_6.jpg', 'images/room-img_7.jpg'
+                            ],
+                            roomInfo: {
+                                number: 856,
+                                type: false,
+                                price: '7 300'
+                            },
+                            numOfComments: 19,
+                            rating: 5,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_5.jpg', 'images/room-img_6.jpg',
+                                'images/room-img_7.jpg', 'images/room-img_8.jpg'
+                            ],
+                            roomInfo: {
+                                number: 740,
+                                type: false,
+                                price: '6 000'
+                            },
+                            numOfComments: 44,
+                            rating: 4,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_6.jpg', 'images/room-img_7.jpg',
+                                'images/room-img_8.jpg', 'images/room-img_9.jpg'
+                            ],
+                            roomInfo: {
+                                number: 982,
+                                type: false,
+                                price: '5 800'
+                            },
+                            numOfComments: 56,
+                            rating: 3,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_7.jpg', 'images/room-img_8.jpg',
+                                'images/room-img_9.jpg', 'images/room-img_10.jpg'
+                            ],
+                            roomInfo: {
+                                number: 678,
+                                type: false,
+                                price: '5 500'
+                            },
+                            numOfComments: 45,
+                            rating: 5,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_8.jpg', 'images/room-img_9.jpg',
+                                'images/room-img_10.jpg', 'images/room-img_11.jpg'
+                            ],
+                            roomInfo: {
+                                number: 450,
+                                type: false,
+                                price: '5 300'
+                            },
+                            numOfComments: 39,
+                            rating: 4,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_9.jpg', 'images/room-img_10.jpg',
+                                'images/room-img_11.jpg', 'images/room-img_12.jpg'
+                            ],
+                            roomInfo: {
+                                number: 350,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 77,
+                            rating: 3,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_10.jpg', 'images/room-img_11.jpg',
+                                'images/room-img_12.jpg', 'images/room-img_1.jpg'
+                            ],
+                            roomInfo: {
+                                number: 666,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 25,
+                            rating: 5,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_11.jpg', 'images/room-img_12.jpg',
+                                'images/room-img_1.jpg', 'images/room-img_2.jpg'
+                            ],
+                            roomInfo: {
+                                number: 444,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 15,
+                            rating: 3,
+                        });
+pug_indent.pop();
+pug_indent.push('              ');
+pug_mixins["room-card"]({
+                            imagesSrc: [
+                                'images/room-img_12.jpg', 'images/room-img_1.jpg',
+                                'images/room-img_2.jpg', 'images/room-img_3.jpg'
+                            ],
+                            roomInfo: {
+                                number: 352,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 55,
+                            rating: 3,
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__pagination\"\u003E";
+pug_indent.push('              ');
+pug_mixins["pagination"]('1 – 12 из 100+ вариантов аренды');
+pug_indent.pop();
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n          \u003C\u002Fsection\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fmain\u003E";
+pug_indent.push('    ');
+pug_mixins["footer"]();
+pug_indent.pop();
+pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
+    }.call(this, "Array" in locals_for_with ?
+        locals_for_with.Array :
+        typeof Array !== 'undefined' ? Array : undefined, "hovered" in locals_for_with ?
+        locals_for_with.hovered :
+        typeof hovered !== 'undefined' ? hovered : undefined, "long" in locals_for_with ?
+        locals_for_with.long :
+        typeof long !== 'undefined' ? long : undefined, "noFrame" in locals_for_with ?
+        locals_for_with.noFrame :
+        typeof noFrame !== 'undefined' ? noFrame : undefined, "pug_indent" in locals_for_with ?
+        locals_for_with.pug_indent :
+        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "secondary" in locals_for_with ?
+        locals_for_with.secondary :
+        typeof secondary !== 'undefined' ? secondary : undefined, "textColor" in locals_for_with ?
+        locals_for_with.textColor :
+        typeof textColor !== 'undefined' ? textColor : undefined));
+    ;;return pug_html;};
+module.exports = template;
 
 /***/ }),
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */
+
+/***/ 197:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var starSelector = '.js-rate-button__star';
-var activeStarClass = 'rate-button__star_active';
-$(starSelector).hover(function handleStarHover() {
-  $(this).addClass(activeStarClass);
-  $(this).parent().find("".concat(starSelector, ":lt(").concat($(this).index(), ")")).addClass(activeStarClass);
-  $(this).parent().find("".concat(starSelector, ":gt(").concat($(this).index(), ")")).removeClass(activeStarClass);
-}).mouseout(function handleStarMouseout() {
-  $(this).parent().find("".concat(starSelector, ":eq(").concat($(this).parent().data('current-rating'), ")")).removeClass(activeStarClass);
-  $(this).parent().find("".concat(starSelector, ":gt(").concat($(this).parent().data('current-rating'), ")")).removeClass(activeStarClass);
-  $(this).parent().find("".concat(starSelector, ":lt(").concat($(this).parent().data('current-rating'), ")")).addClass(activeStarClass);
-}).click(function handleStarClick() {
-  $(this).parent().data('current-rating', $(this).index() + 1);
-  $(this).addClass(activeStarClass);
-  $(this).parent().find("".concat(starSelector, ":lt(").concat($(this).index(), ")")).addClass(activeStarClass);
-  $(this).parent().find("".concat(starSelector, ":gt(").concat($(this).index(), ")")).removeClass(activeStarClass);
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
 
 /***/ }),
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
+
+/***/ 198:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_1.jpg");
+
+/***/ }),
+
+/***/ 199:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_2.jpg");
+
+/***/ }),
+
+/***/ 200:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_3.jpg");
+
+/***/ }),
+
+/***/ 201:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_4.jpg");
+
+/***/ }),
+
+/***/ 202:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_5.jpg");
+
+/***/ }),
+
+/***/ 203:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_6.jpg");
+
+/***/ }),
+
+/***/ 204:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_7.jpg");
+
+/***/ }),
+
+/***/ 205:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_8.jpg");
+
+/***/ }),
+
+/***/ 206:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_9.jpg");
+
+/***/ }),
+
+/***/ 207:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_10.jpg");
+
+/***/ }),
+
+/***/ 208:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_11.jpg");
+
+/***/ }),
+
+/***/ 209:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_12.jpg");
+
+/***/ }),
+
+/***/ 29:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14114,7 +16734,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(5) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -14830,40 +17450,988 @@ return $.widget;
 
 
 /***/ }),
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */
+
+/***/ 3:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Dropdown = /*#__PURE__*/function () {
+  function Dropdown(elem) {
+    var _this = this;
+
+    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    _classCallCheck(this, Dropdown);
+
+    this.elem = elem;
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.defaultValue = defaultInputValue;
+    this.popup = this.getPopup();
+    this.hiddenPopupClass = 'dropdown__popup_hidden';
+    this.doubleDropdownClass = 'dropdown_double';
+    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
+    this.listening = false;
+
+    if (!this.isPopupHidden()) {
+      this.textFields.forEach(function (el) {
+        var _el$classList;
+
+        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
+      });
+    }
+
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.addWindowListener();
+
+    if (blockInPopupInstance) {
+      this.blockInPopupInstance = blockInPopupInstance;
+
+      try {
+        this.blockInPopupInstance.subscribe(this);
+      } catch (err) {
+        throw new Error('blockInPopupInstance must have a subscribe method');
+      }
+    }
+  }
+
+  _createClass(Dropdown, [{
+    key: "update",
+    value: function update(action) {
+      var _this2 = this;
+
+      this.changeTextFieldValue(action.valueText);
+
+      if (action.type === 'CLICK_APPLY-BUTTON') {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList2;
+
+          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "changeTextFieldValue",
+    value: function changeTextFieldValue(text) {
+      var _this3 = this;
+
+      if (this.isDropdownDouble()) {
+        if (Array.isArray(text)) {
+          text.forEach(function (value, i) {
+            if (!value) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = value;
+            }
+          });
+        } else {
+          this.textFieldInputs.forEach(function (input, i) {
+            if (!text) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = text;
+            }
+          });
+        }
+      } else if (!text) {
+        this.textFieldInputs[0].value = this.defaultValue;
+      } else {
+        this.textFieldInputs[0].value = text;
+      }
+    }
+  }, {
+    key: "getPopup",
+    value: function getPopup() {
+      var popupSelector = '.dropdown__popup';
+      return this.elem.querySelector(popupSelector);
+    }
+  }, {
+    key: "getTextFields",
+    value: function getTextFields() {
+      var textFieldSelector = '.dropdown__text-field .text-field';
+      return this.elem.querySelectorAll(textFieldSelector);
+    }
+  }, {
+    key: "getTextFieldInputs",
+    value: function getTextFieldInputs() {
+      var inputSelector = '.text-field__input';
+      var inputs = [];
+      this.textFields.forEach(function (elem) {
+        inputs.push(elem.querySelector(inputSelector));
+      });
+      return inputs;
+    }
+  }, {
+    key: "isPopupHidden",
+    value: function isPopupHidden() {
+      return this.popup.classList.contains(this.hiddenPopupClass);
+    }
+  }, {
+    key: "isDropdownDouble",
+    value: function isDropdownDouble() {
+      return this.elem.classList.contains(this.doubleDropdownClass);
+    }
+  }, {
+    key: "addWindowListener",
+    value: function addWindowListener() {
+      window.addEventListener('click', this.handleWindowClick);
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      var _this4 = this;
+
+      if (evt.path.includes(this.elem)) {
+        this.listening = true;
+
+        if (!evt.path.includes(this.popup)) {
+          if (this.isPopupHidden()) {
+            this.popup.classList.remove(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList3;
+
+              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          } else {
+            this.popup.classList.add(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList4;
+
+              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          }
+        }
+      } else if (this.listening) {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList5;
+
+          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
+        });
+      }
+    }
+  }]);
+
+  return Dropdown;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
+
+/***/ }),
+
+/***/ 33:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(83);
 /* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(40);
+/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(84);
 /* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _rate_button_rate_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20);
-/* harmony import */ var _rate_button_rate_button__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_rate_button_rate_button__WEBPACK_IMPORTED_MODULE_2__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
-$('.js-room-card__slider').slick({
-  dots: true,
-  arrows: true,
-  prevArrow: '<i class="slick-prev slick-arrow material-icons" aria-label="Next"></i>',
-  nextArrow: '<i class="slick-next slick-arrow material-icons" aria-label="Next"></i>'
-});
+
+var RoomCard = /*#__PURE__*/function () {
+  function RoomCard(elem) {
+    _classCallCheck(this, RoomCard);
+
+    this.elem = elem;
+    this.init();
+  }
+
+  _createClass(RoomCard, [{
+    key: "getSliderElem",
+    value: function getSliderElem() {
+      var sliderSelector = '.room-card__slider';
+      return this.elem.querySelector(sliderSelector);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      $(this.getSliderElem()).slick({
+        dots: true,
+        arrows: true,
+        prevArrow: '<i class="slick-prev slick-arrow material-icons" aria-label="Next"></i>',
+        nextArrow: '<i class="slick-next slick-arrow material-icons" aria-label="Next"></i>'
+      });
+    }
+  }]);
+
+  return RoomCard;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (RoomCard);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 39 */
+
+/***/ 34:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(85);
+/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var RangeSlider = /*#__PURE__*/function () {
+  function RangeSlider(elem) {
+    _classCallCheck(this, RangeSlider);
+
+    this.rubSymbol = '₽';
+    this.sliderSelector = '.js-range-slider__slider';
+    this.valueSelector = '.js-range-slider__value';
+    this.elem = elem;
+    this.values = [5000, 10000];
+    this.onSlide = this.onSlide.bind(this);
+    this.init();
+  }
+
+  _createClass(RangeSlider, [{
+    key: "init",
+    value: function init() {
+      $(this.getSlider()).slider({
+        range: true,
+        min: 200,
+        max: 15400,
+        values: this.values,
+        slide: this.onSlide
+      });
+      this.updateValueElem();
+    }
+  }, {
+    key: "prettifyNum",
+    value: function prettifyNum(num) {
+      var n = num.toString();
+      var separator = ' ';
+      return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1".concat(separator));
+    }
+  }, {
+    key: "getSlider",
+    value: function getSlider() {
+      return this.elem.querySelector(this.sliderSelector);
+    }
+  }, {
+    key: "getValueElem",
+    value: function getValueElem() {
+      return this.elem.querySelector(this.valueSelector);
+    }
+  }, {
+    key: "onSlide",
+    value: function onSlide(event, ui) {
+      this.values = _toConsumableArray(ui.values);
+      this.updateValueElem();
+    }
+  }, {
+    key: "updateValueElem",
+    value: function updateValueElem() {
+      this.getValueElem().innerText = "".concat(this.prettifyNum(this.values[0]) + this.rubSymbol, " - ") + "".concat(this.prettifyNum(this.values[1])).concat(this.rubSymbol);
+    }
+  }]);
+
+  return RangeSlider;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (RangeSlider);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 35:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(88);
+/* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Pagination = /*#__PURE__*/function () {
+  function Pagination(elem) {
+    _classCallCheck(this, Pagination);
+
+    this.elem = elem;
+    this.pagesSelector = '.js-pagination__pages';
+    this.itemsNumber = 180;
+    this.itemsOnPage = 12;
+    this.init();
+  }
+
+  _createClass(Pagination, [{
+    key: "init",
+    value: function init() {
+      $(this.getPagesElem()).pagination({
+        items: this.itemsNumber,
+        itemsOnPage: this.itemsOnPage,
+        displayedPages: 3,
+        edges: 1,
+        prevText: false,
+        nextText: '<i class="pagination__arrow material-icons">arrow_forward</i>'
+      });
+    }
+  }, {
+    key: "getPagesElem",
+    value: function getPagesElem() {
+      return this.elem.querySelector(this.pagesSelector);
+    }
+  }]);
+
+  return Pagination;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Pagination);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 36:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ExpandableCheckboxes = /*#__PURE__*/function () {
+  function ExpandableCheckboxes(elem) {
+    _classCallCheck(this, ExpandableCheckboxes);
+
+    this.elem = elem;
+    this.listening = false;
+    this.expandedClassName = 'expandable-checkboxes_expanded';
+    this.expanded = this.elem.classList.contains(this.expandedClassName);
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.init();
+  }
+
+  _createClass(ExpandableCheckboxes, [{
+    key: "init",
+    value: function init() {
+      window.addEventListener('click', this.handleWindowClick);
+    }
+  }, {
+    key: "getCheckboxes",
+    value: function getCheckboxes() {
+      var checkboxesSelector = '.expandable-checkboxes__checkboxes';
+      return this.elem.querySelector(checkboxesSelector);
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      var clickedOnElem = evt.path.includes(this.elem);
+      var clickedOnCheckboxes = evt.path.includes(this.getCheckboxes());
+
+      if (clickedOnElem) {
+        this.listening = true;
+      }
+
+      if (this.listening) {
+        if (this.expanded) {
+          if (!clickedOnCheckboxes) {
+            this.expanded = false;
+            this.elem.classList.remove(this.expandedClassName);
+          }
+        } else if (clickedOnElem) {
+          this.expanded = true;
+          this.elem.classList.add(this.expandedClassName);
+        }
+      }
+    }
+  }]);
+
+  return ExpandableCheckboxes;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (ExpandableCheckboxes);
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
+	if ( true ) {
+
+		// AMD. Register as an anonymous module.
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+} ( function( $ ) {
+
+$.ui = $.ui || {};
+
+return $.ui.version = "1.12.1";
+
+} ) );
+
+
+/***/ }),
+
+/***/ 7:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
+/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var DatePicker = /*#__PURE__*/function () {
+  function DatePicker(_ref) {
+    var element = _ref.element,
+        _ref$options = _ref.options,
+        options = _ref$options === void 0 ? {} : _ref$options,
+        _ref$initialDate = _ref.initialDate,
+        initialDate = _ref$initialDate === void 0 ? [null, null] : _ref$initialDate,
+        _ref$doubleText = _ref.doubleText,
+        doubleText = _ref$doubleText === void 0 ? false : _ref$doubleText;
+
+    _classCallCheck(this, DatePicker);
+
+    this.clearBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
+    this.applyBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
+    this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    this.dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.$elem = $(element);
+    this.extensionRangeObject = {};
+    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
+    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+    this.doubleText = doubleText;
+    this.defaultOptions = {
+      range: 'period',
+      showButtonPanel: true,
+      currentText: this.clearBtnHTML + this.applyBtnHTML,
+      firstDay: 1,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      dateFormat: 'dd.mm.yy',
+      monthNames: this.monthNames,
+      monthNamesShort: this.monthNamesShort,
+      dayNames: this.dayNames,
+      dayNamesShort: this.dayNamesShort,
+      dayNamesMin: this.dayNamesMin,
+      onSelect: this.onSelect
+    };
+    this.options = _objectSpread(_objectSpread({}, this.defaultOptions), options);
+    this.init();
+    this.setDate(initialDate);
+    this.observers = [];
+  }
+
+  _createClass(DatePicker, [{
+    key: "init",
+    value: function init() {
+      this.$elem.datepicker(this.options);
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-clear-button'));
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-apply-button'));
+    }
+  }, {
+    key: "updateClearBtn",
+    value: function updateClearBtn() {
+      if (this.$elem.datepicker('getDate')) {
+        this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
+      } else {
+        this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
+      }
+    }
+  }, {
+    key: "setDate",
+    value: function setDate(dateObjects) {
+      var dateTexts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [null, null];
+      this.$elem.datepicker('setDate', dateObjects);
+
+      var _dateObjects = _slicedToArray(dateObjects, 2);
+
+      this.extensionRangeObject.startDate = _dateObjects[0];
+      this.extensionRangeObject.endDate = _dateObjects[1];
+
+      var _dateTexts = _slicedToArray(dateTexts, 2);
+
+      this.extensionRangeObject.startDateText = _dateTexts[0];
+      this.extensionRangeObject.endDateText = _dateTexts[1];
+      this.getClearBtn().click(this.handleClearButtonClick);
+      this.getApplyBtn().click(this.handleApplyButtonClick);
+      this.updateClearBtn();
+    }
+  }, {
+    key: "handleApplyButtonClick",
+    value: function handleApplyButtonClick() {
+      var dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
+      var dateTexts = [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText];
+      this.setDate(dates, dateTexts);
+      var valueText;
+
+      if (this.doubleText) {
+        valueText = dateTexts;
+      } else if (dateTexts[0] && dateTexts[1]) {
+        valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
+      } else {
+        valueText = null;
+      }
+
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: dates,
+        valueText: valueText
+      });
+    }
+  }, {
+    key: "handleClearButtonClick",
+    value: function handleClearButtonClick() {
+      this.setDate([null, null]);
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: [null, null],
+        valueText: null
+      });
+    }
+  }, {
+    key: "onSelect",
+    value: function onSelect(dateText, inst, extensionRange) {
+      var _this = this;
+
+      this.extensionRangeObject = extensionRange;
+      setTimeout(function () {
+        _this.getApplyBtn().click(_this.handleApplyButtonClick);
+
+        _this.getClearBtn().click(_this.handleClearButtonClick);
+      }, 100);
+    }
+  }]);
+
+  return DatePicker;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/common.blocks/counting-item/counting-item.js
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CountingItem = /*#__PURE__*/function () {
+  function CountingItem(elem) {
+    _classCallCheck(this, CountingItem);
+
+    this.elem = elem;
+    this.plusBtn = this.getPlusBtn();
+    this.minusBtn = this.getMinusBtn();
+    this.valueElem = this.getValueElem();
+    this.value = +this.valueElem.innerText;
+    this.name = this.getNameElem().innerText.toLowerCase();
+    this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
+    this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);
+    this.initButtons();
+    this.observers = [];
+  }
+
+  _createClass(CountingItem, [{
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "getValue",
+    value: function getValue() {
+      return this.value;
+    }
+  }, {
+    key: "getValueText",
+    value: function getValueText() {
+      if (this.value === 0) {
+        return '';
+      }
+
+      return "".concat(this.value, " ").concat(this.name);
+    }
+  }, {
+    key: "getNameElem",
+    value: function getNameElem() {
+      var nameElemSelector = '.counting-item__name .heading';
+      return this.elem.querySelector(nameElemSelector);
+    }
+  }, {
+    key: "getPlusBtn",
+    value: function getPlusBtn() {
+      return this.elem.querySelector('.counting-item__change-button_plus');
+    }
+  }, {
+    key: "getMinusBtn",
+    value: function getMinusBtn() {
+      return this.elem.querySelector('.counting-item__change-button_minus');
+    }
+  }, {
+    key: "getValueElem",
+    value: function getValueElem() {
+      return this.elem.querySelector('.counting-item__value .heading');
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(newValue) {
+      if (newValue >= 0) {
+        this.value = newValue;
+        this.valueElem.innerText = this.value;
+
+        if (newValue === 0) {
+          this.minusBtn.classList.add('counting-item__change-button_disabled');
+        } else {
+          this.minusBtn.classList.remove('counting-item__change-button_disabled');
+        }
+      }
+
+      this.notify({
+        type: 'UPDATE_VALUE',
+        value: this.value,
+        valueText: this.getValueText()
+      });
+      return this.value;
+    }
+  }, {
+    key: "initButtons",
+    value: function initButtons() {
+      this.plusBtn.addEventListener('click', this.handlePlusBtnClick);
+      this.minusBtn.addEventListener('click', this.handleMinusBtnClick);
+
+      if (this.value === 0) {
+        this.minusBtn.classList.add('counting-item__change-button_disabled');
+      }
+    }
+  }, {
+    key: "handlePlusBtnClick",
+    value: function handlePlusBtnClick() {
+      var newValue = this.value + 1;
+      this.setValue(newValue);
+    }
+  }, {
+    key: "handleMinusBtnClick",
+    value: function handleMinusBtnClick() {
+      var newValue = this.value - 1;
+      this.setValue(newValue);
+    }
+  }]);
+
+  return CountingItem;
+}();
+
+/* harmony default export */ var counting_item = (CountingItem);
+// CONCATENATED MODULE: ./src/common.blocks/items-counter/items-counter.js
+function items_counter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function items_counter_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function items_counter_createClass(Constructor, protoProps, staticProps) { if (protoProps) items_counter_defineProperties(Constructor.prototype, protoProps); if (staticProps) items_counter_defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var items_counter_ItemsCounter = /*#__PURE__*/function () {
+  function ItemsCounter(elem) {
+    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    items_counter_classCallCheck(this, ItemsCounter);
+
+    this.elem = elem;
+    this.clearBtn = this.getClearBtn();
+    this.applyBtn = this.getApplyBtn();
+    this.itemElems = this.getItemElems();
+    this.countingItemInstances = this.createCountingItemInstances();
+    this.wordToValueTextReplace = wordToValueTextReplace;
+    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
+    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
+    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
+    this.addListenersToButtons();
+    this.updateClearButton();
+    this.observers = [];
+    this.subscribeToItems();
+  }
+
+  items_counter_createClass(ItemsCounter, [{
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(action) {
+      if (action.type === 'UPDATE_VALUE') {
+        if (this.isWithoutButtons()) {
+          this.updateClearButton();
+          this.notify({
+            type: 'UPDATE_VALUE',
+            value: this.getValues(),
+            valueText: this.convertValuesToText()
+          });
+        }
+      }
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "getValues",
+    value: function getValues() {
+      var values = [];
+      this.countingItemInstances.forEach(function (inst) {
+        var value = inst.getValue();
+        values.push(value);
+      });
+      return values;
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      var clearBtnSelector = '.items-counter__clear-button';
+      return this.elem.querySelector(clearBtnSelector);
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      var applyBtnSelector = '.items-counter__apply-button';
+      return this.elem.querySelector(applyBtnSelector);
+    }
+  }, {
+    key: "getItemElems",
+    value: function getItemElems() {
+      var itemSelector = '.counting-item';
+      return this.elem.querySelectorAll(itemSelector);
+    }
+  }, {
+    key: "isWithoutButtons",
+    value: function isWithoutButtons() {
+      var withoutButtonsClass = 'items-counter_without-buttons';
+      return this.elem.classList.contains(withoutButtonsClass);
+    }
+  }, {
+    key: "updateClearButton",
+    value: function updateClearButton() {
+      var valuesSum = 0;
+      this.getValues().forEach(function (val) {
+        valuesSum += val;
+      });
+
+      if (valuesSum === 0) {
+        this.clearBtn.classList.add(this.clearBtnDisabledClass);
+      } else {
+        this.clearBtn.classList.remove(this.clearBtnDisabledClass);
+      }
+    }
+  }, {
+    key: "handleClearBtnClick",
+    value: function handleClearBtnClick() {
+      this.countingItemInstances.forEach(function (inst) {
+        inst.setValue(0);
+      });
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "handleApplyBtnClick",
+    value: function handleApplyBtnClick() {
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "convertValuesToText",
+    value: function convertValuesToText() {
+      var fullText = '';
+
+      if (this.wordToValueTextReplace) {
+        var valuesSum = 0;
+        this.countingItemInstances.forEach(function (inst) {
+          valuesSum += inst.getValue();
+        });
+        fullText += "".concat(valuesSum, " ").concat(this.wordToValueTextReplace);
+      } else {
+        var maxItemsNumInText = 2;
+        var textsList = [];
+        this.countingItemInstances.forEach(function (inst) {
+          if (inst.getValueText() !== '') {
+            textsList.push(inst.getValueText());
+          }
+        });
+        textsList.forEach(function (text, index) {
+          if (index !== 0) {
+            if (index < maxItemsNumInText) {
+              fullText += ', ';
+            }
+          }
+
+          if (index < maxItemsNumInText) {
+            fullText += text;
+          }
+
+          if (index === maxItemsNumInText - 1) {
+            fullText += '...';
+          }
+        });
+      }
+
+      return fullText;
+    }
+  }, {
+    key: "addListenersToButtons",
+    value: function addListenersToButtons() {
+      this.clearBtn.addEventListener('click', this.handleClearBtnClick);
+      this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
+    }
+  }, {
+    key: "createCountingItemInstances",
+    value: function createCountingItemInstances() {
+      var instances = [];
+      this.itemElems.forEach(function (elem) {
+        var countingItem = new counting_item(elem);
+        instances.push(countingItem);
+      });
+      return instances;
+    }
+  }, {
+    key: "subscribeToItems",
+    value: function subscribeToItems() {
+      var _this = this;
+
+      this.countingItemInstances.forEach(function (inst) {
+        inst.subscribe(_this);
+      });
+    }
+  }]);
+
+  return ItemsCounter;
+}();
+
+/* harmony default export */ var items_counter = __webpack_exports__["a"] = (items_counter_ItemsCounter);
+
+/***/ }),
+
+/***/ 83:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(i){"use strict"; true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (i),
@@ -14873,7 +18441,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 40 */
+
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -14881,40 +18450,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   
 
 /***/ }),
-/* 41 */,
-/* 42 */,
-/* 43 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(44);
-/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__);
-
-var rubSymbol = '₽';
-var sliderSelector = '.js-range-slider__slider';
-var valueSelector = '.js-range-slider__value';
-var values = [5000, 10000];
-
-var numPrettify = function numPrettify(num) {
-  var n = num.toString();
-  var separator = ' ';
-  return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1".concat(separator));
-};
-
-$(sliderSelector).slider({
-  range: true,
-  min: 200,
-  max: 15400,
-  values: values,
-  slide: function slide(event, ui) {
-    $(this).parent().find(valueSelector).text("".concat(numPrettify(ui.values[0]) + rubSymbol, " - ").concat(numPrettify(ui.values[1])).concat(rubSymbol));
-  }
-});
-$(sliderSelector).parent().find(valueSelector).text("".concat(numPrettify(values[0]) + rubSymbol, " - ").concat(numPrettify(values[1])).concat(rubSymbol));
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 44 */
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -14941,10 +18478,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(45),
-			__webpack_require__(9),
-			__webpack_require__(1),
-			__webpack_require__(26)
+			__webpack_require__(86),
+			__webpack_require__(12),
+			__webpack_require__(5),
+			__webpack_require__(29)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -15671,7 +19208,8 @@ return $.widget( "ui.slider", $.ui.mouse, {
 
 
 /***/ }),
-/* 45 */
+
+/***/ 86:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15694,9 +19232,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(46),
-			__webpack_require__(1),
-			__webpack_require__(26)
+			__webpack_require__(87),
+			__webpack_require__(5),
+			__webpack_require__(29)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -15902,14 +19440,15 @@ return $.widget( "ui.mouse", {
 
 
 /***/ }),
-/* 46 */
+
+/***/ 87:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(1) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(5) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -15922,27 +19461,8 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 
 /***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var simple_pagination_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(48);
-/* harmony import */ var simple_pagination_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_pagination_js__WEBPACK_IMPORTED_MODULE_0__);
-
-var items = 180;
-var itemsOnPage = 12;
-$('.js-pagination__pages').pagination({
-  items: items,
-  itemsOnPage: itemsOnPage,
-  displayedPages: 3,
-  edges: 1,
-  prevText: false,
-  nextText: '<i class="pagination__arrow material-icons">arrow_forward</i>'
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 48 */
+/***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/**
@@ -16342,1349 +19862,14 @@ $('.js-pagination__pages').pagination({
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {function list(dropdownElems, popupSelector, titleSelector, classNameToToggle) {
-  var activeLists = [];
-
-  var handlerWindowClick = function handlerWindowClick(evt) {
-    for (var i = 0; i < dropdownElems.length; i += 1) {
-      var elem = dropdownElems[i];
-      var inputs = elem.querySelectorAll(titleSelector);
-
-      if (evt.composedPath().includes(inputs[0]) || evt.composedPath().includes(inputs[1])) {
-        if (!activeLists.includes(elem)) {
-          activeLists.push(elem);
-        }
-      }
-    }
-
-    for (var _i = 0; _i < activeLists.length; _i += 1) {
-      var _elem = activeLists[_i];
-
-      var _inputs = _elem.querySelectorAll(titleSelector);
-
-      var popup = _elem.querySelector(popupSelector);
-
-      if (evt.composedPath().includes(popup)) return;
-
-      if (evt.composedPath().includes(_inputs[0]) || evt.composedPath().includes(_inputs[1])) {
-        _elem.classList.toggle(classNameToToggle);
-      } else {
-        _elem.classList.remove(classNameToToggle);
-      }
-    }
-  };
-
-  window.addEventListener('click', handlerWindowClick);
-}
-
-list($('.list'), '.list__checkboxes', '.list__title', 'list_expanded');
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_ui_kit_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(77);
-/* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_search_room_pug__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _search_room_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(78);
-/* harmony import */ var _search_room_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_search_room_sass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _blocks_date_picker_datepicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(2);
-/* harmony import */ var _blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(13);
-/* harmony import */ var _blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(43);
-/* harmony import */ var _blocks_list_list__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(49);
-/* harmony import */ var _blocks_list_list__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_blocks_list_list__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _blocks_cards_room_room_card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(38);
-/* harmony import */ var _blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(47);
-/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(14);
-/* harmony import */ var _blocks_header_header__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_blocks_header_header__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _images_room_img_1_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(79);
-/* harmony import */ var _images_room_img_2_jpg__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(80);
-/* harmony import */ var _images_room_img_3_jpg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(81);
-/* harmony import */ var _images_room_img_4_jpg__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(82);
-/* harmony import */ var _images_room_img_5_jpg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(83);
-/* harmony import */ var _images_room_img_6_jpg__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(84);
-/* harmony import */ var _images_room_img_7_jpg__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(85);
-/* harmony import */ var _images_room_img_8_jpg__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(86);
-/* harmony import */ var _images_room_img_9_jpg__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(87);
-/* harmony import */ var _images_room_img_10_jpg__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(88);
-/* harmony import */ var _images_room_img_11_jpg__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(89);
-/* harmony import */ var _images_room_img_12_jpg__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(90);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Object(_blocks_date_picker_datepicker__WEBPACK_IMPORTED_MODULE_4__[/* setDatepickerDate */ "b"])($('.js-date-picker'), [new Date(2019, 7, 19), new Date(2019, 7, 23)]);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var pug = __webpack_require__(6);
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
-    var locals_for_with = (locals || {});
-    
-    (function (Array, pug_indent) {
-      var pug_indent = [];
-pug_mixins["datepicker"] = pug_interp = function(double, titles, values){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["date-picker","js-date-picker",`${
-      double ? "date-picker_double js-date-picker_double" : "date-picker_single js-date-picker_single"
-    }`], [false,false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__date\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"date-picker__title\"\u003E" + (pug.escape(null == (pug_interp = titles[0]) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__text-field\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([`date-picker__input ${double ? "date-picker__input_double" : "date-picker__input_single"}`], [true]), false, true)+" placeholder=\"ДД.ММ.ГГГГ\""+pug.attr("value", values[0] ? values[0] : '', true, true)+pug.attr("name", `${double ? "start-date" : "all-dates"}`, true, true)) + "\u003E\u003Ci class=\"date-picker__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-if ((double)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__date\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"date-picker__title\"\u003E" + (pug.escape(null == (pug_interp = titles[1]) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"date-picker__text-field\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"date-picker__input date-picker__input_double\""+" name=\"end-date\""+pug.attr("value", values[1] ? values[1] : '', true, true)+" placeholder=\"ДД.ММ.ГГГГ\"") + "\u003E\u003Ci class=\"date-picker__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["popup"] = pug_interp = function(options){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__items\"\u003E";
-// iterate options
-;(function(){
-  var $$obj = options;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index0 = 0, $$l = $$obj.length; pug_index0 < $$l; pug_index0++) {
-        var val = $$obj[pug_index0];
-// iterate val
-;(function(){
-  var $$obj = val;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index1 = 0, $$l = $$obj.length; pug_index1 < $$l; pug_index1++) {
-        var item = $$obj[pug_index1];
-if (item.name) {
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__item\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"items-popup__title\"\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__value\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__remove-value\"\u003E-\u003C\u002Fdiv\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3\u003E" + (pug.escape(null == (pug_interp = item.value) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__add-value\"\u003E+\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index1 in $$obj) {
-      $$l++;
-      var item = $$obj[pug_index1];
-if (item.name) {
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__item\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"items-popup__title\"\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__value\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__remove-value\"\u003E-\u003C\u002Fdiv\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3\u003E" + (pug.escape(null == (pug_interp = item.value) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__add-value\"\u003E+\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-    }
-  }
-}).call(this);
-
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index0 in $$obj) {
-      $$l++;
-      var val = $$obj[pug_index0];
-// iterate val
-;(function(){
-  var $$obj = val;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index2 = 0, $$l = $$obj.length; pug_index2 < $$l; pug_index2++) {
-        var item = $$obj[pug_index2];
-if (item.name) {
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__item\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"items-popup__title\"\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__value\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__remove-value\"\u003E-\u003C\u002Fdiv\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3\u003E" + (pug.escape(null == (pug_interp = item.value) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__add-value\"\u003E+\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index2 in $$obj) {
-      $$l++;
-      var item = $$obj[pug_index2];
-if (item.name) {
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__item\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"items-popup__title\"\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__value\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__remove-value\"\u003E-\u003C\u002Fdiv\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3\u003E" + (pug.escape(null == (pug_interp = item.value) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__change-value items-popup__add-value\"\u003E+\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-    }
-  }
-}).call(this);
-
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-popup__button-pane\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"items-popup__clear\"\u003EОчистить\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"items-popup__confirm\"\u003EПрименить\u003C\u002Fh3\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["dropdown"] = pug_interp = function(text, title, popupParams, modName, description){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-            additionalClassName += `dropdown_${val}`;
-            if (index !== modName.length - 1) {
-                additionalClassName += ' ';
-            }
-        });
-    } else {
-        additionalClassName = `dropdown_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown","js-dropdown",additionalClassName], [false,false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"dropdown__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-if (description) {
-pug_html = pug_html + "\u003Cspan class=\"dropdown__description\"\u003E" + (pug.escape(null == (pug_interp = description) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__input\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text\"\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"dropdown__arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__popup\"\u003E";
-pug_indent.push('    ');
-pug_mixins["popup"](popupParams);
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["range-slider"] = pug_interp = function(title, description){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"range-slider__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\u003Cspan class=\"range-slider__value js-range-slider__value\"\u003E\u003C\u002Fspan\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider__slider js-range-slider__slider\"\u003E\u003C\u002Fdiv\u003E";
-if (description) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider__description\"\u003E" + (pug.escape(null == (pug_interp = description) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["checkbox-buttons"] = pug_interp = function(title, checkboxes, rich){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["checkboxes",`${rich ? 'checkboxes_rich' : ''}`], [false,true]), false, true)) + "\u003E";
-if (title) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"checkboxes__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"checkboxes__buttons\"\u003E";
-// iterate checkboxes
-;(function(){
-  var $$obj = checkboxes;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index3 = 0, $$l = $$obj.length; pug_index3 < $$l; pug_index3++) {
-        var elem = $$obj[pug_index3];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"checkboxes__button checkbox-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"checkbox-button__input\""+" type=\"checkbox\""+pug.attr("checked", elem.checked, true, true)) + "\u003E\u003Cspan class=\"checkbox-button__name\"\u003E" + (null == (pug_interp = elem.name) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-if ((rich)) {
-pug_html = pug_html + "\u003Cspan class=\"checkbox-button__description\"\u003E" + (null == (pug_interp = elem.description) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index3 in $$obj) {
-      $$l++;
-      var elem = $$obj[pug_index3];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"checkboxes__button checkbox-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"checkbox-button__input\""+" type=\"checkbox\""+pug.attr("checked", elem.checked, true, true)) + "\u003E\u003Cspan class=\"checkbox-button__name\"\u003E" + (null == (pug_interp = elem.name) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-if ((rich)) {
-pug_html = pug_html + "\u003Cspan class=\"checkbox-button__description\"\u003E" + (null == (pug_interp = elem.description) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["checkbox-buttons"] = pug_interp = function(title, checkboxes, rich){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["checkboxes",`${rich ? 'checkboxes_rich' : ''}`], [false,true]), false, true)) + "\u003E";
-if (title) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"checkboxes__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"checkboxes__buttons\"\u003E";
-// iterate checkboxes
-;(function(){
-  var $$obj = checkboxes;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index4 = 0, $$l = $$obj.length; pug_index4 < $$l; pug_index4++) {
-        var elem = $$obj[pug_index4];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"checkboxes__button checkbox-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"checkbox-button__input\""+" type=\"checkbox\""+pug.attr("checked", elem.checked, true, true)) + "\u003E\u003Cspan class=\"checkbox-button__name\"\u003E" + (null == (pug_interp = elem.name) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-if ((rich)) {
-pug_html = pug_html + "\u003Cspan class=\"checkbox-button__description\"\u003E" + (null == (pug_interp = elem.description) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index4 in $$obj) {
-      $$l++;
-      var elem = $$obj[pug_index4];
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Clabel class=\"checkboxes__button checkbox-button\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"checkbox-button__input\""+" type=\"checkbox\""+pug.attr("checked", elem.checked, true, true)) + "\u003E\u003Cspan class=\"checkbox-button__name\"\u003E" + (null == (pug_interp = elem.name) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-if ((rich)) {
-pug_html = pug_html + "\u003Cspan class=\"checkbox-button__description\"\u003E" + (null == (pug_interp = elem.description) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Flabel\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["list"] = pug_interp = function(title, checkboxes, modName){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val) => {
-            additionalClassName += `list_${val}`;
-        });
-    } else {
-        additionalClassName = `list_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["list",additionalClassName], [false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"list__title\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"list__text\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"material-icons list__arrow\"\u003Eexpand_more\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"list__checkboxes\"\u003E";
-pug_indent.push('    ');
-pug_mixins["checkbox-buttons"](false, checkboxes);
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["rate-button"] = pug_interp = function(currentRating){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (" class=\"rate-button\""+pug.attr("data-current-rating", currentRating, true, true)) + "\u003E";
-for (let i = 1; i <= 5; i++)
-{
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["rate-button__star","js-rate-button__star","material-icons",`${i <= currentRating ? 'rate-button__star_active' : ''}`], [false,false,false,true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["room-card"] = pug_interp = function(roomImagesSrc, roomInfo, numOfComments, arrows){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["room-card",`${arrows ? 'room-card_with-arrows' : ''}`], [false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__slider js-room-card__slider\"\u003E";
-// iterate roomImagesSrc
-;(function(){
-  var $$obj = roomImagesSrc;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index5 = 0, $$l = $$obj.length; pug_index5 < $$l; pug_index5++) {
-        var imgSrc = $$obj[pug_index5];
-pug_html = pug_html + "\u003Cimg" + (" class=\"room-card__img\""+pug.attr("src", imgSrc, true, true)+" alt=\"room-img\"") + "\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index5 in $$obj) {
-      $$l++;
-      var imgSrc = $$obj[pug_index5];
-pug_html = pug_html + "\u003Cimg" + (" class=\"room-card__img\""+pug.attr("src", imgSrc, true, true)+" alt=\"room-img\"") + "\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__content\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__room-info\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__name\"\u003E\u003Cspan\u003E№&nbsp;\u003C\u002Fspan\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch2\u003E" + (pug.escape(null == (pug_interp = roomInfo.number) ? "" : pug_interp)) + "\u003C\u002Fh2\u003E";
-if (roomInfo.type) {
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"room-card__type\"\u003E&nbsp;" + (pug.escape(null == (pug_interp = roomInfo.type) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-}
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__price\"\u003E" + (pug.escape(null == (pug_interp = roomInfo.price) ? "" : pug_interp)) + "\u003Cspan\u003E&nbsp;в сутки\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__rating-and-comments\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__rating\"\u003E";
-pug_indent.push('        ');
-pug_mixins["rate-button"](roomInfo.rating);
-pug_indent.pop();
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card__comments\"\u003E" + (pug.escape(null == (pug_interp = numOfComments) ? "" : pug_interp)) + "\u003Cspan\u003E&nbsp;Отзывов\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["pagination"] = pug_interp = function(desc){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"pagination\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"pagination__pages js-pagination__pages\"\u003E\u003C\u002Fdiv\u003E\u003Cspan class=\"pagination__desc\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["button"] = pug_interp = function(text, modName, link){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-          additionalClassName += `button_${val}`;
-          if (index !== modName.length - 1) {
-              additionalClassName += ' ';
-          }
-        });
-    } else {
-        additionalClassName = `button_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([`button ${additionalClassName}`], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"h3 button__text\""+pug.attr("href", link ? link: 'change-me', true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003Ci class=\"button__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E\u003C\u002Fbutton\u003E";
-};
-pug_mixins["header"] = pug_interp = function(user, activeLink){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-const navItems = [
-    {
-        name: 'О нас',
-        dropdown: false
-    },
-    {
-        name: 'Услуги',
-        dropdown: true
-    },
-    {
-        name: 'Вакансии',
-        dropdown: false
-    },
-    {
-        name: 'Новости',
-        dropdown: false
-    },
-    {
-        name: 'Соглашения',
-        dropdown: true
-    }
-]
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cnav class=\"header__nav\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-for (let i = 0; i < navItems.length; i++)
-{
-let active = (i === activeLink)
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes(["header__nav-item",`${active ? 'header__nav-item_active': ''} ${
-                                navItems[i].dropdown ? 'header__nav-item_dropdown-item': ''}`], [false,true]), false, true)) + "\u003E";
-if ((navItems[i].dropdown)) {
-pug_html = pug_html + "\n            ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\u003Ci class=\"header__item-arrow material-icons\"\u003Eexpand_more\u003C\u002Fi\u003E";
-}
-else {
-pug_html = pug_html + "\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = navItems[i].name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
-}
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fli\u003E";
-}
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fnav\u003E";
-if (user) {
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__user\"\u003E" + (pug.escape(null == (pug_interp = user) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-}
-else {
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
-pug_indent.push('        ');
-pug_mixins["button"]('Войти', 'secondary', 'login-and-registration.html');
-pug_indent.pop();
-pug_indent.push('        ');
-pug_mixins["button"]('Зарегистрироваться', false, 'login-and-registration.html');
-pug_indent.pop();
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003Cspan\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fheader\u003E";
-};
-pug_mixins["text-field"] = pug_interp = function({placeholder, type, title, state, modName, className, arrow, value}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let additionalClassName = '';
-if (modName) {
-    if (Array.isArray(modName)) {
-        modName.forEach((val, index) => {
-            additionalClassName += `text-field_${val}`;
-            if (index !== modName.length - 1) {
-                additionalClassName += ' ';
-            }
-        });
-    } else {
-        additionalClassName = `text-field_${modName}`;
-    }
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["text-field",`${className ? className : ''}${modName ? ' ' + additionalClassName: ''}`], [false,true]), false, true)) + "\u003E";
-if (title) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__info\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"text-field__title\"\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Fh3\u003E";
-if (state) {
-pug_html = pug_html + "\u003Cspan class=\"text-field__state\"\u003E" + (pug.escape(null == (pug_interp = state) ? "" : pug_interp)) + "\u003C\u002Fspan\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__field\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (" class=\"text-field__input\""+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", `${value ? value : ''}`, true, true)) + "\u003E";
-if (arrow) {
-pug_html = pug_html + "\u003Ci class=\"text-field__arrow material-icons\"\u003Earrow_forward\u003C\u002Fi\u003E";
-}
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-const navLinks = ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
-const aboutLinks = ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
-const supportLinks = ['Соглашения', 'Сообщества', 'Связь с нами']
-
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cfooter class=\"footer\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__body\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__main-info\"\u003E\u003Cimg class=\"footer__logo\" src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__text\"\u003EБронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu-nav\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EНавигация\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-// iterate navLinks
-;(function(){
-  var $$obj = navLinks;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index6 = 0, $$l = $$obj.length; pug_index6 < $$l; pug_index6++) {
-        var link = $$obj[pug_index6];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index6 in $$obj) {
-      $$l++;
-      var link = $$obj[pug_index6];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu-about\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EО нас\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-// iterate aboutLinks
-;(function(){
-  var $$obj = aboutLinks;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index7 = 0, $$l = $$obj.length; pug_index7 < $$l; pug_index7++) {
-        var link = $$obj[pug_index7];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index7 in $$obj) {
-      $$l++;
-      var link = $$obj[pug_index7];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu-support\"\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EСлужба поддержки\u003C\u002Fh3\u003E\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul\u003E";
-// iterate supportLinks
-;(function(){
-  var $$obj = supportLinks;
-  if ('number' == typeof $$obj.length) {
-      for (var pug_index8 = 0, $$l = $$obj.length; pug_index8 < $$l; pug_index8++) {
-        var link = $$obj[pug_index8];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-      }
-  } else {
-    var $$l = 0;
-    for (var pug_index8 in $$obj) {
-      $$l++;
-      var link = $$obj[pug_index8];
-pug_html = pug_html + "\n          ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli class=\"footer__menu-link\"\u003E\u003Ca href=\"change-me\"\u003E" + (pug.escape(null == (pug_interp = link) ? "" : pug_interp)) + "\u003C\u002Fa\u003E\u003C\u002Fli\u003E";
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n        ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription\"\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Ch3 class=\"footer__title\"\u003EПодписка\u003C\u002Fh3\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПолучайте специальные\u003Cbr\u003Eпредложения и новости сервиса\u003C\u002Fdiv\u003E\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-input\"\u003E";
-pug_indent.push('        ');
-pug_mixins["text-field"]({
-                      placeholder: 'Email',
-                      type: 'email',
-                      className: 'subscription-text-field',
-                      arrow: true,
-                    });
-pug_indent.pop();
-pug_html = pug_html + "\n      ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__line\"\u003E\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n    ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__social\"\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca href=\"change-me\"\u003E\u003Ci class=\"footer__social-link fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ffooter\u003E";
-};
-const title = 'Search room'
-const fileName = 'search-room'
-pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
-pug_indent.push('    ');
-pug_mixins["header"](false, false);
-pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cmain class=\"search-room\"\u003E\n      \u003Cdiv class=\"container search-room__container\"\u003E\n        \u003Caside class=\"search-room__params\"\u003E\n          \u003Cdiv class=\"search-room__params-date\"\u003E";
-pug_indent.push('            ');
-pug_mixins["datepicker"](false, ['Даты пребывания в отеле'], ['19 авг - 23 авг']);
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"search-room__params-guests\"\u003E";
-pug_indent.push('            ');
-pug_mixins["dropdown"]('3 гостя, 1 младенец', 'Гости', {
-                        items: {
-                            item1: {
-                                name: 'Гости',
-                                value: '3'
-                            },
-                            item2: {
-                                name: 'Дети',
-                                value: '0'
-                            },
-                            item3: {
-                                name: 'Младенцы',
-                                value: '1'
-                            }
-                        }
-                    }, 'small');
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"search-room__params-price\"\u003E";
-pug_indent.push('            ');
-pug_mixins["range-slider"]('Диапазон цены', 'Стоимость за сутки пребывания в номере');
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"search-room__params-checkboxes\"\u003E";
-pug_indent.push('            ');
-pug_mixins["checkbox-buttons"]('Правила дома', [
-                        {
-                            name: 'Можно курить',
-                            checked: false
-                        },
-                        {
-                            name: 'Можно с питомцами',
-                            checked: true
-                        },
-                        {
-                            name: 'Можно пригласить гостей<br>(до 10 человек)',
-                            checked: true
-                        }
-                    ]);
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"search-room__params-rich-checkboxes\"\u003E";
-pug_indent.push('            ');
-pug_mixins["checkbox-buttons"]('Доступность', [
-                        {
-                            name: 'Широкий коридор',
-                            description: 'Ширина коридоров в номере<br>не менее 91 см.',
-                            checked: false
-                        },
-                        {
-                            name: 'Помощник для инвалидов',
-                            description: 'На 1 этаже вас встретит специалист<br>и проводит до номера.',
-                            checked: false
-                        }
-                    ], true);
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"search-room__params-facilities\"\u003E";
-pug_indent.push('            ');
-pug_mixins["dropdown"]('2 спальни, 2 кровати...', 'Удобства номера', {
-                        items: {
-                            item1: {
-                                name: 'Спальни',
-                                value: '2'
-                            },
-                            item2: {
-                                name: 'Кровати',
-                                value: '2'
-                            },
-                            item3: {
-                                name: 'Ванные комнаты',
-                                value: '0'
-                            }
-                        },
-                    }, 'small');
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"search-room__params-list\"\u003E";
-pug_indent.push('            ');
-pug_mixins["list"]('Дополнительные удобства', [
-                        {
-                            name: 'Завтрак',
-                            checked: false
-                        },
-                        {
-                            name: 'Письменный стол',
-                            checked: true
-                        },
-                        {
-                            name: 'Стул для кормления',
-                            checked: true
-                        },
-                        {
-                            name: 'Кроватка',
-                            checked: true
-                        },
-                        {
-                            name: 'Телевизор',
-                            checked: false
-                        },
-                        {
-                            name: 'Шампунь',
-                            checked: false
-                        }
-                    ]);
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Faside\u003E\n        \u003Csection class=\"search-room__rooms-section\"\u003E\n          \u003Ch1 class=\"search-room__title\"\u003EНомера, которые мы для вас подобрали\u003C\u002Fh1\u003E\n          \u003Cdiv class=\"search-room__room-cards\"\u003E";
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_1.jpg', 'images/room-img_2.jpg',
-                            'images/room-img_3.jpg', 'images/room-img_4.jpg'
-                        ],
-                        {
-                            number: 888,
-                            type: 'Люкс',
-                            rating: 5,
-                            price: '9 990₽'
-                        },
-                        145,
-                        true
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_2.jpg', 'images/room-img_3.jpg',
-                            'images/room-img_4.jpg', 'images/room-img_5.jpg'
-                        ],
-                        {
-                            number: 840,
-                            type: false,
-                            rating: 4,
-                            price: '9 900₽'
-                        },
-                        65
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_3.jpg', 'images/room-img_4.jpg',
-                            'images/room-img_5.jpg', 'images/room-img_6.jpg'
-                        ],
-                        {
-                            number: 980,
-                            type: 'Люкс',
-                            rating: 3,
-                            price: '8 500₽'
-                        },
-                        35
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_4.jpg', 'images/room-img_5.jpg',
-                            'images/room-img_6.jpg', 'images/room-img_7.jpg'
-                        ],
-                        {
-                            number: 856,
-                            type: false,
-                            rating: 5,
-                            price: '7 300₽'
-                        },
-                        19
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_5.jpg', 'images/room-img_6.jpg',
-                            'images/room-img_7.jpg', 'images/room-img_8.jpg'
-                        ],
-                        {
-                            number: 740,
-                            type: false,
-                            rating: 4,
-                            price: '6 000₽'
-                        },
-                        44
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_6.jpg', 'images/room-img_7.jpg',
-                            'images/room-img_8.jpg', 'images/room-img_9.jpg'
-                        ],
-                        {
-                            number: 982,
-                            type: false,
-                            rating: 3,
-                            price: '5 800₽'
-                        },
-                        56
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_7.jpg', 'images/room-img_8.jpg',
-                            'images/room-img_9.jpg', 'images/room-img_10.jpg'
-                        ],
-                        {
-                            number: 678,
-                            type: false,
-                            rating: 5,
-                            price: '5 500₽'
-                        },
-                        45
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_8.jpg', 'images/room-img_9.jpg',
-                            'images/room-img_10.jpg', 'images/room-img_11.jpg'
-                        ],
-                        {
-                            number: 450,
-                            type: false,
-                            rating: 4,
-                            price: '5 300₽'
-                        },
-                        39
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_9.jpg', 'images/room-img_10.jpg',
-                            'images/room-img_11.jpg', 'images/room-img_12.jpg'
-                        ],
-                        {
-                            number: 350,
-                            type: false,
-                            rating: 3,
-                            price: '5 000₽'
-                        },
-                        77
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_10.jpg', 'images/room-img_11.jpg',
-                            'images/room-img_12.jpg', 'images/room-img_1.jpg'
-                        ],
-                        {
-                            number: 666,
-                            type: false,
-                            rating: 5,
-                            price: '5 000₽'
-                        },
-                        25
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_11.jpg', 'images/room-img_12.jpg',
-                            'images/room-img_1.jpg', 'images/room-img_2.jpg'
-                        ],
-                        {
-                            number: 444,
-                            type: false,
-                            rating: 3,
-                            price: '5 000₽'
-                        },
-                        15
-                    );
-pug_indent.pop();
-pug_indent.push('            ');
-pug_mixins["room-card"](
-                        [
-                            'images/room-img_12.jpg', 'images/room-img_1.jpg',
-                            'images/room-img_2.jpg', 'images/room-img_3.jpg'
-                        ],
-                        {
-                            number: 352,
-                            type: false,
-                            rating: 3,
-                            price: '5 000₽'
-                        },
-                        55
-                    );
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"search-room__pagination\"\u003E";
-pug_indent.push('            ');
-pug_mixins["pagination"]('1 – 12 из 100+ вариантов аренды');
-pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fsection\u003E\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fmain\u003E";
-pug_indent.push('    ');
-pug_mixins["footer"]();
-pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
-    }.call(this, "Array" in locals_for_with ?
-        locals_for_with.Array :
-        typeof Array !== 'undefined' ? Array : undefined, "pug_indent" in locals_for_with ?
-        locals_for_with.pug_indent :
-        typeof pug_indent !== 'undefined' ? pug_indent : undefined));
-    ;;return pug_html;};
-module.exports = template;
-
-/***/ }),
-/* 78 */
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
     if(false) { var cssReload; }
   
 
-/***/ }),
-/* 79 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_1.jpg");
-
-/***/ }),
-/* 80 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_2.jpg");
-
-/***/ }),
-/* 81 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_3.jpg");
-
-/***/ }),
-/* 82 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_4.jpg");
-
-/***/ }),
-/* 83 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_5.jpg");
-
-/***/ }),
-/* 84 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_6.jpg");
-
-/***/ }),
-/* 85 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_7.jpg");
-
-/***/ }),
-/* 86 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_8.jpg");
-
-/***/ }),
-/* 87 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_9.jpg");
-
-/***/ }),
-/* 88 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_10.jpg");
-
-/***/ }),
-/* 89 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_11.jpg");
-
-/***/ }),
-/* 90 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_12.jpg");
-
 /***/ })
-/******/ ]);
+
+/******/ });
