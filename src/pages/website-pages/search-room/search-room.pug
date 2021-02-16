@@ -1,11 +1,13 @@
 extends ../../../templates/website-pages
 
-include ../../../common.blocks/date-picker/date-picker
 include ../../../common.blocks/dropdown/dropdown
+include ../../../common.blocks/items-counter/items-counter
+include ../../../common.blocks/date-picker/date-picker
 include ../../../common.blocks/range-slider/range-slider
 include ../../../common.blocks/checkbox-buttons/checkbox-buttons
-include ../../../common.blocks/list/list
-include ../../../common.blocks/cards/room-card/room-card
+include ../../../common.blocks/expandable-checkboxes/expandable-checkboxes
+include ../../../common.blocks/room-card/room-card
+include ../../../common.blocks/heading/heading
 include ../../../common.blocks/pagination/pagination
 
 
@@ -13,280 +15,322 @@ block vars
     - const title = 'Search room'
     - const fileName = 'search-room'
 
-
 block content
     main.search-room
-        .container.search-room__container
-            aside.search-room__params
-                .search-room__params-date
-                    +date-picker(false, ['Даты пребывания в отеле'], ['19 авг - 23 авг'])
-                .search-room__params-guests
-                    +dropdown({
-                        text: '3 гостя, 1 младенец',
-                        title: 'Гости',
-                        popupParams: {
+        .container
+            .search-room__container
+                aside.search-room__params
+                    .search-room__params-date
+                        +dropdown({
+                            title: 'Даты пребывания в отеле',
+                            inputOptions: {
+                                value: '19 авг - 23 авг',
+                                placeholder: 'Дата'
+                            },
+                            popupMixinOptions: {
+                                name: 'date-picker'
+                            },
+                            short: true
+                        })
+
+                    .search-room__params-guests
+                        +dropdown({
+                            title: 'Гости',
+                            inputOptions: {
+                                value: '3 гостя, 1 младенец',
+                                placeholder: 'Удобства'
+                            },
+                            popupMixinOptions: {
+                                name: 'items-counter',
+                                params: {
+                                    items: [
+                                        {
+                                            name: 'Взрослые',
+                                            value: 3
+                                        },
+                                        {
+                                            name: 'Дети',
+                                            value: 0
+                                        },
+                                        {
+                                            name: 'Младенцы',
+                                            value: 1
+                                        }
+                                    ],
+                                    withoutButtons: true
+                                }
+                            },
+                            short: true
+                        })
+
+                    .search-room__params-price
+                        +range-slider('Диапазон цены', 'Стоимость за сутки пребывания в номере')
+                    .search-room__params-rules
+                        .search-room__subtitle
+                            +heading({ text: 'Правила дома' })
+                        +checkbox-buttons({
                             items: [
                                 {
-                                    name: 'Гости',
-                                    value: '3'
+                                    name: 'Можно курить',
+                                    checked: false
                                 },
                                 {
-                                    name: 'Дети',
-                                    value: '0'
+                                    name: 'Можно с питомцами',
+                                    checked: true
                                 },
                                 {
-                                    name: 'Младенцы',
-                                    value: '1'
+                                    name: 'Можно пригласить гостей<br>(до 10 человек)',
+                                    checked: true
                                 }
                             ],
-                        },
-                        modName: 'small',
-                    })
-
-                .search-room__params-price
-                    +range-slider('Диапазон цены', 'Стоимость за сутки пребывания в номере')
-                .search-room__params-checkboxes
-                    +checkbox-buttons('Правила дома', [
-                        {
-                            name: 'Можно курить',
-                            checked: false
-                        },
-                        {
-                            name: 'Можно с питомцами',
-                            checked: true
-                        },
-                        {
-                            name: 'Можно пригласить гостей<br>(до 10 человек)',
-                            checked: true
-                        }
-                    ])
-                .search-room__params-rich-checkboxes
-                    +checkbox-buttons('Доступность', [
-                        {
-                            name: 'Широкий коридор',
-                            description: 'Ширина коридоров в номере<br>не менее 91 см.',
-                            checked: false
-                        },
-                        {
-                            name: 'Помощник для инвалидов',
-                            description: 'На 1 этаже вас встретит специалист<br>и проводит до номера.',
-                            checked: false
-                        }
-                    ], true)
-                .search-room__params-facilities
-                    +dropdown({
-                        text: '2 спальни, 2 кровати...',
-                        title: 'Удобства номера',
-                        popupParams: {
+                        })
+                    .search-room__params-availability
+                        .search-room__subtitle
+                            +heading({ text: 'Доступность' })
+                        +checkbox-buttons({
                             items: [
                                 {
-                                    name: 'Спальни',
-                                    value: '2'
+                                    name: 'Широкий коридор',
+                                    description: 'Ширина коридоров в номере<br>не менее 91 см.',
+                                    checked: false
                                 },
                                 {
-                                    name: 'Кровати',
-                                    value: '2'
-                                },
-                                {
-                                    name: 'Ванные комнаты',
-                                    value: '0'
+                                    name: 'Помощник для инвалидов',
+                                    description: 'На 1 этаже вас встретит специалист<br>и ' +
+                                      'проводит до номера.',
+                                    checked: false
                                 }
                             ],
-                        },
-                        modName: 'small',
-                    })
+                            rich: true
+                        })
+                    .search-room__params-facilities
+                        +dropdown({
+                            title: 'Удобства номера',
+                            inputOptions: {
+                                value: '2 спальни, 2 кровати...',
+                                placeholder: 'Удобства'
+                            },
+                            popupMixinOptions: {
+                                name: 'items-counter',
+                                params: {
+                                    items: [
+                                        {
+                                            name: 'Спальни',
+                                            value: '2'
+                                        },
+                                        {
+                                            name: 'Кровати',
+                                            value: '2'
+                                        },
+                                        {
+                                            name: 'Ванные комнаты',
+                                            value: '0'
+                                        }
+                                    ],
+                                    withoutButtons: true
+                                }
+                            },
+                            short: true,
+                        })
 
-                .search-room__params-list
-                    +list('Дополнительные удобства', [
-                        {
-                            name: 'Завтрак',
-                            checked: false
-                        },
-                        {
-                            name: 'Письменный стол',
-                            checked: true
-                        },
-                        {
-                            name: 'Стул для кормления',
-                            checked: true
-                        },
-                        {
-                            name: 'Кроватка',
-                            checked: true
-                        },
-                        {
-                            name: 'Телевизор',
-                            checked: false
-                        },
-                        {
-                            name: 'Шампунь',
-                            checked: false
-                        }
-                    ])
+                    .search-room__params-list
+                        +expandable-checkboxes({
+                            title: 'Дополнительные удобства',
+                            items: [
+                                {
+                                    name: 'Завтрак',
+                                    checked: false
+                                },
+                                {
+                                    name: 'Письменный стол',
+                                    checked: true
+                                },
+                                {
+                                    name: 'Стул для кормления',
+                                    checked: true
+                                },
+                                {
+                                    name: 'Кроватка',
+                                    checked: true
+                                },
+                                {
+                                    name: 'Телевизор',
+                                    checked: false
+                                },
+                                {
+                                    name: 'Шампунь',
+                                    checked: false
+                                }
+                            ]
+                        })
 
 
-            section.search-room__rooms-section
-                h1.search-room__title Номера, которые мы для вас подобрали
-                .search-room__room-cards
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_1.jpg', 'images/room-img_2.jpg',
-                            'images/room-img_3.jpg', 'images/room-img_4.jpg'
-                        ],
-                        roomInfo: {
-                            number: 888,
-                            type: 'Люкс',
+                section.search-room__rooms-section
+                    .search-room__rooms-section-title
+                        +heading({
+                            type: 'h1',
+                            text: 'Номера, которые мы для вас подобрали'
+                        })
+                    .search-room__room-cards
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_1.jpg', 'images/room-img_2.jpg',
+                                'images/room-img_3.jpg', 'images/room-img_4.jpg'
+                            ],
+                            roomInfo: {
+                                number: 888,
+                                type: 'Люкс',
+                                price: '9 990'
+                            },
+                            numOfComments: 145,
+                            sliderArrows: true,
                             rating: 5,
-                            price: '9 990₽'
-                        },
-                        numOfComments: 145,
-                        arrows: true,
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_2.jpg', 'images/room-img_3.jpg',
-                            'images/room-img_4.jpg', 'images/room-img_5.jpg'
-                        ],
-                        roomInfo: {
-                            number: 840,
-                            type: false,
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_2.jpg', 'images/room-img_3.jpg',
+                                'images/room-img_4.jpg', 'images/room-img_5.jpg'
+                            ],
+                            roomInfo: {
+                                number: 840,
+                                type: false,
+                                price: '9 900'
+                            },
+                            numOfComments: 65,
                             rating: 4,
-                            price: '9 900₽'
-                        },
-                        numOfComments: 65
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_3.jpg', 'images/room-img_4.jpg',
-                            'images/room-img_5.jpg', 'images/room-img_6.jpg'
-                        ],
-                        roomInfo: {
-                            number: 980,
-                            type: 'Люкс',
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_3.jpg', 'images/room-img_4.jpg',
+                                'images/room-img_5.jpg', 'images/room-img_6.jpg'
+                            ],
+                            roomInfo: {
+                                number: 980,
+                                type: 'Люкс',
+                                price: '8 500'
+                            },
+                            numOfComments: 35,
                             rating: 3,
-                            price: '8 500₽'
-                        },
-                        numOfComments: 35
-                    })
+                        })
 
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_4.jpg', 'images/room-img_5.jpg',
-                            'images/room-img_6.jpg', 'images/room-img_7.jpg'
-                        ],
-                        roomInfo: {
-                            number: 856,
-                            type: false,
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_4.jpg', 'images/room-img_5.jpg',
+                                'images/room-img_6.jpg', 'images/room-img_7.jpg'
+                            ],
+                            roomInfo: {
+                                number: 856,
+                                type: false,
+                                price: '7 300'
+                            },
+                            numOfComments: 19,
                             rating: 5,
-                            price: '7 300₽'
-                        },
-                        numOfComments: 19
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_5.jpg', 'images/room-img_6.jpg',
-                            'images/room-img_7.jpg', 'images/room-img_8.jpg'
-                        ],
-                        roomInfo: {
-                            number: 740,
-                            type: false,
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_5.jpg', 'images/room-img_6.jpg',
+                                'images/room-img_7.jpg', 'images/room-img_8.jpg'
+                            ],
+                            roomInfo: {
+                                number: 740,
+                                type: false,
+                                price: '6 000'
+                            },
+                            numOfComments: 44,
                             rating: 4,
-                            price: '6 000₽'
-                        },
-                        numOfComments: 44
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_6.jpg', 'images/room-img_7.jpg',
-                            'images/room-img_8.jpg', 'images/room-img_9.jpg'
-                        ],
-                        roomInfo: {
-                            number: 982,
-                            type: false,
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_6.jpg', 'images/room-img_7.jpg',
+                                'images/room-img_8.jpg', 'images/room-img_9.jpg'
+                            ],
+                            roomInfo: {
+                                number: 982,
+                                type: false,
+                                price: '5 800'
+                            },
+                            numOfComments: 56,
                             rating: 3,
-                            price: '5 800₽'
-                        },
-                        numOfComments: 56
-                    })
+                        })
 
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_7.jpg', 'images/room-img_8.jpg',
-                            'images/room-img_9.jpg', 'images/room-img_10.jpg'
-                        ],
-                        roomInfo: {
-                            number: 678,
-                            type: false,
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_7.jpg', 'images/room-img_8.jpg',
+                                'images/room-img_9.jpg', 'images/room-img_10.jpg'
+                            ],
+                            roomInfo: {
+                                number: 678,
+                                type: false,
+                                price: '5 500'
+                            },
+                            numOfComments: 45,
                             rating: 5,
-                            price: '5 500₽'
-                        },
-                        numOfComments: 45
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_8.jpg', 'images/room-img_9.jpg',
-                            'images/room-img_10.jpg', 'images/room-img_11.jpg'
-                        ],
-                        roomInfo: {
-                            number: 450,
-                            type: false,
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_8.jpg', 'images/room-img_9.jpg',
+                                'images/room-img_10.jpg', 'images/room-img_11.jpg'
+                            ],
+                            roomInfo: {
+                                number: 450,
+                                type: false,
+                                price: '5 300'
+                            },
+                            numOfComments: 39,
                             rating: 4,
-                            price: '5 300₽'
-                        },
-                        numOfComments: 39
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_9.jpg', 'images/room-img_10.jpg',
-                            'images/room-img_11.jpg', 'images/room-img_12.jpg'
-                        ],
-                        roomInfo: {
-                            number: 350,
-                            type: false,
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_9.jpg', 'images/room-img_10.jpg',
+                                'images/room-img_11.jpg', 'images/room-img_12.jpg'
+                            ],
+                            roomInfo: {
+                                number: 350,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 77,
                             rating: 3,
-                            price: '5 000₽'
-                        },
-                        numOfComments: 77
-                    })
+                        })
 
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_10.jpg', 'images/room-img_11.jpg',
-                            'images/room-img_12.jpg', 'images/room-img_1.jpg'
-                        ],
-                        roomInfo: {
-                            number: 666,
-                            type: false,
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_10.jpg', 'images/room-img_11.jpg',
+                                'images/room-img_12.jpg', 'images/room-img_1.jpg'
+                            ],
+                            roomInfo: {
+                                number: 666,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 25,
                             rating: 5,
-                            price: '5 000₽'
-                        },
-                        numOfComments: 25
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_11.jpg', 'images/room-img_12.jpg',
-                            'images/room-img_1.jpg', 'images/room-img_2.jpg'
-                        ],
-                        roomInfo: {
-                            number: 444,
-                            type: false,
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_11.jpg', 'images/room-img_12.jpg',
+                                'images/room-img_1.jpg', 'images/room-img_2.jpg'
+                            ],
+                            roomInfo: {
+                                number: 444,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 15,
                             rating: 3,
-                            price: '5 000₽'
-                        },
-                        numOfComments: 15
-                    })
-                    +room-card({
-                        roomImagesSrc: [
-                            'images/room-img_12.jpg', 'images/room-img_1.jpg',
-                            'images/room-img_2.jpg', 'images/room-img_3.jpg'
-                        ],
-                        roomInfo: {
-                            number: 352,
-                            type: false,
+                        })
+                        +room-card({
+                            imagesSrc: [
+                                'images/room-img_12.jpg', 'images/room-img_1.jpg',
+                                'images/room-img_2.jpg', 'images/room-img_3.jpg'
+                            ],
+                            roomInfo: {
+                                number: 352,
+                                type: false,
+                                price: '5 000'
+                            },
+                            numOfComments: 55,
                             rating: 3,
-                            price: '5 000₽'
-                        },
-                        numOfComments: 55
-                    })
-                .search-room__pagination
-                    +pagination('1 – 12 из 100+ вариантов аренды')
+                        })
+                    .search-room__pagination
+                        +pagination('1 – 12 из 100+ вариантов аренды')

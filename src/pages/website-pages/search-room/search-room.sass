@@ -1,90 +1,75 @@
-@import '@/sass/headings'
-@import '@common.blocks/header/header'
-@import '@common.blocks/footer/footer'
-
-@import '@common.blocks/cards/room-card/room-card'
+@import '@/common.blocks/header/header'
+@import '@/common.blocks/footer/footer'
+@import '@/common.blocks/dropdown/dropdown'
+@import '@/common.blocks/items-counter/items-counter'
+@import '@/common.blocks/date-picker/date-picker'
+@import '@/common.blocks/range-slider/range-slider'
+@import '@/common.blocks/checkbox-buttons/checkbox-buttons'
+@import '@/common.blocks/expandable-checkboxes/expandable-checkboxes'
+@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/room-card/room-card'
+@import '@/common.blocks/pagination/pagination'
 
 
 .search-room
-    position: relative
-    &:after
-        content: ''
-        height: 1px
-        width: 100%
-        position: absolute
-        left: 0
-        bottom: 0
-        background-color: $dark-shade-25
-    &__container
-        display: flex
+  position: relative
+  &:after
+    content: ''
+    height: 1px
+    width: 100%
+    position: absolute
+    left: 0
+    bottom: 0
+    background-color: $dark-shade-25
+  &__container
+    padding-top: 30px
+    display: grid
+    grid-template-columns: 266px 1fr
+    grid-column-gap: 60px
+  &__room-cards
+    padding-top: 21px
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-column-gap: 12px
+    grid-row-gap: 19px
+  &__subtitle
+    margin-bottom: 16px
+  &__params
+    &-date
+      margin-bottom: 20px
+      position: relative
+      z-index: 2
+    &-guests
+      margin-bottom: 30px
+    &-price
+      margin-bottom: 30px
+    &-rules
+      margin-bottom: 30px
+    &-availability
+      margin-bottom: 30px
+    &-facilities
+      margin-bottom: 16px
+  &__pagination
+    margin-top: 37px
+    margin-bottom: 73px
+    margin-right: 13px
+    display: flex
+    justify-content: center
 
 
-    &__params
-        width: 266px
-        height: 100%
-        margin-right: 60px
-        display: inline-block
-
-    &__params-date, &__params-price, &__params-checkboxes
-        margin-top: 30px
-
-    &__params-guests
-        margin-top: 20px
-
-    &__params-rich-checkboxes
-        margin-top: 22px
-
-    &__params-facilities
-        margin-top: 21px
-
-    &__params-list
-        margin-top: 29px
-
-
-    &__rooms-section
-        display: inline-block
-        height: 100%
-
-    &__title
-        +h1
-        margin-top: 30px
-
+@media screen and (max-width: 1200px)
+  .search-room
     &__room-cards
-        margin-top: 21px
-        display: flex
-        flex-wrap: wrap
-        width: 100%
-        justify-content: space-between
-        margin-bottom: 20px
-        .room-card
-            margin-bottom: 19.5px
+      grid-template-columns: 1fr 1fr
 
-    &__pagination
-        width: 100%
-        display: flex
-        justify-content: center
-        margin-bottom: 73px
-        box-sizing: border-box
-        padding-right: 12px
+@media screen and (max-width: 1000px)
+  .search-room
+    &__room-cards
+      grid-template-columns: 1fr
 
-
-@media screen and (max-width: 990px)
-    .search-room
-        &__container
-            flex-direction: column
-        &__params
-            width: 100%
-        &__params-date,
-        &__params-guests,
-        &__params-price,
-        &__params-checkboxes,
-        &__params-rich-checkboxes,
-        &__params-facilities,
-        &__params-list
-            display: flex
-            justify-content: center
-
-@media screen and (max-width: 626px)
-    .search-room__room-cards
-        flex-direction: column
-        align-items: center
+@media screen and (max-width: 800px)
+  .search-room
+    &__container
+      display: grid
+      grid-template-columns: 1fr
+      grid-row-gap: 120px
