@@ -1,23 +1,7 @@
 include __input/text-field__input
 include __arrow/text-field__arrow
 
-//-
-    inputOptions: {
-        placeholder: string
-        type: string
-        value: string
-        readonly: boolean
-        maskedDate: boolean
-    }
-    arrowOptions: {
-        type: string
-        color: string
-    }
-    modifiers: {
-        focused: boolean
-        short: boolean
-        flatBottom: boolean
-    }
+
 mixin text-field({inputOptions = {}, arrowOptions = false, modifiers = {}} = {})
     -
         let className = 'text-field';

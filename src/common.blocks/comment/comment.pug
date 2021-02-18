@@ -2,17 +2,6 @@ include __header/comment__header
 include __content/comment__content
 
 
-//-
-    {
-        avatarLink: string
-        userName: string
-        date: string
-        text: string
-        likeOptions: {
-            likesNum: number
-            active: boolean
-        }
-    }
 mixin comment({avatarLink, userName, date, text, likeOptions})
     .comment
         +comment__header({

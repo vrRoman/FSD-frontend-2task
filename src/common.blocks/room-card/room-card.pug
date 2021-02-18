@@ -2,18 +2,6 @@ include __slider/room-card__slider
 include __content/room-card__content
 
 
-//-
-    {
-        roomImagesSrc: Array<string>
-        sliderArrows: boolean
-        roomInfo: {
-            number: number
-            type: string | false
-            price: string | number
-        }
-        rating: number
-        numOfComments: number
-    }
 mixin room-card({imagesSrc, sliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'})
     .room-card
         +room-card__slider({

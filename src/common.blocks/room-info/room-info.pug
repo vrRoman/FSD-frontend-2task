@@ -2,11 +2,6 @@ include __name/room-info__name
 include __price/room-info__price
 
 
-//-
-    number: number
-    type: string | false
-    price: string | number
-    smallName: boolean
 mixin room-info({number, type = false, price, smallName = false})
     .room-info
         +room-info__name({ number, type, small: smallName })

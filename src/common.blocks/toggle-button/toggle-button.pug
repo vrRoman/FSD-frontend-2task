@@ -2,11 +2,6 @@ include __input/toggle-button__input
 include __text/toggle-button__text
 
 
-//-
-    {
-        text: string
-        checked?: boolean
-    }
 mixin toggle-button({text, checked = false})
     label.toggle-button
         +toggle-button__input(checked)

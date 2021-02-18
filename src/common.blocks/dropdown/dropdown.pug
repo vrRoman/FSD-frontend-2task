@@ -2,28 +2,6 @@ include __text-field/dropdown__text-field
 include __popup/dropdown__popup
 
 
-//-
-    inputOptions: {
-        value: string
-        placeholder: string
-    } | [
-        {
-            value: string
-            placeholder: string
-        },
-        {
-            value: string
-            placeholder: string
-        }
-    ]
-    popupMixinOptions: {
-        name: string
-        params: mixinParameters
-    } !Mixin must be included in the file where +dropdown is called
-    hiddenPopup: boolean
-    title: string | Array<string> | false
-    double: boolean
-    short: false
 mixin dropdown({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false, short = false} = {})
     -
         let className = 'dropdown';

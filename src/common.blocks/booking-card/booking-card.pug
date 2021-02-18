@@ -8,18 +8,6 @@ include __total/booking-card__total
 include ../button/button
 
 
-//-
-    roomInfo: {
-        number: number
-        price: string | number
-        type: string
-    }
-    bookingItems: Array<{
-        text: string
-        price: string | number
-        tooltip: boolean
-    }>
-    totalPrice: string | number
 mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
     .booking-card
         +room-info(roomInfo)
