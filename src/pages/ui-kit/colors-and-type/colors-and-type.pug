@@ -1,71 +1,42 @@
 extends ../../../templates/ui-kit
 
-include ../../../common.blocks/heading/heading
+include ../../../common.blocks/color-demo/color-demo
+include ../../../common.blocks/type-demo/type-demo
 
 
 block vars
     - let name = 'colors-and-type'
 
 
-mixin color(name, hex, demoColor)
-    -
-        let demoClassName = `color__demo color__demo_${demoColor}`;
-    .color
-        div(class=demoClassName)
-        .color__info
-            +heading({
-                type: 'h2',
-                text: name,
-            })
-            .color__hex= hex
-
-
-mixin type(name, text, headerType)
-    -
-        let nameClassName = 'type__name';
-        if (headerType) {
-            nameClassName += ` type__name_type_${headerType}`;
-        }
-    .type
-        div(class=nameClassName)= name
-        .type__text
-            if (headerType)
-                +heading({
-                    text,
-                    type: headerType,
-                })
-            else
-                span !{text}
-
 block content
     .container
         .colors-and-type
             .colors
                 .colors__color
-                    +color('Dark Shade 100%', '#1F2041', 'dark-shade-100')
+                    +color-demo('Dark Shade 100%', '#1F2041', 'dark-shade-100')
                 .colors__color
-                    +color('Dark Shade 75%', '#1F2041', 'dark-shade-75')
+                    +color-demo('Dark Shade 75%', '#1F2041', 'dark-shade-75')
                 .colors__color
-                    +color('Dark Shade 50%', '#1F2041', 'dark-shade-50')
+                    +color-demo('Dark Shade 50%', '#1F2041', 'dark-shade-50')
                 .colors__color
-                    +color('Dark Shade 25%', '#1F2041', 'dark-shade-25')
+                    +color-demo('Dark Shade 25%', '#1F2041', 'dark-shade-25')
                 .colors__color
-                    +color('Dark Shade 5%', '#1F2041', 'dark-shade-5')
+                    +color-demo('Dark Shade 5%', '#1F2041', 'dark-shade-5')
                 .colors__color
-                    +color('Purple', '#BC9CFF', 'purple')
+                    +color-demo('Purple', '#BC9CFF', 'purple')
                 .colors__color
-                    +color('Green', '#6FCF97', 'green')
+                    +color-demo('Green', '#6FCF97', 'green')
 
             .types
                 .types__type
-                    +type('H1',
+                    +type-demo('H1',
                         'This one is the sub-section or widget title', 'h1')
                 .types__type
-                    +type('H2',
+                    +type-demo('H2',
                         'Next one is the item title inside widgets', 'h2')
                 .types__type
-                    +type('H3',
+                    +type-demo('H3',
                         'This is a label or CTA text', 'h3')
                 .types__type
-                    +type('Body',
+                    +type-demo('Body',
                         'This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.')

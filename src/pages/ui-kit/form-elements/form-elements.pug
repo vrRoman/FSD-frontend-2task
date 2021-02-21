@@ -1,6 +1,6 @@
 extends ../../../templates/ui-kit
 
-include ../../../common.blocks/heading/heading
+include ../../../common.blocks/elem-info/elem-info
 include ../../../common.blocks/text-field/text-field
 include ../../../common.blocks/dropdown/dropdown
 include ../../../common.blocks/items-counter/items-counter
@@ -18,13 +18,6 @@ include ../../../common.blocks/bullet-list/bullet-list
 include ../../../common.blocks/icon-text-list/icon-text-list
 include ../../../common.blocks/comment/comment
 
-
-mixin elem-info(title, state, isShort = false)
-    .elem-info(class=isShort ? 'elem-info_short' : false)
-        .elem-info__title
-            +heading({text: title})
-        if (state)
-            .elem-info__state= state
 
 block vars
     - const name = 'form-elements'

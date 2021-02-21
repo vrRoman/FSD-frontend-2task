@@ -1,0 +1,45 @@
+@import '@/common.blocks/heading/heading'
+
+
+.color-demo
+  display: flex
+  align-items: center
+
+  &__hex
+    font:
+      family: 'Montserrat', sans-serif
+      size: 19px
+      style: normal
+      weight: normal
+    line-height: (28rem / 14)
+    margin-top: 2px
+
+  &__info
+    margin: 5px 0 0 40px
+    color: $dark-shade-100
+
+  &__demo
+    width: 70px
+    height: 70px
+    border-radius: 6px
+    &_color
+      &_dark-shade-100
+        background-color: $dark-shade-100
+
+      &_dark-shade-75
+        background-color: $dark-shade-75
+
+      &_dark-shade-50
+        background-color: $dark-shade-50
+
+      &_dark-shade-25
+        background-color: $dark-shade-25
+
+      &_dark-shade-5
+        background-color: $dark-shade-5
+
+      &_purple
+        background-color: $purple
+
+      &_green
+        background-color: $green

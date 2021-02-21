@@ -1,0 +1,19 @@
+include ../heading/heading
+
+
+mixin type-demo(name, text, headerType)
+    -
+        let nameClassName = 'type-demo__name';
+        if (headerType) {
+            nameClassName += ` type-demo__name_type_${headerType}`;
+        }
+    .type-demo
+        div(class=nameClassName)= name
+        .type__text
+            if (headerType)
+                +heading({
+                  text,
+                  type: headerType,
+                })
+            else
+                span !{text}

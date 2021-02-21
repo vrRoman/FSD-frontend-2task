@@ -1,5 +1,6 @@
 @import '@/sass/colors.sass'
-@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/color-demo/color-demo'
+@import '@/common.blocks/type-demo/type-demo'
 
 
 .colors-and-type
@@ -20,82 +21,6 @@
         margin-top: 51px
     &:last-child
         margin-top: 48px
-
-
-.color
-    display: flex
-    align-items: center
-
-    &__hex
-        font:
-            family: 'Montserrat', sans-serif
-            size: 19px
-            style: normal
-            weight: normal
-        line-height: (28rem / 14)
-        margin-top: 2px
-
-    &__info
-        margin: 5px 0 0 40px
-        color: $dark-shade-100
-
-    &__demo
-        width: 70px
-        height: 70px
-        border-radius: 6px
-
-    &__demo_dark-shade-100
-        background-color: $dark-shade-100
-
-    &__demo_dark-shade-75
-        background-color: $dark-shade-75
-
-    &__demo_dark-shade-50
-        background-color: $dark-shade-50
-
-    &__demo_dark-shade-25
-        background-color: $dark-shade-25
-
-    &__demo_dark-shade-5
-        background-color: $dark-shade-5
-
-    &__demo_purple
-        background-color: $purple
-
-    &__demo_green
-        background-color: $green
-
-
-.type
-    max-width: 436px
-    width: 100%
-    display: flex
-    justify-content: space-between
-
-    &__text
-        max-width: 400px
-        width: 100%
-
-    &__name
-        width: 40px
-        text-align: right
-        color: $dark-shade-25
-        font:
-            family: Montserrat, sans-serif
-            style: normal
-            weight: normal
-
-        margin-right: 30px
-        &_type
-            &_h1
-                font-size: 24px
-                line-height: 29px
-            &_h2
-                font-size: 19px
-                line-height: 23px
-            &_h3
-                font-size: 12px
-                line-height: 15px
 
 
 @media screen and (max-width: 850px)

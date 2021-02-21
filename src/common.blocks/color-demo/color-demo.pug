@@ -1,0 +1,14 @@
+include ../heading/heading
+
+
+mixin color-demo(name, hex, color)
+    -
+        let demoClassName = `color-demo__demo color-demo__demo_color_${color}`
+    .color-demo
+        div(class=demoClassName)
+        .color-demo__info
+            +heading({
+                type: 'h2',
+                text: name,
+            })
+            .color-demo__hex= hex
