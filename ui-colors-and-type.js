@@ -455,16 +455,16 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["color"] = pug_interp = function(name, hex, demoColor){
+pug_mixins["color-demo"] = pug_interp = function(name, hex, color){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let demoClassName = `color__demo color__demo_${demoColor}`;
+let demoClassName = `color-demo__demo color-demo__demo_color_${color}`
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"color\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"color-demo\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([demoClassName], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"color__info\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"color-demo__info\"\u003E";
 pug_indent.push('    ');
 pug_mixins["heading"]({
                 type: 'h2',
@@ -473,21 +473,57 @@ pug_mixins["heading"]({
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"color__hex\"\u003E" + (pug.escape(null == (pug_interp = hex) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"color-demo__hex\"\u003E" + (pug.escape(null == (pug_interp = hex) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["type"] = pug_interp = function(name, text, headerType){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let nameClassName = 'type__name';
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["type-demo"] = pug_interp = function(name, text, headerType){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let nameClassName = 'type-demo__name';
 if (headerType) {
-    nameClassName += ` type__name_type_${headerType}`;
+    nameClassName += ` type-demo__name_type_${headerType}`;
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"type\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"type-demo\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([nameClassName], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -495,8 +531,8 @@ pug_html = pug_html + "\u003Cdiv class=\"type__text\"\u003E";
 if ((headerType)) {
 pug_indent.push('    ');
 pug_mixins["heading"]({
-                    text,
-                    type: headerType,
+                  text,
+                  type: headerType,
                 });
 pug_indent.pop();
 }
@@ -512,52 +548,51 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 let name = 'colors-and-type'
 pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", "ui-"+name+".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E\n    \u003Cdiv class=\"ui-logo-container\"\u003E\u003Cimg class=\"ui-logo-container__logo\" src=\"images\u002Flogo-icon.svg\" alt=\"logo\"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv class=\"container\"\u003E\n      \u003Cdiv class=\"colors-and-type\"\u003E\n        \u003Cdiv class=\"colors\"\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
 pug_indent.push('            ');
-pug_mixins["color"]('Dark Shade 100%', '#1F2041', 'dark-shade-100');
+pug_mixins["color-demo"]('Dark Shade 100%', '#1F2041', 'dark-shade-100');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
 pug_indent.push('            ');
-pug_mixins["color"]('Dark Shade 75%', '#1F2041', 'dark-shade-75');
+pug_mixins["color-demo"]('Dark Shade 75%', '#1F2041', 'dark-shade-75');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
 pug_indent.push('            ');
-pug_mixins["color"]('Dark Shade 50%', '#1F2041', 'dark-shade-50');
+pug_mixins["color-demo"]('Dark Shade 50%', '#1F2041', 'dark-shade-50');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
 pug_indent.push('            ');
-pug_mixins["color"]('Dark Shade 25%', '#1F2041', 'dark-shade-25');
+pug_mixins["color-demo"]('Dark Shade 25%', '#1F2041', 'dark-shade-25');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
 pug_indent.push('            ');
-pug_mixins["color"]('Dark Shade 5%', '#1F2041', 'dark-shade-5');
+pug_mixins["color-demo"]('Dark Shade 5%', '#1F2041', 'dark-shade-5');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
 pug_indent.push('            ');
-pug_mixins["color"]('Purple', '#BC9CFF', 'purple');
+pug_mixins["color-demo"]('Purple', '#BC9CFF', 'purple');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
 pug_indent.push('            ');
-pug_mixins["color"]('Green', '#6FCF97', 'green');
+pug_mixins["color-demo"]('Green', '#6FCF97', 'green');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=\"types\"\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
 pug_indent.push('            ');
-pug_mixins["type"]('H1',
+pug_mixins["type-demo"]('H1',
                         'This one is the sub-section or widget title', 'h1');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
 pug_indent.push('            ');
-pug_mixins["type"]('H2',
+pug_mixins["type-demo"]('H2',
                         'Next one is the item title inside widgets', 'h2');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
 pug_indent.push('            ');
-pug_mixins["type"]('H3',
+pug_mixins["type-demo"]('H3',
                         'This is a label or CTA text', 'h3');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
 pug_indent.push('            ');
-pug_mixins["type"]('Body',
-                        'This is the body text which is used for most<br>of the design, like ' +
-                        'paragraphs, lists, etc.', false);
+pug_mixins["type-demo"]('Body',
+                        'This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.');
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cscript" + (pug.attr("src", "ui-"+name+".js", true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
     }.call(this, "pug_indent" in locals_for_with ?

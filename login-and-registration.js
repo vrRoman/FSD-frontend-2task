@@ -11337,7 +11337,7 @@ var pug = __webpack_require__(10);
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (hovered, long, noFrame, pug_indent, secondary, textColor) {
+    (function (isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
       var pug_indent = [];
 pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -11375,7 +11375,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -11401,8 +11401,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -11460,15 +11460,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -11477,18 +11477,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -11509,7 +11509,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -11518,18 +11522,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -11555,8 +11559,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -11575,17 +11579,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -11621,18 +11625,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -11658,8 +11662,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -11678,17 +11682,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -11805,18 +11809,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -11842,8 +11846,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -11862,17 +11866,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -11955,7 +11959,7 @@ pug_mixins["text-field"]({
             inputOptions: {
                 placeholder: 'ДД.ММ.ГГГГ',
                 type: 'text',
-                maskedDate: true
+                isMaskedDate: true
             }
         });
 pug_indent.pop();
@@ -12014,18 +12018,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -12051,8 +12055,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -12071,17 +12075,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -12117,18 +12121,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -12154,8 +12158,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -12174,17 +12178,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -12275,7 +12279,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -12301,8 +12305,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -12360,15 +12364,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -12377,18 +12381,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -12409,7 +12413,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -12426,9 +12434,9 @@ pug_html = pug_html + "\u003Cdiv class=\"signup-card__account-exists\"\u003E\u00
 pug_indent.push('  ');
 pug_mixins["button"]({
             text: 'Войти',
-            link: false,
+            hasLink: false,
             modifiers: {
-                secondary: true
+                isSecondary: true
             }
         });
 pug_indent.pop();
@@ -12470,7 +12478,7 @@ pug_mixins["button"]({
             text: 'Перейти к оплате',
             link: 'landing-page.html',
             modifiers: {
-                long: true,
+                isLong: true,
                 textColor: 'white'
             }
         });
@@ -12518,7 +12526,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -12544,8 +12552,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -12603,15 +12611,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -12620,18 +12628,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -12652,7 +12660,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -12661,18 +12673,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -12698,8 +12710,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -12718,17 +12730,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -12764,18 +12776,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -12801,8 +12813,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -12821,17 +12833,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -12867,7 +12879,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -12893,8 +12905,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -12952,15 +12964,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -12969,18 +12981,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -13001,7 +13013,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -13018,9 +13034,9 @@ pug_html = pug_html + "\u003Cdiv class=\"signin-card__account-not-exists\"\u003E
 pug_indent.push('  ');
 pug_mixins["button"]({
             text: 'Создать',
-            link: false,
+            hasLink: false,
             modifiers: {
-                secondary: true
+                isSecondary: true
             }
         });
 pug_indent.pop();
@@ -13050,7 +13066,7 @@ pug_mixins["button"]({
             text: 'Войти',
             link: 'landing-page.html',
             modifiers: {
-                long: true,
+                isLong: true,
                 textColor: 'white',
             }
         });
@@ -13062,7 +13078,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -13088,8 +13104,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -13102,29 +13118,29 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
 pug_indent.push('  ');
-pug_mixins["arrow"]({ small: true });
+pug_mixins["arrow"]({ withoutPadding: true });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+pug_mixins["navigation__link"] = pug_interp = function(text, link = 'change-me'){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 };
-pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+pug_mixins["navigation__item"] = pug_interp = function({name, isDropdown = false, isActive = false, link = 'change-me'}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation__item';
-if (active) {
+if (isActive) {
     className += ' navigation__item_active';
 }
-if (dropdown) {
+if (isDropdown) {
     className += ' navigation__item_with-dropdown'
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((dropdown)) {
+if ((isDropdown)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
@@ -13141,7 +13157,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fli\u003E";
 };
-pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+pug_mixins["navigation__list"] = pug_interp = function({items, activeItem}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13152,12 +13168,12 @@ pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
   if ('number' == typeof $$obj.length) {
       for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
         var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
       }
@@ -13166,12 +13182,12 @@ pug_indent.pop();
     for (var itemIndex in $$obj) {
       $$l++;
       var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
     }
@@ -13182,7 +13198,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Ful\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
@@ -13192,7 +13208,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_mixins["navigation__list"]({
+            items,
+            activeItem: activeLinkIndex
+        });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13209,23 +13228,23 @@ pug_mixins["navigation"]({
             items: [
                 {
                     name: 'О нас',
-                    dropdown: false
+                    isDropdown: false
                 },
                 {
                     name: 'Услуги',
-                    dropdown: true
+                    isDropdown: true
                 },
                 {
                     name: 'Вакансии',
-                    dropdown: false
+                    isDropdown: false
                 },
                 {
                     name: 'Новости',
-                    dropdown: false
+                    isDropdown: false
                 },
                 {
                     name: 'Соглашения',
-                    dropdown: true
+                    isDropdown: true
                 }
             ]
         });
@@ -13234,7 +13253,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fnav\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -13260,8 +13279,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -13319,15 +13338,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -13336,18 +13355,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -13368,7 +13387,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -13387,7 +13410,7 @@ pug_mixins["button"]({
             text: 'Войти',
             link: 'login-and-registration.html',
             modifiers: {
-                secondary: true
+                isSecondary: true
             }
         });
 pug_indent.pop();
@@ -13455,7 +13478,7 @@ pug_mixins["header__logo"] = pug_interp = function(link = 'landing-page.html'){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Ca" + (" class=\"header__logo\""+pug.attr("href", link, true, true)) + "\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E";
 };
-pug_mixins["header__container"] = pug_interp = function(user, activeLink){
+pug_mixins["header__container"] = pug_interp = function(userName, activeLink){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13464,7 +13487,7 @@ pug_indent.push('  ');
 pug_mixins["header__logo"]();
 pug_indent.pop();
 pug_indent.push('  ');
-pug_mixins["header__menu"](user, activeLink);
+pug_mixins["header__menu"](userName, activeLink);
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["header__hamburger"]();
@@ -13473,13 +13496,13 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["header"] = pug_interp = function(user, activeLink = 0){
+pug_mixins["header"] = pug_interp = function({userName, activeLink = 0} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cheader class=\"header\"\u003E";
 pug_indent.push('  ');
-pug_mixins["header__container"](user, activeLink);
+pug_mixins["header__container"](userName, activeLink);
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13503,7 +13526,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -13529,8 +13552,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -13543,29 +13566,29 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
 pug_indent.push('  ');
-pug_mixins["arrow"]({ small: true });
+pug_mixins["arrow"]({ withoutPadding: true });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+pug_mixins["navigation__link"] = pug_interp = function(text, link = 'change-me'){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 };
-pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+pug_mixins["navigation__item"] = pug_interp = function({name, isDropdown = false, isActive = false, link = 'change-me'}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation__item';
-if (active) {
+if (isActive) {
     className += ' navigation__item_active';
 }
-if (dropdown) {
+if (isDropdown) {
     className += ' navigation__item_with-dropdown'
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((dropdown)) {
+if ((isDropdown)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
@@ -13582,7 +13605,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fli\u003E";
 };
-pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+pug_mixins["navigation__list"] = pug_interp = function({items, activeItem}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13593,12 +13616,12 @@ pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
   if ('number' == typeof $$obj.length) {
       for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
         var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
       }
@@ -13607,12 +13630,12 @@ pug_indent.pop();
     for (var itemIndex in $$obj) {
       $$l++;
       var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
     }
@@ -13623,7 +13646,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Ful\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
@@ -13633,7 +13656,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_mixins["navigation__list"]({
+            items,
+            activeItem: activeLinkIndex
+        });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13737,18 +13763,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -13774,8 +13800,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -13794,17 +13820,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -13895,7 +13921,7 @@ pug_mixins["text-field"]({
                 type: 'email'
             },
             modifiers: {
-                short: true
+                isShort: true
             },
             arrowOptions: {
                 type: 'forward',
@@ -14000,7 +14026,7 @@ const title = 'Login and registration'
 const fileName = 'login-and-registration'
 pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
 pug_indent.push('    ');
-pug_mixins["header"](false, false);
+pug_mixins["header"]();
 pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cmain class=\"login-and-registration\"\u003E\n      \u003Cdiv class=\"login-and-registration__signup-card\"\u003E";
 pug_indent.push('        ');
@@ -14015,19 +14041,19 @@ pug_indent.push('    ');
 pug_mixins["footer"]();
 pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
-    }.call(this, "hovered" in locals_for_with ?
-        locals_for_with.hovered :
-        typeof hovered !== 'undefined' ? hovered : undefined, "long" in locals_for_with ?
-        locals_for_with.long :
-        typeof long !== 'undefined' ? long : undefined, "noFrame" in locals_for_with ?
-        locals_for_with.noFrame :
-        typeof noFrame !== 'undefined' ? noFrame : undefined, "pug_indent" in locals_for_with ?
+    }.call(this, "isHovered" in locals_for_with ?
+        locals_for_with.isHovered :
+        typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
+        locals_for_with.isLong :
+        typeof isLong !== 'undefined' ? isLong : undefined, "isSecondary" in locals_for_with ?
+        locals_for_with.isSecondary :
+        typeof isSecondary !== 'undefined' ? isSecondary : undefined, "pug_indent" in locals_for_with ?
         locals_for_with.pug_indent :
-        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "secondary" in locals_for_with ?
-        locals_for_with.secondary :
-        typeof secondary !== 'undefined' ? secondary : undefined, "textColor" in locals_for_with ?
+        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "textColor" in locals_for_with ?
         locals_for_with.textColor :
-        typeof textColor !== 'undefined' ? textColor : undefined));
+        typeof textColor !== 'undefined' ? textColor : undefined, "withoutFrame" in locals_for_with ?
+        locals_for_with.withoutFrame :
+        typeof withoutFrame !== 'undefined' ? withoutFrame : undefined));
     ;;return pug_html;};
 module.exports = template;
 
@@ -14050,11 +14076,11 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 27:
+/***/ 28:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29);
 /* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__);
 
 $('.js-text-field__input_masked-date').mask('99.99.9999');
@@ -14062,7 +14088,7 @@ $('.js-text-field__input_masked-date').mask('99.99.9999');
 
 /***/ }),
 
-/***/ 28:
+/***/ 29:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -14672,13 +14698,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 30:
+/***/ 31:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./src/common.blocks/text-field/__input/_masked-date/text-field__input_masked-date.js
-var text_field_input_masked_date = __webpack_require__(27);
+var text_field_input_masked_date = __webpack_require__(28);
 
 // CONCATENATED MODULE: ./src/common.blocks/text-field/__input/text-field__input.js
 
@@ -14691,7 +14717,7 @@ var text_field_input_masked_date = __webpack_require__(27);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _text_field_text_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(30);
+/* harmony import */ var _common_blocks_text_field_text_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
 
 
 /***/ }),

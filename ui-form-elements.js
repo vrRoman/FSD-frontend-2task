@@ -13474,15 +13474,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _form_elements_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(191);
 /* harmony import */ var _form_elements_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_form_elements_sass__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _images_avatar_murad_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(192);
-/* harmony import */ var _common_blocks_text_field_text_field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(30);
+/* harmony import */ var _common_blocks_text_field_text_field__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(31);
 /* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(3);
 /* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(8);
 /* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(7);
 /* harmony import */ var _common_blocks_like_button_like_button__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(20);
-/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(34);
-/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(35);
-/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(36);
-/* harmony import */ var _common_blocks_comment_comment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(37);
+/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(35);
+/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(36);
+/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(37);
+/* harmony import */ var _common_blocks_comment_comment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(38);
 
 
 
@@ -13507,7 +13507,7 @@ $guestsDropdowns.each(function init() {
 var dateDropdownElem = document.querySelector('.form-elements__date-dropdown .dropdown');
 var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_8__[/* default */ "a"]({
   element: dateDropdownElem.querySelector('.date-picker'),
-  doubleText: true
+  isTextDouble: true
 });
 var dateDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"](dateDropdownElem, datePicker, 'ДД.ММ.ГГГГ');
 var filterDateDropdownElem = document.querySelector('.form-elements__filter-date-dropdown' + ' .dropdown');
@@ -13721,7 +13721,7 @@ var pug = __webpack_require__(10);
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (Array, hovered, long, noFrame, pug_indent, secondary, textColor) {
+    (function (Array, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
       var pug_indent = [];
 pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -13759,18 +13759,40 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["elem-info"] = pug_interp = function(title, state, isShort = false){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["elem-info",isShort ? 'elem-info_short' : false], [false,true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"elem-info__title\"\u003E";
+pug_indent.push('    ');
+pug_mixins["heading"]({text: title});
+pug_indent.pop();
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+if ((state)) {
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"elem-info__state\"\u003E" + (pug.escape(null == (pug_interp = state) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -13796,8 +13818,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -13816,17 +13838,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -13845,18 +13867,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -13882,8 +13904,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -13902,17 +13924,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -13981,7 +14003,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown__text-field"] = pug_interp = function({inputOptions, title = false, active = false}){
+pug_mixins["dropdown__text-field"] = pug_interp = function({inputOptions, title, isActive = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13995,13 +14017,13 @@ pug_indent.push('  ');
 pug_mixins["text-field"]({
             inputOptions: {
                 ...inputOptions,
-                maskedDate: false,
-                readonly: true
+                isMaskedDate: false,
+                isReadonly: true
             },
-            arrowOptions: true,
+            arrowOptions: {},
             modifiers: {
-                focused: active,
-                flatBottom: active,
+                isFocused: isActive,
+                isBottomFlat: isActive,
             }
         });
 pug_indent.pop();
@@ -14027,17 +14049,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false, short = false} = {}){
+pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'dropdown';
-if (double) {
+if (isDouble) {
     className += ' dropdown_double';
 }
-if (short) {
+if (isShort) {
   className += ' dropdown_short';
 }
 
-if (double) {
+if (isDouble) {
     if (!Array.isArray(title)) {
         title = [title, title];
     }
@@ -14048,19 +14070,19 @@ if (double) {
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((double)) {
+if ((isDouble)) {
 pug_indent.push('  ');
 pug_mixins["dropdown__text-field"]({
                 inputOptions: inputOptions[0],
                 title: title[0],
-                active: !hiddenPopup
+                isActive: !popupHidden
             });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["dropdown__text-field"]({
                 inputOptions: inputOptions[1],
                 title: title[1],
-                active: !hiddenPopup
+                isActive: !popupHidden
             });
 pug_indent.pop();
 }
@@ -14069,7 +14091,7 @@ pug_indent.push('  ');
 pug_mixins["dropdown__text-field"]({
                 inputOptions,
                 title,
-                active: !hiddenPopup
+                isActive: !popupHidden
             });
 pug_indent.pop();
 }
@@ -14077,7 +14099,7 @@ pug_indent.push('  ');
 pug_mixins["dropdown__popup"]({
             mixinName: popupMixinOptions.name,
             mixinParams: popupMixinOptions.params,
-            hidden: hiddenPopup
+            hidden: popupHidden
         });
 pug_indent.pop();
 pug_html = pug_html + "\n";
@@ -14272,7 +14294,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -14298,8 +14320,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -14357,15 +14379,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -14374,18 +14396,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -14406,7 +14428,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -14423,9 +14449,9 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button\"\u003E";
 pug_indent.push('  ');
 pug_mixins["button"]({
             text: 'Применить',
-            link: false,
+            hasLink: false,
             modifiers: {
-                noFrame: true,
+                withoutFrame: true,
                 color: 'purple'
             }
         });
@@ -14434,7 +14460,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -14460,8 +14486,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -14519,15 +14545,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -14536,18 +14562,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -14568,7 +14594,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -14585,9 +14615,9 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button\"\u003E";
 pug_indent.push('  ');
 pug_mixins["button"]({
             text: 'Очистить',
-            link: false,
+            hasLink: false,
             modifiers: {
-                noFrame: true,
+                withoutFrame: true,
                 textColor: 'gray'
           }
         });
@@ -14654,7 +14684,7 @@ pug_mixins["checkbox-buttons__description"] = pug_interp = function(desc){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__description\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
 };
-pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, rich = false }){
+pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, isRich = false }){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -14665,7 +14695,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__name"](item.name);
 pug_indent.pop();
-if ((rich)) {
+if ((isRich)) {
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__description"](item.description);
 pug_indent.pop();
@@ -14674,10 +14704,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Flabel\u003E";
 };
-pug_mixins["checkbox-buttons"] = pug_interp = function({items, rich = false}){
+pug_mixins["checkbox-buttons"] = pug_interp = function({items, isRich = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'checkbox-buttons';
-if (rich) {
+if (isRich) {
     className += ' checkbox-buttons_rich';
 }
 pug_html = pug_html + "\n";
@@ -14692,7 +14722,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
       }
@@ -14704,7 +14734,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
     }
@@ -14818,10 +14848,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"like-button__number\"\u003E" + (pug.escape(null == (pug_interp = number) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["like-button"] = pug_interp = function({likesNum = 0, active = false}){
+pug_mixins["like-button"] = pug_interp = function({likesNum = 0, isActive = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'like-button js-like-button';
-if (active) {
+if (isActive) {
     className += ' like-button_active';
 }
 pug_html = pug_html + "\n";
@@ -14949,7 +14979,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -14975,8 +15005,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -15034,15 +15064,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -15051,18 +15081,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -15083,7 +15113,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -15138,7 +15172,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -15164,8 +15198,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -15213,7 +15247,7 @@ pug_mixins["checkbox-buttons__description"] = pug_interp = function(desc){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__description\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
 };
-pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, rich = false }){
+pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, isRich = false }){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15224,7 +15258,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__name"](item.name);
 pug_indent.pop();
-if ((rich)) {
+if ((isRich)) {
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__description"](item.description);
 pug_indent.pop();
@@ -15233,10 +15267,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Flabel\u003E";
 };
-pug_mixins["checkbox-buttons"] = pug_interp = function({items, rich = false}){
+pug_mixins["checkbox-buttons"] = pug_interp = function({items, isRich = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'checkbox-buttons';
-if (rich) {
+if (isRich) {
     className += ' checkbox-buttons_rich';
 }
 pug_html = pug_html + "\n";
@@ -15251,7 +15285,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
       }
@@ -15263,7 +15297,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
     }
@@ -15453,10 +15487,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"like-button__number\"\u003E" + (pug.escape(null == (pug_interp = number) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["like-button"] = pug_interp = function({likesNum = 0, active = false}){
+pug_mixins["like-button"] = pug_interp = function({likesNum = 0, isActive = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'like-button js-like-button';
-if (active) {
+if (isActive) {
     className += ' like-button_active';
 }
 pug_html = pug_html + "\n";
@@ -15523,28 +15557,6 @@ pug_mixins["comment__content"]({
             text
         });
 pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["elem-info"] = pug_interp = function(title, state = false, short = false){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["elem-info",short ? 'elem-info_short' : false], [false,true]), false, true)) + "\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"elem-info__title\"\u003E";
-pug_indent.push('    ');
-pug_mixins["heading"]({text: title});
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-if ((state)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"elem-info__state\"\u003E" + (pug.escape(null == (pug_interp = state) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-}
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
@@ -15620,7 +15632,7 @@ pug_mixins["text-field"]({
                             value: 'This is pretty awesome'
                         },
                         modifiers: {
-                            focused: true
+                            isFocused: true
                         }
                     });
 pug_indent.pop();
@@ -15663,7 +15675,7 @@ pug_mixins["text-field"]({
                         inputOptions: {
                             placeholder: 'ДД.ММ.ГГГГ',
                             type: 'text',
-                            maskedDate: true
+                            isMaskedDate: true
                         }
                     });
 pug_indent.pop();
@@ -15684,7 +15696,7 @@ pug_mixins["dropdown"]({
                             popupMixinOptions: {
                                 name: 'date-picker'
                             },
-                            double: true
+                            isDouble: true
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"form-elements__dropdown-wrapper\"\u003E\n            \u003Cdiv class=\"form-elements__filter-date-dropdown\"\u003E";
@@ -15698,7 +15710,7 @@ pug_mixins["dropdown"]({
                             popupMixinOptions: {
                                 name: 'date-picker'
                             },
-                            short: true
+                            isShort: true
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"form-elements__field-wrapper\"\u003E\n            \u003Cdiv class=\"form-elements__field-elem-info\"\u003E";
@@ -15717,7 +15729,7 @@ pug_mixins["text-field"]({
                             color: 'purple-gradient'
                         },
                         modifiers: {
-                            short: true
+                            isShort: true
                         }
                     });
 pug_indent.pop();
@@ -15786,7 +15798,7 @@ pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdi
 pug_indent.push('              ');
 pug_mixins["like-button"]({
                             likesNum: 12,
-                            active: true
+                            isActive: true
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"form-elements__button-wrapper form-elements__button-wrapper_rate\"\u003E\n            \u003Cdiv class=\"form-elements__button-elem-info\"\u003E";
@@ -15817,7 +15829,7 @@ pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdi
 pug_indent.push('              ');
 pug_mixins["button"]({
                             modifiers: {
-                                hovered: true
+                                isHovered: true
                             }
                         });
 pug_indent.pop();
@@ -15825,7 +15837,7 @@ pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdi
 pug_indent.push('              ');
 pug_mixins["button"]({
                             modifiers: {
-                                secondary: true
+                                isSecondary: true
                             }
                         });
 pug_indent.pop();
@@ -15833,8 +15845,8 @@ pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdi
 pug_indent.push('              ');
 pug_mixins["button"]({
                             modifiers: {
-                                secondary: true,
-                                hovered: true
+                                isSecondary: true,
+                                isHovered: true
                             }
                         });
 pug_indent.pop();
@@ -15842,7 +15854,7 @@ pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdi
 pug_indent.push('              ');
 pug_mixins["button"]({
                             modifiers: {
-                                noFrame: true,
+                                withoutFrame: true,
                                 textColor: 'purple'
                             }
                         });
@@ -15851,7 +15863,7 @@ pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdi
 pug_indent.push('              ');
 pug_mixins["button"]({
                             modifiers: {
-                                noFrame: true,
+                                withoutFrame: true,
                                 textColor: 'gray'
                             }
                         });
@@ -15861,7 +15873,7 @@ pug_indent.push('              ');
 pug_mixins["button"]({
                             text: 'Перейти к оплате',
                             modifiers: {
-                                long: true
+                                isLong: true
                             }
                         });
 pug_indent.pop();
@@ -15891,7 +15903,7 @@ pug_mixins["dropdown"]({
                                     withoutButtons: true
                                 }
                             },
-                            short: true
+                            isShort: true
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"form-elements__field-wrapper\"\u003E\n            \u003Cdiv class=\"form-elements__facilities-dropdown form-elements__facilities-dropdown_expanded\"\u003E\n              \u003Cdiv class=\"form-elements__field-elem-info\"\u003E";
@@ -15912,8 +15924,8 @@ pug_mixins["dropdown"]({
                                     withoutButtons: true
                                 }
                             },
-                            short: true,
-                            hiddenPopup: false
+                            isShort: true,
+                            popupHidden: false
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=\"form-elements__elements-container\"\u003E\n          \u003Cdiv class=\"form-elements__guests-dropdown\"\u003E";
@@ -15943,7 +15955,7 @@ pug_mixins["dropdown"]({
                                 ]
                             }
                         },
-                        hiddenPopup: false
+                        popupHidden: false
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=\"form-elements__elements-container\"\u003E\n          \u003Cdiv class=\"form-elements__guests-dropdown\"\u003E";
@@ -15973,7 +15985,7 @@ pug_mixins["dropdown"]({
                                 ]
                             }
                         },
-                        hiddenPopup: false
+                        popupHidden: false
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=\"form-elements__elements-container form-elements__elements-container_with-top-margin\"\u003E\n          \u003Cdiv class=\"form-elements__expandable-checkboxes-wrapper\"\u003E";
@@ -16008,7 +16020,7 @@ pug_mixins["checkbox-buttons"]({
                                 checked: false
                             }
                         ],
-                        rich: true
+                        isRich: true
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=\"form-elements__elements-container form-elements__elements-container_with-top-margin\"\u003E\n          \u003Cdiv class=\"form-elements__bullet-list-wrapper\"\u003E\n            \u003Cdiv class=\"form-elements__bullet-elem-info\"\u003E";
@@ -16044,31 +16056,29 @@ pug_mixins["comment"]({
                     avatarLink: 'images/avatar_murad.png',
                     userName: 'Мурад Сарафанов',
                     date: '5 дней назад',
-                    text: 'Великолепный матрас на кровати в основной спальне! ' +
-                        'А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. ' +
-                        'Выкрикивал комплименты повару — никто не жаловался из соседей.',
+                    text: 'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
                     likeOptions: {
                         likesNum: 12,
-                        active: true
+                        isActive: true
                     }
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cscript" + (pug.attr("src", "ui-"+name+".js", true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
     }.call(this, "Array" in locals_for_with ?
         locals_for_with.Array :
-        typeof Array !== 'undefined' ? Array : undefined, "hovered" in locals_for_with ?
-        locals_for_with.hovered :
-        typeof hovered !== 'undefined' ? hovered : undefined, "long" in locals_for_with ?
-        locals_for_with.long :
-        typeof long !== 'undefined' ? long : undefined, "noFrame" in locals_for_with ?
-        locals_for_with.noFrame :
-        typeof noFrame !== 'undefined' ? noFrame : undefined, "pug_indent" in locals_for_with ?
+        typeof Array !== 'undefined' ? Array : undefined, "isHovered" in locals_for_with ?
+        locals_for_with.isHovered :
+        typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
+        locals_for_with.isLong :
+        typeof isLong !== 'undefined' ? isLong : undefined, "isSecondary" in locals_for_with ?
+        locals_for_with.isSecondary :
+        typeof isSecondary !== 'undefined' ? isSecondary : undefined, "pug_indent" in locals_for_with ?
         locals_for_with.pug_indent :
-        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "secondary" in locals_for_with ?
-        locals_for_with.secondary :
-        typeof secondary !== 'undefined' ? secondary : undefined, "textColor" in locals_for_with ?
+        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "textColor" in locals_for_with ?
         locals_for_with.textColor :
-        typeof textColor !== 'undefined' ? textColor : undefined));
+        typeof textColor !== 'undefined' ? textColor : undefined, "withoutFrame" in locals_for_with ?
+        locals_for_with.withoutFrame :
+        typeof withoutFrame !== 'undefined' ? withoutFrame : undefined));
     ;;return pug_html;};
 module.exports = template;
 
@@ -16149,11 +16159,11 @@ var LikeButton = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 27:
+/***/ 28:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29);
 /* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__);
 
 $('.js-text-field__input_masked-date').mask('99.99.9999');
@@ -16161,7 +16171,7 @@ $('.js-text-field__input_masked-date').mask('99.99.9999');
 
 /***/ }),
 
-/***/ 28:
+/***/ 29:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -16771,7 +16781,195 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 29:
+/***/ 3:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Dropdown = /*#__PURE__*/function () {
+  function Dropdown(elem) {
+    var _this = this;
+
+    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    _classCallCheck(this, Dropdown);
+
+    this.elem = elem;
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.defaultValue = defaultInputValue;
+    this.popup = this.getPopup();
+    this.hiddenPopupClass = 'dropdown__popup_hidden';
+    this.doubleDropdownClass = 'dropdown_double';
+    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
+    this.listening = false;
+
+    if (!this.isPopupHidden()) {
+      this.textFields.forEach(function (el) {
+        var _el$classList;
+
+        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
+      });
+    }
+
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.addWindowListener();
+
+    if (blockInPopupInstance) {
+      this.blockInPopupInstance = blockInPopupInstance;
+
+      try {
+        this.blockInPopupInstance.subscribe(this);
+      } catch (err) {
+        throw new Error('blockInPopupInstance must have a subscribe method');
+      }
+    }
+  }
+
+  _createClass(Dropdown, [{
+    key: "update",
+    value: function update(action) {
+      var _this2 = this;
+
+      this.changeTextFieldValue(action.valueText);
+
+      if (action.type === 'CLICK_APPLY-BUTTON') {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList2;
+
+          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "changeTextFieldValue",
+    value: function changeTextFieldValue(text) {
+      var _this3 = this;
+
+      if (this.isDropdownDouble()) {
+        if (Array.isArray(text)) {
+          text.forEach(function (value, i) {
+            if (!value) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = value;
+            }
+          });
+        } else {
+          this.textFieldInputs.forEach(function (input, i) {
+            if (!text) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = text;
+            }
+          });
+        }
+      } else if (!text) {
+        this.textFieldInputs[0].value = this.defaultValue;
+      } else {
+        this.textFieldInputs[0].value = text;
+      }
+    }
+  }, {
+    key: "getPopup",
+    value: function getPopup() {
+      var popupSelector = '.dropdown__popup';
+      return this.elem.querySelector(popupSelector);
+    }
+  }, {
+    key: "getTextFields",
+    value: function getTextFields() {
+      var textFieldSelector = '.dropdown__text-field .text-field';
+      return this.elem.querySelectorAll(textFieldSelector);
+    }
+  }, {
+    key: "getTextFieldInputs",
+    value: function getTextFieldInputs() {
+      var inputSelector = '.text-field__input';
+      var inputs = [];
+      this.textFields.forEach(function (elem) {
+        inputs.push(elem.querySelector(inputSelector));
+      });
+      return inputs;
+    }
+  }, {
+    key: "isPopupHidden",
+    value: function isPopupHidden() {
+      return this.popup.classList.contains(this.hiddenPopupClass);
+    }
+  }, {
+    key: "isDropdownDouble",
+    value: function isDropdownDouble() {
+      return this.elem.classList.contains(this.doubleDropdownClass);
+    }
+  }, {
+    key: "addWindowListener",
+    value: function addWindowListener() {
+      window.addEventListener('click', this.handleWindowClick);
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      var _this4 = this;
+
+      if (evt.path.includes(this.elem)) {
+        this.listening = true;
+
+        if (!evt.path.includes(this.popup)) {
+          if (this.isPopupHidden()) {
+            this.popup.classList.remove(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList3;
+
+              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          } else {
+            this.popup.classList.add(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList4;
+
+              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          }
+        }
+      } else if (this.listening) {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList5;
+
+          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
+        });
+      }
+    }
+  }]);
+
+  return Dropdown;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
+
+/***/ }),
+
+/***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -17510,201 +17708,13 @@ return $.widget;
 
 /***/ }),
 
-/***/ 3:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Dropdown = /*#__PURE__*/function () {
-  function Dropdown(elem) {
-    var _this = this;
-
-    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-    _classCallCheck(this, Dropdown);
-
-    this.elem = elem;
-    this.textFields = this.getTextFields();
-    this.textFieldInputs = this.getTextFieldInputs();
-    this.defaultValue = defaultInputValue;
-    this.popup = this.getPopup();
-    this.hiddenPopupClass = 'dropdown__popup_hidden';
-    this.doubleDropdownClass = 'dropdown_double';
-    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
-    this.listening = false;
-
-    if (!this.isPopupHidden()) {
-      this.textFields.forEach(function (el) {
-        var _el$classList;
-
-        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
-      });
-    }
-
-    this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.addWindowListener();
-
-    if (blockInPopupInstance) {
-      this.blockInPopupInstance = blockInPopupInstance;
-
-      try {
-        this.blockInPopupInstance.subscribe(this);
-      } catch (err) {
-        throw new Error('blockInPopupInstance must have a subscribe method');
-      }
-    }
-  }
-
-  _createClass(Dropdown, [{
-    key: "update",
-    value: function update(action) {
-      var _this2 = this;
-
-      this.changeTextFieldValue(action.valueText);
-
-      if (action.type === 'CLICK_APPLY-BUTTON') {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList2;
-
-          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
-        });
-      }
-    }
-  }, {
-    key: "changeTextFieldValue",
-    value: function changeTextFieldValue(text) {
-      var _this3 = this;
-
-      if (this.isDropdownDouble()) {
-        if (Array.isArray(text)) {
-          text.forEach(function (value, i) {
-            if (!value) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = value;
-            }
-          });
-        } else {
-          this.textFieldInputs.forEach(function (input, i) {
-            if (!text) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = text;
-            }
-          });
-        }
-      } else if (!text) {
-        this.textFieldInputs[0].value = this.defaultValue;
-      } else {
-        this.textFieldInputs[0].value = text;
-      }
-    }
-  }, {
-    key: "getPopup",
-    value: function getPopup() {
-      var popupSelector = '.dropdown__popup';
-      return this.elem.querySelector(popupSelector);
-    }
-  }, {
-    key: "getTextFields",
-    value: function getTextFields() {
-      var textFieldSelector = '.dropdown__text-field .text-field';
-      return this.elem.querySelectorAll(textFieldSelector);
-    }
-  }, {
-    key: "getTextFieldInputs",
-    value: function getTextFieldInputs() {
-      var inputSelector = '.text-field__input';
-      var inputs = [];
-      this.textFields.forEach(function (elem) {
-        inputs.push(elem.querySelector(inputSelector));
-      });
-      return inputs;
-    }
-  }, {
-    key: "isPopupHidden",
-    value: function isPopupHidden() {
-      return this.popup.classList.contains(this.hiddenPopupClass);
-    }
-  }, {
-    key: "isDropdownDouble",
-    value: function isDropdownDouble() {
-      return this.elem.classList.contains(this.doubleDropdownClass);
-    }
-  }, {
-    key: "addWindowListener",
-    value: function addWindowListener() {
-      window.addEventListener('click', this.handleWindowClick);
-    }
-  }, {
-    key: "handleWindowClick",
-    value: function handleWindowClick(evt) {
-      var _this4 = this;
-
-      if (evt.path.includes(this.elem)) {
-        this.listening = true;
-
-        if (!evt.path.includes(this.popup)) {
-          if (this.isPopupHidden()) {
-            this.popup.classList.remove(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList3;
-
-              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          } else {
-            this.popup.classList.add(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList4;
-
-              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          }
-        }
-      } else if (this.listening) {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList5;
-
-          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
-        });
-      }
-    }
-  }]);
-
-  return Dropdown;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
-
-/***/ }),
-
-/***/ 30:
+/***/ 31:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
 // EXTERNAL MODULE: ./src/common.blocks/text-field/__input/_masked-date/text-field__input_masked-date.js
-var text_field_input_masked_date = __webpack_require__(27);
+var text_field_input_masked_date = __webpack_require__(28);
 
 // CONCATENATED MODULE: ./src/common.blocks/text-field/__input/text-field__input.js
 
@@ -17713,7 +17723,7 @@ var text_field_input_masked_date = __webpack_require__(27);
 
 /***/ }),
 
-/***/ 34:
+/***/ 35:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17802,7 +17812,7 @@ var RangeSlider = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17854,7 +17864,7 @@ var Pagination = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 36:
+/***/ 37:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17918,7 +17928,7 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 37:
+/***/ 38:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18019,8 +18029,8 @@ var DatePicker = /*#__PURE__*/function () {
         options = _ref$options === void 0 ? {} : _ref$options,
         _ref$initialDate = _ref.initialDate,
         initialDate = _ref$initialDate === void 0 ? [null, null] : _ref$initialDate,
-        _ref$doubleText = _ref.doubleText,
-        doubleText = _ref$doubleText === void 0 ? false : _ref$doubleText;
+        _ref$isTextDouble = _ref.isTextDouble,
+        isTextDouble = _ref$isTextDouble === void 0 ? false : _ref$isTextDouble;
 
     _classCallCheck(this, DatePicker);
 
@@ -18036,7 +18046,7 @@ var DatePicker = /*#__PURE__*/function () {
     this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
     this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
     this.onSelect = this.onSelect.bind(this);
-    this.doubleText = doubleText;
+    this.isTextDouble = isTextDouble;
     this.defaultOptions = {
       range: 'period',
       showButtonPanel: true,
@@ -18121,7 +18131,7 @@ var DatePicker = /*#__PURE__*/function () {
       this.setDate(dates, dateTexts);
       var valueText;
 
-      if (this.doubleText) {
+      if (this.isTextDouble) {
         valueText = dateTexts;
       } else if (dateTexts[0] && dateTexts[1]) {
         valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
@@ -18302,7 +18312,7 @@ function items_counter_createClass(Constructor, protoProps, staticProps) { if (p
 
 var items_counter_ItemsCounter = /*#__PURE__*/function () {
   function ItemsCounter(elem) {
-    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
     items_counter_classCallCheck(this, ItemsCounter);
 
@@ -18520,7 +18530,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			__webpack_require__(86),
 			__webpack_require__(12),
 			__webpack_require__(5),
-			__webpack_require__(29)
+			__webpack_require__(30)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -19273,7 +19283,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			__webpack_require__(0),
 			__webpack_require__(87),
 			__webpack_require__(5),
-			__webpack_require__(29)
+			__webpack_require__(30)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),

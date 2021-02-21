@@ -13742,14 +13742,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images_room_img_10_jpg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(207);
 /* harmony import */ var _images_room_img_11_jpg__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(208);
 /* harmony import */ var _images_room_img_12_jpg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(209);
-/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(34);
-/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(33);
-/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(35);
+/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(35);
+/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(34);
+/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(36);
 /* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(14);
 /* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(8);
 /* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(3);
 /* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(7);
-/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(36);
+/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(37);
 
 
 
@@ -13810,20 +13810,20 @@ var pug = __webpack_require__(10);
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (Array, hovered, long, noFrame, pug_indent, secondary, textColor) {
+    (function (Array, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
       var pug_indent = [];
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -13849,8 +13849,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -13869,17 +13869,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -13948,7 +13948,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown__text-field"] = pug_interp = function({inputOptions, title = false, active = false}){
+pug_mixins["dropdown__text-field"] = pug_interp = function({inputOptions, title, isActive = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -13962,13 +13962,13 @@ pug_indent.push('  ');
 pug_mixins["text-field"]({
             inputOptions: {
                 ...inputOptions,
-                maskedDate: false,
-                readonly: true
+                isMaskedDate: false,
+                isReadonly: true
             },
-            arrowOptions: true,
+            arrowOptions: {},
             modifiers: {
-                focused: active,
-                flatBottom: active,
+                isFocused: isActive,
+                isBottomFlat: isActive,
             }
         });
 pug_indent.pop();
@@ -13994,17 +13994,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false, short = false} = {}){
+pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'dropdown';
-if (double) {
+if (isDouble) {
     className += ' dropdown_double';
 }
-if (short) {
+if (isShort) {
   className += ' dropdown_short';
 }
 
-if (double) {
+if (isDouble) {
     if (!Array.isArray(title)) {
         title = [title, title];
     }
@@ -14015,19 +14015,19 @@ if (double) {
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((double)) {
+if ((isDouble)) {
 pug_indent.push('  ');
 pug_mixins["dropdown__text-field"]({
                 inputOptions: inputOptions[0],
                 title: title[0],
-                active: !hiddenPopup
+                isActive: !popupHidden
             });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["dropdown__text-field"]({
                 inputOptions: inputOptions[1],
                 title: title[1],
-                active: !hiddenPopup
+                isActive: !popupHidden
             });
 pug_indent.pop();
 }
@@ -14036,7 +14036,7 @@ pug_indent.push('  ');
 pug_mixins["dropdown__text-field"]({
                 inputOptions,
                 title,
-                active: !hiddenPopup
+                isActive: !popupHidden
             });
 pug_indent.pop();
 }
@@ -14044,7 +14044,7 @@ pug_indent.push('  ');
 pug_mixins["dropdown__popup"]({
             mixinName: popupMixinOptions.name,
             mixinParams: popupMixinOptions.params,
-            hidden: hiddenPopup
+            hidden: popupHidden
         });
 pug_indent.pop();
 pug_html = pug_html + "\n";
@@ -14239,7 +14239,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -14265,8 +14265,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -14324,15 +14324,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -14341,18 +14341,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -14373,7 +14373,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -14390,9 +14394,9 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button\"\u003E";
 pug_indent.push('  ');
 pug_mixins["button"]({
             text: 'Применить',
-            link: false,
+            hasLink: false,
             modifiers: {
-                noFrame: true,
+                withoutFrame: true,
                 color: 'purple'
             }
         });
@@ -14401,7 +14405,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -14427,8 +14431,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -14486,15 +14490,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -14503,18 +14507,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -14535,7 +14539,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -14552,9 +14560,9 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button\"\u003E";
 pug_indent.push('  ');
 pug_mixins["button"]({
             text: 'Очистить',
-            link: false,
+            hasLink: false,
             modifiers: {
-                noFrame: true,
+                withoutFrame: true,
                 textColor: 'gray'
           }
         });
@@ -14708,7 +14716,7 @@ pug_mixins["checkbox-buttons__description"] = pug_interp = function(desc){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__description\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
 };
-pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, rich = false }){
+pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, isRich = false }){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -14719,7 +14727,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__name"](item.name);
 pug_indent.pop();
-if ((rich)) {
+if ((isRich)) {
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__description"](item.description);
 pug_indent.pop();
@@ -14728,10 +14736,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Flabel\u003E";
 };
-pug_mixins["checkbox-buttons"] = pug_interp = function({items, rich = false}){
+pug_mixins["checkbox-buttons"] = pug_interp = function({items, isRich = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'checkbox-buttons';
-if (rich) {
+if (isRich) {
     className += ' checkbox-buttons_rich';
 }
 pug_html = pug_html + "\n";
@@ -14746,7 +14754,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
       }
@@ -14758,7 +14766,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
     }
@@ -14805,7 +14813,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -14831,8 +14839,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -14880,7 +14888,7 @@ pug_mixins["checkbox-buttons__description"] = pug_interp = function(desc){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cspan class=\"checkbox-buttons__description\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E";
 };
-pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, rich = false }){
+pug_mixins["checkbox-buttons__button"] = pug_interp = function({ item, isRich = false }){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -14891,7 +14899,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__name"](item.name);
 pug_indent.pop();
-if ((rich)) {
+if ((isRich)) {
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__description"](item.description);
 pug_indent.pop();
@@ -14900,10 +14908,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Flabel\u003E";
 };
-pug_mixins["checkbox-buttons"] = pug_interp = function({items, rich = false}){
+pug_mixins["checkbox-buttons"] = pug_interp = function({items, isRich = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'checkbox-buttons';
-if (rich) {
+if (isRich) {
     className += ' checkbox-buttons_rich';
 }
 pug_html = pug_html + "\n";
@@ -14918,7 +14926,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
       }
@@ -14930,7 +14938,7 @@ pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["checkbox-buttons__button"]({
               item,
-              rich
+              isRich
             });
 pug_indent.pop();
     }
@@ -14976,10 +14984,10 @@ pug_mixins["room-card__img"] = pug_interp = function(src){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Cimg" + (" class=\"room-card__img\""+pug.attr("src", src, true, true)+" alt=\"room-image\"") + "\u003E";
 };
-pug_mixins["room-card__slider"] = pug_interp = function({imagesSrc, sliderArrows = false}){
+pug_mixins["room-card__slider"] = pug_interp = function({imagesSrc, hasSliderArrows = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'room-card__slider js-room-card__slider';
-if (sliderArrows) {
+if (hasSliderArrows) {
     className += ' room-card__slider_with-arrows';
 }
 pug_html = pug_html + "\n";
@@ -15051,18 +15059,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["room-info__number"] = pug_interp = function(number, small = false){
+pug_mixins["room-info__number"] = pug_interp = function(number, isSmall = false){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'room-info__number';
 let text = '';
-if (small) {
-    className += ' room-info__number_small';
+if (isSmall) {
+    className += ' room-info__number_size_small';
     text = number;
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + ("\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)));
-if ((!small)) {
+if ((!isSmall)) {
 pug_indent.push('  ');
 pug_mixins["heading"]({
                 text: number,
@@ -15089,7 +15097,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["room-info__name"] = pug_interp = function({number, type = false, small = false}){
+pug_mixins["room-info__name"] = pug_interp = function({number, type, isSmall = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15098,7 +15106,7 @@ pug_indent.push('  ');
 pug_mixins["room-info__number-sign"]();
 pug_indent.pop();
 pug_indent.push('  ');
-pug_mixins["room-info__number"](number, small);
+pug_mixins["room-info__number"](number, isSmall);
 pug_indent.pop();
 if ((type)) {
 pug_indent.push('  ');
@@ -15125,13 +15133,13 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["room-info"] = pug_interp = function({number, type = false, price, smallName = false}){
+pug_mixins["room-info"] = pug_interp = function({number, type, price, isNameSmall = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"room-info\"\u003E";
 pug_indent.push('  ');
-pug_mixins["room-info__name"]({ number, type, small: smallName });
+pug_mixins["room-info__name"]({ number, type, isSmall: isNameSmall });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["room-info__price"](price);
@@ -15148,7 +15156,7 @@ pug_html = pug_html + "\u003Cdiv class=\"room-card__room-info\"\u003E";
 pug_indent.push('  ');
 pug_mixins["room-info"]({
             ...roomInfo,
-            smallName: true
+            isNameSmall: true
         });
 pug_indent.pop();
 pug_html = pug_html + "\n";
@@ -15227,7 +15235,7 @@ pug_mixins["room-card__rating-and-comments"]({
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["room-card"] = pug_interp = function({imagesSrc, sliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'}){
+pug_mixins["room-card"] = pug_interp = function({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15235,7 +15243,7 @@ pug_html = pug_html + "\u003Cdiv class=\"room-card\"\u003E";
 pug_indent.push('  ');
 pug_mixins["room-card__slider"]({
           imagesSrc,
-          sliderArrows
+          hasSliderArrows
         });
 pug_indent.pop();
 pug_indent.push('  ');
@@ -15291,7 +15299,7 @@ pug_html = pug_html + "\u003Cdiv class=\"pagination__pages js-pagination__pages\
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -15317,8 +15325,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -15331,29 +15339,29 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
 pug_indent.push('  ');
-pug_mixins["arrow"]({ small: true });
+pug_mixins["arrow"]({ withoutPadding: true });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+pug_mixins["navigation__link"] = pug_interp = function(text, link = 'change-me'){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 };
-pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+pug_mixins["navigation__item"] = pug_interp = function({name, isDropdown = false, isActive = false, link = 'change-me'}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation__item';
-if (active) {
+if (isActive) {
     className += ' navigation__item_active';
 }
-if (dropdown) {
+if (isDropdown) {
     className += ' navigation__item_with-dropdown'
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((dropdown)) {
+if ((isDropdown)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
@@ -15370,7 +15378,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fli\u003E";
 };
-pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+pug_mixins["navigation__list"] = pug_interp = function({items, activeItem}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15381,12 +15389,12 @@ pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
   if ('number' == typeof $$obj.length) {
       for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
         var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
       }
@@ -15395,12 +15403,12 @@ pug_indent.pop();
     for (var itemIndex in $$obj) {
       $$l++;
       var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
     }
@@ -15411,7 +15419,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Ful\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
@@ -15421,7 +15429,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_mixins["navigation__list"]({
+            items,
+            activeItem: activeLinkIndex
+        });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15438,23 +15449,23 @@ pug_mixins["navigation"]({
             items: [
                 {
                     name: 'О нас',
-                    dropdown: false
+                    isDropdown: false
                 },
                 {
                     name: 'Услуги',
-                    dropdown: true
+                    isDropdown: true
                 },
                 {
                     name: 'Вакансии',
-                    dropdown: false
+                    isDropdown: false
                 },
                 {
                     name: 'Новости',
-                    dropdown: false
+                    isDropdown: false
                 },
                 {
                     name: 'Соглашения',
-                    dropdown: true
+                    isDropdown: true
                 }
             ]
         });
@@ -15463,7 +15474,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fnav\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -15489,8 +15500,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -15548,15 +15559,15 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["button__link"] = pug_interp = function(headingOptions, link){
+pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", link, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"](headingOptions);
 pug_indent.pop();
 pug_html = pug_html + "\u003C\u002Fa\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -15565,18 +15576,18 @@ let headingOptions = {
     color: 'white'
 };
 
-if (modifiers.secondary) {
+if (modifiers.isSecondary) {
     className += ' button_secondary';
     headingOptions.color = 'purple';
 }
-if (modifiers.noFrame) {
+if (modifiers.withoutFrame) {
     headingOptions.color = 'purple';
-    className += ' button_no-frame';
+    className += ' button_without-frame';
 }
-if (modifiers.long) {
+if (modifiers.isLong) {
     className += ' button_long';
 }
-if (modifiers.hovered) {
+if (modifiers.isHovered) {
     className += ' button_hovered';
 }
 switch (modifiers.textColor) {
@@ -15597,7 +15608,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["button__link"](headingOptions, link);
+pug_mixins["button__link"]({
+            headingOptions,
+            hasLink,
+            link
+        });
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["button__arrow"]();
@@ -15616,7 +15631,7 @@ pug_mixins["button"]({
             text: 'Войти',
             link: 'login-and-registration.html',
             modifiers: {
-                secondary: true
+                isSecondary: true
             }
         });
 pug_indent.pop();
@@ -15684,7 +15699,7 @@ pug_mixins["header__logo"] = pug_interp = function(link = 'landing-page.html'){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Ca" + (" class=\"header__logo\""+pug.attr("href", link, true, true)) + "\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E";
 };
-pug_mixins["header__container"] = pug_interp = function(user, activeLink){
+pug_mixins["header__container"] = pug_interp = function(userName, activeLink){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15693,7 +15708,7 @@ pug_indent.push('  ');
 pug_mixins["header__logo"]();
 pug_indent.pop();
 pug_indent.push('  ');
-pug_mixins["header__menu"](user, activeLink);
+pug_mixins["header__menu"](userName, activeLink);
 pug_indent.pop();
 pug_indent.push('  ');
 pug_mixins["header__hamburger"]();
@@ -15702,13 +15717,13 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["header"] = pug_interp = function(user, activeLink = 0){
+pug_mixins["header"] = pug_interp = function({userName, activeLink = 0} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cheader class=\"header\"\u003E";
 pug_indent.push('  ');
-pug_mixins["header__container"](user, activeLink);
+pug_mixins["header__container"](userName, activeLink);
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15732,7 +15747,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -15758,8 +15773,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -15772,29 +15787,29 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
 pug_indent.push('  ');
-pug_mixins["arrow"]({ small: true });
+pug_mixins["arrow"]({ withoutPadding: true });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation__link"] = pug_interp = function(text, link = false){
+pug_mixins["navigation__link"] = pug_interp = function(text, link = 'change-me'){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
 };
-pug_mixins["navigation__item"] = pug_interp = function({name, dropdown = false, active = false, link = false}){
+pug_mixins["navigation__item"] = pug_interp = function({name, isDropdown = false, isActive = false, link = 'change-me'}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation__item';
-if (active) {
+if (isActive) {
     className += ' navigation__item_active';
 }
-if (dropdown) {
+if (isDropdown) {
     className += ' navigation__item_with-dropdown'
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((dropdown)) {
+if ((isDropdown)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
@@ -15811,7 +15826,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fli\u003E";
 };
-pug_mixins["navigation__list"] = pug_interp = function(items, activeItem){
+pug_mixins["navigation__list"] = pug_interp = function({items, activeItem}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15822,12 +15837,12 @@ pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
   if ('number' == typeof $$obj.length) {
       for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
         var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
       }
@@ -15836,12 +15851,12 @@ pug_indent.pop();
     for (var itemIndex in $$obj) {
       $$l++;
       var item = $$obj[itemIndex];
-const active = itemIndex === activeItem;
+const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
 pug_indent.push('  ');
 pug_mixins["navigation__item"]({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             });
 pug_indent.pop();
     }
@@ -15852,7 +15867,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Ful\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex = false, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
@@ -15862,7 +15877,10 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 pug_indent.push('  ');
-pug_mixins["navigation__list"](items, activeLinkIndex);
+pug_mixins["navigation__list"]({
+            items,
+            activeItem: activeLinkIndex
+        });
 pug_indent.pop();
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15966,18 +15984,18 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = false, type = false, value = false, readonly = false, maskedDate = false} = {}){
+pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field__input';
-if (maskedDate) {
+if (isMaskedDate) {
     className += ' text-field__input_masked-date js-text-field__input_masked-date'
 }
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", readonly, true, true)) + "\u003E";
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
 };
-pug_mixins["arrow"] = pug_interp = function({type, color, small = false} = {}){
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'arrow';
 
@@ -16003,8 +16021,8 @@ switch (color) {
         break;
 }
 
-if (small) {
-    className += ' arrow_small';
+if (withoutPadding) {
+    className += ' arrow_without-padding';
 }
 
 pug_html = pug_html + "\n";
@@ -16023,17 +16041,17 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions = false, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
-if (modifiers.focused) {
+if (modifiers.isFocused) {
     className += ' text-field_focused';
 }
-if (modifiers.short) {
+if (modifiers.isShort) {
     className += ' text-field_short';
 }
-if (modifiers.flatBottom) {
+if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
@@ -16124,7 +16142,7 @@ pug_mixins["text-field"]({
                 type: 'email'
             },
             modifiers: {
-                short: true
+                isShort: true
             },
             arrowOptions: {
                 type: 'forward',
@@ -16229,7 +16247,7 @@ const title = 'Search room'
 const fileName = 'search-room'
 pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
 pug_indent.push('    ');
-pug_mixins["header"](false, false);
+pug_mixins["header"]();
 pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cmain class=\"search-room\"\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"search-room__container\"\u003E\n          \u003Caside class=\"search-room__params\"\u003E\n            \u003Cdiv class=\"search-room__params-date\"\u003E";
 pug_indent.push('              ');
@@ -16242,7 +16260,7 @@ pug_mixins["dropdown"]({
                             popupMixinOptions: {
                                 name: 'date-picker'
                             },
-                            short: true
+                            isShort: true
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-guests\"\u003E";
@@ -16273,7 +16291,7 @@ pug_mixins["dropdown"]({
                                     withoutButtons: true
                                 }
                             },
-                            short: true
+                            isShort: true
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-price\"\u003E";
@@ -16323,7 +16341,7 @@ pug_mixins["checkbox-buttons"]({
                                     checked: false
                                 }
                             ],
-                            rich: true
+                            isRich: true
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-facilities\"\u003E";
@@ -16354,7 +16372,7 @@ pug_mixins["dropdown"]({
                                     withoutButtons: true
                                 }
                             },
-                            short: true,
+                            isShort: true,
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-list\"\u003E";
@@ -16409,7 +16427,7 @@ pug_mixins["room-card"]({
                                 price: '9 990'
                             },
                             numOfComments: 145,
-                            sliderArrows: true,
+                            hasSliderArrows: true,
                             rating: 5,
                         });
 pug_indent.pop();
@@ -16421,7 +16439,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 840,
-                                type: false,
                                 price: '9 900'
                             },
                             numOfComments: 65,
@@ -16451,7 +16468,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 856,
-                                type: false,
                                 price: '7 300'
                             },
                             numOfComments: 19,
@@ -16466,7 +16482,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 740,
-                                type: false,
                                 price: '6 000'
                             },
                             numOfComments: 44,
@@ -16481,7 +16496,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 982,
-                                type: false,
                                 price: '5 800'
                             },
                             numOfComments: 56,
@@ -16496,7 +16510,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 678,
-                                type: false,
                                 price: '5 500'
                             },
                             numOfComments: 45,
@@ -16511,7 +16524,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 450,
-                                type: false,
                                 price: '5 300'
                             },
                             numOfComments: 39,
@@ -16526,7 +16538,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 350,
-                                type: false,
                                 price: '5 000'
                             },
                             numOfComments: 77,
@@ -16541,7 +16552,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 666,
-                                type: false,
                                 price: '5 000'
                             },
                             numOfComments: 25,
@@ -16556,7 +16566,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 444,
-                                type: false,
                                 price: '5 000'
                             },
                             numOfComments: 15,
@@ -16571,7 +16580,6 @@ pug_mixins["room-card"]({
                             ],
                             roomInfo: {
                                 number: 352,
-                                type: false,
                                 price: '5 000'
                             },
                             numOfComments: 55,
@@ -16589,19 +16597,19 @@ pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
     }.call(this, "Array" in locals_for_with ?
         locals_for_with.Array :
-        typeof Array !== 'undefined' ? Array : undefined, "hovered" in locals_for_with ?
-        locals_for_with.hovered :
-        typeof hovered !== 'undefined' ? hovered : undefined, "long" in locals_for_with ?
-        locals_for_with.long :
-        typeof long !== 'undefined' ? long : undefined, "noFrame" in locals_for_with ?
-        locals_for_with.noFrame :
-        typeof noFrame !== 'undefined' ? noFrame : undefined, "pug_indent" in locals_for_with ?
+        typeof Array !== 'undefined' ? Array : undefined, "isHovered" in locals_for_with ?
+        locals_for_with.isHovered :
+        typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
+        locals_for_with.isLong :
+        typeof isLong !== 'undefined' ? isLong : undefined, "isSecondary" in locals_for_with ?
+        locals_for_with.isSecondary :
+        typeof isSecondary !== 'undefined' ? isSecondary : undefined, "pug_indent" in locals_for_with ?
         locals_for_with.pug_indent :
-        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "secondary" in locals_for_with ?
-        locals_for_with.secondary :
-        typeof secondary !== 'undefined' ? secondary : undefined, "textColor" in locals_for_with ?
+        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "textColor" in locals_for_with ?
         locals_for_with.textColor :
-        typeof textColor !== 'undefined' ? textColor : undefined));
+        typeof textColor !== 'undefined' ? textColor : undefined, "withoutFrame" in locals_for_with ?
+        locals_for_with.withoutFrame :
+        typeof withoutFrame !== 'undefined' ? withoutFrame : undefined));
     ;;return pug_html;};
 module.exports = template;
 
@@ -16712,7 +16720,195 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 29:
+/***/ 3:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Dropdown = /*#__PURE__*/function () {
+  function Dropdown(elem) {
+    var _this = this;
+
+    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    _classCallCheck(this, Dropdown);
+
+    this.elem = elem;
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.defaultValue = defaultInputValue;
+    this.popup = this.getPopup();
+    this.hiddenPopupClass = 'dropdown__popup_hidden';
+    this.doubleDropdownClass = 'dropdown_double';
+    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
+    this.listening = false;
+
+    if (!this.isPopupHidden()) {
+      this.textFields.forEach(function (el) {
+        var _el$classList;
+
+        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
+      });
+    }
+
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.addWindowListener();
+
+    if (blockInPopupInstance) {
+      this.blockInPopupInstance = blockInPopupInstance;
+
+      try {
+        this.blockInPopupInstance.subscribe(this);
+      } catch (err) {
+        throw new Error('blockInPopupInstance must have a subscribe method');
+      }
+    }
+  }
+
+  _createClass(Dropdown, [{
+    key: "update",
+    value: function update(action) {
+      var _this2 = this;
+
+      this.changeTextFieldValue(action.valueText);
+
+      if (action.type === 'CLICK_APPLY-BUTTON') {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList2;
+
+          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "changeTextFieldValue",
+    value: function changeTextFieldValue(text) {
+      var _this3 = this;
+
+      if (this.isDropdownDouble()) {
+        if (Array.isArray(text)) {
+          text.forEach(function (value, i) {
+            if (!value) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = value;
+            }
+          });
+        } else {
+          this.textFieldInputs.forEach(function (input, i) {
+            if (!text) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = text;
+            }
+          });
+        }
+      } else if (!text) {
+        this.textFieldInputs[0].value = this.defaultValue;
+      } else {
+        this.textFieldInputs[0].value = text;
+      }
+    }
+  }, {
+    key: "getPopup",
+    value: function getPopup() {
+      var popupSelector = '.dropdown__popup';
+      return this.elem.querySelector(popupSelector);
+    }
+  }, {
+    key: "getTextFields",
+    value: function getTextFields() {
+      var textFieldSelector = '.dropdown__text-field .text-field';
+      return this.elem.querySelectorAll(textFieldSelector);
+    }
+  }, {
+    key: "getTextFieldInputs",
+    value: function getTextFieldInputs() {
+      var inputSelector = '.text-field__input';
+      var inputs = [];
+      this.textFields.forEach(function (elem) {
+        inputs.push(elem.querySelector(inputSelector));
+      });
+      return inputs;
+    }
+  }, {
+    key: "isPopupHidden",
+    value: function isPopupHidden() {
+      return this.popup.classList.contains(this.hiddenPopupClass);
+    }
+  }, {
+    key: "isDropdownDouble",
+    value: function isDropdownDouble() {
+      return this.elem.classList.contains(this.doubleDropdownClass);
+    }
+  }, {
+    key: "addWindowListener",
+    value: function addWindowListener() {
+      window.addEventListener('click', this.handleWindowClick);
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      var _this4 = this;
+
+      if (evt.path.includes(this.elem)) {
+        this.listening = true;
+
+        if (!evt.path.includes(this.popup)) {
+          if (this.isPopupHidden()) {
+            this.popup.classList.remove(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList3;
+
+              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          } else {
+            this.popup.classList.add(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList4;
+
+              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          }
+        }
+      } else if (this.listening) {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList5;
+
+          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
+        });
+      }
+    }
+  }]);
+
+  return Dropdown;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
+
+/***/ }),
+
+/***/ 30:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -17451,195 +17647,7 @@ return $.widget;
 
 /***/ }),
 
-/***/ 3:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Dropdown = /*#__PURE__*/function () {
-  function Dropdown(elem) {
-    var _this = this;
-
-    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-    _classCallCheck(this, Dropdown);
-
-    this.elem = elem;
-    this.textFields = this.getTextFields();
-    this.textFieldInputs = this.getTextFieldInputs();
-    this.defaultValue = defaultInputValue;
-    this.popup = this.getPopup();
-    this.hiddenPopupClass = 'dropdown__popup_hidden';
-    this.doubleDropdownClass = 'dropdown_double';
-    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
-    this.listening = false;
-
-    if (!this.isPopupHidden()) {
-      this.textFields.forEach(function (el) {
-        var _el$classList;
-
-        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
-      });
-    }
-
-    this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.addWindowListener();
-
-    if (blockInPopupInstance) {
-      this.blockInPopupInstance = blockInPopupInstance;
-
-      try {
-        this.blockInPopupInstance.subscribe(this);
-      } catch (err) {
-        throw new Error('blockInPopupInstance must have a subscribe method');
-      }
-    }
-  }
-
-  _createClass(Dropdown, [{
-    key: "update",
-    value: function update(action) {
-      var _this2 = this;
-
-      this.changeTextFieldValue(action.valueText);
-
-      if (action.type === 'CLICK_APPLY-BUTTON') {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList2;
-
-          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
-        });
-      }
-    }
-  }, {
-    key: "changeTextFieldValue",
-    value: function changeTextFieldValue(text) {
-      var _this3 = this;
-
-      if (this.isDropdownDouble()) {
-        if (Array.isArray(text)) {
-          text.forEach(function (value, i) {
-            if (!value) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = value;
-            }
-          });
-        } else {
-          this.textFieldInputs.forEach(function (input, i) {
-            if (!text) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = text;
-            }
-          });
-        }
-      } else if (!text) {
-        this.textFieldInputs[0].value = this.defaultValue;
-      } else {
-        this.textFieldInputs[0].value = text;
-      }
-    }
-  }, {
-    key: "getPopup",
-    value: function getPopup() {
-      var popupSelector = '.dropdown__popup';
-      return this.elem.querySelector(popupSelector);
-    }
-  }, {
-    key: "getTextFields",
-    value: function getTextFields() {
-      var textFieldSelector = '.dropdown__text-field .text-field';
-      return this.elem.querySelectorAll(textFieldSelector);
-    }
-  }, {
-    key: "getTextFieldInputs",
-    value: function getTextFieldInputs() {
-      var inputSelector = '.text-field__input';
-      var inputs = [];
-      this.textFields.forEach(function (elem) {
-        inputs.push(elem.querySelector(inputSelector));
-      });
-      return inputs;
-    }
-  }, {
-    key: "isPopupHidden",
-    value: function isPopupHidden() {
-      return this.popup.classList.contains(this.hiddenPopupClass);
-    }
-  }, {
-    key: "isDropdownDouble",
-    value: function isDropdownDouble() {
-      return this.elem.classList.contains(this.doubleDropdownClass);
-    }
-  }, {
-    key: "addWindowListener",
-    value: function addWindowListener() {
-      window.addEventListener('click', this.handleWindowClick);
-    }
-  }, {
-    key: "handleWindowClick",
-    value: function handleWindowClick(evt) {
-      var _this4 = this;
-
-      if (evt.path.includes(this.elem)) {
-        this.listening = true;
-
-        if (!evt.path.includes(this.popup)) {
-          if (this.isPopupHidden()) {
-            this.popup.classList.remove(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList3;
-
-              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          } else {
-            this.popup.classList.add(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList4;
-
-              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          }
-        }
-      } else if (this.listening) {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList5;
-
-          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
-        });
-      }
-    }
-  }]);
-
-  return Dropdown;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
-
-/***/ }),
-
-/***/ 33:
+/***/ 34:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17690,7 +17698,7 @@ var RoomCard = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 34:
+/***/ 35:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17779,7 +17787,7 @@ var RangeSlider = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17831,7 +17839,7 @@ var Pagination = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 36:
+/***/ 37:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17960,8 +17968,8 @@ var DatePicker = /*#__PURE__*/function () {
         options = _ref$options === void 0 ? {} : _ref$options,
         _ref$initialDate = _ref.initialDate,
         initialDate = _ref$initialDate === void 0 ? [null, null] : _ref$initialDate,
-        _ref$doubleText = _ref.doubleText,
-        doubleText = _ref$doubleText === void 0 ? false : _ref$doubleText;
+        _ref$isTextDouble = _ref.isTextDouble,
+        isTextDouble = _ref$isTextDouble === void 0 ? false : _ref$isTextDouble;
 
     _classCallCheck(this, DatePicker);
 
@@ -17977,7 +17985,7 @@ var DatePicker = /*#__PURE__*/function () {
     this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
     this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
     this.onSelect = this.onSelect.bind(this);
-    this.doubleText = doubleText;
+    this.isTextDouble = isTextDouble;
     this.defaultOptions = {
       range: 'period',
       showButtonPanel: true,
@@ -18062,7 +18070,7 @@ var DatePicker = /*#__PURE__*/function () {
       this.setDate(dates, dateTexts);
       var valueText;
 
-      if (this.doubleText) {
+      if (this.isTextDouble) {
         valueText = dateTexts;
       } else if (dateTexts[0] && dateTexts[1]) {
         valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
@@ -18243,7 +18251,7 @@ function items_counter_createClass(Constructor, protoProps, staticProps) { if (p
 
 var items_counter_ItemsCounter = /*#__PURE__*/function () {
   function ItemsCounter(elem) {
-    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
     items_counter_classCallCheck(this, ItemsCounter);
 
@@ -18481,7 +18489,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			__webpack_require__(86),
 			__webpack_require__(12),
 			__webpack_require__(5),
-			__webpack_require__(29)
+			__webpack_require__(30)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -19234,7 +19242,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 			__webpack_require__(0),
 			__webpack_require__(87),
 			__webpack_require__(5),
-			__webpack_require__(29)
+			__webpack_require__(30)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
