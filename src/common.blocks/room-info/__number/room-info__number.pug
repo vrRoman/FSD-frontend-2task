@@ -6,7 +6,7 @@ mixin room-info__number(number, isSmall = false)
         let className = 'room-info__number';
         let text = '';
         if (isSmall) {
-            className += ' room-info__number_small';
+            className += ' room-info__number_size_small';
             text = number;
         }
     div(class=className)= text
