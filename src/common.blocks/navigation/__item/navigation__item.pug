@@ -2,17 +2,17 @@ include ../__item-arrow/navigation__item-arrow
 include ../__link/navigation__link
 
 
-mixin navigation__item({name, dropdown = false, active = false, link = false})
+mixin navigation__item({name, isDropdown = false, isActive = false, link = 'change-me'})
     -
         let className = 'navigation__item';
-        if (active) {
+        if (isActive) {
             className += ' navigation__item_active';
         }
-        if (dropdown) {
+        if (isDropdown) {
             className += ' navigation__item_with-dropdown'
         }
     li(class=className)
-        if (dropdown)
+        if (isDropdown)
             div= name
             +navigation__item-arrow
         else

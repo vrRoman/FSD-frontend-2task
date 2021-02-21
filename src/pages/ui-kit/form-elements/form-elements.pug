@@ -19,8 +19,8 @@ include ../../../common.blocks/icon-text-list/icon-text-list
 include ../../../common.blocks/comment/comment
 
 
-mixin elem-info(title, state = false, short = false)
-    .elem-info(class=short ? 'elem-info_short' : false)
+mixin elem-info(title, state, isShort = false)
+    .elem-info(class=isShort ? 'elem-info_short' : false)
         .elem-info__title
             +heading({text: title})
         if (state)
@@ -96,7 +96,7 @@ block content
                             value: 'This is pretty awesome'
                         },
                         modifiers: {
-                            focused: true
+                            isFocused: true
                         }
                     })
                 .form-elements__field-wrapper
@@ -134,7 +134,7 @@ block content
                         inputOptions: {
                             placeholder: 'ДД.ММ.ГГГГ',
                             type: 'text',
-                            maskedDate: true
+                            isMaskedDate: true
                         }
                     })
                 .form-elements__dropdown-wrapper
@@ -154,7 +154,7 @@ block content
                             popupMixinOptions: {
                                 name: 'date-picker'
                             },
-                            double: true
+                            isDouble: true
                         })
                 .form-elements__dropdown-wrapper
                     .form-elements__filter-date-dropdown
@@ -167,7 +167,7 @@ block content
                             popupMixinOptions: {
                                 name: 'date-picker'
                             },
-                            short: true
+                            isShort: true
                         })
                 .form-elements__field-wrapper
                     .form-elements__field-elem-info
@@ -182,7 +182,7 @@ block content
                             color: 'purple-gradient'
                         },
                         modifiers: {
-                            short: true
+                            isShort: true
                         }
                     })
 
@@ -236,7 +236,7 @@ block content
                     .form-elements__like-button
                         +like-button({
                             likesNum: 12,
-                            active: true
+                            isActive: true
                         })
                 .form-elements__button-wrapper.form-elements__button-wrapper_rate
                     .form-elements__button-elem-info
@@ -258,33 +258,33 @@ block content
                     .form-elements__button
                         +button({
                             modifiers: {
-                                hovered: true
+                                isHovered: true
                             }
                         })
                     .form-elements__button
                         +button({
                             modifiers: {
-                                secondary: true
+                                isSecondary: true
                             }
                         })
                     .form-elements__button
                         +button({
                             modifiers: {
-                                secondary: true,
-                                hovered: true
+                                isSecondary: true,
+                                isHovered: true
                             }
                         })
                     .form-elements__button
                         +button({
                             modifiers: {
-                                noFrame: true,
+                                withoutFrame: true,
                                 textColor: 'purple'
                             }
                         })
                     .form-elements__button
                         +button({
                             modifiers: {
-                                noFrame: true,
+                                withoutFrame: true,
                                 textColor: 'gray'
                             }
                         })
@@ -292,7 +292,7 @@ block content
                         +button({
                             text: 'Перейти к оплате',
                             modifiers: {
-                                long: true
+                                isLong: true
                             }
                         })
 
@@ -319,7 +319,7 @@ block content
                                     withoutButtons: true
                                 }
                             },
-                            short: true
+                            isShort: true
                         })
                 .form-elements__field-wrapper
                     .form-elements__facilities-dropdown.form-elements__facilities-dropdown_expanded
@@ -337,8 +337,8 @@ block content
                                     withoutButtons: true
                                 }
                             },
-                            short: true,
-                            hiddenPopup: false
+                            isShort: true,
+                            popupHidden: false
                         })
 
             .form-elements__elements-container
@@ -368,7 +368,7 @@ block content
                                 ]
                             }
                         },
-                        hiddenPopup: false
+                        popupHidden: false
                     })
 
             .form-elements__elements-container
@@ -398,7 +398,7 @@ block content
                                 ]
                             }
                         },
-                        hiddenPopup: false
+                        popupHidden: false
                     })
 
             .form-elements__elements-container.form-elements__elements-container_with-top-margin
@@ -429,7 +429,7 @@ block content
                                 checked: false
                             }
                         ],
-                        rich: true
+                        isRich: true
                     })
 
             .form-elements__elements-container.form-elements__elements-container_with-top-margin
@@ -464,6 +464,6 @@ block content
                     text: 'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.',
                     likeOptions: {
                         likesNum: 12,
-                        active: true
+                        isActive: true
                     }
                 })

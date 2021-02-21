@@ -2,10 +2,10 @@ include __heart/like-button__heart
 include __number/like-button__number
 
 
-mixin like-button({likesNum = 0, active = false})
+mixin like-button({likesNum = 0, isActive = false})
     -
         let className = 'like-button js-like-button';
-        if (active) {
+        if (isActive) {
             className += ' like-button_active';
         }
     div(class=className)

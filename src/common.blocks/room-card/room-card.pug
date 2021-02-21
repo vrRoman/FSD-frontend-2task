@@ -2,10 +2,10 @@ include __slider/room-card__slider
 include __content/room-card__content
 
 
-mixin room-card({imagesSrc, sliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'})
+mixin room-card({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'})
     .room-card
         +room-card__slider({
           imagesSrc,
-          sliderArrows
+          hasSliderArrows
         })
         +room-card__content({roomInfo, rating, numOfComments, link})

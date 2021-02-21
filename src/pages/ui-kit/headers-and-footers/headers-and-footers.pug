@@ -12,9 +12,14 @@ block vars
 block content
     .headers-and-footers
         .headers-and-footers__header
-            +header(false, 0)
+            +header({
+                activeLink: 0
+            })
         .headers-and-footers__header
-            +header('Юлий Цезарь', 0)
+            +header({
+                userName: 'Юлий Цезарь',
+                activeLink: 0
+            })
         .headers-and-footers__footer
             +footer
         .headers-and-footers__footer-creative

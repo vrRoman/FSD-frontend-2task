@@ -28,7 +28,7 @@ $guestsDropdowns.each(function init() {
 const dateDropdownElem = document.querySelector('.form-elements__date-dropdown .dropdown');
 const datePicker = new DatePicker({
   element: dateDropdownElem.querySelector('.date-picker'),
-  doubleText: true,
+  isTextDouble: true,
 });
 const dateDropdown = new Dropdown(dateDropdownElem, datePicker, 'ДД.ММ.ГГГГ');
 

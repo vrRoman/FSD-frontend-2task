@@ -12,7 +12,7 @@ class SearchCard {
   init() {
     const datePicker = new DatePicker({
       element: this.getDateDropdown().querySelector('.date-picker'),
-      doubleText: true,
+      isTextDouble: true,
     });
     const dateDropdown = new Dropdown(this.getDateDropdown(), datePicker, 'ДД.ММ.ГГГГ');
 

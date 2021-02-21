@@ -1,4 +1,4 @@
-mixin arrow({type, color, small = false} = {})
+mixin arrow({type, color, withoutPadding = false} = {})
     -
         let className = 'arrow';
 
@@ -24,8 +24,8 @@ mixin arrow({type, color, small = false} = {})
                 break;
         }
 
-        if (small) {
-            className += ' arrow_small';
+        if (withoutPadding) {
+            className += ' arrow_without-padding';
         }
 
     div(class=className)

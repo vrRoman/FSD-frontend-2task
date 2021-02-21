@@ -2,7 +2,7 @@ import 'jquery-ui/ui/widgets/datepicker';
 import './jquery.datepicker.extension.range.min';
 
 class DatePicker {
-  constructor({ element, options = {}, initialDate = [null, null], doubleText = false }) {
+  constructor({ element, options = {}, initialDate = [null, null], isTextDouble = false }) {
     this.clearBtnHTML = '<button class="ui-datepicker-current '
       + 'ui-state-default ui-corner-all '
       + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" '
@@ -37,7 +37,7 @@ class DatePicker {
     this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
     this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
     this.onSelect = this.onSelect.bind(this);
-    this.doubleText = doubleText;
+    this.isTextDouble = isTextDouble;
     this.defaultOptions = {
       range: 'period',
       showButtonPanel: true,
@@ -113,7 +113,7 @@ class DatePicker {
     this.setDate(dates, dateTexts);
 
     let valueText;
-    if (this.doubleText) {
+    if (this.isTextDouble) {
       valueText = dateTexts;
     } else if (dateTexts[0] && dateTexts[1]) {
       valueText = `${dateTexts[0]} - ${dateTexts[1]}`;

@@ -2,19 +2,19 @@ include ../../text-field/text-field
 include ../__title/dropdown__title
 
 
-mixin dropdown__text-field({inputOptions, title = false, active = false})
+mixin dropdown__text-field({inputOptions, title, isActive = false})
     .dropdown__text-field
         if (title)
             +dropdown__title(title)
         +text-field({
             inputOptions: {
                 ...inputOptions,
-                maskedDate: false,
-                readonly: true
+                isMaskedDate: false,
+                isReadonly: true
             },
-            arrowOptions: true,
+            arrowOptions: {},
             modifiers: {
-                focused: active,
-                flatBottom: active,
+                isFocused: isActive,
+                isBottomFlat: isActive,
             }
         })

@@ -1,12 +1,12 @@
 include ../__item/navigation__item
 
 
-mixin navigation__list(items, activeItem)
+mixin navigation__list({items, activeItem})
     ul.navigation__list
         each item, itemIndex in items
-            - const active = itemIndex === activeItem;
+            - const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
             +navigation__item({
-                active,
+                isActive,
                 name: item.name,
-                dropdown: item.dropdown
+                isDropdown: item.isDropdown
             })

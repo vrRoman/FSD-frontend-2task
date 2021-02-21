@@ -1,3 +1,3 @@
-mixin button__link(headingOptions, link)
-    a(href=link).button__link
+mixin button__link({headingOptions, link, hasLink})
+    a(href=hasLink ? link : false).button__link
         +heading(headingOptions)

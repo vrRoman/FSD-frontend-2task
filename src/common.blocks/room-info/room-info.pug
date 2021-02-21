@@ -2,7 +2,7 @@ include __name/room-info__name
 include __price/room-info__price
 
 
-mixin room-info({number, type = false, price, smallName = false})
+mixin room-info({number, type, price, isNameSmall = false})
     .room-info
-        +room-info__name({ number, type, small: smallName })
+        +room-info__name({ number, type, isSmall: isNameSmall })
         +room-info__price(price)

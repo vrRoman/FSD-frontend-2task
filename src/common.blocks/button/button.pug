@@ -5,7 +5,7 @@ include __arrow/button__arrow
 include __link/button__link
 
 
-mixin button({text = 'click me', link = 'change-me', modifiers = {secondary, noFrame, long, hovered, textColor}} = {})
+mixin button({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {})
     -
         let className = 'button';
         let headingOptions = {
@@ -14,18 +14,18 @@ mixin button({text = 'click me', link = 'change-me', modifiers = {secondary, noF
             color: 'white'
         };
 
-        if (modifiers.secondary) {
+        if (modifiers.isSecondary) {
             className += ' button_secondary';
             headingOptions.color = 'purple';
         }
-        if (modifiers.noFrame) {
+        if (modifiers.withoutFrame) {
             headingOptions.color = 'purple';
-            className += ' button_no-frame';
+            className += ' button_without-frame';
         }
-        if (modifiers.long) {
+        if (modifiers.isLong) {
             className += ' button_long';
         }
-        if (modifiers.hovered) {
+        if (modifiers.isHovered) {
             className += ' button_hovered';
         }
         switch (modifiers.textColor) {
@@ -43,5 +43,9 @@ mixin button({text = 'click me', link = 'change-me', modifiers = {secondary, noF
         }
 
     button(class=className)
-        +button__link(headingOptions, link)
+        +button__link({
+            headingOptions,
+            hasLink,
+            link
+        })
         +button__arrow

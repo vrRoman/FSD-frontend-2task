@@ -1,5 +1,5 @@
 class Dropdown {
-  constructor(elem, blockInPopupInstance = false, defaultInputValue = '') {
+  constructor(elem, blockInPopupInstance = null, defaultInputValue = '') {
     this.elem = elem;
     this.textFields = this.getTextFields();
     this.textFieldInputs = this.getTextFieldInputs();

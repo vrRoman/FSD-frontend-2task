@@ -1,6 +1,6 @@
 include __container/header__container
 
 
-mixin header(user, activeLink = 0)
+mixin header({userName, activeLink = 0} = {})
     header.header
-        +header__container(user, activeLink)
+        +header__container(userName, activeLink)

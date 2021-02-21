@@ -2,17 +2,17 @@ include __input/text-field__input
 include __arrow/text-field__arrow
 
 
-mixin text-field({inputOptions = {}, arrowOptions = false, modifiers = {}} = {})
+mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}} = {})
     -
         let className = 'text-field';
 
-        if (modifiers.focused) {
+        if (modifiers.isFocused) {
             className += ' text-field_focused';
         }
-        if (modifiers.short) {
+        if (modifiers.isShort) {
             className += ' text-field_short';
         }
-        if (modifiers.flatBottom) {
+        if (modifiers.isBottomFlat) {
             className += ' text-field_flat-bottom';
         }
 

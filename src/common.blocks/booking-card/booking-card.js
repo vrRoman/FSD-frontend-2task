@@ -12,7 +12,7 @@ class BookingCard {
     const datePicker = new DatePicker({
       element: this.getDatePickerElem(),
       initialDate: [new Date(2019, 7, 19), new Date(2019, 7, 23)],
-      doubleText: true,
+      isTextDouble: true,
     });
     const dropdownWithDatePicker = new Dropdown(this.getDateDropdownElem(), datePicker, 'ДД.ММ.ГГГГ');
 

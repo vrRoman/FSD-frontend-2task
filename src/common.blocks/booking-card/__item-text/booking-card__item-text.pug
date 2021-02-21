@@ -1,4 +1,4 @@
-mixin booking-card__item-text(text, tooltip)
+mixin booking-card__item-text(text, hasTooltip)
     .booking-card__item-text !{text}
-        if (tooltip)
+        if (hasTooltip)
             +booking-card__tooltip

@@ -1,15 +1,15 @@
 include __button/checkbox-buttons__button
 
 
-mixin checkbox-buttons({items, rich = false})
+mixin checkbox-buttons({items, isRich = false})
     -
         let className = 'checkbox-buttons';
-        if (rich) {
+        if (isRich) {
             className += ' checkbox-buttons_rich';
         }
     div(class=className)
         each item in items
             +checkbox-buttons__button({
               item,
-              rich
+              isRich
             })

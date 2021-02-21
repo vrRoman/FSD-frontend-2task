@@ -3,9 +3,9 @@ include ../__name/checkbox-buttons__name
 include ../__description/checkbox-buttons__description
 
 
-mixin checkbox-buttons__button({ item, rich = false })
+mixin checkbox-buttons__button({ item, isRich = false })
     label.checkbox-buttons__button
         +checkbox-buttons__input(item.checked)
         +checkbox-buttons__name(item.name)
-        if (rich)
+        if (isRich)
             +checkbox-buttons__description(item.description)

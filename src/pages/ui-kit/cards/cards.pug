@@ -38,12 +38,12 @@ block content
                             {
                               text: 'Сбор за услуги: скидка 2 179₽',
                               price: 0,
-                              tooltip: true
+                              hasTooltip: true
                             },
                             {
                               text: 'Сбор за дополнительные услуги',
                               price: '300',
-                              tooltip: true
+                              hasTooltip: true
                             }
                         ],
                         totalPrice: '38 081',
@@ -62,7 +62,7 @@ block content
                     +room-card({
                         imagesSrc: ['images/room-img_1.jpg', 'images/room-img_2.jpg',
                           'images/room-img_3.jpg', 'images/room-img_4.jpg'],
-                        sliderArrows: true,
+                        hasSliderArrows: true,
                         roomInfo: {
                             number: 888,
                             type: 'Люкс',
@@ -76,10 +76,9 @@ block content
                     +room-card({
                         imagesSrc: ['images/room-img_2.jpg', 'images/room-img_3.jpg',
                           'images/room-img_4.jpg', 'images/room-img_5.jpg'],
-                        sliderArrows: false,
+                        hasSliderArrows: false,
                         roomInfo: {
                             number: 840,
-                            type: false,
                             price: '9 900'
                         },
                         numOfComments: 65,

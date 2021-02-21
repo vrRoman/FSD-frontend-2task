@@ -17,9 +17,9 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
         +booking-card__total(totalPrice)
         +button({
             text: 'Забронировать',
-            link: false,
+            hasLink: false,
             modifiers: {
-                long: true,
+                isLong: true,
                 textColor: 'white',
             }
         })

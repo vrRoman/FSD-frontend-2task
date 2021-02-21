@@ -2,17 +2,17 @@ include __text-field/dropdown__text-field
 include __popup/dropdown__popup
 
 
-mixin dropdown({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, title = false, double = false, short = false} = {})
+mixin dropdown({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {})
     -
         let className = 'dropdown';
-        if (double) {
+        if (isDouble) {
             className += ' dropdown_double';
         }
-        if (short) {
+        if (isShort) {
           className += ' dropdown_short';
         }
 
-        if (double) {
+        if (isDouble) {
             if (!Array.isArray(title)) {
                 title = [title, title];
             }
@@ -21,25 +21,25 @@ mixin dropdown({inputOptions = {}, popupMixinOptions = {}, hiddenPopup = true, t
             }
         }
     div(class=className)
-        if (double)
+        if (isDouble)
             +dropdown__text-field({
                 inputOptions: inputOptions[0],
                 title: title[0],
-                active: !hiddenPopup
+                isActive: !popupHidden
             })
             +dropdown__text-field({
                 inputOptions: inputOptions[1],
                 title: title[1],
-                active: !hiddenPopup
+                isActive: !popupHidden
             })
         else
             +dropdown__text-field({
                 inputOptions,
                 title,
-                active: !hiddenPopup
+                isActive: !popupHidden
             })
         +dropdown__popup({
             mixinName: popupMixinOptions.name,
             mixinParams: popupMixinOptions.params,
-            hidden: hiddenPopup
+            hidden: popupHidden
         })

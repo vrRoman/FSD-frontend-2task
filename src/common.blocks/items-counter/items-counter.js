@@ -1,7 +1,7 @@
 import CountingItem from '@/common.blocks/counting-item/counting-item';
 
 class ItemsCounter {
-  constructor(elem, wordToValueTextReplace = false) {
+  constructor(elem, wordToValueTextReplace = null) {
     this.elem = elem;
     this.clearBtn = this.getClearBtn();
     this.applyBtn = this.getApplyBtn();
