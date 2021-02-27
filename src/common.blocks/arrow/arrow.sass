@@ -24,9 +24,24 @@
     -moz-osx-font-smoothing: grayscale
     font-feature-settings: 'liga'
 
+  &_color
+    &_purple-gradient
+      &:after
+        color: transparent
+        background: $purple-gradient
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
+    &_white
+      &:after
+        color: #fff
 
-@import '_color/arrow_color_white'
-@import '_color/arrow_color_purple-gradient'
-@import '_type/arrow_type_expand-less'
-@import '_type/arrow_type_forward'
-@import '_without-padding/arrow_without-padding'
+  &_type
+    &_expand-less
+      &:after
+        content: 'expand_less'
+    &_forward
+      &:after
+        content: 'arrow_forward'
+
+  &_without-padding
+    padding: 0

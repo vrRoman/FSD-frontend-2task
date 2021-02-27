@@ -1,5 +1,8 @@
 @import '@/common.blocks/heading/heading'
 @import '@/common.blocks/button/button'
+@import '@/common.blocks/date-picker/date-picker'
+@import '@/common.blocks/items-counter/items-counter'
+@import '@/common.blocks/dropdown/dropdown'
 
 
 .search-card
@@ -11,7 +14,12 @@
   box-sizing: border-box
   border: 1px solid rgba(0, 0, 0, 0.12)
   border-radius: 4px
-
-
-@import '__guests/search-card__guests'
-@import '__dates/search-card__dates'
+  &__guests
+    margin-top: 21px
+    margin-bottom: 31px
+    position: relative
+    z-index: 1
+  &__dates
+    margin-top: 22px
+    position: relative
+    z-index: 2

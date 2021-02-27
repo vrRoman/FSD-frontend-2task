@@ -1,9 +1,6 @@
 include ../arrow/arrow
 include ../heading/heading
 
-include __arrow/button__arrow
-include __link/button__link
-
 
 mixin button({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {})
     -
@@ -43,9 +40,10 @@ mixin button({text = 'click me', hasLink = true, link = 'change-me', modifiers =
         }
 
     button(class=className)
-        +button__link({
-            headingOptions,
-            hasLink,
-            link
-        })
-        +button__arrow
+        a(href=hasLink ? link : false).button__link
+            +heading(headingOptions)
+        .button__arrow
+            +arrow({
+                type: 'forward',
+                color: 'white'
+            })

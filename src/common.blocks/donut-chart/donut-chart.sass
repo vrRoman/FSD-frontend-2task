@@ -1,7 +1,44 @@
+@import '@/sass/colors'
+@import '@/common.blocks/heading/heading'
+
+
 .donut-chart
   display: flex
   align-items: flex-end
-
-
-@import '__chart/donut-chart__chart'
-@import '__list/donut-chart__list'
+  &__votes
+    margin-bottom: 3px
+    position: absolute
+    display: flex
+    flex-direction: column
+    align-items: center
+    z-index: -1
+  &__chart
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+  &__item
+    &:before
+      content: ''
+      height: 10px
+      width: 10px
+      margin-right: 5px
+      display: inline-block
+      border-radius: 50%
+    &_color
+      &_dark
+        &:before
+          background: linear-gradient(180deg, #919191 0%, #3D4975 100%)
+      &_orange
+        &:before
+          background: linear-gradient(180deg, #FFE39C 0%, #FFBA9C 100%)
+      &_green
+        &:before
+          background: $green-gradient
+      &_purple
+        &:before
+          background: $purple-gradient
+  &__list
+    list-style: none
+    padding: 0
+    margin: 0 0 2px 25px

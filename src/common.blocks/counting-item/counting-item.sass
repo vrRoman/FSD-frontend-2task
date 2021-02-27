@@ -1,10 +1,33 @@
+@import '@/sass/colors'
+
+
 .counting-item
   display: flex
   justify-content: space-between
   align-items: center
+  &__counter
+    display: flex
+    align-items: center
+  &__change-button
+    width: 30px
+    height: 30px
+    box-sizing: border-box
+    border: 1px solid $dark-shade-25
+      radius: 50%
+    display: flex
+    justify-content: center
+    align-items: center
+    color: $dark-shade-50
+    cursor: pointer
+    user-select: none
+    &_disabled
+      opacity: .5
+  &__value
+    min-width: 32px
+    margin-bottom: 3px
+    display: flex
+    justify-content: center
+    user-select: none
 
-
-@import '__counter/counting-item__counter'
-@import '__change-button/counting-item__change-button'
-@import '__value/counting-item__value'
-@import '__name/counting-item__name'
+  &__name
+    margin-bottom: 3px

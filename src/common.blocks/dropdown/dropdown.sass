@@ -1,13 +1,34 @@
+@import '@/sass/colors'
+@import '@/common.blocks/heading/heading'
+
+
 .dropdown
   max-width: 320px
   width: 100%
   position: relative
   z-index: 1
+  &__popup
+    min-width: 100%
+    box-sizing: border-box
+    position: absolute
+    top: calc(100% - 1px)
+    background-color: #fff
+    overflow: hidden
+    border: 1px solid $dark-shade-50
+      bottom-left-radius: 4px
+      bottom-right-radius: 4px
+    &_hidden
+      display: none
+  &__text-field
+    position: relative
+    z-index: 1
+  &__title
+    margin-bottom: 5px
 
-
-@import '__popup/dropdown__popup'
-@import '__text-field/dropdown__text-field'
-@import '__title/dropdown__title'
-
-@import '_double/dropdown_double'
-@import '_short/dropdown_short'
+  &_double
+    display: flex
+    justify-content: space-between
+    .dropdown__text-field
+      max-width: 150px
+  &_short
+    max-width: 266px

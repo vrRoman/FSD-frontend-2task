@@ -1,5 +1,6 @@
-include __title/expandable-checkboxes__title
-include __checkboxes/expandable-checkboxes__checkboxes
+include ../heading/heading
+include ../arrow/arrow
+include ../checkbox-buttons/checkbox-buttons
 
 
 mixin expandable-checkboxes({title='Expandable checkbox list', items, expanded = false})
@@ -9,5 +10,9 @@ mixin expandable-checkboxes({title='Expandable checkbox list', items, expanded =
             className += ' expandable-checkboxes_expanded';
         }
     div(class=className)
-        +expandable-checkboxes__title(title)
-        +expandable-checkboxes__checkboxes(items)
+        .expandable-checkboxes__title
+            +heading({ text: title })
+            .expandable-checkboxes__arrow
+                +arrow()
+        .expandable-checkboxes__checkboxes
+            +checkbox-buttons({ items })

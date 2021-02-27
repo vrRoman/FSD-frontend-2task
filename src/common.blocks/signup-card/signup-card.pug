@@ -1,13 +1,8 @@
 include ../heading/heading
 include ../button/button
-
-include __name/signup-card__name
-include __surname/signup-card__surname
-include __gender/signup-card__gender
-include __birth/signup-card__birth
-include __login-details/signup-card__login-details
-include __offers/signup-card__offers
-include __account-exists/signup-card__account-exists
+include ../text-field/text-field
+include ../toggle-button/toggle-button
+include ../radio-buttons/radio-buttons
 
 
 mixin signup-card
@@ -16,12 +11,60 @@ mixin signup-card
             type: 'h1',
             text: 'Регистрация аккаунта'
         })
-        +signup-card__name
-        +signup-card__surname
-        +signup-card__gender
-        +signup-card__birth
-        +signup-card__login-details
-        +signup-card__offers
+        .signup-card__name
+            +text-field({
+                inputOptions: {
+                    type: 'text',
+                    placeholder: 'Имя'
+                }
+            })
+        .signup-card__surname
+            +text-field({
+                inputOptions: {
+                    type: 'text',
+                    placeholder: 'Фамилия'
+                }
+            })
+        .signup-card__gender
+            +radio-buttons({
+                items: ['Мужчина', 'Женщина'],
+                itemsName: 'gender'
+            })
+        .signup-card__birth
+            .signup-card__subtitle
+                +heading({
+                    text: 'Дата рождения',
+                    type: 'h3'
+                })
+            +text-field({
+                inputOptions: {
+                    placeholder: 'ДД.ММ.ГГГГ',
+                    type: 'text',
+                    isMaskedDate: true
+                }
+            })
+        .signup-card__login-details
+            .signup-card__subtitle
+                +heading({
+                    text: 'Данные для входа в сервис',
+                    type: 'h3'
+                })
+            .signup-card__email
+                +text-field({
+                    inputOptions: {
+                        type: 'email',
+                        placeholder: 'Email'
+                    }
+                })
+            .signup-card__password
+                +text-field({
+                    inputOptions: {
+                        type: 'password',
+                        placeholder: 'Пароль'
+                    }
+                })
+        .signup-card__offers
+            +toggle-button({ text: 'Получать спецпредложения' })
         +button({
             text: 'Перейти к оплате',
             link: 'landing-page.html',
@@ -30,4 +73,12 @@ mixin signup-card
                 textColor: 'white'
             }
         })
-        +signup-card__account-exists
+        .signup-card__account-exists
+            span Уже есть аккаунт на Toxin
+            +button({
+                text: 'Войти',
+                hasLink: false,
+                modifiers: {
+                    isSecondary: true
+                }
+            })

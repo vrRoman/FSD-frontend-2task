@@ -1,4 +1,4 @@
-include __list/navigation__list
+include ../arrow/arrow
 
 
 mixin navigation({items, activeLinkIndex, inColumn = false})
@@ -8,7 +8,24 @@ mixin navigation({items, activeLinkIndex, inColumn = false})
             className += ' navigation_in-column';
         }
     nav(class=className)
-        +navigation__list({
-            items,
-            activeItem: activeLinkIndex
-        })
+        ul.navigation__list
+            each item, itemIndex in items
+                -
+                    const isActive = activeLinkIndex !== undefined ? (itemIndex === activeLinkIndex) : false;
+                    const link = item.link || 'change-me';
+
+                    let itemClassName = 'navigation__item';
+                    if (isActive) {
+                        itemClassName += ' navigation__item_active';
+                    }
+                    if (item.isDropdown) {
+                        itemClassName += ' navigation__item_with-dropdown';
+                    }
+
+                li(class=itemClassName)
+                    if (item.isDropdown)
+                        div= item.name
+                        .navigation__item-arrow
+                            +arrow({ withoutPadding: true })
+                    else
+                        a.navigation__link(href=link)= item.name

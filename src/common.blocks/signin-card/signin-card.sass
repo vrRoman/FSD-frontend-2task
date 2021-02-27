@@ -1,5 +1,6 @@
 @import '@/common.blocks/heading/heading'
 @import '@/common.blocks/button/button'
+@import '@/common.blocks/text-field/text-field'
 
 
 .signin-card
@@ -11,8 +12,14 @@
   box-sizing: border-box
   border: 1px solid rgba(0, 0, 0, 0.12)
   border-radius: 4px
-
-
-@import '__email/signin-card__email'
-@import '__password/signin-card__password'
-@import '__account-not-exists/signin-card__account-not-exists'
+  &__email
+    margin-top: 20px
+  &__password
+    margin-top: 10px
+    margin-bottom: 20px
+  &__account-not-exists
+    margin-top: 30px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    color: #000

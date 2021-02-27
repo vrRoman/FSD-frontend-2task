@@ -1,6 +1,3 @@
-include __button/checkbox-buttons__button
-
-
 mixin checkbox-buttons({items, isRich = false})
     -
         let className = 'checkbox-buttons';
@@ -9,7 +6,11 @@ mixin checkbox-buttons({items, isRich = false})
         }
     div(class=className)
         each item in items
-            +checkbox-buttons__button({
-              item,
-              isRich
-            })
+            label.checkbox-buttons__button
+                input.checkbox-buttons__input(
+                    type='checkbox',
+                    checked= item.checked
+                )
+                span.checkbox-buttons__name !{item.name}
+                if (isRich)
+                    span.checkbox-buttons__description !{item.description}

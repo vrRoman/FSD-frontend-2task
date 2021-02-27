@@ -1,6 +1,42 @@
+@import '@/sass/colors'
+
+
 .icon-text-list
   max-width: 280px
   width: 100%
-
-
-@import '__item/icon-text-list__item'
+  &__icon
+    margin-right: 10px
+    font-size: 48px
+    line-height: 1
+    background: $purple-gradient
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+  &__title
+    display: inline
+    font-family: Montserrat, Arial, sans-serif
+    font-weight: bold
+    font-size: 1rem
+    color: $dark-shade-75
+  &__item
+    max-height: 48px
+    margin-top: 22px
+    padding-bottom: 20px
+    position: relative
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+    align-content: flex-start
+    &:after
+      content: ''
+      height: 1px
+      width: 100%
+      background-color: $dark-shade-10
+      position: absolute
+      bottom: 0
+      display: block
+    &:first-child
+      margin-top: 0
+    &:last-child
+      padding-bottom: 0
+      &:after
+        display: none

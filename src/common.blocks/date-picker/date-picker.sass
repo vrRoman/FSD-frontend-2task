@@ -6,6 +6,9 @@
   width: 318px
   position: relative
   z-index: 1
+  &_with-border
+    border: 1px solid $dark-shade-25
+    box-shadow: 0 10px 20px 0 $dark-shade-5
 
 
 .ui-datepicker
@@ -213,6 +216,3 @@
 
   &-current:not(&-custom-button)
     display: none
-
-
-@import '_with-border/date-picker_with-border'

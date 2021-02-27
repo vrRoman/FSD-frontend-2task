@@ -1,7 +1,7 @@
-include __item/icon-text-list__item
-
-
 mixin icon-text-list(items)
     .icon-text-list
         each item in items
-            +icon-text-list__item(item)
+            .icon-text-list__item
+                i.icon-text-list__icon.material-icons= item.iconName
+                .icon-text-list__title= item.title
+                .icon-text-list__description= item.description

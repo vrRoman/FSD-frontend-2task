@@ -1,5 +1,4 @@
-include __input/text-field__input
-include __arrow/text-field__arrow
+include ../arrow/arrow
 
 
 mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}} = {})
@@ -17,6 +16,19 @@ mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}} = {})
         }
 
     div(class=className)
-        +text-field__input(inputOptions)
+        -
+            let inputClassName = 'text-field__input';
+            if (inputOptions.isMaskedDate) {
+                inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+            }
+
+        input(
+            class=inputClassName,
+            type=inputOptions.type,
+            placeholder=inputOptions.placeholder,
+            value=inputOptions.value,
+            readonly=inputOptions.isReadonly
+        )
         if (arrowOptions)
-            +text-field__arrow(arrowOptions)
+            .text-field__arrow
+                +arrow(arrowOptions)

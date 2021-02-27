@@ -1,5 +1,4 @@
-include __text-field/dropdown__text-field
-include __popup/dropdown__popup
+include ../text-field/text-field
 
 
 mixin dropdown({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {})
@@ -22,24 +21,62 @@ mixin dropdown({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, t
         }
     div(class=className)
         if (isDouble)
-            +dropdown__text-field({
-                inputOptions: inputOptions[0],
-                title: title[0],
-                isActive: !popupHidden
-            })
-            +dropdown__text-field({
-                inputOptions: inputOptions[1],
-                title: title[1],
-                isActive: !popupHidden
-            })
+            .dropdown__text-field
+                if (title[0])
+                    .dropdown__title
+                        +heading({
+                            text: title[0],
+                        })
+                +text-field({
+                    inputOptions: {
+                        ...inputOptions[0],
+                        isMaskedDate: false,
+                        isReadonly: true
+                    },
+                    arrowOptions: {},
+                    modifiers: {
+                        isFocused: !popupHidden,
+                        isBottomFlat: !popupHidden,
+                    }
+                })
+            .dropdown__text-field
+                if (title[1])
+                    .dropdown__title
+                        +heading({
+                            text: title[1],
+                        })
+                +text-field({
+                    inputOptions: {
+                        ...inputOptions[1],
+                        isMaskedDate: false,
+                        isReadonly: true
+                    },
+                    arrowOptions: {},
+                    modifiers: {
+                        isFocused: !popupHidden,
+                        isBottomFlat: !popupHidden,
+                    }
+                })
         else
-            +dropdown__text-field({
-                inputOptions,
-                title,
-                isActive: !popupHidden
-            })
-        +dropdown__popup({
-            mixinName: popupMixinOptions.name,
-            mixinParams: popupMixinOptions.params,
-            hidden: popupHidden
-        })
+            .dropdown__text-field
+                if (title)
+                    .dropdown__title
+                        +heading({
+                            text: title,
+                        })
+                +text-field({
+                    inputOptions: {
+                        ...inputOptions,
+                        isMaskedDate: false,
+                        isReadonly: true
+                    },
+                    arrowOptions: {},
+                    modifiers: {
+                        isFocused: !popupHidden,
+                        isBottomFlat: !popupHidden,
+                    }
+                })
+
+        .dropdown__popup(class=`${popupHidden ? 'dropdown__popup_hidden' : false}`)
+            if (popupMixinOptions.name)
+                +#{popupMixinOptions.name}(popupMixinOptions.params)

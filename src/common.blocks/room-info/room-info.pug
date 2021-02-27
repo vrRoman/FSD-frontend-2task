@@ -1,8 +1,28 @@
-include __name/room-info__name
-include __price/room-info__price
+include ../heading/heading
 
 
 mixin room-info({number, type, price, isNameSmall = false})
     .room-info
-        +room-info__name({ number, type, isSmall: isNameSmall })
-        +room-info__price(price)
+        .room-info__name
+            span.room-info__number-sign №
+            -
+                let numberClassName = 'room-info__number';
+                let text = '';
+                if (isNameSmall) {
+                    numberClassName += ' room-info__number_size_small';
+                    text = number;
+                }
+            div(class=numberClassName)= text
+                if (!isNameSmall)
+                    +heading({
+                        text: number,
+                        type: 'h1'
+                    })
+            if (type)
+                .room-info__type
+                    +heading({
+                        text: type,
+                        color: 'purple',
+                    })
+        .room-info__price= price + '₽'
+            span.room-info__price-measure в сутки

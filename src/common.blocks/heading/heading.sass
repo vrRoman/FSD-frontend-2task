@@ -9,10 +9,18 @@
 
   font-size: (24rem / 14)
   line-height: (29rem / 14)
-
-
-@import '_color/heading_color_white'
-@import '_color/heading_color_purple'
-@import '_color/heading_color_gray'
-@import '_type/heading_type_h2'
-@import '_type/heading_type_h3'
+  &_color
+    &_white
+      color: #fff
+    &_purple
+      color: $purple
+    &_gray
+      color: $dark-shade-50
+  &_type
+    &_h2
+      font-size: (19rem / 14)
+      line-height: (23rem / 14)
+    &_h3
+      font-size: (12rem / 14)
+      line-height: (15rem / 14)
+      text-transform: uppercase

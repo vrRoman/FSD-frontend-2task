@@ -1,11 +1,11 @@
-include __info/range-slider__info
-include __slider/range-slider__slider
-include __description/range-slider__description
+include ../heading/heading
 
 
 mixin range-slider(title, description = false)
     .range-slider
-        +range-slider__info(title)
-        +range-slider__slider
+        .range-slider__info
+            +heading({ text: title })
+            span.range-slider__value.js-range-slider__value
+        .range-slider__slider.js-range-slider__slider
         if description
-            +range-slider__description(description)
+            .range-slider__description= description

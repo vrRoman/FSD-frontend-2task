@@ -1,3 +1,10 @@
+@import '@/sass/colors'
+@import '@/common.blocks/navigation/navigation'
+@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/text-field/text-field'
+@import '@/common.blocks/social-links/social-links'
+
+
 .footer
   width: 100%
   box-sizing: border-box
@@ -6,13 +13,59 @@
   background-color: #fff
   box-shadow: 0 10px 20px 0 $dark-shade-5
   z-index: 1
+  &__description
+    margin-top: 10px
+  &__subtitle
+    margin-bottom: 21px
+    margin-top: 5px
+  &__menu
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-column-gap: 40px
+  &__subscription-text
+    margin-bottom: 20px
+  &__subscription
+    display: flex
+    flex-direction: column
+  &__body
+    max-width: 1160px
+    margin: 0 auto
+    box-sizing: border-box
+    padding: 100px 0
+    display: grid
+    grid-template-columns: 260px 1fr 260px
+    grid-gap: 40px
+  &__bottom
+    max-width: 1160px
+    margin: 0 auto
+    box-sizing: border-box
+    padding: 23px 0
+    position: relative
+    display: flex
+    justify-content: space-between
+    align-items: center
+  &__line
+    width: 100%
+    height: 1px
+    position: absolute
+    left: 0
+    background-color: #e5e5e5
 
+
+@media screen and (max-width: 1200px)
+  .footer
+    &__body
+      grid-template-columns: 1fr
+      grid-template-rows: auto auto auto
+    &__bottom
+      flex-direction: column
+      justify-content: center
 
 @media screen and (max-width: 800px)
   .footer
     padding: 0 20px
-
-
-@import '__body/footer__body'
-@import '__bottom/footer__bottom'
-@import '__line/footer__line'
+    &__menu
+      grid-template-columns: auto
+      grid-template-rows: auto auto auto
+      grid-row-gap: 40px
+      justify-content: center

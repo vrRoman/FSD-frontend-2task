@@ -1,7 +1,44 @@
+@import '@/sass/colors'
+@import '@/common.blocks/heading/heading'
+
+
 .room-info
   display: flex
   justify-content: space-between
-
-
-@import '__name/room-info__name'
-@import '__price/room-info__price'
+  &__number
+    &_size
+      &_small
+        font-family: Montserrat, Arial, sans-serif
+        font-style: normal
+        font-weight: bold
+        font-size: (20rem/14)
+        line-height: (17rem / 14)
+        color: $dark-shade-100
+  &__number-sign
+    margin-right: 4px
+    margin-bottom: 2px
+    display: flex
+    align-items: flex-end
+    font-family: Montserrat, Arial, sans-serif
+    font-size: 1rem
+    line-height: (17rem / 14)
+    font-weight: bold
+    color: $dark-shade-100
+  &__type
+    margin-left: 8px
+    margin-bottom: 2px
+    display: flex
+    align-items: flex-end
+  &__name
+    display: flex
+  &__price-measure
+    margin-left: 4px
+    font-weight: normal
+    font-size: (12rem/14)
+  &__price
+    font-family: Montserrat, Arial, sans-serif
+    font-weight: bold
+    line-height: (18rem / 14)
+    color: $dark-shade-50
+    display: flex
+    align-items: flex-end

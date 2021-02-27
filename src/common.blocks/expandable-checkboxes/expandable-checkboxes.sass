@@ -1,8 +1,23 @@
+@import '@/common.blocks/checkbox-buttons/checkbox-buttons'
+@import '@/common.blocks/heading/heading'
+@import '@/common.blocks/arrow/arrow'
+
+
 .expandable-checkboxes
-    max-width: 266px
+  max-width: 266px
+  width: 100%
+  &__checkboxes
+    height: 0
+    overflow: hidden
+  &__title
     width: 100%
-
-
-@import '__checkboxes/expandable-checkboxes__checkboxes'
-@import '__title/expandable-checkboxes__title'
-@import '_expanded/expandable-checkboxes_expanded'
+    display: flex
+    align-items: center
+    justify-content: space-between
+    user-select: none
+  &_expanded
+    .expandable-checkboxes__checkboxes
+      height: unset
+      margin-top: 3px
+    .expandable-checkboxes__arrow
+      transform: rotate(180deg)

@@ -1,5 +1,19 @@
+@import '@/sass/colors'
+
+
 .social-links
   display: flex
-
-
-@import '__link/social-links__link'
+  &__icon
+    display: block
+    &:before
+      background: $purple-gradient
+      color: transparent
+      -webkit-background-clip: text
+      font-size: (24rem / 14)
+  &__link
+    display: block
+    text-decoration: none
+    cursor: pointer
+    margin-right: 23px
+    &:last-child
+      margin-right: 0

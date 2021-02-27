@@ -1,12 +1,40 @@
+@import '@/sass/colors'
+@import '@/common.blocks/arrow/arrow'
+
+
 .text-field
   position: relative
   width: 100%
   max-width: 320px
+  &__input
+    width: 100%
+    padding: 12px 15px
+    box-sizing: border-box
+    outline: none
+    border: 1px solid $dark-shade-25
+    border-radius: 4px
 
+    font-family: "Montserrat", Arial, sans-serif
+    font-size: 1rem
+    line-height: (18rem / 14)
+    color: $dark-shade-75
 
-@import '__input/text-field__input'
-@import '__arrow/text-field__arrow'
-
-@import '_focused/text-field_focused'
-@import '_short/text-field_short'
-@import '_flat-bottom/text-field_flat-bottom'
+    transition: .2s
+    &::placeholder
+      color: $dark-shade-25
+    &:focus, &:hover
+      border-color: $dark-shade-50
+  &__arrow
+    position: absolute
+    right: 0
+    top: 0
+  &_focused
+    .text-field__input
+      border-color: $dark-shade-50
+  &_short
+    max-width: 266px
+  &_flat-bottom
+    .text-field__input
+      border:
+        bottom-right-radius: unset
+        bottom-left-radius: unset

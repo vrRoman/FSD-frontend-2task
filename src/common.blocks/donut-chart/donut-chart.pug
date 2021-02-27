@@ -1,8 +1,24 @@
-include __chart/donut-chart__chart
-include __list/donut-chart__list
+include ../heading/heading
 
 
 mixin donut-chart()
     .donut-chart
-        +donut-chart__chart
-        +donut-chart__list
+        .donut-chart__chart
+            canvas(width='126' height='126')
+            .donut-chart__votes
+                .donut-chart__value
+                    +heading({
+                        type: 'h1',
+                        text: 260,
+                        color: 'purple'
+                    })
+                +heading({
+                    type: 'h3',
+                    text: 'голосов',
+                    color: 'purple'
+                })
+        ul.donut-chart__list
+            li.donut-chart__item.donut-chart__item_color_orange Великолепно
+            li.donut-chart__item.donut-chart__item_color_green Хорошо
+            li.donut-chart__item.donut-chart__item_color_purple Удовлетворительно
+            li.donut-chart__item.donut-chart__item_color_dark Разочарован

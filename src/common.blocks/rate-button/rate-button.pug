@@ -1,7 +1,10 @@
-include __star/rate-button__star
-
-
 mixin rate-button(currentRating)
     .rate-button
         - for (let i = 1; i <= 5; i++)
-            +rate-button__star(i <= currentRating)
+            -
+                const active = i <= currentRating;
+                let className = 'material-icons rate-button__star';
+                if (active) {
+                    className += ' rate-button__star_active';
+                }
+            div(class=className)

@@ -1,5 +1,8 @@
 @import '@/common.blocks/heading/heading'
 @import '@/common.blocks/button/button'
+@import '@/common.blocks/text-field/text-field'
+@import '@/common.blocks/toggle-button/toggle-button'
+@import '@/common.blocks/radio-buttons/radio-buttons'
 
 
 .signup-card
@@ -11,12 +14,27 @@
   border: 1px solid rgba(0, 0, 0, 0.12)
   border-radius: 4px
   padding: 39px 29px 29px 29px
-
-
-@import '__name/signup-card__name'
-@import '__surname/signup-card__surname'
-@import '__gender/signup-card__gender'
-@import '__birth/signup-card__birth'
-@import '__login-details/signup-card__login-details'
-@import '__offers/signup-card__offers'
-@import '__account-exists/signup-card__account-exists'
+  &__name
+    margin-top: 21px
+  &__surname
+    margin-top: 10px
+  &__gender
+    margin-top: 10px
+  &__subtitle
+    margin-bottom: 5px
+  &__birth
+    margin-top: 24px
+  &__email
+    margin-bottom: 10px
+  &__password
+    margin-bottom: 8px
+  &__login-details
+    margin-top: 20px
+  &__offers
+    margin-bottom: 22px
+  &__account-exists
+    margin-top: 30px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    color: #000

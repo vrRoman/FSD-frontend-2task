@@ -6,6 +6,12 @@
   width: 100%
   display: inline-flex
   justify-content: space-between
-
-
-@import '__star/rate-button__star'
+  &__star
+    &:after
+      content: 'star_border'
+      background: $purple-gradient
+      -webkit-text-fill-color: transparent
+      -webkit-background-clip: text
+    &_active
+      &:after
+        content: 'star'

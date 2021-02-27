@@ -1,6 +1,56 @@
-include __container/header__container
+include ../button/button
+include ../navigation/navigation
 
 
 mixin header({userName, activeLink = 0} = {})
     header.header
-        +header__container(userName, activeLink)
+        .header__container
+            a.header__logo(href='landing-page.html')
+                img(src='images/logo.svg', alt='logo')
+            .header__menu
+                nav.header__nav-container
+                    +navigation({
+                        activeLinkIndex: activeLink,
+                        items: [
+                            {
+                                name: 'О нас',
+                                isDropdown: false
+                            },
+                            {
+                                name: 'Услуги',
+                                isDropdown: true
+                            },
+                            {
+                                name: 'Вакансии',
+                                isDropdown: false
+                            },
+                            {
+                                name: 'Новости',
+                                isDropdown: false
+                            },
+                            {
+                                name: 'Соглашения',
+                                isDropdown: true
+                            }
+                        ]
+                    })
+
+                if userName
+                    .header__user= userName
+                else
+                    .header__buttons
+                        +button({
+                            text: 'Войти',
+                            link: 'login-and-registration.html',
+                            modifiers: {
+                                isSecondary: true
+                            }
+                        })
+                        +button({
+                            text: 'Зарегистрироваться',
+                            link: 'login-and-registration.html'
+                        })
+            .header__hamburger
+                span.header__hamburger-line
+                span.header__hamburger-line
+                span.header__hamburger-line

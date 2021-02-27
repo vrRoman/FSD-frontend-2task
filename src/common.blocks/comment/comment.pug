@@ -1,15 +1,16 @@
-include __header/comment__header
-include __content/comment__content
+include ../like-button/like-button
 
 
 mixin comment({avatarLink, userName, date, text, likeOptions})
     .comment
-        +comment__header({
-            avatarLink,
-            userName,
-            date
-        })
-        +comment__content({
-            likeOptions,
-            text
-        })
+        .comment__header
+            img.comment__avatar(
+                src=avatarLink,
+                alt='user-avatar'
+            )
+            .comment__user-name= userName
+            .comment__date= date
+        .comment__content
+            .comment__likes
+                +like-button(likeOptions)
+            .comment__text= text

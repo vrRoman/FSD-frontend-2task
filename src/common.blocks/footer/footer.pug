@@ -1,16 +1,71 @@
-include __body/footer__body
-include __bottom/footer__bottom
-include __line/footer__line
+include ../navigation/navigation
+include ../heading/heading
+include ../text-field/text-field
+include ../social-links/social-links
 
 
 mixin footer
-    -
-        const navLinks = ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
-        const aboutLinks = ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
-        const supportLinks = ['Соглашения', 'Сообщества', 'Связь с нами']
-
-
     footer.footer
-        +footer__body
-        +footer__line
-        +footer__bottom
+        .footer__body
+            .footer__main-info
+                img(src='images/logo.svg', alt='logo')
+                .footer__description Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»
+            .footer__menu
+                .footer__nav
+                    .footer__subtitle
+                        +heading({ text: 'Навигация' })
+                    +navigation({
+                        items: [
+                            { name: 'О нас' },
+                            { name: 'Новости' },
+                            { name: 'Служба поддержки' },
+                            { name: 'Услуги' },
+                        ],
+                        inColumn: true,
+                    })
+                .footer__nav
+                    .footer__subtitle
+                        +heading({ text: 'О нас' })
+                    +navigation({
+                        items: [
+                            { name: 'О сервисе' },
+                            { name: 'Наша команда' },
+                            { name: 'Вакансии' },
+                            { name: 'Инвесторы' },
+                        ],
+                        inColumn: true,
+                    })
+                .footer__nav
+                    .footer__subtitle
+                        +heading({ text: 'Служба поддержки' })
+                    +navigation({
+                        items: [
+                            { name: 'Соглашения' },
+                            { name: 'Сообщества' },
+                            { name: 'Связь с нами' },
+                        ],
+                        inColumn: true,
+                    })
+            .footer__subscription
+                .footer__subtitle
+                    +heading({ text: 'Подписка' })
+                .footer__subscription-text Получайте специальные предложения и новости сервиса
+                +text-field({
+                    inputOptions: {
+                        placeholder: 'Email',
+                        type: 'email'
+                    },
+                    modifiers: {
+                        isShort: true
+                    },
+                    arrowOptions: {
+                        type: 'forward',
+                        color: 'purple'
+                    }
+                })
+
+        .footer__line
+
+        .footer__bottom
+            span Copyright © 2018 Toxin отель. Все права зачищены.
+            +social-links

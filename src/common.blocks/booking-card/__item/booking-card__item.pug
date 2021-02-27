@@ -1,9 +1,0 @@
-include ../__item-text/booking-card__item-text
-include ../__item-price/booking-card__item-price
-include ../__tooltip/booking-card__tooltip
-
-
-mixin booking-card__item({text, price, hasTooltip = false})
-    .booking-card__item
-        +booking-card__item-text(text, hasTooltip)
-        +booking-card__item-price(price)

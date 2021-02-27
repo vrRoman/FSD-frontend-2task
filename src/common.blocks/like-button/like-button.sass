@@ -11,9 +11,25 @@
   border: 1px solid $dark-shade-25
   border-radius: 10px
   cursor: pointer
-
-
-@import '__heart/like-button__heart'
-@import '__number/like-button__number'
-
-@import '_active/like-button_active'
+  &__heart
+    margin-left: 4px
+    display: flex
+    &:after
+      content: 'favorite_border'
+      font-size: (10rem / 14)
+      color: $dark-shade-25
+  &__number
+    margin-left: 4px
+    font-family: Montserrat, Arial, sans-serif
+    font-size: (10rem / 14)
+    line-height: (12rem / 14)
+    color: $dark-shade-25
+    user-select: none
+  &_active
+    border-color: $purple
+    .like-button__heart
+      &:after
+        content: 'favorite'
+        color: $purple
+    .like-button__number
+      color: $purple

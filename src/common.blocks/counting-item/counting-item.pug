@@ -1,8 +1,16 @@
-include __name/counting-item__name
-include __counter/counting-item__counter
+include ../heading/heading
 
 
 mixin counting-item({name = '', value = 0} = {})
     .counting-item
-        +counting-item__name(name)
-        +counting-item__counter(value)
+        .counting-item__name
+            +heading({
+                text: name
+            })
+        .counting-item__counter
+            .counting-item__change-button.counting-item__change-button_minus -
+            .counting-item__value
+                +heading({
+                    text: value
+                })
+            .counting-item__change-button.counting-item__change-button_plus +

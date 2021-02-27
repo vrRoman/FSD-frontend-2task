@@ -1,7 +1,4 @@
-include __item/bullet-list__item
-
-
 mixin bullet-list(itemTexts)
     ul.bullet-list
         each text in itemTexts
-            +bullet-list__item(text)
+            li.bullet-list__item !{text}

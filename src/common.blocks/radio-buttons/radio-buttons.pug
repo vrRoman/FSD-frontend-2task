@@ -1,12 +1,11 @@
-include __button/radio-buttons__button
-
-
 mixin radio-buttons({items, itemsName})
     .radio-buttons
         each text, index in items
             - const checked = index === 0;
-            +radio-buttons__button({
-                text,
-                checked,
-                inputName: itemsName
-            })
+            label.radio-buttons__button
+                input.radio-buttons__input(
+                    type='radio',
+                    name=itemsName,
+                    checked=checked,
+                )
+                span.radio-buttons__button-text= text
