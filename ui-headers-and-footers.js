@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 186);
+/******/ 	return __webpack_require__(__webpack_require__.s = 75);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10967,6 +10967,963 @@ return jQuery;
 /***/ }),
 
 /***/ 10:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 13:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
+var jquery = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/images/logo.svg
+/* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
+// CONCATENATED MODULE: ./src/images/logo-icon.svg
+/* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
+// CONCATENATED MODULE: ./src/js/images.js
+
+
+// CONCATENATED MODULE: ./src/js/index.js
+
+
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Header = /*#__PURE__*/function () {
+  function Header(elem) {
+    _classCallCheck(this, Header);
+
+    this.elem = elem;
+    this.menu = this.getMenu();
+    this.hamburger = this.getHamburger();
+    this.showHamburgerOn = 1200;
+    this.hiddenMenuClass = 'header__menu_hidden';
+    this.visibleHamburgerClass = 'header__hamburger_visible';
+    this.columnNavClass = 'navigation_in-column';
+    this.updateHeader = this.updateHeader.bind(this);
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.init();
+  }
+
+  _createClass(Header, [{
+    key: "getHamburger",
+    value: function getHamburger() {
+      var hamburgerSelector = '.header__hamburger';
+      return this.elem.querySelector(hamburgerSelector);
+    }
+  }, {
+    key: "getMenu",
+    value: function getMenu() {
+      var menuSelector = '.header__menu';
+      return this.elem.querySelector(menuSelector);
+    }
+  }, {
+    key: "getNav",
+    value: function getNav() {
+      var navSelector = '.navigation';
+      return this.elem.querySelector(navSelector);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      window.addEventListener('resize', this.updateHeader);
+      window.addEventListener('click', this.handleWindowClick);
+      window.addEventListener('load', this.updateHeader);
+    }
+  }, {
+    key: "updateHeader",
+    value: function updateHeader() {
+      if (window.innerWidth > this.showHamburgerOn) {
+        this.menu.classList.remove(this.hiddenMenuClass);
+        this.hamburger.classList.remove(this.visibleHamburgerClass);
+        this.getNav().classList.remove(this.columnNavClass);
+      } else {
+        this.menu.classList.add(this.hiddenMenuClass);
+        this.hamburger.classList.add(this.visibleHamburgerClass);
+        this.getNav().classList.add(this.columnNavClass);
+      }
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      if (window.innerWidth <= this.showHamburgerOn) {
+        if (evt.path.includes(this.hamburger)) {
+          this.menu.classList.toggle(this.hiddenMenuClass);
+        } else if (!evt.path.includes(this.menu)) {
+          if (!this.menu.classList.contains(this.hiddenMenuClass)) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            this.menu.classList.add(this.hiddenMenuClass);
+          }
+        }
+      }
+    }
+  }]);
+
+  return Header;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Header);
+
+/***/ }),
+
+/***/ 75:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76);
+/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(77);
+/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
+
+
+
+
+
+var $headers = $('.header');
+$headers.each(function init() {
+  var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 76:
+/***/ (function(module, exports, __webpack_require__) {
+
+var pug = __webpack_require__(9);
+
+function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
+    var locals_for_with = (locals || {});
+    
+    (function (isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
+      var pug_indent = [];
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (withoutPadding) {
+    className += ' arrow_without-padding';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'button';
+let headingOptions = {
+    text,
+    type: 'h3',
+    color: 'white'
+};
+
+if (modifiers.isSecondary) {
+    className += ' button_secondary';
+    headingOptions.color = 'purple';
+}
+if (modifiers.withoutFrame) {
+    headingOptions.color = 'purple';
+    className += ' button_without-frame';
+}
+if (modifiers.isLong) {
+    className += ' button_long';
+}
+if (modifiers.isHovered) {
+    className += ' button_hovered';
+}
+switch (modifiers.textColor) {
+    case 'white':
+        headingOptions.color = 'white';
+        break;
+    case 'purple':
+        headingOptions.color = 'purple';
+        break;
+    case 'gray':
+        headingOptions.color = 'gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
+pug_indent.push('    ');
+pug_mixins["heading"](headingOptions);
+pug_indent.pop();
+pug_html = pug_html + "\u003C\u002Fa\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
+pug_indent.push('    ');
+pug_mixins["arrow"]({
+                type: 'forward',
+                color: 'white'
+            });
+pug_indent.pop();
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fbutton\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (withoutPadding) {
+    className += ' arrow_without-padding';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation';
+if (inColumn) {
+    className += ' navigation_in-column';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
+        var item = $$obj[itemIndex];
+const isActive = activeLinkIndex !== undefined ? (itemIndex === activeLinkIndex) : false;
+const link = item.link || 'change-me';
+
+let itemClassName = 'navigation__item';
+if (isActive) {
+    itemClassName += ' navigation__item_active';
+}
+if (item.isDropdown) {
+    itemClassName += ' navigation__item_with-dropdown';
+}
+
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([itemClassName], [true]), false, true)) + "\u003E";
+if ((item.isDropdown)) {
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('        ');
+pug_mixins["arrow"]({ withoutPadding: true });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+}
+else {
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+}
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+      }
+  } else {
+    var $$l = 0;
+    for (var itemIndex in $$obj) {
+      $$l++;
+      var item = $$obj[itemIndex];
+const isActive = activeLinkIndex !== undefined ? (itemIndex === activeLinkIndex) : false;
+const link = item.link || 'change-me';
+
+let itemClassName = 'navigation__item';
+if (isActive) {
+    itemClassName += ' navigation__item_active';
+}
+if (item.isDropdown) {
+    itemClassName += ' navigation__item_with-dropdown';
+}
+
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([itemClassName], [true]), false, true)) + "\u003E";
+if ((item.isDropdown)) {
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('        ');
+pug_mixins["arrow"]({ withoutPadding: true });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+}
+else {
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+}
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ful\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["header"] = pug_interp = function({userName, activeLink = 0} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav class=\"header__nav-container\"\u003E";
+pug_indent.push('        ');
+pug_mixins["navigation"]({
+                        activeLinkIndex: activeLink,
+                        items: [
+                            {
+                                name: 'О нас',
+                                isDropdown: false
+                            },
+                            {
+                                name: 'Услуги',
+                                isDropdown: true
+                            },
+                            {
+                                name: 'Вакансии',
+                                isDropdown: false
+                            },
+                            {
+                                name: 'Новости',
+                                isDropdown: false
+                            },
+                            {
+                                name: 'Соглашения',
+                                isDropdown: true
+                            }
+                        ]
+                    });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+if (userName) {
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__user\"\u003E" + (pug.escape(null == (pug_interp = userName) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
+}
+else {
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
+pug_indent.push('        ');
+pug_mixins["button"]({
+                            text: 'Войти',
+                            link: 'login-and-registration.html',
+                            modifiers: {
+                                isSecondary: true
+                            }
+                        });
+pug_indent.pop();
+pug_indent.push('        ');
+pug_mixins["button"]({
+                            text: 'Зарегистрироваться',
+                            link: 'login-and-registration.html'
+                        });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+}
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fheader\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (withoutPadding) {
+    className += ' arrow_without-padding';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'navigation';
+if (inColumn) {
+    className += ' navigation_in-column';
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
+// iterate items
+;(function(){
+  var $$obj = items;
+  if ('number' == typeof $$obj.length) {
+      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
+        var item = $$obj[itemIndex];
+const isActive = activeLinkIndex !== undefined ? (itemIndex === activeLinkIndex) : false;
+const link = item.link || 'change-me';
+
+let itemClassName = 'navigation__item';
+if (isActive) {
+    itemClassName += ' navigation__item_active';
+}
+if (item.isDropdown) {
+    itemClassName += ' navigation__item_with-dropdown';
+}
+
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([itemClassName], [true]), false, true)) + "\u003E";
+if ((item.isDropdown)) {
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('        ');
+pug_mixins["arrow"]({ withoutPadding: true });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+}
+else {
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+}
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+      }
+  } else {
+    var $$l = 0;
+    for (var itemIndex in $$obj) {
+      $$l++;
+      var item = $$obj[itemIndex];
+const isActive = activeLinkIndex !== undefined ? (itemIndex === activeLinkIndex) : false;
+const link = item.link || 'change-me';
+
+let itemClassName = 'navigation__item';
+if (isActive) {
+    itemClassName += ' navigation__item_active';
+}
+if (item.isDropdown) {
+    itemClassName += ' navigation__item_with-dropdown';
+}
+
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([itemClassName], [true]), false, true)) + "\u003E";
+if ((item.isDropdown)) {
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
+pug_indent.push('        ');
+pug_mixins["arrow"]({ withoutPadding: true });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+}
+else {
+pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = item.name) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
+}
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fli\u003E";
+    }
+  }
+}).call(this);
+
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ful\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fnav\u003E";
+};
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'heading';
+let tag;
+
+switch (type) {
+    case 'h3':
+        className += ' heading_type_h3';
+        tag = 'h3';
+        break;
+    case 'h2':
+        className += ' heading_type_h2';
+        tag = 'h2';
+        break;
+    default:
+        tag = 'h1';
+        break;
+}
+switch (color) {
+    case 'white':
+        className += ' heading_color_white';
+        break;
+    case 'purple':
+        className += ' heading_color_purple';
+        break;
+    case 'gray':
+        className += ' heading_color_gray';
+        break;
+    default:
+        break;
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
+};
+pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'arrow';
+
+switch (type) {
+    case 'expand-less':
+        className += ' arrow_type_expand-less';
+        break;
+    case 'forward':
+        className += ' arrow_type_forward';
+        break;
+    default:
+        break;
+}
+
+switch (color) {
+    case 'white':
+        className += ' arrow_color_white';
+        break;
+    case 'purple-gradient':
+        className += ' arrow_color_purple-gradient';
+        break;
+    default:
+        break;
+}
+
+if (withoutPadding) {
+    className += ' arrow_without-padding';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+let className = 'text-field';
+
+if (modifiers.isFocused) {
+    className += ' text-field_focused';
+}
+if (modifiers.isShort) {
+    className += ' text-field_short';
+}
+if (modifiers.isBottomFlat) {
+    className += ' text-field_flat-bottom';
+}
+
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+let inputClassName = 'text-field__input';
+if (inputOptions.isMaskedDate) {
+    inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([inputClassName], [true]), false, true)+pug.attr("type", inputOptions.type, true, true)+pug.attr("placeholder", inputOptions.placeholder, true, true)+pug.attr("value", inputOptions.value, true, true)+pug.attr("readonly", inputOptions.isReadonly, true, true)) + "\u003E";
+if ((arrowOptions)) {
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
+pug_indent.push('    ');
+pug_mixins["arrow"](arrowOptions);
+pug_indent.pop();
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+}
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+pug_mixins["social-links"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"social-links\"\u003E\u003Ca class=\"social-links__link\" href=\"change-me\"\u003E\u003Ci class=\"social-links__icon fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca class=\"social-links__link\" href=\"change-me\"\u003E\u003Ci class=\"social-links__icon fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca class=\"social-links__link\" href=\"change-me\"\u003E\u003Ci class=\"social-links__icon fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cfooter class=\"footer\"\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__body\"\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__main-info\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__description\"\u003EБронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__menu\"\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__nav\"\u003E\n        ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('          ');
+pug_mixins["heading"]({ text: 'Навигация' });
+pug_indent.pop();
+pug_html = pug_html + "\n        ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+pug_indent.push('        ');
+pug_mixins["navigation"]({
+                        items: [
+                            { name: 'О нас' },
+                            { name: 'Новости' },
+                            { name: 'Служба поддержки' },
+                            { name: 'Услуги' },
+                        ],
+                        inColumn: true,
+                    });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__nav\"\u003E\n        ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('          ');
+pug_mixins["heading"]({ text: 'О нас' });
+pug_indent.pop();
+pug_html = pug_html + "\n        ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+pug_indent.push('        ');
+pug_mixins["navigation"]({
+                        items: [
+                            { name: 'О сервисе' },
+                            { name: 'Наша команда' },
+                            { name: 'Вакансии' },
+                            { name: 'Инвесторы' },
+                        ],
+                        inColumn: true,
+                    });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__nav\"\u003E\n        ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('          ');
+pug_mixins["heading"]({ text: 'Служба поддержки' });
+pug_indent.pop();
+pug_html = pug_html + "\n        ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+pug_indent.push('        ');
+pug_mixins["navigation"]({
+                        items: [
+                            { name: 'Соглашения' },
+                            { name: 'Сообщества' },
+                            { name: 'Связь с нами' },
+                        ],
+                        inColumn: true,
+                    });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subscription\"\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
+pug_indent.push('        ');
+pug_mixins["heading"]({ text: 'Подписка' });
+pug_indent.pop();
+pug_html = pug_html + "\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n      ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПолучайте специальные предложения и новости сервиса\u003C\u002Fdiv\u003E";
+pug_indent.push('      ');
+pug_mixins["text-field"]({
+                    inputOptions: {
+                        placeholder: 'Email',
+                        type: 'email'
+                    },
+                    modifiers: {
+                        isShort: true
+                    },
+                    arrowOptions: {
+                        type: 'forward',
+                        color: 'purple'
+                    }
+                });
+pug_indent.pop();
+pug_html = pug_html + "\n    ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__line\"\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\u003Cspan\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fspan\u003E";
+pug_indent.push('    ');
+pug_mixins["social-links"]();
+pug_indent.pop();
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Ffooter\u003E";
+};
+pug_mixins["social-links"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"social-links\"\u003E\u003Ca class=\"social-links__link\" href=\"change-me\"\u003E\u003Ci class=\"social-links__icon fab fa-twitter\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca class=\"social-links__link\" href=\"change-me\"\u003E\u003Ci class=\"social-links__icon fab fa-facebook-square\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003Ca class=\"social-links__link\" href=\"change-me\"\u003E\u003Ci class=\"social-links__icon fab fa-instagram\"\u003E\u003C\u002Fi\u003E\u003C\u002Fa\u003E\u003C\u002Fdiv\u003E";
+};
+pug_mixins["footer-creative"] = pug_interp = function(){
+var block = (this && this.block), attributes = (this && this.attributes) || {};
+pug_html = pug_html + "\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer-creative\"\u003E\u003Cimg class=\"footer-creative__logo\" src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer-creative__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003Cdiv class=\"footer-creative__social\"\u003E";
+pug_indent.push('    ');
+pug_mixins["social-links"]();
+pug_indent.pop();
+pug_html = pug_html + "\n  ";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
+pug_html = pug_html + pug_indent.join("");
+pug_html = pug_html + "\u003C\u002Fdiv\u003E";
+};
+const name = 'headers-and-footers'
+pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", "ui-"+name+".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E\n    \u003Cdiv class=\"ui-logo-container\"\u003E\u003Cimg class=\"ui-logo-container__logo\" src=\"images\u002Flogo-icon.svg\" alt=\"logo\"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv class=\"headers-and-footers\"\u003E\n      \u003Cdiv class=\"headers-and-footers__header\"\u003E";
+pug_indent.push('        ');
+pug_mixins["header"]({
+                activeLink: 0
+            });
+pug_indent.pop();
+pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"headers-and-footers__header\"\u003E";
+pug_indent.push('        ');
+pug_mixins["header"]({
+                userName: 'Юлий Цезарь',
+                activeLink: 0
+            });
+pug_indent.pop();
+pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"headers-and-footers__footer\"\u003E";
+pug_indent.push('        ');
+pug_mixins["footer"]();
+pug_indent.pop();
+pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"headers-and-footers__footer-creative\"\u003E";
+pug_indent.push('        ');
+pug_mixins["footer-creative"]();
+pug_indent.pop();
+pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cscript" + (pug.attr("src", "ui-"+name+".js", true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
+    }.call(this, "isHovered" in locals_for_with ?
+        locals_for_with.isHovered :
+        typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
+        locals_for_with.isLong :
+        typeof isLong !== 'undefined' ? isLong : undefined, "isSecondary" in locals_for_with ?
+        locals_for_with.isSecondary :
+        typeof isSecondary !== 'undefined' ? isSecondary : undefined, "pug_indent" in locals_for_with ?
+        locals_for_with.pug_indent :
+        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "textColor" in locals_for_with ?
+        locals_for_with.textColor :
+        typeof textColor !== 'undefined' ? textColor : undefined, "withoutFrame" in locals_for_with ?
+        locals_for_with.withoutFrame :
+        typeof withoutFrame !== 'undefined' ? withoutFrame : undefined));
+    ;;return pug_html;};
+module.exports = template;
+
+/***/ }),
+
+/***/ 77:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 8:
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11220,7 +12177,7 @@ function pug_rethrow(err, filename, lineno, str) {
     throw err;
   }
   try {
-    str = str || __webpack_require__(11).readFileSync(filename, 'utf8');
+    str = str || __webpack_require__(10).readFileSync(filename, 'utf8');
   } catch (ex) {
     pug_rethrow(err, null, lineno);
   }
@@ -11253,1209 +12210,6 @@ function pug_rethrow(err, filename, lineno, str) {
   throw err;
 }
 
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 13:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
-var jquery = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/images/logo.svg
-/* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
-// CONCATENATED MODULE: ./src/images/logo-icon.svg
-/* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
-// CONCATENATED MODULE: ./src/js/images.js
-
-
-// CONCATENATED MODULE: ./src/js/index.js
-
-
-
-/***/ }),
-
-/***/ 14:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Header = /*#__PURE__*/function () {
-  function Header(elem) {
-    _classCallCheck(this, Header);
-
-    this.elem = elem;
-    this.menu = this.getMenu();
-    this.hamburger = this.getHamburger();
-    this.showHamburgerOn = 1200;
-    this.hiddenMenuClass = 'header__menu_hidden';
-    this.visibleHamburgerClass = 'header__hamburger_visible';
-    this.columnNavClass = 'navigation_in-column';
-    this.updateHeader = this.updateHeader.bind(this);
-    this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.init();
-  }
-
-  _createClass(Header, [{
-    key: "getHamburger",
-    value: function getHamburger() {
-      var hamburgerSelector = '.header__hamburger';
-      return this.elem.querySelector(hamburgerSelector);
-    }
-  }, {
-    key: "getMenu",
-    value: function getMenu() {
-      var menuSelector = '.header__menu';
-      return this.elem.querySelector(menuSelector);
-    }
-  }, {
-    key: "getNav",
-    value: function getNav() {
-      var navSelector = '.navigation';
-      return this.elem.querySelector(navSelector);
-    }
-  }, {
-    key: "init",
-    value: function init() {
-      window.addEventListener('resize', this.updateHeader);
-      window.addEventListener('click', this.handleWindowClick);
-      window.addEventListener('load', this.updateHeader);
-    }
-  }, {
-    key: "updateHeader",
-    value: function updateHeader() {
-      if (window.innerWidth > this.showHamburgerOn) {
-        this.menu.classList.remove(this.hiddenMenuClass);
-        this.hamburger.classList.remove(this.visibleHamburgerClass);
-        this.getNav().classList.remove(this.columnNavClass);
-      } else {
-        this.menu.classList.add(this.hiddenMenuClass);
-        this.hamburger.classList.add(this.visibleHamburgerClass);
-        this.getNav().classList.add(this.columnNavClass);
-      }
-    }
-  }, {
-    key: "handleWindowClick",
-    value: function handleWindowClick(evt) {
-      if (window.innerWidth <= this.showHamburgerOn) {
-        if (evt.path.includes(this.hamburger)) {
-          this.menu.classList.toggle(this.hiddenMenuClass);
-        } else if (!evt.path.includes(this.menu)) {
-          if (!this.menu.classList.contains(this.hiddenMenuClass)) {
-            evt.stopPropagation();
-            evt.preventDefault();
-            this.menu.classList.add(this.hiddenMenuClass);
-          }
-        }
-      }
-    }
-  }]);
-
-  return Header;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Header);
-
-/***/ }),
-
-/***/ 186:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(187);
-/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(188);
-/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
-
-
-
-
-
-var $headers = $('.header');
-$headers.each(function init() {
-  var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"](this);
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-
-/***/ 187:
-/***/ (function(module, exports, __webpack_require__) {
-
-var pug = __webpack_require__(10);
-
-function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
-    var locals_for_with = (locals || {});
-    
-    (function (isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
-      var pug_indent = [];
-pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'arrow';
-
-switch (type) {
-    case 'expand-less':
-        className += ' arrow_type_expand-less';
-        break;
-    case 'forward':
-        className += ' arrow_type_forward';
-        break;
-    default:
-        break;
-}
-
-switch (color) {
-    case 'white':
-        className += ' arrow_color_white';
-        break;
-    case 'purple-gradient':
-        className += ' arrow_color_purple-gradient';
-        break;
-    default:
-        break;
-}
-
-if (withoutPadding) {
-    className += ' arrow_without-padding';
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
-};
-pug_mixins["navigation__item-arrow"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
-pug_indent.push('  ');
-pug_mixins["arrow"]({ withoutPadding: true });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["navigation__link"] = pug_interp = function(text, link = 'change-me'){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
-};
-pug_mixins["navigation__item"] = pug_interp = function({name, isDropdown = false, isActive = false, link = 'change-me'}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'navigation__item';
-if (isActive) {
-    className += ' navigation__item_active';
-}
-if (isDropdown) {
-    className += ' navigation__item_with-dropdown'
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((isDropdown)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-pug_indent.push('  ');
-pug_mixins["navigation__item-arrow"]();
-pug_indent.pop();
-}
-else {
-pug_indent.push('  ');
-pug_mixins["navigation__link"](name, link);
-pug_indent.pop();
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fli\u003E";
-};
-pug_mixins["navigation__list"] = pug_interp = function({items, activeItem}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
-// iterate items
-;(function(){
-  var $$obj = items;
-  if ('number' == typeof $$obj.length) {
-      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
-        var item = $$obj[itemIndex];
-const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
-pug_indent.push('  ');
-pug_mixins["navigation__item"]({
-                isActive,
-                name: item.name,
-                isDropdown: item.isDropdown
-            });
-pug_indent.pop();
-      }
-  } else {
-    var $$l = 0;
-    for (var itemIndex in $$obj) {
-      $$l++;
-      var item = $$obj[itemIndex];
-const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
-pug_indent.push('  ');
-pug_mixins["navigation__item"]({
-                isActive,
-                name: item.name,
-                isDropdown: item.isDropdown
-            });
-pug_indent.pop();
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E";
-};
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'navigation';
-if (inColumn) {
-    className += ' navigation_in-column';
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-pug_indent.push('  ');
-pug_mixins["navigation__list"]({
-            items,
-            activeItem: activeLinkIndex
-        });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fnav\u003E";
-};
-pug_mixins["header__nav-container"] = pug_interp = function(activeLinkIndex){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cnav class=\"header__nav-container\"\u003E";
-pug_indent.push('  ');
-pug_mixins["navigation"]({
-            activeLinkIndex,
-            items: [
-                {
-                    name: 'О нас',
-                    isDropdown: false
-                },
-                {
-                    name: 'Услуги',
-                    isDropdown: true
-                },
-                {
-                    name: 'Вакансии',
-                    isDropdown: false
-                },
-                {
-                    name: 'Новости',
-                    isDropdown: false
-                },
-                {
-                    name: 'Соглашения',
-                    isDropdown: true
-                }
-            ]
-        });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fnav\u003E";
-};
-pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'arrow';
-
-switch (type) {
-    case 'expand-less':
-        className += ' arrow_type_expand-less';
-        break;
-    case 'forward':
-        className += ' arrow_type_forward';
-        break;
-    default:
-        break;
-}
-
-switch (color) {
-    case 'white':
-        className += ' arrow_color_white';
-        break;
-    case 'purple-gradient':
-        className += ' arrow_color_purple-gradient';
-        break;
-    default:
-        break;
-}
-
-if (withoutPadding) {
-    className += ' arrow_without-padding';
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
-};
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'heading';
-let tag;
-
-switch (type) {
-    case 'h3':
-        className += ' heading_type_h3';
-        tag = 'h3';
-        break;
-    case 'h2':
-        className += ' heading_type_h2';
-        tag = 'h2';
-        break;
-    default:
-        tag = 'h1';
-        break;
-}
-switch (color) {
-    case 'white':
-        className += ' heading_color_white';
-        break;
-    case 'purple':
-        className += ' heading_color_purple';
-        break;
-    case 'gray':
-        className += ' heading_color_gray';
-        break;
-    default:
-        break;
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
-};
-pug_mixins["button__arrow"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"button__arrow\"\u003E";
-pug_indent.push('  ');
-pug_mixins["arrow"]({
-            type: 'forward',
-            color: 'white'
-        });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["button__link"] = pug_interp = function({headingOptions, link, hasLink}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"button__link\""+pug.attr("href", hasLink ? link : false, true, true)) + "\u003E";
-pug_indent.push('  ');
-pug_mixins["heading"](headingOptions);
-pug_indent.pop();
-pug_html = pug_html + "\u003C\u002Fa\u003E";
-};
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'button';
-let headingOptions = {
-    text,
-    type: 'h3',
-    color: 'white'
-};
-
-if (modifiers.isSecondary) {
-    className += ' button_secondary';
-    headingOptions.color = 'purple';
-}
-if (modifiers.withoutFrame) {
-    headingOptions.color = 'purple';
-    className += ' button_without-frame';
-}
-if (modifiers.isLong) {
-    className += ' button_long';
-}
-if (modifiers.isHovered) {
-    className += ' button_hovered';
-}
-switch (modifiers.textColor) {
-    case 'white':
-        headingOptions.color = 'white';
-        break;
-    case 'purple':
-        headingOptions.color = 'purple';
-        break;
-    case 'gray':
-        headingOptions.color = 'gray';
-        break;
-    default:
-        break;
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cbutton" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-pug_indent.push('  ');
-pug_mixins["button__link"]({
-            headingOptions,
-            hasLink,
-            link
-        });
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["button__arrow"]();
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fbutton\u003E";
-};
-pug_mixins["header__buttons"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__buttons\"\u003E";
-pug_indent.push('  ');
-pug_mixins["button"]({
-            text: 'Войти',
-            link: 'login-and-registration.html',
-            modifiers: {
-                isSecondary: true
-            }
-        });
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["button"]({
-            text: 'Зарегистрироваться',
-            link: 'login-and-registration.html'
-        });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["header__user"] = pug_interp = function(name){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__user\"\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["header__menu"] = pug_interp = function(userName, activeLink){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E";
-pug_indent.push('  ');
-pug_mixins["header__nav-container"](activeLink);
-pug_indent.pop();
-if (userName) {
-pug_indent.push('  ');
-pug_mixins["header__user"](userName);
-pug_indent.pop();
-}
-else {
-pug_indent.push('  ');
-pug_mixins["header__buttons"]();
-pug_indent.pop();
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["header__hamburger-line"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E";
-};
-pug_mixins["header__hamburger"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E";
-pug_indent.push('  ');
-pug_mixins["header__hamburger-line"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["header__hamburger-line"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["header__hamburger-line"]();
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["header__logo"] = pug_interp = function(link = 'landing-page.html'){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"header__logo\""+pug.attr("href", link, true, true)) + "\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E";
-};
-pug_mixins["header__container"] = pug_interp = function(userName, activeLink){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E";
-pug_indent.push('  ');
-pug_mixins["header__logo"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["header__menu"](userName, activeLink);
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["header__hamburger"]();
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["header"] = pug_interp = function({userName, activeLink = 0} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cheader class=\"header\"\u003E";
-pug_indent.push('  ');
-pug_mixins["header__container"](userName, activeLink);
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fheader\u003E";
-};
-pug_mixins["footer__description"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__description\"\u003EБронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__main-info"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__main-info\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E";
-pug_indent.push('  ');
-pug_mixins["footer__description"]();
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'arrow';
-
-switch (type) {
-    case 'expand-less':
-        className += ' arrow_type_expand-less';
-        break;
-    case 'forward':
-        className += ' arrow_type_forward';
-        break;
-    default:
-        break;
-}
-
-switch (color) {
-    case 'white':
-        className += ' arrow_color_white';
-        break;
-    case 'purple-gradient':
-        className += ' arrow_color_purple-gradient';
-        break;
-    default:
-        break;
-}
-
-if (withoutPadding) {
-    className += ' arrow_without-padding';
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
-};
-pug_mixins["navigation__item-arrow"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"navigation__item-arrow\"\u003E";
-pug_indent.push('  ');
-pug_mixins["arrow"]({ withoutPadding: true });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["navigation__link"] = pug_interp = function(text, link = 'change-me'){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"navigation__link\""+pug.attr("href", link, true, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002Fa\u003E";
-};
-pug_mixins["navigation__item"] = pug_interp = function({name, isDropdown = false, isActive = false, link = 'change-me'}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'navigation__item';
-if (isActive) {
-    className += ' navigation__item_active';
-}
-if (isDropdown) {
-    className += ' navigation__item_with-dropdown'
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cli" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-if ((isDropdown)) {
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Fdiv\u003E";
-pug_indent.push('  ');
-pug_mixins["navigation__item-arrow"]();
-pug_indent.pop();
-}
-else {
-pug_indent.push('  ');
-pug_mixins["navigation__link"](name, link);
-pug_indent.pop();
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fli\u003E";
-};
-pug_mixins["navigation__list"] = pug_interp = function({items, activeItem}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cul class=\"navigation__list\"\u003E";
-// iterate items
-;(function(){
-  var $$obj = items;
-  if ('number' == typeof $$obj.length) {
-      for (var itemIndex = 0, $$l = $$obj.length; itemIndex < $$l; itemIndex++) {
-        var item = $$obj[itemIndex];
-const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
-pug_indent.push('  ');
-pug_mixins["navigation__item"]({
-                isActive,
-                name: item.name,
-                isDropdown: item.isDropdown
-            });
-pug_indent.pop();
-      }
-  } else {
-    var $$l = 0;
-    for (var itemIndex in $$obj) {
-      $$l++;
-      var item = $$obj[itemIndex];
-const isActive = activeItem !== undefined ? (itemIndex === activeItem) : false;
-pug_indent.push('  ');
-pug_mixins["navigation__item"]({
-                isActive,
-                name: item.name,
-                isDropdown: item.isDropdown
-            });
-pug_indent.pop();
-    }
-  }
-}).call(this);
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ful\u003E";
-};
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'navigation';
-if (inColumn) {
-    className += ' navigation_in-column';
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cnav" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-pug_indent.push('  ');
-pug_mixins["navigation__list"]({
-            items,
-            activeItem: activeLinkIndex
-        });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fnav\u003E";
-};
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'heading';
-let tag;
-
-switch (type) {
-    case 'h3':
-        className += ' heading_type_h3';
-        tag = 'h3';
-        break;
-    case 'h2':
-        className += ' heading_type_h2';
-        tag = 'h2';
-        break;
-    default:
-        tag = 'h1';
-        break;
-}
-switch (color) {
-    case 'white':
-        className += ' heading_color_white';
-        break;
-    case 'purple':
-        className += ' heading_color_purple';
-        break;
-    case 'gray':
-        className += ' heading_color_gray';
-        break;
-    default:
-        break;
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
-};
-pug_mixins["footer__subtitle"] = pug_interp = function(text){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
-pug_indent.push('  ');
-pug_mixins["heading"]({ text });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__nav"] = pug_interp = function(title, items){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__nav\"\u003E";
-pug_indent.push('  ');
-pug_mixins["footer__subtitle"](title);
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["navigation"]({
-            items,
-            inColumn: true
-        });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__menu"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__menu\"\u003E";
-pug_indent.push('  ');
-pug_mixins["footer__nav"]('Навигация', [
-            { name: 'О нас' },
-            { name: 'Новости' },
-            { name: 'Служба поддержки' },
-            { name: 'Услуги' }
-        ]);
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["footer__nav"]('О нас', [
-            { name: 'О сервисе' },
-            { name: 'Наша команда' },
-            { name: 'Вакансии' },
-            { name: 'Инвесторы' }
-        ]);
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["footer__nav"]('Служба поддержки', [
-          { name: 'Соглашения' },
-          { name: 'Сообщества' },
-          { name: 'Связь с нами' }
-        ]);
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["text-field__input"] = pug_interp = function({placeholder = '', type = 'text', value = '', isReadonly = false, isMaskedDate = false} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'text-field__input';
-if (isMaskedDate) {
-    className += ' text-field__input_masked-date js-text-field__input_masked-date'
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cinput" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("type", type, true, true)+pug.attr("placeholder", placeholder, true, true)+pug.attr("value", value, true, true)+pug.attr("readonly", isReadonly, true, true)) + "\u003E";
-};
-pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'arrow';
-
-switch (type) {
-    case 'expand-less':
-        className += ' arrow_type_expand-less';
-        break;
-    case 'forward':
-        className += ' arrow_type_forward';
-        break;
-    default:
-        break;
-}
-
-switch (color) {
-    case 'white':
-        className += ' arrow_color_white';
-        break;
-    case 'purple-gradient':
-        className += ' arrow_color_purple-gradient';
-        break;
-    default:
-        break;
-}
-
-if (withoutPadding) {
-    className += ' arrow_without-padding';
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
-};
-pug_mixins["text-field__arrow"] = pug_interp = function(arrowOptions){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"text-field__arrow\"\u003E";
-pug_indent.push('  ');
-pug_mixins["arrow"](arrowOptions);
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'text-field';
-
-if (modifiers.isFocused) {
-    className += ' text-field_focused';
-}
-if (modifiers.isShort) {
-    className += ' text-field_short';
-}
-if (modifiers.isBottomFlat) {
-    className += ' text-field_flat-bottom';
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
-pug_indent.push('  ');
-pug_mixins["text-field__input"](inputOptions);
-pug_indent.pop();
-if ((arrowOptions)) {
-pug_indent.push('  ');
-pug_mixins["text-field__arrow"](arrowOptions);
-pug_indent.pop();
-}
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'heading';
-let tag;
-
-switch (type) {
-    case 'h3':
-        className += ' heading_type_h3';
-        tag = 'h3';
-        break;
-    case 'h2':
-        className += ' heading_type_h2';
-        tag = 'h2';
-        break;
-    default:
-        tag = 'h1';
-        break;
-}
-switch (color) {
-    case 'white':
-        className += ' heading_color_white';
-        break;
-    case 'purple':
-        className += ' heading_color_purple';
-        break;
-    case 'gray':
-        className += ' heading_color_gray';
-        break;
-    default:
-        break;
-}
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
-};
-pug_mixins["footer__subtitle"] = pug_interp = function(text){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subtitle\"\u003E";
-pug_indent.push('  ');
-pug_mixins["heading"]({ text });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__subscription-text"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription-text\"\u003EПолучайте специальные предложения и новости сервиса\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__subscription"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__subscription\"\u003E";
-pug_indent.push('  ');
-pug_mixins["footer__subtitle"]('Подписка');
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["footer__subscription-text"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["text-field"]({
-            inputOptions: {
-                placeholder: 'Email',
-                type: 'email'
-            },
-            modifiers: {
-                isShort: true
-            },
-            arrowOptions: {
-                type: 'forward',
-                color: 'purple'
-            }
-        });
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__body"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__body\"\u003E";
-pug_indent.push('  ');
-pug_mixins["footer__main-info"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["footer__menu"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["footer__subscription"]();
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["social-links__icon"] = pug_interp = function(name){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ci" + (pug.attr("class", pug.classes(["social-links__icon","fab",`fa-${name}`], [false,false,true]), false, true)) + "\u003E\u003C\u002Fi\u003E";
-};
-pug_mixins["social-links__link"] = pug_interp = function(name, link = 'change-me'){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"social-links__link\""+pug.attr("href", link, true, true)) + "\u003E";
-pug_indent.push('  ');
-pug_mixins["social-links__icon"](name);
-pug_indent.pop();
-pug_html = pug_html + "\u003C\u002Fa\u003E";
-};
-pug_mixins["social-links"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"social-links\"\u003E";
-pug_indent.push('  ');
-pug_mixins["social-links__link"]('twitter');
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["social-links__link"]('facebook-square');
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["social-links__link"]('instagram');
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__bottom"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__bottom\"\u003E\u003Cspan\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fspan\u003E";
-pug_indent.push('  ');
-pug_mixins["social-links"]();
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer__line"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer__line\"\u003E\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-const navLinks = ['О нас', 'Новости', 'Служба поддержки', 'Услуги']
-const aboutLinks = ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
-const supportLinks = ['Соглашения', 'Сообщества', 'Связь с нами']
-
-
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cfooter class=\"footer\"\u003E";
-pug_indent.push('  ');
-pug_mixins["footer__body"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["footer__line"]();
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["footer__bottom"]();
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Ffooter\u003E";
-};
-pug_mixins["social-links__icon"] = pug_interp = function(name){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ci" + (pug.attr("class", pug.classes(["social-links__icon","fab",`fa-${name}`], [false,false,true]), false, true)) + "\u003E\u003C\u002Fi\u003E";
-};
-pug_mixins["social-links__link"] = pug_interp = function(name, link = 'change-me'){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\u003Ca" + (" class=\"social-links__link\""+pug.attr("href", link, true, true)) + "\u003E";
-pug_indent.push('  ');
-pug_mixins["social-links__icon"](name);
-pug_indent.pop();
-pug_html = pug_html + "\u003C\u002Fa\u003E";
-};
-pug_mixins["social-links"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"social-links\"\u003E";
-pug_indent.push('  ');
-pug_mixins["social-links__link"]('twitter');
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["social-links__link"]('facebook-square');
-pug_indent.pop();
-pug_indent.push('  ');
-pug_mixins["social-links__link"]('instagram');
-pug_indent.pop();
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-pug_mixins["footer-creative"] = pug_interp = function(){
-var block = (this && this.block), attributes = (this && this.attributes) || {};
-pug_html = pug_html + "\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer-creative\"\u003E\u003Cimg class=\"footer-creative__logo\" src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer-creative__copyright\"\u003ECopyright © 2018 Toxin отель. Все права зачищены.\u003C\u002Fdiv\u003E\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"footer-creative__social\"\u003E";
-pug_indent.push('    ');
-pug_mixins["social-links"]();
-pug_indent.pop();
-pug_html = pug_html + "\n  ";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
-pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003C\u002Fdiv\u003E";
-};
-const name = 'headers-and-footers'
-pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", "ui-"+name+".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E\n    \u003Cdiv class=\"ui-logo-container\"\u003E\u003Cimg class=\"ui-logo-container__logo\" src=\"images\u002Flogo-icon.svg\" alt=\"logo\"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv class=\"headers-and-footers\"\u003E\n      \u003Cdiv class=\"headers-and-footers__header\"\u003E";
-pug_indent.push('        ');
-pug_mixins["header"]({
-                activeLink: 0
-            });
-pug_indent.pop();
-pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"headers-and-footers__header\"\u003E";
-pug_indent.push('        ');
-pug_mixins["header"]({
-                userName: 'Юлий Цезарь',
-                activeLink: 0
-            });
-pug_indent.pop();
-pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"headers-and-footers__footer\"\u003E";
-pug_indent.push('        ');
-pug_mixins["footer"]();
-pug_indent.pop();
-pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"headers-and-footers__footer-creative\"\u003E";
-pug_indent.push('        ');
-pug_mixins["footer-creative"]();
-pug_indent.pop();
-pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fdiv\u003E\n    \u003Cscript" + (pug.attr("src", "ui-"+name+".js", true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
-    }.call(this, "isHovered" in locals_for_with ?
-        locals_for_with.isHovered :
-        typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
-        locals_for_with.isLong :
-        typeof isLong !== 'undefined' ? isLong : undefined, "isSecondary" in locals_for_with ?
-        locals_for_with.isSecondary :
-        typeof isSecondary !== 'undefined' ? isSecondary : undefined, "pug_indent" in locals_for_with ?
-        locals_for_with.pug_indent :
-        typeof pug_indent !== 'undefined' ? pug_indent : undefined, "textColor" in locals_for_with ?
-        locals_for_with.textColor :
-        typeof textColor !== 'undefined' ? textColor : undefined, "withoutFrame" in locals_for_with ?
-        locals_for_with.withoutFrame :
-        typeof withoutFrame !== 'undefined' ? withoutFrame : undefined));
-    ;;return pug_html;};
-module.exports = template;
-
-/***/ }),
-
-/***/ 188:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
 
 /***/ })
 
