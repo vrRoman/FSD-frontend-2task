@@ -24,7 +24,7 @@ class RangeSlider {
     this.updateValueElem();
   }
 
-  prettifyNum(num) {
+  static prettifyNum(num) {
     const n = num.toString();
     const separator = ' ';
     return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, `$1${separator}`);
@@ -44,8 +44,8 @@ class RangeSlider {
   }
 
   updateValueElem() {
-    this.getValueElem().innerText = `${this.prettifyNum(this.values[0]) + this.rubSymbol} - `
-      + `${this.prettifyNum(this.values[1])}${this.rubSymbol}`;
+    this.getValueElem().innerText = `${RangeSlider.prettifyNum(this.values[0]) + this.rubSymbol} - `
+      + `${RangeSlider.prettifyNum(this.values[1])}${this.rubSymbol}`;
   }
 }
 

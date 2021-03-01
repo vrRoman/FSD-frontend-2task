@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import '@/sass/main.sass';
 import '@/js/index';
 

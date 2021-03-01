@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import '@/js/index';
 
 import './form-elements.pug';

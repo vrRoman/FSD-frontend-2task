@@ -9,6 +9,7 @@ class DonutChart {
 
   init() {
     const ctx = this.getChartElem().getContext('2d');
+    // eslint-disable-next-line no-unused-vars
     const chart = new Chart(ctx, {
       type: 'doughnut',
       data: {

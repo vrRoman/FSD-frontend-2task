@@ -2,7 +2,12 @@ import 'jquery-ui/ui/widgets/datepicker';
 import './jquery.datepicker.extension.range.min';
 
 class DatePicker {
-  constructor({ element, options = {}, initialDate = [null, null], isTextDouble = false }) {
+  constructor({
+    element,
+    options = {},
+    initialDate = [null, null],
+    isTextDouble = false,
+  }) {
     this.clearBtnHTML = '<button class="ui-datepicker-current '
       + 'ui-state-default ui-corner-all '
       + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" '
