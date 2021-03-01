@@ -11,7 +11,7 @@ html(lang='ru')
         meta(charset='utf-8')
         meta(name='viewport' content='initial-scale=1.0, width=device-width')
         link(rel="shortcut icon" href="images/logo-icon.svg")
-        link(rel="stylesheet" type="text/css" href=fileName + ".css")
+        link(rel="stylesheet" type="text/css" href=`${fileName}.css`)
         title= title
     body
         +header
@@ -20,4 +20,4 @@ html(lang='ru')
 
         +footer
 
-        script(src=fileName + '.js')
+        script(src=`${fileName}.js`)

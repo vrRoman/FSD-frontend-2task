@@ -63,7 +63,7 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
                     .booking-card__item-text !{item.text}
                         if (item.hasTooltip)
                             .booking-card__tooltip i
-                    .booking-card__item-price= item.price + '₽'
+                    .booking-card__item-price= `${item.price}₽`
 
         .booking-card__total
             .booking-card__total-text
@@ -74,7 +74,7 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
             .booking-card__dots
             .booking-card__total-price
                 +heading({
-                    text: totalPrice + '₽',
+                    text: `${totalPrice}₽`,
                     type: 'h2',
                 })
 

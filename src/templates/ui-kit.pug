@@ -6,7 +6,7 @@ html(lang="ru")
         meta(charset = "utf-8")
         meta(name="viewport" content="initial-scale=1.0, width=device-width")
         link(rel="shortcut icon" href="images/logo-icon.svg")
-        link(rel="stylesheet" type="text/css" href="ui-"+name+".css")
+        link(rel="stylesheet" type="text/css" href=`ui-${name}.css`)
         title= name
 
     body
@@ -15,4 +15,4 @@ html(lang="ru")
 
         block content
 
-        script(src="ui-"+name+".js")
+        script(src=`ui-${name}.js`)
