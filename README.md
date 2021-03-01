@@ -33,5 +33,9 @@ npm run dev
 _Скомпилировать код в режиме production:_  
 ```
 npm run build
+```  
+_Запустить линтер:_
+```
+npm run lint
 ```      
     
