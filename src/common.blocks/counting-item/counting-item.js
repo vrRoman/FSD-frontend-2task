@@ -41,11 +41,11 @@ class CountingItem {
   }
 
   getPlusBtn() {
-    return this.elem.querySelector('.counting-item__change-button_plus');
+    return this.elem.querySelector('.counting-item__change-button_action_increase');
   }
 
   getMinusBtn() {
-    return this.elem.querySelector('.counting-item__change-button_minus');
+    return this.elem.querySelector('.counting-item__change-button_action_decrease');
   }
 
   getValueElem() {
