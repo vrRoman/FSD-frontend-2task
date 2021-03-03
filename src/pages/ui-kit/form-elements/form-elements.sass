@@ -72,16 +72,18 @@
     margin-top: 40px
     &:first-child
       margin-top: 0
-    &_like
-      display: grid
-      grid-template-columns: 40px 40px
-      grid-column-gap: 10px
-      grid-template-areas: "button-info button-info" ". ."
-    &_rate
-      display: grid
-      grid-template-areas: "button-info button-info" ". ."
-      grid-template-columns: 120px 120px
-      grid-column-gap: 20px
+  &__like-buttons-wrapper
+    margin-top: 40px
+    display: grid
+    grid-template-columns: 40px 40px
+    grid-column-gap: 10px
+    grid-template-areas: "button-info button-info" ". ."
+  &__rate-buttons-wrapper
+    margin-top: 40px
+    display: grid
+    grid-template-areas: "button-info button-info" ". ."
+    grid-template-columns: 120px 120px
+    grid-column-gap: 20px
 
   &__dropdown-wrapper
     margin: 42px 0

@@ -207,7 +207,7 @@ block content
                         items: ['Мужчина', 'Женщина'],
                         itemsName: 'gender'
                     })
-                .form-elements__button-wrapper.form-elements__button-wrapper_toggle
+                .form-elements__button-wrapper
                     .form-elements__button-elem-info
                         +elem-info('Toggle')
                     .form-elements__toggle-button
@@ -219,7 +219,7 @@ block content
                         +toggle-button({
                             text: 'Получать спецпредложения'
                         })
-                .form-elements__button-wrapper.form-elements__button-wrapper_like
+                .form-elements__like-buttons-wrapper
                     .form-elements__button-elem-info
                         +elem-info('Like button')
                     .form-elements__like-button
@@ -231,7 +231,7 @@ block content
                             likesNum: 12,
                             isActive: true
                         })
-                .form-elements__button-wrapper.form-elements__button-wrapper_rate
+                .form-elements__rate-buttons-wrapper
                     .form-elements__button-elem-info
                         +elem-info('Rate button')
                     .form-elements__rate-button
@@ -243,7 +243,7 @@ block content
             .form-elements__elements-container
                 .form-elements__range-slider-wrapper
                     +range-slider('Range slider')
-                .form-elements__button-wrapper.form-elements__button-wrapper_buttons
+                .form-elements__button-wrapper
                     .form-elements__button-elem-info
                         +elem-info('Buttons')
                     .form-elements__button
