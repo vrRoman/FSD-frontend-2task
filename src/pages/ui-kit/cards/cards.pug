@@ -14,73 +14,72 @@ block vars
 
 
 block content
-    .container
-        .cards
-            .cards__column
-                .cards__elem
-                    +search-card
-                .cards__elem
-                    +signup-card
+    .cards
+        .cards__column
+            .cards__elem
+                +search-card
+            .cards__elem
+                +signup-card
 
-            .cards__column
-                .cards__elem
-                    +booking-card({
-                        roomInfo: {
-                            number: 888,
-                            type: 'люкс',
-                            price: '9 990'
+        .cards__column
+            .cards__elem
+                +booking-card({
+                    roomInfo: {
+                        number: 888,
+                        type: 'люкс',
+                        price: '9 990'
+                    },
+                    bookingItems: [
+                        {
+                          text: '9 990₽ х 4 суток',
+                          price: '39 960'
                         },
-                        bookingItems: [
-                            {
-                              text: '9 990₽ х 4 суток',
-                              price: '39 960'
-                            },
-                            {
-                              text: 'Сбор за услуги: скидка 2 179₽',
-                              price: 0,
-                              hasTooltip: true
-                            },
-                            {
-                              text: 'Сбор за дополнительные услуги',
-                              price: '300',
-                              hasTooltip: true
-                            }
-                        ],
-                        totalPrice: '38 081',
-                    })
-                .cards__elem
-                    +signin-card
-
-            .cards__column.cards__column_size_small
-                .cards__elem
-                    .date-picker-demo
-                        +date-picker({
-                          withBorder: true,
-                        })
-
-                .cards__elem
-                    +room-card({
-                        imagesSrc: ['images/room-img_1.jpg', 'images/room-img_2.jpg',
-                          'images/room-img_3.jpg', 'images/room-img_4.jpg'],
-                        hasSliderArrows: true,
-                        roomInfo: {
-                            number: 888,
-                            type: 'Люкс',
-                            price: '9 900'
+                        {
+                          text: 'Сбор за услуги: скидка 2 179₽',
+                          price: 0,
+                          hasTooltip: true
                         },
-                        numOfComments: 145,
-                        rating: 5
+                        {
+                          text: 'Сбор за дополнительные услуги',
+                          price: '300',
+                          hasTooltip: true
+                        }
+                    ],
+                    totalPrice: '38 081',
+                })
+            .cards__elem
+                +signin-card
+
+        .cards__column.cards__column_size_small
+            .cards__elem
+                .date-picker-demo
+                    +date-picker({
+                      withBorder: true,
                     })
 
-                .cards__elem
-                    +room-card({
-                        imagesSrc: ['images/room-img_2.jpg', 'images/room-img_3.jpg',
-                          'images/room-img_4.jpg', 'images/room-img_5.jpg'],
-                        hasSliderArrows: false,
-                        roomInfo: {
-                            number: 840,
-                            price: '9 900'
-                        },
-                        numOfComments: 65,
-                        rating: 4
-                    })
+            .cards__elem
+                +room-card({
+                    imagesSrc: ['images/room-img_1.jpg', 'images/room-img_2.jpg',
+                      'images/room-img_3.jpg', 'images/room-img_4.jpg'],
+                    hasSliderArrows: true,
+                    roomInfo: {
+                        number: 888,
+                        type: 'Люкс',
+                        price: '9 900'
+                    },
+                    numOfComments: 145,
+                    rating: 5
+                })
+
+            .cards__elem
+                +room-card({
+                    imagesSrc: ['images/room-img_2.jpg', 'images/room-img_3.jpg',
+                      'images/room-img_4.jpg', 'images/room-img_5.jpg'],
+                    hasSliderArrows: false,
+                    roomInfo: {
+                        number: 840,
+                        price: '9 900'
+                    },
+                    numOfComments: 65,
+                    rating: 4
+                })
