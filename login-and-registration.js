@@ -12496,7 +12496,7 @@ pug_html = pug_html + "\u003C\u002Ffooter\u003E";
 };
 const title = 'Login and registration'
 const fileName = 'login-and-registration'
-pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
+pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"\u002Ffavicons\u002Fapple-touch-icon.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"32x32\" href=\"\u002Ffavicons\u002Ffavicon-32x32.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"16x16\" href=\"\u002Ffavicons\u002Ffavicon-16x16.png\"\u003E\n    \u003Clink rel=\"manifest\" href=\"\u002Fsite.webmanifest\"\u003E\n    \u003Clink rel=\"mask-icon\" href=\"\u002Ffavicons\u002Fsafari-pinned-tab.svg\" color=\"#bc9cff\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"\u002Ffavicons\u002Ffavicon.ico\"\u003E\n    \u003Cmeta name=\"msapplication-TileColor\" content=\"#603cba\"\u003E\n    \u003Cmeta name=\"msapplication-config\" content=\"\u002Fbrowserconfig.xml\"\u003E\n    \u003Cmeta name=\"theme-color\" content=\"#ffffff\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", `${fileName}.css`, true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
 pug_indent.push('    ');
 pug_mixins["header"]();
 pug_indent.pop();
@@ -12512,7 +12512,7 @@ pug_html = pug_html + "\n      \u003C\u002Fdiv\u003E\n    \u003C\u002Fmain\u003E
 pug_indent.push('    ');
 pug_mixins["footer"]();
 pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
+pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", `${fileName}.js`, true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
     }.call(this, "isHovered" in locals_for_with ?
         locals_for_with.isHovered :
         typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
@@ -12556,14 +12556,58 @@ module.exports = template;
 // EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
 var jquery = __webpack_require__(0);
 
-// CONCATENATED MODULE: ./src/images/logo.svg
+// CONCATENATED MODULE: ./src/public/images/logo.svg
 /* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
-// CONCATENATED MODULE: ./src/images/logo-icon.svg
+// CONCATENATED MODULE: ./src/public/images/logo-icon.svg
 /* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
 // CONCATENATED MODULE: ./src/js/images.js
 
 
+// CONCATENATED MODULE: ./src/public/favicons/android-chrome-192x192.png
+/* harmony default export */ var android_chrome_192x192 = (__webpack_require__.p + "favicons/android-chrome-192x192.png");
+// CONCATENATED MODULE: ./src/public/favicons/android-chrome-512x512.png
+/* harmony default export */ var android_chrome_512x512 = (__webpack_require__.p + "favicons/android-chrome-512x512.png");
+// CONCATENATED MODULE: ./src/public/favicons/apple-touch-icon.png
+/* harmony default export */ var apple_touch_icon = (__webpack_require__.p + "favicons/apple-touch-icon.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon-16x16.png
+/* harmony default export */ var favicon_16x16 = (__webpack_require__.p + "favicons/favicon-16x16.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon-32x32.png
+/* harmony default export */ var favicon_32x32 = (__webpack_require__.p + "favicons/favicon-32x32.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon.ico
+/* harmony default export */ var favicon = (__webpack_require__.p + "favicons/favicon.ico");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-70x70.png
+/* harmony default export */ var mstile_70x70 = (__webpack_require__.p + "favicons/mstile-70x70.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-144x144.png
+/* harmony default export */ var mstile_144x144 = (__webpack_require__.p + "favicons/mstile-144x144.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-150x150.png
+/* harmony default export */ var mstile_150x150 = (__webpack_require__.p + "favicons/mstile-150x150.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-310x150.png
+/* harmony default export */ var mstile_310x150 = (__webpack_require__.p + "favicons/mstile-310x150.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-310x310.png
+/* harmony default export */ var mstile_310x310 = (__webpack_require__.p + "favicons/mstile-310x310.png");
+// CONCATENATED MODULE: ./src/public/favicons/safari-pinned-tab.svg
+/* harmony default export */ var safari_pinned_tab = (__webpack_require__.p + "favicons/safari-pinned-tab.svg");
+// CONCATENATED MODULE: ./src/js/favicons.js
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./src/public/browserconfig.xml
+/* harmony default export */ var browserconfig = (__webpack_require__.p + "browserconfig.xml");
+// CONCATENATED MODULE: ./src/public/site.webmanifest
+/* harmony default export */ var site_webmanifest = (__webpack_require__.p + "site.webmanifest");
 // CONCATENATED MODULE: ./src/js/index.js
+
+
+
 
 
 

@@ -10998,6 +10998,7 @@ var header = __webpack_require__(14);
 var search_card = __webpack_require__(26);
 
 // CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
+/* eslint-disable no-unused-vars */
 
 
 
@@ -13644,6 +13645,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+/* eslint-disable no-unused-vars */
 
 
 
@@ -13964,12 +13966,12 @@ var CountingItem = /*#__PURE__*/function () {
   }, {
     key: "getPlusBtn",
     value: function getPlusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_plus');
+      return this.elem.querySelector('.counting-item__change-button_action_increase');
     }
   }, {
     key: "getMinusBtn",
     value: function getMinusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_minus');
+      return this.elem.querySelector('.counting-item__change-button_action_decrease');
     }
   }, {
     key: "getValueElem",
@@ -14480,7 +14482,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__counter\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_minus\"\u003E-\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__value\"\u003E";
 pug_indent.push('      ');
@@ -14492,7 +14494,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_plus\"\u003E+\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15730,7 +15732,7 @@ pug_html = pug_html + "\u003C\u002Ffooter\u003E";
 };
 const title = 'Landing page'
 const fileName = 'landing-page'
-pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"images\u002Flogo-icon.svg\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", fileName + ".css", true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
+pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"\u002Ffavicons\u002Fapple-touch-icon.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"32x32\" href=\"\u002Ffavicons\u002Ffavicon-32x32.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"16x16\" href=\"\u002Ffavicons\u002Ffavicon-16x16.png\"\u003E\n    \u003Clink rel=\"manifest\" href=\"\u002Fsite.webmanifest\"\u003E\n    \u003Clink rel=\"mask-icon\" href=\"\u002Ffavicons\u002Fsafari-pinned-tab.svg\" color=\"#bc9cff\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"\u002Ffavicons\u002Ffavicon.ico\"\u003E\n    \u003Cmeta name=\"msapplication-TileColor\" content=\"#603cba\"\u003E\n    \u003Cmeta name=\"msapplication-config\" content=\"\u002Fbrowserconfig.xml\"\u003E\n    \u003Cmeta name=\"theme-color\" content=\"#ffffff\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", `${fileName}.css`, true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = title) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E";
 pug_indent.push('    ');
 pug_mixins["header"]();
 pug_indent.pop();
@@ -15742,7 +15744,7 @@ pug_html = pug_html + "\n        \u003C\u002Fdiv\u003E\n        \u003Cp class=\"
 pug_indent.push('    ');
 pug_mixins["footer"]();
 pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", fileName + '.js', true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
+pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", `${fileName}.js`, true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
     }.call(this, "Array" in locals_for_with ?
         locals_for_with.Array :
         typeof Array !== 'undefined' ? Array : undefined, "isHovered" in locals_for_with ?
