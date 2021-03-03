@@ -10973,72 +10973,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 13:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
-var jquery = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/public/images/logo.svg
-/* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
-// CONCATENATED MODULE: ./src/public/images/logo-icon.svg
-/* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
-// CONCATENATED MODULE: ./src/js/images.js
-
-
-// CONCATENATED MODULE: ./src/public/favicons/android-chrome-192x192.png
-/* harmony default export */ var android_chrome_192x192 = (__webpack_require__.p + "favicons/android-chrome-192x192.png");
-// CONCATENATED MODULE: ./src/public/favicons/android-chrome-512x512.png
-/* harmony default export */ var android_chrome_512x512 = (__webpack_require__.p + "favicons/android-chrome-512x512.png");
-// CONCATENATED MODULE: ./src/public/favicons/apple-touch-icon.png
-/* harmony default export */ var apple_touch_icon = (__webpack_require__.p + "favicons/apple-touch-icon.png");
-// CONCATENATED MODULE: ./src/public/favicons/favicon-16x16.png
-/* harmony default export */ var favicon_16x16 = (__webpack_require__.p + "favicons/favicon-16x16.png");
-// CONCATENATED MODULE: ./src/public/favicons/favicon-32x32.png
-/* harmony default export */ var favicon_32x32 = (__webpack_require__.p + "favicons/favicon-32x32.png");
-// CONCATENATED MODULE: ./src/public/favicons/favicon.ico
-/* harmony default export */ var favicon = (__webpack_require__.p + "favicons/favicon.ico");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-70x70.png
-/* harmony default export */ var mstile_70x70 = (__webpack_require__.p + "favicons/mstile-70x70.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-144x144.png
-/* harmony default export */ var mstile_144x144 = (__webpack_require__.p + "favicons/mstile-144x144.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-150x150.png
-/* harmony default export */ var mstile_150x150 = (__webpack_require__.p + "favicons/mstile-150x150.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-310x150.png
-/* harmony default export */ var mstile_310x150 = (__webpack_require__.p + "favicons/mstile-310x150.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-310x310.png
-/* harmony default export */ var mstile_310x310 = (__webpack_require__.p + "favicons/mstile-310x310.png");
-// CONCATENATED MODULE: ./src/public/favicons/safari-pinned-tab.svg
-/* harmony default export */ var safari_pinned_tab = (__webpack_require__.p + "favicons/safari-pinned-tab.svg");
-// CONCATENATED MODULE: ./src/js/favicons.js
-
-
-
-
-
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./src/public/browserconfig.xml
-/* harmony default export */ var browserconfig = (__webpack_require__.p + "browserconfig.xml");
-// CONCATENATED MODULE: ./src/public/site.webmanifest
-/* harmony default export */ var site_webmanifest = (__webpack_require__.p + "site.webmanifest");
-// CONCATENATED MODULE: ./src/js/index.js
-
-
-
-
-
-
-/***/ }),
-
-/***/ 14:
+/***/ 12:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11126,19 +11061,84 @@ var Header = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ 14:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
+var jquery = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/public/images/logo.svg
+/* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
+// CONCATENATED MODULE: ./src/public/images/logo-icon.svg
+/* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
+// CONCATENATED MODULE: ./src/js/images.js
+
+
+// CONCATENATED MODULE: ./src/public/favicons/android-chrome-192x192.png
+/* harmony default export */ var android_chrome_192x192 = (__webpack_require__.p + "favicons/android-chrome-192x192.png");
+// CONCATENATED MODULE: ./src/public/favicons/android-chrome-512x512.png
+/* harmony default export */ var android_chrome_512x512 = (__webpack_require__.p + "favicons/android-chrome-512x512.png");
+// CONCATENATED MODULE: ./src/public/favicons/apple-touch-icon.png
+/* harmony default export */ var apple_touch_icon = (__webpack_require__.p + "favicons/apple-touch-icon.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon-16x16.png
+/* harmony default export */ var favicon_16x16 = (__webpack_require__.p + "favicons/favicon-16x16.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon-32x32.png
+/* harmony default export */ var favicon_32x32 = (__webpack_require__.p + "favicons/favicon-32x32.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon.ico
+/* harmony default export */ var favicon = (__webpack_require__.p + "favicons/favicon.ico");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-70x70.png
+/* harmony default export */ var mstile_70x70 = (__webpack_require__.p + "favicons/mstile-70x70.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-144x144.png
+/* harmony default export */ var mstile_144x144 = (__webpack_require__.p + "favicons/mstile-144x144.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-150x150.png
+/* harmony default export */ var mstile_150x150 = (__webpack_require__.p + "favicons/mstile-150x150.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-310x150.png
+/* harmony default export */ var mstile_310x150 = (__webpack_require__.p + "favicons/mstile-310x150.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-310x310.png
+/* harmony default export */ var mstile_310x310 = (__webpack_require__.p + "favicons/mstile-310x310.png");
+// CONCATENATED MODULE: ./src/public/favicons/safari-pinned-tab.svg
+/* harmony default export */ var safari_pinned_tab = (__webpack_require__.p + "favicons/safari-pinned-tab.svg");
+// CONCATENATED MODULE: ./src/js/favicons.js
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./src/public/browserconfig.xml
+/* harmony default export */ var browserconfig = (__webpack_require__.p + "browserconfig.xml");
+// CONCATENATED MODULE: ./src/public/site.webmanifest
+/* harmony default export */ var site_webmanifest = (__webpack_require__.p + "site.webmanifest");
+// CONCATENATED MODULE: ./src/js/index.js
+
+
+
+
+
+
+/***/ }),
+
 /***/ 75:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76);
 /* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(77);
 /* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(14);
+/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
 /* eslint-disable no-unused-vars */
 
 
@@ -11863,7 +11863,7 @@ pug_mixins["text-field"]({
                     },
                     arrowOptions: {
                         type: 'forward',
-                        color: 'purple'
+                        color: 'purple-gradient'
                     }
                 });
 pug_indent.pop();

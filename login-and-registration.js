@@ -10978,7 +10978,7 @@ return jQuery;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(109);
@@ -10987,12 +10987,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(111);
 /* harmony import */ var _common_blocks_signup_card_signup_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(40);
+/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(12);
+/* eslint-disable no-unused-vars */
 
 
 
 
 
 
+
+var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"](document.querySelector('.header'));
 var $loginButtons = $('.signup-card__account-exists .button');
 var $signupButtons = $('.signin-card__account-not-exists .button');
 var $signinCard = $('.login-and-registration__signin-card');
@@ -12472,7 +12476,7 @@ pug_mixins["text-field"]({
                     },
                     arrowOptions: {
                         type: 'forward',
-                        color: 'purple'
+                        color: 'purple-gradient'
                     }
                 });
 pug_indent.pop();
@@ -12548,7 +12552,95 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 13:
+/***/ 12:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Header = /*#__PURE__*/function () {
+  function Header(elem) {
+    _classCallCheck(this, Header);
+
+    this.elem = elem;
+    this.menu = this.getMenu();
+    this.hamburger = this.getHamburger();
+    this.showHamburgerOn = 1200;
+    this.hiddenMenuClass = 'header__menu_hidden';
+    this.visibleHamburgerClass = 'header__hamburger_visible';
+    this.columnNavClass = 'navigation_in-column';
+    this.updateHeader = this.updateHeader.bind(this);
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.init();
+  }
+
+  _createClass(Header, [{
+    key: "getHamburger",
+    value: function getHamburger() {
+      var hamburgerSelector = '.header__hamburger';
+      return this.elem.querySelector(hamburgerSelector);
+    }
+  }, {
+    key: "getMenu",
+    value: function getMenu() {
+      var menuSelector = '.header__menu';
+      return this.elem.querySelector(menuSelector);
+    }
+  }, {
+    key: "getNav",
+    value: function getNav() {
+      var navSelector = '.navigation';
+      return this.elem.querySelector(navSelector);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      window.addEventListener('resize', this.updateHeader);
+      window.addEventListener('click', this.handleWindowClick);
+      window.addEventListener('load', this.updateHeader);
+    }
+  }, {
+    key: "updateHeader",
+    value: function updateHeader() {
+      if (window.innerWidth > this.showHamburgerOn) {
+        this.menu.classList.remove(this.hiddenMenuClass);
+        this.hamburger.classList.remove(this.visibleHamburgerClass);
+        this.getNav().classList.remove(this.columnNavClass);
+      } else {
+        this.menu.classList.add(this.hiddenMenuClass);
+        this.hamburger.classList.add(this.visibleHamburgerClass);
+        this.getNav().classList.add(this.columnNavClass);
+      }
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      if (window.innerWidth <= this.showHamburgerOn) {
+        if (evt.path.includes(this.hamburger)) {
+          this.menu.classList.toggle(this.hiddenMenuClass);
+        } else if (!evt.path.includes(this.menu)) {
+          if (!this.menu.classList.contains(this.hiddenMenuClass)) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            this.menu.classList.add(this.hiddenMenuClass);
+          }
+        }
+      }
+    }
+  }]);
+
+  return Header;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Header);
+
+/***/ }),
+
+/***/ 14:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -11992,120 +11992,6 @@ function pug_rethrow(err, filename, lineno, str) {
 /***/ }),
 /* 11 */,
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery UI Keycode 1.12.1
- * http://jqueryui.com
- *
- * Copyright jQuery Foundation and other contributors
- * Released under the MIT license.
- * http://jquery.org/license
- */
-
-//>>label: Keycode
-//>>group: Core
-//>>description: Provide keycodes as keynames
-//>>docs: http://api.jqueryui.com/jQuery.ui.keyCode/
-
-( function( factory ) {
-	if ( true ) {
-
-		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(3) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
-} ( function( $ ) {
-return $.ui.keyCode = {
-	BACKSPACE: 8,
-	COMMA: 188,
-	DELETE: 46,
-	DOWN: 40,
-	END: 35,
-	ENTER: 13,
-	ESCAPE: 27,
-	HOME: 36,
-	LEFT: 37,
-	PAGE_DOWN: 34,
-	PAGE_UP: 33,
-	PERIOD: 190,
-	RIGHT: 39,
-	SPACE: 32,
-	TAB: 9,
-	UP: 38
-};
-
-} ) );
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
-var jquery = __webpack_require__(0);
-
-// CONCATENATED MODULE: ./src/public/images/logo.svg
-/* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
-// CONCATENATED MODULE: ./src/public/images/logo-icon.svg
-/* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
-// CONCATENATED MODULE: ./src/js/images.js
-
-
-// CONCATENATED MODULE: ./src/public/favicons/android-chrome-192x192.png
-/* harmony default export */ var android_chrome_192x192 = (__webpack_require__.p + "favicons/android-chrome-192x192.png");
-// CONCATENATED MODULE: ./src/public/favicons/android-chrome-512x512.png
-/* harmony default export */ var android_chrome_512x512 = (__webpack_require__.p + "favicons/android-chrome-512x512.png");
-// CONCATENATED MODULE: ./src/public/favicons/apple-touch-icon.png
-/* harmony default export */ var apple_touch_icon = (__webpack_require__.p + "favicons/apple-touch-icon.png");
-// CONCATENATED MODULE: ./src/public/favicons/favicon-16x16.png
-/* harmony default export */ var favicon_16x16 = (__webpack_require__.p + "favicons/favicon-16x16.png");
-// CONCATENATED MODULE: ./src/public/favicons/favicon-32x32.png
-/* harmony default export */ var favicon_32x32 = (__webpack_require__.p + "favicons/favicon-32x32.png");
-// CONCATENATED MODULE: ./src/public/favicons/favicon.ico
-/* harmony default export */ var favicon = (__webpack_require__.p + "favicons/favicon.ico");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-70x70.png
-/* harmony default export */ var mstile_70x70 = (__webpack_require__.p + "favicons/mstile-70x70.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-144x144.png
-/* harmony default export */ var mstile_144x144 = (__webpack_require__.p + "favicons/mstile-144x144.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-150x150.png
-/* harmony default export */ var mstile_150x150 = (__webpack_require__.p + "favicons/mstile-150x150.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-310x150.png
-/* harmony default export */ var mstile_310x150 = (__webpack_require__.p + "favicons/mstile-310x150.png");
-// CONCATENATED MODULE: ./src/public/favicons/mstile-310x310.png
-/* harmony default export */ var mstile_310x310 = (__webpack_require__.p + "favicons/mstile-310x310.png");
-// CONCATENATED MODULE: ./src/public/favicons/safari-pinned-tab.svg
-/* harmony default export */ var safari_pinned_tab = (__webpack_require__.p + "favicons/safari-pinned-tab.svg");
-// CONCATENATED MODULE: ./src/js/favicons.js
-
-
-
-
-
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./src/public/browserconfig.xml
-/* harmony default export */ var browserconfig = (__webpack_require__.p + "browserconfig.xml");
-// CONCATENATED MODULE: ./src/public/site.webmanifest
-/* harmony default export */ var site_webmanifest = (__webpack_require__.p + "site.webmanifest");
-// CONCATENATED MODULE: ./src/js/index.js
-
-
-
-
-
-
-/***/ }),
-/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12192,6 +12078,120 @@ var Header = /*#__PURE__*/function () {
 /* harmony default export */ __webpack_exports__["a"] = (Header);
 
 /***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * jQuery UI Keycode 1.12.1
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+//>>label: Keycode
+//>>group: Core
+//>>description: Provide keycodes as keynames
+//>>docs: http://api.jqueryui.com/jQuery.ui.keyCode/
+
+( function( factory ) {
+	if ( true ) {
+
+		// AMD. Register as an anonymous module.
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0), __webpack_require__(3) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+} ( function( $ ) {
+return $.ui.keyCode = {
+	BACKSPACE: 8,
+	COMMA: 188,
+	DELETE: 46,
+	DOWN: 40,
+	END: 35,
+	ENTER: 13,
+	ESCAPE: 27,
+	HOME: 36,
+	LEFT: 37,
+	PAGE_DOWN: 34,
+	PAGE_UP: 33,
+	PERIOD: 190,
+	RIGHT: 39,
+	SPACE: 32,
+	TAB: 9,
+	UP: 38
+};
+
+} ) );
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
+var jquery = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./src/public/images/logo.svg
+/* harmony default export */ var logo = (__webpack_require__.p + "images/logo.svg");
+// CONCATENATED MODULE: ./src/public/images/logo-icon.svg
+/* harmony default export */ var logo_icon = (__webpack_require__.p + "images/logo-icon.svg");
+// CONCATENATED MODULE: ./src/js/images.js
+
+
+// CONCATENATED MODULE: ./src/public/favicons/android-chrome-192x192.png
+/* harmony default export */ var android_chrome_192x192 = (__webpack_require__.p + "favicons/android-chrome-192x192.png");
+// CONCATENATED MODULE: ./src/public/favicons/android-chrome-512x512.png
+/* harmony default export */ var android_chrome_512x512 = (__webpack_require__.p + "favicons/android-chrome-512x512.png");
+// CONCATENATED MODULE: ./src/public/favicons/apple-touch-icon.png
+/* harmony default export */ var apple_touch_icon = (__webpack_require__.p + "favicons/apple-touch-icon.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon-16x16.png
+/* harmony default export */ var favicon_16x16 = (__webpack_require__.p + "favicons/favicon-16x16.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon-32x32.png
+/* harmony default export */ var favicon_32x32 = (__webpack_require__.p + "favicons/favicon-32x32.png");
+// CONCATENATED MODULE: ./src/public/favicons/favicon.ico
+/* harmony default export */ var favicon = (__webpack_require__.p + "favicons/favicon.ico");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-70x70.png
+/* harmony default export */ var mstile_70x70 = (__webpack_require__.p + "favicons/mstile-70x70.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-144x144.png
+/* harmony default export */ var mstile_144x144 = (__webpack_require__.p + "favicons/mstile-144x144.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-150x150.png
+/* harmony default export */ var mstile_150x150 = (__webpack_require__.p + "favicons/mstile-150x150.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-310x150.png
+/* harmony default export */ var mstile_310x150 = (__webpack_require__.p + "favicons/mstile-310x150.png");
+// CONCATENATED MODULE: ./src/public/favicons/mstile-310x310.png
+/* harmony default export */ var mstile_310x310 = (__webpack_require__.p + "favicons/mstile-310x310.png");
+// CONCATENATED MODULE: ./src/public/favicons/safari-pinned-tab.svg
+/* harmony default export */ var safari_pinned_tab = (__webpack_require__.p + "favicons/safari-pinned-tab.svg");
+// CONCATENATED MODULE: ./src/js/favicons.js
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./src/public/browserconfig.xml
+/* harmony default export */ var browserconfig = (__webpack_require__.p + "browserconfig.xml");
+// CONCATENATED MODULE: ./src/public/site.webmanifest
+/* harmony default export */ var site_webmanifest = (__webpack_require__.p + "site.webmanifest");
+// CONCATENATED MODULE: ./src/js/index.js
+
+
+
+
+
+
+/***/ }),
 /* 15 */,
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -12223,7 +12223,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
 			__webpack_require__(3),
-			__webpack_require__(12)
+			__webpack_require__(13)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -15540,7 +15540,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
 			__webpack_require__(44),
-			__webpack_require__(12),
+			__webpack_require__(13),
 			__webpack_require__(3),
 			__webpack_require__(25)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
@@ -16964,7 +16964,7 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(13);
+/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
 /* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(85);
 /* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_search_room_pug__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _search_room_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(86);
@@ -16984,7 +16984,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(29);
 /* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(28);
 /* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(30);
-/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(14);
+/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(12);
 /* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(7);
 /* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(2);
 /* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(5);
@@ -18743,7 +18743,7 @@ pug_mixins["text-field"]({
                     },
                     arrowOptions: {
                         type: 'forward',
-                        color: 'purple'
+                        color: 'purple-gradient'
                     }
                 });
 pug_indent.pop();
