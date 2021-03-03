@@ -1,2 +1,2 @@
-import '../images/logo.svg';
-import '../images/logo-icon.svg';
+import '../public/images/logo.svg';
+import '../public/images/logo-icon.svg';

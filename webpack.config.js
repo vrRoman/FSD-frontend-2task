@@ -87,6 +87,27 @@ module.exports = {
           name: 'fonts/[name].[ext]',
         },
       },
+      {
+        test: /favicons\//,
+        loader: 'file-loader',
+        options: {
+          name: 'favicons/[name].[ext]',
+        },
+      },
+      {
+        test: /browserconfig\.xml$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
+      },
+      {
+        test: /site\.webmanifest$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
+      },
     ],
   },
 
