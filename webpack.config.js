@@ -75,6 +75,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
+        exclude: /favicons/,
         loader: 'file-loader',
         options: {
           name: 'images/[name].[ext]',
