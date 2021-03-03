@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import '@/js/index';
 import '@/sass/main.sass';
 
@@ -7,6 +9,9 @@ import './login-and-registration.sass';
 import './images/login-registration-bg.jpg';
 
 import '@/common.blocks/signup-card/signup-card';
+import Header from '@/common.blocks/header/header';
+
+const header = new Header(document.querySelector('.header'));
 
 const $loginButtons = $('.signup-card__account-exists .button');
 const $signupButtons = $('.signin-card__account-not-exists .button');
