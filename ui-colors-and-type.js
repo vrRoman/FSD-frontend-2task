@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 53);
+/******/ 	return __webpack_require__(__webpack_require__.s = 61);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -93,16 +93,16 @@
 
 /***/ }),
 
-/***/ 53:
+/***/ 61:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 /* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _colors_and_type_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(65);
+/* harmony import */ var _colors_and_type_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(73);
 /* harmony import */ var _colors_and_type_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_colors_and_type_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _colors_and_type_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(66);
+/* harmony import */ var _colors_and_type_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(74);
 /* harmony import */ var _colors_and_type_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_colors_and_type_pug__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 65:
+/***/ 73:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -119,7 +119,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 66:
+/***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(9);
@@ -129,7 +129,7 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     
     (function (pug_indent) {
       var pug_indent = [];
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -159,6 +159,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -189,7 +192,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -219,6 +222,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -256,50 +262,50 @@ pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
 let name = 'colors-and-type'
-pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"\u002Ffavicons\u002Fapple-touch-icon.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"32x32\" href=\"\u002Ffavicons\u002Ffavicon-32x32.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"16x16\" href=\"\u002Ffavicons\u002Ffavicon-16x16.png\"\u003E\n    \u003Clink rel=\"manifest\" href=\"\u002Fsite.webmanifest\"\u003E\n    \u003Clink rel=\"mask-icon\" href=\"\u002Ffavicons\u002Fsafari-pinned-tab.svg\" color=\"#bc9cff\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"\u002Ffavicons\u002Ffavicon.ico\"\u003E\n    \u003Cmeta name=\"msapplication-TileColor\" content=\"#603cba\"\u003E\n    \u003Cmeta name=\"msapplication-config\" content=\"\u002Fbrowserconfig.xml\"\u003E\n    \u003Cmeta name=\"theme-color\" content=\"#ffffff\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", `ui-${name}.css`, true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E\n    \u003Cdiv class=\"ui-logo-container\"\u003E\u003Cimg class=\"ui-logo-container__logo\" src=\"images\u002Flogo-icon.svg\" alt=\"logo\"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv class=\"container\"\u003E\n      \u003Cdiv class=\"colors-and-type\"\u003E\n        \u003Cdiv class=\"colors\"\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
+pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n  \u003Chead\u003E\n    \u003Cmeta charset=\"utf-8\"\u003E\n    \u003Cmeta name=\"viewport\" content=\"initial-scale=1.0, width=device-width\"\u003E\n    \u003Clink rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"\u002Ffavicons\u002Fapple-touch-icon.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"32x32\" href=\"\u002Ffavicons\u002Ffavicon-32x32.png\"\u003E\n    \u003Clink rel=\"icon\" type=\"image\u002Fpng\" sizes=\"16x16\" href=\"\u002Ffavicons\u002Ffavicon-16x16.png\"\u003E\n    \u003Clink rel=\"manifest\" href=\"\u002Fsite.webmanifest\"\u003E\n    \u003Clink rel=\"mask-icon\" href=\"\u002Ffavicons\u002Fsafari-pinned-tab.svg\" color=\"#bc9cff\"\u003E\n    \u003Clink rel=\"shortcut icon\" href=\"\u002Ffavicons\u002Ffavicon.ico\"\u003E\n    \u003Cmeta name=\"msapplication-TileColor\" content=\"#603cba\"\u003E\n    \u003Cmeta name=\"msapplication-config\" content=\"\u002Fbrowserconfig.xml\"\u003E\n    \u003Cmeta name=\"theme-color\" content=\"#ffffff\"\u003E\n    \u003Clink" + (" rel=\"stylesheet\" type=\"text\u002Fcss\""+pug.attr("href", `ui-${name}.css`, true, true)) + "\u003E\n    \u003Ctitle\u003E" + (pug.escape(null == (pug_interp = name) ? "" : pug_interp)) + "\u003C\u002Ftitle\u003E\n  \u003C\u002Fhead\u003E\n  \u003Cbody\u003E\n    \u003Cdiv class=\"ui-logo-container\"\u003E\u003Cimg class=\"ui-logo-container__logo\" src=\"images\u002Flogo-icon.svg\" alt=\"logo\"\u003E\u003C\u002Fdiv\u003E\n    \u003Cdiv class=\"container\"\u003E\n      \u003Cdiv class=\"colors-and-type\"\u003E\n        \u003Cdiv class=\"colors-and-type__colors\"\u003E\n          \u003Cdiv class=\"colors-and-type__color\"\u003E";
 pug_indent.push('            ');
 pug_mixins["color-demo"]('Dark Shade 100%', '#1F2041', 'dark-shade-100');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__color\"\u003E";
 pug_indent.push('            ');
 pug_mixins["color-demo"]('Dark Shade 75%', '#1F2041', 'dark-shade-75');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__color\"\u003E";
 pug_indent.push('            ');
 pug_mixins["color-demo"]('Dark Shade 50%', '#1F2041', 'dark-shade-50');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__color\"\u003E";
 pug_indent.push('            ');
 pug_mixins["color-demo"]('Dark Shade 25%', '#1F2041', 'dark-shade-25');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__color\"\u003E";
 pug_indent.push('            ');
 pug_mixins["color-demo"]('Dark Shade 5%', '#1F2041', 'dark-shade-5');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__color\"\u003E";
 pug_indent.push('            ');
 pug_mixins["color-demo"]('Purple', '#BC9CFF', 'purple');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors__color\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__color\"\u003E";
 pug_indent.push('            ');
 pug_mixins["color-demo"]('Green', '#6FCF97', 'green');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=\"types\"\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=\"colors-and-type__types\"\u003E\n          \u003Cdiv class=\"colors-and-type__type\"\u003E";
 pug_indent.push('            ');
 pug_mixins["type-demo"]('H1',
                         'This one is the sub-section or widget title', 'h1');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__type\"\u003E";
 pug_indent.push('            ');
 pug_mixins["type-demo"]('H2',
                         'Next one is the item title inside widgets', 'h2');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__type\"\u003E";
 pug_indent.push('            ');
 pug_mixins["type-demo"]('H3',
                         'This is a label or CTA text', 'h3');
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"types__type\"\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cdiv class=\"colors-and-type__type\"\u003E";
 pug_indent.push('            ');
 pug_mixins["type-demo"]('Body',
                         'This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.');

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 112);
+/******/ 	return __webpack_require__(__webpack_require__.s = 99);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10973,43 +10973,6 @@ return jQuery;
 
 /***/ }),
 
-/***/ 112:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./src/sass/main.sass
-var main = __webpack_require__(8);
-
-// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.sass
-var landing_page = __webpack_require__(82);
-
-// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.pug
-var landing_page_landing_page = __webpack_require__(83);
-
-// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/images/landing-page-bg.jpg
-/* harmony default export */ var landing_page_bg = (__webpack_require__.p + "images/landing-page-bg.jpg");
-// EXTERNAL MODULE: ./src/common.blocks/header/header.js
-var header = __webpack_require__(12);
-
-// EXTERNAL MODULE: ./src/common.blocks/search-card/search-card.js
-var search_card = __webpack_require__(26);
-
-// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
-/* eslint-disable no-unused-vars */
-
-
-
-
-
-
-var landing_page_header = new header["a" /* default */](document.querySelector('.header'));
-var searchCard = new search_card["a" /* default */](document.querySelector('.search-card'));
-
-/***/ }),
-
 /***/ 12:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -11039,19 +11002,19 @@ var Header = /*#__PURE__*/function () {
   _createClass(Header, [{
     key: "getHamburger",
     value: function getHamburger() {
-      var hamburgerSelector = '.header__hamburger';
+      var hamburgerSelector = '.js-header__hamburger';
       return this.elem.querySelector(hamburgerSelector);
     }
   }, {
     key: "getMenu",
     value: function getMenu() {
-      var menuSelector = '.header__menu';
+      var menuSelector = '.js-header__menu';
       return this.elem.querySelector(menuSelector);
     }
   }, {
     key: "getNav",
     value: function getNav() {
-      var navSelector = '.navigation';
+      var navSelector = '.js-navigation';
       return this.elem.querySelector(navSelector);
     }
   }, {
@@ -13444,6 +13407,20 @@ var _datepickerExtension = function _datepickerExtension() {
 
 /***/ }),
 
+/***/ 18:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* eslint-disable no-unused-vars */
+
+$('.js-header').each(function init() {
+  var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
 /***/ 2:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13555,19 +13532,19 @@ var Dropdown = /*#__PURE__*/function () {
   }, {
     key: "getPopup",
     value: function getPopup() {
-      var popupSelector = '.dropdown__popup';
+      var popupSelector = '.js-dropdown__popup';
       return this.elem.querySelector(popupSelector);
     }
   }, {
     key: "getTextFields",
     value: function getTextFields() {
-      var textFieldSelector = '.dropdown__text-field .text-field';
+      var textFieldSelector = '.js-dropdown__text-field .js-text-field';
       return this.elem.querySelectorAll(textFieldSelector);
     }
   }, {
     key: "getTextFieldInputs",
     value: function getTextFieldInputs() {
-      var inputSelector = '.text-field__input';
+      var inputSelector = '.js-text-field__input';
       var inputs = [];
       this.textFields.forEach(function (elem) {
         inputs.push(elem.querySelector(inputSelector));
@@ -13632,7 +13609,7 @@ var Dropdown = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13662,23 +13639,23 @@ var SearchCard = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]({
-        element: this.getDateDropdown().querySelector('.date-picker'),
+        element: this.getDateDropdown().querySelector('.js-date-picker'),
         isTextDouble: true
       });
       var dateDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getDateDropdown(), datePicker, 'ДД.ММ.ГГГГ');
-      var itemsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](this.getGuestsDropdown().querySelector('.items-counter'), 'гостя');
+      var itemsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](this.getGuestsDropdown().querySelector('.js-items-counter'), 'гостя');
       var guestsDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getGuestsDropdown(), itemsCounter, 'Сколько гостей');
     }
   }, {
     key: "getDateDropdown",
     value: function getDateDropdown() {
-      var selector = '.search-card__dates .dropdown';
+      var selector = '.js-search-card__dates .js-dropdown';
       return this.elem.querySelector(selector);
     }
   }, {
     key: "getGuestsDropdown",
     value: function getGuestsDropdown() {
-      var selector = ' .search-card__guests .dropdown';
+      var selector = ' .js-search-card__guests .js-dropdown';
       return this.elem.querySelector(selector);
     }
   }]);
@@ -13710,6 +13687,20 @@ return $.ui.version = "1.12.1";
 
 } ) );
 
+
+/***/ }),
+
+/***/ 43:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27);
+/* eslint-disable no-unused-vars */
+
+$('.js-search-card').each(function init() {
+  var searchCard = new _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
 
@@ -13760,8 +13751,8 @@ var DatePicker = /*#__PURE__*/function () {
 
     _classCallCheck(this, DatePicker);
 
-    this.clearBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
-    this.applyBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
+    this.clearBtnHTML = "<button class=\"ui-datepicker-current \n      ui-state-default ui-corner-all \n      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button\" \n      type=\"button\">\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C</button> ";
+    this.applyBtnHTML = "<button class=\"ui-datepicker-current\n      ui-state-default ui-corner-all\n      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button\"\n      type=\"button\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C</button> ";
     this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
     this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
@@ -13960,23 +13951,23 @@ var CountingItem = /*#__PURE__*/function () {
   }, {
     key: "getNameElem",
     value: function getNameElem() {
-      var nameElemSelector = '.counting-item__name .heading';
+      var nameElemSelector = '.js-counting-item__name .js-heading';
       return this.elem.querySelector(nameElemSelector);
     }
   }, {
     key: "getPlusBtn",
     value: function getPlusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_action_increase');
+      return this.elem.querySelector('.js-counting-item__change-button_action_increase');
     }
   }, {
     key: "getMinusBtn",
     value: function getMinusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_action_decrease');
+      return this.elem.querySelector('.js-counting-item__change-button_action_decrease');
     }
   }, {
     key: "getValueElem",
     value: function getValueElem() {
-      return this.elem.querySelector('.counting-item__value .heading');
+      return this.elem.querySelector('.js-counting-item__value .js-heading');
     }
   }, {
     key: "setValue",
@@ -14096,19 +14087,19 @@ var items_counter_ItemsCounter = /*#__PURE__*/function () {
   }, {
     key: "getClearBtn",
     value: function getClearBtn() {
-      var clearBtnSelector = '.items-counter__clear-button';
+      var clearBtnSelector = '.js-items-counter__clear-button';
       return this.elem.querySelector(clearBtnSelector);
     }
   }, {
     key: "getApplyBtn",
     value: function getApplyBtn() {
-      var applyBtnSelector = '.items-counter__apply-button';
+      var applyBtnSelector = '.js-items-counter__apply-button';
       return this.elem.querySelector(applyBtnSelector);
     }
   }, {
     key: "getItemElems",
     value: function getItemElems() {
-      var itemSelector = '.counting-item';
+      var itemSelector = '.js-counting-item';
       return this.elem.querySelectorAll(itemSelector);
     }
   }, {
@@ -14235,7 +14226,7 @@ var items_counter_ItemsCounter = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 82:
+/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -14244,7 +14235,7 @@ var items_counter_ItemsCounter = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 83:
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(9);
@@ -14254,7 +14245,7 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     
     (function (Array, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
       var pug_indent = [];
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -14284,6 +14275,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -14324,7 +14318,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -14355,12 +14349,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -14383,6 +14380,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -14428,7 +14429,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -14459,6 +14460,9 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -14468,12 +14472,13 @@ pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0} = {})
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item js-counting-item\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__name\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__name js-counting-item__name\"\u003E";
 pug_indent.push('    ');
 pug_mixins["heading"]({
-                text: name
+                text: name,
+                withJs: true,
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -14482,19 +14487,20 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__counter\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease js-counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__value\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__value js-counting-item__value\"\u003E";
 pug_indent.push('      ');
 pug_mixins["heading"]({
-                    text: value
+                    text: value,
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase js-counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -14534,7 +14540,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -14565,12 +14571,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -14593,6 +14602,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -14630,7 +14643,7 @@ pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
 pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'items-counter';
+let className = 'items-counter js-items-counter';
 if (withoutButtons) {
     className += ' items-counter_without-buttons';
 }
@@ -14685,7 +14698,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-counter__button-panel\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button js-items-counter__clear-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Очистить',
@@ -14700,7 +14713,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button js-items-counter__apply-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Применить',
@@ -14753,7 +14766,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -14767,12 +14780,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -14795,7 +14815,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
 pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'dropdown';
+let className = 'dropdown js-dropdown';
 if (isDouble) {
     className += ' dropdown_double';
 }
@@ -14817,7 +14837,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 if ((isDouble)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[0])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -14836,20 +14856,22 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[0],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[1])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -14868,13 +14890,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[1],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -14884,7 +14908,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 else {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title)) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -14903,13 +14927,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions,
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -14918,7 +14944,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 }
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup","js-dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,false,true]), false, true)) + "\u003E";
 if ((popupMixinOptions.name)) {
 pug_indent.push('    ');
 pug_mixins[popupMixinOptions.name](popupMixinOptions.params);
@@ -14934,7 +14960,7 @@ pug_mixins["search-card"] = pug_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"search-card\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"search-card js-search-card\"\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"]({
             type: 'h1',
@@ -14943,7 +14969,7 @@ pug_mixins["heading"]({
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"search-card__dates\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"search-card__dates js-search-card__dates\"\u003E";
 pug_indent.push('    ');
 pug_mixins["dropdown"]({
                 inputOptions: {
@@ -14962,7 +14988,7 @@ pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"search-card__guests\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"search-card__guests js-search-card__guests\"\u003E";
 pug_indent.push('    ');
 pug_mixins["dropdown"]({
                 inputOptions: {
@@ -15042,7 +15068,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -15073,12 +15099,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -15101,6 +15130,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -15170,11 +15203,14 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
     className += ' navigation_in-column';
+}
+if (withJs) {
+    className += ' js-navigation';
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15273,11 +15309,11 @@ pug_mixins["header"] = pug_interp = function({userName, activeLink = 0} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
+pug_html = pug_html + "\u003Cheader class=\"header js-header\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E\n      ";
+pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav class=\"header__nav-container\"\u003E";
 pug_indent.push('        ');
@@ -15304,7 +15340,8 @@ pug_mixins["navigation"]({
                                 name: 'Соглашения',
                                 isDropdown: true
                             }
-                        ]
+                        ],
+                        withJs: true,
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
@@ -15342,7 +15379,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15382,11 +15419,14 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
     className += ' navigation_in-column';
+}
+if (withJs) {
+    className += ' js-navigation';
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15481,7 +15521,7 @@ pug_html = pug_html + "\u003C\u002Ful\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fnav\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -15511,6 +15551,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -15551,7 +15594,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -15565,12 +15608,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -16051,6 +16101,41 @@ function pug_rethrow(err, filename, lineno, str) {
   } catch (e) {}
   throw err;
 }
+
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./src/sass/main.sass
+var main = __webpack_require__(8);
+
+// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.sass
+var landing_page = __webpack_require__(84);
+
+// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.pug
+var landing_page_landing_page = __webpack_require__(85);
+
+// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/images/landing-page-bg.jpg
+/* harmony default export */ var landing_page_bg = (__webpack_require__.p + "images/landing-page-bg.jpg");
+// EXTERNAL MODULE: ./src/common.blocks/header/init.js
+var init = __webpack_require__(18);
+
+// EXTERNAL MODULE: ./src/common.blocks/search-card/init.js
+var search_card_init = __webpack_require__(43);
+
+// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
+/* eslint-disable no-unused-vars */
+
+
+
+
+
 
 
 /***/ })

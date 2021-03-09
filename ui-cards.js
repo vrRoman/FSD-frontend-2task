@@ -81,11 +81,12 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 67);
+/******/ 	return __webpack_require__(__webpack_require__.s = 97);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10964,1035 +10965,15 @@ return jQuery;
 
 
 /***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Dropdown = /*#__PURE__*/function () {
-  function Dropdown(elem) {
-    var _this = this;
-
-    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-    _classCallCheck(this, Dropdown);
-
-    this.elem = elem;
-    this.textFields = this.getTextFields();
-    this.textFieldInputs = this.getTextFieldInputs();
-    this.defaultValue = defaultInputValue;
-    this.popup = this.getPopup();
-    this.hiddenPopupClass = 'dropdown__popup_hidden';
-    this.doubleDropdownClass = 'dropdown_double';
-    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
-    this.listening = false;
-
-    if (!this.isPopupHidden()) {
-      this.textFields.forEach(function (el) {
-        var _el$classList;
-
-        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
-      });
-    }
-
-    this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.addWindowListener();
-
-    if (blockInPopupInstance) {
-      this.blockInPopupInstance = blockInPopupInstance;
-
-      try {
-        this.blockInPopupInstance.subscribe(this);
-      } catch (err) {
-        throw new Error('blockInPopupInstance must have a subscribe method');
-      }
-    }
-  }
-
-  _createClass(Dropdown, [{
-    key: "update",
-    value: function update(action) {
-      var _this2 = this;
-
-      this.changeTextFieldValue(action.valueText);
-
-      if (action.type === 'CLICK_APPLY-BUTTON') {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList2;
-
-          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
-        });
-      }
-    }
-  }, {
-    key: "changeTextFieldValue",
-    value: function changeTextFieldValue(text) {
-      var _this3 = this;
-
-      if (this.isDropdownDouble()) {
-        if (Array.isArray(text)) {
-          text.forEach(function (value, i) {
-            if (!value) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = value;
-            }
-          });
-        } else {
-          this.textFieldInputs.forEach(function (input, i) {
-            if (!text) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = text;
-            }
-          });
-        }
-      } else if (!text) {
-        this.textFieldInputs[0].value = this.defaultValue;
-      } else {
-        this.textFieldInputs[0].value = text;
-      }
-    }
-  }, {
-    key: "getPopup",
-    value: function getPopup() {
-      var popupSelector = '.dropdown__popup';
-      return this.elem.querySelector(popupSelector);
-    }
-  }, {
-    key: "getTextFields",
-    value: function getTextFields() {
-      var textFieldSelector = '.dropdown__text-field .text-field';
-      return this.elem.querySelectorAll(textFieldSelector);
-    }
-  }, {
-    key: "getTextFieldInputs",
-    value: function getTextFieldInputs() {
-      var inputSelector = '.text-field__input';
-      var inputs = [];
-      this.textFields.forEach(function (elem) {
-        inputs.push(elem.querySelector(inputSelector));
-      });
-      return inputs;
-    }
-  }, {
-    key: "isPopupHidden",
-    value: function isPopupHidden() {
-      return this.popup.classList.contains(this.hiddenPopupClass);
-    }
-  }, {
-    key: "isDropdownDouble",
-    value: function isDropdownDouble() {
-      return this.elem.classList.contains(this.doubleDropdownClass);
-    }
-  }, {
-    key: "addWindowListener",
-    value: function addWindowListener() {
-      window.addEventListener('click', this.handleWindowClick);
-    }
-  }, {
-    key: "handleWindowClick",
-    value: function handleWindowClick(evt) {
-      var _this4 = this;
-
-      if (evt.path.includes(this.elem)) {
-        this.listening = true;
-
-        if (!evt.path.includes(this.popup)) {
-          if (this.isPopupHidden()) {
-            this.popup.classList.remove(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList3;
-
-              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          } else {
-            this.popup.classList.add(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList4;
-
-              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          }
-        }
-      } else if (this.listening) {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList5;
-
-          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
-        });
-      }
-    }
-  }]);
-
-  return Dropdown;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
-	if ( true ) {
-
-		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
-} ( function( $ ) {
-
-$.ui = $.ui || {};
-
-return $.ui.version = "1.12.1";
-
-} ) );
-
-
-/***/ }),
-/* 4 */,
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
-/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
-/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var DatePicker = /*#__PURE__*/function () {
-  function DatePicker(_ref) {
-    var element = _ref.element,
-        _ref$options = _ref.options,
-        options = _ref$options === void 0 ? {} : _ref$options,
-        _ref$initialDate = _ref.initialDate,
-        initialDate = _ref$initialDate === void 0 ? [null, null] : _ref$initialDate,
-        _ref$isTextDouble = _ref.isTextDouble,
-        isTextDouble = _ref$isTextDouble === void 0 ? false : _ref$isTextDouble;
-
-    _classCallCheck(this, DatePicker);
-
-    this.clearBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
-    this.applyBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
-    this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-    this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-    this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-    this.dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    this.dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    this.$elem = $(element);
-    this.extensionRangeObject = {};
-    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
-    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-    this.isTextDouble = isTextDouble;
-    this.defaultOptions = {
-      range: 'period',
-      showButtonPanel: true,
-      currentText: this.clearBtnHTML + this.applyBtnHTML,
-      firstDay: 1,
-      showOtherMonths: true,
-      selectOtherMonths: true,
-      dateFormat: 'dd.mm.yy',
-      monthNames: this.monthNames,
-      monthNamesShort: this.monthNamesShort,
-      dayNames: this.dayNames,
-      dayNamesShort: this.dayNamesShort,
-      dayNamesMin: this.dayNamesMin,
-      onSelect: this.onSelect
-    };
-    this.options = _objectSpread(_objectSpread({}, this.defaultOptions), options);
-    this.init();
-    this.setDate(initialDate);
-    this.observers = [];
-  }
-
-  _createClass(DatePicker, [{
-    key: "init",
-    value: function init() {
-      this.$elem.datepicker(this.options);
-    }
-  }, {
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
-    }
-  }, {
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
-    }
-  }, {
-    key: "getClearBtn",
-    value: function getClearBtn() {
-      return $(this.$elem.find('.js-ui-datepicker-clear-button'));
-    }
-  }, {
-    key: "getApplyBtn",
-    value: function getApplyBtn() {
-      return $(this.$elem.find('.js-ui-datepicker-apply-button'));
-    }
-  }, {
-    key: "updateClearBtn",
-    value: function updateClearBtn() {
-      if (this.$elem.datepicker('getDate')) {
-        this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
-      } else {
-        this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
-      }
-    }
-  }, {
-    key: "setDate",
-    value: function setDate(dateObjects) {
-      var dateTexts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [null, null];
-      this.$elem.datepicker('setDate', dateObjects);
-
-      var _dateObjects = _slicedToArray(dateObjects, 2);
-
-      this.extensionRangeObject.startDate = _dateObjects[0];
-      this.extensionRangeObject.endDate = _dateObjects[1];
-
-      var _dateTexts = _slicedToArray(dateTexts, 2);
-
-      this.extensionRangeObject.startDateText = _dateTexts[0];
-      this.extensionRangeObject.endDateText = _dateTexts[1];
-      this.getClearBtn().click(this.handleClearButtonClick);
-      this.getApplyBtn().click(this.handleApplyButtonClick);
-      this.updateClearBtn();
-    }
-  }, {
-    key: "handleApplyButtonClick",
-    value: function handleApplyButtonClick() {
-      var dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
-      var dateTexts = [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText];
-      this.setDate(dates, dateTexts);
-      var valueText;
-
-      if (this.isTextDouble) {
-        valueText = dateTexts;
-      } else if (dateTexts[0] && dateTexts[1]) {
-        valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
-      } else {
-        valueText = null;
-      }
-
-      this.notify({
-        type: 'CLICK_APPLY-BUTTON',
-        value: dates,
-        valueText: valueText
-      });
-    }
-  }, {
-    key: "handleClearButtonClick",
-    value: function handleClearButtonClick() {
-      this.setDate([null, null]);
-      this.notify({
-        type: 'CLICK_CLEAR-BUTTON',
-        value: [null, null],
-        valueText: null
-      });
-    }
-  }, {
-    key: "onSelect",
-    value: function onSelect(dateText, inst, extensionRange) {
-      var _this = this;
-
-      this.extensionRangeObject = extensionRange;
-      setTimeout(function () {
-        _this.getApplyBtn().click(_this.handleApplyButtonClick);
-
-        _this.getClearBtn().click(_this.handleClearButtonClick);
-      }, 100);
-    }
-  }]);
-
-  return DatePicker;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 6 */,
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./src/common.blocks/counting-item/counting-item.js
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var CountingItem = /*#__PURE__*/function () {
-  function CountingItem(elem) {
-    _classCallCheck(this, CountingItem);
-
-    this.elem = elem;
-    this.plusBtn = this.getPlusBtn();
-    this.minusBtn = this.getMinusBtn();
-    this.valueElem = this.getValueElem();
-    this.value = +this.valueElem.innerText;
-    this.name = this.getNameElem().innerText.toLowerCase();
-    this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
-    this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);
-    this.initButtons();
-    this.observers = [];
-  }
-
-  _createClass(CountingItem, [{
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
-    }
-  }, {
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
-    }
-  }, {
-    key: "getValue",
-    value: function getValue() {
-      return this.value;
-    }
-  }, {
-    key: "getValueText",
-    value: function getValueText() {
-      if (this.value === 0) {
-        return '';
-      }
-
-      return "".concat(this.value, " ").concat(this.name);
-    }
-  }, {
-    key: "getNameElem",
-    value: function getNameElem() {
-      var nameElemSelector = '.counting-item__name .heading';
-      return this.elem.querySelector(nameElemSelector);
-    }
-  }, {
-    key: "getPlusBtn",
-    value: function getPlusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_action_increase');
-    }
-  }, {
-    key: "getMinusBtn",
-    value: function getMinusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_action_decrease');
-    }
-  }, {
-    key: "getValueElem",
-    value: function getValueElem() {
-      return this.elem.querySelector('.counting-item__value .heading');
-    }
-  }, {
-    key: "setValue",
-    value: function setValue(newValue) {
-      if (newValue >= 0) {
-        this.value = newValue;
-        this.valueElem.innerText = this.value;
-
-        if (newValue === 0) {
-          this.minusBtn.classList.add('counting-item__change-button_disabled');
-        } else {
-          this.minusBtn.classList.remove('counting-item__change-button_disabled');
-        }
-      }
-
-      this.notify({
-        type: 'UPDATE_VALUE',
-        value: this.value,
-        valueText: this.getValueText()
-      });
-      return this.value;
-    }
-  }, {
-    key: "initButtons",
-    value: function initButtons() {
-      this.plusBtn.addEventListener('click', this.handlePlusBtnClick);
-      this.minusBtn.addEventListener('click', this.handleMinusBtnClick);
-
-      if (this.value === 0) {
-        this.minusBtn.classList.add('counting-item__change-button_disabled');
-      }
-    }
-  }, {
-    key: "handlePlusBtnClick",
-    value: function handlePlusBtnClick() {
-      var newValue = this.value + 1;
-      this.setValue(newValue);
-    }
-  }, {
-    key: "handleMinusBtnClick",
-    value: function handleMinusBtnClick() {
-      var newValue = this.value - 1;
-      this.setValue(newValue);
-    }
-  }]);
-
-  return CountingItem;
-}();
-
-/* harmony default export */ var counting_item = (CountingItem);
-// CONCATENATED MODULE: ./src/common.blocks/items-counter/items-counter.js
-function items_counter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function items_counter_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function items_counter_createClass(Constructor, protoProps, staticProps) { if (protoProps) items_counter_defineProperties(Constructor.prototype, protoProps); if (staticProps) items_counter_defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var items_counter_ItemsCounter = /*#__PURE__*/function () {
-  function ItemsCounter(elem) {
-    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-    items_counter_classCallCheck(this, ItemsCounter);
-
-    this.elem = elem;
-    this.clearBtn = this.getClearBtn();
-    this.applyBtn = this.getApplyBtn();
-    this.itemElems = this.getItemElems();
-    this.countingItemInstances = this.createCountingItemInstances();
-    this.wordToValueTextReplace = wordToValueTextReplace;
-    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
-    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
-    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
-    this.addListenersToButtons();
-    this.updateClearButton();
-    this.observers = [];
-    this.subscribeToItems();
-  }
-
-  items_counter_createClass(ItemsCounter, [{
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
-    }
-  }, {
-    key: "update",
-    value: function update(action) {
-      if (action.type === 'UPDATE_VALUE') {
-        if (this.isWithoutButtons()) {
-          this.updateClearButton();
-          this.notify({
-            type: 'UPDATE_VALUE',
-            value: this.getValues(),
-            valueText: this.convertValuesToText()
-          });
-        }
-      }
-    }
-  }, {
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
-    }
-  }, {
-    key: "getValues",
-    value: function getValues() {
-      var values = [];
-      this.countingItemInstances.forEach(function (inst) {
-        var value = inst.getValue();
-        values.push(value);
-      });
-      return values;
-    }
-  }, {
-    key: "getClearBtn",
-    value: function getClearBtn() {
-      var clearBtnSelector = '.items-counter__clear-button';
-      return this.elem.querySelector(clearBtnSelector);
-    }
-  }, {
-    key: "getApplyBtn",
-    value: function getApplyBtn() {
-      var applyBtnSelector = '.items-counter__apply-button';
-      return this.elem.querySelector(applyBtnSelector);
-    }
-  }, {
-    key: "getItemElems",
-    value: function getItemElems() {
-      var itemSelector = '.counting-item';
-      return this.elem.querySelectorAll(itemSelector);
-    }
-  }, {
-    key: "isWithoutButtons",
-    value: function isWithoutButtons() {
-      var withoutButtonsClass = 'items-counter_without-buttons';
-      return this.elem.classList.contains(withoutButtonsClass);
-    }
-  }, {
-    key: "updateClearButton",
-    value: function updateClearButton() {
-      var valuesSum = 0;
-      this.getValues().forEach(function (val) {
-        valuesSum += val;
-      });
-
-      if (valuesSum === 0) {
-        this.clearBtn.classList.add(this.clearBtnDisabledClass);
-      } else {
-        this.clearBtn.classList.remove(this.clearBtnDisabledClass);
-      }
-    }
-  }, {
-    key: "handleClearBtnClick",
-    value: function handleClearBtnClick() {
-      this.countingItemInstances.forEach(function (inst) {
-        inst.setValue(0);
-      });
-      this.updateClearButton();
-      this.notify({
-        type: 'CLICK_CLEAR-BUTTON',
-        value: this.getValues(),
-        valueText: this.convertValuesToText()
-      });
-    }
-  }, {
-    key: "handleApplyBtnClick",
-    value: function handleApplyBtnClick() {
-      this.updateClearButton();
-      this.notify({
-        type: 'CLICK_APPLY-BUTTON',
-        value: this.getValues(),
-        valueText: this.convertValuesToText()
-      });
-    }
-  }, {
-    key: "convertValuesToText",
-    value: function convertValuesToText() {
-      var fullText = '';
-
-      if (this.wordToValueTextReplace) {
-        var valuesSum = 0;
-        this.countingItemInstances.forEach(function (inst) {
-          valuesSum += inst.getValue();
-        });
-        fullText += "".concat(valuesSum, " ").concat(this.wordToValueTextReplace);
-      } else {
-        var maxItemsNumInText = 2;
-        var textsList = [];
-        this.countingItemInstances.forEach(function (inst) {
-          if (inst.getValueText() !== '') {
-            textsList.push(inst.getValueText());
-          }
-        });
-        textsList.forEach(function (text, index) {
-          if (index !== 0) {
-            if (index < maxItemsNumInText) {
-              fullText += ', ';
-            }
-          }
-
-          if (index < maxItemsNumInText) {
-            fullText += text;
-          }
-
-          if (index === maxItemsNumInText - 1) {
-            fullText += '...';
-          }
-        });
-      }
-
-      return fullText;
-    }
-  }, {
-    key: "addListenersToButtons",
-    value: function addListenersToButtons() {
-      this.clearBtn.addEventListener('click', this.handleClearBtnClick);
-      this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
-    }
-  }, {
-    key: "createCountingItemInstances",
-    value: function createCountingItemInstances() {
-      var instances = [];
-      this.itemElems.forEach(function (elem) {
-        var countingItem = new counting_item(elem);
-        instances.push(countingItem);
-      });
-      return instances;
-    }
-  }, {
-    key: "subscribeToItems",
-    value: function subscribeToItems() {
-      var _this = this;
-
-      this.countingItemInstances.forEach(function (inst) {
-        inst.subscribe(_this);
-      });
-    }
-  }]);
-
-  return ItemsCounter;
-}();
-
-/* harmony default export */ var items_counter = __webpack_exports__["a"] = (items_counter_ItemsCounter);
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var pug_has_own_property = Object.prototype.hasOwnProperty;
-
-/**
- * Merge two attribute objects giving precedence
- * to values in object `b`. Classes are special-cased
- * allowing for arrays and merging/joining appropriately
- * resulting in a string.
- *
- * @param {Object} a
- * @param {Object} b
- * @return {Object} a
- * @api private
- */
-
-exports.merge = pug_merge;
-function pug_merge(a, b) {
-  if (arguments.length === 1) {
-    var attrs = a[0];
-    for (var i = 1; i < a.length; i++) {
-      attrs = pug_merge(attrs, a[i]);
-    }
-    return attrs;
-  }
-
-  for (var key in b) {
-    if (key === 'class') {
-      var valA = a[key] || [];
-      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
-    } else if (key === 'style') {
-      var valA = pug_style(a[key]);
-      valA = valA && valA[valA.length - 1] !== ';' ? valA + ';' : valA;
-      var valB = pug_style(b[key]);
-      valB = valB && valB[valB.length - 1] !== ';' ? valB + ';' : valB;
-      a[key] = valA + valB;
-    } else {
-      a[key] = b[key];
-    }
-  }
-
-  return a;
-}
-
-/**
- * Process array, object, or string as a string of classes delimited by a space.
- *
- * If `val` is an array, all members of it and its subarrays are counted as
- * classes. If `escaping` is an array, then whether or not the item in `val` is
- * escaped depends on the corresponding item in `escaping`. If `escaping` is
- * not an array, no escaping is done.
- *
- * If `val` is an object, all the keys whose value is truthy are counted as
- * classes. No escaping is done.
- *
- * If `val` is a string, it is counted as a class. No escaping is done.
- *
- * @param {(Array.<string>|Object.<string, boolean>|string)} val
- * @param {?Array.<string>} escaping
- * @return {String}
- */
-exports.classes = pug_classes;
-function pug_classes_array(val, escaping) {
-  var classString = '',
-    className,
-    padding = '',
-    escapeEnabled = Array.isArray(escaping);
-  for (var i = 0; i < val.length; i++) {
-    className = pug_classes(val[i]);
-    if (!className) continue;
-    escapeEnabled && escaping[i] && (className = pug_escape(className));
-    classString = classString + padding + className;
-    padding = ' ';
-  }
-  return classString;
-}
-function pug_classes_object(val) {
-  var classString = '',
-    padding = '';
-  for (var key in val) {
-    if (key && val[key] && pug_has_own_property.call(val, key)) {
-      classString = classString + padding + key;
-      padding = ' ';
-    }
-  }
-  return classString;
-}
-function pug_classes(val, escaping) {
-  if (Array.isArray(val)) {
-    return pug_classes_array(val, escaping);
-  } else if (val && typeof val === 'object') {
-    return pug_classes_object(val);
-  } else {
-    return val || '';
-  }
-}
-
-/**
- * Convert object or string to a string of CSS styles delimited by a semicolon.
- *
- * @param {(Object.<string, string>|string)} val
- * @return {String}
- */
-
-exports.style = pug_style;
-function pug_style(val) {
-  if (!val) return '';
-  if (typeof val === 'object') {
-    var out = '';
-    for (var style in val) {
-      /* istanbul ignore else */
-      if (pug_has_own_property.call(val, style)) {
-        out = out + style + ':' + val[style] + ';';
-      }
-    }
-    return out;
-  } else {
-    return val + '';
-  }
-}
-
-/**
- * Render the given attribute.
- *
- * @param {String} key
- * @param {String} val
- * @param {Boolean} escaped
- * @param {Boolean} terse
- * @return {String}
- */
-exports.attr = pug_attr;
-function pug_attr(key, val, escaped, terse) {
-  if (
-    val === false ||
-    val == null ||
-    (!val && (key === 'class' || key === 'style'))
-  ) {
-    return '';
-  }
-  if (val === true) {
-    return ' ' + (terse ? key : key + '="' + key + '"');
-  }
-  var type = typeof val;
-  if (
-    (type === 'object' || type === 'function') &&
-    typeof val.toJSON === 'function'
-  ) {
-    val = val.toJSON();
-  }
-  if (typeof val !== 'string') {
-    val = JSON.stringify(val);
-    if (!escaped && val.indexOf('"') !== -1) {
-      return ' ' + key + "='" + val.replace(/'/g, '&#39;') + "'";
-    }
-  }
-  if (escaped) val = pug_escape(val);
-  return ' ' + key + '="' + val + '"';
-}
-
-/**
- * Render the given attributes object.
- *
- * @param {Object} obj
- * @param {Object} terse whether to use HTML5 terse boolean attributes
- * @return {String}
- */
-exports.attrs = pug_attrs;
-function pug_attrs(obj, terse) {
-  var attrs = '';
-
-  for (var key in obj) {
-    if (pug_has_own_property.call(obj, key)) {
-      var val = obj[key];
-
-      if ('class' === key) {
-        val = pug_classes(val);
-        attrs = pug_attr(key, val, false, terse) + attrs;
-        continue;
-      }
-      if ('style' === key) {
-        val = pug_style(val);
-      }
-      attrs += pug_attr(key, val, false, terse);
-    }
-  }
-
-  return attrs;
-}
-
-/**
- * Escape the given string of `html`.
- *
- * @param {String} html
- * @return {String}
- * @api private
- */
-
-var pug_match_html = /["&<>]/;
-exports.escape = pug_escape;
-function pug_escape(_html) {
-  var html = '' + _html;
-  var regexResult = pug_match_html.exec(html);
-  if (!regexResult) return _html;
-
-  var result = '';
-  var i, lastIndex, escape;
-  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
-    switch (html.charCodeAt(i)) {
-      case 34:
-        escape = '&quot;';
-        break;
-      case 38:
-        escape = '&amp;';
-        break;
-      case 60:
-        escape = '&lt;';
-        break;
-      case 62:
-        escape = '&gt;';
-        break;
-      default:
-        continue;
-    }
-    if (lastIndex !== i) result += html.substring(lastIndex, i);
-    lastIndex = i + 1;
-    result += escape;
-  }
-  if (lastIndex !== i) return result + html.substring(lastIndex, i);
-  else return result;
-}
-
-/**
- * Re-throw the given `err` in context to the
- * the pug in `filename` at the given `lineno`.
- *
- * @param {Error} err
- * @param {String} filename
- * @param {String} lineno
- * @param {String} str original source
- * @api private
- */
-
-exports.rethrow = pug_rethrow;
-function pug_rethrow(err, filename, lineno, str) {
-  if (!(err instanceof Error)) throw err;
-  if ((typeof window != 'undefined' || !filename) && !str) {
-    err.message += ' on line ' + lineno;
-    throw err;
-  }
-  try {
-    str = str || __webpack_require__(10).readFileSync(filename, 'utf8');
-  } catch (ex) {
-    pug_rethrow(err, null, lineno);
-  }
-  var context = 3,
-    lines = str.split('\n'),
-    start = Math.max(lineno - context, 0),
-    end = Math.min(lines.length, lineno + context);
-
-  // Error context
-  var context = lines
-    .slice(start, end)
-    .map(function(line, i) {
-      var curr = i + start + 1;
-      return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
-    })
-    .join('\n');
-
-  // Alter exception message
-  err.path = filename;
-  try {
-    err.message =
-      (filename || 'Pug') +
-      ':' +
-      lineno +
-      '\n' +
-      context +
-      '\n\n' +
-      err.message;
-  } catch (e) {}
-  throw err;
-}
-
-
-/***/ }),
-/* 10 */
+/***/ 10:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */
+
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -12042,7 +11023,8 @@ return $.ui.keyCode = {
 
 
 /***/ }),
-/* 14 */
+
+/***/ 14:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12106,8 +11088,8 @@ var jquery = __webpack_require__(0);
 
 
 /***/ }),
-/* 15 */,
-/* 16 */
+
+/***/ 16:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// jscs:disable maximumLineLength
@@ -14232,7 +13214,8 @@ return $.datepicker;
 
 
 /***/ }),
-/* 17 */
+
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14400,12 +13383,196 @@ var _datepickerExtension = function _datepickerExtension() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */
+
+/***/ 2:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Dropdown = /*#__PURE__*/function () {
+  function Dropdown(elem) {
+    var _this = this;
+
+    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+
+    _classCallCheck(this, Dropdown);
+
+    this.elem = elem;
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.defaultValue = defaultInputValue;
+    this.popup = this.getPopup();
+    this.hiddenPopupClass = 'dropdown__popup_hidden';
+    this.doubleDropdownClass = 'dropdown_double';
+    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
+    this.listening = false;
+
+    if (!this.isPopupHidden()) {
+      this.textFields.forEach(function (el) {
+        var _el$classList;
+
+        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
+      });
+    }
+
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.addWindowListener();
+
+    if (blockInPopupInstance) {
+      this.blockInPopupInstance = blockInPopupInstance;
+
+      try {
+        this.blockInPopupInstance.subscribe(this);
+      } catch (err) {
+        throw new Error('blockInPopupInstance must have a subscribe method');
+      }
+    }
+  }
+
+  _createClass(Dropdown, [{
+    key: "update",
+    value: function update(action) {
+      var _this2 = this;
+
+      this.changeTextFieldValue(action.valueText);
+
+      if (action.type === 'CLICK_APPLY-BUTTON') {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList2;
+
+          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "changeTextFieldValue",
+    value: function changeTextFieldValue(text) {
+      var _this3 = this;
+
+      if (this.isDropdownDouble()) {
+        if (Array.isArray(text)) {
+          text.forEach(function (value, i) {
+            if (!value) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = value;
+            }
+          });
+        } else {
+          this.textFieldInputs.forEach(function (input, i) {
+            if (!text) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = text;
+            }
+          });
+        }
+      } else if (!text) {
+        this.textFieldInputs[0].value = this.defaultValue;
+      } else {
+        this.textFieldInputs[0].value = text;
+      }
+    }
+  }, {
+    key: "getPopup",
+    value: function getPopup() {
+      var popupSelector = '.js-dropdown__popup';
+      return this.elem.querySelector(popupSelector);
+    }
+  }, {
+    key: "getTextFields",
+    value: function getTextFields() {
+      var textFieldSelector = '.js-dropdown__text-field .js-text-field';
+      return this.elem.querySelectorAll(textFieldSelector);
+    }
+  }, {
+    key: "getTextFieldInputs",
+    value: function getTextFieldInputs() {
+      var inputSelector = '.js-text-field__input';
+      var inputs = [];
+      this.textFields.forEach(function (elem) {
+        inputs.push(elem.querySelector(inputSelector));
+      });
+      return inputs;
+    }
+  }, {
+    key: "isPopupHidden",
+    value: function isPopupHidden() {
+      return this.popup.classList.contains(this.hiddenPopupClass);
+    }
+  }, {
+    key: "isDropdownDouble",
+    value: function isDropdownDouble() {
+      return this.elem.classList.contains(this.doubleDropdownClass);
+    }
+  }, {
+    key: "addWindowListener",
+    value: function addWindowListener() {
+      window.addEventListener('click', this.handleWindowClick);
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      var _this4 = this;
+
+      if (evt.path.includes(this.elem)) {
+        this.listening = true;
+
+        if (!evt.path.includes(this.popup)) {
+          if (this.isPopupHidden()) {
+            this.popup.classList.remove(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList3;
+
+              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          } else {
+            this.popup.classList.add(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList4;
+
+              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          }
+        }
+      } else if (this.listening) {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList5;
+
+          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
+        });
+      }
+    }
+  }]);
+
+  return Dropdown;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
+
+/***/ }),
+
+/***/ 23:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14416,7 +13583,8 @@ $('.js-text-field__input_masked-date').mask('99.99.9999');
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 24 */
+
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -15025,65 +14193,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 25 */,
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/* eslint-disable no-unused-vars */
-
-
-
-
-var SearchCard = /*#__PURE__*/function () {
-  function SearchCard(elem) {
-    _classCallCheck(this, SearchCard);
-
-    this.elem = elem;
-    this.init();
-  }
-
-  _createClass(SearchCard, [{
-    key: "init",
-    value: function init() {
-      var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]({
-        element: this.getDateDropdown().querySelector('.date-picker'),
-        isTextDouble: true
-      });
-      var dateDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getDateDropdown(), datePicker, 'ДД.ММ.ГГГГ');
-      var itemsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](this.getGuestsDropdown().querySelector('.items-counter'), 'гостя');
-      var guestsDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getGuestsDropdown(), itemsCounter, 'Сколько гостей');
-    }
-  }, {
-    key: "getDateDropdown",
-    value: function getDateDropdown() {
-      var selector = '.search-card__dates .dropdown';
-      return this.elem.querySelector(selector);
-    }
-  }, {
-    key: "getGuestsDropdown",
-    value: function getGuestsDropdown() {
-      var selector = ' .search-card__guests .dropdown';
-      return this.elem.querySelector(selector);
-    }
-  }]);
-
-  return SearchCard;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (SearchCard);
-
-/***/ }),
-/* 27 */
+/***/ 26:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15124,25 +14235,25 @@ var BookingCard = /*#__PURE__*/function () {
   }, {
     key: "getDatePickerElem",
     value: function getDatePickerElem() {
-      var datePickerSelector = '.booking-card__dates .dropdown .dropdown__popup .date-picker';
+      var datePickerSelector = '.js-booking-card__dates .js-dropdown .js-dropdown__popup .js-date-picker';
       return this.elem.querySelector(datePickerSelector);
     }
   }, {
     key: "getDateDropdownElem",
     value: function getDateDropdownElem() {
-      var dateDropdownSelector = '.booking-card__dates .dropdown';
+      var dateDropdownSelector = '.js-booking-card__dates .js-dropdown';
       return this.elem.querySelector(dateDropdownSelector);
     }
   }, {
     key: "getItemsCounterElem",
     value: function getItemsCounterElem() {
-      var itemsCounterElemSelector = '.booking-card__guests .dropdown .dropdown__popup .items-counter';
+      var itemsCounterElemSelector = '.js-booking-card__guests .js-dropdown .js-dropdown__popup .js-items-counter';
       return this.elem.querySelector(itemsCounterElemSelector);
     }
   }, {
     key: "getGuestsDropdownElem",
     value: function getGuestsDropdownElem() {
-      var guestsDropdownSelector = '.booking-card__guests .dropdown';
+      var guestsDropdownSelector = '.js-booking-card__guests .js-dropdown';
       return this.elem.querySelector(guestsDropdownSelector);
     }
   }]);
@@ -15153,13 +14264,72 @@ var BookingCard = /*#__PURE__*/function () {
 /* harmony default export */ __webpack_exports__["a"] = (BookingCard);
 
 /***/ }),
-/* 28 */
+
+/***/ 27:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
+/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
+/* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/* eslint-disable no-unused-vars */
+
+
+
+
+var SearchCard = /*#__PURE__*/function () {
+  function SearchCard(elem) {
+    _classCallCheck(this, SearchCard);
+
+    this.elem = elem;
+    this.init();
+  }
+
+  _createClass(SearchCard, [{
+    key: "init",
+    value: function init() {
+      var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]({
+        element: this.getDateDropdown().querySelector('.js-date-picker'),
+        isTextDouble: true
+      });
+      var dateDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getDateDropdown(), datePicker, 'ДД.ММ.ГГГГ');
+      var itemsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](this.getGuestsDropdown().querySelector('.js-items-counter'), 'гостя');
+      var guestsDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getGuestsDropdown(), itemsCounter, 'Сколько гостей');
+    }
+  }, {
+    key: "getDateDropdown",
+    value: function getDateDropdown() {
+      var selector = '.js-search-card__dates .js-dropdown';
+      return this.elem.querySelector(selector);
+    }
+  }, {
+    key: "getGuestsDropdown",
+    value: function getGuestsDropdown() {
+      var selector = ' .js-search-card__guests .js-dropdown';
+      return this.elem.querySelector(selector);
+    }
+  }]);
+
+  return SearchCard;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (SearchCard);
+
+/***/ }),
+
+/***/ 28:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45);
 /* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42);
+/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46);
 /* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15181,7 +14351,7 @@ var RoomCard = /*#__PURE__*/function () {
   _createClass(RoomCard, [{
     key: "getSliderElem",
     value: function getSliderElem() {
-      var sliderSelector = '.room-card__slider';
+      var sliderSelector = '.js-room-card__slider';
       return this.elem.querySelector(sliderSelector);
     }
   }, {
@@ -15203,18 +14373,31 @@ var RoomCard = /*#__PURE__*/function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
+	if ( true ) {
+
+		// AMD. Register as an anonymous module.
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+} ( function( $ ) {
+
+$.ui = $.ui || {};
+
+return $.ui.version = "1.12.1";
+
+} ) );
+
+
+/***/ }),
+
+/***/ 41:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15222,7 +14405,50 @@ var RoomCard = /*#__PURE__*/function () {
 
 
 /***/ }),
-/* 41 */
+
+/***/ 42:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_booking_card_booking_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(26);
+/* eslint-disable no-unused-vars */
+
+$('.js-booking-card').each(function init() {
+  var bookingCard = new _common_blocks_booking_card_booking_card__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 43:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27);
+/* eslint-disable no-unused-vars */
+
+$('.js-search-card').each(function init() {
+  var searchCard = new _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 44:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
+/* eslint-disable no-unused-vars */
+
+$('.js-room-card').each(function init() {
+  var roomCard = new _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(i){"use strict"; true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (i),
@@ -15232,7 +14458,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 42 */
+
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -15240,84 +14467,521 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   
 
 /***/ }),
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */
+
+/***/ 5:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
-/* harmony import */ var _cards_pug__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68);
-/* harmony import */ var _cards_pug__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_cards_pug__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(8);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _cards_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(69);
-/* harmony import */ var _cards_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_cards_sass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _images_room_img_1_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(70);
-/* harmony import */ var _images_room_img_2_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(71);
-/* harmony import */ var _images_room_img_3_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(72);
-/* harmony import */ var _images_room_img_4_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(73);
-/* harmony import */ var _images_room_img_5_jpg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(74);
-/* harmony import */ var _common_blocks_signup_card_signup_card__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(40);
-/* harmony import */ var _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(26);
-/* harmony import */ var _common_blocks_booking_card_booking_card__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(27);
-/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(5);
-/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(28);
-/* eslint-disable no-unused-vars */
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
+/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
 
+var DatePicker = /*#__PURE__*/function () {
+  function DatePicker(_ref) {
+    var element = _ref.element,
+        _ref$options = _ref.options,
+        options = _ref$options === void 0 ? {} : _ref$options,
+        _ref$initialDate = _ref.initialDate,
+        initialDate = _ref$initialDate === void 0 ? [null, null] : _ref$initialDate,
+        _ref$isTextDouble = _ref.isTextDouble,
+        isTextDouble = _ref$isTextDouble === void 0 ? false : _ref$isTextDouble;
 
+    _classCallCheck(this, DatePicker);
 
+    this.clearBtnHTML = "<button class=\"ui-datepicker-current \n      ui-state-default ui-corner-all \n      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button\" \n      type=\"button\">\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C</button> ";
+    this.applyBtnHTML = "<button class=\"ui-datepicker-current\n      ui-state-default ui-corner-all\n      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button\"\n      type=\"button\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C</button> ";
+    this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    this.dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.$elem = $(element);
+    this.extensionRangeObject = {};
+    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
+    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+    this.isTextDouble = isTextDouble;
+    this.defaultOptions = {
+      range: 'period',
+      showButtonPanel: true,
+      currentText: this.clearBtnHTML + this.applyBtnHTML,
+      firstDay: 1,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      dateFormat: 'dd.mm.yy',
+      monthNames: this.monthNames,
+      monthNamesShort: this.monthNamesShort,
+      dayNames: this.dayNames,
+      dayNamesShort: this.dayNamesShort,
+      dayNamesMin: this.dayNamesMin,
+      onSelect: this.onSelect
+    };
+    this.options = _objectSpread(_objectSpread({}, this.defaultOptions), options);
+    this.init();
+    this.setDate(initialDate);
+    this.observers = [];
+  }
 
+  _createClass(DatePicker, [{
+    key: "init",
+    value: function init() {
+      this.$elem.datepicker(this.options);
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-clear-button'));
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-apply-button'));
+    }
+  }, {
+    key: "updateClearBtn",
+    value: function updateClearBtn() {
+      if (this.$elem.datepicker('getDate')) {
+        this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
+      } else {
+        this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
+      }
+    }
+  }, {
+    key: "setDate",
+    value: function setDate(dateObjects) {
+      var dateTexts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [null, null];
+      this.$elem.datepicker('setDate', dateObjects);
 
+      var _dateObjects = _slicedToArray(dateObjects, 2);
 
+      this.extensionRangeObject.startDate = _dateObjects[0];
+      this.extensionRangeObject.endDate = _dateObjects[1];
 
+      var _dateTexts = _slicedToArray(dateTexts, 2);
 
+      this.extensionRangeObject.startDateText = _dateTexts[0];
+      this.extensionRangeObject.endDateText = _dateTexts[1];
+      this.getClearBtn().click(this.handleClearButtonClick);
+      this.getApplyBtn().click(this.handleApplyButtonClick);
+      this.updateClearBtn();
+    }
+  }, {
+    key: "handleApplyButtonClick",
+    value: function handleApplyButtonClick() {
+      var dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
+      var dateTexts = [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText];
+      this.setDate(dates, dateTexts);
+      var valueText;
 
+      if (this.isTextDouble) {
+        valueText = dateTexts;
+      } else if (dateTexts[0] && dateTexts[1]) {
+        valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
+      } else {
+        valueText = null;
+      }
 
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: dates,
+        valueText: valueText
+      });
+    }
+  }, {
+    key: "handleClearButtonClick",
+    value: function handleClearButtonClick() {
+      this.setDate([null, null]);
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: [null, null],
+        valueText: null
+      });
+    }
+  }, {
+    key: "onSelect",
+    value: function onSelect(dateText, inst, extensionRange) {
+      var _this = this;
 
-var searchCardElem = document.querySelector('.search-card');
-var bookingCardElem = document.querySelector('.booking-card');
-var datepickerElem = document.querySelector('.date-picker-demo .js-date-picker');
-var $roomCards = $('.room-card');
-var searchCard = new _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"](searchCardElem);
-var bookingCard = new _common_blocks_booking_card_booking_card__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"](bookingCardElem);
-var datepickerCard = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_12__[/* default */ "a"]({
-  element: datepickerElem,
-  initialDate: [new Date(2019, 7, 19), new Date(2019, 7, 23)]
-});
-$roomCards.each(function initRoomCards() {
-  var roomCard = new _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"](this);
-});
+      this.extensionRangeObject = extensionRange;
+      setTimeout(function () {
+        _this.getApplyBtn().click(_this.handleApplyButtonClick);
+
+        _this.getClearBtn().click(_this.handleClearButtonClick);
+      }, 100);
+    }
+  }]);
+
+  return DatePicker;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 68 */
+
+/***/ 7:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./src/common.blocks/counting-item/counting-item.js
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CountingItem = /*#__PURE__*/function () {
+  function CountingItem(elem) {
+    _classCallCheck(this, CountingItem);
+
+    this.elem = elem;
+    this.plusBtn = this.getPlusBtn();
+    this.minusBtn = this.getMinusBtn();
+    this.valueElem = this.getValueElem();
+    this.value = +this.valueElem.innerText;
+    this.name = this.getNameElem().innerText.toLowerCase();
+    this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
+    this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);
+    this.initButtons();
+    this.observers = [];
+  }
+
+  _createClass(CountingItem, [{
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "getValue",
+    value: function getValue() {
+      return this.value;
+    }
+  }, {
+    key: "getValueText",
+    value: function getValueText() {
+      if (this.value === 0) {
+        return '';
+      }
+
+      return "".concat(this.value, " ").concat(this.name);
+    }
+  }, {
+    key: "getNameElem",
+    value: function getNameElem() {
+      var nameElemSelector = '.js-counting-item__name .js-heading';
+      return this.elem.querySelector(nameElemSelector);
+    }
+  }, {
+    key: "getPlusBtn",
+    value: function getPlusBtn() {
+      return this.elem.querySelector('.js-counting-item__change-button_action_increase');
+    }
+  }, {
+    key: "getMinusBtn",
+    value: function getMinusBtn() {
+      return this.elem.querySelector('.js-counting-item__change-button_action_decrease');
+    }
+  }, {
+    key: "getValueElem",
+    value: function getValueElem() {
+      return this.elem.querySelector('.js-counting-item__value .js-heading');
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(newValue) {
+      if (newValue >= 0) {
+        this.value = newValue;
+        this.valueElem.innerText = this.value;
+
+        if (newValue === 0) {
+          this.minusBtn.classList.add('counting-item__change-button_disabled');
+        } else {
+          this.minusBtn.classList.remove('counting-item__change-button_disabled');
+        }
+      }
+
+      this.notify({
+        type: 'UPDATE_VALUE',
+        value: this.value,
+        valueText: this.getValueText()
+      });
+      return this.value;
+    }
+  }, {
+    key: "initButtons",
+    value: function initButtons() {
+      this.plusBtn.addEventListener('click', this.handlePlusBtnClick);
+      this.minusBtn.addEventListener('click', this.handleMinusBtnClick);
+
+      if (this.value === 0) {
+        this.minusBtn.classList.add('counting-item__change-button_disabled');
+      }
+    }
+  }, {
+    key: "handlePlusBtnClick",
+    value: function handlePlusBtnClick() {
+      var newValue = this.value + 1;
+      this.setValue(newValue);
+    }
+  }, {
+    key: "handleMinusBtnClick",
+    value: function handleMinusBtnClick() {
+      var newValue = this.value - 1;
+      this.setValue(newValue);
+    }
+  }]);
+
+  return CountingItem;
+}();
+
+/* harmony default export */ var counting_item = (CountingItem);
+// CONCATENATED MODULE: ./src/common.blocks/items-counter/items-counter.js
+function items_counter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function items_counter_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function items_counter_createClass(Constructor, protoProps, staticProps) { if (protoProps) items_counter_defineProperties(Constructor.prototype, protoProps); if (staticProps) items_counter_defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var items_counter_ItemsCounter = /*#__PURE__*/function () {
+  function ItemsCounter(elem) {
+    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+    items_counter_classCallCheck(this, ItemsCounter);
+
+    this.elem = elem;
+    this.clearBtn = this.getClearBtn();
+    this.applyBtn = this.getApplyBtn();
+    this.itemElems = this.getItemElems();
+    this.countingItemInstances = this.createCountingItemInstances();
+    this.wordToValueTextReplace = wordToValueTextReplace;
+    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
+    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
+    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
+    this.addListenersToButtons();
+    this.updateClearButton();
+    this.observers = [];
+    this.subscribeToItems();
+  }
+
+  items_counter_createClass(ItemsCounter, [{
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(action) {
+      if (action.type === 'UPDATE_VALUE') {
+        if (this.isWithoutButtons()) {
+          this.updateClearButton();
+          this.notify({
+            type: 'UPDATE_VALUE',
+            value: this.getValues(),
+            valueText: this.convertValuesToText()
+          });
+        }
+      }
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "getValues",
+    value: function getValues() {
+      var values = [];
+      this.countingItemInstances.forEach(function (inst) {
+        var value = inst.getValue();
+        values.push(value);
+      });
+      return values;
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      var clearBtnSelector = '.js-items-counter__clear-button';
+      return this.elem.querySelector(clearBtnSelector);
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      var applyBtnSelector = '.js-items-counter__apply-button';
+      return this.elem.querySelector(applyBtnSelector);
+    }
+  }, {
+    key: "getItemElems",
+    value: function getItemElems() {
+      var itemSelector = '.js-counting-item';
+      return this.elem.querySelectorAll(itemSelector);
+    }
+  }, {
+    key: "isWithoutButtons",
+    value: function isWithoutButtons() {
+      var withoutButtonsClass = 'items-counter_without-buttons';
+      return this.elem.classList.contains(withoutButtonsClass);
+    }
+  }, {
+    key: "updateClearButton",
+    value: function updateClearButton() {
+      var valuesSum = 0;
+      this.getValues().forEach(function (val) {
+        valuesSum += val;
+      });
+
+      if (valuesSum === 0) {
+        this.clearBtn.classList.add(this.clearBtnDisabledClass);
+      } else {
+        this.clearBtn.classList.remove(this.clearBtnDisabledClass);
+      }
+    }
+  }, {
+    key: "handleClearBtnClick",
+    value: function handleClearBtnClick() {
+      this.countingItemInstances.forEach(function (inst) {
+        inst.setValue(0);
+      });
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "handleApplyBtnClick",
+    value: function handleApplyBtnClick() {
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "convertValuesToText",
+    value: function convertValuesToText() {
+      var fullText = '';
+
+      if (this.wordToValueTextReplace) {
+        var valuesSum = 0;
+        this.countingItemInstances.forEach(function (inst) {
+          valuesSum += inst.getValue();
+        });
+        fullText += "".concat(valuesSum, " ").concat(this.wordToValueTextReplace);
+      } else {
+        var maxItemsNumInText = 2;
+        var textsList = [];
+        this.countingItemInstances.forEach(function (inst) {
+          if (inst.getValueText() !== '') {
+            textsList.push(inst.getValueText());
+          }
+        });
+        textsList.forEach(function (text, index) {
+          if (index !== 0) {
+            if (index < maxItemsNumInText) {
+              fullText += ', ';
+            }
+          }
+
+          if (index < maxItemsNumInText) {
+            fullText += text;
+          }
+
+          if (index === maxItemsNumInText - 1) {
+            fullText += '...';
+          }
+        });
+      }
+
+      return fullText;
+    }
+  }, {
+    key: "addListenersToButtons",
+    value: function addListenersToButtons() {
+      this.clearBtn.addEventListener('click', this.handleClearBtnClick);
+      this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
+    }
+  }, {
+    key: "createCountingItemInstances",
+    value: function createCountingItemInstances() {
+      var instances = [];
+      this.itemElems.forEach(function (elem) {
+        var countingItem = new counting_item(elem);
+        instances.push(countingItem);
+      });
+      return instances;
+    }
+  }, {
+    key: "subscribeToItems",
+    value: function subscribeToItems() {
+      var _this = this;
+
+      this.countingItemInstances.forEach(function (inst) {
+        inst.subscribe(_this);
+      });
+    }
+  }]);
+
+  return ItemsCounter;
+}();
+
+/* harmony default export */ var items_counter = __webpack_exports__["a"] = (items_counter_ItemsCounter);
+
+/***/ }),
+
+/***/ 75:
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(9);
@@ -15327,7 +14991,7 @@ function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     
     (function (Array, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
       var pug_indent = [];
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -15357,6 +15021,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -15397,7 +15064,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -15428,12 +15095,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -15456,6 +15126,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -15501,7 +15175,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -15532,6 +15206,9 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15541,12 +15218,13 @@ pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0} = {})
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item js-counting-item\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__name\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__name js-counting-item__name\"\u003E";
 pug_indent.push('    ');
 pug_mixins["heading"]({
-                text: name
+                text: name,
+                withJs: true,
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -15555,19 +15233,20 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__counter\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease js-counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__value\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__value js-counting-item__value\"\u003E";
 pug_indent.push('      ');
 pug_mixins["heading"]({
-                    text: value
+                    text: value,
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase js-counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -15607,7 +15286,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -15638,12 +15317,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -15666,6 +15348,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -15703,7 +15389,7 @@ pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
 pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'items-counter';
+let className = 'items-counter js-items-counter';
 if (withoutButtons) {
     className += ' items-counter_without-buttons';
 }
@@ -15758,7 +15444,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-counter__button-panel\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button js-items-counter__clear-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Очистить',
@@ -15773,7 +15459,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button js-items-counter__apply-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Применить',
@@ -15826,7 +15512,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -15840,12 +15526,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -15868,7 +15561,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
 pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'dropdown';
+let className = 'dropdown js-dropdown';
 if (isDouble) {
     className += ' dropdown_double';
 }
@@ -15890,7 +15583,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 if ((isDouble)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[0])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -15909,20 +15602,22 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[0],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[1])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -15941,13 +15636,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[1],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -15957,7 +15654,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 else {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title)) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -15976,13 +15673,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions,
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -15991,7 +15690,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 }
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup","js-dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,false,true]), false, true)) + "\u003E";
 if ((popupMixinOptions.name)) {
 pug_indent.push('    ');
 pug_mixins[popupMixinOptions.name](popupMixinOptions.params);
@@ -16007,7 +15706,7 @@ pug_mixins["search-card"] = pug_interp = function(){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"search-card\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"search-card js-search-card\"\u003E";
 pug_indent.push('  ');
 pug_mixins["heading"]({
             type: 'h1',
@@ -16016,7 +15715,7 @@ pug_mixins["heading"]({
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"search-card__dates\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"search-card__dates js-search-card__dates\"\u003E";
 pug_indent.push('    ');
 pug_mixins["dropdown"]({
                 inputOptions: {
@@ -16035,7 +15734,7 @@ pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"search-card__guests\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"search-card__guests js-search-card__guests\"\u003E";
 pug_indent.push('    ');
 pug_mixins["dropdown"]({
                 inputOptions: {
@@ -16081,7 +15780,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -16111,6 +15810,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -16151,7 +15853,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -16182,12 +15884,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -16210,6 +15915,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -16279,7 +15988,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -16293,12 +16002,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -16505,14 +16221,15 @@ pug_mixins["button"]({
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signup-card__account-exists\"\u003E\u003Cspan\u003EУже есть аккаунт на Toxin\u003C\u002Fspan\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"signup-card__account-exists js-signup-card__account-exists\"\u003E\u003Cspan\u003EУже есть аккаунт на Toxin\u003C\u002Fspan\u003E";
 pug_indent.push('    ');
 pug_mixins["button"]({
                 text: 'Войти',
                 hasLink: false,
                 modifiers: {
                     isSecondary: true
-                }
+                },
+                withJs: true,
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -16521,7 +16238,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -16551,6 +16268,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -16640,7 +16360,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -16671,12 +16391,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -16699,6 +16422,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -16744,7 +16471,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -16775,6 +16502,9 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -16784,12 +16514,13 @@ pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0} = {})
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item js-counting-item\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__name\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__name js-counting-item__name\"\u003E";
 pug_indent.push('    ');
 pug_mixins["heading"]({
-                text: name
+                text: name,
+                withJs: true,
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -16798,19 +16529,20 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__counter\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease js-counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__value\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__value js-counting-item__value\"\u003E";
 pug_indent.push('      ');
 pug_mixins["heading"]({
-                    text: value
+                    text: value,
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase js-counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -16850,7 +16582,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -16881,12 +16613,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -16909,6 +16644,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -16946,7 +16685,7 @@ pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
 pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'items-counter';
+let className = 'items-counter js-items-counter';
 if (withoutButtons) {
     className += ' items-counter_without-buttons';
 }
@@ -17001,7 +16740,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-counter__button-panel\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button js-items-counter__clear-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Очистить',
@@ -17016,7 +16755,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button js-items-counter__apply-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Применить',
@@ -17069,7 +16808,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -17083,12 +16822,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -17111,7 +16857,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
 pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'dropdown';
+let className = 'dropdown js-dropdown';
 if (isDouble) {
     className += ' dropdown_double';
 }
@@ -17133,7 +16879,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 if ((isDouble)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[0])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -17152,20 +16898,22 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[0],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[1])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -17184,13 +16932,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[1],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -17200,7 +16950,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 else {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title)) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -17219,13 +16969,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions,
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -17234,7 +16986,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 }
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup","js-dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,false,true]), false, true)) + "\u003E";
 if ((popupMixinOptions.name)) {
 pug_indent.push('    ');
 pug_mixins[popupMixinOptions.name](popupMixinOptions.params);
@@ -17246,7 +16998,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17277,6 +17029,9 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -17286,13 +17041,13 @@ pug_mixins["booking-card"] = pug_interp = function({roomInfo, bookingItems, tota
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"booking-card\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"booking-card js-booking-card\"\u003E";
 pug_indent.push('  ');
 pug_mixins["room-info"](roomInfo);
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"booking-card__dates\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"booking-card__dates js-booking-card__dates\"\u003E";
 pug_indent.push('    ');
 pug_mixins["dropdown"]({
                 isDouble: true,
@@ -17316,7 +17071,7 @@ pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"booking-card__guests\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"booking-card__guests js-booking-card__guests\"\u003E";
 pug_indent.push('    ');
 pug_mixins["dropdown"]({
                 inputOptions: {
@@ -17445,7 +17200,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17475,6 +17230,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -17515,7 +17273,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17546,12 +17304,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -17574,6 +17335,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -17643,7 +17408,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -17657,12 +17422,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -17733,14 +17505,15 @@ pug_mixins["button"]({
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"signin-card__account-not-exists\"\u003E\u003Cspan\u003EНет аккаунта на Toxin?\u003C\u002Fspan\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"signin-card__account-not-exists js-signin-card__account-not-exists\"\u003E\u003Cspan\u003EНет аккаунта на Toxin?\u003C\u002Fspan\u003E";
 pug_indent.push('    ');
 pug_mixins["button"]({
                 text: 'Создать',
                 hasLink: false,
                 modifiers: {
                     isSecondary: true
-                }
+                },
+                withJs: true,
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -17749,7 +17522,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17779,6 +17552,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -17858,7 +17634,7 @@ pug_mixins["room-card"] = pug_interp = function({imagesSrc, hasSliderArrows = fa
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"room-card js-room-card\"\u003E";
 let sliderClassName = 'room-card__slider js-room-card__slider';
 if (hasSliderArrows) {
     sliderClassName += ' room-card__slider_with-arrows';
@@ -17965,7 +17741,7 @@ pug_html = pug_html + "\n        \u003C\u002Fdiv\u003E\n        \u003Cdiv class=
 pug_indent.push('          ');
 pug_mixins["signin-card"]();
 pug_indent.pop();
-pug_html = pug_html + "\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"cards__column cards__column_size_small\"\u003E\n        \u003Cdiv class=\"cards__elem\"\u003E\n          \u003Cdiv class=\"date-picker-demo\"\u003E";
+pug_html = pug_html + "\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fdiv\u003E\n      \u003Cdiv class=\"cards__column cards__column_size_small\"\u003E\n        \u003Cdiv class=\"cards__elem\"\u003E\n          \u003Cdiv class=\"date-picker-demo js-date-picker-demo\"\u003E";
 pug_indent.push('            ');
 pug_mixins["date-picker"]({
                       withBorder: true,
@@ -18020,7 +17796,8 @@ pug_html = pug_html + "\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fdiv\u0
 module.exports = template;
 
 /***/ }),
-/* 69 */
+
+/***/ 76:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -18028,39 +17805,372 @@ module.exports = template;
   
 
 /***/ }),
-/* 70 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_1.jpg");
+/***/ 8:
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ }),
-/* 71 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_2.jpg");
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
 
 /***/ }),
-/* 72 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+/***/ 9:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_3.jpg");
+
+
+var pug_has_own_property = Object.prototype.hasOwnProperty;
+
+/**
+ * Merge two attribute objects giving precedence
+ * to values in object `b`. Classes are special-cased
+ * allowing for arrays and merging/joining appropriately
+ * resulting in a string.
+ *
+ * @param {Object} a
+ * @param {Object} b
+ * @return {Object} a
+ * @api private
+ */
+
+exports.merge = pug_merge;
+function pug_merge(a, b) {
+  if (arguments.length === 1) {
+    var attrs = a[0];
+    for (var i = 1; i < a.length; i++) {
+      attrs = pug_merge(attrs, a[i]);
+    }
+    return attrs;
+  }
+
+  for (var key in b) {
+    if (key === 'class') {
+      var valA = a[key] || [];
+      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
+    } else if (key === 'style') {
+      var valA = pug_style(a[key]);
+      valA = valA && valA[valA.length - 1] !== ';' ? valA + ';' : valA;
+      var valB = pug_style(b[key]);
+      valB = valB && valB[valB.length - 1] !== ';' ? valB + ';' : valB;
+      a[key] = valA + valB;
+    } else {
+      a[key] = b[key];
+    }
+  }
+
+  return a;
+}
+
+/**
+ * Process array, object, or string as a string of classes delimited by a space.
+ *
+ * If `val` is an array, all members of it and its subarrays are counted as
+ * classes. If `escaping` is an array, then whether or not the item in `val` is
+ * escaped depends on the corresponding item in `escaping`. If `escaping` is
+ * not an array, no escaping is done.
+ *
+ * If `val` is an object, all the keys whose value is truthy are counted as
+ * classes. No escaping is done.
+ *
+ * If `val` is a string, it is counted as a class. No escaping is done.
+ *
+ * @param {(Array.<string>|Object.<string, boolean>|string)} val
+ * @param {?Array.<string>} escaping
+ * @return {String}
+ */
+exports.classes = pug_classes;
+function pug_classes_array(val, escaping) {
+  var classString = '',
+    className,
+    padding = '',
+    escapeEnabled = Array.isArray(escaping);
+  for (var i = 0; i < val.length; i++) {
+    className = pug_classes(val[i]);
+    if (!className) continue;
+    escapeEnabled && escaping[i] && (className = pug_escape(className));
+    classString = classString + padding + className;
+    padding = ' ';
+  }
+  return classString;
+}
+function pug_classes_object(val) {
+  var classString = '',
+    padding = '';
+  for (var key in val) {
+    if (key && val[key] && pug_has_own_property.call(val, key)) {
+      classString = classString + padding + key;
+      padding = ' ';
+    }
+  }
+  return classString;
+}
+function pug_classes(val, escaping) {
+  if (Array.isArray(val)) {
+    return pug_classes_array(val, escaping);
+  } else if (val && typeof val === 'object') {
+    return pug_classes_object(val);
+  } else {
+    return val || '';
+  }
+}
+
+/**
+ * Convert object or string to a string of CSS styles delimited by a semicolon.
+ *
+ * @param {(Object.<string, string>|string)} val
+ * @return {String}
+ */
+
+exports.style = pug_style;
+function pug_style(val) {
+  if (!val) return '';
+  if (typeof val === 'object') {
+    var out = '';
+    for (var style in val) {
+      /* istanbul ignore else */
+      if (pug_has_own_property.call(val, style)) {
+        out = out + style + ':' + val[style] + ';';
+      }
+    }
+    return out;
+  } else {
+    return val + '';
+  }
+}
+
+/**
+ * Render the given attribute.
+ *
+ * @param {String} key
+ * @param {String} val
+ * @param {Boolean} escaped
+ * @param {Boolean} terse
+ * @return {String}
+ */
+exports.attr = pug_attr;
+function pug_attr(key, val, escaped, terse) {
+  if (
+    val === false ||
+    val == null ||
+    (!val && (key === 'class' || key === 'style'))
+  ) {
+    return '';
+  }
+  if (val === true) {
+    return ' ' + (terse ? key : key + '="' + key + '"');
+  }
+  var type = typeof val;
+  if (
+    (type === 'object' || type === 'function') &&
+    typeof val.toJSON === 'function'
+  ) {
+    val = val.toJSON();
+  }
+  if (typeof val !== 'string') {
+    val = JSON.stringify(val);
+    if (!escaped && val.indexOf('"') !== -1) {
+      return ' ' + key + "='" + val.replace(/'/g, '&#39;') + "'";
+    }
+  }
+  if (escaped) val = pug_escape(val);
+  return ' ' + key + '="' + val + '"';
+}
+
+/**
+ * Render the given attributes object.
+ *
+ * @param {Object} obj
+ * @param {Object} terse whether to use HTML5 terse boolean attributes
+ * @return {String}
+ */
+exports.attrs = pug_attrs;
+function pug_attrs(obj, terse) {
+  var attrs = '';
+
+  for (var key in obj) {
+    if (pug_has_own_property.call(obj, key)) {
+      var val = obj[key];
+
+      if ('class' === key) {
+        val = pug_classes(val);
+        attrs = pug_attr(key, val, false, terse) + attrs;
+        continue;
+      }
+      if ('style' === key) {
+        val = pug_style(val);
+      }
+      attrs += pug_attr(key, val, false, terse);
+    }
+  }
+
+  return attrs;
+}
+
+/**
+ * Escape the given string of `html`.
+ *
+ * @param {String} html
+ * @return {String}
+ * @api private
+ */
+
+var pug_match_html = /["&<>]/;
+exports.escape = pug_escape;
+function pug_escape(_html) {
+  var html = '' + _html;
+  var regexResult = pug_match_html.exec(html);
+  if (!regexResult) return _html;
+
+  var result = '';
+  var i, lastIndex, escape;
+  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
+    switch (html.charCodeAt(i)) {
+      case 34:
+        escape = '&quot;';
+        break;
+      case 38:
+        escape = '&amp;';
+        break;
+      case 60:
+        escape = '&lt;';
+        break;
+      case 62:
+        escape = '&gt;';
+        break;
+      default:
+        continue;
+    }
+    if (lastIndex !== i) result += html.substring(lastIndex, i);
+    lastIndex = i + 1;
+    result += escape;
+  }
+  if (lastIndex !== i) return result + html.substring(lastIndex, i);
+  else return result;
+}
+
+/**
+ * Re-throw the given `err` in context to the
+ * the pug in `filename` at the given `lineno`.
+ *
+ * @param {Error} err
+ * @param {String} filename
+ * @param {String} lineno
+ * @param {String} str original source
+ * @api private
+ */
+
+exports.rethrow = pug_rethrow;
+function pug_rethrow(err, filename, lineno, str) {
+  if (!(err instanceof Error)) throw err;
+  if ((typeof window != 'undefined' || !filename) && !str) {
+    err.message += ' on line ' + lineno;
+    throw err;
+  }
+  try {
+    str = str || __webpack_require__(10).readFileSync(filename, 'utf8');
+  } catch (ex) {
+    pug_rethrow(err, null, lineno);
+  }
+  var context = 3,
+    lines = str.split('\n'),
+    start = Math.max(lineno - context, 0),
+    end = Math.min(lines.length, lineno + context);
+
+  // Error context
+  var context = lines
+    .slice(start, end)
+    .map(function(line, i) {
+      var curr = i + start + 1;
+      return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
+    })
+    .join('\n');
+
+  // Alter exception message
+  err.path = filename;
+  try {
+    err.message =
+      (filename || 'Pug') +
+      ':' +
+      lineno +
+      '\n' +
+      context +
+      '\n\n' +
+      err.message;
+  } catch (e) {}
+  throw err;
+}
+
 
 /***/ }),
-/* 73 */
+
+/***/ 97:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_4.jpg");
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
-/***/ }),
-/* 74 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+// EXTERNAL MODULE: ./src/js/index.js + 18 modules
+var js = __webpack_require__(14);
 
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_5.jpg");
+// EXTERNAL MODULE: ./src/pages/ui-kit/cards/cards.pug
+var cards = __webpack_require__(75);
+
+// EXTERNAL MODULE: ./src/sass/main.sass
+var main = __webpack_require__(8);
+
+// EXTERNAL MODULE: ./src/pages/ui-kit/cards/cards.sass
+var cards_cards = __webpack_require__(76);
+
+// CONCATENATED MODULE: ./src/pages/ui-kit/cards/images/room-img_1.jpg
+/* harmony default export */ var room_img_1 = (__webpack_require__.p + "images/room-img_1.jpg");
+// CONCATENATED MODULE: ./src/pages/ui-kit/cards/images/room-img_2.jpg
+/* harmony default export */ var room_img_2 = (__webpack_require__.p + "images/room-img_2.jpg");
+// CONCATENATED MODULE: ./src/pages/ui-kit/cards/images/room-img_3.jpg
+/* harmony default export */ var room_img_3 = (__webpack_require__.p + "images/room-img_3.jpg");
+// CONCATENATED MODULE: ./src/pages/ui-kit/cards/images/room-img_4.jpg
+/* harmony default export */ var room_img_4 = (__webpack_require__.p + "images/room-img_4.jpg");
+// CONCATENATED MODULE: ./src/pages/ui-kit/cards/images/room-img_5.jpg
+/* harmony default export */ var room_img_5 = (__webpack_require__.p + "images/room-img_5.jpg");
+// EXTERNAL MODULE: ./src/common.blocks/signup-card/signup-card.js
+var signup_card = __webpack_require__(41);
+
+// EXTERNAL MODULE: ./src/common.blocks/booking-card/init.js
+var init = __webpack_require__(42);
+
+// EXTERNAL MODULE: ./src/common.blocks/search-card/init.js
+var search_card_init = __webpack_require__(43);
+
+// EXTERNAL MODULE: ./src/common.blocks/room-card/init.js
+var room_card_init = __webpack_require__(44);
+
+// EXTERNAL MODULE: ./src/common.blocks/date-picker/date-picker.js
+var date_picker = __webpack_require__(5);
+
+// CONCATENATED MODULE: ./src/pages/ui-kit/cards/cards.js
+/* eslint-disable no-unused-vars */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var datepickerElem = document.querySelector('.js-date-picker-demo .js-date-picker');
+var datepicker = new date_picker["a" /* default */]({
+  element: datepickerElem,
+  initialDate: [new Date(2019, 7, 19), new Date(2019, 7, 23)]
+});
 
 /***/ })
-/******/ ]);
+
+/******/ });

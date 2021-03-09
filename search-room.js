@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 84);
+/******/ 	return __webpack_require__(__webpack_require__.s = 96);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11076,19 +11076,19 @@ var Dropdown = /*#__PURE__*/function () {
   }, {
     key: "getPopup",
     value: function getPopup() {
-      var popupSelector = '.dropdown__popup';
+      var popupSelector = '.js-dropdown__popup';
       return this.elem.querySelector(popupSelector);
     }
   }, {
     key: "getTextFields",
     value: function getTextFields() {
-      var textFieldSelector = '.dropdown__text-field .text-field';
+      var textFieldSelector = '.js-dropdown__text-field .js-text-field';
       return this.elem.querySelectorAll(textFieldSelector);
     }
   }, {
     key: "getTextFieldInputs",
     value: function getTextFieldInputs() {
-      var inputSelector = '.text-field__input';
+      var inputSelector = '.js-text-field__input';
       var inputs = [];
       this.textFields.forEach(function (elem) {
         inputs.push(elem.querySelector(inputSelector));
@@ -11222,8 +11222,8 @@ var DatePicker = /*#__PURE__*/function () {
 
     _classCallCheck(this, DatePicker);
 
-    this.clearBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" ' + 'type="button">Очистить</button> ';
-    this.applyBtnHTML = '<button class="ui-datepicker-current ' + 'ui-state-default ui-corner-all ' + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" ' + 'type="button">Применить</button> ';
+    this.clearBtnHTML = "<button class=\"ui-datepicker-current \n      ui-state-default ui-corner-all \n      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button\" \n      type=\"button\">\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C</button> ";
+    this.applyBtnHTML = "<button class=\"ui-datepicker-current\n      ui-state-default ui-corner-all\n      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button\"\n      type=\"button\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C</button> ";
     this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
     this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
@@ -11422,23 +11422,23 @@ var CountingItem = /*#__PURE__*/function () {
   }, {
     key: "getNameElem",
     value: function getNameElem() {
-      var nameElemSelector = '.counting-item__name .heading';
+      var nameElemSelector = '.js-counting-item__name .js-heading';
       return this.elem.querySelector(nameElemSelector);
     }
   }, {
     key: "getPlusBtn",
     value: function getPlusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_action_increase');
+      return this.elem.querySelector('.js-counting-item__change-button_action_increase');
     }
   }, {
     key: "getMinusBtn",
     value: function getMinusBtn() {
-      return this.elem.querySelector('.counting-item__change-button_action_decrease');
+      return this.elem.querySelector('.js-counting-item__change-button_action_decrease');
     }
   }, {
     key: "getValueElem",
     value: function getValueElem() {
-      return this.elem.querySelector('.counting-item__value .heading');
+      return this.elem.querySelector('.js-counting-item__value .js-heading');
     }
   }, {
     key: "setValue",
@@ -11558,19 +11558,19 @@ var items_counter_ItemsCounter = /*#__PURE__*/function () {
   }, {
     key: "getClearBtn",
     value: function getClearBtn() {
-      var clearBtnSelector = '.items-counter__clear-button';
+      var clearBtnSelector = '.js-items-counter__clear-button';
       return this.elem.querySelector(clearBtnSelector);
     }
   }, {
     key: "getApplyBtn",
     value: function getApplyBtn() {
-      var applyBtnSelector = '.items-counter__apply-button';
+      var applyBtnSelector = '.js-items-counter__apply-button';
       return this.elem.querySelector(applyBtnSelector);
     }
   }, {
     key: "getItemElems",
     value: function getItemElems() {
-      var itemSelector = '.counting-item';
+      var itemSelector = '.js-counting-item';
       return this.elem.querySelectorAll(itemSelector);
     }
   }, {
@@ -12020,19 +12020,19 @@ var Header = /*#__PURE__*/function () {
   _createClass(Header, [{
     key: "getHamburger",
     value: function getHamburger() {
-      var hamburgerSelector = '.header__hamburger';
+      var hamburgerSelector = '.js-header__hamburger';
       return this.elem.querySelector(hamburgerSelector);
     }
   }, {
     key: "getMenu",
     value: function getMenu() {
-      var menuSelector = '.header__menu';
+      var menuSelector = '.js-header__menu';
       return this.elem.querySelector(menuSelector);
     }
   }, {
     key: "getNav",
     value: function getNav() {
-      var navSelector = '.navigation';
+      var navSelector = '.js-navigation';
       return this.elem.querySelector(navSelector);
     }
   }, {
@@ -14486,7 +14486,19 @@ var _datepickerExtension = function _datepickerExtension() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */,
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* eslint-disable no-unused-vars */
+
+$('.js-header').each(function init() {
+  var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
 /* 19 */,
 /* 20 */,
 /* 21 */,
@@ -15237,9 +15249,9 @@ return $.widget;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45);
 /* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(42);
+/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46);
 /* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15261,7 +15273,7 @@ var RoomCard = /*#__PURE__*/function () {
   _createClass(RoomCard, [{
     key: "getSliderElem",
     value: function getSliderElem() {
-      var sliderSelector = '.room-card__slider';
+      var sliderSelector = '.js-room-card__slider';
       return this.elem.querySelector(sliderSelector);
     }
   }, {
@@ -15283,11 +15295,12 @@ var RoomCard = /*#__PURE__*/function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 29 */
+/* 29 */,
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
 /* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -15371,11 +15384,11 @@ var RangeSlider = /*#__PURE__*/function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53);
 /* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15422,7 +15435,7 @@ var Pagination = /*#__PURE__*/function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15452,7 +15465,7 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
   }, {
     key: "getCheckboxes",
     value: function getCheckboxes() {
-      var checkboxesSelector = '.expandable-checkboxes__checkboxes';
+      var checkboxesSelector = '.js-expandable-checkboxes__checkboxes';
       return this.elem.querySelector(checkboxesSelector);
     }
   }, {
@@ -15485,7 +15498,6 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
 /* harmony default export */ __webpack_exports__["a"] = (ExpandableCheckboxes);
 
 /***/ }),
-/* 32 */,
 /* 33 */,
 /* 34 */,
 /* 35 */,
@@ -15494,7 +15506,23 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
 /* 38 */,
 /* 39 */,
 /* 40 */,
-/* 41 */
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
+/* eslint-disable no-unused-vars */
+
+$('.js-room-card').each(function init() {
+  var roomCard = new _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(i){"use strict"; true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (i),
@@ -15504,7 +15532,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 42 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -15512,7 +15540,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   
 
 /***/ }),
-/* 43 */
+/* 47 */,
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(30);
+/* eslint-disable no-unused-vars */
+
+$('.js-range-slider').each(function init() {
+  var rangeSlider = new _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15539,7 +15581,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(44),
+			__webpack_require__(50),
 			__webpack_require__(13),
 			__webpack_require__(3),
 			__webpack_require__(25)
@@ -16269,7 +16311,7 @@ return $.widget( "ui.slider", $.ui.mouse, {
 
 
 /***/ }),
-/* 44 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -16292,7 +16334,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(45),
+			__webpack_require__(51),
 			__webpack_require__(3),
 			__webpack_require__(25)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
@@ -16500,7 +16542,7 @@ return $.widget( "ui.mouse", {
 
 
 /***/ }),
-/* 45 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -16520,7 +16562,20 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 
 /***/ }),
-/* 46 */
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* eslint-disable no-unused-vars */
+
+$('.js-pagination').each(function init() {
+  var pagination = new _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/**
@@ -16920,14 +16975,19 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
+/* eslint-disable no-unused-vars */
+
+$('.js-expandable-checkboxes').each(function init() {
+  var expandableCheckboxes = new _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
 /* 55 */,
 /* 56 */,
 /* 57 */,
@@ -16957,91 +17017,9 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 /* 81 */,
 /* 82 */,
 /* 83 */,
-/* 84 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
-/* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(85);
-/* harmony import */ var _search_room_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_search_room_pug__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _search_room_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(86);
-/* harmony import */ var _search_room_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_search_room_sass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _images_room_img_1_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(87);
-/* harmony import */ var _images_room_img_2_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(88);
-/* harmony import */ var _images_room_img_3_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(89);
-/* harmony import */ var _images_room_img_4_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(90);
-/* harmony import */ var _images_room_img_5_jpg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(91);
-/* harmony import */ var _images_room_img_6_jpg__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(92);
-/* harmony import */ var _images_room_img_7_jpg__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(93);
-/* harmony import */ var _images_room_img_8_jpg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(94);
-/* harmony import */ var _images_room_img_9_jpg__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(95);
-/* harmony import */ var _images_room_img_10_jpg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(96);
-/* harmony import */ var _images_room_img_11_jpg__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(97);
-/* harmony import */ var _images_room_img_12_jpg__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(98);
-/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(29);
-/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(28);
-/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(30);
-/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(12);
-/* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(7);
-/* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(2);
-/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(5);
-/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(31);
-/* eslint-disable no-unused-vars */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_19__[/* default */ "a"](document.querySelector('.header'));
-var range = new _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_16__[/* default */ "a"](document.querySelector('.range-slider'));
-var $rooms = $('.room-card');
-$rooms.each(function init() {
-  var room = new _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_17__[/* default */ "a"](this);
-});
-var pagination = new _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_18__[/* default */ "a"](document.querySelector('.pagination'));
-var dateDropdownElem = document.querySelector('.search-room__params-date .dropdown');
-var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_22__[/* default */ "a"]({
-  element: dateDropdownElem.querySelector('.date-picker'),
-  options: {
-    dateFormat: 'd M'
-  }
-});
-var datedropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__[/* default */ "a"](dateDropdownElem, datePicker, 'Даты пребывания в отеле');
-var guestsDropdownElem = document.querySelector('.search-room__params-guests .dropdown');
-var guestsCounterElem = guestsDropdownElem.querySelector('.items-counter');
-var guestsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"](guestsCounterElem, 'гостя');
-var guestsDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__[/* default */ "a"](guestsDropdownElem, guestsCounter, 'Сколько гостей');
-var facilitiesDropdownElem = document.querySelector('.search-room__params-facilities .dropdown');
-var facilitiesCounterElem = facilitiesDropdownElem.querySelector('.items-counter');
-var facilitiesCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_20__[/* default */ "a"](facilitiesCounterElem);
-var facilitiesDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_21__[/* default */ "a"](facilitiesDropdownElem, facilitiesCounter, 'Удобства');
-var expandableCheckboxes = new _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_23__[/* default */ "a"](document.querySelector('.expandable-checkboxes'));
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 85 */
+/* 84 */,
+/* 85 */,
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(9);
@@ -17085,7 +17063,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -17099,12 +17077,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -17127,7 +17112,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
 pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'dropdown';
+let className = 'dropdown js-dropdown';
 if (isDouble) {
     className += ' dropdown_double';
 }
@@ -17149,7 +17134,7 @@ pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], 
 if ((isDouble)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[0])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -17168,20 +17153,22 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[0],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title[1])) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -17200,13 +17187,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions[1],
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -17216,7 +17205,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 else {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"dropdown__text-field js-dropdown__text-field\"\u003E";
 if ((title)) {
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
@@ -17235,13 +17224,15 @@ pug_mixins["text-field"]({
                     inputOptions: {
                         ...inputOptions,
                         isMaskedDate: false,
-                        isReadonly: true
+                        isReadonly: true,
+                        withJs: true,
                     },
                     arrowOptions: {},
                     modifiers: {
                         isFocused: !popupHidden,
                         isBottomFlat: !popupHidden,
-                    }
+                    },
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -17250,7 +17241,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 }
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes(["dropdown__popup","js-dropdown__popup",`${popupHidden ? 'dropdown__popup_hidden' : false}`], [false,false,true]), false, true)) + "\u003E";
 if ((popupMixinOptions.name)) {
 pug_indent.push('    ');
 pug_mixins[popupMixinOptions.name](popupMixinOptions.params);
@@ -17262,7 +17253,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17293,6 +17284,9 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -17302,12 +17296,13 @@ pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0} = {})
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item js-counting-item\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__name\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__name js-counting-item__name\"\u003E";
 pug_indent.push('    ');
 pug_mixins["heading"]({
-                text: name
+                text: name,
+                withJs: true,
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -17316,19 +17311,20 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__counter\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_decrease js-counting-item__change-button_action_decrease\"\u003E-\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__value\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__value js-counting-item__value\"\u003E";
 pug_indent.push('      ');
 pug_mixins["heading"]({
-                    text: value
+                    text: value,
+                    withJs: true,
                 });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"counting-item__change-button counting-item__change-button_action_increase js-counting-item__change-button_action_increase\"\u003E+\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -17368,7 +17364,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17399,12 +17395,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -17427,6 +17426,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -17464,7 +17467,7 @@ pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
 pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'items-counter';
+let className = 'items-counter js-items-counter';
 if (withoutButtons) {
     className += ' items-counter_without-buttons';
 }
@@ -17519,7 +17522,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-counter__button-panel\"\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__clear-button js-items-counter__clear-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Очистить',
@@ -17534,7 +17537,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"items-counter__apply-button js-items-counter__apply-button\"\u003E";
 pug_indent.push('      ');
 pug_mixins["button"]({
                     text: 'Применить',
@@ -17563,7 +17566,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17594,6 +17597,9 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -17603,7 +17609,7 @@ pug_mixins["range-slider"] = pug_interp = function(title, description = false){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"range-slider\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"range-slider js-range-slider\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"range-slider__info\"\u003E";
 pug_indent.push('    ');
@@ -17674,7 +17680,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17704,6 +17710,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -17797,7 +17806,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
 pug_mixins["expandable-checkboxes"] = pug_interp = function({title='Expandable checkbox list', items, expanded = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
-let className = 'expandable-checkboxes';
+let className = 'expandable-checkboxes js-expandable-checkboxes';
 if (expanded) {
     className += ' expandable-checkboxes_expanded';
 }
@@ -17821,7 +17830,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"expandable-checkboxes__checkboxes\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"expandable-checkboxes__checkboxes js-expandable-checkboxes__checkboxes\"\u003E";
 pug_indent.push('    ');
 pug_mixins["checkbox-buttons"]({ items });
 pug_indent.pop();
@@ -17831,7 +17840,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -17861,6 +17870,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -17940,7 +17952,7 @@ pug_mixins["room-card"] = pug_interp = function({imagesSrc, hasSliderArrows = fa
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"room-card\"\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"room-card js-room-card\"\u003E";
 let sliderClassName = 'room-card__slider js-room-card__slider';
 if (hasSliderArrows) {
     sliderClassName += ' room-card__slider_with-arrows';
@@ -17997,7 +18009,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003C\u002Fa\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -18028,6 +18040,9 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -18037,7 +18052,7 @@ pug_mixins["pagination"] = pug_interp = function(desc){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"pagination\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"pagination js-pagination\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"pagination__pages js-pagination__pages\"\u003E\u003C\u002Fdiv\u003E\u003Cspan class=\"pagination__desc\"\u003E" + (null == (pug_interp = desc) ? "" : pug_interp) + "\u003C\u002Fspan\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -18077,7 +18092,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -18108,12 +18123,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -18136,6 +18154,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -18205,11 +18227,14 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
     className += ' navigation_in-column';
+}
+if (withJs) {
+    className += ' js-navigation';
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -18308,11 +18333,11 @@ pug_mixins["header"] = pug_interp = function({userName, activeLink = 0} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
+pug_html = pug_html + "\u003Cheader class=\"header js-header\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E\n      ";
+pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav class=\"header__nav-container\"\u003E";
 pug_indent.push('        ');
@@ -18339,7 +18364,8 @@ pug_mixins["navigation"]({
                                 name: 'Соглашения',
                                 isDropdown: true
                             }
-                        ]
+                        ],
+                        withJs: true,
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
@@ -18377,7 +18403,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -18417,11 +18443,14 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
     className += ' navigation_in-column';
+}
+if (withJs) {
+    className += ' js-navigation';
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -18516,7 +18545,7 @@ pug_html = pug_html + "\u003C\u002Ful\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fnav\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -18546,6 +18575,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -18586,7 +18618,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -18600,12 +18632,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -18771,7 +18810,7 @@ pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n
 pug_indent.push('    ');
 pug_mixins["header"]();
 pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cmain class=\"search-room\"\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"search-room__container\"\u003E\n          \u003Caside class=\"search-room__params\"\u003E\n            \u003Cdiv class=\"search-room__params-date\"\u003E";
+pug_html = pug_html + "\n    \u003Cmain class=\"search-room\"\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"search-room__container\"\u003E\n          \u003Caside class=\"search-room__params\"\u003E\n            \u003Cdiv class=\"search-room__params-date js-search-room__params-date\"\u003E";
 pug_indent.push('              ');
 pug_mixins["dropdown"]({
                             title: 'Даты пребывания в отеле',
@@ -18785,7 +18824,7 @@ pug_mixins["dropdown"]({
                             isShort: true
                         });
 pug_indent.pop();
-pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-guests\"\u003E";
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-guests js-search-room__params-guests\"\u003E";
 pug_indent.push('              ');
 pug_mixins["dropdown"]({
                             title: 'Гости',
@@ -18865,7 +18904,7 @@ pug_mixins["checkbox-buttons"]({
                             isRich: true
                         });
 pug_indent.pop();
-pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-facilities\"\u003E";
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-facilities js-search-room__params-facilities\"\u003E";
 pug_indent.push('              ');
 pug_mixins["dropdown"]({
                             title: 'Удобства номера',
@@ -19135,7 +19174,7 @@ pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", `${fileName}.js`, 
 module.exports = template;
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -19143,88 +19182,123 @@ module.exports = template;
   
 
 /***/ }),
-/* 87 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_1.jpg");
-
-/***/ }),
-/* 88 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_2.jpg");
-
-/***/ }),
-/* 89 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_3.jpg");
-
-/***/ }),
-/* 90 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_4.jpg");
-
-/***/ }),
-/* 91 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_5.jpg");
-
-/***/ }),
-/* 92 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_6.jpg");
-
-/***/ }),
-/* 93 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_7.jpg");
-
-/***/ }),
-/* 94 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_8.jpg");
-
-/***/ }),
-/* 95 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_9.jpg");
-
-/***/ }),
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
 /* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_10.jpg");
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
 
-/***/ }),
-/* 97 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+// EXTERNAL MODULE: ./src/sass/main.sass
+var main = __webpack_require__(8);
 
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_11.jpg");
+// EXTERNAL MODULE: ./src/js/index.js + 18 modules
+var js = __webpack_require__(14);
 
-/***/ }),
-/* 98 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+// EXTERNAL MODULE: ./src/pages/website-pages/search-room/search-room.pug
+var search_room = __webpack_require__(86);
 
-"use strict";
-/* unused harmony default export */ var _unused_webpack_default_export = (__webpack_require__.p + "images/room-img_12.jpg");
+// EXTERNAL MODULE: ./src/pages/website-pages/search-room/search-room.sass
+var search_room_search_room = __webpack_require__(87);
+
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_1.jpg
+/* harmony default export */ var room_img_1 = (__webpack_require__.p + "images/room-img_1.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_2.jpg
+/* harmony default export */ var room_img_2 = (__webpack_require__.p + "images/room-img_2.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_3.jpg
+/* harmony default export */ var room_img_3 = (__webpack_require__.p + "images/room-img_3.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_4.jpg
+/* harmony default export */ var room_img_4 = (__webpack_require__.p + "images/room-img_4.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_5.jpg
+/* harmony default export */ var room_img_5 = (__webpack_require__.p + "images/room-img_5.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_6.jpg
+/* harmony default export */ var room_img_6 = (__webpack_require__.p + "images/room-img_6.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_7.jpg
+/* harmony default export */ var room_img_7 = (__webpack_require__.p + "images/room-img_7.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_8.jpg
+/* harmony default export */ var room_img_8 = (__webpack_require__.p + "images/room-img_8.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_9.jpg
+/* harmony default export */ var room_img_9 = (__webpack_require__.p + "images/room-img_9.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_10.jpg
+/* harmony default export */ var room_img_10 = (__webpack_require__.p + "images/room-img_10.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_11.jpg
+/* harmony default export */ var room_img_11 = (__webpack_require__.p + "images/room-img_11.jpg");
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_12.jpg
+/* harmony default export */ var room_img_12 = (__webpack_require__.p + "images/room-img_12.jpg");
+// EXTERNAL MODULE: ./src/common.blocks/range-slider/init.js
+var init = __webpack_require__(48);
+
+// EXTERNAL MODULE: ./src/common.blocks/room-card/init.js
+var room_card_init = __webpack_require__(44);
+
+// EXTERNAL MODULE: ./src/common.blocks/pagination/init.js
+var pagination_init = __webpack_require__(52);
+
+// EXTERNAL MODULE: ./src/common.blocks/header/init.js
+var header_init = __webpack_require__(18);
+
+// EXTERNAL MODULE: ./src/common.blocks/expandable-checkboxes/init.js
+var expandable_checkboxes_init = __webpack_require__(54);
+
+// EXTERNAL MODULE: ./src/common.blocks/items-counter/items-counter.js + 1 modules
+var items_counter = __webpack_require__(7);
+
+// EXTERNAL MODULE: ./src/common.blocks/dropdown/dropdown.js
+var dropdown = __webpack_require__(2);
+
+// EXTERNAL MODULE: ./src/common.blocks/date-picker/date-picker.js
+var date_picker = __webpack_require__(5);
+
+// CONCATENATED MODULE: ./src/pages/website-pages/search-room/search-room.js
+/* eslint-disable no-unused-vars */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var dateDropdownElem = document.querySelector('.js-search-room__params-date .js-dropdown');
+var datePicker = new date_picker["a" /* default */]({
+  element: dateDropdownElem.querySelector('.js-date-picker'),
+  options: {
+    dateFormat: 'd M'
+  }
+});
+var dateDropdown = new dropdown["a" /* default */](dateDropdownElem, datePicker, 'Даты пребывания в отеле');
+var guestsDropdownElem = document.querySelector('.js-search-room__params-guests .js-dropdown');
+var guestsCounterElem = guestsDropdownElem.querySelector('.js-items-counter');
+var guestsCounter = new items_counter["a" /* default */](guestsCounterElem, 'гостя');
+var guestsDropdown = new dropdown["a" /* default */](guestsDropdownElem, guestsCounter, 'Сколько гостей');
+var facilitiesDropdownElem = document.querySelector('.js-search-room__params-facilities .js-dropdown');
+var facilitiesCounterElem = facilitiesDropdownElem.querySelector('.js-items-counter');
+var facilitiesCounter = new items_counter["a" /* default */](facilitiesCounterElem);
+var facilitiesDropdown = new dropdown["a" /* default */](facilitiesDropdownElem, facilitiesCounter, 'Удобства');
 
 /***/ })
 /******/ ]);

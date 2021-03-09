@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 75);
+/******/ 	return __webpack_require__(__webpack_require__.s = 77);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -11002,19 +11002,19 @@ var Header = /*#__PURE__*/function () {
   _createClass(Header, [{
     key: "getHamburger",
     value: function getHamburger() {
-      var hamburgerSelector = '.header__hamburger';
+      var hamburgerSelector = '.js-header__hamburger';
       return this.elem.querySelector(hamburgerSelector);
     }
   }, {
     key: "getMenu",
     value: function getMenu() {
-      var menuSelector = '.header__menu';
+      var menuSelector = '.js-header__menu';
       return this.elem.querySelector(menuSelector);
     }
   }, {
     key: "getNav",
     value: function getNav() {
-      var navSelector = '.navigation';
+      var navSelector = '.js-navigation';
       return this.elem.querySelector(navSelector);
     }
   }, {
@@ -11126,34 +11126,42 @@ var jquery = __webpack_require__(0);
 
 /***/ }),
 
-/***/ 75:
+/***/ 18:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(76);
-/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(77);
-/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(12);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* eslint-disable no-unused-vars */
 
-
-
-
-
-var $headers = $('.header');
-$headers.each(function init() {
-  var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"](this);
+$('.js-header').each(function init() {
+  var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
 
-/***/ 76:
+/***/ 77:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(78);
+/* harmony import */ var _headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_pug__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(79);
+/* harmony import */ var _headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_headers_and_footers_sass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_blocks_header_init__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(18);
+
+
+
+
+
+
+/***/ }),
+
+/***/ 78:
 /***/ (function(module, exports, __webpack_require__) {
 
 var pug = __webpack_require__(9);
@@ -11197,7 +11205,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -11228,12 +11236,15 @@ switch (color) {
     default:
         break;
 }
+if (withJs) {
+  className += ' js-heading';
+}
 
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}} = {}){
+pug_mixins["button"] = pug_interp = function({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'button';
 let headingOptions = {
@@ -11256,6 +11267,10 @@ if (modifiers.isLong) {
 if (modifiers.isHovered) {
     className += ' button_hovered';
 }
+if (withJs) {
+  className += ' js-button';
+}
+
 switch (modifiers.textColor) {
     case 'white':
         headingOptions.color = 'white';
@@ -11325,11 +11340,14 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
     className += ' navigation_in-column';
+}
+if (withJs) {
+    className += ' js-navigation';
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -11428,11 +11446,11 @@ pug_mixins["header"] = pug_interp = function({userName, activeLink = 0} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cheader class=\"header\"\u003E\n  ";
+pug_html = pug_html + "\u003Cheader class=\"header js-header\"\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"header__container\"\u003E\u003Ca class=\"header__logo\" href=\"landing-page.html\"\u003E\u003Cimg src=\"images\u002Flogo.svg\" alt=\"logo\"\u003E\u003C\u002Fa\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__menu\"\u003E\n      ";
+pug_html = pug_html + "\u003Cdiv class=\"header__menu js-header__menu\"\u003E\n      ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cnav class=\"header__nav-container\"\u003E";
 pug_indent.push('        ');
@@ -11459,7 +11477,8 @@ pug_mixins["navigation"]({
                                 name: 'Соглашения',
                                 isDropdown: true
                             }
-                        ]
+                        ],
+                        withJs: true,
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n      ";
@@ -11497,7 +11516,7 @@ pug_html = pug_html + "\n    ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n    ";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"header__hamburger\"\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv class=\"header__hamburger js-header__hamburger\"\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003Cspan class=\"header__hamburger-line\"\u003E\u003C\u002Fspan\u003E\u003C\u002Fdiv\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
@@ -11537,11 +11556,14 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false}){
+pug_mixins["navigation"] = pug_interp = function({items, activeLinkIndex, inColumn = false, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'navigation';
 if (inColumn) {
     className += ' navigation_in-column';
+}
+if (withJs) {
+    className += ' js-navigation';
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
@@ -11636,7 +11658,7 @@ pug_html = pug_html + "\u003C\u002Ful\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fnav\u003E";
 };
-pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color}){
+pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'heading';
 let tag;
@@ -11666,6 +11688,9 @@ switch (color) {
         break;
     default:
         break;
+}
+if (withJs) {
+  className += ' js-heading';
 }
 
 pug_html = pug_html + "\n";
@@ -11706,7 +11731,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
-pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}} = {}){
+pug_mixins["text-field"] = pug_interp = function({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'text-field';
 
@@ -11720,12 +11745,19 @@ if (modifiers.isBottomFlat) {
     className += ' text-field_flat-bottom';
 }
 
+if (withJs) {
+    className += ' js-text-field';
+}
+
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
 let inputClassName = 'text-field__input';
 if (inputOptions.isMaskedDate) {
     inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
+}
+if (inputOptions.withJs) {
+    inputClassName += ' js-text-field__input';
 }
 
 pug_html = pug_html + "\n  ";
@@ -11950,7 +11982,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 77:
+/***/ 79:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
