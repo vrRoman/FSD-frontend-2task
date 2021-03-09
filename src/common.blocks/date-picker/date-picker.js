@@ -8,14 +8,14 @@ class DatePicker {
     initialDate = [null, null],
     isTextDouble = false,
   }) {
-    this.clearBtnHTML = '<button class="ui-datepicker-current '
-      + 'ui-state-default ui-corner-all '
-      + 'ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" '
-      + 'type="button">Очистить</button> ';
-    this.applyBtnHTML = '<button class="ui-datepicker-current '
-      + 'ui-state-default ui-corner-all '
-      + 'ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button" '
-      + 'type="button">Применить</button> ';
+    this.clearBtnHTML = `<button class="ui-datepicker-current 
+      ui-state-default ui-corner-all 
+      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" 
+      type="button">Очистить</button> `;
+    this.applyBtnHTML = `<button class="ui-datepicker-current
+      ui-state-default ui-corner-all
+      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button"
+      type="button">Применить</button> `;
     this.monthNames = [
       'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
       'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
