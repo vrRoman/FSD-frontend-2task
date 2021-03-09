@@ -11,208 +11,208 @@
     box-shadow: 0 10px 20px 0 $dark-shade-5
 
 
-.ui-datepicker
-  $selector: &
+  .ui-datepicker
+    $selector: '.ui-datepicker'
 
-  &#{$selector}-inline
-    border: none
-    position: relative
-    box-sizing: border-box
-    width: 318px
-    padding: 20px 20px 18px
-  #{$selector}-header
-    background-color: transparent
-    border: none
-    padding: 0
-  #{$selector}-prev, #{$selector}-next
-    top: -2px
-    .ui-icon
-      display: none
-    &:after
-      cursor: pointer
-      color: $purple
-
-      font-family: 'Material Icons'
-      font-weight: normal
-      font-style: normal
-      font-size: 24px
-      display: inline-block
-      line-height: 1
-      text-transform: none
-      letter-spacing: normal
-      word-wrap: normal
-      white-space: nowrap
-      direction: ltr
-      -webkit-font-smoothing: antialiased
-      text-rendering: optimizeLegibility
-      -moz-osx-font-smoothing: grayscale
-      font-feature-settings: 'liga'
-    &.ui-state-hover
+    &-inline
       border: none
+      position: relative
+      box-sizing: border-box
+      width: 318px
+      padding: 20px 20px 18px
+    &-header
       background-color: transparent
-      top: 0
+      border: none
+      padding: 0
+    &-prev, &-next
+      top: -2px
+      .ui-icon
+        display: none
+      &:after
+        cursor: pointer
+        color: $purple
 
-  #{$selector}-prev
-    left: 0
-    &:after
-      content: 'arrow_back'
+        font-family: 'Material Icons'
+        font-weight: normal
+        font-style: normal
+        font-size: 24px
+        display: inline-block
+        line-height: 1
+        text-transform: none
+        letter-spacing: normal
+        word-wrap: normal
+        white-space: nowrap
+        direction: ltr
+        -webkit-font-smoothing: antialiased
+        text-rendering: optimizeLegibility
+        -moz-osx-font-smoothing: grayscale
+        font-feature-settings: 'liga'
+      &.ui-state-hover
+        border: none
+        background-color: transparent
+        top: 0
 
-    &.ui-state-hover
+    &-prev
       left: 0
+      &:after
+        content: 'arrow_back'
 
-  #{$selector}-next
-    top: -2px
-    right: -2px
-    &:after
-      content: 'arrow_forward'
+      &.ui-state-hover
+        left: 0
 
-    &.ui-state-hover
-      right: 0
+    &-next
+      top: -2px
+      right: -2px
+      &:after
+        content: 'arrow_forward'
 
-
-  #{$selector}-title
-    font-family: Montserrat, Arial, sans-serif
-    font-weight: bold
-    font-size: (19rem / 14)
-    line-height: (23rem / 14)
-
-    color: $dark-shade-100
-    #{$selector}-year
-      display: block
-    #{$selector}-month
-      margin-left: 4px
+      &.ui-state-hover
+        right: 0
 
 
-  #{$selector}-calendar
-    margin-top: 8px
-    margin-bottom: 22px
-    thead
-      span
+    &-title
+      font-family: Montserrat, Arial, sans-serif
+      font-weight: bold
+      font-size: (19rem / 14)
+      line-height: (23rem / 14)
+
+      color: $dark-shade-100
+      #{$selector}-year
+        display: block
+      #{$selector}-month
+        margin-left: 4px
+
+
+    &-calendar
+      margin-top: 8px
+      margin-bottom: 22px
+      thead
+        span
+          font-family: Montserrat, Arial, sans-serif
+          font-weight: bold
+          font-size: (12rem / 14)
+          line-height: (15rem / 14)
+
+          color: $purple
+      tbody
+        td
+          position: relative
+          padding: 0
+          a
+            height: 40px
+            width: 40px
+            box-sizing: border-box
+            display: flex
+            justify-content: center
+            align-items: center
+            background-color: transparent
+            border: none
+
+            font-family: Montserrat, Arial, sans-serif
+            font-style: normal
+            font-weight: normal
+            font-size: (12rem / 14)
+            line-height: (15rem / 14)
+            text-align: center
+            color: $dark-shade-50
+          .ui-state-hover
+            background: $purple-gradient
+            border-radius: 50%
+            color: #fff
+            font-weight: bold
+            opacity: 0.7
+
+        #{$selector}-other-month a
+          color: $dark-shade-25
+        #{$selector}-today
+          a
+            background: $green-gradient
+            border-radius: 50%
+            color: #fff
+            font-weight: bold
+
+        .selected-start:not(#{$selector}-today), .selected-end:not(#{$selector}-today)
+          a
+            background: $purple-gradient
+            border-radius: 50%
+            color: #fff
+            font-weight: bold
+
+        .selected-start:not(.selected-end)
+          &:after
+            content: ''
+            background-color: rgba(188,156,255,0.25)
+            position: absolute
+            border-bottom-left-radius: 50%
+            border-top-left-radius: 50%
+            width: 100%
+            height: 100%
+            right: 0
+            top: 0
+            z-index: 0
+          .ui-state-default
+            position: relative
+            z-index: 1
+        .selected-end:not(.selected-start)
+          &:before
+            content: ''
+            background-color: rgba(188,156,255,0.25)
+            position: absolute
+            border-bottom-right-radius: 50%
+            border-top-right-radius: 50%
+            width: 100%
+            height: 100%
+            left: 0
+            top: 0
+            z-index: 0
+          .ui-state-default
+            position: relative
+            z-index: 1
+
+        .selected:not(.selected-start):not(.selected-end)
+          &:after
+            content: ''
+            background-color: rgba(188,156,255,0.25)
+            position: absolute
+            width: 100%
+            height: 100%
+            right: 0
+            top: 0
+            z-index: 0
+          .ui-state-default
+            position: relative
+            z-index: 1
+
+
+    &-buttonpane
+      border: none
+      display: flex
+      justify-content: space-between
+      padding: 0
+      margin-top: auto
+      #{$selector}-current
+        background-color: unset
+        border: none
+        margin: 0
+        padding: 0
+
         font-family: Montserrat, Arial, sans-serif
         font-weight: bold
         font-size: (12rem / 14)
         line-height: (15rem / 14)
+        text-transform: uppercase
+        outline: none
+        transition: opacity .4s
+        &:hover
+          opacity: .5
 
+      #{$selector}-clear-button
+        color: $dark-shade-50
+        &_disabled
+          visibility: hidden
+
+      #{$selector}-apply-button
         color: $purple
-    tbody
-      td
-        position: relative
-        padding: 0
-        a
-          height: 40px
-          width: 40px
-          box-sizing: border-box
-          display: flex
-          justify-content: center
-          align-items: center
-          background-color: transparent
-          border: none
 
-          font-family: Montserrat, Arial, sans-serif
-          font-style: normal
-          font-weight: normal
-          font-size: (12rem / 14)
-          line-height: (15rem / 14)
-          text-align: center
-          color: $dark-shade-50
-        .ui-state-hover
-          background: $purple-gradient
-          border-radius: 50%
-          color: #fff
-          font-weight: bold
-          opacity: 0.7
-
-      #{$selector}-other-month a
-        color: $dark-shade-25
-      #{$selector}-today
-        a
-          background: $green-gradient
-          border-radius: 50%
-          color: #fff
-          font-weight: bold
-
-      .selected-start:not(#{$selector}-today), .selected-end:not(#{$selector}-today)
-        a
-          background: $purple-gradient
-          border-radius: 50%
-          color: #fff
-          font-weight: bold
-
-      .selected-start:not(.selected-end)
-        &:after
-          content: ''
-          background-color: rgba(188,156,255,0.25)
-          position: absolute
-          border-bottom-left-radius: 50%
-          border-top-left-radius: 50%
-          width: 100%
-          height: 100%
-          right: 0
-          top: 0
-          z-index: 0
-        .ui-state-default
-          position: relative
-          z-index: 1
-      .selected-end:not(.selected-start)
-        &:before
-          content: ''
-          background-color: rgba(188,156,255,0.25)
-          position: absolute
-          border-bottom-right-radius: 50%
-          border-top-right-radius: 50%
-          width: 100%
-          height: 100%
-          left: 0
-          top: 0
-          z-index: 0
-        .ui-state-default
-          position: relative
-          z-index: 1
-
-      .selected:not(.selected-start):not(.selected-end)
-        &:after
-          content: ''
-          background-color: rgba(188,156,255,0.25)
-          position: absolute
-          width: 100%
-          height: 100%
-          right: 0
-          top: 0
-          z-index: 0
-        .ui-state-default
-          position: relative
-          z-index: 1
-
-
-  #{$selector}-buttonpane
-    border: none
-    display: flex
-    justify-content: space-between
-    padding: 0
-    margin-top: auto
-    #{$selector}-current
-      background-color: unset
-      border: none
-      margin: 0
-      padding: 0
-
-      font-family: Montserrat, Arial, sans-serif
-      font-weight: bold
-      font-size: (12rem / 14)
-      line-height: (15rem / 14)
-      text-transform: uppercase
-      outline: none
-      transition: opacity .4s
-      &:hover
-        opacity: .5
-
-    #{$selector}-clear-button
-      color: $dark-shade-50
-      &_disabled
-        visibility: hidden
-
-    #{$selector}-apply-button
-      color: $purple
-
-  &-current:not(&-custom-button)
-    display: none
+      #{$selector}-current:not(#{$selector}-custom-button)
+        display: none
