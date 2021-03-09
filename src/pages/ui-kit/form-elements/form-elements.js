@@ -10,16 +10,15 @@ import './form-elements.sass';
 import './images/avatar_murad.png';
 
 import '@/common.blocks/text-field/text-field';
+import '@/common.blocks/comment/comment';
+import '@/common.blocks/like-button/init';
+import '@/common.blocks/range-slider/init';
+import '@/common.blocks/pagination/init';
+import '@/common.blocks/expandable-checkboxes/init';
 import Dropdown from '@/common.blocks/dropdown/dropdown';
 import ItemsCounter from '@/common.blocks/items-counter/items-counter';
 import DatePicker from '@/common.blocks/date-picker/date-picker';
-import LikeButton from '@/common.blocks/like-button/like-button';
-import RangeSlider from '@/common.blocks/range-slider/range-slider';
-import Pagination from '@/common.blocks/pagination/pagination';
-import ExpandableCheckboxes from '@/common.blocks/expandable-checkboxes/expandable-checkboxes';
-import Comment from '@/common.blocks/comment/comment';
 
-// Dropdowns
 const $guestsDropdowns = $('.form-elements__guests-dropdown .dropdown');
 $guestsDropdowns.each(function init() {
   const popupElem = this.querySelector('.items-counter');
@@ -50,24 +49,3 @@ $facilitiesDropdowns.each(function init() {
   const itemsCounter = new ItemsCounter(popupElem);
   const dropdown = new Dropdown(this, itemsCounter, 'Удобства');
 });
-
-// Like buttons
-const $likeButtonElems = $('.form-elements__like-button .like-button');
-$likeButtonElems.each(function init() {
-  const likeButton = new LikeButton(this);
-});
-
-// Range slider
-const rangeSlider = new RangeSlider(document.querySelector('.range-slider'));
-
-// Pagination
-const pagination = new Pagination(document.querySelector('.pagination'));
-
-// Expandable checkbox list
-const $expandableElems = $('.expandable-checkboxes');
-$expandableElems.each(function init() {
-  const expandable = new ExpandableCheckboxes(this);
-});
-
-// Comment
-const comment = new Comment(document.querySelector('.comment'));
