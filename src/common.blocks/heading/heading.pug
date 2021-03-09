@@ -1,4 +1,4 @@
-mixin heading({text = '', type = 'h3', color})
+mixin heading({text = '', type = 'h3', color, withJs = false})
     -
         let className = 'heading';
         let tag;
@@ -28,6 +28,9 @@ mixin heading({text = '', type = 'h3', color})
                 break;
             default:
                 break;
+        }
+        if (withJs) {
+          className += ' js-heading';
         }
 
     #{tag}(class=className)= text
