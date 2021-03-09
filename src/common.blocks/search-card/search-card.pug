@@ -6,12 +6,12 @@ include ../dropdown/dropdown
 
 
 mixin search-card
-    .search-card
+    .search-card.js-search-card
         +heading({
             type: 'h1',
             text: 'Найдём номера под ваши пожелания'
         })
-        .search-card__dates
+        .search-card__dates.js-search-card__dates
             +dropdown({
                 inputOptions: {
                     value: 'ДД.ММ.ГГГГ',
@@ -24,7 +24,7 @@ mixin search-card
                 title: ['Прибытие', 'Выезд'],
                 isDouble: true
             })
-        .search-card__guests
+        .search-card__guests.js-search-card__guests
             +dropdown({
                 inputOptions: {
                     value: 'Сколько гостей',

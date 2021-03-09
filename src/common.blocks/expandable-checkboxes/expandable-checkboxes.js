@@ -14,7 +14,7 @@ class ExpandableCheckboxes {
   }
 
   getCheckboxes() {
-    const checkboxesSelector = '.expandable-checkboxes__checkboxes';
+    const checkboxesSelector = '.js-expandable-checkboxes__checkboxes';
     return this.elem.querySelector(checkboxesSelector);
   }
 

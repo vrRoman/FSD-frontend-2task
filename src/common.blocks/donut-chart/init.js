@@ -2,6 +2,6 @@
 
 import DonutChart from '@/common.blocks/donut-chart/donut-chart';
 
-$('.donut-chart').each(function init() {
+$('.js-donut-chart').each(function init() {
   const donutChart = new DonutChart(this);
 });

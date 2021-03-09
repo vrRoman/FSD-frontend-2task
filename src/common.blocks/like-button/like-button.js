@@ -9,7 +9,7 @@ class LikeButton {
   }
 
   getNumberElem() {
-    const numberElemSelector = '.like-button__number';
+    const numberElemSelector = '.js-like-button__number';
     return this.elem.querySelector(numberElemSelector);
   }
 

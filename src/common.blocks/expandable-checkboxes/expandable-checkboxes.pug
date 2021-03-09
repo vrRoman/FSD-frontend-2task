@@ -5,7 +5,7 @@ include ../checkbox-buttons/checkbox-buttons
 
 mixin expandable-checkboxes({title='Expandable checkbox list', items, expanded = false})
     -
-        let className = 'expandable-checkboxes';
+        let className = 'expandable-checkboxes js-expandable-checkboxes';
         if (expanded) {
             className += ' expandable-checkboxes_expanded';
         }
@@ -14,5 +14,5 @@ mixin expandable-checkboxes({title='Expandable checkbox list', items, expanded =
             +heading({ text: title })
             .expandable-checkboxes__arrow
                 +arrow()
-        .expandable-checkboxes__checkboxes
+        .expandable-checkboxes__checkboxes.js-expandable-checkboxes__checkboxes
             +checkbox-buttons({ items })

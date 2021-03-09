@@ -1,11 +1,14 @@
 include ../arrow/arrow
 
 
-mixin navigation({items, activeLinkIndex, inColumn = false})
+mixin navigation({items, activeLinkIndex, inColumn = false, withJs = false})
     -
         let className = 'navigation';
         if (inColumn) {
             className += ' navigation_in-column';
+        }
+        if (withJs) {
+            className += ' js-navigation';
         }
     nav(class=className)
         ul.navigation__list

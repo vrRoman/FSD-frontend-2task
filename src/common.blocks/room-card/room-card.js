@@ -8,7 +8,7 @@ class RoomCard {
   }
 
   getSliderElem() {
-    const sliderSelector = '.room-card__slider';
+    const sliderSelector = '.js-room-card__slider';
     return this.elem.querySelector(sliderSelector);
   }
 

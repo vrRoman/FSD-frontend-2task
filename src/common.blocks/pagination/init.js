@@ -2,6 +2,6 @@
 
 import Pagination from '@/common.blocks/pagination/pagination';
 
-$('.pagination').each(function init() {
+$('.js-pagination').each(function init() {
   const pagination = new Pagination(this);
 });

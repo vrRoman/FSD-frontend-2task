@@ -2,15 +2,17 @@ include ../heading/heading
 
 
 mixin counting-item({name = '', value = 0} = {})
-    .counting-item
-        .counting-item__name
+    .counting-item.js-counting-item
+        .counting-item__name.js-counting-item__name
             +heading({
-                text: name
+                text: name,
+                withJs: true,
             })
         .counting-item__counter
-            .counting-item__change-button.counting-item__change-button_action_decrease -
-            .counting-item__value
+            .counting-item__change-button.counting-item__change-button_action_decrease.js-counting-item__change-button_action_decrease -
+            .counting-item__value.js-counting-item__value
                 +heading({
-                    text: value
+                    text: value,
+                    withJs: true,
                 })
-            .counting-item__change-button.counting-item__change-button_action_increase +
+            .counting-item__change-button.counting-item__change-button_action_increase.js-counting-item__change-button_action_increase +

@@ -28,21 +28,21 @@ import ItemsCounter from '@/common.blocks/items-counter/items-counter';
 import Dropdown from '@/common.blocks/dropdown/dropdown';
 import DatePicker from '@/common.blocks/date-picker/date-picker';
 
-const dateDropdownElem = document.querySelector('.search-room__params-date .dropdown');
+const dateDropdownElem = document.querySelector('.js-search-room__params-date .js-dropdown');
 const datePicker = new DatePicker({
-  element: dateDropdownElem.querySelector('.date-picker'),
+  element: dateDropdownElem.querySelector('.js-date-picker'),
   options: {
     dateFormat: 'd M',
   },
 });
 const dateDropdown = new Dropdown(dateDropdownElem, datePicker, 'Даты пребывания в отеле');
 
-const guestsDropdownElem = document.querySelector('.search-room__params-guests .dropdown');
-const guestsCounterElem = guestsDropdownElem.querySelector('.items-counter');
+const guestsDropdownElem = document.querySelector('.js-search-room__params-guests .js-dropdown');
+const guestsCounterElem = guestsDropdownElem.querySelector('.js-items-counter');
 const guestsCounter = new ItemsCounter(guestsCounterElem, 'гостя');
 const guestsDropdown = new Dropdown(guestsDropdownElem, guestsCounter, 'Сколько гостей');
 
-const facilitiesDropdownElem = document.querySelector('.search-room__params-facilities .dropdown');
-const facilitiesCounterElem = facilitiesDropdownElem.querySelector('.items-counter');
+const facilitiesDropdownElem = document.querySelector('.js-search-room__params-facilities .js-dropdown');
+const facilitiesCounterElem = facilitiesDropdownElem.querySelector('.js-items-counter');
 const facilitiesCounter = new ItemsCounter(facilitiesCounterElem);
 const facilitiesDropdown = new Dropdown(facilitiesDropdownElem, facilitiesCounter, 'Удобства');

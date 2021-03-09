@@ -7,10 +7,10 @@ include ../heading/heading
 
 
 mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
-    .booking-card
+    .booking-card.js-booking-card
         +room-info(roomInfo)
 
-        .booking-card__dates
+        .booking-card__dates.js-booking-card__dates
             +dropdown({
                 isDouble: true,
                 title: ['Прибытие', 'Выезд'],
@@ -29,7 +29,7 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
                 }
             })
 
-        .booking-card__guests
+        .booking-card__guests.js-booking-card__guests
             +dropdown({
                 inputOptions: {
                     value: '3 гостя',

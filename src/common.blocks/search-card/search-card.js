@@ -13,22 +13,22 @@ class SearchCard {
 
   init() {
     const datePicker = new DatePicker({
-      element: this.getDateDropdown().querySelector('.date-picker'),
+      element: this.getDateDropdown().querySelector('.js-date-picker'),
       isTextDouble: true,
     });
     const dateDropdown = new Dropdown(this.getDateDropdown(), datePicker, 'ДД.ММ.ГГГГ');
 
-    const itemsCounter = new ItemsCounter(this.getGuestsDropdown().querySelector('.items-counter'), 'гостя');
+    const itemsCounter = new ItemsCounter(this.getGuestsDropdown().querySelector('.js-items-counter'), 'гостя');
     const guestsDropdown = new Dropdown(this.getGuestsDropdown(), itemsCounter, 'Сколько гостей');
   }
 
   getDateDropdown() {
-    const selector = '.search-card__dates .dropdown';
+    const selector = '.js-search-card__dates .js-dropdown';
     return this.elem.querySelector(selector);
   }
 
   getGuestsDropdown() {
-    const selector = ' .search-card__guests .dropdown';
+    const selector = ' .js-search-card__guests .js-dropdown';
     return this.elem.querySelector(selector);
   }
 }

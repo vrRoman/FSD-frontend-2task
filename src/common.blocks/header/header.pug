@@ -3,11 +3,11 @@ include ../navigation/navigation
 
 
 mixin header({userName, activeLink = 0} = {})
-    header.header
+    header.header.js-header
         .header__container
             a.header__logo(href='landing-page.html')
                 img(src='images/logo.svg', alt='logo')
-            .header__menu
+            .header__menu.js-header__menu
                 nav.header__nav-container
                     +navigation({
                         activeLinkIndex: activeLink,
@@ -32,7 +32,8 @@ mixin header({userName, activeLink = 0} = {})
                                 name: 'Соглашения',
                                 isDropdown: true
                             }
-                        ]
+                        ],
+                        withJs: true,
                     })
 
                 if userName
@@ -50,7 +51,7 @@ mixin header({userName, activeLink = 0} = {})
                             text: 'Зарегистрироваться',
                             link: 'login-and-registration.html'
                         })
-            .header__hamburger
+            .header__hamburger.js-header__hamburger
                 span.header__hamburger-line
                 span.header__hamburger-line
                 span.header__hamburger-line

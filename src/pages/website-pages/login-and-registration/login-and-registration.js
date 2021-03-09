@@ -9,11 +9,11 @@ import './images/login-registration-bg.jpg';
 import '@/common.blocks/signup-card/signup-card';
 import '@/common.blocks/header/init';
 
-const $loginButtons = $('.signup-card__account-exists .button');
-const $signupButtons = $('.signin-card__account-not-exists .button');
-const $signinCard = $('.login-and-registration__signin-card');
-const $signupCard = $('.login-and-registration__signup-card');
-const $pageElem = $('.login-and-registration');
+const $loginButtons = $('.js-signup-card__account-exists .js-button');
+const $signupButtons = $('.js-signin-card__account-not-exists .js-button');
+const $signinCard = $('.js-login-and-registration__signin-card');
+const $signupCard = $('.js-login-and-registration__signup-card');
+const $pageElem = $('.js-login-and-registration');
 const pageElemLoginClass = 'login-and-registration_login';
 
 function showSigninCard() {

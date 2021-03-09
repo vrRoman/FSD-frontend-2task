@@ -3,7 +3,7 @@ include ../rate-button/rate-button
 
 
 mixin room-card({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'})
-    .room-card
+    .room-card.js-room-card
         -
             let sliderClassName = 'room-card__slider js-room-card__slider';
             if (hasSliderArrows) {

@@ -2,6 +2,6 @@
 
 import Header from '@/common.blocks/header/header';
 
-$('.header').each(function init() {
+$('.js-header').each(function init() {
   const header = new Header(this);
 });

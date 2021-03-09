@@ -31,12 +31,13 @@ mixin signin-card
                 textColor: 'white',
             }
         })
-        .signin-card__account-not-exists
+        .signin-card__account-not-exists.js-signin-card__account-not-exists
             span Нет аккаунта на Toxin?
             +button({
                 text: 'Создать',
                 hasLink: false,
                 modifiers: {
                     isSecondary: true
-                }
+                },
+                withJs: true,
             })

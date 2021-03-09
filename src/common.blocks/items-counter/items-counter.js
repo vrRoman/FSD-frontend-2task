@@ -56,17 +56,17 @@ class ItemsCounter {
   }
 
   getClearBtn() {
-    const clearBtnSelector = '.items-counter__clear-button';
+    const clearBtnSelector = '.js-items-counter__clear-button';
     return this.elem.querySelector(clearBtnSelector);
   }
 
   getApplyBtn() {
-    const applyBtnSelector = '.items-counter__apply-button';
+    const applyBtnSelector = '.js-items-counter__apply-button';
     return this.elem.querySelector(applyBtnSelector);
   }
 
   getItemElems() {
-    const itemSelector = '.counting-item';
+    const itemSelector = '.js-counting-item';
     return this.elem.querySelectorAll(itemSelector);
   }
 

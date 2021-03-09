@@ -20,7 +20,7 @@ block content
         .container
             .search-room__container
                 aside.search-room__params
-                    .search-room__params-date
+                    .search-room__params-date.js-search-room__params-date
                         +dropdown({
                             title: 'Даты пребывания в отеле',
                             inputOptions: {
@@ -33,7 +33,7 @@ block content
                             isShort: true
                         })
 
-                    .search-room__params-guests
+                    .search-room__params-guests.js-search-room__params-guests
                         +dropdown({
                             title: 'Гости',
                             inputOptions: {
@@ -102,7 +102,7 @@ block content
                             ],
                             isRich: true
                         })
-                    .search-room__params-facilities
+                    .search-room__params-facilities.js-search-room__params-facilities
                         +dropdown({
                             title: 'Удобства номера',
                             inputOptions: {

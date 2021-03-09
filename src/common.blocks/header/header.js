@@ -14,17 +14,17 @@ class Header {
   }
 
   getHamburger() {
-    const hamburgerSelector = '.header__hamburger';
+    const hamburgerSelector = '.js-header__hamburger';
     return this.elem.querySelector(hamburgerSelector);
   }
 
   getMenu() {
-    const menuSelector = '.header__menu';
+    const menuSelector = '.js-header__menu';
     return this.elem.querySelector(menuSelector);
   }
 
   getNav() {
-    const navSelector = '.navigation';
+    const navSelector = '.js-navigation';
     return this.elem.querySelector(navSelector);
   }
 

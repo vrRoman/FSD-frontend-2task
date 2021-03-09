@@ -73,12 +73,13 @@ mixin signup-card
                 textColor: 'white'
             }
         })
-        .signup-card__account-exists
+        .signup-card__account-exists.js-signup-card__account-exists
             span Уже есть аккаунт на Toxin
             +button({
                 text: 'Войти',
                 hasLink: false,
                 modifiers: {
                     isSecondary: true
-                }
+                },
+                withJs: true,
             })

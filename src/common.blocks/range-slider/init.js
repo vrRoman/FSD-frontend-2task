@@ -2,6 +2,6 @@
 
 import RangeSlider from '@/common.blocks/range-slider/range-slider';
 
-$('.range-slider').each(function init() {
+$('.js-range-slider').each(function init() {
   const rangeSlider = new RangeSlider(this);
 });

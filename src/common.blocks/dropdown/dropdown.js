@@ -69,17 +69,17 @@ class Dropdown {
   }
 
   getPopup() {
-    const popupSelector = '.dropdown__popup';
+    const popupSelector = '.js-dropdown__popup';
     return this.elem.querySelector(popupSelector);
   }
 
   getTextFields() {
-    const textFieldSelector = '.dropdown__text-field .text-field';
+    const textFieldSelector = '.js-dropdown__text-field .js-text-field';
     return this.elem.querySelectorAll(textFieldSelector);
   }
 
   getTextFieldInputs() {
-    const inputSelector = '.text-field__input';
+    const inputSelector = '.js-text-field__input';
     const inputs = [];
     this.textFields.forEach((elem) => {
       inputs.push(elem.querySelector(inputSelector));

@@ -36,20 +36,20 @@ class CountingItem {
   }
 
   getNameElem() {
-    const nameElemSelector = '.counting-item__name .heading';
+    const nameElemSelector = '.js-counting-item__name .js-heading';
     return this.elem.querySelector(nameElemSelector);
   }
 
   getPlusBtn() {
-    return this.elem.querySelector('.counting-item__change-button_action_increase');
+    return this.elem.querySelector('.js-counting-item__change-button_action_increase');
   }
 
   getMinusBtn() {
-    return this.elem.querySelector('.counting-item__change-button_action_decrease');
+    return this.elem.querySelector('.js-counting-item__change-button_action_decrease');
   }
 
   getValueElem() {
-    return this.elem.querySelector('.counting-item__value .heading');
+    return this.elem.querySelector('.js-counting-item__value .js-heading');
   }
 
   setValue(newValue) {

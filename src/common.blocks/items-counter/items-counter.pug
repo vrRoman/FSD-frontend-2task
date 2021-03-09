@@ -4,7 +4,7 @@ include ../button/button
 
 mixin items-counter({items, withoutButtons = false})
     -
-        let className = 'items-counter';
+        let className = 'items-counter js-items-counter';
         if (withoutButtons) {
             className += ' items-counter_without-buttons';
         }
@@ -17,7 +17,7 @@ mixin items-counter({items, withoutButtons = false})
                         value: item.value
                     })
         .items-counter__button-panel
-            .items-counter__clear-button
+            .items-counter__clear-button.js-items-counter__clear-button
                 +button({
                     text: 'Очистить',
                     hasLink: false,
@@ -26,7 +26,7 @@ mixin items-counter({items, withoutButtons = false})
                         textColor: 'gray'
                     }
                 })
-            .items-counter__apply-button
+            .items-counter__apply-button.js-items-counter__apply-button
                 +button({
                     text: 'Применить',
                     hasLink: false,

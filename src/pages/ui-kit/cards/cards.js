@@ -19,7 +19,7 @@ import '@/common.blocks/search-card/init';
 import '@/common.blocks/room-card/init';
 import DatePicker from '@/common.blocks/date-picker/date-picker';
 
-const datepickerElem = document.querySelector('.date-picker-demo .js-date-picker');
+const datepickerElem = document.querySelector('.js-date-picker-demo .js-date-picker');
 const datepicker = new DatePicker({
   element: datepickerElem,
   initialDate: [new Date(2019, 7, 19), new Date(2019, 7, 23)],

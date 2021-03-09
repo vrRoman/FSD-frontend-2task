@@ -23,22 +23,22 @@ class BookingCard {
   }
 
   getDatePickerElem() {
-    const datePickerSelector = '.booking-card__dates .dropdown .dropdown__popup .date-picker';
+    const datePickerSelector = '.js-booking-card__dates .js-dropdown .js-dropdown__popup .js-date-picker';
     return this.elem.querySelector(datePickerSelector);
   }
 
   getDateDropdownElem() {
-    const dateDropdownSelector = '.booking-card__dates .dropdown';
+    const dateDropdownSelector = '.js-booking-card__dates .js-dropdown';
     return this.elem.querySelector(dateDropdownSelector);
   }
 
   getItemsCounterElem() {
-    const itemsCounterElemSelector = '.booking-card__guests .dropdown .dropdown__popup .items-counter';
+    const itemsCounterElemSelector = '.js-booking-card__guests .js-dropdown .js-dropdown__popup .js-items-counter';
     return this.elem.querySelector(itemsCounterElemSelector);
   }
 
   getGuestsDropdownElem() {
-    const guestsDropdownSelector = '.booking-card__guests .dropdown';
+    const guestsDropdownSelector = '.js-booking-card__guests .js-dropdown';
     return this.elem.querySelector(guestsDropdownSelector);
   }
 }

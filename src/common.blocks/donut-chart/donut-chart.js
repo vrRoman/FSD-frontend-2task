@@ -53,7 +53,7 @@ class DonutChart {
   }
 
   getChartElem() {
-    const chartSelector = '.donut-chart__chart canvas';
+    const chartSelector = '.js-donut-chart__canvas';
     return this.elem.querySelector(chartSelector);
   }
 }
