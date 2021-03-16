@@ -1,6 +1,8 @@
 class CountingItem {
-  constructor(elem) {
+  constructor(elem, wordsDeclension = null) {
     this.elem = elem;
+    this.wordsDeclension = wordsDeclension;
+
     this.plusBtn = this.getPlusBtn();
     this.minusBtn = this.getMinusBtn();
     this.valueElem = this.getValueElem();
@@ -12,6 +14,22 @@ class CountingItem {
     this.initButtons();
 
     this.observers = [];
+  }
+
+  static declinationByNumber(number, words) {
+    const lastTwoDigits = Math.abs(number) % 100;
+    const lastDigit = lastTwoDigits % 10;
+
+    if (lastTwoDigits > 10 && lastTwoDigits < 20) {
+      return words[2];
+    }
+    if (lastDigit > 1 && lastDigit < 5) {
+      return words[1];
+    }
+    if (lastDigit === 1) {
+      return words[0];
+    }
+    return words[2];
   }
 
   subscribe(observer) {
@@ -32,7 +50,14 @@ class CountingItem {
     if (this.value === 0) {
       return '';
     }
-    return `${this.value} ${this.name}`;
+
+    let { name } = this;
+
+    if (this.wordsDeclension) {
+      name = CountingItem.declinationByNumber(this.value, this.wordsDeclension);
+    }
+
+    return `${this.value} ${name}`;
   }
 
   getNameElem() {
