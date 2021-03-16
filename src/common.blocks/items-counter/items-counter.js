@@ -1,13 +1,18 @@
 import CountingItem from '@/common.blocks/counting-item/counting-item';
 
 class ItemsCounter {
-  constructor(elem, wordToValueTextReplace = null) {
-    this.elem = elem;
+  constructor({
+    element,
+    wordForValueTextReplacing = null,
+    itemIndexForSeparateCount = null,
+  }) {
+    this.elem = element;
     this.clearBtn = this.getClearBtn();
     this.applyBtn = this.getApplyBtn();
     this.itemElems = this.getItemElems();
     this.countingItemInstances = this.createCountingItemInstances();
-    this.wordToValueTextReplace = wordToValueTextReplace;
+    this.wordForValueTextReplacing = wordForValueTextReplacing;
+    this.itemIndexForSeparateCount = itemIndexForSeparateCount;
     this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
 
     this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
@@ -110,12 +115,27 @@ class ItemsCounter {
 
   convertValuesToText() {
     let fullText = '';
-    if (this.wordToValueTextReplace) {
-      let valuesSum = 0;
-      this.countingItemInstances.forEach((inst) => {
-        valuesSum += inst.getValue();
-      });
-      fullText += `${valuesSum} ${this.wordToValueTextReplace}`;
+    if (this.wordForValueTextReplacing) {
+      if (this.itemIndexForSeparateCount !== null) {
+        let valuesSumWithoutSeparateItem = 0;
+        this.countingItemInstances.forEach((inst, index) => {
+          if (index !== this.itemIndexForSeparateCount) {
+            valuesSumWithoutSeparateItem += inst.getValue();
+          }
+        });
+        fullText += `${valuesSumWithoutSeparateItem} ${this.wordForValueTextReplacing}`;
+
+        const separateItem = this.countingItemInstances[this.itemIndexForSeparateCount];
+        if (separateItem.getValue()) {
+          fullText += `, ${separateItem.getValueText()}`;
+        }
+      } else {
+        let valuesSum = 0;
+        this.countingItemInstances.forEach((inst) => {
+          valuesSum += inst.getValue();
+        });
+        fullText += `${valuesSum} ${this.wordForValueTextReplacing}`;
+      }
     } else {
       const maxItemsNumInText = 2;
       const textsList = [];
