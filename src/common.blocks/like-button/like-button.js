@@ -1,7 +1,7 @@
 class LikeButton {
   constructor(elem) {
     this.elem = elem;
-    this.value = +this.getNumberElem().innerText;
+    this.value = Number(this.getNumberElem().innerText);
     this.activeClass = 'like-button_active';
     this.handleLikeButtonClick = this.handleLikeButtonClick.bind(this);
 

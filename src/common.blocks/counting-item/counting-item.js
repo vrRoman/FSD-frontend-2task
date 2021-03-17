@@ -6,7 +6,7 @@ class CountingItem {
     this.plusBtn = this.getPlusBtn();
     this.minusBtn = this.getMinusBtn();
     this.valueElem = this.getValueElem();
-    this.value = +this.valueElem.innerText;
+    this.value = Number(this.valueElem.innerText);
     this.name = this.getNameElem().innerText.toLowerCase();
     this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
     this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);

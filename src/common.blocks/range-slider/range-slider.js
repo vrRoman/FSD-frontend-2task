@@ -44,8 +44,10 @@ class RangeSlider {
   }
 
   updateValueElem() {
-    this.getValueElem().innerText = `${RangeSlider.prettifyNum(this.values[0]) + this.rubSymbol} - `
-      + `${RangeSlider.prettifyNum(this.values[1])}${this.rubSymbol}`;
+    const firstPrice = `${RangeSlider.prettifyNum(this.values[0])}${this.rubSymbol}`;
+    const secondPrice = `${RangeSlider.prettifyNum(this.values[1])}${this.rubSymbol}`;
+
+    this.getValueElem().innerText = `${firstPrice} - ${secondPrice}`;
   }
 }
 
