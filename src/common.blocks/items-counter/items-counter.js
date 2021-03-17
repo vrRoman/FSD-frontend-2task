@@ -123,11 +123,16 @@ class ItemsCounter {
             valuesSumWithoutSeparateItem += inst.getValue();
           }
         });
-        fullText += `${valuesSumWithoutSeparateItem} ${this.wordForValueTextReplacing}`;
+        fullText = `${valuesSumWithoutSeparateItem} ${this.wordForValueTextReplacing}`;
 
         const separateItem = this.countingItemInstances[this.itemIndexForSeparateCount];
+
         if (separateItem.getValue()) {
-          fullText += `, ${separateItem.getValueText()}`;
+          if (valuesSumWithoutSeparateItem === 0) {
+            fullText = separateItem.getValueText();
+          } else {
+            fullText += `, ${separateItem.getValueText()}`;
+          }
         }
       } else {
         let valuesSum = 0;
