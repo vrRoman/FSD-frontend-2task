@@ -10,24 +10,32 @@ class Dropdown {
     this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
     this.listening = false;
 
-    if (!this.isPopupHidden()) {
-      this.textFields.forEach((el) => {
-        el.classList.add(...this.activeTextFieldClasses);
-      });
-    }
+    this.updateTextFieldsClasses();
 
     this.handleWindowClick = this.handleWindowClick.bind(this);
 
     this.addWindowListener();
 
-    if (blockInPopupInstance) {
-      this.blockInPopupInstance = blockInPopupInstance;
+    this.blockInPopupInstance = blockInPopupInstance;
 
+    this.subscribeToPopupInstance();
+  }
+
+  subscribeToPopupInstance() {
+    if (this.blockInPopupInstance) {
       try {
         this.blockInPopupInstance.subscribe(this);
       } catch (err) {
         throw new Error('blockInPopupInstance must have a subscribe method');
       }
+    }
+  }
+
+  updateTextFieldsClasses() {
+    if (!this.isPopupHidden()) {
+      this.textFields.forEach((el) => {
+        el.classList.add(...this.activeTextFieldClasses);
+      });
     }
   }
 
