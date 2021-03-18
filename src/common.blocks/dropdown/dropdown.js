@@ -8,7 +8,7 @@ class Dropdown {
     this.hiddenPopupClass = 'dropdown__popup_hidden';
     this.doubleDropdownClass = 'dropdown_double';
     this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
-    this.listening = false;
+    this.isListening = false;
 
     this.updateTextFieldsClasses();
 
@@ -109,7 +109,7 @@ class Dropdown {
 
   handleWindowClick(evt) {
     if (evt.path.includes(this.elem)) {
-      this.listening = true;
+      this.isListening = true;
       if (!evt.path.includes(this.popup)) {
         if (this.isPopupHidden()) {
           this.popup.classList.remove(this.hiddenPopupClass);
@@ -123,7 +123,7 @@ class Dropdown {
           });
         }
       }
-    } else if (this.listening) {
+    } else if (this.isListening) {
       this.popup.classList.add(this.hiddenPopupClass);
       this.textFields.forEach((el) => {
         el.classList.remove(...this.activeTextFieldClasses);
