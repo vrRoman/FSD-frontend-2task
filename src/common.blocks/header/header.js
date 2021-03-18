@@ -7,7 +7,8 @@ class Header {
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
     this.columnNavClass = 'navigation_in-column';
-    this.updateHeader = this.updateHeader.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.handleWindowLoad = this.handleWindowLoad.bind(this);
     this.handleWindowClick = this.handleWindowClick.bind(this);
 
     this.init();
@@ -29,9 +30,17 @@ class Header {
   }
 
   init() {
-    window.addEventListener('resize', this.updateHeader);
+    window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('click', this.handleWindowClick);
-    window.addEventListener('load', this.updateHeader);
+    window.addEventListener('load', this.handleWindowLoad);
+  }
+
+  handleWindowResize() {
+    this.updateHeader();
+  }
+
+  handleWindowLoad() {
+    this.updateHeader();
   }
 
   updateHeader() {

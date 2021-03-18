@@ -16,16 +16,16 @@ const $signupCard = $('.js-login-and-registration__signup-card');
 const $pageElem = $('.js-login-and-registration');
 const pageElemLoginClass = 'login-and-registration_login';
 
-function showSigninCard() {
+function handleLoginButtonsClick() {
   $signupCard.hide();
   $signinCard.show();
   $pageElem.toggleClass(pageElemLoginClass);
 }
-function showSignupCard() {
+function handleSignupButtonsClick() {
   $signupCard.show();
   $signinCard.hide();
   $pageElem.toggleClass(pageElemLoginClass);
 }
 
-$loginButtons.click(showSigninCard);
-$signupButtons.click(showSignupCard);
+$loginButtons.click(handleLoginButtonsClick);
+$signupButtons.click(handleSignupButtonsClick);

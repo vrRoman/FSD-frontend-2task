@@ -8,7 +8,7 @@ class RangeSlider {
 
     this.elem = elem;
     this.values = [5000, 10000];
-    this.onSlide = this.onSlide.bind(this);
+    this.handleSliderValuesChanged = this.handleSliderValuesChanged.bind(this);
 
     this.init();
   }
@@ -19,7 +19,7 @@ class RangeSlider {
       min: 200,
       max: 15400,
       values: this.values,
-      slide: this.onSlide,
+      slide: this.handleSliderValuesChanged,
     });
     this.updateValueElem();
   }
@@ -38,7 +38,7 @@ class RangeSlider {
     return this.elem.querySelector(this.valueSelector);
   }
 
-  onSlide(event, ui) {
+  handleSliderValuesChanged(event, ui) {
     this.values = [...ui.values];
     this.updateValueElem();
   }

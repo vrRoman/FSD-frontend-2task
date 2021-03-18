@@ -41,7 +41,7 @@ class DatePicker {
     this.extensionRangeObject = {};
     this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
     this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
-    this.onSelect = this.onSelect.bind(this);
+    this.handleDateSelect = this.handleDateSelect.bind(this);
     this.isTextDouble = isTextDouble;
     this.defaultOptions = {
       range: 'period',
@@ -56,7 +56,7 @@ class DatePicker {
       dayNames: this.dayNames,
       dayNamesShort: this.dayNamesShort,
       dayNamesMin: this.dayNamesMin,
-      onSelect: this.onSelect,
+      onSelect: this.handleDateSelect,
     };
     this.options = {
       ...this.defaultOptions,
@@ -142,7 +142,7 @@ class DatePicker {
     });
   }
 
-  onSelect(dateText, inst, extensionRange) {
+  handleDateSelect(dateText, inst, extensionRange) {
     this.extensionRangeObject = extensionRange;
     setTimeout(() => {
       this.getApplyBtn().click(this.handleApplyButtonClick);
