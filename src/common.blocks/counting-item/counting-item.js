@@ -14,6 +14,16 @@ class CountingItem {
     this.initButtons();
 
     this.observers = [];
+
+    this.addToJqueryData();
+  }
+
+  addToJqueryData() {
+    if ($) {
+      $(this.elem).data({
+        instance: this,
+      });
+    }
   }
 
   static declinationByNumber(number, words) {

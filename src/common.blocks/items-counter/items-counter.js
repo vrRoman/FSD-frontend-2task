@@ -1,4 +1,5 @@
 import CountingItem from '@/common.blocks/counting-item/counting-item';
+import '@/common.blocks/counting-item/init';
 
 class ItemsCounter {
   constructor(element) {
@@ -6,7 +7,7 @@ class ItemsCounter {
     this.clearBtn = this.getClearBtn();
     this.applyBtn = this.getApplyBtn();
     this.itemElems = this.getItemElems();
-    this.countingItemInstances = this.createCountingItemInstances();
+    this.countingItemInstances = this.getCountingItemInstances();
     this.wordForValueTextReplacing = JSON.parse(this.elem.dataset.replaceText);
     this.itemIndexForSeparateCount = JSON.parse(this.elem.dataset.separateItem);
     this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
@@ -184,13 +185,11 @@ class ItemsCounter {
     this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
   }
 
-  createCountingItemInstances() {
+  getCountingItemInstances() {
     const instances = [];
 
     this.itemElems.forEach((elem) => {
-      const countingItem = new CountingItem(elem);
-
-      instances.push(countingItem);
+      instances.push($(elem).data('instance'));
     });
 
     return instances;
