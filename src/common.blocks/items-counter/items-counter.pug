@@ -2,19 +2,24 @@ include ../counting-item/counting-item
 include ../button/button
 
 
-mixin items-counter({items, withoutButtons = false})
+mixin items-counter({items, withoutButtons = false, wordForValueTextReplacing = null, itemIndexForSeparateCount = null})
     -
         let className = 'items-counter js-items-counter';
         if (withoutButtons) {
             className += ' items-counter_without-buttons';
         }
-    div(class=className)
+    div(
+        class=className
+        data-replace-text=JSON.stringify(wordForValueTextReplacing)
+        data-separate-item=JSON.stringify(itemIndexForSeparateCount)
+    )
         .items-counter__items-list
             each item in items
                 .items-counter__item
                     +counting-item({
                         name: item.name,
-                        value: item.value
+                        value: item.value,
+                        nameDeclensions: item.nameDeclensions,
                     })
         .items-counter__button-panel
             .items-counter__clear-button.js-items-counter__clear-button

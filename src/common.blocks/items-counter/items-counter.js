@@ -1,18 +1,14 @@
 import CountingItem from '@/common.blocks/counting-item/counting-item';
 
 class ItemsCounter {
-  constructor({
-    element,
-    wordForValueTextReplacing = null,
-    itemIndexForSeparateCount = null,
-  }) {
+  constructor(element) {
     this.elem = element;
     this.clearBtn = this.getClearBtn();
     this.applyBtn = this.getApplyBtn();
     this.itemElems = this.getItemElems();
     this.countingItemInstances = this.createCountingItemInstances();
-    this.wordForValueTextReplacing = wordForValueTextReplacing;
-    this.itemIndexForSeparateCount = itemIndexForSeparateCount;
+    this.wordForValueTextReplacing = JSON.parse(this.elem.dataset.replaceText);
+    this.itemIndexForSeparateCount = JSON.parse(this.elem.dataset.separateItem);
     this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
 
     this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
@@ -24,6 +20,16 @@ class ItemsCounter {
 
     this.observers = [];
     this.subscribeToItems();
+
+    this.addToJqueryData();
+  }
+
+  addToJqueryData() {
+    if ($) {
+      $(this.elem).data({
+        instance: this,
+      });
+    }
   }
 
   notify(action) {
@@ -123,16 +129,23 @@ class ItemsCounter {
             valuesSumWithoutSeparateItem += inst.getValue();
           }
         });
-        fullText = `${valuesSumWithoutSeparateItem} ${this.wordForValueTextReplacing}`;
+
+        let word = this.wordForValueTextReplacing;
+        if (Array.isArray(this.wordForValueTextReplacing)) {
+          word = CountingItem.declinationByNumber(
+            valuesSumWithoutSeparateItem, this.wordForValueTextReplacing,
+          );
+        }
 
         const separateItem = this.countingItemInstances[this.itemIndexForSeparateCount];
 
-        if (separateItem.getValue()) {
-          if (valuesSumWithoutSeparateItem === 0) {
-            fullText = separateItem.getValueText();
-          } else {
+        if (valuesSumWithoutSeparateItem) {
+          fullText = `${valuesSumWithoutSeparateItem} ${word}`;
+          if (separateItem.getValue()) {
             fullText += `, ${separateItem.getValueText()}`;
           }
+        } else if (separateItem.getValue()) {
+          fullText += separateItem.getValueText();
         }
       } else {
         let valuesSum = 0;

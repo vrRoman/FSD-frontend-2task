@@ -2,12 +2,7 @@ import 'jquery-ui/ui/widgets/datepicker';
 import './jquery.datepicker.extension.range.min';
 
 class DatePicker {
-  constructor({
-    element,
-    options = {},
-    initialDate = [null, null],
-    isTextDouble = false,
-  }) {
+  constructor(element) {
     this.clearBtnHTML = `<button class="ui-datepicker-current 
       ui-state-default ui-corner-all 
       ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" 
@@ -42,15 +37,17 @@ class DatePicker {
     this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
     this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
     this.handleDateSelect = this.handleDateSelect.bind(this);
-    this.isTextDouble = isTextDouble;
-    this.defaultOptions = {
+    this.isTextDouble = JSON.parse(this.$elem[0].dataset.isTextDouble);
+    this.dateFormat = this.$elem[0].dataset.dateFormat ? this.$elem[0].dataset.dateFormat : 'dd.mm.yy';
+
+    this.options = {
       range: 'period',
       showButtonPanel: true,
       currentText: this.clearBtnHTML + this.applyBtnHTML,
       firstDay: 1,
       showOtherMonths: true,
       selectOtherMonths: true,
-      dateFormat: 'dd.mm.yy',
+      dateFormat: this.dateFormat,
       monthNames: this.monthNames,
       monthNamesShort: this.monthNamesShort,
       dayNames: this.dayNames,
@@ -58,15 +55,25 @@ class DatePicker {
       dayNamesMin: this.dayNamesMin,
       onSelect: this.handleDateSelect,
     };
-    this.options = {
-      ...this.defaultOptions,
-      ...options,
-    };
 
     this.init();
-    this.setDate(initialDate);
+
+    this.initialDate = JSON.parse(this.$elem[0].dataset.initialDate);
+    this.initialDate[0] = this.initialDate[0] ? new Date(this.initialDate[0]) : null;
+    this.initialDate[1] = this.initialDate[1] ? new Date(this.initialDate[1]) : null;
+    this.setDate(this.initialDate);
 
     this.observers = [];
+
+    this.addToJqueryData();
+  }
+
+  addToJqueryData() {
+    if ($) {
+      this.$elem.data({
+        instance: this,
+      });
+    }
   }
 
   init() {

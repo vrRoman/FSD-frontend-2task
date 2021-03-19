@@ -1,9 +1,9 @@
 class Dropdown {
-  constructor(elem, blockInPopupInstance = null, defaultInputValue = '') {
+  constructor(elem) {
     this.elem = elem;
     this.textFields = this.getTextFields();
     this.textFieldInputs = this.getTextFieldInputs();
-    this.defaultValue = defaultInputValue;
+    this.defaultValue = JSON.parse(this.elem.dataset.defaultValue);
     this.popup = this.getPopup();
     this.hiddenPopupClass = 'dropdown__popup_hidden';
     this.doubleDropdownClass = 'dropdown_double';
@@ -16,18 +16,16 @@ class Dropdown {
 
     this.addWindowListener();
 
-    this.blockInPopupInstance = blockInPopupInstance;
-
-    this.subscribeToPopupInstance();
+    this.findAndSubscribeToPopupInstance();
   }
 
-  subscribeToPopupInstance() {
-    if (this.blockInPopupInstance) {
-      try {
-        this.blockInPopupInstance.subscribe(this);
-      } catch (err) {
-        throw new Error('blockInPopupInstance must have a subscribe method');
-      }
+  findAndSubscribeToPopupInstance() {
+    const blockInPopup = $(this.popup).find('> *');
+    const instance = blockInPopup.data('instance');
+    try {
+      instance.subscribe(this);
+    } catch {
+      throw new Error('blockInPopup.data() must have a \'instance\' prop with subscribe property');
     }
   }
 

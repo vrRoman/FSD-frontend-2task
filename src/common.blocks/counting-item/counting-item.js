@@ -1,7 +1,7 @@
 class CountingItem {
-  constructor(elem, wordsDeclension = null) {
+  constructor(elem) {
     this.elem = elem;
-    this.wordsDeclension = wordsDeclension;
+    this.wordsDeclension = this.elem.dataset.words ? JSON.parse(this.elem.dataset.words) : null;
 
     this.plusBtn = this.getPlusBtn();
     this.minusBtn = this.getMinusBtn();
@@ -54,7 +54,7 @@ class CountingItem {
     let { name } = this;
 
     if (this.wordsDeclension) {
-      name = CountingItem.declinationByNumber(this.value, this.wordsDeclension);
+      name = CountingItem.declinationByNumber(this.value, this.wordsDeclension).toLowerCase();
     }
 
     return `${this.value} ${name}`;

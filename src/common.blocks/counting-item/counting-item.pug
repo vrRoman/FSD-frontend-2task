@@ -1,8 +1,8 @@
 include ../heading/heading
 
 
-mixin counting-item({name = '', value = 0} = {})
-    .counting-item.js-counting-item
+mixin counting-item({name = '', value = 0, nameDeclensions} = {})
+    .counting-item.js-counting-item(data-words=nameDeclensions ? JSON.stringify(nameDeclensions) : false)
         .counting-item__name.js-counting-item__name
             +heading({
                 text: name,
