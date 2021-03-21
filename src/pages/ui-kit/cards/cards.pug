@@ -27,22 +27,22 @@ block content
                     roomInfo: {
                         number: 888,
                         type: 'люкс',
-                        price: '9 990'
+                        price: '9 990',
                     },
                     bookingItems: [
                         {
                           text: '9 990₽ х 4 суток',
-                          price: '39 960'
+                          price: '39 960',
                         },
                         {
                           text: 'Сбор за услуги: скидка 2 179₽',
                           price: 0,
-                          hasTooltip: true
+                          hasTooltip: true,
                         },
                         {
                           text: 'Сбор за дополнительные услуги',
                           price: '300',
-                          hasTooltip: true
+                          hasTooltip: true,
                         }
                     ],
                     totalPrice: '38 081',
@@ -52,10 +52,10 @@ block content
 
         .cards__column.cards__column_size_small
             .cards__elem
-                .date-picker-demo.js-date-picker-demo
-                    +date-picker({
-                      withBorder: true,
-                    })
+                +date-picker({
+                    withBorder: true,
+                    initialDate: [new Date(2019, 7, 19), new Date(2019, 7, 23)],
+                })
 
             .cards__elem
                 +room-card({
@@ -65,10 +65,10 @@ block content
                     roomInfo: {
                         number: 888,
                         type: 'Люкс',
-                        price: '9 900'
+                        price: '9 900',
                     },
                     numOfComments: 145,
-                    rating: 5
+                    rating: 5,
                 })
 
             .cards__elem
@@ -78,8 +78,8 @@ block content
                     hasSliderArrows: false,
                     roomInfo: {
                         number: 840,
-                        price: '9 900'
+                        price: '9 900',
                     },
                     numOfComments: 65,
-                    rating: 4
+                    rating: 4,
                 })

@@ -20,25 +20,29 @@ block content
         .container
             .search-room__container
                 aside.search-room__params
-                    .search-room__params-date.js-search-room__params-date
+                    .search-room__params-date
                         +dropdown({
                             title: 'Даты пребывания в отеле',
                             inputOptions: {
                                 value: '19 авг - 23 авг',
-                                placeholder: 'Дата'
+                                placeholder: 'Дата',
                             },
                             popupMixinOptions: {
-                                name: 'date-picker'
+                                name: 'date-picker',
+                                params: {
+                                    dateFormat: 'd M',
+                                },
                             },
-                            isShort: true
+                            isShort: true,
+                            defaultInputValue: 'Даты пребывания в отеле',
                         })
 
-                    .search-room__params-guests.js-search-room__params-guests
+                    .search-room__params-guests
                         +dropdown({
                             title: 'Гости',
                             inputOptions: {
                                 value: '3 гостя, 1 младенец',
-                                placeholder: 'Удобства'
+                                placeholder: 'Удобства',
                             },
                             popupMixinOptions: {
                                 name: 'items-counter',
@@ -46,21 +50,23 @@ block content
                                     items: [
                                         {
                                             name: 'Взрослые',
-                                            value: 3
+                                            value: 3,
                                         },
                                         {
                                             name: 'Дети',
-                                            value: 0
+                                            value: 0,
                                         },
                                         {
                                             name: 'Младенцы',
-                                            value: 1
-                                        }
+                                            value: 1,
+                                        },
                                     ],
-                                    withoutButtons: true
-                                }
+                                    withoutButtons: true,
+                                    wordForValueTextReplacing: 'гостя',
+                                },
                             },
-                            isShort: true
+                            isShort: true,
+                            defaultInputValue: 'Сколько гостей',
                         })
 
                     .search-room__params-price
@@ -102,7 +108,7 @@ block content
                             ],
                             isRich: true
                         })
-                    .search-room__params-facilities.js-search-room__params-facilities
+                    .search-room__params-facilities
                         +dropdown({
                             title: 'Удобства номера',
                             inputOptions: {
@@ -115,21 +121,22 @@ block content
                                     items: [
                                         {
                                             name: 'Спальни',
-                                            value: '2'
+                                            value: '2',
                                         },
                                         {
                                             name: 'Кровати',
-                                            value: '2'
+                                            value: '2',
                                         },
                                         {
                                             name: 'Ванные комнаты',
-                                            value: '0'
-                                        }
+                                            value: '0',
+                                        },
                                     ],
-                                    withoutButtons: true
-                                }
+                                    withoutButtons: true,
+                                },
                             },
                             isShort: true,
+                            defaultInputValue: 'Удобства',
                         })
 
                     .search-room__params-list

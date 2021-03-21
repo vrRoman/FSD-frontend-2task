@@ -15,14 +15,17 @@ mixin search-card
             +dropdown({
                 inputOptions: {
                     value: 'ДД.ММ.ГГГГ',
-                    placeholder: 'ДД.ММ.ГГГГ'
+                    placeholder: 'ДД.ММ.ГГГГ',
                 },
                 popupMixinOptions: {
                     name: 'date-picker',
-                    params: {}
+                    params: {
+                        isTextDouble: true,
+                    },
                 },
                 title: ['Прибытие', 'Выезд'],
-                isDouble: true
+                isDouble: true,
+                defaultInputValue: 'ДД.ММ.ГГГГ',
             })
         .search-card__guests.js-search-card__guests
             +dropdown({
@@ -45,11 +48,13 @@ mixin search-card
                             {
                                 name: 'Младенцы',
                                 value: '0'
-                            }
-                        ]
-                    }
+                            },
+                        ],
+                        wordForValueTextReplacing: 'гостя',
+                    },
                 },
-                title: 'Гости'
+                title: 'Гости',
+                defaultInputValue: 'Сколько гостей',
             })
         +button({
             text: 'Подобрать номер',
@@ -57,5 +62,5 @@ mixin search-card
             modifiers: {
                 isLong: true,
                 textColor: 'white',
-            }
+            },
         })

@@ -8,4 +8,4 @@ import './landing-page.pug';
 import './images/landing-page-bg.jpg';
 
 import '@/common.blocks/header/init';
-import '@/common.blocks/search-card/init';
+import '@/common.blocks/search-card/search-card';

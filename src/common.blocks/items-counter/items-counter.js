@@ -153,7 +153,10 @@ class ItemsCounter {
         this.countingItemInstances.forEach((inst) => {
           valuesSum += inst.getValue();
         });
-        fullText += `${valuesSum} ${this.wordForValueTextReplacing}`;
+
+        if (valuesSum !== 0) {
+          fullText += `${valuesSum} ${this.wordForValueTextReplacing}`;
+        }
       }
     } else {
       const maxItemsNumInText = 2;

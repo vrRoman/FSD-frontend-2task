@@ -10,7 +10,7 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
     .booking-card.js-booking-card
         +room-info(roomInfo)
 
-        .booking-card__dates.js-booking-card__dates
+        .booking-card__dates
             +dropdown({
                 isDouble: true,
                 title: ['Прибытие', 'Выезд'],
@@ -25,11 +25,16 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
                     }
                 ],
                 popupMixinOptions: {
-                    name: 'date-picker'
-                }
+                    name: 'date-picker',
+                    params: {
+                      initialDate: [new Date(2019, 7, 19), new Date(2019, 7, 23)],
+                      isTextDouble: true,
+                    },
+                },
+                defaultInputValue: 'ДД.ММ.ГГГГ',
             })
 
-        .booking-card__guests.js-booking-card__guests
+        .booking-card__guests
             +dropdown({
                 inputOptions: {
                     value: '3 гостя',
@@ -52,9 +57,11 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
                                 value: 0,
                             },
                         ],
+                        wordForValueTextReplacing: 'гостя',
                     },
                 },
                 title: 'Гости',
+                defaultInputValue: 'Сколько гостей',
             })
 
         .booking-card__items
