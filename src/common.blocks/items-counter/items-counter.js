@@ -154,8 +154,15 @@ class ItemsCounter {
           valuesSum += inst.getValue();
         });
 
+        let word = this.wordForValueTextReplacing;
+        if (Array.isArray(this.wordForValueTextReplacing)) {
+          word = CountingItem.declinationByNumber(
+            valuesSum, this.wordForValueTextReplacing,
+          );
+        }
+
         if (valuesSum !== 0) {
-          fullText += `${valuesSum} ${this.wordForValueTextReplacing}`;
+          fullText += `${valuesSum} ${word}`;
         }
       }
     } else {
