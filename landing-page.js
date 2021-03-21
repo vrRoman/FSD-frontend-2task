@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 99);
+/******/ 	return __webpack_require__(__webpack_require__.s = 101);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10967,13 +10967,672 @@ return jQuery;
 /***/ }),
 
 /***/ 10:
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* (ignored) */
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _common_blocks_counting_item_init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var ItemsCounter = /*#__PURE__*/function () {
+  function ItemsCounter(element) {
+    _classCallCheck(this, ItemsCounter);
+
+    this.elem = element;
+    this.clearBtn = this.getClearBtn();
+    this.applyBtn = this.getApplyBtn();
+    this.itemElems = this.getItemElems();
+    this.countingItemInstances = this.getCountingItemInstances();
+    this.wordForValueTextReplacing = JSON.parse(this.elem.dataset.replaceText);
+    this.itemIndexForSeparateCount = JSON.parse(this.elem.dataset.separateItem);
+    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
+    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
+    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
+    this.addListenersToButtons();
+    this.updateClearButton();
+    this.observers = [];
+    this.subscribeToItems();
+    this.addToJqueryData();
+  }
+
+  _createClass(ItemsCounter, [{
+    key: "addToJqueryData",
+    value: function addToJqueryData() {
+      if ($) {
+        $(this.elem).data({
+          instance: this
+        });
+      }
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(action) {
+      if (action.type === 'UPDATE_VALUE') {
+        if (this.isWithoutButtons()) {
+          this.updateClearButton();
+          this.notify({
+            type: 'UPDATE_VALUE',
+            value: this.getValues(),
+            valueText: this.convertValuesToText()
+          });
+        }
+      }
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "getValues",
+    value: function getValues() {
+      var values = [];
+      this.countingItemInstances.forEach(function (inst) {
+        var value = inst.getValue();
+        values.push(value);
+      });
+      return values;
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      var clearBtnSelector = '.js-items-counter__clear-button';
+      return this.elem.querySelector(clearBtnSelector);
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      var applyBtnSelector = '.js-items-counter__apply-button';
+      return this.elem.querySelector(applyBtnSelector);
+    }
+  }, {
+    key: "getItemElems",
+    value: function getItemElems() {
+      var itemSelector = '.js-counting-item';
+      return this.elem.querySelectorAll(itemSelector);
+    }
+  }, {
+    key: "isWithoutButtons",
+    value: function isWithoutButtons() {
+      var withoutButtonsClass = 'items-counter_without-buttons';
+      return this.elem.classList.contains(withoutButtonsClass);
+    }
+  }, {
+    key: "updateClearButton",
+    value: function updateClearButton() {
+      var valuesSum = 0;
+      this.getValues().forEach(function (val) {
+        valuesSum += val;
+      });
+
+      if (valuesSum === 0) {
+        this.clearBtn.classList.add(this.clearBtnDisabledClass);
+      } else {
+        this.clearBtn.classList.remove(this.clearBtnDisabledClass);
+      }
+    }
+  }, {
+    key: "handleClearBtnClick",
+    value: function handleClearBtnClick() {
+      this.countingItemInstances.forEach(function (inst) {
+        inst.setValue(0);
+      });
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "handleApplyBtnClick",
+    value: function handleApplyBtnClick() {
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "convertValuesToText",
+    value: function convertValuesToText() {
+      var _this = this;
+
+      var fullText = '';
+
+      if (this.wordForValueTextReplacing) {
+        if (this.itemIndexForSeparateCount !== null) {
+          var valuesSumWithoutSeparateItem = 0;
+          this.countingItemInstances.forEach(function (inst, index) {
+            if (index !== _this.itemIndexForSeparateCount) {
+              valuesSumWithoutSeparateItem += inst.getValue();
+            }
+          });
+          var word = this.wordForValueTextReplacing;
+
+          if (Array.isArray(this.wordForValueTextReplacing)) {
+            word = _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].declinationByNumber(valuesSumWithoutSeparateItem, this.wordForValueTextReplacing);
+          }
+
+          var separateItem = this.countingItemInstances[this.itemIndexForSeparateCount];
+
+          if (valuesSumWithoutSeparateItem) {
+            fullText = "".concat(valuesSumWithoutSeparateItem, " ").concat(word);
+
+            if (separateItem.getValue()) {
+              fullText += ", ".concat(separateItem.getValueText());
+            }
+          } else if (separateItem.getValue()) {
+            fullText += separateItem.getValueText();
+          }
+        } else {
+          var valuesSum = 0;
+          this.countingItemInstances.forEach(function (inst) {
+            valuesSum += inst.getValue();
+          });
+          var _word = this.wordForValueTextReplacing;
+
+          if (Array.isArray(this.wordForValueTextReplacing)) {
+            _word = _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].declinationByNumber(valuesSum, this.wordForValueTextReplacing);
+          }
+
+          if (valuesSum !== 0) {
+            fullText += "".concat(valuesSum, " ").concat(_word);
+          }
+        }
+      } else {
+        var maxItemsNumInText = 2;
+        var textsList = [];
+        this.countingItemInstances.forEach(function (inst) {
+          if (inst.getValueText() !== '') {
+            textsList.push(inst.getValueText());
+          }
+        });
+        textsList.forEach(function (text, index) {
+          if (index !== 0) {
+            if (index < maxItemsNumInText) {
+              fullText += ', ';
+            }
+          }
+
+          if (index < maxItemsNumInText) {
+            fullText += text;
+          }
+
+          if (index === maxItemsNumInText - 1) {
+            fullText += '...';
+          }
+        });
+      }
+
+      return fullText;
+    }
+  }, {
+    key: "addListenersToButtons",
+    value: function addListenersToButtons() {
+      this.clearBtn.addEventListener('click', this.handleClearBtnClick);
+      this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
+    }
+  }, {
+    key: "getCountingItemInstances",
+    value: function getCountingItemInstances() {
+      var instances = [];
+      this.itemElems.forEach(function (elem) {
+        instances.push($(elem).data('instance'));
+      });
+      return instances;
+    }
+  }, {
+    key: "subscribeToItems",
+    value: function subscribeToItems() {
+      var _this2 = this;
+
+      this.countingItemInstances.forEach(function (inst) {
+        inst.subscribe(_this2);
+      });
+    }
+  }]);
+
+  return ItemsCounter;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (ItemsCounter);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./src/sass/main.sass
+var main = __webpack_require__(6);
+
+// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.sass
+var landing_page = __webpack_require__(85);
+
+// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.pug
+var landing_page_landing_page = __webpack_require__(86);
+
+// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/images/landing-page-bg.jpg
+/* harmony default export */ var landing_page_bg = (__webpack_require__.p + "images/landing-page-bg.jpg");
+// EXTERNAL MODULE: ./src/common.blocks/header/init.js
+var init = __webpack_require__(23);
+
+// EXTERNAL MODULE: ./src/common.blocks/search-card/search-card.js
+var search_card = __webpack_require__(45);
+
+// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
+/* eslint-disable no-unused-vars */
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ 11:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
+/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var DatePicker = /*#__PURE__*/function () {
+  function DatePicker(element) {
+    _classCallCheck(this, DatePicker);
+
+    this.clearBtnHTML = "<button class=\"ui-datepicker-current \n      ui-state-default ui-corner-all \n      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button\" \n      type=\"button\">\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C</button> ";
+    this.applyBtnHTML = "<button class=\"ui-datepicker-current\n      ui-state-default ui-corner-all\n      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button\"\n      type=\"button\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C</button> ";
+    this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    this.dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.$elem = $(element);
+    this.extensionRangeObject = {};
+    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
+    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
+    this.handleDateSelect = this.handleDateSelect.bind(this);
+    this.isTextDouble = JSON.parse(this.$elem[0].dataset.isTextDouble);
+    this.dateFormat = this.$elem[0].dataset.dateFormat ? this.$elem[0].dataset.dateFormat : 'dd.mm.yy';
+    this.options = {
+      range: 'period',
+      showButtonPanel: true,
+      currentText: this.clearBtnHTML + this.applyBtnHTML,
+      firstDay: 1,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      dateFormat: this.dateFormat,
+      monthNames: this.monthNames,
+      monthNamesShort: this.monthNamesShort,
+      dayNames: this.dayNames,
+      dayNamesShort: this.dayNamesShort,
+      dayNamesMin: this.dayNamesMin,
+      onSelect: this.handleDateSelect
+    };
+    this.init();
+    this.initialDate = JSON.parse(this.$elem[0].dataset.initialDate);
+    this.initialDate[0] = this.initialDate[0] ? new Date(this.initialDate[0]) : null;
+    this.initialDate[1] = this.initialDate[1] ? new Date(this.initialDate[1]) : null;
+    this.setDate(this.initialDate);
+    this.observers = [];
+    this.addToJqueryData();
+  }
+
+  _createClass(DatePicker, [{
+    key: "addToJqueryData",
+    value: function addToJqueryData() {
+      if ($) {
+        this.$elem.data({
+          instance: this
+        });
+      }
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      this.$elem.datepicker(this.options);
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-clear-button'));
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-apply-button'));
+    }
+  }, {
+    key: "updateClearBtn",
+    value: function updateClearBtn() {
+      if (this.$elem.datepicker('getDate')) {
+        this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
+      } else {
+        this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
+      }
+    }
+  }, {
+    key: "setDate",
+    value: function setDate(dateObjects) {
+      var dateTexts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [null, null];
+      this.$elem.datepicker('setDate', dateObjects);
+
+      var _dateObjects = _slicedToArray(dateObjects, 2);
+
+      this.extensionRangeObject.startDate = _dateObjects[0];
+      this.extensionRangeObject.endDate = _dateObjects[1];
+
+      var _dateTexts = _slicedToArray(dateTexts, 2);
+
+      this.extensionRangeObject.startDateText = _dateTexts[0];
+      this.extensionRangeObject.endDateText = _dateTexts[1];
+      this.getClearBtn().click(this.handleClearButtonClick);
+      this.getApplyBtn().click(this.handleApplyButtonClick);
+      this.updateClearBtn();
+    }
+  }, {
+    key: "handleApplyButtonClick",
+    value: function handleApplyButtonClick() {
+      var dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
+      var dateTexts = [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText];
+      this.setDate(dates, dateTexts);
+      var valueText;
+
+      if (this.isTextDouble) {
+        valueText = dateTexts;
+      } else if (dateTexts[0] && dateTexts[1]) {
+        valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
+      } else {
+        valueText = null;
+      }
+
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: dates,
+        valueText: valueText
+      });
+    }
+  }, {
+    key: "handleClearButtonClick",
+    value: function handleClearButtonClick() {
+      this.setDate([null, null]);
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: [null, null],
+        valueText: null
+      });
+    }
+  }, {
+    key: "handleDateSelect",
+    value: function handleDateSelect(dateText, inst, extensionRange) {
+      var _this = this;
+
+      this.extensionRangeObject = extensionRange;
+      setTimeout(function () {
+        _this.getApplyBtn().click(_this.handleApplyButtonClick);
+
+        _this.getClearBtn().click(_this.handleClearButtonClick);
+      }, 100);
+    }
+  }]);
+
+  return DatePicker;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
 
 /***/ 12:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Dropdown = /*#__PURE__*/function () {
+  function Dropdown(elem) {
+    _classCallCheck(this, Dropdown);
+
+    this.elem = elem;
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.defaultValue = JSON.parse(this.elem.dataset.defaultValue);
+    this.popup = this.getPopup();
+    this.hiddenPopupClass = 'dropdown__popup_hidden';
+    this.doubleDropdownClass = 'dropdown_double';
+    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
+    this.isListening = false;
+    this.updateTextFieldsClasses();
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.addWindowListener();
+    this.findAndSubscribeToPopupInstance();
+  }
+
+  _createClass(Dropdown, [{
+    key: "findAndSubscribeToPopupInstance",
+    value: function findAndSubscribeToPopupInstance() {
+      var blockInPopup = $(this.popup).find('> *');
+      var instance = blockInPopup.data('instance');
+
+      try {
+        instance.subscribe(this);
+      } catch (_unused) {
+        throw new Error('blockInPopup.data() must have a \'instance\' prop with subscribe property');
+      }
+    }
+  }, {
+    key: "updateTextFieldsClasses",
+    value: function updateTextFieldsClasses() {
+      var _this = this;
+
+      if (!this.isPopupHidden()) {
+        this.textFields.forEach(function (el) {
+          var _el$classList;
+
+          (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(action) {
+      var _this2 = this;
+
+      this.changeTextFieldValue(action.valueText);
+
+      if (action.type === 'CLICK_APPLY-BUTTON') {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList2;
+
+          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "changeTextFieldValue",
+    value: function changeTextFieldValue(text) {
+      var _this3 = this;
+
+      if (this.isDropdownDouble()) {
+        if (Array.isArray(text)) {
+          text.forEach(function (value, i) {
+            if (!value) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = value;
+            }
+          });
+        } else {
+          this.textFieldInputs.forEach(function (input, i) {
+            if (!text) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = text;
+            }
+          });
+        }
+      } else if (!text) {
+        this.textFieldInputs[0].value = this.defaultValue;
+      } else {
+        this.textFieldInputs[0].value = text;
+      }
+    }
+  }, {
+    key: "getPopup",
+    value: function getPopup() {
+      var popupSelector = '.js-dropdown__popup';
+      return this.elem.querySelector(popupSelector);
+    }
+  }, {
+    key: "getTextFields",
+    value: function getTextFields() {
+      var textFieldSelector = '.js-dropdown__text-field .js-text-field';
+      return this.elem.querySelectorAll(textFieldSelector);
+    }
+  }, {
+    key: "getTextFieldInputs",
+    value: function getTextFieldInputs() {
+      var inputSelector = '.js-text-field__input';
+      var inputs = [];
+      this.textFields.forEach(function (elem) {
+        inputs.push(elem.querySelector(inputSelector));
+      });
+      return inputs;
+    }
+  }, {
+    key: "isPopupHidden",
+    value: function isPopupHidden() {
+      return this.popup.classList.contains(this.hiddenPopupClass);
+    }
+  }, {
+    key: "isDropdownDouble",
+    value: function isDropdownDouble() {
+      return this.elem.classList.contains(this.doubleDropdownClass);
+    }
+  }, {
+    key: "addWindowListener",
+    value: function addWindowListener() {
+      window.addEventListener('click', this.handleWindowClick);
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      var _this4 = this;
+
+      if (evt.path.includes(this.elem)) {
+        this.isListening = true;
+
+        if (!evt.path.includes(this.popup)) {
+          if (this.isPopupHidden()) {
+            this.popup.classList.remove(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList3;
+
+              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          } else {
+            this.popup.classList.add(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList4;
+
+              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          }
+        }
+      } else if (this.isListening) {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList5;
+
+          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
+        });
+      }
+    }
+  }]);
+
+  return Dropdown;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10994,7 +11653,8 @@ var Header = /*#__PURE__*/function () {
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
     this.columnNavClass = 'navigation_in-column';
-    this.updateHeader = this.updateHeader.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.handleWindowLoad = this.handleWindowLoad.bind(this);
     this.handleWindowClick = this.handleWindowClick.bind(this);
     this.init();
   }
@@ -11020,9 +11680,19 @@ var Header = /*#__PURE__*/function () {
   }, {
     key: "init",
     value: function init() {
-      window.addEventListener('resize', this.updateHeader);
+      window.addEventListener('resize', this.handleWindowResize);
       window.addEventListener('click', this.handleWindowClick);
-      window.addEventListener('load', this.updateHeader);
+      window.addEventListener('load', this.handleWindowLoad);
+    }
+  }, {
+    key: "handleWindowResize",
+    value: function handleWindowResize() {
+      this.updateHeader();
+    }
+  }, {
+    key: "handleWindowLoad",
+    value: function handleWindowLoad() {
+      this.updateHeader();
     }
   }, {
     key: "updateHeader",
@@ -11061,7 +11731,21 @@ var Header = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 13:
+/***/ 14:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* eslint-disable no-unused-vars */
+
+$('.js-date-picker').each(function init() {
+  var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -11112,7 +11796,212 @@ return $.ui.keyCode = {
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* eslint-disable no-unused-vars */
+
+$('.js-items-counter').each(function init() {
+  var itemsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 18:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* eslint-disable no-unused-vars */
+
+$('.js-dropdown').each(function init() {
+  var dropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CountingItem = /*#__PURE__*/function () {
+  function CountingItem(elem) {
+    _classCallCheck(this, CountingItem);
+
+    this.elem = elem;
+    this.wordsDeclension = this.elem.dataset.words ? JSON.parse(this.elem.dataset.words) : null;
+    this.plusBtn = this.getPlusBtn();
+    this.minusBtn = this.getMinusBtn();
+    this.valueElem = this.getValueElem();
+    this.value = Number(this.valueElem.innerText);
+    this.name = this.getNameElem().innerText.toLowerCase();
+    this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
+    this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);
+    this.initButtons();
+    this.observers = [];
+    this.addToJqueryData();
+  }
+
+  _createClass(CountingItem, [{
+    key: "addToJqueryData",
+    value: function addToJqueryData() {
+      if ($) {
+        $(this.elem).data({
+          instance: this
+        });
+      }
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "getValue",
+    value: function getValue() {
+      return this.value;
+    }
+  }, {
+    key: "getValueText",
+    value: function getValueText() {
+      if (this.value === 0) {
+        return '';
+      }
+
+      var name = this.name;
+
+      if (this.wordsDeclension) {
+        name = CountingItem.declinationByNumber(this.value, this.wordsDeclension).toLowerCase();
+      }
+
+      return "".concat(this.value, " ").concat(name);
+    }
+  }, {
+    key: "getNameElem",
+    value: function getNameElem() {
+      var nameElemSelector = '.js-counting-item__name .js-heading';
+      return this.elem.querySelector(nameElemSelector);
+    }
+  }, {
+    key: "getPlusBtn",
+    value: function getPlusBtn() {
+      return this.elem.querySelector('.js-counting-item__change-button_action_increase');
+    }
+  }, {
+    key: "getMinusBtn",
+    value: function getMinusBtn() {
+      return this.elem.querySelector('.js-counting-item__change-button_action_decrease');
+    }
+  }, {
+    key: "getValueElem",
+    value: function getValueElem() {
+      return this.elem.querySelector('.js-counting-item__value .js-heading');
+    }
+  }, {
+    key: "setValue",
+    value: function setValue(newValue) {
+      if (newValue >= 0) {
+        this.value = newValue;
+        this.valueElem.innerText = this.value;
+
+        if (newValue === 0) {
+          this.minusBtn.classList.add('counting-item__change-button_disabled');
+        } else {
+          this.minusBtn.classList.remove('counting-item__change-button_disabled');
+        }
+      }
+
+      this.notify({
+        type: 'UPDATE_VALUE',
+        value: this.value,
+        valueText: this.getValueText()
+      });
+      return this.value;
+    }
+  }, {
+    key: "initButtons",
+    value: function initButtons() {
+      this.plusBtn.addEventListener('click', this.handlePlusBtnClick);
+      this.minusBtn.addEventListener('click', this.handleMinusBtnClick);
+
+      if (this.value === 0) {
+        this.minusBtn.classList.add('counting-item__change-button_disabled');
+      }
+    }
+  }, {
+    key: "handlePlusBtnClick",
+    value: function handlePlusBtnClick() {
+      var newValue = this.value + 1;
+      this.setValue(newValue);
+    }
+  }, {
+    key: "handleMinusBtnClick",
+    value: function handleMinusBtnClick() {
+      var newValue = this.value - 1;
+      this.setValue(newValue);
+    }
+  }], [{
+    key: "declinationByNumber",
+    value: function declinationByNumber(number, words) {
+      var lastTwoDigits = Math.abs(number) % 100;
+      var lastDigit = lastTwoDigits % 10;
+
+      if (lastTwoDigits > 10 && lastTwoDigits < 20) {
+        return words[2];
+      }
+
+      if (lastDigit > 1 && lastDigit < 5) {
+        return words[1];
+      }
+
+      if (lastDigit === 1) {
+        return words[0];
+      }
+
+      return words[2];
+    }
+  }]);
+
+  return CountingItem;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (CountingItem);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 20:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* eslint-disable no-unused-vars */
+
+$('.js-counting-item').each(function init() {
+  var countingItem = new _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 21:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// jscs:disable maximumLineLength
@@ -11142,7 +12031,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
 			__webpack_require__(3),
-			__webpack_require__(13)
+			__webpack_require__(15)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -13238,7 +14127,7 @@ return $.datepicker;
 
 /***/ }),
 
-/***/ 17:
+/***/ 22:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -13407,263 +14296,17 @@ var _datepickerExtension = function _datepickerExtension() {
 
 /***/ }),
 
-/***/ 18:
+/***/ 23:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* eslint-disable no-unused-vars */
 
 $('.js-header').each(function init() {
   var header = new _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
 });
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-
-/***/ 2:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Dropdown = /*#__PURE__*/function () {
-  function Dropdown(elem) {
-    var _this = this;
-
-    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-    _classCallCheck(this, Dropdown);
-
-    this.elem = elem;
-    this.textFields = this.getTextFields();
-    this.textFieldInputs = this.getTextFieldInputs();
-    this.defaultValue = defaultInputValue;
-    this.popup = this.getPopup();
-    this.hiddenPopupClass = 'dropdown__popup_hidden';
-    this.doubleDropdownClass = 'dropdown_double';
-    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
-    this.listening = false;
-
-    if (!this.isPopupHidden()) {
-      this.textFields.forEach(function (el) {
-        var _el$classList;
-
-        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
-      });
-    }
-
-    this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.addWindowListener();
-
-    if (blockInPopupInstance) {
-      this.blockInPopupInstance = blockInPopupInstance;
-
-      try {
-        this.blockInPopupInstance.subscribe(this);
-      } catch (err) {
-        throw new Error('blockInPopupInstance must have a subscribe method');
-      }
-    }
-  }
-
-  _createClass(Dropdown, [{
-    key: "update",
-    value: function update(action) {
-      var _this2 = this;
-
-      this.changeTextFieldValue(action.valueText);
-
-      if (action.type === 'CLICK_APPLY-BUTTON') {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList2;
-
-          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
-        });
-      }
-    }
-  }, {
-    key: "changeTextFieldValue",
-    value: function changeTextFieldValue(text) {
-      var _this3 = this;
-
-      if (this.isDropdownDouble()) {
-        if (Array.isArray(text)) {
-          text.forEach(function (value, i) {
-            if (!value) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = value;
-            }
-          });
-        } else {
-          this.textFieldInputs.forEach(function (input, i) {
-            if (!text) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = text;
-            }
-          });
-        }
-      } else if (!text) {
-        this.textFieldInputs[0].value = this.defaultValue;
-      } else {
-        this.textFieldInputs[0].value = text;
-      }
-    }
-  }, {
-    key: "getPopup",
-    value: function getPopup() {
-      var popupSelector = '.js-dropdown__popup';
-      return this.elem.querySelector(popupSelector);
-    }
-  }, {
-    key: "getTextFields",
-    value: function getTextFields() {
-      var textFieldSelector = '.js-dropdown__text-field .js-text-field';
-      return this.elem.querySelectorAll(textFieldSelector);
-    }
-  }, {
-    key: "getTextFieldInputs",
-    value: function getTextFieldInputs() {
-      var inputSelector = '.js-text-field__input';
-      var inputs = [];
-      this.textFields.forEach(function (elem) {
-        inputs.push(elem.querySelector(inputSelector));
-      });
-      return inputs;
-    }
-  }, {
-    key: "isPopupHidden",
-    value: function isPopupHidden() {
-      return this.popup.classList.contains(this.hiddenPopupClass);
-    }
-  }, {
-    key: "isDropdownDouble",
-    value: function isDropdownDouble() {
-      return this.elem.classList.contains(this.doubleDropdownClass);
-    }
-  }, {
-    key: "addWindowListener",
-    value: function addWindowListener() {
-      window.addEventListener('click', this.handleWindowClick);
-    }
-  }, {
-    key: "handleWindowClick",
-    value: function handleWindowClick(evt) {
-      var _this4 = this;
-
-      if (evt.path.includes(this.elem)) {
-        this.listening = true;
-
-        if (!evt.path.includes(this.popup)) {
-          if (this.isPopupHidden()) {
-            this.popup.classList.remove(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList3;
-
-              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          } else {
-            this.popup.classList.add(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList4;
-
-              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          }
-        }
-      } else if (this.listening) {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList5;
-
-          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
-        });
-      }
-    }
-  }]);
-
-  return Dropdown;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
-
-/***/ }),
-
-/***/ 27:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
-/* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-/* eslint-disable no-unused-vars */
-
-
-
-
-var SearchCard = /*#__PURE__*/function () {
-  function SearchCard(elem) {
-    _classCallCheck(this, SearchCard);
-
-    this.elem = elem;
-    this.init();
-  }
-
-  _createClass(SearchCard, [{
-    key: "init",
-    value: function init() {
-      var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]({
-        element: this.getDateDropdown().querySelector('.js-date-picker'),
-        isTextDouble: true
-      });
-      var dateDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getDateDropdown(), datePicker, 'ДД.ММ.ГГГГ');
-      var itemsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](this.getGuestsDropdown().querySelector('.js-items-counter'), 'гостя');
-      var guestsDropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"](this.getGuestsDropdown(), itemsCounter, 'Сколько гостей');
-    }
-  }, {
-    key: "getDateDropdown",
-    value: function getDateDropdown() {
-      var selector = '.js-search-card__dates .js-dropdown';
-      return this.elem.querySelector(selector);
-    }
-  }, {
-    key: "getGuestsDropdown",
-    value: function getGuestsDropdown() {
-      var selector = ' .js-search-card__guests .js-dropdown';
-      return this.elem.querySelector(selector);
-    }
-  }]);
-
-  return SearchCard;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (SearchCard);
 
 /***/ }),
 
@@ -13690,560 +14333,343 @@ return $.ui.version = "1.12.1";
 
 /***/ }),
 
-/***/ 43:
+/***/ 45:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(27);
-/* eslint-disable no-unused-vars */
+/* harmony import */ var _common_blocks_date_picker_init__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
+/* harmony import */ var _common_blocks_items_counter_init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
+/* harmony import */ var _common_blocks_dropdown_init__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18);
 
-$('.js-search-card').each(function init() {
-  var searchCard = new _common_blocks_search_card_search_card__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
-});
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+
 
 /***/ }),
 
-/***/ 5:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
-/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
-/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var DatePicker = /*#__PURE__*/function () {
-  function DatePicker(_ref) {
-    var element = _ref.element,
-        _ref$options = _ref.options,
-        options = _ref$options === void 0 ? {} : _ref$options,
-        _ref$initialDate = _ref.initialDate,
-        initialDate = _ref$initialDate === void 0 ? [null, null] : _ref$initialDate,
-        _ref$isTextDouble = _ref.isTextDouble,
-        isTextDouble = _ref$isTextDouble === void 0 ? false : _ref$isTextDouble;
-
-    _classCallCheck(this, DatePicker);
-
-    this.clearBtnHTML = "<button class=\"ui-datepicker-current \n      ui-state-default ui-corner-all \n      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button\" \n      type=\"button\">\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C</button> ";
-    this.applyBtnHTML = "<button class=\"ui-datepicker-current\n      ui-state-default ui-corner-all\n      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button\"\n      type=\"button\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C</button> ";
-    this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-    this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-    this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-    this.dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    this.dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    this.$elem = $(element);
-    this.extensionRangeObject = {};
-    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
-    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-    this.isTextDouble = isTextDouble;
-    this.defaultOptions = {
-      range: 'period',
-      showButtonPanel: true,
-      currentText: this.clearBtnHTML + this.applyBtnHTML,
-      firstDay: 1,
-      showOtherMonths: true,
-      selectOtherMonths: true,
-      dateFormat: 'dd.mm.yy',
-      monthNames: this.monthNames,
-      monthNamesShort: this.monthNamesShort,
-      dayNames: this.dayNames,
-      dayNamesShort: this.dayNamesShort,
-      dayNamesMin: this.dayNamesMin,
-      onSelect: this.onSelect
-    };
-    this.options = _objectSpread(_objectSpread({}, this.defaultOptions), options);
-    this.init();
-    this.setDate(initialDate);
-    this.observers = [];
-  }
-
-  _createClass(DatePicker, [{
-    key: "init",
-    value: function init() {
-      this.$elem.datepicker(this.options);
-    }
-  }, {
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
-    }
-  }, {
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
-    }
-  }, {
-    key: "getClearBtn",
-    value: function getClearBtn() {
-      return $(this.$elem.find('.js-ui-datepicker-clear-button'));
-    }
-  }, {
-    key: "getApplyBtn",
-    value: function getApplyBtn() {
-      return $(this.$elem.find('.js-ui-datepicker-apply-button'));
-    }
-  }, {
-    key: "updateClearBtn",
-    value: function updateClearBtn() {
-      if (this.$elem.datepicker('getDate')) {
-        this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
-      } else {
-        this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
-      }
-    }
-  }, {
-    key: "setDate",
-    value: function setDate(dateObjects) {
-      var dateTexts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [null, null];
-      this.$elem.datepicker('setDate', dateObjects);
-
-      var _dateObjects = _slicedToArray(dateObjects, 2);
-
-      this.extensionRangeObject.startDate = _dateObjects[0];
-      this.extensionRangeObject.endDate = _dateObjects[1];
-
-      var _dateTexts = _slicedToArray(dateTexts, 2);
-
-      this.extensionRangeObject.startDateText = _dateTexts[0];
-      this.extensionRangeObject.endDateText = _dateTexts[1];
-      this.getClearBtn().click(this.handleClearButtonClick);
-      this.getApplyBtn().click(this.handleApplyButtonClick);
-      this.updateClearBtn();
-    }
-  }, {
-    key: "handleApplyButtonClick",
-    value: function handleApplyButtonClick() {
-      var dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
-      var dateTexts = [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText];
-      this.setDate(dates, dateTexts);
-      var valueText;
-
-      if (this.isTextDouble) {
-        valueText = dateTexts;
-      } else if (dateTexts[0] && dateTexts[1]) {
-        valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
-      } else {
-        valueText = null;
-      }
-
-      this.notify({
-        type: 'CLICK_APPLY-BUTTON',
-        value: dates,
-        valueText: valueText
-      });
-    }
-  }, {
-    key: "handleClearButtonClick",
-    value: function handleClearButtonClick() {
-      this.setDate([null, null]);
-      this.notify({
-        type: 'CLICK_CLEAR-BUTTON',
-        value: [null, null],
-        valueText: null
-      });
-    }
-  }, {
-    key: "onSelect",
-    value: function onSelect(dateText, inst, extensionRange) {
-      var _this = this;
-
-      this.extensionRangeObject = extensionRange;
-      setTimeout(function () {
-        _this.getApplyBtn().click(_this.handleApplyButtonClick);
-
-        _this.getClearBtn().click(_this.handleClearButtonClick);
-      }, 100);
-    }
-  }]);
-
-  return DatePicker;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
 
 /***/ }),
 
 /***/ 7:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./src/common.blocks/counting-item/counting-item.js
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+var pug_has_own_property = Object.prototype.hasOwnProperty;
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+/**
+ * Merge two attribute objects giving precedence
+ * to values in object `b`. Classes are special-cased
+ * allowing for arrays and merging/joining appropriately
+ * resulting in a string.
+ *
+ * @param {Object} a
+ * @param {Object} b
+ * @return {Object} a
+ * @api private
+ */
 
-var CountingItem = /*#__PURE__*/function () {
-  function CountingItem(elem) {
-    _classCallCheck(this, CountingItem);
-
-    this.elem = elem;
-    this.plusBtn = this.getPlusBtn();
-    this.minusBtn = this.getMinusBtn();
-    this.valueElem = this.getValueElem();
-    this.value = +this.valueElem.innerText;
-    this.name = this.getNameElem().innerText.toLowerCase();
-    this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
-    this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);
-    this.initButtons();
-    this.observers = [];
+exports.merge = pug_merge;
+function pug_merge(a, b) {
+  if (arguments.length === 1) {
+    var attrs = a[0];
+    for (var i = 1; i < a.length; i++) {
+      attrs = pug_merge(attrs, a[i]);
+    }
+    return attrs;
   }
 
-  _createClass(CountingItem, [{
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
+  for (var key in b) {
+    if (key === 'class') {
+      var valA = a[key] || [];
+      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
+    } else if (key === 'style') {
+      var valA = pug_style(a[key]);
+      valA = valA && valA[valA.length - 1] !== ';' ? valA + ';' : valA;
+      var valB = pug_style(b[key]);
+      valB = valB && valB[valB.length - 1] !== ';' ? valB + ';' : valB;
+      a[key] = valA + valB;
+    } else {
+      a[key] = b[key];
     }
-  }, {
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
-    }
-  }, {
-    key: "getValue",
-    value: function getValue() {
-      return this.value;
-    }
-  }, {
-    key: "getValueText",
-    value: function getValueText() {
-      if (this.value === 0) {
-        return '';
-      }
-
-      return "".concat(this.value, " ").concat(this.name);
-    }
-  }, {
-    key: "getNameElem",
-    value: function getNameElem() {
-      var nameElemSelector = '.js-counting-item__name .js-heading';
-      return this.elem.querySelector(nameElemSelector);
-    }
-  }, {
-    key: "getPlusBtn",
-    value: function getPlusBtn() {
-      return this.elem.querySelector('.js-counting-item__change-button_action_increase');
-    }
-  }, {
-    key: "getMinusBtn",
-    value: function getMinusBtn() {
-      return this.elem.querySelector('.js-counting-item__change-button_action_decrease');
-    }
-  }, {
-    key: "getValueElem",
-    value: function getValueElem() {
-      return this.elem.querySelector('.js-counting-item__value .js-heading');
-    }
-  }, {
-    key: "setValue",
-    value: function setValue(newValue) {
-      if (newValue >= 0) {
-        this.value = newValue;
-        this.valueElem.innerText = this.value;
-
-        if (newValue === 0) {
-          this.minusBtn.classList.add('counting-item__change-button_disabled');
-        } else {
-          this.minusBtn.classList.remove('counting-item__change-button_disabled');
-        }
-      }
-
-      this.notify({
-        type: 'UPDATE_VALUE',
-        value: this.value,
-        valueText: this.getValueText()
-      });
-      return this.value;
-    }
-  }, {
-    key: "initButtons",
-    value: function initButtons() {
-      this.plusBtn.addEventListener('click', this.handlePlusBtnClick);
-      this.minusBtn.addEventListener('click', this.handleMinusBtnClick);
-
-      if (this.value === 0) {
-        this.minusBtn.classList.add('counting-item__change-button_disabled');
-      }
-    }
-  }, {
-    key: "handlePlusBtnClick",
-    value: function handlePlusBtnClick() {
-      var newValue = this.value + 1;
-      this.setValue(newValue);
-    }
-  }, {
-    key: "handleMinusBtnClick",
-    value: function handleMinusBtnClick() {
-      var newValue = this.value - 1;
-      this.setValue(newValue);
-    }
-  }]);
-
-  return CountingItem;
-}();
-
-/* harmony default export */ var counting_item = (CountingItem);
-// CONCATENATED MODULE: ./src/common.blocks/items-counter/items-counter.js
-function items_counter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function items_counter_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function items_counter_createClass(Constructor, protoProps, staticProps) { if (protoProps) items_counter_defineProperties(Constructor.prototype, protoProps); if (staticProps) items_counter_defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var items_counter_ItemsCounter = /*#__PURE__*/function () {
-  function ItemsCounter(elem) {
-    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-    items_counter_classCallCheck(this, ItemsCounter);
-
-    this.elem = elem;
-    this.clearBtn = this.getClearBtn();
-    this.applyBtn = this.getApplyBtn();
-    this.itemElems = this.getItemElems();
-    this.countingItemInstances = this.createCountingItemInstances();
-    this.wordToValueTextReplace = wordToValueTextReplace;
-    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
-    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
-    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
-    this.addListenersToButtons();
-    this.updateClearButton();
-    this.observers = [];
-    this.subscribeToItems();
   }
 
-  items_counter_createClass(ItemsCounter, [{
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
+  return a;
+}
+
+/**
+ * Process array, object, or string as a string of classes delimited by a space.
+ *
+ * If `val` is an array, all members of it and its subarrays are counted as
+ * classes. If `escaping` is an array, then whether or not the item in `val` is
+ * escaped depends on the corresponding item in `escaping`. If `escaping` is
+ * not an array, no escaping is done.
+ *
+ * If `val` is an object, all the keys whose value is truthy are counted as
+ * classes. No escaping is done.
+ *
+ * If `val` is a string, it is counted as a class. No escaping is done.
+ *
+ * @param {(Array.<string>|Object.<string, boolean>|string)} val
+ * @param {?Array.<string>} escaping
+ * @return {String}
+ */
+exports.classes = pug_classes;
+function pug_classes_array(val, escaping) {
+  var classString = '',
+    className,
+    padding = '',
+    escapeEnabled = Array.isArray(escaping);
+  for (var i = 0; i < val.length; i++) {
+    className = pug_classes(val[i]);
+    if (!className) continue;
+    escapeEnabled && escaping[i] && (className = pug_escape(className));
+    classString = classString + padding + className;
+    padding = ' ';
+  }
+  return classString;
+}
+function pug_classes_object(val) {
+  var classString = '',
+    padding = '';
+  for (var key in val) {
+    if (key && val[key] && pug_has_own_property.call(val, key)) {
+      classString = classString + padding + key;
+      padding = ' ';
     }
-  }, {
-    key: "update",
-    value: function update(action) {
-      if (action.type === 'UPDATE_VALUE') {
-        if (this.isWithoutButtons()) {
-          this.updateClearButton();
-          this.notify({
-            type: 'UPDATE_VALUE',
-            value: this.getValues(),
-            valueText: this.convertValuesToText()
-          });
-        }
+  }
+  return classString;
+}
+function pug_classes(val, escaping) {
+  if (Array.isArray(val)) {
+    return pug_classes_array(val, escaping);
+  } else if (val && typeof val === 'object') {
+    return pug_classes_object(val);
+  } else {
+    return val || '';
+  }
+}
+
+/**
+ * Convert object or string to a string of CSS styles delimited by a semicolon.
+ *
+ * @param {(Object.<string, string>|string)} val
+ * @return {String}
+ */
+
+exports.style = pug_style;
+function pug_style(val) {
+  if (!val) return '';
+  if (typeof val === 'object') {
+    var out = '';
+    for (var style in val) {
+      /* istanbul ignore else */
+      if (pug_has_own_property.call(val, style)) {
+        out = out + style + ':' + val[style] + ';';
       }
     }
-  }, {
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
-    }
-  }, {
-    key: "getValues",
-    value: function getValues() {
-      var values = [];
-      this.countingItemInstances.forEach(function (inst) {
-        var value = inst.getValue();
-        values.push(value);
-      });
-      return values;
-    }
-  }, {
-    key: "getClearBtn",
-    value: function getClearBtn() {
-      var clearBtnSelector = '.js-items-counter__clear-button';
-      return this.elem.querySelector(clearBtnSelector);
-    }
-  }, {
-    key: "getApplyBtn",
-    value: function getApplyBtn() {
-      var applyBtnSelector = '.js-items-counter__apply-button';
-      return this.elem.querySelector(applyBtnSelector);
-    }
-  }, {
-    key: "getItemElems",
-    value: function getItemElems() {
-      var itemSelector = '.js-counting-item';
-      return this.elem.querySelectorAll(itemSelector);
-    }
-  }, {
-    key: "isWithoutButtons",
-    value: function isWithoutButtons() {
-      var withoutButtonsClass = 'items-counter_without-buttons';
-      return this.elem.classList.contains(withoutButtonsClass);
-    }
-  }, {
-    key: "updateClearButton",
-    value: function updateClearButton() {
-      var valuesSum = 0;
-      this.getValues().forEach(function (val) {
-        valuesSum += val;
-      });
+    return out;
+  } else {
+    return val + '';
+  }
+}
 
-      if (valuesSum === 0) {
-        this.clearBtn.classList.add(this.clearBtnDisabledClass);
-      } else {
-        this.clearBtn.classList.remove(this.clearBtnDisabledClass);
+/**
+ * Render the given attribute.
+ *
+ * @param {String} key
+ * @param {String} val
+ * @param {Boolean} escaped
+ * @param {Boolean} terse
+ * @return {String}
+ */
+exports.attr = pug_attr;
+function pug_attr(key, val, escaped, terse) {
+  if (
+    val === false ||
+    val == null ||
+    (!val && (key === 'class' || key === 'style'))
+  ) {
+    return '';
+  }
+  if (val === true) {
+    return ' ' + (terse ? key : key + '="' + key + '"');
+  }
+  var type = typeof val;
+  if (
+    (type === 'object' || type === 'function') &&
+    typeof val.toJSON === 'function'
+  ) {
+    val = val.toJSON();
+  }
+  if (typeof val !== 'string') {
+    val = JSON.stringify(val);
+    if (!escaped && val.indexOf('"') !== -1) {
+      return ' ' + key + "='" + val.replace(/'/g, '&#39;') + "'";
+    }
+  }
+  if (escaped) val = pug_escape(val);
+  return ' ' + key + '="' + val + '"';
+}
+
+/**
+ * Render the given attributes object.
+ *
+ * @param {Object} obj
+ * @param {Object} terse whether to use HTML5 terse boolean attributes
+ * @return {String}
+ */
+exports.attrs = pug_attrs;
+function pug_attrs(obj, terse) {
+  var attrs = '';
+
+  for (var key in obj) {
+    if (pug_has_own_property.call(obj, key)) {
+      var val = obj[key];
+
+      if ('class' === key) {
+        val = pug_classes(val);
+        attrs = pug_attr(key, val, false, terse) + attrs;
+        continue;
       }
-    }
-  }, {
-    key: "handleClearBtnClick",
-    value: function handleClearBtnClick() {
-      this.countingItemInstances.forEach(function (inst) {
-        inst.setValue(0);
-      });
-      this.updateClearButton();
-      this.notify({
-        type: 'CLICK_CLEAR-BUTTON',
-        value: this.getValues(),
-        valueText: this.convertValuesToText()
-      });
-    }
-  }, {
-    key: "handleApplyBtnClick",
-    value: function handleApplyBtnClick() {
-      this.updateClearButton();
-      this.notify({
-        type: 'CLICK_APPLY-BUTTON',
-        value: this.getValues(),
-        valueText: this.convertValuesToText()
-      });
-    }
-  }, {
-    key: "convertValuesToText",
-    value: function convertValuesToText() {
-      var fullText = '';
-
-      if (this.wordToValueTextReplace) {
-        var valuesSum = 0;
-        this.countingItemInstances.forEach(function (inst) {
-          valuesSum += inst.getValue();
-        });
-        fullText += "".concat(valuesSum, " ").concat(this.wordToValueTextReplace);
-      } else {
-        var maxItemsNumInText = 2;
-        var textsList = [];
-        this.countingItemInstances.forEach(function (inst) {
-          if (inst.getValueText() !== '') {
-            textsList.push(inst.getValueText());
-          }
-        });
-        textsList.forEach(function (text, index) {
-          if (index !== 0) {
-            if (index < maxItemsNumInText) {
-              fullText += ', ';
-            }
-          }
-
-          if (index < maxItemsNumInText) {
-            fullText += text;
-          }
-
-          if (index === maxItemsNumInText - 1) {
-            fullText += '...';
-          }
-        });
+      if ('style' === key) {
+        val = pug_style(val);
       }
-
-      return fullText;
+      attrs += pug_attr(key, val, false, terse);
     }
-  }, {
-    key: "addListenersToButtons",
-    value: function addListenersToButtons() {
-      this.clearBtn.addEventListener('click', this.handleClearBtnClick);
-      this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
-    }
-  }, {
-    key: "createCountingItemInstances",
-    value: function createCountingItemInstances() {
-      var instances = [];
-      this.itemElems.forEach(function (elem) {
-        var countingItem = new counting_item(elem);
-        instances.push(countingItem);
-      });
-      return instances;
-    }
-  }, {
-    key: "subscribeToItems",
-    value: function subscribeToItems() {
-      var _this = this;
+  }
 
-      this.countingItemInstances.forEach(function (inst) {
-        inst.subscribe(_this);
-      });
+  return attrs;
+}
+
+/**
+ * Escape the given string of `html`.
+ *
+ * @param {String} html
+ * @return {String}
+ * @api private
+ */
+
+var pug_match_html = /["&<>]/;
+exports.escape = pug_escape;
+function pug_escape(_html) {
+  var html = '' + _html;
+  var regexResult = pug_match_html.exec(html);
+  if (!regexResult) return _html;
+
+  var result = '';
+  var i, lastIndex, escape;
+  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
+    switch (html.charCodeAt(i)) {
+      case 34:
+        escape = '&quot;';
+        break;
+      case 38:
+        escape = '&amp;';
+        break;
+      case 60:
+        escape = '&lt;';
+        break;
+      case 62:
+        escape = '&gt;';
+        break;
+      default:
+        continue;
     }
-  }]);
+    if (lastIndex !== i) result += html.substring(lastIndex, i);
+    lastIndex = i + 1;
+    result += escape;
+  }
+  if (lastIndex !== i) return result + html.substring(lastIndex, i);
+  else return result;
+}
 
-  return ItemsCounter;
-}();
+/**
+ * Re-throw the given `err` in context to the
+ * the pug in `filename` at the given `lineno`.
+ *
+ * @param {Error} err
+ * @param {String} filename
+ * @param {String} lineno
+ * @param {String} str original source
+ * @api private
+ */
 
-/* harmony default export */ var items_counter = __webpack_exports__["a"] = (items_counter_ItemsCounter);
+exports.rethrow = pug_rethrow;
+function pug_rethrow(err, filename, lineno, str) {
+  if (!(err instanceof Error)) throw err;
+  if ((typeof window != 'undefined' || !filename) && !str) {
+    err.message += ' on line ' + lineno;
+    throw err;
+  }
+  try {
+    str = str || __webpack_require__(8).readFileSync(filename, 'utf8');
+  } catch (ex) {
+    pug_rethrow(err, null, lineno);
+  }
+  var context = 3,
+    lines = str.split('\n'),
+    start = Math.max(lineno - context, 0),
+    end = Math.min(lines.length, lineno + context);
+
+  // Error context
+  var context = lines
+    .slice(start, end)
+    .map(function(line, i) {
+      var curr = i + start + 1;
+      return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
+    })
+    .join('\n');
+
+  // Alter exception message
+  err.path = filename;
+  try {
+    err.message =
+      (filename || 'Pug') +
+      ':' +
+      lineno +
+      '\n' +
+      context +
+      '\n\n' +
+      err.message;
+  } catch (e) {}
+  throw err;
+}
+
 
 /***/ }),
 
 /***/ 8:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
-
-/***/ }),
-
-/***/ 84:
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-    if(false) { var cssReload; }
-  
+/* (ignored) */
 
 /***/ }),
 
 /***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
-var pug = __webpack_require__(9);
+// extracted by mini-css-extract-plugin
+    if(false) { var cssReload; }
+  
+
+/***/ }),
+
+/***/ 86:
+/***/ (function(module, exports, __webpack_require__) {
+
+var pug = __webpack_require__(7);
 
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (Array, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
+    (function (Array, JSON, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
       var pug_indent = [];
 pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -14419,7 +14845,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
-pug_mixins["date-picker"] = pug_interp = function({withBorder = false} = {}){
+pug_mixins["date-picker"] = pug_interp = function({withBorder = false, dateFormat = null, initialDate = [null, null], isTextDouble = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'date-picker js-date-picker';
 if (withBorder) {
@@ -14427,7 +14853,7 @@ if (withBorder) {
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("data-date-format", dateFormat, true, true)+pug.attr("data-initial-date", initialDate, true, true)+pug.attr("data-is-text-double", isTextDouble ? 'true' : 'false', true, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
 pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -14468,11 +14894,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0} = {}){
+pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0, nameDeclensions} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item js-counting-item\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv" + (" class=\"counting-item js-counting-item\""+pug.attr("data-words", nameDeclensions ? JSON.stringify(nameDeclensions) : false, true, true)) + "\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__name js-counting-item__name\"\u003E";
 pug_indent.push('    ');
@@ -14641,7 +15067,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
-pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false}){
+pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false, wordForValueTextReplacing = null, itemIndexForSeparateCount = null}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'items-counter js-items-counter';
 if (withoutButtons) {
@@ -14649,7 +15075,7 @@ if (withoutButtons) {
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("data-replace-text", JSON.stringify(wordForValueTextReplacing), true, true)+pug.attr("data-separate-item", JSON.stringify(itemIndexForSeparateCount), true, true)) + "\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-counter__items-list\"\u003E";
 // iterate items
@@ -14664,7 +15090,8 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__item\"\u003E";
 pug_indent.push('      ');
 pug_mixins["counting-item"]({
                         name: item.name,
-                        value: item.value
+                        value: item.value,
+                        nameDeclensions: item.nameDeclensions,
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
@@ -14682,7 +15109,8 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__item\"\u003E";
 pug_indent.push('      ');
 pug_mixins["counting-item"]({
                         name: item.name,
-                        value: item.value
+                        value: item.value,
+                        nameDeclensions: item.nameDeclensions,
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
@@ -14813,7 +15241,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
+pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false, defaultInputValue = ''} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'dropdown js-dropdown';
 if (isDouble) {
@@ -14833,7 +15261,7 @@ if (isDouble) {
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("data-default-value", JSON.stringify(defaultInputValue), true, true)) + "\u003E";
 if ((isDouble)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -14974,14 +15402,17 @@ pug_indent.push('    ');
 pug_mixins["dropdown"]({
                 inputOptions: {
                     value: 'ДД.ММ.ГГГГ',
-                    placeholder: 'ДД.ММ.ГГГГ'
+                    placeholder: 'ДД.ММ.ГГГГ',
                 },
                 popupMixinOptions: {
                     name: 'date-picker',
-                    params: {}
+                    params: {
+                        isTextDouble: true,
+                    },
                 },
                 title: ['Прибытие', 'Выезд'],
-                isDouble: true
+                isDouble: true,
+                defaultInputValue: 'ДД.ММ.ГГГГ',
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -15009,12 +15440,16 @@ pug_mixins["dropdown"]({
                             },
                             {
                                 name: 'Младенцы',
-                                value: '0'
-                            }
-                        ]
-                    }
+                                value: '0',
+                                nameDeclensions: ['младенец', 'младенца', 'младенцев'],
+                            },
+                        ],
+                        wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                        itemIndexForSeparateCount: 2,
+                    },
                 },
-                title: 'Гости'
+                title: 'Гости',
+                defaultInputValue: 'Сколько гостей',
             });
 pug_indent.pop();
 pug_html = pug_html + "\n  ";
@@ -15027,7 +15462,7 @@ pug_mixins["button"]({
             modifiers: {
                 isLong: true,
                 textColor: 'white',
-            }
+            },
         });
 pug_indent.pop();
 pug_html = pug_html + "\n";
@@ -15797,7 +16232,9 @@ pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", `${fileName}.js`, true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
     }.call(this, "Array" in locals_for_with ?
         locals_for_with.Array :
-        typeof Array !== 'undefined' ? Array : undefined, "isHovered" in locals_for_with ?
+        typeof Array !== 'undefined' ? Array : undefined, "JSON" in locals_for_with ?
+        locals_for_with.JSON :
+        typeof JSON !== 'undefined' ? JSON : undefined, "isHovered" in locals_for_with ?
         locals_for_with.isHovered :
         typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
         locals_for_with.isLong :
@@ -15812,331 +16249,6 @@ pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", `${fileName}.js`, 
         typeof withoutFrame !== 'undefined' ? withoutFrame : undefined));
     ;;return pug_html;};
 module.exports = template;
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var pug_has_own_property = Object.prototype.hasOwnProperty;
-
-/**
- * Merge two attribute objects giving precedence
- * to values in object `b`. Classes are special-cased
- * allowing for arrays and merging/joining appropriately
- * resulting in a string.
- *
- * @param {Object} a
- * @param {Object} b
- * @return {Object} a
- * @api private
- */
-
-exports.merge = pug_merge;
-function pug_merge(a, b) {
-  if (arguments.length === 1) {
-    var attrs = a[0];
-    for (var i = 1; i < a.length; i++) {
-      attrs = pug_merge(attrs, a[i]);
-    }
-    return attrs;
-  }
-
-  for (var key in b) {
-    if (key === 'class') {
-      var valA = a[key] || [];
-      a[key] = (Array.isArray(valA) ? valA : [valA]).concat(b[key] || []);
-    } else if (key === 'style') {
-      var valA = pug_style(a[key]);
-      valA = valA && valA[valA.length - 1] !== ';' ? valA + ';' : valA;
-      var valB = pug_style(b[key]);
-      valB = valB && valB[valB.length - 1] !== ';' ? valB + ';' : valB;
-      a[key] = valA + valB;
-    } else {
-      a[key] = b[key];
-    }
-  }
-
-  return a;
-}
-
-/**
- * Process array, object, or string as a string of classes delimited by a space.
- *
- * If `val` is an array, all members of it and its subarrays are counted as
- * classes. If `escaping` is an array, then whether or not the item in `val` is
- * escaped depends on the corresponding item in `escaping`. If `escaping` is
- * not an array, no escaping is done.
- *
- * If `val` is an object, all the keys whose value is truthy are counted as
- * classes. No escaping is done.
- *
- * If `val` is a string, it is counted as a class. No escaping is done.
- *
- * @param {(Array.<string>|Object.<string, boolean>|string)} val
- * @param {?Array.<string>} escaping
- * @return {String}
- */
-exports.classes = pug_classes;
-function pug_classes_array(val, escaping) {
-  var classString = '',
-    className,
-    padding = '',
-    escapeEnabled = Array.isArray(escaping);
-  for (var i = 0; i < val.length; i++) {
-    className = pug_classes(val[i]);
-    if (!className) continue;
-    escapeEnabled && escaping[i] && (className = pug_escape(className));
-    classString = classString + padding + className;
-    padding = ' ';
-  }
-  return classString;
-}
-function pug_classes_object(val) {
-  var classString = '',
-    padding = '';
-  for (var key in val) {
-    if (key && val[key] && pug_has_own_property.call(val, key)) {
-      classString = classString + padding + key;
-      padding = ' ';
-    }
-  }
-  return classString;
-}
-function pug_classes(val, escaping) {
-  if (Array.isArray(val)) {
-    return pug_classes_array(val, escaping);
-  } else if (val && typeof val === 'object') {
-    return pug_classes_object(val);
-  } else {
-    return val || '';
-  }
-}
-
-/**
- * Convert object or string to a string of CSS styles delimited by a semicolon.
- *
- * @param {(Object.<string, string>|string)} val
- * @return {String}
- */
-
-exports.style = pug_style;
-function pug_style(val) {
-  if (!val) return '';
-  if (typeof val === 'object') {
-    var out = '';
-    for (var style in val) {
-      /* istanbul ignore else */
-      if (pug_has_own_property.call(val, style)) {
-        out = out + style + ':' + val[style] + ';';
-      }
-    }
-    return out;
-  } else {
-    return val + '';
-  }
-}
-
-/**
- * Render the given attribute.
- *
- * @param {String} key
- * @param {String} val
- * @param {Boolean} escaped
- * @param {Boolean} terse
- * @return {String}
- */
-exports.attr = pug_attr;
-function pug_attr(key, val, escaped, terse) {
-  if (
-    val === false ||
-    val == null ||
-    (!val && (key === 'class' || key === 'style'))
-  ) {
-    return '';
-  }
-  if (val === true) {
-    return ' ' + (terse ? key : key + '="' + key + '"');
-  }
-  var type = typeof val;
-  if (
-    (type === 'object' || type === 'function') &&
-    typeof val.toJSON === 'function'
-  ) {
-    val = val.toJSON();
-  }
-  if (typeof val !== 'string') {
-    val = JSON.stringify(val);
-    if (!escaped && val.indexOf('"') !== -1) {
-      return ' ' + key + "='" + val.replace(/'/g, '&#39;') + "'";
-    }
-  }
-  if (escaped) val = pug_escape(val);
-  return ' ' + key + '="' + val + '"';
-}
-
-/**
- * Render the given attributes object.
- *
- * @param {Object} obj
- * @param {Object} terse whether to use HTML5 terse boolean attributes
- * @return {String}
- */
-exports.attrs = pug_attrs;
-function pug_attrs(obj, terse) {
-  var attrs = '';
-
-  for (var key in obj) {
-    if (pug_has_own_property.call(obj, key)) {
-      var val = obj[key];
-
-      if ('class' === key) {
-        val = pug_classes(val);
-        attrs = pug_attr(key, val, false, terse) + attrs;
-        continue;
-      }
-      if ('style' === key) {
-        val = pug_style(val);
-      }
-      attrs += pug_attr(key, val, false, terse);
-    }
-  }
-
-  return attrs;
-}
-
-/**
- * Escape the given string of `html`.
- *
- * @param {String} html
- * @return {String}
- * @api private
- */
-
-var pug_match_html = /["&<>]/;
-exports.escape = pug_escape;
-function pug_escape(_html) {
-  var html = '' + _html;
-  var regexResult = pug_match_html.exec(html);
-  if (!regexResult) return _html;
-
-  var result = '';
-  var i, lastIndex, escape;
-  for (i = regexResult.index, lastIndex = 0; i < html.length; i++) {
-    switch (html.charCodeAt(i)) {
-      case 34:
-        escape = '&quot;';
-        break;
-      case 38:
-        escape = '&amp;';
-        break;
-      case 60:
-        escape = '&lt;';
-        break;
-      case 62:
-        escape = '&gt;';
-        break;
-      default:
-        continue;
-    }
-    if (lastIndex !== i) result += html.substring(lastIndex, i);
-    lastIndex = i + 1;
-    result += escape;
-  }
-  if (lastIndex !== i) return result + html.substring(lastIndex, i);
-  else return result;
-}
-
-/**
- * Re-throw the given `err` in context to the
- * the pug in `filename` at the given `lineno`.
- *
- * @param {Error} err
- * @param {String} filename
- * @param {String} lineno
- * @param {String} str original source
- * @api private
- */
-
-exports.rethrow = pug_rethrow;
-function pug_rethrow(err, filename, lineno, str) {
-  if (!(err instanceof Error)) throw err;
-  if ((typeof window != 'undefined' || !filename) && !str) {
-    err.message += ' on line ' + lineno;
-    throw err;
-  }
-  try {
-    str = str || __webpack_require__(10).readFileSync(filename, 'utf8');
-  } catch (ex) {
-    pug_rethrow(err, null, lineno);
-  }
-  var context = 3,
-    lines = str.split('\n'),
-    start = Math.max(lineno - context, 0),
-    end = Math.min(lines.length, lineno + context);
-
-  // Error context
-  var context = lines
-    .slice(start, end)
-    .map(function(line, i) {
-      var curr = i + start + 1;
-      return (curr == lineno ? '  > ' : '    ') + curr + '| ' + line;
-    })
-    .join('\n');
-
-  // Alter exception message
-  err.path = filename;
-  try {
-    err.message =
-      (filename || 'Pug') +
-      ':' +
-      lineno +
-      '\n' +
-      context +
-      '\n\n' +
-      err.message;
-  } catch (e) {}
-  throw err;
-}
-
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./src/sass/main.sass
-var main = __webpack_require__(8);
-
-// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.sass
-var landing_page = __webpack_require__(84);
-
-// EXTERNAL MODULE: ./src/pages/website-pages/landing-page/landing-page.pug
-var landing_page_landing_page = __webpack_require__(85);
-
-// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/images/landing-page-bg.jpg
-/* harmony default export */ var landing_page_bg = (__webpack_require__.p + "images/landing-page-bg.jpg");
-// EXTERNAL MODULE: ./src/common.blocks/header/init.js
-var init = __webpack_require__(18);
-
-// EXTERNAL MODULE: ./src/common.blocks/search-card/init.js
-var search_card_init = __webpack_require__(43);
-
-// CONCATENATED MODULE: ./src/pages/website-pages/landing-page/landing-page.js
-/* eslint-disable no-unused-vars */
-
-
-
-
-
-
 
 /***/ })
 

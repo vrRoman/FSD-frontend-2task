@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 92);
+/******/ 	return __webpack_require__(__webpack_require__.s = 93);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -10966,14 +10966,7 @@ return jQuery;
 
 /***/ }),
 
-/***/ 10:
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 12:
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10994,7 +10987,8 @@ var Header = /*#__PURE__*/function () {
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
     this.columnNavClass = 'navigation_in-column';
-    this.updateHeader = this.updateHeader.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.handleWindowLoad = this.handleWindowLoad.bind(this);
     this.handleWindowClick = this.handleWindowClick.bind(this);
     this.init();
   }
@@ -11020,9 +11014,19 @@ var Header = /*#__PURE__*/function () {
   }, {
     key: "init",
     value: function init() {
-      window.addEventListener('resize', this.updateHeader);
+      window.addEventListener('resize', this.handleWindowResize);
       window.addEventListener('click', this.handleWindowClick);
-      window.addEventListener('load', this.updateHeader);
+      window.addEventListener('load', this.handleWindowLoad);
+    }
+  }, {
+    key: "handleWindowResize",
+    value: function handleWindowResize() {
+      this.updateHeader();
+    }
+  }, {
+    key: "handleWindowLoad",
+    value: function handleWindowLoad() {
+      this.updateHeader();
     }
   }, {
     key: "updateHeader",
@@ -11061,7 +11065,7 @@ var Header = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ 14:
+/***/ 16:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11126,11 +11130,11 @@ var jquery = __webpack_require__(0);
 
 /***/ }),
 
-/***/ 18:
+/***/ 23:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* eslint-disable no-unused-vars */
 
 $('.js-header').each(function init() {
@@ -11140,11 +11144,11 @@ $('.js-header').each(function init() {
 
 /***/ }),
 
-/***/ 23:
+/***/ 28:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29);
 /* harmony import */ var jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_mask_plugin__WEBPACK_IMPORTED_MODULE_0__);
 
 $('.js-text-field__input_masked-date').mask('99.99.9999');
@@ -11152,7 +11156,7 @@ $('.js-text-field__input_masked-date').mask('99.99.9999');
 
 /***/ }),
 
-/***/ 24:
+/***/ 29:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -11762,16 +11766,16 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 41:
+/***/ 46:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _common_blocks_text_field_text_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(23);
+/* harmony import */ var _common_blocks_text_field_text_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
 
 
 /***/ }),
 
-/***/ 8:
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -11780,7 +11784,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ 9:
+/***/ 7:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12034,7 +12038,7 @@ function pug_rethrow(err, filename, lineno, str) {
     throw err;
   }
   try {
-    str = str || __webpack_require__(10).readFileSync(filename, 'utf8');
+    str = str || __webpack_require__(8).readFileSync(filename, 'utf8');
   } catch (ex) {
     pug_rethrow(err, null, lineno);
   }
@@ -12070,57 +12074,122 @@ function pug_rethrow(err, filename, lineno, str) {
 
 /***/ }),
 
-/***/ 92:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 8:
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
-/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(93);
-/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(94);
-/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(95);
-/* harmony import */ var _common_blocks_signup_card_signup_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(41);
-/* harmony import */ var _common_blocks_header_init__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(18);
-
-
-
-
-
-
-
-var $loginButtons = $('.js-signup-card__account-exists .js-button');
-var $signupButtons = $('.js-signin-card__account-not-exists .js-button');
-var $signinCard = $('.js-login-and-registration__signin-card');
-var $signupCard = $('.js-login-and-registration__signup-card');
-var $pageElem = $('.js-login-and-registration');
-var pageElemLoginClass = 'login-and-registration_login';
-
-function showSigninCard() {
-  $signupCard.hide();
-  $signinCard.show();
-  $pageElem.toggleClass(pageElemLoginClass);
-}
-
-function showSignupCard() {
-  $signupCard.show();
-  $signinCard.hide();
-  $pageElem.toggleClass(pageElemLoginClass);
-}
-
-$loginButtons.click(showSigninCard);
-$signupButtons.click(showSignupCard);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+/* (ignored) */
 
 /***/ }),
 
 /***/ 93:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+/* harmony import */ var _sass_main_sass__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_sass_main_sass__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(94);
+/* harmony import */ var _login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_pug__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(95);
+/* harmony import */ var _login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_login_and_registration_sass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _images_login_registration_bg_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(96);
+/* harmony import */ var _common_blocks_signup_card_signup_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(46);
+/* harmony import */ var _common_blocks_header_init__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(23);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+
+
+
+var LoginAndRegistration = /*#__PURE__*/function () {
+  function LoginAndRegistration() {
+    _classCallCheck(this, LoginAndRegistration);
+
+    this.loginButtonsSelector = '.js-signup-card__account-exists .js-button';
+    this.signupButtonsSelector = '.js-signin-card__account-not-exists .js-button';
+    this.signinCardSelector = '.js-login-and-registration__signin-card';
+    this.signupCardSelector = '.js-login-and-registration__signup-card';
+    this.pageSelector = '.js-login-and-registration';
+    this.pageLoginClass = 'login-and-registration_login';
+    this.$loginButtons = this.getLoginButtons();
+    this.$signupButtons = this.getSignupButtons();
+    this.$signinCard = this.getSigninCard();
+    this.$signupCard = this.getSignupCard();
+    this.$pageElem = this.getPageElem();
+    this.handleLoginButtonsClick = this.handleLoginButtonsClick.bind(this);
+    this.handleSignupButtonsClick = this.handleSignupButtonsClick.bind(this);
+    this.init();
+  }
+
+  _createClass(LoginAndRegistration, [{
+    key: "getLoginButtons",
+    value: function getLoginButtons() {
+      return $(this.loginButtonsSelector);
+    }
+  }, {
+    key: "getSignupButtons",
+    value: function getSignupButtons() {
+      return $(this.signupButtonsSelector);
+    }
+  }, {
+    key: "getSigninCard",
+    value: function getSigninCard() {
+      return $(this.signinCardSelector);
+    }
+  }, {
+    key: "getSignupCard",
+    value: function getSignupCard() {
+      return $(this.signupCardSelector);
+    }
+  }, {
+    key: "getPageElem",
+    value: function getPageElem() {
+      return $(this.pageSelector);
+    }
+  }, {
+    key: "handleLoginButtonsClick",
+    value: function handleLoginButtonsClick() {
+      this.$signupCard.hide();
+      this.$signinCard.show();
+      this.$pageElem.toggleClass(this.pageLoginClass);
+    }
+  }, {
+    key: "handleSignupButtonsClick",
+    value: function handleSignupButtonsClick() {
+      this.$signupCard.show();
+      this.$signinCard.hide();
+      this.$pageElem.toggleClass(this.pageLoginClass);
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      this.$loginButtons.click(this.handleLoginButtonsClick);
+      this.$signupButtons.click(this.handleSignupButtonsClick);
+    }
+  }]);
+
+  return LoginAndRegistration;
+}(); // eslint-disable-next-line no-unused-vars
+
+
+var loginAndRegistration = new LoginAndRegistration();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
-var pug = __webpack_require__(9);
+var pug = __webpack_require__(7);
 
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
@@ -13690,7 +13759,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 94:
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -13699,7 +13768,7 @@ module.exports = template;
 
 /***/ }),
 
-/***/ 95:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

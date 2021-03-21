@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 96);
+/******/ 	return __webpack_require__(__webpack_require__.s = 97);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10969,409 +10969,7 @@ return jQuery;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Dropdown = /*#__PURE__*/function () {
-  function Dropdown(elem) {
-    var _this = this;
-
-    var blockInPopupInstance = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    var defaultInputValue = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-
-    _classCallCheck(this, Dropdown);
-
-    this.elem = elem;
-    this.textFields = this.getTextFields();
-    this.textFieldInputs = this.getTextFieldInputs();
-    this.defaultValue = defaultInputValue;
-    this.popup = this.getPopup();
-    this.hiddenPopupClass = 'dropdown__popup_hidden';
-    this.doubleDropdownClass = 'dropdown_double';
-    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
-    this.listening = false;
-
-    if (!this.isPopupHidden()) {
-      this.textFields.forEach(function (el) {
-        var _el$classList;
-
-        (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
-      });
-    }
-
-    this.handleWindowClick = this.handleWindowClick.bind(this);
-    this.addWindowListener();
-
-    if (blockInPopupInstance) {
-      this.blockInPopupInstance = blockInPopupInstance;
-
-      try {
-        this.blockInPopupInstance.subscribe(this);
-      } catch (err) {
-        throw new Error('blockInPopupInstance must have a subscribe method');
-      }
-    }
-  }
-
-  _createClass(Dropdown, [{
-    key: "update",
-    value: function update(action) {
-      var _this2 = this;
-
-      this.changeTextFieldValue(action.valueText);
-
-      if (action.type === 'CLICK_APPLY-BUTTON') {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList2;
-
-          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
-        });
-      }
-    }
-  }, {
-    key: "changeTextFieldValue",
-    value: function changeTextFieldValue(text) {
-      var _this3 = this;
-
-      if (this.isDropdownDouble()) {
-        if (Array.isArray(text)) {
-          text.forEach(function (value, i) {
-            if (!value) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = value;
-            }
-          });
-        } else {
-          this.textFieldInputs.forEach(function (input, i) {
-            if (!text) {
-              _this3.textFieldInputs[i].value = _this3.defaultValue;
-            } else {
-              _this3.textFieldInputs[i].value = text;
-            }
-          });
-        }
-      } else if (!text) {
-        this.textFieldInputs[0].value = this.defaultValue;
-      } else {
-        this.textFieldInputs[0].value = text;
-      }
-    }
-  }, {
-    key: "getPopup",
-    value: function getPopup() {
-      var popupSelector = '.js-dropdown__popup';
-      return this.elem.querySelector(popupSelector);
-    }
-  }, {
-    key: "getTextFields",
-    value: function getTextFields() {
-      var textFieldSelector = '.js-dropdown__text-field .js-text-field';
-      return this.elem.querySelectorAll(textFieldSelector);
-    }
-  }, {
-    key: "getTextFieldInputs",
-    value: function getTextFieldInputs() {
-      var inputSelector = '.js-text-field__input';
-      var inputs = [];
-      this.textFields.forEach(function (elem) {
-        inputs.push(elem.querySelector(inputSelector));
-      });
-      return inputs;
-    }
-  }, {
-    key: "isPopupHidden",
-    value: function isPopupHidden() {
-      return this.popup.classList.contains(this.hiddenPopupClass);
-    }
-  }, {
-    key: "isDropdownDouble",
-    value: function isDropdownDouble() {
-      return this.elem.classList.contains(this.doubleDropdownClass);
-    }
-  }, {
-    key: "addWindowListener",
-    value: function addWindowListener() {
-      window.addEventListener('click', this.handleWindowClick);
-    }
-  }, {
-    key: "handleWindowClick",
-    value: function handleWindowClick(evt) {
-      var _this4 = this;
-
-      if (evt.path.includes(this.elem)) {
-        this.listening = true;
-
-        if (!evt.path.includes(this.popup)) {
-          if (this.isPopupHidden()) {
-            this.popup.classList.remove(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList3;
-
-              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          } else {
-            this.popup.classList.add(this.hiddenPopupClass);
-            this.textFields.forEach(function (el) {
-              var _el$classList4;
-
-              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
-            });
-          }
-        }
-      } else if (this.listening) {
-        this.popup.classList.add(this.hiddenPopupClass);
-        this.textFields.forEach(function (el) {
-          var _el$classList5;
-
-          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
-        });
-      }
-    }
-  }]);
-
-  return Dropdown;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
-	if ( true ) {
-
-		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
-} ( function( $ ) {
-
-$.ui = $.ui || {};
-
-return $.ui.version = "1.12.1";
-
-} ) );
-
-
-/***/ }),
-/* 4 */,
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(16);
-/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(17);
-/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-var DatePicker = /*#__PURE__*/function () {
-  function DatePicker(_ref) {
-    var element = _ref.element,
-        _ref$options = _ref.options,
-        options = _ref$options === void 0 ? {} : _ref$options,
-        _ref$initialDate = _ref.initialDate,
-        initialDate = _ref$initialDate === void 0 ? [null, null] : _ref$initialDate,
-        _ref$isTextDouble = _ref.isTextDouble,
-        isTextDouble = _ref$isTextDouble === void 0 ? false : _ref$isTextDouble;
-
-    _classCallCheck(this, DatePicker);
-
-    this.clearBtnHTML = "<button class=\"ui-datepicker-current \n      ui-state-default ui-corner-all \n      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button\" \n      type=\"button\">\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C</button> ";
-    this.applyBtnHTML = "<button class=\"ui-datepicker-current\n      ui-state-default ui-corner-all\n      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button\"\n      type=\"button\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C</button> ";
-    this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-    this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-    this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-    this.dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    this.dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-    this.$elem = $(element);
-    this.extensionRangeObject = {};
-    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
-    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
-    this.onSelect = this.onSelect.bind(this);
-    this.isTextDouble = isTextDouble;
-    this.defaultOptions = {
-      range: 'period',
-      showButtonPanel: true,
-      currentText: this.clearBtnHTML + this.applyBtnHTML,
-      firstDay: 1,
-      showOtherMonths: true,
-      selectOtherMonths: true,
-      dateFormat: 'dd.mm.yy',
-      monthNames: this.monthNames,
-      monthNamesShort: this.monthNamesShort,
-      dayNames: this.dayNames,
-      dayNamesShort: this.dayNamesShort,
-      dayNamesMin: this.dayNamesMin,
-      onSelect: this.onSelect
-    };
-    this.options = _objectSpread(_objectSpread({}, this.defaultOptions), options);
-    this.init();
-    this.setDate(initialDate);
-    this.observers = [];
-  }
-
-  _createClass(DatePicker, [{
-    key: "init",
-    value: function init() {
-      this.$elem.datepicker(this.options);
-    }
-  }, {
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
-    }
-  }, {
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
-    }
-  }, {
-    key: "getClearBtn",
-    value: function getClearBtn() {
-      return $(this.$elem.find('.js-ui-datepicker-clear-button'));
-    }
-  }, {
-    key: "getApplyBtn",
-    value: function getApplyBtn() {
-      return $(this.$elem.find('.js-ui-datepicker-apply-button'));
-    }
-  }, {
-    key: "updateClearBtn",
-    value: function updateClearBtn() {
-      if (this.$elem.datepicker('getDate')) {
-        this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
-      } else {
-        this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
-      }
-    }
-  }, {
-    key: "setDate",
-    value: function setDate(dateObjects) {
-      var dateTexts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [null, null];
-      this.$elem.datepicker('setDate', dateObjects);
-
-      var _dateObjects = _slicedToArray(dateObjects, 2);
-
-      this.extensionRangeObject.startDate = _dateObjects[0];
-      this.extensionRangeObject.endDate = _dateObjects[1];
-
-      var _dateTexts = _slicedToArray(dateTexts, 2);
-
-      this.extensionRangeObject.startDateText = _dateTexts[0];
-      this.extensionRangeObject.endDateText = _dateTexts[1];
-      this.getClearBtn().click(this.handleClearButtonClick);
-      this.getApplyBtn().click(this.handleApplyButtonClick);
-      this.updateClearBtn();
-    }
-  }, {
-    key: "handleApplyButtonClick",
-    value: function handleApplyButtonClick() {
-      var dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
-      var dateTexts = [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText];
-      this.setDate(dates, dateTexts);
-      var valueText;
-
-      if (this.isTextDouble) {
-        valueText = dateTexts;
-      } else if (dateTexts[0] && dateTexts[1]) {
-        valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
-      } else {
-        valueText = null;
-      }
-
-      this.notify({
-        type: 'CLICK_APPLY-BUTTON',
-        value: dates,
-        valueText: valueText
-      });
-    }
-  }, {
-    key: "handleClearButtonClick",
-    value: function handleClearButtonClick() {
-      this.setDate([null, null]);
-      this.notify({
-        type: 'CLICK_CLEAR-BUTTON',
-        value: [null, null],
-        valueText: null
-      });
-    }
-  }, {
-    key: "onSelect",
-    value: function onSelect(dateText, inst, extensionRange) {
-      var _this = this;
-
-      this.extensionRangeObject = extensionRange;
-      setTimeout(function () {
-        _this.getApplyBtn().click(_this.handleApplyButtonClick);
-
-        _this.getClearBtn().click(_this.handleClearButtonClick);
-      }, 100);
-    }
-  }]);
-
-  return DatePicker;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
-
-/***/ }),
-/* 6 */,
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./src/common.blocks/counting-item/counting-item.js
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* WEBPACK VAR INJECTION */(function($) {function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
@@ -11382,18 +10980,29 @@ var CountingItem = /*#__PURE__*/function () {
     _classCallCheck(this, CountingItem);
 
     this.elem = elem;
+    this.wordsDeclension = this.elem.dataset.words ? JSON.parse(this.elem.dataset.words) : null;
     this.plusBtn = this.getPlusBtn();
     this.minusBtn = this.getMinusBtn();
     this.valueElem = this.getValueElem();
-    this.value = +this.valueElem.innerText;
+    this.value = Number(this.valueElem.innerText);
     this.name = this.getNameElem().innerText.toLowerCase();
     this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
     this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);
     this.initButtons();
     this.observers = [];
+    this.addToJqueryData();
   }
 
   _createClass(CountingItem, [{
+    key: "addToJqueryData",
+    value: function addToJqueryData() {
+      if ($) {
+        $(this.elem).data({
+          instance: this
+        });
+      }
+    }
+  }, {
     key: "subscribe",
     value: function subscribe(observer) {
       this.observers.push(observer);
@@ -11417,7 +11026,13 @@ var CountingItem = /*#__PURE__*/function () {
         return '';
       }
 
-      return "".concat(this.value, " ").concat(this.name);
+      var name = this.name;
+
+      if (this.wordsDeclension) {
+        name = CountingItem.declinationByNumber(this.value, this.wordsDeclension).toLowerCase();
+      }
+
+      return "".concat(this.value, " ").concat(name);
     }
   }, {
     key: "getNameElem",
@@ -11483,211 +11098,60 @@ var CountingItem = /*#__PURE__*/function () {
       var newValue = this.value - 1;
       this.setValue(newValue);
     }
+  }], [{
+    key: "declinationByNumber",
+    value: function declinationByNumber(number, words) {
+      var lastTwoDigits = Math.abs(number) % 100;
+      var lastDigit = lastTwoDigits % 10;
+
+      if (lastTwoDigits > 10 && lastTwoDigits < 20) {
+        return words[2];
+      }
+
+      if (lastDigit > 1 && lastDigit < 5) {
+        return words[1];
+      }
+
+      if (lastDigit === 1) {
+        return words[0];
+      }
+
+      return words[2];
+    }
   }]);
 
   return CountingItem;
 }();
 
-/* harmony default export */ var counting_item = (CountingItem);
-// CONCATENATED MODULE: ./src/common.blocks/items-counter/items-counter.js
-function items_counter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function items_counter_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function items_counter_createClass(Constructor, protoProps, staticProps) { if (protoProps) items_counter_defineProperties(Constructor.prototype, protoProps); if (staticProps) items_counter_defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var items_counter_ItemsCounter = /*#__PURE__*/function () {
-  function ItemsCounter(elem) {
-    var wordToValueTextReplace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-    items_counter_classCallCheck(this, ItemsCounter);
-
-    this.elem = elem;
-    this.clearBtn = this.getClearBtn();
-    this.applyBtn = this.getApplyBtn();
-    this.itemElems = this.getItemElems();
-    this.countingItemInstances = this.createCountingItemInstances();
-    this.wordToValueTextReplace = wordToValueTextReplace;
-    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
-    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
-    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
-    this.addListenersToButtons();
-    this.updateClearButton();
-    this.observers = [];
-    this.subscribeToItems();
-  }
-
-  items_counter_createClass(ItemsCounter, [{
-    key: "notify",
-    value: function notify(action) {
-      this.observers.forEach(function (observer) {
-        observer.update(action);
-      });
-    }
-  }, {
-    key: "update",
-    value: function update(action) {
-      if (action.type === 'UPDATE_VALUE') {
-        if (this.isWithoutButtons()) {
-          this.updateClearButton();
-          this.notify({
-            type: 'UPDATE_VALUE',
-            value: this.getValues(),
-            valueText: this.convertValuesToText()
-          });
-        }
-      }
-    }
-  }, {
-    key: "subscribe",
-    value: function subscribe(observer) {
-      this.observers.push(observer);
-    }
-  }, {
-    key: "getValues",
-    value: function getValues() {
-      var values = [];
-      this.countingItemInstances.forEach(function (inst) {
-        var value = inst.getValue();
-        values.push(value);
-      });
-      return values;
-    }
-  }, {
-    key: "getClearBtn",
-    value: function getClearBtn() {
-      var clearBtnSelector = '.js-items-counter__clear-button';
-      return this.elem.querySelector(clearBtnSelector);
-    }
-  }, {
-    key: "getApplyBtn",
-    value: function getApplyBtn() {
-      var applyBtnSelector = '.js-items-counter__apply-button';
-      return this.elem.querySelector(applyBtnSelector);
-    }
-  }, {
-    key: "getItemElems",
-    value: function getItemElems() {
-      var itemSelector = '.js-counting-item';
-      return this.elem.querySelectorAll(itemSelector);
-    }
-  }, {
-    key: "isWithoutButtons",
-    value: function isWithoutButtons() {
-      var withoutButtonsClass = 'items-counter_without-buttons';
-      return this.elem.classList.contains(withoutButtonsClass);
-    }
-  }, {
-    key: "updateClearButton",
-    value: function updateClearButton() {
-      var valuesSum = 0;
-      this.getValues().forEach(function (val) {
-        valuesSum += val;
-      });
-
-      if (valuesSum === 0) {
-        this.clearBtn.classList.add(this.clearBtnDisabledClass);
-      } else {
-        this.clearBtn.classList.remove(this.clearBtnDisabledClass);
-      }
-    }
-  }, {
-    key: "handleClearBtnClick",
-    value: function handleClearBtnClick() {
-      this.countingItemInstances.forEach(function (inst) {
-        inst.setValue(0);
-      });
-      this.updateClearButton();
-      this.notify({
-        type: 'CLICK_CLEAR-BUTTON',
-        value: this.getValues(),
-        valueText: this.convertValuesToText()
-      });
-    }
-  }, {
-    key: "handleApplyBtnClick",
-    value: function handleApplyBtnClick() {
-      this.updateClearButton();
-      this.notify({
-        type: 'CLICK_APPLY-BUTTON',
-        value: this.getValues(),
-        valueText: this.convertValuesToText()
-      });
-    }
-  }, {
-    key: "convertValuesToText",
-    value: function convertValuesToText() {
-      var fullText = '';
-
-      if (this.wordToValueTextReplace) {
-        var valuesSum = 0;
-        this.countingItemInstances.forEach(function (inst) {
-          valuesSum += inst.getValue();
-        });
-        fullText += "".concat(valuesSum, " ").concat(this.wordToValueTextReplace);
-      } else {
-        var maxItemsNumInText = 2;
-        var textsList = [];
-        this.countingItemInstances.forEach(function (inst) {
-          if (inst.getValueText() !== '') {
-            textsList.push(inst.getValueText());
-          }
-        });
-        textsList.forEach(function (text, index) {
-          if (index !== 0) {
-            if (index < maxItemsNumInText) {
-              fullText += ', ';
-            }
-          }
-
-          if (index < maxItemsNumInText) {
-            fullText += text;
-          }
-
-          if (index === maxItemsNumInText - 1) {
-            fullText += '...';
-          }
-        });
-      }
-
-      return fullText;
-    }
-  }, {
-    key: "addListenersToButtons",
-    value: function addListenersToButtons() {
-      this.clearBtn.addEventListener('click', this.handleClearBtnClick);
-      this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
-    }
-  }, {
-    key: "createCountingItemInstances",
-    value: function createCountingItemInstances() {
-      var instances = [];
-      this.itemElems.forEach(function (elem) {
-        var countingItem = new counting_item(elem);
-        instances.push(countingItem);
-      });
-      return instances;
-    }
-  }, {
-    key: "subscribeToItems",
-    value: function subscribeToItems() {
-      var _this = this;
-
-      this.countingItemInstances.forEach(function (inst) {
-        inst.subscribe(_this);
-      });
-    }
-  }]);
-
-  return ItemsCounter;
-}();
-
-/* harmony default export */ var items_counter = __webpack_exports__["a"] = (items_counter_ItemsCounter);
+/* harmony default export */ __webpack_exports__["a"] = (CountingItem);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 8 */
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
+	if ( true ) {
+
+		// AMD. Register as an anonymous module.
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(0) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+} ( function( $ ) {
+
+$.ui = $.ui || {};
+
+return $.ui.version = "1.12.1";
+
+} ) );
+
+
+/***/ }),
+/* 4 */,
+/* 5 */,
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -11695,7 +11159,7 @@ var items_counter_ItemsCounter = /*#__PURE__*/function () {
   
 
 /***/ }),
-/* 9 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11949,7 +11413,7 @@ function pug_rethrow(err, filename, lineno, str) {
     throw err;
   }
   try {
-    str = str || __webpack_require__(10).readFileSync(filename, 'utf8');
+    str = str || __webpack_require__(8).readFileSync(filename, 'utf8');
   } catch (ex) {
     pug_rethrow(err, null, lineno);
   }
@@ -11984,14 +11448,642 @@ function pug_rethrow(err, filename, lineno, str) {
 
 
 /***/ }),
-/* 10 */
+/* 8 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 11 */,
+/* 9 */,
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* harmony import */ var _common_blocks_counting_item_init__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var ItemsCounter = /*#__PURE__*/function () {
+  function ItemsCounter(element) {
+    _classCallCheck(this, ItemsCounter);
+
+    this.elem = element;
+    this.clearBtn = this.getClearBtn();
+    this.applyBtn = this.getApplyBtn();
+    this.itemElems = this.getItemElems();
+    this.countingItemInstances = this.getCountingItemInstances();
+    this.wordForValueTextReplacing = JSON.parse(this.elem.dataset.replaceText);
+    this.itemIndexForSeparateCount = JSON.parse(this.elem.dataset.separateItem);
+    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
+    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
+    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
+    this.addListenersToButtons();
+    this.updateClearButton();
+    this.observers = [];
+    this.subscribeToItems();
+    this.addToJqueryData();
+  }
+
+  _createClass(ItemsCounter, [{
+    key: "addToJqueryData",
+    value: function addToJqueryData() {
+      if ($) {
+        $(this.elem).data({
+          instance: this
+        });
+      }
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(action) {
+      if (action.type === 'UPDATE_VALUE') {
+        if (this.isWithoutButtons()) {
+          this.updateClearButton();
+          this.notify({
+            type: 'UPDATE_VALUE',
+            value: this.getValues(),
+            valueText: this.convertValuesToText()
+          });
+        }
+      }
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "getValues",
+    value: function getValues() {
+      var values = [];
+      this.countingItemInstances.forEach(function (inst) {
+        var value = inst.getValue();
+        values.push(value);
+      });
+      return values;
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      var clearBtnSelector = '.js-items-counter__clear-button';
+      return this.elem.querySelector(clearBtnSelector);
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      var applyBtnSelector = '.js-items-counter__apply-button';
+      return this.elem.querySelector(applyBtnSelector);
+    }
+  }, {
+    key: "getItemElems",
+    value: function getItemElems() {
+      var itemSelector = '.js-counting-item';
+      return this.elem.querySelectorAll(itemSelector);
+    }
+  }, {
+    key: "isWithoutButtons",
+    value: function isWithoutButtons() {
+      var withoutButtonsClass = 'items-counter_without-buttons';
+      return this.elem.classList.contains(withoutButtonsClass);
+    }
+  }, {
+    key: "updateClearButton",
+    value: function updateClearButton() {
+      var valuesSum = 0;
+      this.getValues().forEach(function (val) {
+        valuesSum += val;
+      });
+
+      if (valuesSum === 0) {
+        this.clearBtn.classList.add(this.clearBtnDisabledClass);
+      } else {
+        this.clearBtn.classList.remove(this.clearBtnDisabledClass);
+      }
+    }
+  }, {
+    key: "handleClearBtnClick",
+    value: function handleClearBtnClick() {
+      this.countingItemInstances.forEach(function (inst) {
+        inst.setValue(0);
+      });
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "handleApplyBtnClick",
+    value: function handleApplyBtnClick() {
+      this.updateClearButton();
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: this.getValues(),
+        valueText: this.convertValuesToText()
+      });
+    }
+  }, {
+    key: "convertValuesToText",
+    value: function convertValuesToText() {
+      var _this = this;
+
+      var fullText = '';
+
+      if (this.wordForValueTextReplacing) {
+        if (this.itemIndexForSeparateCount !== null) {
+          var valuesSumWithoutSeparateItem = 0;
+          this.countingItemInstances.forEach(function (inst, index) {
+            if (index !== _this.itemIndexForSeparateCount) {
+              valuesSumWithoutSeparateItem += inst.getValue();
+            }
+          });
+          var word = this.wordForValueTextReplacing;
+
+          if (Array.isArray(this.wordForValueTextReplacing)) {
+            word = _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].declinationByNumber(valuesSumWithoutSeparateItem, this.wordForValueTextReplacing);
+          }
+
+          var separateItem = this.countingItemInstances[this.itemIndexForSeparateCount];
+
+          if (valuesSumWithoutSeparateItem) {
+            fullText = "".concat(valuesSumWithoutSeparateItem, " ").concat(word);
+
+            if (separateItem.getValue()) {
+              fullText += ", ".concat(separateItem.getValueText());
+            }
+          } else if (separateItem.getValue()) {
+            fullText += separateItem.getValueText();
+          }
+        } else {
+          var valuesSum = 0;
+          this.countingItemInstances.forEach(function (inst) {
+            valuesSum += inst.getValue();
+          });
+          var _word = this.wordForValueTextReplacing;
+
+          if (Array.isArray(this.wordForValueTextReplacing)) {
+            _word = _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"].declinationByNumber(valuesSum, this.wordForValueTextReplacing);
+          }
+
+          if (valuesSum !== 0) {
+            fullText += "".concat(valuesSum, " ").concat(_word);
+          }
+        }
+      } else {
+        var maxItemsNumInText = 2;
+        var textsList = [];
+        this.countingItemInstances.forEach(function (inst) {
+          if (inst.getValueText() !== '') {
+            textsList.push(inst.getValueText());
+          }
+        });
+        textsList.forEach(function (text, index) {
+          if (index !== 0) {
+            if (index < maxItemsNumInText) {
+              fullText += ', ';
+            }
+          }
+
+          if (index < maxItemsNumInText) {
+            fullText += text;
+          }
+
+          if (index === maxItemsNumInText - 1) {
+            fullText += '...';
+          }
+        });
+      }
+
+      return fullText;
+    }
+  }, {
+    key: "addListenersToButtons",
+    value: function addListenersToButtons() {
+      this.clearBtn.addEventListener('click', this.handleClearBtnClick);
+      this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
+    }
+  }, {
+    key: "getCountingItemInstances",
+    value: function getCountingItemInstances() {
+      var instances = [];
+      this.itemElems.forEach(function (elem) {
+        instances.push($(elem).data('instance'));
+      });
+      return instances;
+    }
+  }, {
+    key: "subscribeToItems",
+    value: function subscribeToItems() {
+      var _this2 = this;
+
+      this.countingItemInstances.forEach(function (inst) {
+        inst.subscribe(_this2);
+      });
+    }
+  }]);
+
+  return ItemsCounter;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (ItemsCounter);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
+/* harmony import */ var jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_datepicker__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(22);
+/* harmony import */ var _jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_jquery_datepicker_extension_range_min__WEBPACK_IMPORTED_MODULE_1__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var DatePicker = /*#__PURE__*/function () {
+  function DatePicker(element) {
+    _classCallCheck(this, DatePicker);
+
+    this.clearBtnHTML = "<button class=\"ui-datepicker-current \n      ui-state-default ui-corner-all \n      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button\" \n      type=\"button\">\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u044C</button> ";
+    this.applyBtnHTML = "<button class=\"ui-datepicker-current\n      ui-state-default ui-corner-all\n      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button\"\n      type=\"button\">\u041F\u0440\u0438\u043C\u0435\u043D\u0438\u0442\u044C</button> ";
+    this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    this.monthNamesShort = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    this.dayNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+    this.dayNamesShort = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.dayNamesMin = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    this.$elem = $(element);
+    this.extensionRangeObject = {};
+    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
+    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
+    this.handleDateSelect = this.handleDateSelect.bind(this);
+    this.isTextDouble = JSON.parse(this.$elem[0].dataset.isTextDouble);
+    this.dateFormat = this.$elem[0].dataset.dateFormat ? this.$elem[0].dataset.dateFormat : 'dd.mm.yy';
+    this.options = {
+      range: 'period',
+      showButtonPanel: true,
+      currentText: this.clearBtnHTML + this.applyBtnHTML,
+      firstDay: 1,
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      dateFormat: this.dateFormat,
+      monthNames: this.monthNames,
+      monthNamesShort: this.monthNamesShort,
+      dayNames: this.dayNames,
+      dayNamesShort: this.dayNamesShort,
+      dayNamesMin: this.dayNamesMin,
+      onSelect: this.handleDateSelect
+    };
+    this.init();
+    this.initialDate = JSON.parse(this.$elem[0].dataset.initialDate);
+    this.initialDate[0] = this.initialDate[0] ? new Date(this.initialDate[0]) : null;
+    this.initialDate[1] = this.initialDate[1] ? new Date(this.initialDate[1]) : null;
+    this.setDate(this.initialDate);
+    this.observers = [];
+    this.addToJqueryData();
+  }
+
+  _createClass(DatePicker, [{
+    key: "addToJqueryData",
+    value: function addToJqueryData() {
+      if ($) {
+        this.$elem.data({
+          instance: this
+        });
+      }
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      this.$elem.datepicker(this.options);
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(observer) {
+      this.observers.push(observer);
+    }
+  }, {
+    key: "notify",
+    value: function notify(action) {
+      this.observers.forEach(function (observer) {
+        observer.update(action);
+      });
+    }
+  }, {
+    key: "getClearBtn",
+    value: function getClearBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-clear-button'));
+    }
+  }, {
+    key: "getApplyBtn",
+    value: function getApplyBtn() {
+      return $(this.$elem.find('.js-ui-datepicker-apply-button'));
+    }
+  }, {
+    key: "updateClearBtn",
+    value: function updateClearBtn() {
+      if (this.$elem.datepicker('getDate')) {
+        this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
+      } else {
+        this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
+      }
+    }
+  }, {
+    key: "setDate",
+    value: function setDate(dateObjects) {
+      var dateTexts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [null, null];
+      this.$elem.datepicker('setDate', dateObjects);
+
+      var _dateObjects = _slicedToArray(dateObjects, 2);
+
+      this.extensionRangeObject.startDate = _dateObjects[0];
+      this.extensionRangeObject.endDate = _dateObjects[1];
+
+      var _dateTexts = _slicedToArray(dateTexts, 2);
+
+      this.extensionRangeObject.startDateText = _dateTexts[0];
+      this.extensionRangeObject.endDateText = _dateTexts[1];
+      this.getClearBtn().click(this.handleClearButtonClick);
+      this.getApplyBtn().click(this.handleApplyButtonClick);
+      this.updateClearBtn();
+    }
+  }, {
+    key: "handleApplyButtonClick",
+    value: function handleApplyButtonClick() {
+      var dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
+      var dateTexts = [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText];
+      this.setDate(dates, dateTexts);
+      var valueText;
+
+      if (this.isTextDouble) {
+        valueText = dateTexts;
+      } else if (dateTexts[0] && dateTexts[1]) {
+        valueText = "".concat(dateTexts[0], " - ").concat(dateTexts[1]);
+      } else {
+        valueText = null;
+      }
+
+      this.notify({
+        type: 'CLICK_APPLY-BUTTON',
+        value: dates,
+        valueText: valueText
+      });
+    }
+  }, {
+    key: "handleClearButtonClick",
+    value: function handleClearButtonClick() {
+      this.setDate([null, null]);
+      this.notify({
+        type: 'CLICK_CLEAR-BUTTON',
+        value: [null, null],
+        valueText: null
+      });
+    }
+  }, {
+    key: "handleDateSelect",
+    value: function handleDateSelect(dateText, inst, extensionRange) {
+      var _this = this;
+
+      this.extensionRangeObject = extensionRange;
+      setTimeout(function () {
+        _this.getApplyBtn().click(_this.handleApplyButtonClick);
+
+        _this.getClearBtn().click(_this.handleClearButtonClick);
+      }, 100);
+    }
+  }]);
+
+  return DatePicker;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (DatePicker);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
 /* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Dropdown = /*#__PURE__*/function () {
+  function Dropdown(elem) {
+    _classCallCheck(this, Dropdown);
+
+    this.elem = elem;
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.defaultValue = JSON.parse(this.elem.dataset.defaultValue);
+    this.popup = this.getPopup();
+    this.hiddenPopupClass = 'dropdown__popup_hidden';
+    this.doubleDropdownClass = 'dropdown_double';
+    this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
+    this.isListening = false;
+    this.updateTextFieldsClasses();
+    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this.addWindowListener();
+    this.findAndSubscribeToPopupInstance();
+  }
+
+  _createClass(Dropdown, [{
+    key: "findAndSubscribeToPopupInstance",
+    value: function findAndSubscribeToPopupInstance() {
+      var blockInPopup = $(this.popup).find('> *');
+      var instance = blockInPopup.data('instance');
+
+      try {
+        instance.subscribe(this);
+      } catch (_unused) {
+        throw new Error('blockInPopup.data() must have a \'instance\' prop with subscribe property');
+      }
+    }
+  }, {
+    key: "updateTextFieldsClasses",
+    value: function updateTextFieldsClasses() {
+      var _this = this;
+
+      if (!this.isPopupHidden()) {
+        this.textFields.forEach(function (el) {
+          var _el$classList;
+
+          (_el$classList = el.classList).add.apply(_el$classList, _toConsumableArray(_this.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(action) {
+      var _this2 = this;
+
+      this.changeTextFieldValue(action.valueText);
+
+      if (action.type === 'CLICK_APPLY-BUTTON') {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList2;
+
+          (_el$classList2 = el.classList).remove.apply(_el$classList2, _toConsumableArray(_this2.activeTextFieldClasses));
+        });
+      }
+    }
+  }, {
+    key: "changeTextFieldValue",
+    value: function changeTextFieldValue(text) {
+      var _this3 = this;
+
+      if (this.isDropdownDouble()) {
+        if (Array.isArray(text)) {
+          text.forEach(function (value, i) {
+            if (!value) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = value;
+            }
+          });
+        } else {
+          this.textFieldInputs.forEach(function (input, i) {
+            if (!text) {
+              _this3.textFieldInputs[i].value = _this3.defaultValue;
+            } else {
+              _this3.textFieldInputs[i].value = text;
+            }
+          });
+        }
+      } else if (!text) {
+        this.textFieldInputs[0].value = this.defaultValue;
+      } else {
+        this.textFieldInputs[0].value = text;
+      }
+    }
+  }, {
+    key: "getPopup",
+    value: function getPopup() {
+      var popupSelector = '.js-dropdown__popup';
+      return this.elem.querySelector(popupSelector);
+    }
+  }, {
+    key: "getTextFields",
+    value: function getTextFields() {
+      var textFieldSelector = '.js-dropdown__text-field .js-text-field';
+      return this.elem.querySelectorAll(textFieldSelector);
+    }
+  }, {
+    key: "getTextFieldInputs",
+    value: function getTextFieldInputs() {
+      var inputSelector = '.js-text-field__input';
+      var inputs = [];
+      this.textFields.forEach(function (elem) {
+        inputs.push(elem.querySelector(inputSelector));
+      });
+      return inputs;
+    }
+  }, {
+    key: "isPopupHidden",
+    value: function isPopupHidden() {
+      return this.popup.classList.contains(this.hiddenPopupClass);
+    }
+  }, {
+    key: "isDropdownDouble",
+    value: function isDropdownDouble() {
+      return this.elem.classList.contains(this.doubleDropdownClass);
+    }
+  }, {
+    key: "addWindowListener",
+    value: function addWindowListener() {
+      window.addEventListener('click', this.handleWindowClick);
+    }
+  }, {
+    key: "handleWindowClick",
+    value: function handleWindowClick(evt) {
+      var _this4 = this;
+
+      if (evt.path.includes(this.elem)) {
+        this.isListening = true;
+
+        if (!evt.path.includes(this.popup)) {
+          if (this.isPopupHidden()) {
+            this.popup.classList.remove(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList3;
+
+              (_el$classList3 = el.classList).add.apply(_el$classList3, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          } else {
+            this.popup.classList.add(this.hiddenPopupClass);
+            this.textFields.forEach(function (el) {
+              var _el$classList4;
+
+              (_el$classList4 = el.classList).remove.apply(_el$classList4, _toConsumableArray(_this4.activeTextFieldClasses));
+            });
+          }
+        }
+      } else if (this.isListening) {
+        this.popup.classList.add(this.hiddenPopupClass);
+        this.textFields.forEach(function (el) {
+          var _el$classList5;
+
+          (_el$classList5 = el.classList).remove.apply(_el$classList5, _toConsumableArray(_this4.activeTextFieldClasses));
+        });
+      }
+    }
+  }]);
+
+  return Dropdown;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Dropdown);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12012,7 +12104,8 @@ var Header = /*#__PURE__*/function () {
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
     this.columnNavClass = 'navigation_in-column';
-    this.updateHeader = this.updateHeader.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.handleWindowLoad = this.handleWindowLoad.bind(this);
     this.handleWindowClick = this.handleWindowClick.bind(this);
     this.init();
   }
@@ -12038,9 +12131,19 @@ var Header = /*#__PURE__*/function () {
   }, {
     key: "init",
     value: function init() {
-      window.addEventListener('resize', this.updateHeader);
+      window.addEventListener('resize', this.handleWindowResize);
       window.addEventListener('click', this.handleWindowClick);
-      window.addEventListener('load', this.updateHeader);
+      window.addEventListener('load', this.handleWindowLoad);
+    }
+  }, {
+    key: "handleWindowResize",
+    value: function handleWindowResize() {
+      this.updateHeader();
+    }
+  }, {
+    key: "handleWindowLoad",
+    value: function handleWindowLoad() {
+      this.updateHeader();
     }
   }, {
     key: "updateHeader",
@@ -12078,7 +12181,20 @@ var Header = /*#__PURE__*/function () {
 /* harmony default export */ __webpack_exports__["a"] = (Header);
 
 /***/ }),
-/* 13 */
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
+/* eslint-disable no-unused-vars */
+
+$('.js-date-picker').each(function init() {
+  var datePicker = new _common_blocks_date_picker_date_picker__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -12128,7 +12244,7 @@ return $.ui.keyCode = {
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12192,8 +12308,47 @@ var jquery = __webpack_require__(0);
 
 
 /***/ }),
-/* 15 */,
-/* 16 */
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* eslint-disable no-unused-vars */
+
+$('.js-items-counter').each(function init() {
+  var itemsCounter = new _common_blocks_items_counter_items_counter__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* eslint-disable no-unused-vars */
+
+$('.js-dropdown').each(function init() {
+  var dropdown = new _common_blocks_dropdown_dropdown__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 19 */,
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2);
+/* eslint-disable no-unused-vars */
+
+$('.js-counting-item').each(function init() {
+  var countingItem = new _common_blocks_counting_item_counting_item__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](this);
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// jscs:disable maximumLineLength
@@ -12223,7 +12378,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
 			__webpack_require__(3),
-			__webpack_require__(13)
+			__webpack_require__(15)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -14318,7 +14473,7 @@ return $.datepicker;
 
 
 /***/ }),
-/* 17 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -14486,11 +14641,11 @@ var _datepickerExtension = function _datepickerExtension() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 18 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_header_header__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* eslint-disable no-unused-vars */
 
 $('.js-header').each(function init() {
@@ -14499,13 +14654,13 @@ $('.js-header').each(function init() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
 /* 24 */,
-/* 25 */
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15243,15 +15398,13 @@ return $.widget;
 
 
 /***/ }),
-/* 26 */,
-/* 27 */,
-/* 28 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(45);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(48);
 /* harmony import */ var slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_min__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(46);
+/* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(49);
 /* harmony import */ var slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel_slick_slick_scss__WEBPACK_IMPORTED_MODULE_1__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15295,12 +15448,12 @@ var RoomCard = /*#__PURE__*/function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 29 */,
-/* 30 */
+/* 32 */,
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(52);
 /* harmony import */ var jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_ui_ui_widgets_slider__WEBPACK_IMPORTED_MODULE_0__);
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -15331,7 +15484,7 @@ var RangeSlider = /*#__PURE__*/function () {
     this.valueSelector = '.js-range-slider__value';
     this.elem = elem;
     this.values = [5000, 10000];
-    this.onSlide = this.onSlide.bind(this);
+    this.handleSliderValuesChanged = this.handleSliderValuesChanged.bind(this);
     this.init();
   }
 
@@ -15343,7 +15496,7 @@ var RangeSlider = /*#__PURE__*/function () {
         min: 200,
         max: 15400,
         values: this.values,
-        slide: this.onSlide
+        slide: this.handleSliderValuesChanged
       });
       this.updateValueElem();
     }
@@ -15358,15 +15511,17 @@ var RangeSlider = /*#__PURE__*/function () {
       return this.elem.querySelector(this.valueSelector);
     }
   }, {
-    key: "onSlide",
-    value: function onSlide(event, ui) {
+    key: "handleSliderValuesChanged",
+    value: function handleSliderValuesChanged(event, ui) {
       this.values = _toConsumableArray(ui.values);
       this.updateValueElem();
     }
   }, {
     key: "updateValueElem",
     value: function updateValueElem() {
-      this.getValueElem().innerText = "".concat(RangeSlider.prettifyNum(this.values[0]) + this.rubSymbol, " - ") + "".concat(RangeSlider.prettifyNum(this.values[1])).concat(this.rubSymbol);
+      var firstPrice = "".concat(RangeSlider.prettifyNum(this.values[0])).concat(this.rubSymbol);
+      var secondPrice = "".concat(RangeSlider.prettifyNum(this.values[1])).concat(this.rubSymbol);
+      this.getValueElem().innerText = "".concat(firstPrice, " - ").concat(secondPrice);
     }
   }], [{
     key: "prettifyNum",
@@ -15384,11 +15539,11 @@ var RangeSlider = /*#__PURE__*/function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56);
 /* harmony import */ var simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(simple_pagination_js_jquery_simplePagination__WEBPACK_IMPORTED_MODULE_0__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15435,7 +15590,7 @@ var Pagination = /*#__PURE__*/function () {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -15450,9 +15605,9 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
     _classCallCheck(this, ExpandableCheckboxes);
 
     this.elem = elem;
-    this.listening = false;
+    this.isListening = false;
     this.expandedClassName = 'expandable-checkboxes_expanded';
-    this.expanded = this.elem.classList.contains(this.expandedClassName);
+    this.isExpanded = this.elem.classList.contains(this.expandedClassName);
     this.handleWindowClick = this.handleWindowClick.bind(this);
     this.init();
   }
@@ -15471,21 +15626,21 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
   }, {
     key: "handleWindowClick",
     value: function handleWindowClick(evt) {
-      var clickedOnElem = evt.path.includes(this.elem);
-      var clickedOnCheckboxes = evt.path.includes(this.getCheckboxes());
+      var isClickedOnElem = evt.path.includes(this.elem);
+      var isClickedOnCheckboxes = evt.path.includes(this.getCheckboxes());
 
-      if (clickedOnElem) {
-        this.listening = true;
+      if (isClickedOnElem) {
+        this.isListening = true;
       }
 
-      if (this.listening) {
-        if (this.expanded) {
-          if (!clickedOnCheckboxes) {
-            this.expanded = false;
+      if (this.isListening) {
+        if (this.isExpanded) {
+          if (!isClickedOnCheckboxes) {
+            this.isExpanded = false;
             this.elem.classList.remove(this.expandedClassName);
           }
-        } else if (clickedOnElem) {
-          this.expanded = true;
+        } else if (isClickedOnElem) {
+          this.isExpanded = true;
           this.elem.classList.add(this.expandedClassName);
         }
       }
@@ -15498,9 +15653,6 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
 /* harmony default export */ __webpack_exports__["a"] = (ExpandableCheckboxes);
 
 /***/ }),
-/* 33 */,
-/* 34 */,
-/* 35 */,
 /* 36 */,
 /* 37 */,
 /* 38 */,
@@ -15509,11 +15661,14 @@ var ExpandableCheckboxes = /*#__PURE__*/function () {
 /* 41 */,
 /* 42 */,
 /* 43 */,
-/* 44 */
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(28);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_room_card_room_card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
 /* eslint-disable no-unused-vars */
 
 $('.js-room-card').each(function init() {
@@ -15522,7 +15677,7 @@ $('.js-room-card').each(function init() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 45 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(i){"use strict"; true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(0)], __WEBPACK_AMD_DEFINE_FACTORY__ = (i),
@@ -15532,7 +15687,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 46 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -15540,12 +15695,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   
 
 /***/ }),
-/* 47 */,
-/* 48 */
+/* 50 */,
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(30);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_range_slider_range_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* eslint-disable no-unused-vars */
 
 $('.js-range-slider').each(function init() {
@@ -15554,7 +15709,7 @@ $('.js-range-slider').each(function init() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 49 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -15581,10 +15736,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(50),
-			__webpack_require__(13),
+			__webpack_require__(53),
+			__webpack_require__(15),
 			__webpack_require__(3),
-			__webpack_require__(25)
+			__webpack_require__(30)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -16311,7 +16466,7 @@ return $.widget( "ui.slider", $.ui.mouse, {
 
 
 /***/ }),
-/* 50 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -16334,9 +16489,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 			__webpack_require__(0),
-			__webpack_require__(51),
+			__webpack_require__(54),
 			__webpack_require__(3),
-			__webpack_require__(25)
+			__webpack_require__(30)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -16542,7 +16697,7 @@ return $.widget( "ui.mouse", {
 
 
 /***/ }),
-/* 51 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -16562,11 +16717,11 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_pagination_pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(34);
 /* eslint-disable no-unused-vars */
 
 $('.js-pagination').each(function init() {
@@ -16575,7 +16730,7 @@ $('.js-pagination').each(function init() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/**
@@ -16975,11 +17130,11 @@ $('.js-pagination').each(function init() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(32);
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _common_blocks_expandable_checkboxes_expandable_checkboxes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(35);
 /* eslint-disable no-unused-vars */
 
 $('.js-expandable-checkboxes').each(function init() {
@@ -16988,9 +17143,6 @@ $('.js-expandable-checkboxes').each(function init() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(0)))
 
 /***/ }),
-/* 55 */,
-/* 56 */,
-/* 57 */,
 /* 58 */,
 /* 59 */,
 /* 60 */,
@@ -17019,15 +17171,16 @@ $('.js-expandable-checkboxes').each(function init() {
 /* 83 */,
 /* 84 */,
 /* 85 */,
-/* 86 */
+/* 86 */,
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pug = __webpack_require__(9);
+var pug = __webpack_require__(7);
 
 function template(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;
     var locals_for_with = (locals || {});
     
-    (function (Array, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
+    (function (Array, JSON, isHovered, isLong, isSecondary, pug_indent, textColor, withoutFrame) {
       var pug_indent = [];
 pug_mixins["arrow"] = pug_interp = function({type, color, withoutPadding = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -17110,7 +17263,7 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false} = {}){
+pug_mixins["dropdown"] = pug_interp = function({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false, defaultInputValue = ''} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'dropdown js-dropdown';
 if (isDouble) {
@@ -17130,7 +17283,7 @@ if (isDouble) {
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("data-default-value", JSON.stringify(defaultInputValue), true, true)) + "\u003E";
 if ((isDouble)) {
 pug_html = pug_html + "\n  ";
 pug_html = pug_html + pug_indent.join("");
@@ -17292,11 +17445,11 @@ pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C" + (tag) + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E" + (pug.escape(null == (pug_interp = text) ? "" : pug_interp)) + "\u003C\u002F" + (tag) + "\u003E";
 };
-pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0} = {}){
+pug_mixins["counting-item"] = pug_interp = function({name = '', value = 0, nameDeclensions} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv class=\"counting-item js-counting-item\"\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv" + (" class=\"counting-item js-counting-item\""+pug.attr("data-words", nameDeclensions ? JSON.stringify(nameDeclensions) : false, true, true)) + "\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"counting-item__name js-counting-item__name\"\u003E";
 pug_indent.push('    ');
@@ -17465,7 +17618,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fbutton\u003E";
 };
-pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false}){
+pug_mixins["items-counter"] = pug_interp = function({items, withoutButtons = false, wordForValueTextReplacing = null, itemIndexForSeparateCount = null}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'items-counter js-items-counter';
 if (withoutButtons) {
@@ -17473,7 +17626,7 @@ if (withoutButtons) {
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\n  ";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("data-replace-text", JSON.stringify(wordForValueTextReplacing), true, true)+pug.attr("data-separate-item", JSON.stringify(itemIndexForSeparateCount), true, true)) + "\u003E\n  ";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"items-counter__items-list\"\u003E";
 // iterate items
@@ -17488,7 +17641,8 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__item\"\u003E";
 pug_indent.push('      ');
 pug_mixins["counting-item"]({
                         name: item.name,
-                        value: item.value
+                        value: item.value,
+                        nameDeclensions: item.nameDeclensions,
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
@@ -17506,7 +17660,8 @@ pug_html = pug_html + "\u003Cdiv class=\"items-counter__item\"\u003E";
 pug_indent.push('      ');
 pug_mixins["counting-item"]({
                         name: item.name,
-                        value: item.value
+                        value: item.value,
+                        nameDeclensions: item.nameDeclensions,
                     });
 pug_indent.pop();
 pug_html = pug_html + "\n    ";
@@ -17556,7 +17711,7 @@ pug_html = pug_html + "\u003C\u002Fdiv\u003E\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003C\u002Fdiv\u003E";
 };
-pug_mixins["date-picker"] = pug_interp = function({withBorder = false} = {}){
+pug_mixins["date-picker"] = pug_interp = function({withBorder = false, dateFormat = null, initialDate = [null, null], isTextDouble = false} = {}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
 let className = 'date-picker js-date-picker';
 if (withBorder) {
@@ -17564,7 +17719,7 @@ if (withBorder) {
 }
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
-pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)) + "\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cdiv" + (pug.attr("class", pug.classes([className], [true]), false, true)+pug.attr("data-date-format", dateFormat, true, true)+pug.attr("data-initial-date", initialDate, true, true)+pug.attr("data-is-text-double", isTextDouble ? 'true' : 'false', true, true)) + "\u003E\u003C\u002Fdiv\u003E";
 };
 pug_mixins["heading"] = pug_interp = function({text = '', type = 'h3', color, withJs = false}){
 var block = (this && this.block), attributes = (this && this.attributes) || {};
@@ -17933,7 +18088,7 @@ var block = (this && this.block), attributes = (this && this.attributes) || {};
 pug_html = pug_html + "\n";
 pug_html = pug_html + pug_indent.join("");
 pug_html = pug_html + "\u003Cdiv class=\"rate-button\"\u003E";
-for (let i = 1; i <= 5; i++)
+for (let i = 1; i <= 5; i += 1)
 {
 const active = i <= currentRating;
 let className = 'material-icons rate-button__star';
@@ -18810,27 +18965,31 @@ pug_html = pug_html + "\u003C!DOCTYPE html\u003E\n\u003Chtml lang=\"ru\"\u003E\n
 pug_indent.push('    ');
 pug_mixins["header"]();
 pug_indent.pop();
-pug_html = pug_html + "\n    \u003Cmain class=\"search-room\"\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"search-room__container\"\u003E\n          \u003Caside class=\"search-room__params\"\u003E\n            \u003Cdiv class=\"search-room__params-date js-search-room__params-date\"\u003E";
+pug_html = pug_html + "\n    \u003Cmain class=\"search-room\"\u003E\n      \u003Cdiv class=\"container\"\u003E\n        \u003Cdiv class=\"search-room__container\"\u003E\n          \u003Caside class=\"search-room__params\"\u003E\n            \u003Cdiv class=\"search-room__params-date\"\u003E";
 pug_indent.push('              ');
 pug_mixins["dropdown"]({
                             title: 'Даты пребывания в отеле',
                             inputOptions: {
                                 value: '19 авг - 23 авг',
-                                placeholder: 'Дата'
+                                placeholder: 'Дата',
                             },
                             popupMixinOptions: {
-                                name: 'date-picker'
+                                name: 'date-picker',
+                                params: {
+                                    dateFormat: 'd M',
+                                },
                             },
-                            isShort: true
+                            isShort: true,
+                            defaultInputValue: 'Даты пребывания в отеле',
                         });
 pug_indent.pop();
-pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-guests js-search-room__params-guests\"\u003E";
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-guests\"\u003E";
 pug_indent.push('              ');
 pug_mixins["dropdown"]({
                             title: 'Гости',
                             inputOptions: {
                                 value: '3 гостя, 1 младенец',
-                                placeholder: 'Удобства'
+                                placeholder: 'Удобства',
                             },
                             popupMixinOptions: {
                                 name: 'items-counter',
@@ -18838,21 +18997,25 @@ pug_mixins["dropdown"]({
                                     items: [
                                         {
                                             name: 'Взрослые',
-                                            value: 3
+                                            value: 3,
                                         },
                                         {
                                             name: 'Дети',
-                                            value: 0
+                                            value: 0,
                                         },
                                         {
                                             name: 'Младенцы',
-                                            value: 1
-                                        }
+                                            value: 1,
+                                            nameDeclensions: ['младенец', 'младенца', 'младенцев'],
+                                        },
                                     ],
-                                    withoutButtons: true
-                                }
+                                    withoutButtons: true,
+                                    wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                                    itemIndexForSeparateCount: 2,
+                                },
                             },
-                            isShort: true
+                            isShort: true,
+                            defaultInputValue: 'Сколько гостей',
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-price\"\u003E";
@@ -18904,7 +19067,7 @@ pug_mixins["checkbox-buttons"]({
                             isRich: true
                         });
 pug_indent.pop();
-pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-facilities js-search-room__params-facilities\"\u003E";
+pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-facilities\"\u003E";
 pug_indent.push('              ');
 pug_mixins["dropdown"]({
                             title: 'Удобства номера',
@@ -18918,21 +19081,25 @@ pug_mixins["dropdown"]({
                                     items: [
                                         {
                                             name: 'Спальни',
-                                            value: '2'
+                                            value: '2',
+                                            nameDeclensions: ['спальня', 'спальни', 'спален'],
                                         },
                                         {
                                             name: 'Кровати',
-                                            value: '2'
+                                            value: '2',
+                                            nameDeclensions: ['кровать', 'кровати', 'кроватей'],
                                         },
                                         {
                                             name: 'Ванные комнаты',
-                                            value: '0'
-                                        }
+                                            value: '0',
+                                            nameDeclensions: ['ванная комната', 'ванные комнаты', 'ванных комнат'],
+                                        },
                                     ],
-                                    withoutButtons: true
-                                }
+                                    withoutButtons: true,
+                                },
                             },
                             isShort: true,
+                            defaultInputValue: 'Удобства',
                         });
 pug_indent.pop();
 pug_html = pug_html + "\n            \u003C\u002Fdiv\u003E\n            \u003Cdiv class=\"search-room__params-list\"\u003E";
@@ -19157,7 +19324,9 @@ pug_indent.pop();
 pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", `${fileName}.js`, true, true)) + "\u003E\u003C\u002Fscript\u003E\n  \u003C\u002Fbody\u003E\n\u003C\u002Fhtml\u003E";
     }.call(this, "Array" in locals_for_with ?
         locals_for_with.Array :
-        typeof Array !== 'undefined' ? Array : undefined, "isHovered" in locals_for_with ?
+        typeof Array !== 'undefined' ? Array : undefined, "JSON" in locals_for_with ?
+        locals_for_with.JSON :
+        typeof JSON !== 'undefined' ? JSON : undefined, "isHovered" in locals_for_with ?
         locals_for_with.isHovered :
         typeof isHovered !== 'undefined' ? isHovered : undefined, "isLong" in locals_for_with ?
         locals_for_with.isLong :
@@ -19174,7 +19343,7 @@ pug_html = pug_html + "\n    \u003Cscript" + (pug.attr("src", `${fileName}.js`, 
 module.exports = template;
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -19182,7 +19351,6 @@ module.exports = template;
   
 
 /***/ }),
-/* 88 */,
 /* 89 */,
 /* 90 */,
 /* 91 */,
@@ -19190,7 +19358,8 @@ module.exports = template;
 /* 93 */,
 /* 94 */,
 /* 95 */,
-/* 96 */
+/* 96 */,
+/* 97 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19198,16 +19367,16 @@ module.exports = template;
 __webpack_require__.r(__webpack_exports__);
 
 // EXTERNAL MODULE: ./src/sass/main.sass
-var main = __webpack_require__(8);
+var main = __webpack_require__(6);
 
 // EXTERNAL MODULE: ./src/js/index.js + 18 modules
-var js = __webpack_require__(14);
+var js = __webpack_require__(16);
 
 // EXTERNAL MODULE: ./src/pages/website-pages/search-room/search-room.pug
-var search_room = __webpack_require__(86);
+var search_room = __webpack_require__(87);
 
 // EXTERNAL MODULE: ./src/pages/website-pages/search-room/search-room.sass
-var search_room_search_room = __webpack_require__(87);
+var search_room_search_room = __webpack_require__(88);
 
 // CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_1.jpg
 /* harmony default export */ var room_img_1 = (__webpack_require__.p + "images/room-img_1.jpg");
@@ -19234,28 +19403,28 @@ var search_room_search_room = __webpack_require__(87);
 // CONCATENATED MODULE: ./src/pages/website-pages/search-room/images/room-img_12.jpg
 /* harmony default export */ var room_img_12 = (__webpack_require__.p + "images/room-img_12.jpg");
 // EXTERNAL MODULE: ./src/common.blocks/range-slider/init.js
-var init = __webpack_require__(48);
+var init = __webpack_require__(51);
 
 // EXTERNAL MODULE: ./src/common.blocks/room-card/init.js
-var room_card_init = __webpack_require__(44);
+var room_card_init = __webpack_require__(47);
 
 // EXTERNAL MODULE: ./src/common.blocks/pagination/init.js
-var pagination_init = __webpack_require__(52);
+var pagination_init = __webpack_require__(55);
 
 // EXTERNAL MODULE: ./src/common.blocks/header/init.js
-var header_init = __webpack_require__(18);
+var header_init = __webpack_require__(23);
 
 // EXTERNAL MODULE: ./src/common.blocks/expandable-checkboxes/init.js
-var expandable_checkboxes_init = __webpack_require__(54);
+var expandable_checkboxes_init = __webpack_require__(57);
 
-// EXTERNAL MODULE: ./src/common.blocks/items-counter/items-counter.js + 1 modules
-var items_counter = __webpack_require__(7);
+// EXTERNAL MODULE: ./src/common.blocks/items-counter/init.js
+var items_counter_init = __webpack_require__(17);
 
-// EXTERNAL MODULE: ./src/common.blocks/dropdown/dropdown.js
-var dropdown = __webpack_require__(2);
+// EXTERNAL MODULE: ./src/common.blocks/date-picker/init.js
+var date_picker_init = __webpack_require__(14);
 
-// EXTERNAL MODULE: ./src/common.blocks/date-picker/date-picker.js
-var date_picker = __webpack_require__(5);
+// EXTERNAL MODULE: ./src/common.blocks/dropdown/init.js
+var dropdown_init = __webpack_require__(18);
 
 // CONCATENATED MODULE: ./src/pages/website-pages/search-room/search-room.js
 /* eslint-disable no-unused-vars */
@@ -19283,22 +19452,6 @@ var date_picker = __webpack_require__(5);
 
 
 
-var dateDropdownElem = document.querySelector('.js-search-room__params-date .js-dropdown');
-var datePicker = new date_picker["a" /* default */]({
-  element: dateDropdownElem.querySelector('.js-date-picker'),
-  options: {
-    dateFormat: 'd M'
-  }
-});
-var dateDropdown = new dropdown["a" /* default */](dateDropdownElem, datePicker, 'Даты пребывания в отеле');
-var guestsDropdownElem = document.querySelector('.js-search-room__params-guests .js-dropdown');
-var guestsCounterElem = guestsDropdownElem.querySelector('.js-items-counter');
-var guestsCounter = new items_counter["a" /* default */](guestsCounterElem, 'гостя');
-var guestsDropdown = new dropdown["a" /* default */](guestsDropdownElem, guestsCounter, 'Сколько гостей');
-var facilitiesDropdownElem = document.querySelector('.js-search-room__params-facilities .js-dropdown');
-var facilitiesCounterElem = facilitiesDropdownElem.querySelector('.js-items-counter');
-var facilitiesCounter = new items_counter["a" /* default */](facilitiesCounterElem);
-var facilitiesDropdown = new dropdown["a" /* default */](facilitiesDropdownElem, facilitiesCounter, 'Удобства');
 
 /***/ })
 /******/ ]);
