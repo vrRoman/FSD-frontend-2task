@@ -28,16 +28,19 @@ block content
             [
                 {
                     name: 'Спальни',
-                    value: '2'
+                    value: '2',
+                    nameDeclensions: ['спальня', 'спальни', 'спален'],
                 },
                 {
                     name: 'Кровати',
-                    value: '2'
+                    value: '2',
+                    nameDeclensions: ['кровать', 'кровати', 'кроватей'],
                 },
                 {
                     name: 'Ванные комнаты',
-                    value: '0'
-                }
+                    value: '0',
+                    nameDeclensions: ['ванная комната', 'ванные комнаты', 'ванных комнат'],
+                },
             ]
 
         const listCheckboxes =
@@ -65,7 +68,7 @@ block content
                 {
                     name: 'Шампунь',
                     checked: false
-                }
+                },
             ]
     .container
         .form-elements
@@ -114,10 +117,12 @@ block content
                                         },
                                         {
                                             name: 'Младенцы',
-                                            value: 0
-                                        }
+                                            value: 0,
+                                            nameDeclensions: ['младенец', 'младенца', 'младенцев'],
+                                        },
                                     ],
-                                    wordForValueTextReplacing: 'гостя',
+                                    wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                                    itemIndexForSeparateCount: 2,
                                 },
                             },
                             defaultInputValue: 'Сколько гостей',
@@ -368,10 +373,12 @@ block content
                                     },
                                     {
                                         name: 'Младенцы',
-                                        value: 0
+                                        value: 0,
+                                        nameDeclensions: ['младенец', 'младенца', 'младенцев'],
                                     }
                                 ],
-                                wordForValueTextReplacing: 'гостя',
+                                wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                                itemIndexForSeparateCount: 2,
                             },
                         },
                         popupHidden: false,
@@ -400,10 +407,12 @@ block content
                                     },
                                     {
                                         name: 'Младенцы',
-                                        value: 0
-                                    }
+                                        value: 0,
+                                        nameDeclensions: ['младенец', 'младенца', 'младенцев'],
+                                    },
                                 ],
-                                wordForValueTextReplacing: 'гостя',
+                                wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                                itemIndexForSeparateCount: 2,
                             },
                         },
                         popupHidden: false,

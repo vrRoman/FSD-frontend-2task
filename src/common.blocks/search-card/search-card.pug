@@ -47,10 +47,12 @@ mixin search-card
                             },
                             {
                                 name: 'Младенцы',
-                                value: '0'
+                                value: '0',
+                                nameDeclensions: ['младенец', 'младенца', 'младенцев'],
                             },
                         ],
-                        wordForValueTextReplacing: 'гостя',
+                        wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                        itemIndexForSeparateCount: 2,
                     },
                 },
                 title: 'Гости',

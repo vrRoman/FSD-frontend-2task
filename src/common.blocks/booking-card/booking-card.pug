@@ -55,9 +55,11 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
                             {
                                 name: 'Младенцы',
                                 value: 0,
+                                nameDeclensions: ['младенец', 'младенца', 'младенцев'],
                             },
                         ],
-                        wordForValueTextReplacing: 'гостя',
+                        wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                        itemIndexForSeparateCount: 2,
                     },
                 },
                 title: 'Гости',
