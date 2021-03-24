@@ -121,13 +121,14 @@ class DatePicker {
     const dateTexts = [
       this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText,
     ];
+    const dateTextsDefined = Boolean(dateTexts[0] && dateTexts[1]);
 
     this.setDate(dates, dateTexts);
 
     let valueText;
     if (this.isTextDouble) {
       valueText = dateTexts;
-    } else if (dateTexts[0] && dateTexts[1]) {
+    } else if (dateTextsDefined) {
       valueText = `${dateTexts[0]} - ${dateTexts[1]}`;
     } else {
       valueText = null;
