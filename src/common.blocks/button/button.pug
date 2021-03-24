@@ -2,7 +2,7 @@ include ../arrow/arrow
 include ../heading/heading
 
 
-mixin button({text = 'click me', hasLink = true, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {})
+mixin button({text = 'click me', hasLink = false, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {})
     -
         let className = 'button';
         let headingOptions = {
@@ -43,11 +43,21 @@ mixin button({text = 'click me', hasLink = true, link = 'change-me', modifiers =
                 break;
         }
 
-    button(class=className)
-        a(href=hasLink ? link : false).button__link
-            +heading(headingOptions)
-        .button__arrow
-            +arrow({
-                type: 'forward',
-                color: 'white'
-            })
+    if (hasLink)
+        div(class=className)
+            a(href=link).button__text
+                +heading(headingOptions)
+            .button__arrow
+                +arrow({
+                  type: 'forward',
+                  color: 'white'
+                })
+    else
+        button(class=className)
+            .button__text
+                +heading(headingOptions)
+            .button__arrow
+                +arrow({
+                    type: 'forward',
+                    color: 'white'
+                })
