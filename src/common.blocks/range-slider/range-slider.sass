@@ -6,15 +6,18 @@
 .range-slider
   max-width: 266px
   width: 100%
+
   &__value
     font-family: Montserrat, Arial, sans-serif
     font-size: (12rem / 14)
     line-height: (13rem / 14)
     color: $dark-shade-50
+
   &__info
     margin-bottom: 23px
     display: flex
     justify-content: space-between
+
   &__slider
     width: 100%
     height: 6px
@@ -24,6 +27,7 @@
     align-items: center
     box-sizing: border-box
     cursor: pointer
+
   &__description
     font-size: (12rem / 14)
     line-height: 1rem
@@ -37,6 +41,7 @@
         height: 6px
         background: $green-gradient
         z-index: 0
+
     &-handle.ui-state-default
       width: 12px
       height: 12px
@@ -46,5 +51,6 @@
       z-index: 0
       cursor: pointer
       top: -6px
+
   .ui-state-focus
     outline: none

@@ -5,6 +5,7 @@
 .donut-chart
   display: flex
   align-items: flex-end
+
   &__votes
     margin-bottom: 3px
     position: absolute
@@ -12,11 +13,13 @@
     flex-direction: column
     align-items: center
     z-index: -1
+
   &__chart
     position: relative
     display: flex
     align-items: center
     justify-content: center
+
   &__item
     &:before
       content: ''
@@ -25,19 +28,24 @@
       margin-right: 5px
       display: inline-block
       border-radius: 50%
+
     &_color
       &_dark
         &:before
           background: linear-gradient(180deg, #919191 0%, #3D4975 100%)
+
       &_orange
         &:before
           background: linear-gradient(180deg, #FFE39C 0%, #FFBA9C 100%)
+
       &_green
         &:before
           background: $green-gradient
+
       &_purple
         &:before
           background: $purple-gradient
+
   &__list
     list-style: none
     padding: 0

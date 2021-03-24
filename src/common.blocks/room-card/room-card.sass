@@ -8,18 +8,21 @@
   background-color: #fff
   box-shadow: 0 10px 20px 0 $dark-shade-5
   border-radius: 5px
+
   &__img
     outline: none
     height: 100%
     border:
       top-left-radius: 5px
       top-right-radius: 5px
+
   &__slider
     max-height: 151.38px
     position: relative
 
     .slick-list
       height: 100%
+
     .slick-dots
       margin: 0
       display: flex
@@ -30,6 +33,7 @@
       right: 15px
       bottom: 19px
       list-style: none
+
       li
         button
           padding: 0
@@ -41,8 +45,10 @@
           border-radius: 50%
           outline: none
           cursor: pointer
+
       .slick-active button
         background: #fff
+
     .slick-arrow
       display: none
 
@@ -59,6 +65,7 @@
         top: 0
         &:after
           content: 'expand_more'
+
       .slick-prev
         border-top-left-radius: 5px
         background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%)
@@ -66,6 +73,7 @@
         z-index: 1
         &:after
           transform: rotate(90deg)
+
       .slick-next
         border-top-right-radius: 5px
         background: linear-gradient(-90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%)
@@ -77,6 +85,7 @@
     margin-top: 3px
     padding-bottom: 10px
     position: relative
+
     &:after
       content: ''
       width: 100%
@@ -84,11 +93,13 @@
       background-color: $dark-shade-10
       position: absolute
       bottom: -3px
+
   &__comments-measure
     font-weight: normal
     font-size: 1rem
     margin-left: 4px
     margin-right: 3px
+
   &__comments
     font-family: Montserrat, Arial, sans-serif
     font-size: 1rem
@@ -97,11 +108,13 @@
     color: $dark-shade-50
     display: flex
     align-items: center
+
   &__rating-and-comments
     margin-top: 12px
     display: flex
     justify-content: space-between
     align-items: center
+
   &__content
     padding: 20px 16px 20px 20px
     display: block

@@ -12,14 +12,17 @@
   box-shadow: 0 10px 20px 0 $dark-shade-5
   position: relative
   z-index: 10
+
   &__nav-container
     margin-right: 22px
     display: flex
     align-items: center
+
   &__buttons
     display: grid
     grid-template-columns: auto auto
     grid-column-gap: 20px
+
   &__user
     position: relative
     display: flex
@@ -27,30 +30,38 @@
     font-size: 1rem
     line-height: (17rem / 14)
     color: $dark-shade-50
+
     &:before
       content: ''
       height: 30px
       width: 1px
       background-color: $dark-shade-10
       margin-right: 20px
+
   &__menu
     display: flex
+
     &_hidden
       display: none
+
   &__hamburger-line
     width: 100%
     height: 2px
     background-color: $dark-shade-25
+
   &__hamburger
     height: 30px
     width: 40px
     display: none
     flex-direction: column
     justify-content: space-between
+
     &_visible
       display: flex
+
   &__logo
     display: flex
+
   &__container
     max-width: 1160px
     width: 100%
@@ -65,13 +76,16 @@
     &__nav-container
       margin-right: 0
       margin-bottom: 40px
+
     &__buttons
       grid-template-columns: auto
       grid-template-rows: auto auto
       grid-row-gap: 20px
+
     &__user
       &:before
         display: none
+
     &__menu
       flex-direction: column
       position: absolute
@@ -85,5 +99,6 @@
 @media screen and (max-width: 500px)
   .header
     padding: 0 20px
+
     &__menu
       right: 20px

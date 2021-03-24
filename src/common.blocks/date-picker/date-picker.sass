@@ -6,6 +6,7 @@
   width: 318px
   position: relative
   z-index: 1
+
   &_with-border
     border: 1px solid $dark-shade-25
     box-shadow: 0 10px 20px 0 $dark-shade-5
@@ -20,14 +21,18 @@
       box-sizing: border-box
       width: 318px
       padding: 20px 20px 18px
+
     &-header
       background-color: transparent
       border: none
       padding: 0
+
     &-prev, &-next
       top: -2px
+
       .ui-icon
         display: none
+
       &:after
         cursor: pointer
         color: $purple
@@ -47,6 +52,7 @@
         text-rendering: optimizeLegibility
         -moz-osx-font-smoothing: grayscale
         font-feature-settings: 'liga'
+
       &.ui-state-hover
         border: none
         background-color: transparent
@@ -69,7 +75,6 @@
       &.ui-state-hover
         right: 0
 
-
     &-title
       font-family: Montserrat, Arial, sans-serif
       font-weight: bold
@@ -77,11 +82,12 @@
       line-height: (23rem / 14)
 
       color: $dark-shade-100
+
       #{$selector}-year
         display: block
+
       #{$selector}-month
         margin-left: 4px
-
 
     &-calendar
       margin-top: 8px
@@ -92,12 +98,13 @@
           font-weight: bold
           font-size: (12rem / 14)
           line-height: (15rem / 14)
-
           color: $purple
+
       tbody
         td
           position: relative
           padding: 0
+
           a
             height: 40px
             width: 40px
@@ -115,6 +122,7 @@
             line-height: (15rem / 14)
             text-align: center
             color: $dark-shade-50
+
           .ui-state-hover
             background: $purple-gradient
             border-radius: 50%
@@ -124,6 +132,7 @@
 
         #{$selector}-other-month a
           color: $dark-shade-25
+
         #{$selector}-today
           a
             background: $green-gradient
@@ -150,9 +159,11 @@
             right: 0
             top: 0
             z-index: 0
+
           .ui-state-default
             position: relative
             z-index: 1
+
         .selected-end:not(.selected-start)
           &:before
             content: ''
@@ -165,6 +176,7 @@
             left: 0
             top: 0
             z-index: 0
+
           .ui-state-default
             position: relative
             z-index: 1
@@ -179,10 +191,10 @@
             right: 0
             top: 0
             z-index: 0
+
           .ui-state-default
             position: relative
             z-index: 1
-
 
     &-buttonpane
       border: none
@@ -190,6 +202,7 @@
       justify-content: space-between
       padding: 0
       margin-top: auto
+
       #{$selector}-current
         background-color: unset
         border: none
@@ -203,6 +216,7 @@
         text-transform: uppercase
         outline: none
         transition: opacity .4s
+
         &:hover
           opacity: .5
 

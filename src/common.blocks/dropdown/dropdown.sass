@@ -7,6 +7,7 @@
   width: 100%
   position: relative
   z-index: 1
+
   &__popup
     min-width: 100%
     box-sizing: border-box
@@ -17,18 +18,23 @@
     border: 1px solid $dark-shade-50
       bottom-left-radius: 4px
       bottom-right-radius: 4px
+
     &_hidden
       display: none
+
   &__text-field
     position: relative
     z-index: 1
+
   &__title
     margin-bottom: 5px
 
   &_double
     display: flex
     justify-content: space-between
+
     .dropdown__text-field
       max-width: 150px
+
   &_short
     max-width: 266px

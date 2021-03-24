@@ -30,15 +30,19 @@
   &__guests-dropdown
     position: relative
     z-index: 5
+
   &__date-dropdown
     position: relative
     z-index: 4
+
   &__filter-date-dropdown
     position: relative
     z-index: 3
+
   &__facilities-dropdown
     position: relative
     z-index: 2
+
     &_expanded
       z-index: 1
 
@@ -72,12 +76,14 @@
     margin-top: 40px
     &:first-child
       margin-top: 0
+
   &__like-buttons-wrapper
     margin-top: 40px
     display: grid
     grid-template-columns: 40px 40px
     grid-column-gap: 10px
     grid-template-areas: "button-info button-info" ". ."
+
   &__rate-buttons-wrapper
     margin-top: 40px
     display: grid
@@ -101,9 +107,11 @@
   &__button
     display: inline-block
     margin-bottom: 30px
+
     &:nth-child(2n + 1)
       margin-left: 18px
       width: 150px
+
     &:last-child
       width: 100%
       margin-bottom: 0
@@ -115,6 +123,7 @@
     grid-gap: 100px
     grid-template-columns: repeat(2, 320px)
     grid-template-areas: ". ." ". ." ". ." ". ." ". icon-text-list" "comment comment"
+
     &__elements-container
       &_with-top-margin
         margin-top: 72px
@@ -123,11 +132,14 @@
   .form-elements
     display: flex
     flex-direction: column
+
     &__elements-container
       display: flex
       flex-direction: column
       align-items: center
+
       &:nth-child(5)
         margin-top: 50px
+
       &:nth-child(6)
         margin-top: 100px

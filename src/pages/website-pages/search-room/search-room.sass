@@ -13,6 +13,7 @@
 
 .search-room
   position: relative
+
   &:after
     content: ''
     height: 1px
@@ -21,34 +22,44 @@
     left: 0
     bottom: 0
     background-color: $dark-shade-25
+
   &__container
     padding-top: 30px
     display: grid
     grid-template-columns: 266px 1fr
     grid-column-gap: 60px
+
   &__room-cards
     padding-top: 21px
     display: grid
     grid-template-columns: 1fr 1fr 1fr
     grid-column-gap: 12px
     grid-row-gap: 19px
+
   &__subtitle
     margin-bottom: 16px
+
   &__params
     &-date
       margin-bottom: 20px
       position: relative
       z-index: 2
+
     &-guests
       margin-bottom: 30px
+
     &-price
       margin-bottom: 30px
+
     &-rules
       margin-bottom: 30px
+
     &-availability
       margin-bottom: 30px
+
     &-facilities
       margin-bottom: 16px
+
   &__pagination
     margin-top: 37px
     margin-bottom: 73px

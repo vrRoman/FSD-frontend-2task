@@ -7,6 +7,7 @@
     opacity: 0
     position: absolute
     z-index: -1
+
     &:checked
       + .toggle-button__text
         &:before
@@ -14,6 +15,7 @@
         &:after
           transform: translateX(20px)
           background-color: $purple
+
   &__text
     padding-left: 50px
     position: relative
@@ -25,6 +27,7 @@
     font-size: 1rem
     line-height: (24rem / 14)
     color: $dark-shade-75
+
     &:before
       content: ''
       width: 40px
@@ -35,6 +38,7 @@
       border: 1px solid $dark-shade-25
       border-radius: 10px
       cursor: pointer
+
     &:after
       content: ''
       width: 12px
