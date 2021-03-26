@@ -1,33 +1,24 @@
-import '@/js/index';
-import '@/sass/main.sass';
-
-import './login-and-registration.pug';
-import './login-and-registration.sass';
-
-import './images/login-registration-bg.jpg';
-
-import '@/common.blocks/signup-card/signup-card';
-import '@/common.blocks/header/init';
-
 class LoginAndRegistration {
   constructor() {
-    this.loginButtonsSelector = '.js-signup-card__account-exists .js-button';
-    this.signupButtonsSelector = '.js-signin-card__account-not-exists .js-button';
-    this.signinCardSelector = '.js-login-and-registration__signin-card';
-    this.signupCardSelector = '.js-login-and-registration__signup-card';
     this.pageSelector = '.js-login-and-registration';
-    this.pageLoginClass = 'login-and-registration_login';
+    if (this.getPageElem()) {
+      this.loginButtonsSelector = '.js-signup-card__account-exists .js-button';
+      this.signupButtonsSelector = '.js-signin-card__account-not-exists .js-button';
+      this.signinCardSelector = '.js-login-and-registration__signin-card';
+      this.signupCardSelector = '.js-login-and-registration__signup-card';
+      this.pageLoginClass = 'login-and-registration_login';
 
-    this.$loginButtons = this.getLoginButtons();
-    this.$signupButtons = this.getSignupButtons();
-    this.$signinCard = this.getSigninCard();
-    this.$signupCard = this.getSignupCard();
-    this.$pageElem = this.getPageElem();
+      this.$loginButtons = this.getLoginButtons();
+      this.$signupButtons = this.getSignupButtons();
+      this.$signinCard = this.getSigninCard();
+      this.$signupCard = this.getSignupCard();
+      this.$pageElem = this.getPageElem();
 
-    this.handleLoginButtonsClick = this.handleLoginButtonsClick.bind(this);
-    this.handleSignupButtonsClick = this.handleSignupButtonsClick.bind(this);
+      this.handleLoginButtonsClick = this.handleLoginButtonsClick.bind(this);
+      this.handleSignupButtonsClick = this.handleSignupButtonsClick.bind(this);
 
-    this.init();
+      this.init();
+    }
   }
 
   getLoginButtons() {

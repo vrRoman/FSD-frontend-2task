@@ -1,5 +1,4 @@
 import CountingItem from '@/common.blocks/counting-item/counting-item';
-import '@/common.blocks/counting-item/init';
 
 class ItemsCounter {
   constructor(element) {

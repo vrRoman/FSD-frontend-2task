@@ -1,6 +1,3 @@
-import 'slick-carousel/slick/slick.min';
-import 'slick-carousel/slick/slick.scss';
-
 class RoomCard {
   constructor(elem) {
     this.elem = elem;

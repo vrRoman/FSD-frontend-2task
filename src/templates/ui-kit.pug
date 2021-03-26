@@ -16,7 +16,6 @@ html(lang="ru")
         meta(name="msapplication-config" content="/browserconfig.xml")
         meta(name="theme-color" content="#ffffff")
 
-        link(rel="stylesheet" type="text/css" href=`ui-${name}.css`)
         title= name
 
     body
@@ -25,4 +24,4 @@ html(lang="ru")
 
         block content
 
-        script(src=`ui-${name}.js`)
+        script(src='bundle.js')

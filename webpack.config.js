@@ -4,17 +4,42 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const createSassRule = ({ isScss = false, isImportedFile = false } = {}) => {
+  const importedFileRegExp = /src\/sass\/_colors\.sass$/;
+  let test = /\.sass$/i;
+  let importVarsString = '@import "@/sass/colors"';
+  if (isScss) {
+    test = /\.scss$/i;
+    importVarsString += ';';
+  }
+
+  let sassLoader = {
+    loader: 'sass-loader',
+    options: {
+      additionalData: importVarsString,
+    },
+  };
+
+  if (isImportedFile) {
+    test = importedFileRegExp;
+    sassLoader = 'sass-loader';
+  }
+
+  return {
+    test,
+    exclude: isImportedFile ? undefined : importedFileRegExp,
+    use: [
+      'style-loader',
+      'css-loader',
+      'resolve-url-loader',
+      sassLoader,
+    ],
+  };
+};
+
 module.exports = {
   entry: {
-    'ui-colors-and-type': '@ui-kit/colors-and-type/colors-and-type.js',
-    'ui-cards': '@ui-kit/cards/cards.js',
-    'ui-headers-and-footers': '@ui-kit/headers-and-footers/headers-and-footers.js',
-    'ui-form-elements': '@ui-kit/form-elements/form-elements.js',
-
-    'landing-page': '@web-pages/landing-page/landing-page.js',
-    'search-room': '@web-pages/search-room/search-room.js',
-    'room-details': '@web-pages/room-details/room-details.js',
-    'login-and-registration': '@web-pages/login-and-registration/login-and-registration.js',
+    bundle: '@/js/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -23,8 +48,6 @@ module.exports = {
 
   resolve: {
     alias: {
-      '@ui-kit': path.resolve(__dirname, 'src/pages/ui-kit'),
-      '@web-pages': path.resolve(__dirname, 'src/pages/website-pages'),
       '@': path.resolve(__dirname, 'src'),
     },
   },
@@ -45,21 +68,9 @@ module.exports = {
         test: /\.css/,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true,
-              reloadAll: true,
-            },
-          },
-          'css-loader',
-          'resolve-url-loader',
-          'sass-loader',
-        ],
-      },
+      createSassRule({ isImportedFile: true }),
+      createSassRule(),
+      createSassRule({ isScss: true }),
       {
         test: /\.pug$/,
         use: [
@@ -178,13 +189,8 @@ module.exports = {
 
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    compress: true,
     port: 9000,
     hot: true,
     index: 'landing-page.html',
-  },
-
-  optimization: {
-    minimize: false,
   },
 };

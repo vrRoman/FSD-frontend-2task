@@ -1,6 +1,3 @@
-import 'jquery-ui/ui/widgets/datepicker';
-import './jquery.datepicker.extension.range.min';
-
 class DatePicker {
   constructor(element) {
     this.clearBtnHTML = `<button class="ui-datepicker-current 

@@ -1,5 +1,3 @@
-import 'simple-pagination.js/jquery.simplePagination';
-
 class Pagination {
   constructor(elem) {
     this.elem = elem;

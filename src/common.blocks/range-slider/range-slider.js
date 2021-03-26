@@ -1,5 +1,3 @@
-import 'jquery-ui/ui/widgets/slider';
-
 class RangeSlider {
   constructor(elem) {
     this.rubSymbol = '₽';

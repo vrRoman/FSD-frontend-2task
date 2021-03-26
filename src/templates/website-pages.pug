@@ -21,7 +21,6 @@ html(lang='ru')
         meta(name="msapplication-config" content="/browserconfig.xml")
         meta(name="theme-color" content="#ffffff")
 
-        link(rel="stylesheet" type="text/css" href=`${fileName}.css`)
         title= title
     body
         +header
@@ -30,4 +29,4 @@ html(lang='ru')
 
         +footer
 
-        script(src=`${fileName}.js`)
+        script(src='bundle.js')
