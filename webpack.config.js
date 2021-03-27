@@ -5,9 +5,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const createSassRule = ({ isScss = false, isImportedFile = false } = {}) => {
-  const importedFileRegExp = /src\/sass\/_colors\.sass$/;
+  const importedFileRegExp = /src\/styles\/_colors\.sass$/;
   let test = /\.sass$/i;
-  let importVarsString = '@import "@/sass/colors"';
+  let importVarsString = '@import "@/styles/colors"';
   if (isScss) {
     test = /\.scss$/i;
     importVarsString += ';';
