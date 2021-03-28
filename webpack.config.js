@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const createSassRule = ({ isScss = false, isImportedFile = false } = {}) => {
   const importedFileRegExp = /src\/styles\/_colors\.sass$/;
@@ -129,11 +128,6 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
-    }),
-
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
     }),
 
     new HtmlWebpackPlugin({
