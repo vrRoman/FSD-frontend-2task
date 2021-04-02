@@ -4,10 +4,15 @@ class DonutChart {
   constructor(elem) {
     this.elem = elem;
 
-    this.init();
+    this._init();
   }
 
-  init() {
+  getChartElem() {
+    const chartSelector = '.js-donut-chart__canvas';
+    return this.elem.querySelector(chartSelector);
+  }
+
+  _init() {
     const ctx = this.getChartElem().getContext('2d');
     // eslint-disable-next-line no-unused-vars
     const chart = new Chart(ctx, {
@@ -50,11 +55,6 @@ class DonutChart {
         cutoutPercentage: 87,
       },
     });
-  }
-
-  getChartElem() {
-    const chartSelector = '.js-donut-chart__canvas';
-    return this.elem.querySelector(chartSelector);
   }
 }
 

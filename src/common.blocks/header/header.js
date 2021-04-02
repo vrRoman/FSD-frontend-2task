@@ -7,11 +7,11 @@ class Header {
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
     this.columnNavClass = 'navigation_in-column';
-    this.handleWindowResize = this.handleWindowResize.bind(this);
-    this.handleWindowLoad = this.handleWindowLoad.bind(this);
-    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this._handleWindowResize = this._handleWindowResize.bind(this);
+    this._handleWindowLoad = this._handleWindowLoad.bind(this);
+    this._handleWindowClick = this._handleWindowClick.bind(this);
 
-    this.init();
+    this._init();
   }
 
   getHamburger() {
@@ -29,21 +29,13 @@ class Header {
     return this.elem.querySelector(navSelector);
   }
 
-  init() {
-    window.addEventListener('resize', this.handleWindowResize);
-    window.addEventListener('click', this.handleWindowClick);
-    window.addEventListener('load', this.handleWindowLoad);
+  _init() {
+    window.addEventListener('resize', this._handleWindowResize);
+    window.addEventListener('click', this._handleWindowClick);
+    window.addEventListener('load', this._handleWindowLoad);
   }
 
-  handleWindowResize() {
-    this.updateHeader();
-  }
-
-  handleWindowLoad() {
-    this.updateHeader();
-  }
-
-  updateHeader() {
+  _updateHeader() {
     if (window.innerWidth > this.showHamburgerOn) {
       this.menu.classList.remove(this.hiddenMenuClass);
       this.hamburger.classList.remove(this.visibleHamburgerClass);
@@ -55,7 +47,15 @@ class Header {
     }
   }
 
-  handleWindowClick(evt) {
+  _handleWindowResize() {
+    this._updateHeader();
+  }
+
+  _handleWindowLoad() {
+    this._updateHeader();
+  }
+
+  _handleWindowClick(evt) {
     if (window.innerWidth <= this.showHamburgerOn) {
       if (evt.path.includes(this.hamburger)) {
         this.menu.classList.toggle(this.hiddenMenuClass);

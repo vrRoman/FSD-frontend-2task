@@ -10,35 +10,17 @@ class Dropdown {
     this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
     this.isListening = false;
 
-    this.updateTextFieldsClasses();
+    this._updateTextFieldsClasses();
 
-    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this._handleWindowClick = this._handleWindowClick.bind(this);
 
-    this.addWindowListener();
+    this._addWindowListener();
 
-    this.findAndSubscribeToPopupInstance();
-  }
-
-  findAndSubscribeToPopupInstance() {
-    const blockInPopup = $(this.popup).find('> *');
-    const instance = blockInPopup.data('instance');
-    try {
-      instance.subscribe(this);
-    } catch {
-      throw new Error('blockInPopup.data() must have a \'instance\' prop with subscribe property');
-    }
-  }
-
-  updateTextFieldsClasses() {
-    if (!this.isPopupHidden()) {
-      this.textFields.forEach((el) => {
-        el.classList.add(...this.activeTextFieldClasses);
-      });
-    }
+    this._findAndSubscribeToPopupInstance();
   }
 
   update(action) {
-    this.changeTextFieldValue(action.valueText);
+    this._changeTextFieldValue(action.valueText);
 
     if (action.type === 'CLICK_APPLY-BUTTON') {
       this.popup.classList.add(this.hiddenPopupClass);
@@ -48,8 +30,45 @@ class Dropdown {
     }
   }
 
-  changeTextFieldValue(text) {
-    if (this.isDropdownDouble()) {
+  getPopup() {
+    const popupSelector = '.js-dropdown__popup';
+    return this.elem.querySelector(popupSelector);
+  }
+
+  getTextFields() {
+    const textFieldSelector = '.js-dropdown__text-field .js-text-field';
+    return this.elem.querySelectorAll(textFieldSelector);
+  }
+
+  getTextFieldInputs() {
+    const inputSelector = '.js-text-field__input';
+    const inputs = [];
+    this.textFields.forEach((elem) => {
+      inputs.push(elem.querySelector(inputSelector));
+    });
+    return inputs;
+  }
+
+  _findAndSubscribeToPopupInstance() {
+    const blockInPopup = $(this.popup).find('> *');
+    const instance = blockInPopup.data('instance');
+    try {
+      instance.subscribe(this);
+    } catch {
+      throw new Error('blockInPopup.data() must have a \'instance\' prop with subscribe property');
+    }
+  }
+
+  _updateTextFieldsClasses() {
+    if (!this._isPopupHidden()) {
+      this.textFields.forEach((el) => {
+        el.classList.add(...this.activeTextFieldClasses);
+      });
+    }
+  }
+
+  _changeTextFieldValue(text) {
+    if (this._isDropdownDouble()) {
       if (Array.isArray(text)) {
         text.forEach((value, i) => {
           if (!value) {
@@ -74,42 +93,23 @@ class Dropdown {
     }
   }
 
-  getPopup() {
-    const popupSelector = '.js-dropdown__popup';
-    return this.elem.querySelector(popupSelector);
-  }
-
-  getTextFields() {
-    const textFieldSelector = '.js-dropdown__text-field .js-text-field';
-    return this.elem.querySelectorAll(textFieldSelector);
-  }
-
-  getTextFieldInputs() {
-    const inputSelector = '.js-text-field__input';
-    const inputs = [];
-    this.textFields.forEach((elem) => {
-      inputs.push(elem.querySelector(inputSelector));
-    });
-    return inputs;
-  }
-
-  isPopupHidden() {
+  _isPopupHidden() {
     return this.popup.classList.contains(this.hiddenPopupClass);
   }
 
-  isDropdownDouble() {
+  _isDropdownDouble() {
     return this.elem.classList.contains(this.doubleDropdownClass);
   }
 
-  addWindowListener() {
-    window.addEventListener('click', this.handleWindowClick);
+  _addWindowListener() {
+    window.addEventListener('click', this._handleWindowClick);
   }
 
-  handleWindowClick(evt) {
+  _handleWindowClick(evt) {
     if (evt.path.includes(this.elem)) {
       this.isListening = true;
       if (!evt.path.includes(this.popup)) {
-        if (this.isPopupHidden()) {
+        if (this._isPopupHidden()) {
           this.popup.classList.remove(this.hiddenPopupClass);
           this.textFields.forEach((el) => {
             el.classList.add(...this.activeTextFieldClasses);

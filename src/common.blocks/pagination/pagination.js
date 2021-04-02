@@ -5,10 +5,14 @@ class Pagination {
     this.itemsNumber = 180;
     this.itemsOnPage = 12;
 
-    this.init();
+    this._init();
   }
 
-  init() {
+  getPagesElem() {
+    return this.elem.querySelector(this.pagesSelector);
+  }
+
+  _init() {
     $(this.getPagesElem()).pagination({
       items: this.itemsNumber,
       itemsOnPage: this.itemsOnPage,
@@ -17,10 +21,6 @@ class Pagination {
       prevText: false,
       nextText: '<i class="pagination__arrow material-icons">arrow_forward</i>',
     });
-  }
-
-  getPagesElem() {
-    return this.elem.querySelector(this.pagesSelector);
   }
 }
 

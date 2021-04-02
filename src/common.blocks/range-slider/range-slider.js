@@ -6,20 +6,9 @@ class RangeSlider {
 
     this.elem = elem;
     this.values = [5000, 10000];
-    this.handleSliderValuesChanged = this.handleSliderValuesChanged.bind(this);
+    this._handleSliderValuesChanged = this._handleSliderValuesChanged.bind(this);
 
-    this.init();
-  }
-
-  init() {
-    $(this.getSlider()).slider({
-      range: true,
-      min: 200,
-      max: 15400,
-      values: this.values,
-      slide: this.handleSliderValuesChanged,
-    });
-    this.updateValueElem();
+    this._init();
   }
 
   static prettifyNum(num) {
@@ -36,16 +25,27 @@ class RangeSlider {
     return this.elem.querySelector(this.valueSelector);
   }
 
-  handleSliderValuesChanged(event, ui) {
-    this.values = [...ui.values];
-    this.updateValueElem();
+  _init() {
+    $(this.getSlider()).slider({
+      range: true,
+      min: 200,
+      max: 15400,
+      values: this.values,
+      slide: this._handleSliderValuesChanged,
+    });
+    this._updateValueElem();
   }
 
-  updateValueElem() {
+  _updateValueElem() {
     const firstPrice = `${RangeSlider.prettifyNum(this.values[0])}${this.rubSymbol}`;
     const secondPrice = `${RangeSlider.prettifyNum(this.values[1])}${this.rubSymbol}`;
 
     this.getValueElem().innerText = `${firstPrice} - ${secondPrice}`;
+  }
+
+  _handleSliderValuesChanged(event, ui) {
+    this.values = [...ui.values];
+    this._updateValueElem();
   }
 }
 

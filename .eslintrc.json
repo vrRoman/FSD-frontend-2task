@@ -13,6 +13,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-underscore-dangle": "off"
     },
     "plugins": ["fsd"],
     "settings": {

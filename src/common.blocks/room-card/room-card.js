@@ -1,7 +1,7 @@
 class RoomCard {
   constructor(elem) {
     this.elem = elem;
-    this.init();
+    this._init();
   }
 
   getSliderElem() {
@@ -9,7 +9,7 @@ class RoomCard {
     return this.elem.querySelector(sliderSelector);
   }
 
-  init() {
+  _init() {
     $(this.getSliderElem()).slick({
       dots: true,
       arrows: true,

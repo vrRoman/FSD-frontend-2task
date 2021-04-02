@@ -4,13 +4,9 @@ class ExpandableCheckboxes {
     this.isListening = false;
     this.expandedClassName = 'expandable-checkboxes_expanded';
     this.isExpanded = this.elem.classList.contains(this.expandedClassName);
-    this.handleWindowClick = this.handleWindowClick.bind(this);
+    this._handleWindowClick = this._handleWindowClick.bind(this);
 
-    this.init();
-  }
-
-  init() {
-    window.addEventListener('click', this.handleWindowClick);
+    this._init();
   }
 
   getCheckboxes() {
@@ -18,7 +14,11 @@ class ExpandableCheckboxes {
     return this.elem.querySelector(checkboxesSelector);
   }
 
-  handleWindowClick(evt) {
+  _init() {
+    window.addEventListener('click', this._handleWindowClick);
+  }
+
+  _handleWindowClick(evt) {
     const isClickedOnElem = evt.path.includes(this.elem);
     const isClickedOnCheckboxes = evt.path.includes(this.getCheckboxes());
 

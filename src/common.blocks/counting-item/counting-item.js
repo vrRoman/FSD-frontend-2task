@@ -8,22 +8,15 @@ class CountingItem {
     this.valueElem = this.getValueElem();
     this.value = Number(this.valueElem.innerText);
     this.name = this.getNameElem().innerText.toLowerCase();
-    this.handlePlusBtnClick = this.handlePlusBtnClick.bind(this);
-    this.handleMinusBtnClick = this.handleMinusBtnClick.bind(this);
 
-    this.initButtons();
+    this._handlePlusBtnClick = this._handlePlusBtnClick.bind(this);
+    this._handleMinusBtnClick = this._handleMinusBtnClick.bind(this);
+
+    this._initButtons();
 
     this.observers = [];
 
-    this.addToJqueryData();
-  }
-
-  addToJqueryData() {
-    if ($) {
-      $(this.elem).data({
-        instance: this,
-      });
-    }
+    this._addToJqueryData();
   }
 
   static declinationByNumber(number, words) {
@@ -42,16 +35,6 @@ class CountingItem {
       return words[0];
     }
     return words[2];
-  }
-
-  subscribe(observer) {
-    this.observers.push(observer);
-  }
-
-  notify(action) {
-    this.observers.forEach((observer) => {
-      observer.update(action);
-    });
   }
 
   getValue() {
@@ -101,7 +84,7 @@ class CountingItem {
       }
     }
 
-    this.notify({
+    this._notify({
       type: 'UPDATE_VALUE',
       value: this.value,
       valueText: this.getValueText(),
@@ -109,21 +92,39 @@ class CountingItem {
     return this.value;
   }
 
-  initButtons() {
-    this.plusBtn.addEventListener('click', this.handlePlusBtnClick);
-    this.minusBtn.addEventListener('click', this.handleMinusBtnClick);
+  subscribe(observer) {
+    this.observers.push(observer);
+  }
+
+  _notify(action) {
+    this.observers.forEach((observer) => {
+      observer.update(action);
+    });
+  }
+
+  _addToJqueryData() {
+    if ($) {
+      $(this.elem).data({
+        instance: this,
+      });
+    }
+  }
+
+  _initButtons() {
+    this.plusBtn.addEventListener('click', this._handlePlusBtnClick);
+    this.minusBtn.addEventListener('click', this._handleMinusBtnClick);
 
     if (this.value === 0) {
       this.minusBtn.classList.add('counting-item__change-button_disabled');
     }
   }
 
-  handlePlusBtnClick() {
+  _handlePlusBtnClick() {
     const newValue = this.value + 1;
     this.setValue(newValue);
   }
 
-  handleMinusBtnClick() {
+  _handleMinusBtnClick() {
     const newValue = this.value - 1;
     this.setValue(newValue);
   }

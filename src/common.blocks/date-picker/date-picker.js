@@ -31,9 +31,9 @@ class DatePicker {
 
     this.$elem = $(element);
     this.extensionRangeObject = {};
-    this.handleApplyButtonClick = this.handleApplyButtonClick.bind(this);
-    this.handleClearButtonClick = this.handleClearButtonClick.bind(this);
-    this.handleDateSelect = this.handleDateSelect.bind(this);
+    this._handleApplyButtonClick = this._handleApplyButtonClick.bind(this);
+    this._handleClearButtonClick = this._handleClearButtonClick.bind(this);
+    this._handleDateSelect = this._handleDateSelect.bind(this);
     this.isTextDouble = JSON.parse(this.$elem[0].dataset.isTextDouble);
     this.dateFormat = this.$elem[0].dataset.dateFormat ? this.$elem[0].dataset.dateFormat : 'dd.mm.yy';
 
@@ -50,10 +50,10 @@ class DatePicker {
       dayNames: this.dayNames,
       dayNamesShort: this.dayNamesShort,
       dayNamesMin: this.dayNamesMin,
-      onSelect: this.handleDateSelect,
+      onSelect: this._handleDateSelect,
     };
 
-    this.init();
+    this._init();
 
     this.initialDate = JSON.parse(this.$elem[0].dataset.initialDate);
     this.initialDate[0] = this.initialDate[0] ? new Date(this.initialDate[0]) : null;
@@ -62,29 +62,17 @@ class DatePicker {
 
     this.observers = [];
 
-    this.addToJqueryData();
+    this._addToJqueryData();
   }
 
-  addToJqueryData() {
-    if ($) {
-      this.$elem.data({
-        instance: this,
-      });
-    }
-  }
+  setDate(dateObjects, dateTexts = [null, null]) {
+    this.$elem.datepicker('setDate', dateObjects);
+    [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate] = dateObjects;
+    [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText] = dateTexts;
 
-  init() {
-    this.$elem.datepicker(this.options);
-  }
-
-  subscribe(observer) {
-    this.observers.push(observer);
-  }
-
-  notify(action) {
-    this.observers.forEach((observer) => {
-      observer.update(action);
-    });
+    this.getClearBtn().click(this._handleClearButtonClick);
+    this.getApplyBtn().click(this._handleApplyButtonClick);
+    this._updateClearBtn();
   }
 
   getClearBtn() {
@@ -95,7 +83,29 @@ class DatePicker {
     return $(this.$elem.find('.js-ui-datepicker-apply-button'));
   }
 
-  updateClearBtn() {
+  subscribe(observer) {
+    this.observers.push(observer);
+  }
+
+  _notify(action) {
+    this.observers.forEach((observer) => {
+      observer.update(action);
+    });
+  }
+
+  _init() {
+    this.$elem.datepicker(this.options);
+  }
+
+  _addToJqueryData() {
+    if ($) {
+      this.$elem.data({
+        instance: this,
+      });
+    }
+  }
+
+  _updateClearBtn() {
     if (this.$elem.datepicker('getDate')) {
       this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
     } else {
@@ -103,17 +113,7 @@ class DatePicker {
     }
   }
 
-  setDate(dateObjects, dateTexts = [null, null]) {
-    this.$elem.datepicker('setDate', dateObjects);
-    [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate] = dateObjects;
-    [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText] = dateTexts;
-
-    this.getClearBtn().click(this.handleClearButtonClick);
-    this.getApplyBtn().click(this.handleApplyButtonClick);
-    this.updateClearBtn();
-  }
-
-  handleApplyButtonClick() {
+  _handleApplyButtonClick() {
     const dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
     const dateTexts = [
       this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText,
@@ -131,27 +131,27 @@ class DatePicker {
       valueText = null;
     }
 
-    this.notify({
+    this._notify({
       type: 'CLICK_APPLY-BUTTON',
       value: dates,
       valueText,
     });
   }
 
-  handleClearButtonClick() {
+  _handleClearButtonClick() {
     this.setDate([null, null]);
-    this.notify({
+    this._notify({
       type: 'CLICK_CLEAR-BUTTON',
       value: [null, null],
       valueText: null,
     });
   }
 
-  handleDateSelect(dateText, inst, extensionRange) {
+  _handleDateSelect(dateText, inst, extensionRange) {
     this.extensionRangeObject = extensionRange;
     setTimeout(() => {
-      this.getApplyBtn().click(this.handleApplyButtonClick);
-      this.getClearBtn().click(this.handleClearButtonClick);
+      this.getApplyBtn().click(this._handleApplyButtonClick);
+      this.getClearBtn().click(this._handleClearButtonClick);
     }, 100);
   }
 }

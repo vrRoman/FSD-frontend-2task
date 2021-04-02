@@ -14,10 +14,10 @@ class LoginAndRegistration {
       this.$signupCard = this.getSignupCard();
       this.$pageElem = this.getPageElem();
 
-      this.handleLoginButtonsClick = this.handleLoginButtonsClick.bind(this);
-      this.handleSignupButtonsClick = this.handleSignupButtonsClick.bind(this);
+      this._handleLoginButtonsClick = this._handleLoginButtonsClick.bind(this);
+      this._handleSignupButtonsClick = this._handleSignupButtonsClick.bind(this);
 
-      this.init();
+      this._init();
     }
   }
 
@@ -41,21 +41,21 @@ class LoginAndRegistration {
     return $(this.pageSelector);
   }
 
-  handleLoginButtonsClick() {
+  _init() {
+    this.$loginButtons.click(this._handleLoginButtonsClick);
+    this.$signupButtons.click(this._handleSignupButtonsClick);
+  }
+
+  _handleLoginButtonsClick() {
     this.$signupCard.hide();
     this.$signinCard.show();
     this.$pageElem.toggleClass(this.pageLoginClass);
   }
 
-  handleSignupButtonsClick() {
+  _handleSignupButtonsClick() {
     this.$signupCard.show();
     this.$signinCard.hide();
     this.$pageElem.toggleClass(this.pageLoginClass);
-  }
-
-  init() {
-    this.$loginButtons.click(this.handleLoginButtonsClick);
-    this.$signupButtons.click(this.handleSignupButtonsClick);
   }
 }
 

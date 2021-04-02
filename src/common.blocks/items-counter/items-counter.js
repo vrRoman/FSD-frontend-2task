@@ -6,46 +6,32 @@ class ItemsCounter {
     this.clearBtn = this.getClearBtn();
     this.applyBtn = this.getApplyBtn();
     this.itemElems = this.getItemElems();
-    this.countingItemInstances = this.getCountingItemInstances();
+    this.countingItemInstances = this._getCountingItemInstances();
     this.wordForValueTextReplacing = JSON.parse(this.elem.dataset.replaceText);
     this.itemIndexForSeparateCount = JSON.parse(this.elem.dataset.separateItem);
     this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
 
-    this.handleApplyBtnClick = this.handleApplyBtnClick.bind(this);
-    this.handleClearBtnClick = this.handleClearBtnClick.bind(this);
+    this._handleApplyBtnClick = this._handleApplyBtnClick.bind(this);
+    this._handleClearBtnClick = this._handleClearBtnClick.bind(this);
 
-    this.addListenersToButtons();
+    this._addListenersToButtons();
 
-    this.updateClearButton();
+    this._updateClearButton();
 
     this.observers = [];
-    this.subscribeToItems();
+    this._subscribeToItems();
 
-    this.addToJqueryData();
-  }
-
-  addToJqueryData() {
-    if ($) {
-      $(this.elem).data({
-        instance: this,
-      });
-    }
-  }
-
-  notify(action) {
-    this.observers.forEach((observer) => {
-      observer.update(action);
-    });
+    this._addToJqueryData();
   }
 
   update(action) {
     if (action.type === 'UPDATE_VALUE') {
-      if (this.isWithoutButtons()) {
-        this.updateClearButton();
-        this.notify({
+      if (this._isWithoutButtons()) {
+        this._updateClearButton();
+        this._notify({
           type: 'UPDATE_VALUE',
           value: this.getValues(),
-          valueText: this.convertValuesToText(),
+          valueText: this._convertValuesToText(),
         });
       }
     }
@@ -81,12 +67,37 @@ class ItemsCounter {
     return this.elem.querySelectorAll(itemSelector);
   }
 
-  isWithoutButtons() {
-    const withoutButtonsClass = 'items-counter_without-buttons';
-    return this.elem.classList.contains(withoutButtonsClass);
+  _notify(action) {
+    this.observers.forEach((observer) => {
+      observer.update(action);
+    });
   }
 
-  updateClearButton() {
+  _addToJqueryData() {
+    if ($) {
+      $(this.elem).data({
+        instance: this,
+      });
+    }
+  }
+
+  _getCountingItemInstances() {
+    const instances = [];
+
+    this.itemElems.forEach((elem) => {
+      instances.push($(elem).data('instance'));
+    });
+
+    return instances;
+  }
+
+  _subscribeToItems() {
+    this.countingItemInstances.forEach((inst) => {
+      inst.subscribe(this);
+    });
+  }
+
+  _updateClearButton() {
     let valuesSum = 0;
     this.getValues().forEach((val) => {
       valuesSum += val;
@@ -98,28 +109,12 @@ class ItemsCounter {
     }
   }
 
-  handleClearBtnClick() {
-    this.countingItemInstances.forEach((inst) => {
-      inst.setValue(0);
-    });
-    this.updateClearButton();
-    this.notify({
-      type: 'CLICK_CLEAR-BUTTON',
-      value: this.getValues(),
-      valueText: this.convertValuesToText(),
-    });
+  _isWithoutButtons() {
+    const withoutButtonsClass = 'items-counter_without-buttons';
+    return this.elem.classList.contains(withoutButtonsClass);
   }
 
-  handleApplyBtnClick() {
-    this.updateClearButton();
-    this.notify({
-      type: 'CLICK_APPLY-BUTTON',
-      value: this.getValues(),
-      valueText: this.convertValuesToText(),
-    });
-  }
-
-  convertValuesToText() {
+  _convertValuesToText() {
     let fullText = '';
     if (this.wordForValueTextReplacing) {
       if (this.itemIndexForSeparateCount !== null) {
@@ -189,24 +184,29 @@ class ItemsCounter {
     return fullText;
   }
 
-  addListenersToButtons() {
-    this.clearBtn.addEventListener('click', this.handleClearBtnClick);
-    this.applyBtn.addEventListener('click', this.handleApplyBtnClick);
+  _addListenersToButtons() {
+    this.clearBtn.addEventListener('click', this._handleClearBtnClick);
+    this.applyBtn.addEventListener('click', this._handleApplyBtnClick);
   }
 
-  getCountingItemInstances() {
-    const instances = [];
-
-    this.itemElems.forEach((elem) => {
-      instances.push($(elem).data('instance'));
-    });
-
-    return instances;
-  }
-
-  subscribeToItems() {
+  _handleClearBtnClick() {
     this.countingItemInstances.forEach((inst) => {
-      inst.subscribe(this);
+      inst.setValue(0);
+    });
+    this._updateClearButton();
+    this._notify({
+      type: 'CLICK_CLEAR-BUTTON',
+      value: this.getValues(),
+      valueText: this._convertValuesToText(),
+    });
+  }
+
+  _handleApplyBtnClick() {
+    this._updateClearButton();
+    this._notify({
+      type: 'CLICK_APPLY-BUTTON',
+      value: this.getValues(),
+      valueText: this._convertValuesToText(),
     });
   }
 }

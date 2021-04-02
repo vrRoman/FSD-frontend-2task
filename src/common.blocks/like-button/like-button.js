@@ -3,9 +3,9 @@ class LikeButton {
     this.elem = elem;
     this.value = Number(this.getNumberElem().innerText);
     this.activeClass = 'like-button_active';
-    this.handleLikeButtonClick = this.handleLikeButtonClick.bind(this);
+    this._handleLikeButtonClick = this._handleLikeButtonClick.bind(this);
 
-    this.init();
+    this._init();
   }
 
   getNumberElem() {
@@ -17,7 +17,11 @@ class LikeButton {
     return this.elem.classList.contains(this.activeClass);
   }
 
-  handleLikeButtonClick() {
+  _init() {
+    this.elem.addEventListener('click', this._handleLikeButtonClick);
+  }
+
+  _handleLikeButtonClick() {
     if (this.isActive()) {
       this.value -= 1;
     } else {
@@ -25,10 +29,6 @@ class LikeButton {
     }
     this.getNumberElem().innerText = this.value;
     this.elem.classList.toggle(this.activeClass);
-  }
-
-  init() {
-    this.elem.addEventListener('click', this.handleLikeButtonClick);
   }
 }
 
