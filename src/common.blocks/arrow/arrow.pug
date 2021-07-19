@@ -1,13 +1,14 @@
 mixin arrow({type, color, withoutPadding = false} = {})
     -
         let className = 'arrow';
+        let iconName = 'expand_more';
 
         switch (type) {
             case 'expand-less':
-                className += ' arrow_type_expand-less';
+                iconName = 'expand_less';
                 break;
             case 'forward':
-                className += ' arrow_type_forward';
+                iconName = 'arrow_forward';
                 break;
             default:
                 break;
@@ -28,4 +29,4 @@ mixin arrow({type, color, withoutPadding = false} = {})
             className += ' arrow_without-padding';
         }
 
-    div(class=className)
+    span(class=className)= iconName
