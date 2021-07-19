@@ -139,6 +139,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,
+      template: './src/pages/index.pug',
+      filename: 'index.html',
+    }),
+    new HtmlWebpackPlugin({
+      inject: false,
+      hash: true,
       template: './src/pages/ui-kit/cards/cards.pug',
       filename: 'cards.html',
     }),
@@ -185,6 +191,5 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     port: 9000,
     hot: true,
-    index: 'landing-page.html',
   },
 };
