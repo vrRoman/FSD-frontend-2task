@@ -4,11 +4,12 @@ include ../heading/heading
 mixin color-demo(name, hex, color)
     -
         let demoClassName = `color-demo__demo color-demo__demo_color_${color}`
-    .color-demo
+    section.color-demo
         div(class=demoClassName)
         .color-demo__info
-            +heading({
-                type: 'h2',
-                text: name,
-            })
-            .color-demo__hex= hex
+            header
+                +heading({
+                    type: 'h2',
+                    text: name,
+                })
+            p.color-demo__hex= hex

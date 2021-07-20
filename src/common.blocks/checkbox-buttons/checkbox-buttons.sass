@@ -1,12 +1,18 @@
 .checkbox-buttons
   display: flex
   flex-direction: column
+  margin: 0
+  padding: 0
+  list-style: none
 
-  &__button
+  &__item
     margin-bottom: 10px
-    display: flex
+
     &:last-child
       margin-bottom: 0
+
+  &__button
+    display: flex
 
   &__input:checked
     + .checkbox-buttons__name::before

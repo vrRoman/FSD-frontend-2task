@@ -4,13 +4,14 @@ mixin checkbox-buttons({items, isRich = false})
         if (isRich) {
             className += ' checkbox-buttons_rich';
         }
-    div(class=className)
+    ul(class=className)
         each item in items
-            label.checkbox-buttons__button
-                input.checkbox-buttons__input(
-                    type='checkbox',
-                    checked= item.checked
-                )
-                span.checkbox-buttons__name !{item.name}
-                if (isRich)
-                    span.checkbox-buttons__description !{item.description}
+            li.checkbox-buttons__item
+                label.checkbox-buttons__button
+                    input.checkbox-buttons__input(
+                        type='checkbox',
+                        checked= item.checked
+                    )
+                    span.checkbox-buttons__name !{item.name}
+                    if (isRich)
+                        span.checkbox-buttons__description !{item.description}
