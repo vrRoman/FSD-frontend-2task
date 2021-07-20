@@ -10,7 +10,7 @@ mixin expandable-checkboxes({title='Expandable checkbox list', items, expanded =
             className += ' expandable-checkboxes_expanded';
         }
     div(class=className)
-        .expandable-checkboxes__title
+        .expandable-checkboxes__title(role="button")
             +heading({ text: title })
             .expandable-checkboxes__arrow
                 +arrow()

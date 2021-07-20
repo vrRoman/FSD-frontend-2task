@@ -21,9 +21,9 @@ mixin dropdown({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, t
         }
     section(class=className data-default-value=JSON.stringify(defaultInputValue))
         if (isDouble)
-            .dropdown__text-field.js-dropdown__text-field
+            .dropdown__text-field.js-dropdown__text-field(role="button")
                 if (title[0])
-                    header.dropdown__title
+                    .dropdown__title
                         +heading({
                             text: title[0],
                         })
@@ -41,9 +41,9 @@ mixin dropdown({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, t
                     },
                     withJs: true,
                 })
-            .dropdown__text-field.js-dropdown__text-field
+            .dropdown__text-field.js-dropdown__text-field(role="button")
                 if (title[1])
-                    header.dropdown__title
+                    .dropdown__title
                         +heading({
                             text: title[1],
                         })
@@ -62,9 +62,9 @@ mixin dropdown({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, t
                     withJs: true,
                 })
         else
-            .dropdown__text-field.js-dropdown__text-field
+            .dropdown__text-field.js-dropdown__text-field(role="button")
                 if (title)
-                    header.dropdown__title
+                    .dropdown__title
                         +heading({
                             text: title,
                         })

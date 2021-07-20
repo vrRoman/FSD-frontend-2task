@@ -6,4 +6,4 @@ mixin elem-info(title, state, isShort = false)
         .elem-info__title
             +heading({text: title})
         if (state)
-            .elem-info__state= state
+            p.elem-info__state= state

@@ -9,10 +9,10 @@ mixin counting-item({name = '', value = 0, nameDeclensions} = {})
                 withJs: true,
             })
         .counting-item__counter
-            .counting-item__change-button.counting-item__change-button_action_decrease.js-counting-item__change-button_action_decrease -
+            button.counting-item__change-button.counting-item__change-button_action_decrease.js-counting-item__change-button_action_decrease -
             .counting-item__value.js-counting-item__value
                 +heading({
                     text: value,
                     withJs: true,
                 })
-            .counting-item__change-button.counting-item__change-button_action_increase.js-counting-item__change-button_action_increase +
+            button.counting-item__change-button.counting-item__change-button_action_increase.js-counting-item__change-button_action_increase +
