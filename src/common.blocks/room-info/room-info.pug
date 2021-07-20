@@ -3,7 +3,7 @@ include ../heading/heading
 
 mixin room-info({number, type, price, isNameSmall = false})
     .room-info
-        .room-info__name
+        header.room-info__name
             span.room-info__number-sign №
             -
                 let numberClassName = 'room-info__number';
@@ -24,5 +24,5 @@ mixin room-info({number, type, price, isNameSmall = false})
                         text: type,
                         color: 'purple',
                     })
-        .room-info__price= `${price}₽`
+        p.room-info__price= `${price}₽`
             span.room-info__price-measure в сутки

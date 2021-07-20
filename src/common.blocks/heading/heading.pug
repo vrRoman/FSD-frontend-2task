@@ -12,6 +12,10 @@ mixin heading({text = '', type = 'h3', color, withJs = false})
                 className += ' heading_type_h2';
                 tag = 'h2';
                 break;
+            case 'inline':
+                className += ' heading_type_h3';
+                tag = 'span';
+                break;
             default:
                 tag = 'h1';
                 break;

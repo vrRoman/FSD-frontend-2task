@@ -7,9 +7,13 @@ mixin button({text = 'click me', hasLink = false, link = 'change-me', modifiers 
         let className = 'button';
         let headingOptions = {
             text,
-            type: 'h3',
+            type: 'inline',
             color: 'white'
         };
+
+        if (hasLink) {
+            headingOptions.type = 'h3';
+        }
 
         if (modifiers.isSecondary) {
             className += ' button_secondary';
@@ -54,9 +58,9 @@ mixin button({text = 'click me', hasLink = false, link = 'change-me', modifiers 
                 })
     else
         button(class=className)
-            .button__text
+            span.button__text
                 +heading(headingOptions)
-            .button__arrow
+            span.button__arrow
                 +arrow({
                     type: 'forward',
                     color: 'white'
