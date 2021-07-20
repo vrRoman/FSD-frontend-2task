@@ -1,16 +1,16 @@
 include ../like-button/like-button
 
 
-mixin comment({avatarLink, userName, date, text, likeOptions})
-    .comment
+mixin comment({avatarLink, userName, dateText, dateTime, text, likeOptions})
+    article.comment
         .comment__header
             img.comment__avatar(
                 src=avatarLink,
                 alt='user-avatar'
             )
-            .comment__user-name= userName
-            .comment__date= date
+            h4.comment__user-name= userName
+            time(datetime=dateTime).comment__date= dateText
         .comment__content
             .comment__likes
                 +like-button(likeOptions)
-            .comment__text= text
+            p.comment__text= text
