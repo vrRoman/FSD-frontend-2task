@@ -14,11 +14,10 @@ mixin navigation({items, activeLinkIndex, inColumn = false, withJs = false})
         ul.navigation__list
             each item, itemIndex in items
                 -
-                    const isActive = activeLinkIndex !== undefined ? (itemIndex === activeLinkIndex) : false;
                     const link = item.link || 'change-me';
 
                     let itemClassName = 'navigation__item';
-                    if (isActive) {
+                    if (item.isActive) {
                         itemClassName += ' navigation__item_active';
                     }
                     if (item.isDropdown) {
@@ -27,8 +26,7 @@ mixin navigation({items, activeLinkIndex, inColumn = false, withJs = false})
 
                 li(class=itemClassName)
                     if (item.isDropdown)
-                        div= item.name
-                        .navigation__item-arrow
+                        button.navigation__link= item.name
                             +arrow({ withoutPadding: true })
                     else
                         a.navigation__link(href=link)= item.name
