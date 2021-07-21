@@ -1,10 +1,13 @@
+import autoBind from 'auto-bind';
+
 class ExpandableCheckboxes {
   constructor(elem) {
     this.elem = elem;
     this.isListening = false;
     this.expandedClassName = 'expandable-checkboxes_expanded';
     this.isExpanded = this.elem.classList.contains(this.expandedClassName);
-    this._handleWindowClick = this._handleWindowClick.bind(this);
+
+    autoBind(this);
 
     this._init();
   }

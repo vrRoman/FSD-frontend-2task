@@ -1,3 +1,4 @@
+import autoBind from 'auto-bind';
 import Observable from '@/js/Observable/Observable';
 
 class DatePicker extends Observable {
@@ -35,11 +36,10 @@ class DatePicker extends Observable {
 
     this.$elem = $(element);
     this.extensionRangeObject = {};
-    this._handleApplyButtonClick = this._handleApplyButtonClick.bind(this);
-    this._handleClearButtonClick = this._handleClearButtonClick.bind(this);
-    this._handleDateSelect = this._handleDateSelect.bind(this);
     this.isTextDouble = JSON.parse(this.$elem[0].dataset.isTextDouble);
     this.dateFormat = this.$elem[0].dataset.dateFormat ? this.$elem[0].dataset.dateFormat : 'dd.mm.yy';
+
+    autoBind(this);
 
     this.options = {
       range: 'period',

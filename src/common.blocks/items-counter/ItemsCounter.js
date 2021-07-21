@@ -1,3 +1,5 @@
+import autoBind from 'auto-bind';
+
 import declinationByNumber from '@/js/helpers/declinationByNumber';
 import Observable from '@/js/Observable/Observable';
 
@@ -14,8 +16,7 @@ class ItemsCounter extends Observable {
     this.itemIndexForSeparateCount = JSON.parse(this.elem.dataset.separateItem);
     this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
 
-    this._handleApplyBtnClick = this._handleApplyBtnClick.bind(this);
-    this._handleClearBtnClick = this._handleClearBtnClick.bind(this);
+    autoBind(this);
 
     this._addListenersToButtons();
 

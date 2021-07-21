@@ -1,3 +1,5 @@
+import autoBind from 'auto-bind';
+
 class Dropdown {
   constructor(elem) {
     this.elem = elem;
@@ -10,9 +12,9 @@ class Dropdown {
     this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
     this.isListening = false;
 
-    this._updateTextFieldsClasses();
+    autoBind(this);
 
-    this._handleWindowClick = this._handleWindowClick.bind(this);
+    this._updateTextFieldsClasses();
 
     this._addWindowListener();
 

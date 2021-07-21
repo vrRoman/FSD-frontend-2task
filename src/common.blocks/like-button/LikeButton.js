@@ -1,9 +1,12 @@
+import autoBind from 'auto-bind';
+
 class LikeButton {
   constructor(elem) {
     this.elem = elem;
     this.value = Number(this.getNumberElem().innerText);
     this.activeClass = 'like-button_active';
-    this._handleLikeButtonClick = this._handleLikeButtonClick.bind(this);
+
+    autoBind(this);
 
     this._init();
   }

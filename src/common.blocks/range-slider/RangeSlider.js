@@ -1,3 +1,5 @@
+import autoBind from 'auto-bind';
+
 class RangeSlider {
   constructor(elem) {
     this.rubSymbol = '₽';
@@ -6,7 +8,8 @@ class RangeSlider {
 
     this.elem = elem;
     this.values = [5000, 10000];
-    this._handleSliderValuesChanged = this._handleSliderValuesChanged.bind(this);
+
+    autoBind(this);
 
     this._init();
   }

@@ -1,3 +1,5 @@
+import autoBind from 'auto-bind';
+
 class Header {
   constructor(elem) {
     this.elem = elem;
@@ -7,9 +9,8 @@ class Header {
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
     this.columnNavClass = 'navigation_in-column';
-    this._handleWindowResize = this._handleWindowResize.bind(this);
-    this._handleWindowLoad = this._handleWindowLoad.bind(this);
-    this._handleWindowClick = this._handleWindowClick.bind(this);
+
+    autoBind(this);
 
     this._init();
   }

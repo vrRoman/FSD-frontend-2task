@@ -1,3 +1,5 @@
+import autoBind from 'auto-bind';
+
 class LoginAndRegistration {
   constructor(pageElem) {
     this.loginButtonsSelector = '.js-signup-card__account-exists .js-button';
@@ -12,8 +14,7 @@ class LoginAndRegistration {
     this.$signupCard = this.getSignupCard();
     this.$pageElem = $(pageElem);
 
-    this._handleLoginButtonsClick = this._handleLoginButtonsClick.bind(this);
-    this._handleSignupButtonsClick = this._handleSignupButtonsClick.bind(this);
+    autoBind(this);
 
     this._init();
   }

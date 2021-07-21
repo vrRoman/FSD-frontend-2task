@@ -1,3 +1,5 @@
+import autoBind from 'auto-bind';
+
 import declinationByNumber from '@/js/helpers/declinationByNumber';
 import Observable from '@/js/Observable/Observable';
 
@@ -14,8 +16,7 @@ class CountingItem extends Observable {
     this.value = Number(this.valueElem.innerText);
     this.name = this.getNameElem().innerText.toLowerCase();
 
-    this._handlePlusBtnClick = this._handlePlusBtnClick.bind(this);
-    this._handleMinusBtnClick = this._handleMinusBtnClick.bind(this);
+    autoBind(this);
 
     this._initButtons();
 
