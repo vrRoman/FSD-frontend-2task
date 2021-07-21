@@ -1,4 +1,4 @@
-import CountingItem from '@/common.blocks/counting-item/CountingItem';
+import declinationByNumber from '../../js/helpers/declinationByNumber';
 
 class ItemsCounter {
   constructor(element) {
@@ -127,7 +127,7 @@ class ItemsCounter {
 
         let word = this.wordForValueTextReplacing;
         if (Array.isArray(this.wordForValueTextReplacing)) {
-          word = CountingItem.declinationByNumber(
+          word = declinationByNumber(
             valuesSumWithoutSeparateItem, this.wordForValueTextReplacing,
           );
         }
@@ -150,7 +150,7 @@ class ItemsCounter {
 
         let word = this.wordForValueTextReplacing;
         if (Array.isArray(this.wordForValueTextReplacing)) {
-          word = CountingItem.declinationByNumber(
+          word = declinationByNumber(
             valuesSum, this.wordForValueTextReplacing,
           );
         }
