@@ -5,7 +5,7 @@ mixin range-slider(title, description = false)
     .range-slider.js-range-slider
         .range-slider__info
             +heading({ text: title })
-            span.range-slider__value.js-range-slider__value
+            output.range-slider__value.js-range-slider__value
         .range-slider__slider.js-range-slider__slider
         if description
-            .range-slider__description= description
+            p.range-slider__description= description

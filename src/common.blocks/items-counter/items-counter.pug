@@ -13,9 +13,9 @@ mixin items-counter({items, withoutButtons = false, wordForValueTextReplacing = 
         data-replace-text=JSON.stringify(wordForValueTextReplacing)
         data-separate-item=JSON.stringify(itemIndexForSeparateCount)
     )
-        .items-counter__items-list
+        ul.items-counter__items-list
             each item in items
-                .items-counter__item
+                li.items-counter__item
                     +counting-item({
                         name: item.name,
                         value: item.value,

@@ -1,7 +1,7 @@
 mixin icon-text-list(items)
-    .icon-text-list
+    ul.icon-text-list
         each item in items
-            .icon-text-list__item
-                i.icon-text-list__icon.material-icons= item.iconName
-                .icon-text-list__title= item.title
-                .icon-text-list__description= item.description
+            li.icon-text-list__item
+                span.icon-text-list__icon.material-icons= item.iconName
+                h4.icon-text-list__title= item.title
+                p.icon-text-list__description= item.description

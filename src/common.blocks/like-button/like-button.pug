@@ -5,5 +5,5 @@ mixin like-button({likesNum = 0, isActive = false})
             className += ' like-button_active';
         }
     button(class=className)
-        .like-button__heart.material-icons
-        .like-button__number.js-like-button__number= likesNum
+        span.like-button__heart.material-icons
+        p.like-button__number.js-like-button__number= likesNum
