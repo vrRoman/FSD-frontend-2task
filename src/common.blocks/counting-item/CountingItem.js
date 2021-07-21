@@ -1,7 +1,10 @@
 import declinationByNumber from '@/js/helpers/declinationByNumber';
+import Observable from '@/js/Observable/Observable';
 
-class CountingItem {
+class CountingItem extends Observable {
   constructor(elem) {
+    super();
+
     this.elem = elem;
     this.wordsDeclension = this.elem.dataset.words ? JSON.parse(this.elem.dataset.words) : null;
 
@@ -15,8 +18,6 @@ class CountingItem {
     this._handleMinusBtnClick = this._handleMinusBtnClick.bind(this);
 
     this._initButtons();
-
-    this.observers = [];
 
     this._addToJqueryData();
   }
@@ -68,22 +69,12 @@ class CountingItem {
       }
     }
 
-    this._notify({
+    this.notify({
       type: 'UPDATE_VALUE',
       value: this.value,
       valueText: this.getValueText(),
     });
     return this.value;
-  }
-
-  subscribe(observer) {
-    this.observers.push(observer);
-  }
-
-  _notify(action) {
-    this.observers.forEach((observer) => {
-      observer.update(action);
-    });
   }
 
   _addToJqueryData() {

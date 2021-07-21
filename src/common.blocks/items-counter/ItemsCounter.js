@@ -1,7 +1,10 @@
-import declinationByNumber from '../../js/helpers/declinationByNumber';
+import declinationByNumber from '@/js/helpers/declinationByNumber';
+import Observable from '@/js/Observable/Observable';
 
-class ItemsCounter {
+class ItemsCounter extends Observable {
   constructor(element) {
+    super();
+
     this.elem = element;
     this.clearBtn = this.getClearBtn();
     this.applyBtn = this.getApplyBtn();
@@ -18,7 +21,6 @@ class ItemsCounter {
 
     this._updateClearButton();
 
-    this.observers = [];
     this._subscribeToItems();
 
     this._addToJqueryData();
@@ -28,17 +30,13 @@ class ItemsCounter {
     if (action.type === 'UPDATE_VALUE') {
       if (this._isWithoutButtons()) {
         this._updateClearButton();
-        this._notify({
+        this.notify({
           type: 'UPDATE_VALUE',
           value: this.getValues(),
           valueText: this._convertValuesToText(),
         });
       }
     }
-  }
-
-  subscribe(observer) {
-    this.observers.push(observer);
   }
 
   getValues() {
@@ -65,12 +63,6 @@ class ItemsCounter {
   getItemElems() {
     const itemSelector = '.js-counting-item';
     return this.elem.querySelectorAll(itemSelector);
-  }
-
-  _notify(action) {
-    this.observers.forEach((observer) => {
-      observer.update(action);
-    });
   }
 
   _addToJqueryData() {
@@ -194,7 +186,7 @@ class ItemsCounter {
       inst.setValue(0);
     });
     this._updateClearButton();
-    this._notify({
+    this.notify({
       type: 'CLICK_CLEAR-BUTTON',
       value: this.getValues(),
       valueText: this._convertValuesToText(),
@@ -203,7 +195,7 @@ class ItemsCounter {
 
   _handleApplyBtnClick() {
     this._updateClearButton();
-    this._notify({
+    this.notify({
       type: 'CLICK_APPLY-BUTTON',
       value: this.getValues(),
       valueText: this._convertValuesToText(),

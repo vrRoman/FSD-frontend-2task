@@ -1,5 +1,9 @@
-class DatePicker {
+import Observable from '@/js/Observable/Observable';
+
+class DatePicker extends Observable {
   constructor(element) {
+    super();
+
     this.clearBtnHTML = `<button class="ui-datepicker-current 
       ui-state-default ui-corner-all 
       ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" 
@@ -60,8 +64,6 @@ class DatePicker {
     this.initialDate[1] = this.initialDate[1] ? new Date(this.initialDate[1]) : null;
     this.setDate(this.initialDate);
 
-    this.observers = [];
-
     this._addToJqueryData();
   }
 
@@ -81,16 +83,6 @@ class DatePicker {
 
   getApplyBtn() {
     return $(this.$elem.find('.js-ui-datepicker-apply-button'));
-  }
-
-  subscribe(observer) {
-    this.observers.push(observer);
-  }
-
-  _notify(action) {
-    this.observers.forEach((observer) => {
-      observer.update(action);
-    });
   }
 
   _init() {
@@ -131,7 +123,7 @@ class DatePicker {
       valueText = null;
     }
 
-    this._notify({
+    this.notify({
       type: 'CLICK_APPLY-BUTTON',
       value: dates,
       valueText,
@@ -140,7 +132,7 @@ class DatePicker {
 
   _handleClearButtonClick() {
     this.setDate([null, null]);
-    this._notify({
+    this.notify({
       type: 'CLICK_CLEAR-BUTTON',
       value: [null, null],
       valueText: null,
