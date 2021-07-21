@@ -8,7 +8,7 @@ mixin header({userName, activeLink = 0} = {})
             a.header__logo(href='landing-page.html')
                 img(src='images/logo.svg', alt='logo')
             .header__menu.js-header__menu
-                nav.header__nav-container
+                .header__nav-container
                     +navigation({
                         activeLinkIndex: activeLink,
                         items: [
@@ -53,7 +53,7 @@ mixin header({userName, activeLink = 0} = {})
                             hasLink: true,
                             link: 'login-and-registration.html'
                         })
-            .header__hamburger.js-header__hamburger
+            button.header__hamburger.js-header__hamburger
                 span.header__hamburger-line
                 span.header__hamburger-line
                 span.header__hamburger-line
