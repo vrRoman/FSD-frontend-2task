@@ -4,7 +4,7 @@ include ../text-field/text-field
 
 
 mixin signin-card
-    .signin-card
+    form.signin-card
         +heading({
             type: 'h1',
             text: 'Войти',
@@ -27,6 +27,7 @@ mixin signin-card
             text: 'Войти',
             hasLink: true,
             link: 'landing-page.html',
+            isSubmit: true,
             modifiers: {
                 isLong: true,
                 textColor: 'white',

@@ -6,7 +6,7 @@ include ../radio-buttons/radio-buttons
 
 
 mixin signup-card
-    .signup-card
+    form.signup-card
         +heading({
             type: 'h1',
             text: 'Регистрация аккаунта'
@@ -69,6 +69,7 @@ mixin signup-card
             text: 'Перейти к оплате',
             hasLink: true,
             link: 'landing-page.html',
+            isSubmit: true,
             modifiers: {
                 isLong: true,
                 textColor: 'white'

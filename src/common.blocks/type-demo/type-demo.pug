@@ -8,12 +8,12 @@ mixin type-demo(name, text, headerType)
             nameClassName += ` type-demo__name_type_${headerType}`;
         }
     .type-demo
-        div(class=nameClassName)= name
-        .type__text
+        p(class=nameClassName)= name
+        .type-demo__text-container
             if (headerType)
                 +heading({
                   text,
                   type: headerType,
                 })
             else
-                span !{text}
+                p.type-demo__text !{text}
