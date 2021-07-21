@@ -6,64 +6,66 @@ include ../dropdown/dropdown
 
 
 mixin search-card
-    .search-card.js-search-card
-        +heading({
-            type: 'h1',
-            text: 'Найдём номера под ваши пожелания'
-        })
-        .search-card__dates.js-search-card__dates
-            +dropdown({
-                inputOptions: {
-                    value: 'ДД.ММ.ГГГГ',
-                    placeholder: 'ДД.ММ.ГГГГ',
-                },
-                popupMixinOptions: {
-                    name: 'date-picker',
-                    params: {
-                        isTextDouble: true,
-                    },
-                },
-                title: ['Прибытие', 'Выезд'],
-                isDouble: true,
-                defaultInputValue: 'ДД.ММ.ГГГГ',
+    article.search-card.js-search-card
+        form
+            +heading({
+                type: 'h1',
+                text: 'Найдём номера под ваши пожелания'
             })
-        .search-card__guests.js-search-card__guests
-            +dropdown({
-                inputOptions: {
-                    value: 'Сколько гостей',
-                    placeholder: 'Сколько гостей',
-                },
-                popupMixinOptions: {
-                    name: 'items-counter',
-                    params: {
-                        items: [
-                            {
-                                name: 'Взрослые',
-                                value: '0'
-                            },
-                            {
-                                name: 'Дети',
-                                value: '0'
-                            },
-                            {
-                                name: 'Младенцы',
-                                value: '0',
-                                nameDeclensions: ['младенец', 'младенца', 'младенцев'],
-                            },
-                        ],
-                        wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
-                        itemIndexForSeparateCount: 2,
+            .search-card__dates.js-search-card__dates
+                +dropdown({
+                    inputOptions: {
+                        value: 'ДД.ММ.ГГГГ',
+                        placeholder: 'ДД.ММ.ГГГГ',
                     },
+                    popupMixinOptions: {
+                        name: 'date-picker',
+                        params: {
+                            isTextDouble: true,
+                        },
+                    },
+                    title: ['Прибытие', 'Выезд'],
+                    isDouble: true,
+                    defaultInputValue: 'ДД.ММ.ГГГГ',
+                })
+            .search-card__guests.js-search-card__guests
+                +dropdown({
+                    inputOptions: {
+                        value: 'Сколько гостей',
+                        placeholder: 'Сколько гостей',
+                    },
+                    popupMixinOptions: {
+                        name: 'items-counter',
+                        params: {
+                            items: [
+                                {
+                                    name: 'Взрослые',
+                                    value: '0'
+                                },
+                                {
+                                    name: 'Дети',
+                                    value: '0'
+                                },
+                                {
+                                    name: 'Младенцы',
+                                    value: '0',
+                                    nameDeclensions: ['младенец', 'младенца', 'младенцев'],
+                                },
+                            ],
+                            wordForValueTextReplacing: ['гость', 'гостя', 'гостей'],
+                            itemIndexForSeparateCount: 2,
+                        },
+                    },
+                    title: 'Гости',
+                    defaultInputValue: 'Сколько гостей',
+                })
+            +button({
+                text: 'Подобрать номер',
+                hasLink: true,
+                link: 'search-room.html',
+                isSubmit: true,
+                modifiers: {
+                    isLong: true,
+                    textColor: 'white',
                 },
-                title: 'Гости',
-                defaultInputValue: 'Сколько гостей',
             })
-        +button({
-            text: 'Подобрать номер',
-            hasLink: true,
-            link: 'search-room.html',
-            modifiers: {
-                isLong: true,
-                textColor: 'white',
-            },
-        })

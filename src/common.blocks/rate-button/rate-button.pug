@@ -1,5 +1,5 @@
 mixin rate-button(currentRating)
-    .rate-button
+    ul.rate-button
         - for (let i = 1; i <= 5; i += 1)
             -
                 const active = i <= currentRating;
@@ -7,4 +7,4 @@ mixin rate-button(currentRating)
                 if (active) {
                     className += ' rate-button__star_active';
                 }
-            div(class=className)
+            li(class=className)

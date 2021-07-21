@@ -3,7 +3,7 @@ include ../rate-button/rate-button
 
 
 mixin room-card({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'})
-    .room-card.js-room-card
+    article.room-card.js-room-card
         -
             let sliderClassName = 'room-card__slider js-room-card__slider';
             if (hasSliderArrows) {
@@ -21,7 +21,7 @@ mixin room-card({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComm
                     ...roomInfo,
                     isNameSmall: true
                 })
-            .room-card__rating-and-comments
+            .room-card__footer
                 +rate-button(rating)
-                .room-card__comments= numOfComments
-                    .room-card__comments-measure Отзывов
+                p.room-card__comments= numOfComments
+                    span.room-card__comments-measure Отзывов

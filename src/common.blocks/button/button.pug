@@ -2,7 +2,7 @@ include ../arrow/arrow
 include ../heading/heading
 
 
-mixin button({text = 'click me', hasLink = false, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {})
+mixin button({text = 'click me', hasLink = false, isSubmit = false, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {})
     -
         let className = 'button';
         let headingOptions = {
@@ -57,7 +57,7 @@ mixin button({text = 'click me', hasLink = false, link = 'change-me', modifiers 
                   color: 'white'
                 })
     else
-        button(class=className)
+        button(class=className type=isSubmit ? 'submit' : 'button')
             span.button__text
                 +heading(headingOptions)
             span.button__arrow
