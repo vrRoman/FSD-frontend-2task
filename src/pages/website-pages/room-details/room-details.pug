@@ -13,8 +13,8 @@ block vars
 
 
 block content
-    main.room-details
-        .room-details__room-images
+    article.room-details
+        header.room-details__room-images
             .room-details__main-image-container
                 img.room-details__main-image(src='images/room_1.jpg' alt='room-card-img')
             .room-details__side-image-container
@@ -24,7 +24,7 @@ block content
 
         .container
             .room-details__container
-                .room-details__room-info
+                section.room-details__room-info
                     .room-details__subtitle
                         +heading({
                             type: 'h2',
@@ -47,14 +47,14 @@ block content
                             iconName: 'whatshot'
                         }
                     ])
-                .room-details__expressions
+                section.room-details__expressions
                     .room-details__subtitle
                         +heading({
                             type: 'h2',
                             text: 'Впечатления от номера'
                         })
                     +donut-chart
-                .room-details__comments
+                section.room-details__comments
                     .room-details__subtitle
                         +heading({
                             type: 'h2',
@@ -88,7 +88,7 @@ block content
                             }
                         })
 
-                .room-details__rules
+                section.room-details__rules
                     .room-details__subtitle.room-details__subtitle_indented
                         +heading({
                           type: 'h2',
@@ -99,7 +99,7 @@ block content
                         'Без вечеринок и мероприятий',
                         'Время прибытия — после 13:00,<br>а выезд до 12:00'
                     ])
-                .room-details__cancel
+                section.room-details__cancel
                     .room-details__subtitle
                         +heading({
                             type: 'h2',

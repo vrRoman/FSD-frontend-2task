@@ -2,7 +2,7 @@ include ../button/button
 include ../navigation/navigation
 
 
-mixin header({userName, activeLink = 0} = {})
+mixin header({userName, activeLink} = {})
     header.header.js-header
         .header__container
             a.header__logo(href='landing-page.html')
@@ -14,25 +14,25 @@ mixin header({userName, activeLink = 0} = {})
                         items: [
                             {
                                 name: 'О нас',
-                                isDropdown: false
+                                isDropdown: false,
                             },
                             {
                                 name: 'Услуги',
-                                isDropdown: true
+                                isDropdown: true,
                             },
                             {
                                 name: 'Вакансии',
-                                isDropdown: false
+                                isDropdown: false,
                             },
                             {
                                 name: 'Новости',
-                                isDropdown: false
+                                isDropdown: false,
                             },
                             {
                                 name: 'Соглашения',
-                                isDropdown: true
+                                isDropdown: true,
                             }
-                        ],
+                        ].map((item, index) => ({ ...item, isActive: activeLink === index })),
                         withJs: true,
                     })
 

@@ -13,8 +13,8 @@ class RoomCard {
     $(this.getSliderElem()).slick({
       dots: true,
       arrows: true,
-      prevArrow: '<i class="slick-prev slick-arrow material-icons" aria-label="Next"></i>',
-      nextArrow: '<i class="slick-next slick-arrow material-icons" aria-label="Next"></i>',
+      prevArrow: '<span class="slick-prev slick-arrow material-icons" aria-label="Next"></span>',
+      nextArrow: '<span class="slick-next slick-arrow material-icons" aria-label="Next"></span>',
     });
   }
 }

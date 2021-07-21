@@ -12,12 +12,13 @@ mixin room-info({number, type, price, isNameSmall = false})
                     numberClassName += ' room-info__number_size_small';
                     text = number;
                 }
-            div(class=numberClassName)= text
-                if (!isNameSmall)
-                    +heading({
-                        text: number,
-                        type: 'h1'
-                    })
+            if (isNameSmall)
+                h3(class=numberClassName)= text
+            else
+                +heading({
+                    text: number,
+                    type: 'h1'
+                })
             if (type)
                 .room-info__type
                     +heading({

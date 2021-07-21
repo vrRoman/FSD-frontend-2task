@@ -25,9 +25,10 @@ html(lang='ru')
 
         title= title
     body
-        +header
+        +header({ activeLink })
 
-        block content
+        main
+            block content
 
         +footer
 
