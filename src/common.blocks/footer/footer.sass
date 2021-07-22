@@ -1,7 +1,6 @@
 .footer
   width: 100%
   box-sizing: border-box
-  padding: 0 140px
   position: relative
   background-color: #fff
   box-shadow: 0 10px 20px 0 $dark-shade-5
@@ -29,13 +28,16 @@
   &__body
     max-width: 1160px
     margin: 0 auto
-    box-sizing: border-box
-    padding: 100px 0
+    padding: 100px 140px
     display: grid
     grid-template-columns: 260px 1fr 260px
     grid-gap: 40px
 
   &__bottom
+    width: 100%
+    border-top: 1px solid #e5e5e5
+
+  &__bottom-container
     max-width: 1160px
     margin: 0 auto
     box-sizing: border-box
@@ -45,13 +47,6 @@
     justify-content: space-between
     align-items: center
 
-  &__line
-    width: 100%
-    height: 1px
-    position: absolute
-    left: 0
-    background-color: #e5e5e5
-
 
 @media screen and (max-width: 1200px)
   .footer
@@ -59,7 +54,7 @@
       grid-template-columns: 1fr
       grid-template-rows: auto auto auto
 
-    &__bottom
+    &__bottom-container
       flex-direction: column
       justify-content: center
 
@@ -75,7 +70,7 @@
 
 @media screen and (max-width: 750px)
   .footer
-    padding: 120px 0
+    padding: 118px 0
 
     &__main-info
       display: flex
@@ -84,9 +79,6 @@
       display: none
 
     &__menu
-      display: none
-
-    &__line
       display: none
 
     &__subscription
@@ -98,9 +90,12 @@
       padding: 0
 
     &__bottom
+      border: none
+
+    &__bottom-container
       padding: 0
-      margin-top: 20px
+      margin-top: 18px
 
     &__copyright
-      margin-bottom: 25px
+      margin-bottom: 22px
       text-align: center
