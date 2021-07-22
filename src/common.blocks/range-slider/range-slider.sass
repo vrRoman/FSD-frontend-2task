@@ -1,4 +1,5 @@
 @import '@/styles/colors'
+@import '@/styles/constants'
 
 .range-slider
   max-width: 266px
@@ -6,8 +7,8 @@
 
   &__value
     font-family: Montserrat, Arial, sans-serif
-    font-size: (12rem / 14)
-    line-height: (13rem / 14)
+    font-size: (12rem / $default-font-size)
+    line-height: (13rem / $default-font-size)
     color: $dark-shade-50
 
   &__info
@@ -26,7 +27,7 @@
     cursor: pointer
 
   &__description
-    font-size: (12rem / 14)
+    font-size: (12rem / $default-font-size)
     line-height: 1rem
     color: $dark-shade-50
     margin: 14px 0 0

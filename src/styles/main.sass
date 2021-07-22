@@ -1,12 +1,13 @@
-@import '@/styles/colors'
+@import 'colors'
+@import 'constants'
 
 html
   background-color: #fff
 
   font:
     family: 'Montserrat', Arial, sans-serif
-    size: 14px
-  line-height: (24 / 14)
+    size: $default-font-size + px
+  line-height: (24 / $default-font-size)
   color: $dark-shade-75
 
 body

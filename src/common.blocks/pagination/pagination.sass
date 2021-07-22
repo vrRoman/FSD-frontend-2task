@@ -1,4 +1,5 @@
 @import '@/styles/colors'
+@import '@/styles/constants'
 
 .pagination
   display: inline-block
@@ -7,7 +8,7 @@
     margin: 0 0 0 5px
     font-family: Montserrat, Arial, sans-serif
     font-size: 1rem
-    line-height: (24rem / 14)
+    line-height: (24rem / $default-font-size)
     color: $dark-shade-75
 
   &__pages
@@ -24,7 +25,7 @@
 
       .ellipse
         font-weight: normal
-        font-size: (12rem/14)
+        font-size: (12rem / $default-font-size)
         margin: 0
 
       a, .current
@@ -41,7 +42,7 @@
         justify-content: center
         align-items: center
         font-family: Montserrat, Arial, sans-serif
-        font-size: (12rem / 14)
+        font-size: (12rem / $default-font-size)
         color: $dark-shade-50
 
     .active
