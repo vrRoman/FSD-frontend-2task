@@ -1,7 +1,7 @@
 import 'jquery-ui/themes/base/all.css';
 
 import 'jquery-ui/ui/widgets/datepicker';
-import './libs/jquery.datepicker.extension.range.min';
+import '@/libs/jquery.datepicker.extension.range.min';
 
 import 'jquery-ui/ui/widgets/slider';
 
@@ -13,4 +13,4 @@ import 'slick-carousel/slick/slick.scss';
 
 import 'jquery-mask-plugin';
 
-import './libs/font-awesome-brands/fontawesome.scss';
+import '@/libs/font-awesome-brands/fontawesome.scss';
