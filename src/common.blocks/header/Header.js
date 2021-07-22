@@ -2,18 +2,26 @@ import autoBind from 'auto-bind';
 
 class Header {
   constructor(elem) {
+    autoBind(this);
+
     this.elem = elem;
-    this.menu = this.getMenu();
-    this.hamburger = this.getHamburger();
-    this.navigation = this.getNavigation();
+    this.menu = null;
+    this.hamburger = null;
+    this.navigation = null;
     this.showHamburgerOn = 1200;
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
     this.columnNavClass = 'navigation_in-column';
+  }
 
-    autoBind(this);
+  init() {
+    this.menu = this.getMenu();
+    this.hamburger = this.getHamburger();
+    this.navigation = this.getNavigation();
 
-    this._init();
+    window.addEventListener('resize', this._handleWindowResize);
+    window.addEventListener('click', this._handleWindowClick);
+    window.addEventListener('load', this._handleWindowLoad);
   }
 
   getHamburger() {
@@ -29,12 +37,6 @@ class Header {
   getNavigation() {
     const navSelector = '.js-navigation';
     return this.elem.querySelector(navSelector);
-  }
-
-  _init() {
-    window.addEventListener('resize', this._handleWindowResize);
-    window.addEventListener('click', this._handleWindowClick);
-    window.addEventListener('load', this._handleWindowLoad);
   }
 
   _updateHeader() {

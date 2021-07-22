@@ -3,25 +3,15 @@ import Chart from 'chart.js/dist/Chart.bundle.min';
 class DonutChart {
   constructor(element) {
     this.element = element;
+    this.chartRadius = 60;
+    this.chartElement = null;
+    this.chartContext = null;
+  }
+
+  init() {
     this.chartElement = this.getChartElement();
     this.chartContext = this.chartElement.getContext('2d');
 
-    this._init();
-  }
-
-  getChartElement() {
-    const chartSelector = '.js-donut-chart__canvas';
-    return this.element.querySelector(chartSelector);
-  }
-
-  createCtxGradient(firstColor, secondColor) {
-    const gradient = this.chartContext.createLinearGradient(60, 0, 60, 120);
-    gradient.addColorStop(0, firstColor);
-    gradient.addColorStop(1, secondColor);
-    return gradient;
-  }
-
-  _init() {
     // eslint-disable-next-line no-unused-vars
     const chart = new Chart(this.chartContext, {
       type: 'doughnut',
@@ -48,6 +38,21 @@ class DonutChart {
         cutoutPercentage: 87,
       },
     });
+  }
+
+  getChartElement() {
+    const chartSelector = '.js-donut-chart__canvas';
+    return this.element.querySelector(chartSelector);
+  }
+
+  createCtxGradient(firstColor, secondColor) {
+    const firstPoint = [this.chartRadius, 0];
+    const secondPoint = [this.chartRadius, this.chartRadius * 2];
+
+    const gradient = this.chartContext.createLinearGradient(...firstPoint, ...secondPoint);
+    gradient.addColorStop(0, firstColor);
+    gradient.addColorStop(1, secondColor);
+    return gradient;
   }
 }
 

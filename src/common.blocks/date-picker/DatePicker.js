@@ -4,6 +4,7 @@ import Observable from '@/js/Observable/Observable';
 class DatePicker extends Observable {
   constructor(element) {
     super();
+    autoBind(this);
 
     this.clearBtnHTML = `<button class="ui-datepicker-current 
       ui-state-default ui-corner-all 
@@ -35,15 +36,23 @@ class DatePicker extends Observable {
     ];
 
     this.$elem = $(element);
+    this.extensionRangeObject = {};
+    this.isTextDouble = null;
+    this.$clearButton = null;
+    this.$applyButton = null;
+    this.dateFormat = null;
+    this.initialDate = null;
+  }
+
+  init() {
     this.$clearButton = this.updateClearButton();
     this.$applyButton = this.updateApplyButton();
-    this.extensionRangeObject = {};
     this.isTextDouble = JSON.parse(this.$elem[0].dataset.isTextDouble);
     this.dateFormat = this.$elem[0].dataset.dateFormat ? this.$elem[0].dataset.dateFormat : 'dd.mm.yy';
+    this.initialDate = JSON.parse(this.$elem[0].dataset.initialDate)
+      .map((dateString) => dateString && new Date(dateString));
 
-    autoBind(this);
-
-    this.options = {
+    this.$elem.datepicker({
       range: 'period',
       showButtonPanel: true,
       currentText: this.clearBtnHTML + this.applyBtnHTML,
@@ -57,15 +66,9 @@ class DatePicker extends Observable {
       dayNamesShort: this.dayNamesShort,
       dayNamesMin: this.dayNamesMin,
       onSelect: this._handleDateSelect,
-    };
+    });
 
-    this._init();
-
-    this.initialDate = JSON.parse(this.$elem[0].dataset.initialDate);
-    this.initialDate[0] = this.initialDate[0] ? new Date(this.initialDate[0]) : null;
-    this.initialDate[1] = this.initialDate[1] ? new Date(this.initialDate[1]) : null;
     this.setDate(this.initialDate);
-
     this.addToJqueryData(this.$elem);
   }
 
@@ -101,10 +104,6 @@ class DatePicker extends Observable {
     } else {
       this.$clearButton.addClass('ui-datepicker-clear-button_disabled');
     }
-  }
-
-  _init() {
-    this.$elem.datepicker(this.options);
   }
 
   _handleApplyButtonClick() {

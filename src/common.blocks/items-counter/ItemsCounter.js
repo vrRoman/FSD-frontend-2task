@@ -6,24 +6,29 @@ import Observable from '@/js/Observable/Observable';
 class ItemsCounter extends Observable {
   constructor(element) {
     super();
+    autoBind(this);
 
     this.elem = element;
+    this.clearBtn = null;
+    this.applyBtn = null;
+    this.itemElems = null;
+    this.countingItemInstances = null;
+    this.wordForValueTextReplacing = null;
+    this.itemIndexForSeparateCount = null;
+    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
+  }
+
+  init() {
     this.clearBtn = this.getClearBtn();
     this.applyBtn = this.getApplyBtn();
     this.itemElems = this.getItemElems();
-    this.countingItemInstances = this._getCountingItemInstances();
+    this.countingItemInstances = this.getCountingItemInstances();
     this.wordForValueTextReplacing = JSON.parse(this.elem.dataset.replaceText);
     this.itemIndexForSeparateCount = JSON.parse(this.elem.dataset.separateItem);
-    this.clearBtnDisabledClass = 'items-counter__clear-button_disabled';
-
-    autoBind(this);
 
     this._addListenersToButtons();
-
     this._updateClearButton();
-
     this._subscribeToItems();
-
     this.addToJqueryData(this.elem);
   }
 
@@ -66,7 +71,7 @@ class ItemsCounter extends Observable {
     return this.elem.querySelectorAll(itemSelector);
   }
 
-  _getCountingItemInstances() {
+  getCountingItemInstances() {
     const instances = [];
 
     this.itemElems.forEach((elem) => {

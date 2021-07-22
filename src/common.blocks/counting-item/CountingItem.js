@@ -6,19 +6,32 @@ import Observable from '@/js/Observable/Observable';
 class CountingItem extends Observable {
   constructor(elem) {
     super();
+    autoBind(this);
 
     this.elem = elem;
-    this.wordsDeclension = this.elem.dataset.words ? JSON.parse(this.elem.dataset.words) : null;
+    this.changeButtonDisabledClass = 'counting-item__change-button_disabled';
+    this.wordsDeclension = null;
+    this.plusBtn = null;
+    this.minusBtn = null;
+    this.valueElem = null;
+    this.value = null;
+    this.name = null;
+  }
 
+  init() {
+    this.wordsDeclension = this.elem.dataset.words ? JSON.parse(this.elem.dataset.words) : null;
     this.plusBtn = this.getPlusBtn();
     this.minusBtn = this.getMinusBtn();
     this.valueElem = this.getValueElem();
     this.value = Number(this.valueElem.innerText);
     this.name = this.getNameElem().innerText.toLowerCase();
 
-    autoBind(this);
+    this.plusBtn.addEventListener('click', this._handlePlusBtnClick);
+    this.minusBtn.addEventListener('click', this._handleMinusBtnClick);
 
-    this._initButtons();
+    if (this.value === 0) {
+      this.minusBtn.classList.add(this.changeButtonDisabledClass);
+    }
 
     this.addToJqueryData(this.elem);
   }
@@ -64,9 +77,9 @@ class CountingItem extends Observable {
 
       this.valueElem.innerText = this.value;
       if (newValue === 0) {
-        this.minusBtn.classList.add('counting-item__change-button_disabled');
+        this.minusBtn.classList.add(this.changeButtonDisabledClass);
       } else {
-        this.minusBtn.classList.remove('counting-item__change-button_disabled');
+        this.minusBtn.classList.remove(this.changeButtonDisabledClass);
       }
     }
 
@@ -76,15 +89,6 @@ class CountingItem extends Observable {
       valueText: this.getValueText(),
     });
     return this.value;
-  }
-
-  _initButtons() {
-    this.plusBtn.addEventListener('click', this._handlePlusBtnClick);
-    this.minusBtn.addEventListener('click', this._handleMinusBtnClick);
-
-    if (this.value === 0) {
-      this.minusBtn.classList.add('counting-item__change-button_disabled');
-    }
   }
 
   _handlePlusBtnClick() {

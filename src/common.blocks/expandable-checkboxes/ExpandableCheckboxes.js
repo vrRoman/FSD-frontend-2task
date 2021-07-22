@@ -2,24 +2,24 @@ import autoBind from 'auto-bind';
 
 class ExpandableCheckboxes {
   constructor(elem) {
-    this.elem = elem;
-    this.checkboxes = this.getCheckboxes();
-    this.isListening = false;
-    this.expandedClassName = 'expandable-checkboxes_expanded';
-    this.isExpanded = this.elem.classList.contains(this.expandedClassName);
-
     autoBind(this);
 
-    this._init();
+    this.elem = elem;
+    this.checkboxes = null;
+    this.expandedClassName = 'expandable-checkboxes_expanded';
+    this.isListening = false;
+    this.isExpanded = false;
+  }
+
+  init() {
+    this.checkboxes = this.getCheckboxes();
+    this.isExpanded = this.elem.classList.contains(this.expandedClassName);
+    window.addEventListener('click', this._handleWindowClick);
   }
 
   getCheckboxes() {
     const checkboxesSelector = '.js-expandable-checkboxes__checkboxes';
     return this.elem.querySelector(checkboxesSelector);
-  }
-
-  _init() {
-    window.addEventListener('click', this._handleWindowClick);
   }
 
   _handleWindowClick(evt) {

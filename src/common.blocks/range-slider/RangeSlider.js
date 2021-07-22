@@ -3,29 +3,22 @@ import prettifyNumber from '@/js/helpers/prettifyNumber';
 
 class RangeSlider {
   constructor(elem) {
+    autoBind(this);
+
+    this.elem = elem;
+    this.sliderElem = null;
+    this.valueElem = null;
+
     this.rubSymbol = '₽';
     this.sliderSelector = '.js-range-slider__slider';
     this.valueSelector = '.js-range-slider__value';
+    this.values = [5000, 10000];
+  }
 
-    this.elem = elem;
+  init() {
     this.sliderElem = this.getSlider();
     this.valueElem = this.getValueElem();
-    this.values = [5000, 10000];
 
-    autoBind(this);
-
-    this._init();
-  }
-
-  getSlider() {
-    return this.elem.querySelector(this.sliderSelector);
-  }
-
-  getValueElem() {
-    return this.elem.querySelector(this.valueSelector);
-  }
-
-  _init() {
     $(this.sliderElem).slider({
       range: true,
       min: 200,
@@ -34,6 +27,14 @@ class RangeSlider {
       slide: this._handleSliderValuesChanged,
     });
     this._updateValueElem();
+  }
+
+  getSlider() {
+    return this.elem.querySelector(this.sliderSelector);
+  }
+
+  getValueElem() {
+    return this.elem.querySelector(this.valueSelector);
   }
 
   _updateValueElem() {

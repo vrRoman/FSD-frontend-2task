@@ -2,22 +2,28 @@ import autoBind from 'auto-bind';
 
 class Dropdown {
   constructor(elem) {
+    autoBind(this);
+
     this.elem = elem;
-    this.textFields = this.getTextFields();
-    this.textFieldInputs = this.getTextFieldInputs();
-    this.defaultValue = JSON.parse(this.elem.dataset.defaultValue);
-    this.popup = this.getPopup();
+    this.textFields = null;
+    this.textFieldInputs = null;
+    this.defaultValue = null;
+    this.popup = null;
+
     this.hiddenPopupClass = 'dropdown__popup_hidden';
     this.doubleDropdownClass = 'dropdown_double';
     this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
     this.isListening = false;
+  }
 
-    autoBind(this);
+  init() {
+    this.textFields = this.getTextFields();
+    this.textFieldInputs = this.getTextFieldInputs();
+    this.popup = this.getPopup();
+    this.defaultValue = JSON.parse(this.elem.dataset.defaultValue);
 
     this._updateTextFieldsClasses();
-
     this._addWindowListener();
-
     this._findAndSubscribeToPopupInstance();
   }
 

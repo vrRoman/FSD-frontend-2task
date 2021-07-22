@@ -2,21 +2,29 @@ import autoBind from 'auto-bind';
 
 class LoginAndRegistration {
   constructor(pageElem) {
+    autoBind(this);
+
+    this.$pageElem = $(pageElem);
+    this.$loginButtons = null;
+    this.$signupButtons = null;
+    this.$signinCard = null;
+    this.$signupCard = null;
+
     this.loginButtonsSelector = '.js-signup-card__account-exists .js-button';
     this.signupButtonsSelector = '.js-signin-card__account-not-exists .js-button';
     this.signinCardSelector = '.js-login-and-registration__signin-card';
     this.signupCardSelector = '.js-login-and-registration__signup-card';
     this.pageLoginClass = 'login-and-registration_login';
+  }
 
+  init() {
     this.$loginButtons = this.getLoginButtons();
     this.$signupButtons = this.getSignupButtons();
     this.$signinCard = this.getSigninCard();
     this.$signupCard = this.getSignupCard();
-    this.$pageElem = $(pageElem);
 
-    autoBind(this);
-
-    this._init();
+    this.$loginButtons.on('click', this._handleLoginButtonsClick);
+    this.$signupButtons.on('click', this._handleSignupButtonsClick);
   }
 
   getLoginButtons() {
@@ -33,11 +41,6 @@ class LoginAndRegistration {
 
   getSignupCard() {
     return $(this.signupCardSelector);
-  }
-
-  _init() {
-    this.$loginButtons.on('click', this._handleLoginButtonsClick);
-    this.$signupButtons.on('click', this._handleSignupButtonsClick);
   }
 
   _handleLoginButtonsClick() {
