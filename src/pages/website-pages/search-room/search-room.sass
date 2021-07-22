@@ -16,12 +16,23 @@
     grid-template-columns: 266px 1fr
     grid-column-gap: 60px
 
+    @media (max-width: 800px)
+      display: grid
+      grid-template-columns: 1fr
+      grid-row-gap: 120px
+
   &__room-cards
     padding-top: 21px
     display: grid
     grid-template-columns: 1fr 1fr 1fr
     grid-column-gap: 12px
     grid-row-gap: 19px
+
+    @media (max-width: 1200px)
+      grid-template-columns: 1fr 1fr
+
+    @media (max-width: 1000px)
+      grid-template-columns: 1fr
 
   &__subtitle
     margin-bottom: 16px
@@ -53,21 +64,3 @@
     margin-right: 13px
     display: flex
     justify-content: center
-
-
-@media screen and (max-width: 1200px)
-  .search-room
-    &__room-cards
-      grid-template-columns: 1fr 1fr
-
-@media screen and (max-width: 1000px)
-  .search-room
-    &__room-cards
-      grid-template-columns: 1fr
-
-@media screen and (max-width: 800px)
-  .search-room
-    &__container
-      display: grid
-      grid-template-columns: 1fr
-      grid-row-gap: 120px

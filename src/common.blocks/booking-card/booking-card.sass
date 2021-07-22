@@ -35,6 +35,11 @@
     font-size: (12rem / 14)
     line-height: 1rem
 
+    @media (max-width: 400px)
+      position: relative
+      left: unset
+      top: unset
+
   &__item-text
     margin: 0 0 0 2px
     line-height: (18rem/14)
@@ -69,11 +74,3 @@
     margin-top: 30px
     margin-bottom: 21px
     padding-left: 2px
-
-
-@media screen and (max-width: 400px)
-  .booking-card
-    &__tooltip
-      position: relative
-      left: unset
-      top: unset

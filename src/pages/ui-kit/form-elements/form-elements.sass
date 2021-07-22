@@ -4,8 +4,17 @@
   justify-content: space-between
   grid-row-gap: 100px
   grid-template-areas: ". . ." ". . ." ". . ." "icon-text-list comment comment"
-
   padding: 143px 0 130px
+
+  @media (max-width: 1280px)
+    justify-content: center
+    grid-gap: 100px
+    grid-template-columns: repeat(2, 320px)
+    grid-template-areas: ". ." ". ." ". ." ". ." ". icon-text-list" "comment comment"
+
+  @media (max-width: 800px)
+    display: flex
+    flex-direction: column
 
   &__guests-dropdown
     position: relative
@@ -27,8 +36,24 @@
       z-index: 1
 
   &__elements-container
+    @media (max-width: 800px)
+      display: flex
+      flex-direction: column
+      align-items: center
+
     &_with-top-margin
       margin-top: 72px
+
+      @media (max-width: 1280px)
+        margin-top: 72px
+
+    &:nth-child(5)
+      @media (max-width: 800px)
+        margin-top: 50px
+
+    &:nth-child(6)
+      @media (max-width: 800px)
+        margin-top: 100px
 
   &__icon-text-list-wrapper
     grid-area: icon-text-list
@@ -95,31 +120,3 @@
     &:last-child
       width: 100%
       margin-bottom: 0
-
-
-@media screen and (max-width: 1280px)
-  .form-elements
-    justify-content: center
-    grid-gap: 100px
-    grid-template-columns: repeat(2, 320px)
-    grid-template-areas: ". ." ". ." ". ." ". ." ". icon-text-list" "comment comment"
-
-    &__elements-container
-      &_with-top-margin
-        margin-top: 72px
-
-@media screen and (max-width: 800px)
-  .form-elements
-    display: flex
-    flex-direction: column
-
-    &__elements-container
-      display: flex
-      flex-direction: column
-      align-items: center
-
-      &:nth-child(5)
-        margin-top: 50px
-
-      &:nth-child(6)
-        margin-top: 100px

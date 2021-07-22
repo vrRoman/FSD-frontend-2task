@@ -24,10 +24,21 @@
     justify-content: center
     overflow: hidden
 
+    @media (max-width: 1460px)
+      max-height: 300px
+
   &__room-images
     display: grid
     grid-template-columns: 1fr 461px
     grid-template-areas: "main-img ." "main-img ."
+
+    @media (max-width: 1460px)
+      grid-template-columns: 1fr 1fr
+      grid-template-areas: "main-img main-img" ". ."
+
+    @media (max-width: 800px)
+      grid-template-columns: 1fr
+      grid-template-areas: "main-img" "." "."
 
   &__main-image
     width: 100%
@@ -51,6 +62,9 @@
     right: 0
     top: 3px
 
+    @media (max-width: 450px)
+      top: 60px
+
   &__comment
     margin-top: 23px
     &:first-child
@@ -67,37 +81,12 @@
     justify-content: space-between
     grid-template-areas: ". . booking-card" "comments comments booking-card" ". . booking-card"
 
-
-@media screen and (max-width: 1460px)
-  .room-details
-    &__room-images
-      grid-template-columns: 1fr 1fr
-      grid-template-areas: "main-img main-img" ". ."
-
-    &__side-image-container
-      max-height: 300px
-
-@media screen and (max-width: 1200px)
-  .room-details
-    &__container
+    @media (max-width: 1200px)
       grid-template-columns: auto 380px
       grid-column-gap: 70px
       justify-content: center
       grid-template-areas: ". ." "comments booking-card" ". ." ". ."
 
-@media screen and (max-width: 950px)
-  .room-details
-    &__container
+    @media (max-width: 950px)
       grid-template-columns: 1fr
       grid-template-areas: "." "." "comments" "." "." "booking-card"
-
-@media screen and (max-width: 800px)
-  .room-details
-    &__room-images
-      grid-template-columns: 1fr
-      grid-template-areas: "main-img" "." "."
-
-@media screen and (max-width: 450px)
-  .room-details
-    &__comments-number
-      top: 60px

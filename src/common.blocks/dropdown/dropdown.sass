@@ -29,8 +29,15 @@
     display: flex
     justify-content: space-between
 
+    @media (max-width: 380px)
+      flex-direction: column
+      row-gap: 20px
+
     .dropdown__text-field
       max-width: 150px
+
+      @media (max-width: 380px)
+        max-width: unset
 
   &_short
     max-width: 266px

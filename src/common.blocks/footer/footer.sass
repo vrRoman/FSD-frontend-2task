@@ -6,8 +6,21 @@
   box-shadow: 0 10px 20px 0 $dark-shade-5
   z-index: 1
 
+  @media (max-width: 800px)
+    padding: 0 20px
+
+  @media (max-width: 750px)
+    padding: 118px 0
+
+  &__main-info
+    @media (max-width: 750px)
+      display: flex
+
   &__description
     margin: 10px 0 0
+
+    @media (max-width: 750px)
+      display: none
 
   &__subtitle
     margin-bottom: 21px
@@ -18,12 +31,24 @@
     grid-template-columns: 1fr 1fr 1fr
     grid-column-gap: 40px
 
+    @media (max-width: 800px)
+      grid-template-columns: auto
+      grid-template-rows: auto auto auto
+      grid-row-gap: 40px
+      justify-content: center
+
+    @media (max-width: 750px)
+      display: none
+
   &__subscription-text
     margin-bottom: 20px
 
   &__subscription
     display: flex
     flex-direction: column
+
+    @media (max-width: 750px)
+      display: none
 
   &__body
     max-width: 1160px
@@ -33,9 +58,21 @@
     grid-template-columns: 260px 1fr 260px
     grid-gap: 40px
 
+    @media (max-width: 1200px)
+      grid-template-columns: 1fr
+      grid-template-rows: auto auto auto
+
+    @media (max-width: 750px)
+      display: flex
+      justify-content: center
+      padding: 0
+
   &__bottom
     width: 100%
     border-top: 1px solid #e5e5e5
+
+    @media (max-width: 750px)
+      border: none
 
   &__bottom-container
     max-width: 1160px
@@ -47,55 +84,15 @@
     justify-content: space-between
     align-items: center
 
-
-@media screen and (max-width: 1200px)
-  .footer
-    &__body
-      grid-template-columns: 1fr
-      grid-template-rows: auto auto auto
-
-    &__bottom-container
+    @media (max-width: 1200px)
       flex-direction: column
       justify-content: center
 
-@media screen and (max-width: 800px)
-  .footer
-    padding: 0 20px
-
-    &__menu
-      grid-template-columns: auto
-      grid-template-rows: auto auto auto
-      grid-row-gap: 40px
-      justify-content: center
-
-@media screen and (max-width: 750px)
-  .footer
-    padding: 118px 0
-
-    &__main-info
-      display: flex
-
-    &__description
-      display: none
-
-    &__menu
-      display: none
-
-    &__subscription
-      display: none
-
-    &__body
-      display: flex
-      justify-content: center
-      padding: 0
-
-    &__bottom
-      border: none
-
-    &__bottom-container
+    @media (max-width: 750px)
       padding: 0
       margin-top: 18px
 
-    &__copyright
+  &__copyright
+    @media (max-width: 750px)
       margin-bottom: 22px
       text-align: center
