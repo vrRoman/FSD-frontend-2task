@@ -1,4 +1,5 @@
 import autoBind from 'auto-bind';
+import prettifyNumber from '@/js/helpers/prettifyNumber';
 
 class RangeSlider {
   constructor(elem) {
@@ -12,12 +13,6 @@ class RangeSlider {
     autoBind(this);
 
     this._init();
-  }
-
-  static prettifyNum(num) {
-    const n = num.toString();
-    const separator = ' ';
-    return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, `$1${separator}`);
   }
 
   getSlider() {
@@ -40,8 +35,8 @@ class RangeSlider {
   }
 
   _updateValueElem() {
-    const firstPrice = `${RangeSlider.prettifyNum(this.values[0])}${this.rubSymbol}`;
-    const secondPrice = `${RangeSlider.prettifyNum(this.values[1])}${this.rubSymbol}`;
+    const firstPrice = `${prettifyNumber(this.values[0])}${this.rubSymbol}`;
+    const secondPrice = `${prettifyNumber(this.values[1])}${this.rubSymbol}`;
 
     this.getValueElem().innerText = `${firstPrice} - ${secondPrice}`;
   }
