@@ -9,11 +9,11 @@ class Dropdown {
     this.textFieldInputs = null;
     this.defaultValue = null;
     this.popup = null;
+    this.isPopupHidden = true;
 
     this.hiddenPopupClass = 'dropdown__popup_hidden';
     this.doubleDropdownClass = 'dropdown_double';
     this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
-    this.isListening = false;
   }
 
   init() {
@@ -21,20 +21,19 @@ class Dropdown {
     this.textFieldInputs = this.getTextFieldInputs();
     this.popup = this.getPopup();
     this.defaultValue = JSON.parse(this.elem.dataset.defaultValue);
+    this.isPopupHidden = this.popup.classList.contains(this.hiddenPopupClass);
 
     this._updateTextFieldsClasses();
-    this._addWindowListener();
     this._findAndSubscribeToPopupInstance();
+
+    this.textFields.forEach((element) => element.addEventListener('click', this._handleTextFieldClick));
   }
 
   update(action) {
     this._changeTextFieldValue(action.valueText);
 
     if (action.type === 'CLICK_APPLY-BUTTON') {
-      this.popup.classList.add(this.hiddenPopupClass);
-      this.textFields.forEach((el) => {
-        el.classList.remove(...this.activeTextFieldClasses);
-      });
+      this._hidePopup();
     }
   }
 
@@ -45,7 +44,7 @@ class Dropdown {
 
   getTextFields() {
     const textFieldSelector = '.js-dropdown__text-field .js-text-field';
-    return this.elem.querySelectorAll(textFieldSelector);
+    return Array.from(this.elem.querySelectorAll(textFieldSelector));
   }
 
   getTextFieldInputs() {
@@ -68,7 +67,7 @@ class Dropdown {
   }
 
   _updateTextFieldsClasses() {
-    if (!this._isPopupHidden()) {
+    if (!this.isPopupHidden) {
       this.textFields.forEach((el) => {
         el.classList.add(...this.activeTextFieldClasses);
       });
@@ -101,40 +100,40 @@ class Dropdown {
     }
   }
 
-  _isPopupHidden() {
-    return this.popup.classList.contains(this.hiddenPopupClass);
-  }
-
   _isDropdownDouble() {
     return this.elem.classList.contains(this.doubleDropdownClass);
   }
 
-  _addWindowListener() {
+  _showPopup() {
+    this.popup.classList.remove(this.hiddenPopupClass);
+    this.textFields.forEach((el) => {
+      el.classList.add(...this.activeTextFieldClasses);
+    });
+    this.isPopupHidden = false;
     window.addEventListener('click', this._handleWindowClick);
   }
 
-  _handleWindowClick(evt) {
-    if (evt.path.includes(this.elem)) {
-      this.isListening = true;
-      if (!evt.path.includes(this.popup)) {
-        if (this._isPopupHidden()) {
-          this.popup.classList.remove(this.hiddenPopupClass);
-          this.textFields.forEach((el) => {
-            el.classList.add(...this.activeTextFieldClasses);
-          });
-        } else {
-          this.popup.classList.add(this.hiddenPopupClass);
-          this.textFields.forEach((el) => {
-            el.classList.remove(...this.activeTextFieldClasses);
-          });
-        }
-      }
-    } else if (this.isListening) {
-      this.popup.classList.add(this.hiddenPopupClass);
-      this.textFields.forEach((el) => {
-        el.classList.remove(...this.activeTextFieldClasses);
-      });
+  _hidePopup() {
+    this.popup.classList.add(this.hiddenPopupClass);
+    this.textFields.forEach((el) => {
+      el.classList.remove(...this.activeTextFieldClasses);
+    });
+    this.isPopupHidden = true;
+    window.removeEventListener('click', this._handleWindowClick);
+  }
+
+  _handleTextFieldClick() {
+    if (this.isPopupHidden) {
+      this._showPopup();
+    } else {
+      this._hidePopup();
     }
+  }
+
+  _handleWindowClick(event) {
+    if (event.path.includes(this.elem)) return;
+
+    this._hidePopup();
   }
 }
 

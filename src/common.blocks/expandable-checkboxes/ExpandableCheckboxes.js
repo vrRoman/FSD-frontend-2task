@@ -1,46 +1,58 @@
 import autoBind from 'auto-bind';
 
 class ExpandableCheckboxes {
-  constructor(elem) {
+  constructor(element) {
     autoBind(this);
 
-    this.elem = elem;
+    this.element = element;
     this.checkboxes = null;
+    this.titleElement = null;
     this.expandedClassName = 'expandable-checkboxes_expanded';
-    this.isListening = false;
     this.isExpanded = false;
   }
 
   init() {
     this.checkboxes = this.getCheckboxes();
-    this.isExpanded = this.elem.classList.contains(this.expandedClassName);
-    window.addEventListener('click', this._handleWindowClick);
+    this.titleElement = this.getTitleElement();
+    this.isExpanded = this.element.classList.contains(this.expandedClassName);
+
+    this.titleElement.addEventListener('click', this._handleTitleClick);
   }
 
   getCheckboxes() {
     const checkboxesSelector = '.js-expandable-checkboxes__checkboxes';
-    return this.elem.querySelector(checkboxesSelector);
+    return this.element.querySelector(checkboxesSelector);
   }
 
-  _handleWindowClick(evt) {
-    const isClickedOnElem = evt.path.includes(this.elem);
-    const isClickedOnCheckboxes = evt.path.includes(this.checkboxes);
+  getTitleElement() {
+    const titleSelector = '.js-expandable-checkboxes__title';
+    return this.element.querySelector(titleSelector);
+  }
 
-    if (isClickedOnElem) {
-      this.isListening = true;
-    }
+  _showCheckboxes() {
+    this.element.classList.add(this.expandedClassName);
+    this.isExpanded = true;
+    window.addEventListener('click', this._handleWindowClick);
+  }
 
-    if (this.isListening) {
-      if (this.isExpanded) {
-        if (!isClickedOnCheckboxes) {
-          this.isExpanded = false;
-          this.elem.classList.remove(this.expandedClassName);
-        }
-      } else if (isClickedOnElem) {
-        this.isExpanded = true;
-        this.elem.classList.add(this.expandedClassName);
-      }
+  _hideCheckboxes() {
+    this.element.classList.remove(this.expandedClassName);
+    this.isExpanded = false;
+    window.removeEventListener('click', this._handleWindowClick);
+  }
+
+  _handleTitleClick() {
+    if (this.isExpanded) {
+      this._hideCheckboxes();
+    } else {
+      this._showCheckboxes();
     }
+  }
+
+  _handleWindowClick(event) {
+    if (event.path.includes(this.element)) return;
+
+    this._hideCheckboxes();
   }
 }
 

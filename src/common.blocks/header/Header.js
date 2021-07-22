@@ -8,6 +8,7 @@ class Header {
     this.menu = null;
     this.hamburger = null;
     this.navigation = null;
+    this.isMenuHidden = true;
     this.showHamburgerOn = 1200;
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
@@ -20,8 +21,8 @@ class Header {
     this.navigation = this.getNavigation();
 
     window.addEventListener('resize', this._handleWindowResize);
-    window.addEventListener('click', this._handleWindowClick);
     window.addEventListener('load', this._handleWindowLoad);
+    this.hamburger.addEventListener('click', this._handleHamburgerClick);
   }
 
   getHamburger() {
@@ -41,14 +42,31 @@ class Header {
 
   _updateHeader() {
     if (window.innerWidth > this.showHamburgerOn) {
+      this.isMenuHidden = false;
       this.menu.classList.remove(this.hiddenMenuClass);
       this.hamburger.classList.remove(this.visibleHamburgerClass);
       this.navigation.classList.remove(this.columnNavClass);
+      window.removeEventListener('click', this._handleWindowClick);
     } else {
+      this.isMenuHidden = true;
       this.menu.classList.add(this.hiddenMenuClass);
       this.hamburger.classList.add(this.visibleHamburgerClass);
       this.navigation.classList.add(this.columnNavClass);
     }
+  }
+
+  _showMenu() {
+    this.menu.classList.remove(this.hiddenMenuClass);
+    this.isMenuHidden = false;
+
+    window.addEventListener('click', this._handleWindowClick);
+  }
+
+  _hideMenu() {
+    this.menu.classList.add(this.hiddenMenuClass);
+    this.isMenuHidden = true;
+
+    window.removeEventListener('click', this._handleWindowClick);
   }
 
   _handleWindowResize() {
@@ -59,17 +77,18 @@ class Header {
     this._updateHeader();
   }
 
-  _handleWindowClick(evt) {
-    if (window.innerWidth <= this.showHamburgerOn) {
-      if (evt.path.includes(this.hamburger)) {
-        this.menu.classList.toggle(this.hiddenMenuClass);
-      } else if (!evt.path.includes(this.menu)) {
-        if (!this.menu.classList.contains(this.hiddenMenuClass)) {
-          evt.stopPropagation();
-          evt.preventDefault();
-          this.menu.classList.add(this.hiddenMenuClass);
-        }
-      }
+  _handleHamburgerClick() {
+    if (this.isMenuHidden) {
+      this._showMenu();
+    } else {
+      this._hideMenu();
+    }
+  }
+
+  _handleWindowClick(event) {
+    const shouldHide = !event.path.includes(this.menu) && !event.path.includes(this.hamburger);
+    if (shouldHide) {
+      this._hideMenu();
     }
   }
 }
