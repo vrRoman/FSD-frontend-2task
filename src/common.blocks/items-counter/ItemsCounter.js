@@ -24,7 +24,7 @@ class ItemsCounter extends Observable {
 
     this._subscribeToItems();
 
-    this._addToJqueryData();
+    this.addToJqueryData(this.elem);
   }
 
   update(action) {
@@ -64,14 +64,6 @@ class ItemsCounter extends Observable {
   getItemElems() {
     const itemSelector = '.js-counting-item';
     return this.elem.querySelectorAll(itemSelector);
-  }
-
-  _addToJqueryData() {
-    if ($) {
-      $(this.elem).data({
-        instance: this,
-      });
-    }
   }
 
   _getCountingItemInstances() {

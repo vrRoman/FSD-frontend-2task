@@ -12,6 +12,14 @@ class Observable {
       observer.update(action);
     });
   }
+
+  addToJqueryData(element) {
+    if ($) {
+      $(element).data({
+        instance: this,
+      });
+    }
+  }
 }
 
 export default Observable;

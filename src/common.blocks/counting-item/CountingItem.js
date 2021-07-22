@@ -20,7 +20,7 @@ class CountingItem extends Observable {
 
     this._initButtons();
 
-    this._addToJqueryData();
+    this.addToJqueryData(this.elem);
   }
 
   getValue() {
@@ -76,14 +76,6 @@ class CountingItem extends Observable {
       valueText: this.getValueText(),
     });
     return this.value;
-  }
-
-  _addToJqueryData() {
-    if ($) {
-      $(this.elem).data({
-        instance: this,
-      });
-    }
   }
 
   _initButtons() {

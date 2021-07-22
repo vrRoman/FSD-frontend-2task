@@ -64,7 +64,7 @@ class DatePicker extends Observable {
     this.initialDate[1] = this.initialDate[1] ? new Date(this.initialDate[1]) : null;
     this.setDate(this.initialDate);
 
-    this._addToJqueryData();
+    this.addToJqueryData(this.$elem);
   }
 
   setDate(dateObjects, dateTexts = [null, null]) {
@@ -87,14 +87,6 @@ class DatePicker extends Observable {
 
   _init() {
     this.$elem.datepicker(this.options);
-  }
-
-  _addToJqueryData() {
-    if ($) {
-      this.$elem.data({
-        instance: this,
-      });
-    }
   }
 
   _updateClearBtn() {
