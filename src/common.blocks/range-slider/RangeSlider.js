@@ -8,6 +8,8 @@ class RangeSlider {
     this.valueSelector = '.js-range-slider__value';
 
     this.elem = elem;
+    this.sliderElem = this.getSlider();
+    this.valueElem = this.getValueElem();
     this.values = [5000, 10000];
 
     autoBind(this);
@@ -24,7 +26,7 @@ class RangeSlider {
   }
 
   _init() {
-    $(this.getSlider()).slider({
+    $(this.sliderElem).slider({
       range: true,
       min: 200,
       max: 15400,
@@ -38,7 +40,7 @@ class RangeSlider {
     const firstPrice = `${prettifyNumber(this.values[0])}${this.rubSymbol}`;
     const secondPrice = `${prettifyNumber(this.values[1])}${this.rubSymbol}`;
 
-    this.getValueElem().innerText = `${firstPrice} - ${secondPrice}`;
+    this.valueElem.innerText = `${firstPrice} - ${secondPrice}`;
   }
 
   _handleSliderValuesChanged(event, ui) {

@@ -1,6 +1,7 @@
 class Pagination {
   constructor(elem) {
     this.elem = elem;
+    this.pagesElem = this.getPagesElem();
     this.pagesSelector = '.js-pagination__pages';
     this.itemsNumber = 180;
     this.itemsOnPage = 12;
@@ -13,7 +14,7 @@ class Pagination {
   }
 
   _init() {
-    $(this.getPagesElem()).pagination({
+    $(this.pagesElem).pagination({
       items: this.itemsNumber,
       itemsOnPage: this.itemsOnPage,
       displayedPages: 3,

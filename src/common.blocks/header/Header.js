@@ -5,6 +5,7 @@ class Header {
     this.elem = elem;
     this.menu = this.getMenu();
     this.hamburger = this.getHamburger();
+    this.navigation = this.getNavigation();
     this.showHamburgerOn = 1200;
     this.hiddenMenuClass = 'header__menu_hidden';
     this.visibleHamburgerClass = 'header__hamburger_visible';
@@ -25,7 +26,7 @@ class Header {
     return this.elem.querySelector(menuSelector);
   }
 
-  getNav() {
+  getNavigation() {
     const navSelector = '.js-navigation';
     return this.elem.querySelector(navSelector);
   }
@@ -40,11 +41,11 @@ class Header {
     if (window.innerWidth > this.showHamburgerOn) {
       this.menu.classList.remove(this.hiddenMenuClass);
       this.hamburger.classList.remove(this.visibleHamburgerClass);
-      this.getNav().classList.remove(this.columnNavClass);
+      this.navigation.classList.remove(this.columnNavClass);
     } else {
       this.menu.classList.add(this.hiddenMenuClass);
       this.hamburger.classList.add(this.visibleHamburgerClass);
-      this.getNav().classList.add(this.columnNavClass);
+      this.navigation.classList.add(this.columnNavClass);
     }
   }
 

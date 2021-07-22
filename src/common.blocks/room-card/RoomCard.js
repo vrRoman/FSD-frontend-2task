@@ -1,6 +1,7 @@
 class RoomCard {
   constructor(elem) {
     this.elem = elem;
+    this.sliderElem = this.getSliderElem();
     this._init();
   }
 
@@ -10,7 +11,7 @@ class RoomCard {
   }
 
   _init() {
-    $(this.getSliderElem()).slick({
+    $(this.sliderElem).slick({
       dots: true,
       arrows: true,
       prevArrow: '<span class="slick-prev slick-arrow material-icons" aria-label="Next"></span>',

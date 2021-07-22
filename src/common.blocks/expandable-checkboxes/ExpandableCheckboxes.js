@@ -3,6 +3,7 @@ import autoBind from 'auto-bind';
 class ExpandableCheckboxes {
   constructor(elem) {
     this.elem = elem;
+    this.checkboxes = this.getCheckboxes();
     this.isListening = false;
     this.expandedClassName = 'expandable-checkboxes_expanded';
     this.isExpanded = this.elem.classList.contains(this.expandedClassName);
@@ -23,7 +24,7 @@ class ExpandableCheckboxes {
 
   _handleWindowClick(evt) {
     const isClickedOnElem = evt.path.includes(this.elem);
-    const isClickedOnCheckboxes = evt.path.includes(this.getCheckboxes());
+    const isClickedOnCheckboxes = evt.path.includes(this.checkboxes);
 
     if (isClickedOnElem) {
       this.isListening = true;

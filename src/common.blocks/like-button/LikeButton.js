@@ -3,7 +3,8 @@ import autoBind from 'auto-bind';
 class LikeButton {
   constructor(elem) {
     this.elem = elem;
-    this.value = Number(this.getNumberElem().innerText);
+    this.numberElement = this.getNumberElement();
+    this.value = Number(this.numberElement.innerText);
     this.activeClass = 'like-button_active';
 
     autoBind(this);
@@ -11,7 +12,7 @@ class LikeButton {
     this._init();
   }
 
-  getNumberElem() {
+  getNumberElement() {
     const numberElemSelector = '.js-like-button__number';
     return this.elem.querySelector(numberElemSelector);
   }
@@ -30,7 +31,7 @@ class LikeButton {
     } else {
       this.value += 1;
     }
-    this.getNumberElem().innerText = this.value;
+    this.numberElement.innerText = this.value;
     this.elem.classList.toggle(this.activeClass);
   }
 }

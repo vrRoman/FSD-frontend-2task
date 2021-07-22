@@ -1,45 +1,38 @@
 import Chart from 'chart.js/dist/Chart.bundle.min';
 
 class DonutChart {
-  constructor(elem) {
-    this.elem = elem;
+  constructor(element) {
+    this.element = element;
+    this.chartElement = this.getChartElement();
+    this.chartContext = this.chartElement.getContext('2d');
 
     this._init();
   }
 
-  getChartElem() {
+  getChartElement() {
     const chartSelector = '.js-donut-chart__canvas';
-    return this.elem.querySelector(chartSelector);
+    return this.element.querySelector(chartSelector);
+  }
+
+  createCtxGradient(firstColor, secondColor) {
+    const gradient = this.chartContext.createLinearGradient(60, 0, 60, 120);
+    gradient.addColorStop(0, firstColor);
+    gradient.addColorStop(1, secondColor);
+    return gradient;
   }
 
   _init() {
-    const ctx = this.getChartElem().getContext('2d');
     // eslint-disable-next-line no-unused-vars
-    const chart = new Chart(ctx, {
+    const chart = new Chart(this.chartContext, {
       type: 'doughnut',
       data: {
         labels: ['Удовлетворительно', 'Хорошо', 'Великолепно', 'Разочарован'],
         datasets: [{
           data: [260, 260, 520, 0],
           backgroundColor: [
-            (function getGradient() {
-              const gradient = ctx.createLinearGradient(60, 0, 60, 120);
-              gradient.addColorStop(0, '#BC9CFF');
-              gradient.addColorStop(1, '#8BA4F9');
-              return gradient;
-            }()),
-            (function getGradient() {
-              const gradient = ctx.createLinearGradient(60, 0, 60, 120);
-              gradient.addColorStop(0, '#6FCF97');
-              gradient.addColorStop(1, '#66D2EA');
-              return gradient;
-            }()),
-            (function getGradient() {
-              const gradient = ctx.createLinearGradient(60, 0, 60, 120);
-              gradient.addColorStop(0, '#FFE39C');
-              gradient.addColorStop(1, '#FFBA9C');
-              return gradient;
-            }()),
+            this.createCtxGradient('#BC9CFF', '#8BA4F9'),
+            this.createCtxGradient('#6FCF97', '#66D2EA'),
+            this.createCtxGradient('#FFE39C', '#FFBA9C'),
             'black',
           ],
           borderColor: '#fff',

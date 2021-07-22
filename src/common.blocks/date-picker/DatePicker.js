@@ -35,6 +35,8 @@ class DatePicker extends Observable {
     ];
 
     this.$elem = $(element);
+    this.$clearButton = this.updateClearButton();
+    this.$applyButton = this.updateApplyButton();
     this.extensionRangeObject = {};
     this.isTextDouble = JSON.parse(this.$elem[0].dataset.isTextDouble);
     this.dateFormat = this.$elem[0].dataset.dateFormat ? this.$elem[0].dataset.dateFormat : 'dd.mm.yy';
@@ -72,29 +74,37 @@ class DatePicker extends Observable {
     [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate] = dateObjects;
     [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText] = dateTexts;
 
-    this.getClearBtn().on('click', this._handleClearButtonClick);
-    this.getApplyBtn().on('click', this._handleApplyButtonClick);
-    this._updateClearBtn();
+    this.updateClearButton();
+    this.updateApplyButton();
+    this.updateClearButtonClasses();
   }
 
-  getClearBtn() {
-    return $(this.$elem.find('.js-ui-datepicker-clear-button'));
+  // JQuery перерендеривает кнопки при выборе даты и изменении даты,
+  // поэтому их нужно каждый раз обновлять
+  updateClearButton() {
+    this.$clearButton = $(this.$elem.find('.js-ui-datepicker-clear-button'));
+
+    this.$clearButton.on('click', this._handleClearButtonClick);
+
+    return this.$clearButton;
   }
 
-  getApplyBtn() {
-    return $(this.$elem.find('.js-ui-datepicker-apply-button'));
+  updateApplyButton() {
+    this.$applyButton = $(this.$elem.find('.js-ui-datepicker-apply-button'));
+    this.$applyButton.on('click', this._handleApplyButtonClick);
+    return this.$applyButton;
+  }
+
+  updateClearButtonClasses() {
+    if (this.$elem.datepicker('getDate')) {
+      this.$clearButton.removeClass('ui-datepicker-clear-button_disabled');
+    } else {
+      this.$clearButton.addClass('ui-datepicker-clear-button_disabled');
+    }
   }
 
   _init() {
     this.$elem.datepicker(this.options);
-  }
-
-  _updateClearBtn() {
-    if (this.$elem.datepicker('getDate')) {
-      this.getClearBtn().removeClass('ui-datepicker-clear-button_disabled');
-    } else {
-      this.getClearBtn().addClass('ui-datepicker-clear-button_disabled');
-    }
   }
 
   _handleApplyButtonClick() {
@@ -134,8 +144,8 @@ class DatePicker extends Observable {
   _handleDateSelect(dateText, inst, extensionRange) {
     this.extensionRangeObject = extensionRange;
     setTimeout(() => {
-      this.getApplyBtn().on('click', this._handleApplyButtonClick);
-      this.getClearBtn().on('click', this._handleClearButtonClick);
+      this.updateClearButton();
+      this.updateApplyButton();
     }, 100);
   }
 }
