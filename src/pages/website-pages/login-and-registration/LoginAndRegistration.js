@@ -36,8 +36,8 @@ class LoginAndRegistration {
   }
 
   _init() {
-    this.$loginButtons.click(this._handleLoginButtonsClick);
-    this.$signupButtons.click(this._handleSignupButtonsClick);
+    this.$loginButtons.on('click', this._handleLoginButtonsClick);
+    this.$signupButtons.on('click', this._handleSignupButtonsClick);
   }
 
   _handleLoginButtonsClick() {

@@ -72,8 +72,8 @@ class DatePicker extends Observable {
     [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate] = dateObjects;
     [this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText] = dateTexts;
 
-    this.getClearBtn().click(this._handleClearButtonClick);
-    this.getApplyBtn().click(this._handleApplyButtonClick);
+    this.getClearBtn().on('click', this._handleClearButtonClick);
+    this.getApplyBtn().on('click', this._handleApplyButtonClick);
     this._updateClearBtn();
   }
 
@@ -142,8 +142,8 @@ class DatePicker extends Observable {
   _handleDateSelect(dateText, inst, extensionRange) {
     this.extensionRangeObject = extensionRange;
     setTimeout(() => {
-      this.getApplyBtn().click(this._handleApplyButtonClick);
-      this.getClearBtn().click(this._handleClearButtonClick);
+      this.getApplyBtn().on('click', this._handleApplyButtonClick);
+      this.getClearBtn().on('click', this._handleClearButtonClick);
     }, 100);
   }
 }
