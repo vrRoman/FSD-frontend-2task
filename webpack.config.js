@@ -2,6 +2,32 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { readdirSync, statSync } = require('fs');
+
+const getHtmlWebpackPluginInstances = () => {
+  const pagesDirectory = path.resolve(__dirname, 'src/pages');
+  const pugFilePaths = [];
+
+  const pushPugFilePaths = (directory) => {
+    readdirSync(directory).forEach((fileName) => {
+      const filePath = path.join(directory, fileName);
+      if (statSync(filePath).isDirectory()) {
+        pushPugFilePaths(filePath);
+      } else if (path.extname(fileName) === '.pug') {
+        pugFilePaths.push(filePath);
+      }
+    });
+  };
+
+  pushPugFilePaths(pagesDirectory);
+
+  return pugFilePaths.map((filePath) => new HtmlWebpackPlugin({
+    inject: false,
+    hash: true,
+    template: filePath,
+    filename: `${path.basename(filePath, path.extname(filePath))}.html`,
+  }));
+};
 
 module.exports = {
   entry: {
@@ -103,61 +129,7 @@ module.exports = {
       jQuery: 'jquery',
     }),
 
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/ui-kit/colors-and-type/colors-and-type.pug',
-      filename: 'colors-and-type.html',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/index.pug',
-      filename: 'index.html',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/ui-kit/cards/cards.pug',
-      filename: 'cards.html',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/ui-kit/headers-and-footers/headers-and-footers.pug',
-      filename: 'headers-and-footers.html',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/ui-kit/form-elements/form-elements.pug',
-      filename: 'form-elements.html',
-    }),
-
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/website-pages/landing-page/landing-page.pug',
-      filename: 'landing-page.html',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/website-pages/search-room/search-room.pug',
-      filename: 'search-room.html',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/website-pages/room-details/room-details.pug',
-      filename: 'room-details.html',
-    }),
-    new HtmlWebpackPlugin({
-      inject: false,
-      hash: true,
-      template: './src/pages/website-pages/login-and-registration/login-and-registration.pug',
-      filename: 'login-and-registration.html',
-    }),
+    ...getHtmlWebpackPluginInstances(),
   ],
 
   devServer: {
