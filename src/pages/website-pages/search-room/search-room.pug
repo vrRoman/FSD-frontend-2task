@@ -15,7 +15,7 @@ block vars
     - const title = 'Search room'
 
 block content
-    article.search-room
+    main.search-room
         .container
             .search-room__container
                 form.search-room__params
@@ -176,8 +176,8 @@ block content
                         })
 
 
-                section.search-room__rooms-section
-                    .search-room__rooms-section-title
+                article.search-room__rooms
+                    .search-room__rooms-title
                         +heading({
                             type: 'h1',
                             text: 'Номера, которые мы для вас подобрали'

@@ -13,7 +13,7 @@ block vars
 
 
 block content
-    article.room-details
+    main.room-details
         header.room-details__room-images
             .room-details__main-image-container
                 img.room-details__main-image(src='images/room_1.jpg' alt='room-card-img')
@@ -24,7 +24,7 @@ block content
 
         .container
             .room-details__container
-                section.room-details__room-info
+                article.room-details__room-info
                     .room-details__subtitle
                         +heading({
                             type: 'h2',
@@ -47,14 +47,14 @@ block content
                             iconName: 'whatshot'
                         }
                     ])
-                section.room-details__expressions
+                article.room-details__expressions
                     .room-details__subtitle
                         +heading({
                             type: 'h2',
                             text: 'Впечатления от номера'
                         })
                     +donut-chart
-                section.room-details__comments
+                article.room-details__comments
                     .room-details__subtitle
                         +heading({
                             type: 'h2',
@@ -88,7 +88,7 @@ block content
                             }
                         })
 
-                section.room-details__rules
+                article.room-details__rules
                     .room-details__subtitle.room-details__subtitle_indented
                         +heading({
                           type: 'h2',
@@ -99,7 +99,7 @@ block content
                         'Без вечеринок и мероприятий',
                         'Время прибытия — после 13:00,<br>а выезд до 12:00'
                     ])
-                section.room-details__cancel
+                article.room-details__cancel
                     .room-details__subtitle
                         +heading({
                             type: 'h2',
