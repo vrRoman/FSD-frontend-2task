@@ -182,156 +182,26 @@ block content
                             type: 'h1',
                             text: 'Номера, которые мы для вас подобрали'
                         })
-                    .search-room__room-cards
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_1.jpg', 'images/room-img_2.jpg',
-                                'images/room-img_3.jpg', 'images/room-img_4.jpg'
-                            ],
-                            roomInfo: {
-                                number: 888,
-                                type: 'Люкс',
-                                price: '9 990'
-                            },
-                            numOfComments: 145,
-                            hasSliderArrows: true,
-                            rating: 5,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_2.jpg', 'images/room-img_3.jpg',
-                                'images/room-img_4.jpg', 'images/room-img_5.jpg'
-                            ],
-                            roomInfo: {
-                                number: 840,
-                                price: '9 900'
-                            },
-                            numOfComments: 65,
-                            rating: 4,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_3.jpg', 'images/room-img_4.jpg',
-                                'images/room-img_5.jpg', 'images/room-img_6.jpg'
-                            ],
-                            roomInfo: {
-                                number: 980,
-                                type: 'Люкс',
-                                price: '8 500'
-                            },
-                            numOfComments: 35,
-                            rating: 3,
-                        })
+                    ul.search-room__room-cards
+                        each _, i in Array(12)
+                            -
+                                const images = [];
+                                for (let d = 1; d <= 4; d += 1) {
+                                    const imageNumber = i + d > 12 ? i + d - 12 : i + d;
+                                    images.push(`images/room-img_${imageNumber}.jpg`);
+                                }
+                            li.search-room__room-card
+                                +room-card({
+                                    imagesSrc: images,
+                                    roomInfo: {
+                                        number: i + 300,
+                                        type: Math.random() > 0.85 ? 'Люкс' : undefined,
+                                        price: Math.floor(Math.random() * (16000 - 5000)) + 5000,
+                                    },
+                                    numOfComments: Math.floor(Math.random() * 1000),
+                                    hasSliderArrows: i === 0,
+                                    rating: Math.floor(Math.random() * 5) + 1,
+                                })
 
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_4.jpg', 'images/room-img_5.jpg',
-                                'images/room-img_6.jpg', 'images/room-img_7.jpg'
-                            ],
-                            roomInfo: {
-                                number: 856,
-                                price: '7 300'
-                            },
-                            numOfComments: 19,
-                            rating: 5,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_5.jpg', 'images/room-img_6.jpg',
-                                'images/room-img_7.jpg', 'images/room-img_8.jpg'
-                            ],
-                            roomInfo: {
-                                number: 740,
-                                price: '6 000'
-                            },
-                            numOfComments: 44,
-                            rating: 4,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_6.jpg', 'images/room-img_7.jpg',
-                                'images/room-img_8.jpg', 'images/room-img_9.jpg'
-                            ],
-                            roomInfo: {
-                                number: 982,
-                                price: '5 800'
-                            },
-                            numOfComments: 56,
-                            rating: 3,
-                        })
-
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_7.jpg', 'images/room-img_8.jpg',
-                                'images/room-img_9.jpg', 'images/room-img_10.jpg'
-                            ],
-                            roomInfo: {
-                                number: 678,
-                                price: '5 500'
-                            },
-                            numOfComments: 45,
-                            rating: 5,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_8.jpg', 'images/room-img_9.jpg',
-                                'images/room-img_10.jpg', 'images/room-img_11.jpg'
-                            ],
-                            roomInfo: {
-                                number: 450,
-                                price: '5 300'
-                            },
-                            numOfComments: 39,
-                            rating: 4,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_9.jpg', 'images/room-img_10.jpg',
-                                'images/room-img_11.jpg', 'images/room-img_12.jpg'
-                            ],
-                            roomInfo: {
-                                number: 350,
-                                price: '5 000'
-                            },
-                            numOfComments: 77,
-                            rating: 3,
-                        })
-
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_10.jpg', 'images/room-img_11.jpg',
-                                'images/room-img_12.jpg', 'images/room-img_1.jpg'
-                            ],
-                            roomInfo: {
-                                number: 666,
-                                price: '5 000'
-                            },
-                            numOfComments: 25,
-                            rating: 5,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_11.jpg', 'images/room-img_12.jpg',
-                                'images/room-img_1.jpg', 'images/room-img_2.jpg'
-                            ],
-                            roomInfo: {
-                                number: 444,
-                                price: '5 000'
-                            },
-                            numOfComments: 15,
-                            rating: 3,
-                        })
-                        +room-card({
-                            imagesSrc: [
-                                'images/room-img_12.jpg', 'images/room-img_1.jpg',
-                                'images/room-img_2.jpg', 'images/room-img_3.jpg'
-                            ],
-                            roomInfo: {
-                                number: 352,
-                                price: '5 000'
-                            },
-                            numOfComments: 55,
-                            rating: 3,
-                        })
                     .search-room__pagination
                         +pagination('1 – 12 из 100+ вариантов аренды')
