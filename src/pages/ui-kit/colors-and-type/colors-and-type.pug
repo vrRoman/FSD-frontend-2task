@@ -9,34 +9,35 @@ block vars
 
 
 block content
-    .container
-        .colors-and-type
-            .colors-and-type__colors
-                .colors-and-type__color
-                    +color-demo('Dark Shade 100%', '#1F2041', 'dark-shade-100')
-                .colors-and-type__color
-                    +color-demo('Dark Shade 75%', '#1F2041', 'dark-shade-75')
-                .colors-and-type__color
-                    +color-demo('Dark Shade 50%', '#1F2041', 'dark-shade-50')
-                .colors-and-type__color
-                    +color-demo('Dark Shade 25%', '#1F2041', 'dark-shade-25')
-                .colors-and-type__color
-                    +color-demo('Dark Shade 5%', '#1F2041', 'dark-shade-5')
-                .colors-and-type__color
-                    +color-demo('Purple', '#BC9CFF', 'purple')
-                .colors-and-type__color
-                    +color-demo('Green', '#6FCF97', 'green')
+    .colors-and-type
+        .container
+            .colors-and-type__container
+                ul.colors-and-type__elements-list
+                    li.colors-and-type__color
+                        +color-demo('Dark Shade 100%', '#1F2041', 'dark-shade-100')
+                    li.colors-and-type__color
+                        +color-demo('Dark Shade 75%', '#1F2041', 'dark-shade-75')
+                    li.colors-and-type__color
+                        +color-demo('Dark Shade 50%', '#1F2041', 'dark-shade-50')
+                    li.colors-and-type__color
+                        +color-demo('Dark Shade 25%', '#1F2041', 'dark-shade-25')
+                    li.colors-and-type__color
+                        +color-demo('Dark Shade 5%', '#1F2041', 'dark-shade-5')
+                    li.colors-and-type__color
+                        +color-demo('Purple', '#BC9CFF', 'purple')
+                    li.colors-and-type__color
+                        +color-demo('Green', '#6FCF97', 'green')
 
-            .colors-and-type__types
-                .colors-and-type__type
-                    +type-demo('H1',
-                        'This one is the sub-section or widget title', 'h1')
-                .colors-and-type__type
-                    +type-demo('H2',
-                        'Next one is the item title inside widgets', 'h2')
-                .colors-and-type__type
-                    +type-demo('H3',
-                        'This is a label or CTA text', 'h3')
-                .colors-and-type__type
-                    +type-demo('Body',
-                        'This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.')
+                ul.colors-and-type__elements-list
+                    li.colors-and-type__type
+                        +type-demo('H1',
+                            'This one is the sub-section or widget title', 'h1')
+                    li.colors-and-type__type
+                        +type-demo('H2',
+                            'Next one is the item title inside widgets', 'h2')
+                    li.colors-and-type__type
+                        +type-demo('H3',
+                            'This is a label or CTA text', 'h3')
+                    li.colors-and-type__type
+                        +type-demo('Body',
+                            'This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.')
