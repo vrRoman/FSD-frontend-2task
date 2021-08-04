@@ -14,23 +14,23 @@ mixin header({userName, activeLink} = {})
                         items: [
                             {
                                 name: 'О нас',
-                                isDropdown: false,
                             },
                             {
                                 name: 'Услуги',
-                                isDropdown: true,
+                                subitems: [{ name: 'Заказ комнаты' }],
                             },
                             {
                                 name: 'Вакансии',
-                                isDropdown: false,
                             },
                             {
                                 name: 'Новости',
-                                isDropdown: false,
                             },
                             {
                                 name: 'Соглашения',
-                                isDropdown: true,
+                                subitems: [
+                                    { name: 'Правила' },
+                                    { name: 'Конфиденциальность' },
+                                ],
                             }
                         ].map((item, index) => ({ ...item, isActive: activeLink === index })),
                         withJs: true,

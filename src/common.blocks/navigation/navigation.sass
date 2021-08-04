@@ -15,14 +15,21 @@
     align-items: center
 
   &__item
-    margin-right: 20px
+    position: relative
+    padding: 10px
     display: flex
     align-items: center
+    justify-content: center
     color: $dark-shade-50
     font-size: 1rem
     line-height: (17rem / $default-font-size)
+
     &:last-child
-      margin-right: 0
+      padding-right: 0
+
+    &:hover
+      .navigation__subitems
+        display: block
 
     &_active
       font-weight: bold
@@ -32,6 +39,22 @@
     padding: 0
     margin: 0
     display: flex
+
+  &__subitems
+    display: none
+    position: absolute
+    top: 100%
+    padding: 20px
+    background-color: #fff
+    list-style: none
+    z-index: 6
+    border: 1px solid $dark-shade-25
+
+  &__subitem
+    margin-bottom: 10px
+
+    &:last-child
+      margin-bottom: 0
 
   &_in-column
     .navigation__list

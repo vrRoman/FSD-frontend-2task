@@ -20,13 +20,17 @@ mixin navigation({items, activeLinkIndex, inColumn = false, withJs = false})
                     if (item.isActive) {
                         itemClassName += ' navigation__item_active';
                     }
-                    if (item.isDropdown) {
+                    if (item.subitems) {
                         itemClassName += ' navigation__item_with-dropdown';
                     }
 
                 li(class=itemClassName)
-                    if (item.isDropdown)
+                    if (item.subitems)
                         button.navigation__link= item.name
                             +arrow({ withoutPadding: true })
+                        ul.navigation__subitems
+                            each subitem in item.subitems
+                                li.navigation__subitem
+                                    a.navigation__link(href=subitem.link || 'change-me')= subitem.name
                     else
                         a.navigation__link(href=link)= item.name
