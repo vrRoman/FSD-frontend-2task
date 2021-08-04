@@ -54,6 +54,7 @@ class DatePicker extends Observable {
 
     this.$elem.datepicker({
       range: 'period',
+      minDate: new Date(),
       showButtonPanel: true,
       currentText: this.clearBtnHTML + this.applyBtnHTML,
       firstDay: 1,
