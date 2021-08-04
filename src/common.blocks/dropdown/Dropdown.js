@@ -9,8 +9,10 @@ class Dropdown {
     this.textFieldInputs = null;
     this.defaultValue = null;
     this.popup = null;
+    this.isPopupDistant = false;
     this.isPopupHidden = true;
 
+    this.withDistantPopupClass = 'dropdown_with-distant-popup';
     this.hiddenPopupClass = 'dropdown__popup_hidden';
     this.doubleDropdownClass = 'dropdown_double';
     this.activeTextFieldClasses = ['text-field_focused', 'text-field_flat-bottom'];
@@ -22,6 +24,7 @@ class Dropdown {
     this.popup = this.getPopup();
     this.defaultValue = JSON.parse(this.elem.dataset.defaultValue);
     this.isPopupHidden = this.popup.classList.contains(this.hiddenPopupClass);
+    this.isPopupDistant = this.elem.classList.contains(this.withDistantPopupClass);
 
     this._updateTextFieldsClasses();
     this._findAndSubscribeToPopupInstance();
@@ -67,9 +70,11 @@ class Dropdown {
   }
 
   _updateTextFieldsClasses() {
-    if (!this.isPopupHidden) {
-      this.textFields.forEach((el) => {
-        el.classList.add(...this.activeTextFieldClasses);
+    if (this.isPopupHidden) return;
+
+    if (!this.isPopupDistant) {
+      this.textFields.forEach((element) => {
+        element.classList.add(...this.activeTextFieldClasses);
       });
     }
   }
@@ -106,18 +111,14 @@ class Dropdown {
 
   _showPopup() {
     this.popup.classList.remove(this.hiddenPopupClass);
-    this.textFields.forEach((el) => {
-      el.classList.add(...this.activeTextFieldClasses);
-    });
+    this._updateTextFieldsClasses();
     this.isPopupHidden = false;
     window.addEventListener('click', this._handleWindowClick);
   }
 
   _hidePopup() {
     this.popup.classList.add(this.hiddenPopupClass);
-    this.textFields.forEach((el) => {
-      el.classList.remove(...this.activeTextFieldClasses);
-    });
+    this._updateTextFieldsClasses();
     this.isPopupHidden = true;
     window.removeEventListener('click', this._handleWindowClick);
   }
