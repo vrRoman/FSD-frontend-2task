@@ -2,7 +2,7 @@ include ../arrow/arrow
 include ../heading/heading
 
 
-mixin button({text = 'click me', hasLink = false, isSubmit = false, link = 'change-me', modifiers = {isSecondary, withoutFrame, isLong, isHovered, textColor}, withJs = false} = {})
+mixin button({text = 'click me', hasLink = false, isSubmit = false, link = 'change-me', modifiers = {}, withJs = false} = {})
     -
         let className = 'button';
         let headingOptions = {
@@ -28,6 +28,9 @@ mixin button({text = 'click me', hasLink = false, isSubmit = false, link = 'chan
         }
         if (modifiers.isHovered) {
             className += ' button_hovered';
+        }
+        if (modifiers.isNarrow) {
+            className += ' button_narrow';
         }
         if (withJs) {
           className += ' js-button';

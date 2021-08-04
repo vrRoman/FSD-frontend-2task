@@ -45,13 +45,17 @@ mixin header({userName, activeLink} = {})
                             hasLink: true,
                             link: 'login-and-registration.html',
                             modifiers: {
-                                isSecondary: true
+                                isSecondary: true,
+                                isNarrow: true,
                             }
                         })
                         +button({
                             text: 'Зарегистрироваться',
                             hasLink: true,
-                            link: 'login-and-registration.html'
+                            link: 'login-and-registration.html',
+                            modifiers: {
+                              isNarrow: true,
+                            }
                         })
             button.header__hamburger.js-header__hamburger
                 .header__hamburger-icon
