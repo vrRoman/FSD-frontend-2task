@@ -107,23 +107,29 @@ class DatePicker extends Observable {
     }
   }
 
-  _handleApplyButtonClick() {
+  _getDatesInfo() {
     const dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
     const dateTexts = [
       this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText,
     ];
     const isDateTextsDefined = Boolean(dateTexts[0] && dateTexts[1]);
 
-    this.setDate(dates, dateTexts);
-
     let valueText;
     if (this.isTextDouble) {
       valueText = dateTexts;
     } else if (isDateTextsDefined) {
-      valueText = `${dateTexts[0]} - ${dateTexts[1]}`;
+      valueText = `${dateTexts[0]} - ${dateTexts[1] ?? ''}`;
     } else {
       valueText = null;
     }
+
+    return { dates, dateTexts, valueText };
+  }
+
+  _handleApplyButtonClick() {
+    const { dates, dateTexts, valueText } = this._getDatesInfo();
+
+    this.setDate(dates, dateTexts);
 
     this.notify({
       type: 'CLICK_APPLY-BUTTON',
@@ -144,20 +150,7 @@ class DatePicker extends Observable {
   _handleDateSelect(dateText, inst, extensionRange) {
     this.extensionRangeObject = extensionRange;
 
-    const dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
-    const dateTexts = [
-      this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText,
-    ];
-    const isDateTextsDefined = Boolean(dateTexts[0] && dateTexts[1]);
-
-    let valueText;
-    if (this.isTextDouble) {
-      valueText = dateTexts;
-    } else if (isDateTextsDefined) {
-      valueText = `${dateTexts[0]} - ${dateTexts[1] ?? ''}`;
-    } else {
-      valueText = null;
-    }
+    const { dates, dateTexts, valueText } = this._getDatesInfo();
 
     if (this.extensionRangeObject.step === 0) {
       this.setDate(dates, dateTexts);
