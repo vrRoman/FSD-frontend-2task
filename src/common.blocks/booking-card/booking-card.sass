@@ -38,6 +38,17 @@
     font-size: (12rem / $default-font-size)
     line-height: 1rem
 
+    &:hover
+      &:after
+        content: attr(data-text)
+        position: absolute
+        top: 100%
+        padding: 10px
+        background-color: #fff
+        z-index: 1
+        border: 1px solid $dark-shade-25
+        border-radius: 5px
+
   &__item-text
     margin: 0 0 0 2px
     line-height: (18rem / $default-font-size)

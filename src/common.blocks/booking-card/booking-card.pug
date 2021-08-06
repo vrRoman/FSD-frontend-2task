@@ -72,8 +72,8 @@ mixin booking-card({roomInfo, bookingItems, totalPrice} = {})
                 each item in bookingItems
                     li.booking-card__item
                         p.booking-card__item-text !{item.text}
-                            if (item.hasTooltip)
-                                span.booking-card__tooltip i
+                            if (item.tooltip)
+                                span.booking-card__tooltip(data-text=item.tooltip) i
                         output.booking-card__item-price= `${item.price}₽`
 
             .booking-card__total
