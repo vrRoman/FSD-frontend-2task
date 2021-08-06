@@ -112,14 +112,14 @@ class DatePicker extends Observable {
     const dateTexts = [
       this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText,
     ];
-    const dateTextsDefined = Boolean(dateTexts[0] && dateTexts[1]);
+    const isDateTextsDefined = Boolean(dateTexts[0] && dateTexts[1]);
 
     this.setDate(dates, dateTexts);
 
     let valueText;
     if (this.isTextDouble) {
       valueText = dateTexts;
-    } else if (dateTextsDefined) {
+    } else if (isDateTextsDefined) {
       valueText = `${dateTexts[0]} - ${dateTexts[1]}`;
     } else {
       valueText = null;
@@ -143,6 +143,32 @@ class DatePicker extends Observable {
 
   _handleDateSelect(dateText, inst, extensionRange) {
     this.extensionRangeObject = extensionRange;
+
+    const dates = [this.extensionRangeObject.startDate, this.extensionRangeObject.endDate];
+    const dateTexts = [
+      this.extensionRangeObject.startDateText, this.extensionRangeObject.endDateText,
+    ];
+    const isDateTextsDefined = Boolean(dateTexts[0] && dateTexts[1]);
+
+    let valueText;
+    if (this.isTextDouble) {
+      valueText = dateTexts;
+    } else if (isDateTextsDefined) {
+      valueText = `${dateTexts[0]} - ${dateTexts[1] ?? ''}`;
+    } else {
+      valueText = null;
+    }
+
+    if (this.extensionRangeObject.step === 0) {
+      this.setDate(dates, dateTexts);
+    }
+
+    this.notify({
+      type: 'UPDATE_VALUE',
+      value: dates,
+      valueText,
+    });
+
     setTimeout(() => {
       this.updateClearButton();
       this.updateApplyButton();
