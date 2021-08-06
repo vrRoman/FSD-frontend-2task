@@ -14,6 +14,9 @@ mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}, withJs = fals
         if (modifiers.isBottomFlat) {
             className += ' text-field_flat-bottom';
         }
+        if (modifiers.isClickable) {
+            className += ' text-field_clickable';
+        }
 
         if (withJs) {
             className += ' js-text-field';

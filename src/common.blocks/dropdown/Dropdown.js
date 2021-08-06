@@ -70,9 +70,11 @@ class Dropdown {
   }
 
   _updateTextFieldsClasses() {
-    if (this.isPopupHidden) return;
-
-    if (!this.isPopupDistant) {
+    if (this.isPopupHidden) {
+      this.textFields.forEach((element) => {
+        element.classList.remove(...this.activeTextFieldClasses);
+      });
+    } else if (!this.isPopupDistant) {
       this.textFields.forEach((element) => {
         element.classList.add(...this.activeTextFieldClasses);
       });
@@ -110,16 +112,16 @@ class Dropdown {
   }
 
   _showPopup() {
+    this.isPopupHidden = false;
     this.popup.classList.remove(this.hiddenPopupClass);
     this._updateTextFieldsClasses();
-    this.isPopupHidden = false;
     window.addEventListener('click', this._handleWindowClick);
   }
 
   _hidePopup() {
+    this.isPopupHidden = true;
     this.popup.classList.add(this.hiddenPopupClass);
     this._updateTextFieldsClasses();
-    this.isPopupHidden = true;
     window.removeEventListener('click', this._handleWindowClick);
   }
 
