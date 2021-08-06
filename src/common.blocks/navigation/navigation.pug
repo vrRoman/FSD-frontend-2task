@@ -20,9 +20,6 @@ mixin navigation({items, activeLinkIndex, inColumn = false, withJs = false})
                     if (item.isActive) {
                         itemClassName += ' navigation__item_active';
                     }
-                    if (item.subitems) {
-                        itemClassName += ' navigation__item_with-dropdown';
-                    }
 
                 li(class=itemClassName)
                     if (item.subitems)

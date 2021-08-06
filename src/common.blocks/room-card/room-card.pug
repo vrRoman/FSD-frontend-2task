@@ -15,8 +15,8 @@ mixin room-card({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComm
                     src=src,
                     alt='room-image',
                 )
-        a.room-card__content(href=link)
-            .room-card__room-info
+        .room-card__content
+            a.room-card__room-info(href=link)
                 +room-info(roomInfo)
             .room-card__footer
                 +rate-button(rating)
