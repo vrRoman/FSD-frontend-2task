@@ -40,5 +40,5 @@ mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}, withJs = fals
             readonly=inputOptions.isReadonly
         )
         if (arrowOptions)
-            button.text-field__arrow(type='submit')
+            button.text-field__arrow(type=inputOptions.isSubmit ? 'submit' : 'button')
                 +arrow(arrowOptions)
