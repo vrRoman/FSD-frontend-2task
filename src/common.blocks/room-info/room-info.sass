@@ -6,15 +6,13 @@
   justify-content: space-between
 
   &__number
-    &_size
-      &_small
-        margin: 0
-        font-family: Montserrat, Arial, sans-serif
-        font-style: normal
-        font-weight: bold
-        font-size: (20rem / $default-font-size)
-        line-height: (17rem / $default-font-size)
-        color: $dark-shade-100
+    margin: 0
+    font-family: Montserrat, Arial, sans-serif
+    font-style: normal
+    font-weight: bold
+    font-size: (20rem / $default-font-size)
+    line-height: (17rem / $default-font-size)
+    color: $dark-shade-100
 
   &__number-sign
     margin-right: 4px
@@ -48,3 +46,8 @@
     color: $dark-shade-50
     display: flex
     align-items: flex-end
+
+  &_size
+    &_big
+      .room-info__type
+        margin: 0 0 1px 8px

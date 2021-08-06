@@ -6,6 +6,7 @@
   height: 20px
   position: relative
   display: flex
+  justify-content: space-between
   align-items: center
   box-sizing: border-box
   border: 1px solid $dark-shade-25
@@ -15,7 +16,7 @@
   padding: 0
 
   &__heart
-    margin-left: 4px
+    margin-left: 4.5px
     display: flex
     &:after
       content: 'favorite_border'
@@ -23,7 +24,7 @@
       color: $dark-shade-25
 
   &__number
-    margin: 0 0 0 4px
+    margin: 0 12px 0 5px
     font-family: Montserrat, Arial, sans-serif
     font-size: (10rem / $default-font-size)
     line-height: (12rem / $default-font-size)

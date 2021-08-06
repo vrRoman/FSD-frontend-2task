@@ -25,7 +25,7 @@ block content
         .container
             .room-details__container
                 article.room-details__room-info
-                    .room-details__subtitle
+                    .room-details__room-info-title
                         +heading({
                             type: 'h2',
                             text: 'Сведения о номере'
@@ -48,19 +48,19 @@ block content
                         }
                     ])
                 article.room-details__expressions
-                    .room-details__subtitle
+                    .room-details__expressions-title
                         +heading({
                             type: 'h2',
                             text: 'Впечатления от номера'
                         })
                     +donut-chart
                 article.room-details__comments
-                    .room-details__subtitle
+                    .room-details__comments-title
                         +heading({
                             type: 'h2',
                             text: 'Отзывы посетителей номера'
                         })
-                    span.room-details__comments-number 2 отзыва
+                        span.room-details__comments-number 2 отзыва
                     .room-details__comment
                         +comment({
                             avatarLink: 'images/avatar_murad.png',
@@ -89,7 +89,7 @@ block content
                         })
 
                 article.room-details__rules
-                    .room-details__subtitle.room-details__subtitle_indented
+                    .room-details__rules-title
                         +heading({
                           type: 'h2',
                           text: 'Правила'
@@ -100,7 +100,7 @@ block content
                         'Время прибытия — после 13:00,<br>а выезд до 12:00'
                     ])
                 article.room-details__cancel
-                    .room-details__subtitle
+                    .room-details__cancel-title
                         +heading({
                             type: 'h2',
                             text: 'Отмена'
@@ -116,7 +116,8 @@ block content
                         roomInfo: {
                             number: 888,
                             type: 'люкс',
-                            price: '9 990'
+                            price: '9 990',
+                            isNameBig: true,
                         },
                         bookingItems: [
                             {

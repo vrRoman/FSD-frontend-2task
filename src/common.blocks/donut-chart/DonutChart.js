@@ -3,7 +3,7 @@ import Chart from 'chart.js/dist/Chart.bundle.min';
 class DonutChart {
   constructor(element) {
     this.element = element;
-    this.chartRadius = 60;
+    this.chartRadius = 64;
     this.chartElement = null;
     this.chartContext = null;
   }
@@ -26,7 +26,8 @@ class DonutChart {
             'black',
           ],
           borderColor: '#fff',
-          borderWidth: 3,
+          borderWidth: 4,
+          hoverBorderWidth: 0,
         }],
       },
       options: {

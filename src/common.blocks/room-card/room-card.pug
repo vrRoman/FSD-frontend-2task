@@ -17,10 +17,7 @@ mixin room-card({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComm
                 )
         a.room-card__content(href=link)
             .room-card__room-info
-                +room-info({
-                    ...roomInfo,
-                    isNameSmall: true
-                })
+                +room-info(roomInfo)
             .room-card__footer
                 +rate-button(rating)
                 p.room-card__comments= numOfComments

@@ -1,6 +1,8 @@
 @import '@/styles/colors'
 
 .bullet-list
+  display: flex
+  flex-direction: column
   list-style: none
   padding: 0
   margin: 0
@@ -8,9 +10,8 @@
   &__item
     position: relative
     margin-top: 10px
-    padding-left: 21.5px
-    display: flex
-    align-items: center
+    padding-left: 20px
+    vertical-align: text-top
 
     &:nth-child(1)
       margin-top: 0
@@ -19,7 +20,7 @@
       content: ''
       position: absolute
       left: 0
-      top: 5px
+      top: 6px
       display: inline-block
       width: 10px
       height: 10px

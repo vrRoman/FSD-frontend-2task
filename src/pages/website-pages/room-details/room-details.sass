@@ -26,15 +26,15 @@
     justify-content: center
     overflow: hidden
 
-    @media (max-width: 1460px)
+    @media (max-width: 1200px)
       max-height: 300px
 
   &__room-images
     display: grid
-    grid-template-columns: 1fr 461px
+    grid-template-columns: 1fr max-content
     grid-template-areas: "main-img ." "main-img ."
 
-    @media (max-width: 1460px)
+    @media (max-width: 1200px)
       grid-template-columns: 1fr 1fr
       grid-template-areas: "main-img main-img" ". ."
 
@@ -44,42 +44,57 @@
 
   &__main-image
     width: 100%
+    @media (max-width: 1460px)
+      height: 100%
 
   &__side-image
     width: 100%
 
-  &__subtitle
+  &__expressions-title
+    margin: 0 0 18px 5px
+
+  &__room-info-title
     margin-bottom: 20px
 
-    &_indented
-      margin-left: 20px
+  &__comments-title
+    display: flex
+    justify-content: space-between
+    margin-bottom: 18px
+
+    @media (max-width: 450px)
+      flex-direction: column
 
   &__comments
-    margin-top: 1px
     position: relative
     grid-area: comments
 
   &__comments-number
-    position: absolute
-    right: 0
-    top: 3px
-
-    @media (max-width: 450px)
-      top: 60px
+    margin: 2px 3px 0 0
+    color: $dark-shade-50
 
   &__comment
-    margin-top: 23px
-    &:first-child
-      margin-top: 0
+    margin-bottom: 22px
+    &:last-child
+      margin-bottom: 0
+
+  &__rules-title
+    margin: 0 0 19px 20px
 
   &__booking-card
     grid-area: booking-card
 
+  &__cancel
+    margin-left: 5px
+
+  &__cancel-title
+    margin-bottom: 18px
+
   &__container
     padding: 70px 0 72px
     display: grid
-    grid-template-columns: 290px 350px 380px
-    grid-row-gap: 30px
+    grid-template-columns: 290px auto 380px
+    grid-column-gap: 66px
+    grid-row-gap: 32px
     justify-content: space-between
     grid-template-areas: ". . booking-card" "comments comments booking-card" ". . booking-card"
 

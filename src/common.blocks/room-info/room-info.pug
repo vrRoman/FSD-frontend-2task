@@ -1,24 +1,19 @@
 include ../heading/heading
 
 
-mixin room-info({number, type, price, isNameSmall = false})
-    .room-info
+mixin room-info({number, type, price, isNameBig = false})
+    div(class=`room-info${isNameBig ? ' room-info_size_big' : ''}`)
         header.room-info__name
             span.room-info__number-sign №
-            -
-                let numberClassName = 'room-info__number';
-                let text = '';
-                if (isNameSmall) {
-                    numberClassName += ' room-info__number_size_small';
-                    text = number;
-                }
-            if (isNameSmall)
-                h3(class=numberClassName)= text
-            else
+
+            if (isNameBig)
                 +heading({
-                    text: number,
-                    type: 'h1'
+                  text: number,
+                  type: 'h1'
                 })
+            else
+                h3.room-info__number= number
+
             if (type)
                 .room-info__type
                     +heading({
