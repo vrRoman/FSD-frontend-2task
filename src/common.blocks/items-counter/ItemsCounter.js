@@ -34,14 +34,12 @@ class ItemsCounter extends Observable {
 
   update(action) {
     if (action.type === 'UPDATE_VALUE') {
-      if (this._isWithoutButtons()) {
-        this._updateClearButton();
-        this.notify({
-          type: 'UPDATE_VALUE',
-          value: this.getValues(),
-          valueText: this._convertValuesToText(),
-        });
-      }
+      this._updateClearButton();
+      this.notify({
+        type: 'UPDATE_VALUE',
+        value: this.getValues(),
+        valueText: this._convertValuesToText(),
+      });
     }
   }
 
