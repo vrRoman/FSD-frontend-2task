@@ -32,6 +32,9 @@ mixin button({text = 'click me', hasLink = false, isSubmit = false, link = 'chan
         if (modifiers.isNarrow) {
             className += ' button_narrow';
         }
+        if (modifiers.isWide) {
+            className += ' button_wide';
+        }
         if (withJs) {
           className += ' js-button';
         }
