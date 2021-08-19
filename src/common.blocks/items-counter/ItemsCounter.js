@@ -97,11 +97,6 @@ class ItemsCounter extends Observable {
     }
   }
 
-  _isWithoutButtons() {
-    const withoutButtonsClass = 'items-counter_without-buttons';
-    return this.elem.classList.contains(withoutButtonsClass);
-  }
-
   _convertValuesToText() {
     let fullText = '';
     if (this.wordForValueTextReplacing) {
@@ -148,7 +143,6 @@ class ItemsCounter extends Observable {
         }
       }
     } else {
-      const maxItemsNumInText = 2;
       const textsList = [];
       this.countingItemInstances.forEach((inst) => {
         if (inst.getValueText() !== '') {
@@ -157,16 +151,9 @@ class ItemsCounter extends Observable {
       });
       textsList.forEach((text, index) => {
         if (index !== 0) {
-          if (index < maxItemsNumInText) {
-            fullText += ', ';
-          }
+          fullText += ', ';
         }
-        if (index < maxItemsNumInText) {
-          fullText += text;
-        }
-        if (index === maxItemsNumInText - 1) {
-          fullText += '...';
-        }
+        fullText += text;
       });
     }
     return fullText;

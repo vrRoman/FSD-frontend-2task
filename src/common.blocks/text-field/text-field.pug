@@ -25,6 +25,9 @@ mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}, withJs = fals
     div(class=className)
         -
             let inputClassName = 'text-field__input';
+            if (arrowOptions) {
+                inputClassName += ' text-field__input_with-arrow';
+            }
             if (inputOptions.isMaskedDate) {
                 inputClassName += ' text-field__input_masked-date js-text-field__input_masked-date'
             }

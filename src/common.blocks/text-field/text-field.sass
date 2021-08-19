@@ -19,8 +19,14 @@
     line-height: (18rem / $default-font-size)
     color: $dark-shade-75
     transition: .2s
+    text-overflow: ellipsis
+
+    &_with-arrow
+      padding-right: 44px
+
     &::placeholder
       color: $dark-shade-25
+
     &:focus, &:hover
       border-color: $dark-shade-50
 
