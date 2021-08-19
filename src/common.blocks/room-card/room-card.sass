@@ -50,36 +50,45 @@
         background: #fff
 
     .slick-arrow
-      display: none
+      width: 44px
+      border: none
+      color: #fff
+      position: absolute
+      height: 100%
+      display: flex
+      align-items: center
+      justify-content: center
+      top: 0
+      opacity: 0
+      transition: opacity 150ms
+
+      &:after
+        content: 'expand_more'
+
+    .slick-prev
+      border-top-left-radius: 5px
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%)
+      left: 0
+      z-index: 1
+
+      &:after
+        transform: rotate(90deg)
+
+    .slick-next
+      border-top-right-radius: 5px
+      background: linear-gradient(-90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%)
+      right: 0
+
+      &:after
+        transform: rotate(-90deg)
 
     &_with-arrows
       .slick-arrow
-        width: 44px
-        border: none
-        color: #fff
-        position: absolute
-        height: 100%
-        display: flex
-        align-items: center
-        justify-content: center
-        top: 0
-        &:after
-          content: 'expand_more'
+        opacity: 1
 
-      .slick-prev
-        border-top-left-radius: 5px
-        background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%)
-        left: 0
-        z-index: 1
-        &:after
-          transform: rotate(90deg)
-
-      .slick-next
-        border-top-right-radius: 5px
-        background: linear-gradient(-90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%)
-        right: 0
-        &:after
-          transform: rotate(-90deg)
+    &:hover
+      .slick-arrow
+        opacity: 1
 
   &__room-info
     text-decoration: none
