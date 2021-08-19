@@ -50,7 +50,7 @@ class ExpandableCheckboxes {
   }
 
   _handleWindowClick(event) {
-    if (event.path.includes(this.element)) return;
+    if (event.composedPath().includes(this.element)) return;
 
     this._hideCheckboxes();
   }

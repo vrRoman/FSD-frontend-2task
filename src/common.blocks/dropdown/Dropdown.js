@@ -134,7 +134,7 @@ class Dropdown {
   }
 
   _handleWindowClick(event) {
-    if (event.path.includes(this.elem)) return;
+    if (event.composedPath().includes(this.elem)) return;
 
     this._hidePopup();
   }

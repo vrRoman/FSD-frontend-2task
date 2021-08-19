@@ -86,7 +86,8 @@ class Header {
   }
 
   _handleWindowClick(event) {
-    const shouldHide = !event.path.includes(this.menu) && !event.path.includes(this.hamburger);
+    const shouldHide = !event.composedPath().includes(this.menu)
+      && !event.composedPath().includes(this.hamburger);
     if (shouldHide) {
       this._hideMenu();
     }
