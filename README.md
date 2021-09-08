@@ -1,5 +1,5 @@
 # FSD 2nd task
-## TOXIN - бронирование отелей
+## TOXIN - отель
 ### Links
 - Website pages: 
     - [Landing page](https://vrroman.github.io/FSD-frontend-2task/landing-page.html)
