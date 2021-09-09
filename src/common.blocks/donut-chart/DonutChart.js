@@ -16,9 +16,9 @@ class DonutChart {
     const chart = new Chart(this.chartContext, {
       type: 'doughnut',
       data: {
-        labels: ['Удовлетворительно', 'Хорошо', 'Великолепно', 'Разочарован'],
+        labels: ['Удовлетв.', 'Хорошо', 'Великолепно', 'Разочарован'],
         datasets: [{
-          data: [260, 260, 520, 0],
+          data: [65, 65, 130, 0],
           backgroundColor: [
             this.createCtxGradient('#BC9CFF', '#8BA4F9'),
             this.createCtxGradient('#6FCF97', '#66D2EA'),
