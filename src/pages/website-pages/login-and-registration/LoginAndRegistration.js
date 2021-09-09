@@ -25,6 +25,8 @@ class LoginAndRegistration {
 
     this.$loginButtons.on('click', this._handleLoginButtonsClick);
     this.$signupButtons.on('click', this._handleSignupButtonsClick);
+
+    this.update();
   }
 
   getLoginButtons() {
@@ -43,16 +45,47 @@ class LoginAndRegistration {
     return $(this.signupCardSelector);
   }
 
+  update() {
+    window.location.search
+      .replace('?', '')
+      .split('&')
+      .forEach((param) => {
+        const [name, value] = param.split('=');
+        if (name !== 'action') return;
+
+        if (value === 'registration') {
+          this.$signupCard.show();
+          this.$signinCard.hide();
+          this.$pageElem.removeClass(this.pageLoginClass);
+        }
+        if (value === 'login') {
+          this.$signupCard.hide();
+          this.$signinCard.show();
+          this.$pageElem.addClass(this.pageLoginClass);
+        }
+      });
+  }
+
   _handleLoginButtonsClick() {
-    this.$signupCard.hide();
-    this.$signinCard.show();
-    this.$pageElem.toggleClass(this.pageLoginClass);
+    const params = new URLSearchParams(window.location.search);
+    params.set('action', 'login');
+    window.history.pushState(
+      null,
+      null,
+      `${window.location.pathname}?${params.toString()}`,
+    );
+    this.update();
   }
 
   _handleSignupButtonsClick() {
-    this.$signupCard.show();
-    this.$signinCard.hide();
-    this.$pageElem.toggleClass(this.pageLoginClass);
+    const params = new URLSearchParams(window.location.search);
+    params.set('action', 'registration');
+    window.history.pushState(
+      null,
+      null,
+      `${window.location.pathname}?${params.toString()}`,
+    );
+    this.update();
   }
 }
 
