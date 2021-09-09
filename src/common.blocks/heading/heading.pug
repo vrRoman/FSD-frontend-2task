@@ -30,6 +30,9 @@ mixin heading({text = '', type = 'h3', color, withJs = false})
             case 'gray':
                 className += ' heading_color_gray';
                 break;
+            case 'inherit':
+                className += ' heading_color_inherit';
+                break;
             default:
                 break;
         }

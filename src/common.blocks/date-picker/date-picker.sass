@@ -212,18 +212,15 @@
         line-height: (15rem / $default-font-size)
         text-transform: uppercase
         outline: none
-        transition: opacity .4s
+        transition: color .4s
+        color: $purple
 
         &:hover
-          opacity: .5
+          color: $dark-shade-50
 
       #{$selector}-clear-button
-        color: $dark-shade-50
         &_disabled
           visibility: hidden
-
-      #{$selector}-apply-button
-        color: $purple
 
       #{$selector}-current:not(#{$selector}-custom-button)
         display: none
