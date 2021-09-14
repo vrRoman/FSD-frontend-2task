@@ -36,9 +36,9 @@ mixin signin-card
             span Нет аккаунта на Toxin?
             +button({
                 text: 'Создать',
-                hasLink: false,
+                hasLink: true,
+                link: 'registration.html',
                 modifiers: {
                     isSecondary: true
                 },
-                withJs: true,
             })

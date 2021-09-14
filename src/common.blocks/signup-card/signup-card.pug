@@ -78,10 +78,10 @@ mixin signup-card
             span Уже есть аккаунт на Toxin
             +button({
                 text: 'Войти',
-                hasLink: false,
+                hasLink: true,
+                link: 'login.html',
                 modifiers: {
                     isSecondary: true,
                     isWide: true,
                 },
-                withJs: true,
             })

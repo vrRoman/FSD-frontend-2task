@@ -1,0 +1,13 @@
+extends ../../../templates/website-pages
+
+include ../../../common.blocks/signup-card/signup-card
+include ../../../common.blocks/signin-card/signin-card
+
+
+block vars
+    - const title = 'Registration'
+
+block content
+    main.registration
+        .registration__card
+            +signup-card
