@@ -67,6 +67,7 @@ class DatePicker extends Observable {
       dayNamesShort: this.dayNamesShort,
       dayNamesMin: this.dayNamesMin,
       onSelect: this._handleDateSelect,
+      onChangeMonthYear: this._handleChangeMonthYear,
     });
 
     this.setDate(this.initialDate);
@@ -162,6 +163,14 @@ class DatePicker extends Observable {
       valueText,
     });
 
+    setTimeout(() => {
+      this.updateClearButton();
+      this.updateClearButtonClasses();
+      this.updateApplyButton();
+    }, 100);
+  }
+
+  _handleChangeMonthYear() {
     setTimeout(() => {
       this.updateClearButton();
       this.updateApplyButton();
