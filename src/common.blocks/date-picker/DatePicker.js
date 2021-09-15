@@ -173,8 +173,9 @@ class DatePicker extends Observable {
   _handleChangeMonthYear() {
     setTimeout(() => {
       this.updateClearButton();
+      this.updateClearButtonClasses();
       this.updateApplyButton();
-    }, 100);
+    }, 1);
   }
 }
 
