@@ -4,22 +4,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { readdirSync, statSync } = require('fs');
 
+const PAGES_PATH = path.resolve(__dirname, 'src/pages');
+
+const getFilesPath = (directory, extension) => {
+  const accumulator = [];
+
+  readdirSync(directory).forEach((fileName) => {
+    const filePath = path.join(directory, fileName);
+    if (statSync(filePath).isDirectory()) {
+      accumulator.push(...getFilesPath(filePath, extension));
+    }
+
+    const isExtensionMatch = path.extname(fileName) === extension;
+    if (isExtensionMatch) {
+      accumulator.push(filePath);
+    }
+  });
+
+  return accumulator;
+};
+
 const getHtmlWebpackPluginInstances = () => {
-  const pagesDirectory = path.resolve(__dirname, 'src/pages');
-  const pugFilePaths = [];
-
-  const pushPugFilePaths = (directory) => {
-    readdirSync(directory).forEach((fileName) => {
-      const filePath = path.join(directory, fileName);
-      if (statSync(filePath).isDirectory()) {
-        pushPugFilePaths(filePath);
-      } else if (path.extname(fileName) === '.pug') {
-        pugFilePaths.push(filePath);
-      }
-    });
-  };
-
-  pushPugFilePaths(pagesDirectory);
+  const pugFilePaths = getFilesPath(PAGES_PATH, '.pug');
 
   return pugFilePaths.map((filePath) => new HtmlWebpackPlugin({
     inject: false,
@@ -29,10 +35,17 @@ const getHtmlWebpackPluginInstances = () => {
   }));
 };
 
+const getPagesEntries = () => {
+  const entriesArray = getFilesPath(PAGES_PATH, '.js');
+  const entriesObject = {};
+  entriesArray.forEach((entryPath) => {
+    entriesObject[path.basename(entryPath, '.js')] = entryPath;
+  });
+  return entriesObject;
+};
+
 module.exports = {
-  entry: {
-    bundle: '@/js/index.js',
-  },
+  entry: getPagesEntries(),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
