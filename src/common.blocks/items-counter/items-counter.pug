@@ -1,9 +1,15 @@
 include ../counting-item/counting-item
 include ../button/button
 
-
-mixin items-counter({items, withoutButtons = false, wordForValueTextReplacing = null, itemIndexForSeparateCount = null})
+mixin items-counter(options = {})
     -
+        const {
+            items,
+            withoutButtons = false,
+            wordForValueTextReplacing = null,
+            itemIndexForSeparateCount = null,
+        } = options;
+
         let className = 'items-counter js-items-counter';
         if (withoutButtons) {
             className += ' items-counter_without-buttons';

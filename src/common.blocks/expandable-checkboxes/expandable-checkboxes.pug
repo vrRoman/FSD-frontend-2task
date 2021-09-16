@@ -2,8 +2,7 @@ include ../heading/heading
 include ../arrow/arrow
 include ../checkbox-buttons/checkbox-buttons
 
-
-mixin expandable-checkboxes({title='Expandable checkbox list', items, expanded = false})
+mixin expandable-checkboxes({ title = 'Expandable checkbox list', items, expanded = false })
     -
         let className = 'expandable-checkboxes js-expandable-checkboxes';
         if (expanded) {

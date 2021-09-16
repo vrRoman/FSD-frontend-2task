@@ -4,37 +4,36 @@ include ../text-field/text-field
 include ../toggle-button/toggle-button
 include ../radio-buttons/radio-buttons
 
-
 mixin signup-card
     form.signup-card
         +heading({
             type: 'h1',
-            text: 'Регистрация аккаунта'
+            text: 'Регистрация аккаунта',
         })
         .signup-card__name
             +text-field({
                 inputOptions: {
                     type: 'text',
-                    placeholder: 'Имя'
+                    placeholder: 'Имя',
                 }
             })
         .signup-card__surname
             +text-field({
                 inputOptions: {
                     type: 'text',
-                    placeholder: 'Фамилия'
+                    placeholder: 'Фамилия',
                 }
             })
         .signup-card__gender
             +radio-buttons({
                 items: ['Мужчина', 'Женщина'],
-                itemsName: 'gender'
+                itemsName: 'gender',
             })
         .signup-card__birth
             .signup-card__subtitle
                 +heading({
                     text: 'Дата рождения',
-                    type: 'h3'
+                    type: 'h3',
                 })
             +text-field({
                 inputOptions: {
@@ -47,20 +46,20 @@ mixin signup-card
             .signup-card__subtitle
                 +heading({
                     text: 'Данные для входа в сервис',
-                    type: 'h3'
+                    type: 'h3',
                 })
             .signup-card__email
                 +text-field({
                     inputOptions: {
                         type: 'email',
-                        placeholder: 'Email'
+                        placeholder: 'Email',
                     }
                 })
             .signup-card__password
                 +text-field({
                     inputOptions: {
                         type: 'password',
-                        placeholder: 'Пароль'
+                        placeholder: 'Пароль',
                     }
                 })
         .signup-card__offers

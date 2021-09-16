@@ -1,8 +1,7 @@
 include ../button/button
 include ../navigation/navigation
 
-
-mixin header({userName, activeLink} = {})
+mixin header({ userName, activeLink } = {})
     header.header.js-header
         .header__container
             a.header__logo(href='landing-page.html')
@@ -31,7 +30,7 @@ mixin header({userName, activeLink} = {})
                                     { name: 'Правила' },
                                     { name: 'Конфиденциальность' },
                                 ],
-                            }
+                            },
                         ].map((item, index) => ({ ...item, isActive: activeLink === index })),
                         withJs: true,
                     })
@@ -47,7 +46,7 @@ mixin header({userName, activeLink} = {})
                             modifiers: {
                                 isSecondary: true,
                                 isNarrow: true,
-                            }
+                            },
                         })
                         +button({
                             text: 'Зарегистрироваться',
@@ -55,7 +54,7 @@ mixin header({userName, activeLink} = {})
                             link: 'registration.html',
                             modifiers: {
                               isNarrow: true,
-                            }
+                            },
                         })
             button.header__hamburger.js-header__hamburger
                 .header__hamburger-icon

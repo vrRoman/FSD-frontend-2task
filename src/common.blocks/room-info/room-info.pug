@@ -1,7 +1,6 @@
 include ../heading/heading
 
-
-mixin room-info({number, type, price, isNameBig = false})
+mixin room-info({ number, type, price, isNameBig = false })
     div(class=`room-info${isNameBig ? ' room-info_size_big' : ''}`)
         header.room-info__name
             span.room-info__number-sign №
@@ -9,7 +8,7 @@ mixin room-info({number, type, price, isNameBig = false})
             if (isNameBig)
                 +heading({
                   text: number,
-                  type: 'h1'
+                  type: 'h1',
                 })
             else
                 h3.room-info__number= number

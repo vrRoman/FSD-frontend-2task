@@ -1,6 +1,5 @@
 extends ../../../templates/ui-kit.pug
 
-
 include ../../../common.blocks/search-card/search-card
 include ../../../common.blocks/signup-card/signup-card
 include ../../../common.blocks/booking-card/booking-card
@@ -8,10 +7,8 @@ include ../../../common.blocks/signin-card/signin-card
 include ../../../common.blocks/room-card/room-card
 include ../../../common.blocks/date-picker/date-picker
 
-
 block vars
-    - const name = 'cards'
-
+    - const name = 'cards';
 
 block content
     .cards
@@ -37,12 +34,12 @@ block content
                         {
                             text: 'Сбор за услуги: скидка 2 179₽',
                             price: 0,
-                            tooltip: 'Питание'
+                            tooltip: 'Питание',
                         },
                         {
                             text: 'Сбор за дополнительные услуги',
                             price: '300',
-                            tooltip: 'Постельное белье'
+                            tooltip: 'Постельное белье',
                         }
                     ],
                     totalPrice: '38 081',

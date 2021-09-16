@@ -2,7 +2,6 @@ include ../heading/heading
 include ../button/button
 include ../text-field/text-field
 
-
 mixin signin-card
     form.signin-card
         +heading({
@@ -13,15 +12,15 @@ mixin signin-card
             +text-field({
                 inputOptions: {
                     placeholder: 'Email',
-                    type: 'email'
-                }
+                    type: 'email',
+                },
             })
         .signin-card__password
             +text-field({
                 inputOptions: {
                     type: 'password',
-                    placeholder: 'Пароль'
-                }
+                    placeholder: 'Пароль',
+                },
             })
         +button({
             text: 'Войти',
@@ -30,7 +29,7 @@ mixin signin-card
             modifiers: {
                 isLong: true,
                 textColor: 'white',
-            }
+            },
         })
         .signin-card__account-not-exists.js-signin-card__account-not-exists
             span Нет аккаунта на Toxin?
@@ -39,6 +38,6 @@ mixin signin-card
                 hasLink: true,
                 link: 'registration.html',
                 modifiers: {
-                    isSecondary: true
+                    isSecondary: true,
                 },
             })

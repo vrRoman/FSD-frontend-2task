@@ -82,16 +82,16 @@ block content
                             items: [
                                 {
                                     name: 'Можно курить',
-                                    checked: false
+                                    checked: false,
                                 },
                                 {
                                     name: 'Можно с питомцами',
-                                    checked: true
+                                    checked: true,
                                 },
                                 {
                                     name: 'Можно пригласить гостей<br>(до 10 человек)',
-                                    checked: true
-                                }
+                                    checked: true,
+                                },
                             ],
                         })
                     .search-room__params-availability
@@ -102,22 +102,22 @@ block content
                                 {
                                     name: 'Широкий коридор',
                                     description: 'Ширина коридоров в номере<br>не менее 91 см.',
-                                    checked: false
+                                    checked: false,
                                 },
                                 {
                                     name: 'Помощник для инвалидов',
                                     description: 'На 1 этаже вас встретит специалист<br>и проводит до номера.',
-                                    checked: false
-                                }
+                                    checked: false,
+                                },
                             ],
-                            isRich: true
+                            isRich: true,
                         })
                     .search-room__params-facilities
                         +dropdown({
                             title: 'Удобства номера',
                             inputOptions: {
                                 value: '2 спальни, 2 кровати',
-                                placeholder: 'Удобства'
+                                placeholder: 'Удобства',
                             },
                             popupMixinOptions: {
                                 name: 'items-counter',
@@ -152,29 +152,29 @@ block content
                             items: [
                                 {
                                     name: 'Завтрак',
-                                    checked: false
+                                    checked: false,
                                 },
                                 {
                                     name: 'Письменный стол',
-                                    checked: true
+                                    checked: true,
                                 },
                                 {
                                     name: 'Стул для кормления',
-                                    checked: true
+                                    checked: true,
                                 },
                                 {
                                     name: 'Кроватка',
-                                    checked: true
+                                    checked: true,
                                 },
                                 {
                                     name: 'Телевизор',
-                                    checked: false
+                                    checked: false,
                                 },
                                 {
                                     name: 'Шампунь',
-                                    checked: false
-                                }
-                            ]
+                                    checked: false,
+                                },
+                            ],
                         })
 
 
@@ -182,7 +182,7 @@ block content
                     .search-room__rooms-title
                         +heading({
                             type: 'h1',
-                            text: 'Номера, которые мы для вас подобрали'
+                            text: 'Номера, которые мы для вас подобрали',
                         })
                     ul.search-room__room-cards
                         each _, i in Array(12)

@@ -1,7 +1,6 @@
 include ../arrow/arrow
 
-
-mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}, withJs = false} = {})
+mixin text-field({ inputOptions = {}, arrowOptions, modifiers = {}, withJs = false } = {})
     -
         let className = 'text-field';
 
@@ -40,7 +39,7 @@ mixin text-field({inputOptions = {}, arrowOptions, modifiers = {}, withJs = fals
             type=inputOptions.type,
             placeholder=inputOptions.placeholder,
             value=inputOptions.value,
-            readonly=inputOptions.isReadonly
+            readonly=inputOptions.isReadonly,
         )
         if (arrowOptions)
             button.text-field__arrow(type=inputOptions.isSubmit ? 'submit' : 'button')

@@ -4,13 +4,12 @@ include ../date-picker/date-picker
 include ../items-counter/items-counter
 include ../dropdown/dropdown
 
-
 mixin search-card
     article.search-card.js-search-card
         form
             +heading({
                 type: 'h1',
-                text: 'Найдём номера под ваши пожелания'
+                text: 'Найдём номера под ваши пожелания',
             })
             .search-card__dates.js-search-card__dates
                 +dropdown({
@@ -41,11 +40,11 @@ mixin search-card
                             items: [
                                 {
                                     name: 'Взрослые',
-                                    value: '0'
+                                    value: '0',
                                 },
                                 {
                                     name: 'Дети',
-                                    value: '0'
+                                    value: '0',
                                 },
                                 {
                                     name: 'Младенцы',

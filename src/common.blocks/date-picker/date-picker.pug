@@ -1,5 +1,12 @@
-mixin date-picker({withBorder = false, dateFormat = null, initialDate = [null, null], isTextDouble = false} = {})
+mixin date-picker(options = {})
     -
+        const {
+            withBorder = false,
+            dateFormat = null,
+            initialDate = [null, null],
+            isTextDouble = false,
+        } = options;
+
         let className = 'date-picker js-date-picker';
         if (withBorder) {
             className += ' date-picker_with-border';

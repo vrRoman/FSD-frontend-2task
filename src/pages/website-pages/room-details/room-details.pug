@@ -7,11 +7,9 @@ include ../../../common.blocks/comment/comment
 include ../../../common.blocks/bullet-list/bullet-list
 include ../../../common.blocks/booking-card/booking-card
 
-
 block vars
     - const title = 'Room details';
     - const name = 'room-details';
-
 
 block content
     main.room-details
@@ -29,37 +27,37 @@ block content
                     .room-details__room-info-title
                         +heading({
                             type: 'h2',
-                            text: 'Сведения о номере'
+                            text: 'Сведения о номере',
                         })
                     +icon-text-list([
                         {
                             title: 'Комфорт',
                             description: 'Шумопоглощающие стены',
-                            iconName: 'insert_emoticon'
+                            iconName: 'insert_emoticon',
                         },
                         {
                             title: 'Удобство',
                             description: 'Окно в каждой из спален',
-                            iconName: 'location_city'
+                            iconName: 'location_city',
                         },
                         {
                             title: 'Уют',
                             description: 'Номер оснащён камином',
-                            iconName: 'whatshot'
-                        }
+                            iconName: 'whatshot',
+                        },
                     ])
                 article.room-details__expressions
                     .room-details__expressions-title
                         +heading({
                             type: 'h2',
-                            text: 'Впечатления от номера'
+                            text: 'Впечатления от номера',
                         })
                     +donut-chart
                 article.room-details__comments
                     .room-details__comments-title
                         +heading({
                             type: 'h2',
-                            text: 'Отзывы посетителей номера'
+                            text: 'Отзывы посетителей номера',
                         })
                         span.room-details__comments-number 2 отзыва
                     .room-details__comment
@@ -72,8 +70,8 @@ block content
                                 И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.`,
                             likeOptions: {
                                 likesNum: 12,
-                                isActive: true
-                            }
+                                isActive: true,
+                            },
                         })
                     .room-details__comment
                         +comment({
@@ -85,26 +83,26 @@ block content
                                 каждый день новое блюдо и десерт как комплимент`,
                             likeOptions: {
                                 likesNum: 2,
-                                isActive: false
-                            }
+                                isActive: false,
+                            },
                         })
 
                 article.room-details__rules
                     .room-details__rules-title
                         +heading({
                           type: 'h2',
-                          text: 'Правила'
+                          text: 'Правила',
                         })
                     +bullet-list([
                         'Нельзя с питомцами',
                         'Без вечеринок и мероприятий',
-                        'Время прибытия — после 13:00,<br>а выезд до 12:00'
+                        'Время прибытия — после 13:00,<br>а выезд до 12:00',
                     ])
                 article.room-details__cancel
                     .room-details__cancel-title
                         +heading({
                             type: 'h2',
-                            text: 'Отмена'
+                            text: 'Отмена',
                         })
                     span
                         | Бесплатная отмена в течение 48 ч. После<br>этого при отмене не позднее чем
@@ -123,18 +121,18 @@ block content
                         bookingItems: [
                             {
                                 text: '9 990₽ х 4 суток',
-                                price: '39 960'
+                                price: '39 960',
                             },
                             {
                                   text: 'Сбор за услуги: скидка 2 179₽',
                                   price: 0,
-                                  tooltip: 'Питание'
+                                  tooltip: 'Питание',
                             },
                             {
                                   text: 'Сбор за дополнительные услуги',
                                   price: '300',
-                                  tooltip: 'Постельное белье'
-                            }
+                                  tooltip: 'Постельное белье',
+                            },
                         ],
                         totalPrice: '38 081',
                     })

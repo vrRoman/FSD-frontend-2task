@@ -1,7 +1,6 @@
 include ../heading/heading
 
-
-mixin donut-chart()
+mixin donut-chart
     .donut-chart.js-donut-chart
         .donut-chart__chart
             canvas.donut-chart__canvas.js-donut-chart__canvas(width='128' height='128')
@@ -10,12 +9,12 @@ mixin donut-chart()
                     +heading({
                         type: 'h1',
                         text: 260,
-                        color: 'purple'
+                        color: 'purple',
                     })
                 +heading({
                     type: 'h3',
                     text: 'голосов',
-                    color: 'purple'
+                    color: 'purple',
                 })
         ul.donut-chart__list
             li.donut-chart__item.donut-chart__item_color_orange Великолепно

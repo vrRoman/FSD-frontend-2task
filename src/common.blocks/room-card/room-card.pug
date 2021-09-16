@@ -1,8 +1,17 @@
 include ../room-info/room-info
 include ../rate-button/rate-button
 
+mixin room-card(options = {})
+    -
+        const {
+            imagesSrc,
+            hasSliderArrows = false,
+            roomInfo,
+            rating,
+            numOfComments,
+            link = 'room-details.html',
+        } = options;
 
-mixin room-card({imagesSrc, hasSliderArrows = false, roomInfo, rating, numOfComments, link = 'room-details.html'})
     article.room-card.js-room-card
         -
             let sliderClassName = 'room-card__slider js-room-card__slider';

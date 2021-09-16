@@ -1,12 +1,21 @@
 include ../like-button/like-button
 
-
-mixin comment({avatarLink, userName, dateText, dateTime, text, likeOptions, href='change-me'})
+mixin comment(options = {})
+    -
+        const {
+            avatarLink,
+            userName,
+            dateText,
+            dateTime,
+            text,
+            likeOptions,
+            href = 'change-me',
+        } = options;
     article.comment
         .comment__header
             img.comment__avatar(
                 src=avatarLink,
-                alt='user-avatar'
+                alt='user-avatar',
             )
 
             address

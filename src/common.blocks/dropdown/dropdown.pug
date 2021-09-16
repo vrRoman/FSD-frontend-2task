@@ -1,8 +1,18 @@
 include ../text-field/text-field
 
-
-mixin dropdown({inputOptions = {}, popupMixinOptions = {}, popupHidden = true, title, isDouble = false, isShort = false, isPopupDistant = false, defaultInputValue = ''} = {})
+mixin dropdown(options = {})
     -
+        let {
+            inputOptions = {},
+            popupMixinOptions = {},
+            popupHidden = true,
+            title,
+            isDouble = false,
+            isShort = false,
+            isPopupDistant = false,
+            defaultInputValue = '',
+        } = options;
+
         let className = 'dropdown js-dropdown';
         if (isDouble) {
             className += ' dropdown_double';

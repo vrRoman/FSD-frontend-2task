@@ -18,58 +18,55 @@ include ../../../common.blocks/bullet-list/bullet-list
 include ../../../common.blocks/icon-text-list/icon-text-list
 include ../../../common.blocks/comment/comment
 
-
 block vars
     - const name = 'form-elements'
 
 block content
     -
-        const facilitiesDropdownItems =
-            [
-                {
-                    name: 'Спальни',
-                    value: '2',
-                    nameDeclensions: ['спальня', 'спальни', 'спален'],
-                },
-                {
-                    name: 'Кровати',
-                    value: '2',
-                    nameDeclensions: ['кровать', 'кровати', 'кроватей'],
-                },
-                {
-                    name: 'Ванные комнаты',
-                    value: '0',
-                    nameDeclensions: ['ванная комната', 'ванные комнаты', 'ванных комнат'],
-                },
-            ]
+        const facilitiesDropdownItems = [
+            {
+                name: 'Спальни',
+                value: '2',
+                nameDeclensions: ['спальня', 'спальни', 'спален'],
+            },
+            {
+                name: 'Кровати',
+                value: '2',
+                nameDeclensions: ['кровать', 'кровати', 'кроватей'],
+            },
+            {
+                name: 'Ванные комнаты',
+                value: '0',
+                nameDeclensions: ['ванная комната', 'ванные комнаты', 'ванных комнат'],
+            },
+        ]
 
-        const listCheckboxes =
-            [
-                {
-                    name: 'Завтрак',
-                    checked: false
-                },
-                {
-                    name: 'Письменный стол',
-                    checked: true
-                },
-                {
-                    name: 'Стул для кормления',
-                    checked: true
-                },
-                {
-                    name: 'Кроватка',
-                    checked: true
-                },
-                {
-                    name: 'Телевизор',
-                    checked: false
-                },
-                {
-                    name: 'Шампунь',
-                    checked: false
-                },
-            ]
+        const listCheckboxes = [
+            {
+                name: 'Завтрак',
+                checked: false,
+            },
+            {
+                name: 'Письменный стол',
+                checked: true,
+            },
+            {
+                name: 'Стул для кормления',
+                checked: true,
+            },
+            {
+                name: 'Кроватка',
+                checked: true,
+            },
+            {
+                name: 'Телевизор',
+                checked: false,
+            },
+            {
+                name: 'Шампунь',
+                checked: false,
+            },
+        ]
     .container
         .form-elements
             .form-elements__elements-container
@@ -79,7 +76,7 @@ block content
                     +text-field({
                         inputOptions: {
                             placeholder: 'Email',
-                            type: 'email'
+                            type: 'email',
                         }
                     })
                 .form-elements__field-wrapper
@@ -89,10 +86,10 @@ block content
                         inputOptions: {
                             placeholder: 'This is pretty awesome',
                             type: 'text',
-                            value: 'This is pretty awesome'
+                            value: 'This is pretty awesome',
                         },
                         modifiers: {
-                            isFocused: true
+                            isFocused: true,
                         }
                     })
                 .form-elements__field-wrapper
@@ -101,7 +98,7 @@ block content
                             title: 'Dropdown',
                             inputOptions: {
                                 value: 'Сколько гостей',
-                                placeholder: 'Сколько гостей'
+                                placeholder: 'Сколько гостей',
                             },
                             popupMixinOptions: {
                                 name: 'items-counter',
@@ -109,11 +106,11 @@ block content
                                     items: [
                                         {
                                             name: 'Взрослые',
-                                            value: 0
+                                            value: 0,
                                         },
                                         {
                                             name: 'Дети',
-                                            value: 0
+                                            value: 0,
                                         },
                                         {
                                             name: 'Младенцы',
@@ -155,7 +152,7 @@ block content
                                 name: 'date-picker',
                                 params: {
                                     isTextDouble: true,
-                                    initialDate: [null, '2019.08.19']
+                                    initialDate: [null, '2019.08.19'],
                                 },
                             },
                             isDouble: true,
@@ -205,15 +202,15 @@ block content
                         items: [
                             {
                                 name: 'Можно курить',
-                                checked: false
+                                checked: false,
                             },
                             {
                                 name: 'Можно с питомцами',
-                                checked: true
+                                checked: true,
                             },
                             {
                                 name: 'Можно пригласить гостей<br>(до 10 человек)',
-                                checked: true
+                                checked: true,
                             }
                         ],
                     })
@@ -222,7 +219,7 @@ block content
                         +elem-info('Radio buttons')
                     +radio-buttons({
                         items: ['Мужчина', 'Женщина'],
-                        itemsName: 'gender'
+                        itemsName: 'gender',
                     })
                 .form-elements__button-wrapper
                     .form-elements__button-elem-info
@@ -230,23 +227,23 @@ block content
                     .form-elements__toggle-button
                         +toggle-button({
                             text: 'Получать спецпредложения',
-                            checked: true
+                            checked: true,
                         })
                     .form-elements__toggle-button
                         +toggle-button({
-                            text: 'Получать спецпредложения'
+                            text: 'Получать спецпредложения',
                         })
                 .form-elements__like-buttons-wrapper
                     .form-elements__button-elem-info
                         +elem-info('Like button')
                     .form-elements__like-button
                         +like-button({
-                            likesNum: 2
+                            likesNum: 2,
                         })
                     .form-elements__like-button
                         +like-button({
                             likesNum: 12,
-                            isActive: true
+                            isActive: true,
                         })
                 .form-elements__rate-buttons-wrapper
                     .form-elements__button-elem-info
@@ -268,42 +265,42 @@ block content
                     .form-elements__button
                         +button({
                             modifiers: {
-                                isHovered: true
-                            }
-                        })
-                    .form-elements__button
-                        +button({
-                            modifiers: {
-                                isSecondary: true
-                            }
+                                isHovered: true,
+                            },
                         })
                     .form-elements__button
                         +button({
                             modifiers: {
                                 isSecondary: true,
-                                isHovered: true
-                            }
+                            },
+                        })
+                    .form-elements__button
+                        +button({
+                            modifiers: {
+                                isSecondary: true,
+                                isHovered: true,
+                            },
                         })
                     .form-elements__button
                         +button({
                             modifiers: {
                                 withoutFrame: true,
-                                textColor: 'purple'
-                            }
+                                textColor: 'purple',
+                            },
                         })
                     .form-elements__button
                         +button({
                             modifiers: {
                                 withoutFrame: true,
-                                textColor: 'gray'
-                            }
+                                textColor: 'gray',
+                            },
                         })
                     .form-elements__button
                         +button({
                             text: 'Перейти к оплате',
                             modifiers: {
-                                isLong: true
-                            }
+                                isLong: true,
+                            },
                         })
 
                 .form-elements__button-wrapper
@@ -367,11 +364,11 @@ block content
                                 items: [
                                     {
                                         name: 'Взрослые',
-                                        value: 0
+                                        value: 0,
                                     },
                                     {
                                         name: 'Дети',
-                                        value: 0
+                                        value: 0,
                                     },
                                     {
                                         name: 'Младенцы',
@@ -393,7 +390,7 @@ block content
                         title: 'Dropdown',
                         inputOptions: {
                             value: '3 гостя',
-                            placeholder: 'Сколько гостей'
+                            placeholder: 'Сколько гостей',
                         },
                         popupMixinOptions: {
                             name: 'items-counter',
@@ -401,11 +398,11 @@ block content
                                 items: [
                                     {
                                         name: 'Взрослые',
-                                        value: 2
+                                        value: 2,
                                     },
                                     {
                                         name: 'Дети',
-                                        value: 1
+                                        value: 1,
                                     },
                                     {
                                         name: 'Младенцы',
@@ -441,15 +438,15 @@ block content
                             {
                                 name: 'Широкий коридор',
                                 description: 'Ширина коридоров в номере<br>не менее 91 см.',
-                                checked: false
+                                checked: false,
                             },
                             {
                                 name: 'Помощник для инвалидов',
                                 description: 'На 1 этаже вас встретит специалист<br>и проводит до номера.',
-                                checked: false
+                                checked: false,
                             }
                         ],
-                        isRich: true
+                        isRich: true,
                     })
 
             .form-elements__elements-container.form-elements__elements-container_with-top-margin
@@ -459,7 +456,7 @@ block content
                     +bullet-list([
                       'Нельзя с питомцами',
                       'Без вечеринок и мероприятий',
-                      'Время прибытия — после 13:00,<br>а выезд до 12:00'
+                      'Время прибытия — после 13:00,<br>а выезд до 12:00',
                     ])
 
             .form-elements__icon-text-list-wrapper
@@ -467,13 +464,13 @@ block content
                     {
                         title: 'Комфорт',
                         description: 'Шумопоглощающие стены',
-                        iconName: 'insert_emoticon'
+                        iconName: 'insert_emoticon',
                     },
                     {
                         title: 'Удобство',
                         description: 'Окно в каждой из спален',
-                        iconName: 'location_city'
-                    }
+                        iconName: 'location_city',
+                    },
                 ])
 
             .form-elements__comment-wrapper
@@ -486,6 +483,6 @@ block content
                         И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.`,
                     likeOptions: {
                         likesNum: 12,
-                        isActive: true
-                    }
+                        isActive: true,
+                    },
                 })

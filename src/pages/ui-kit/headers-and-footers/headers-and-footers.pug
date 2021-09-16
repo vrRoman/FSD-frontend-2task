@@ -3,21 +3,19 @@ extends ../../../templates/ui-kit
 include ../../../common.blocks/header/header
 include ../../../common.blocks/footer/footer
 
-
 block vars
-    - const name = 'headers-and-footers'
-
+    - const name = 'headers-and-footers';
 
 block content
     .headers-and-footers
         .headers-and-footers__header
             +header({
-                activeLink: 0
+                activeLink: 0,
             })
         .headers-and-footers__header
             +header({
                 userName: 'Юлий Цезарь',
-                activeLink: 0
+                activeLink: 0,
             })
         .headers-and-footers__footer
             +footer
