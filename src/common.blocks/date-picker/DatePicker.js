@@ -1,39 +1,12 @@
 import autoBind from 'auto-bind';
 import Observable from '@/js/Observable/Observable';
 
+import data from './datePickerData';
+
 class DatePicker extends Observable {
   constructor(element) {
     super();
     autoBind(this);
-
-    this.clearBtnHTML = `<button class="ui-datepicker-current 
-      ui-state-default ui-corner-all 
-      ui-datepicker-custom-button ui-datepicker-clear-button js-ui-datepicker-clear-button" 
-      type="button">Очистить</button> `;
-    this.applyBtnHTML = `<button class="ui-datepicker-current
-      ui-state-default ui-corner-all
-      ui-datepicker-custom-button ui-datepicker-apply-button js-ui-datepicker-apply-button"
-      type="button">Применить</button> `;
-    this.monthNames = [
-      'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-      'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
-    ];
-    this.monthNamesShort = [
-      'янв', 'фев', 'мар', 'апр', 'май', 'июн',
-      'июл', 'авг', 'сен', 'окт', 'ноя', 'дек',
-    ];
-    this.dayNames = [
-      'Воскресенье', 'Понедельник', 'Вторник',
-      'Среда', 'Четверг', 'Пятница', 'Суббота',
-    ];
-    this.dayNamesShort = [
-      'Вс', 'Пн', 'Вт',
-      'Ср', 'Чт', 'Пт', 'Сб',
-    ];
-    this.dayNamesMin = [
-      'Вс', 'Пн', 'Вт',
-      'Ср', 'Чт', 'Пт', 'Сб',
-    ];
 
     this.$elem = $(element);
     this.extensionRangeObject = {};
@@ -56,16 +29,16 @@ class DatePicker extends Observable {
       range: 'period',
       minDate: new Date(),
       showButtonPanel: true,
-      currentText: this.clearBtnHTML + this.applyBtnHTML,
+      currentText: data.clearBtnHTML + data.applyBtnHTML,
       firstDay: 1,
       showOtherMonths: true,
       selectOtherMonths: true,
       dateFormat: this.dateFormat,
-      monthNames: this.monthNames,
-      monthNamesShort: this.monthNamesShort,
-      dayNames: this.dayNames,
-      dayNamesShort: this.dayNamesShort,
-      dayNamesMin: this.dayNamesMin,
+      monthNames: data.monthNames,
+      monthNamesShort: data.monthNamesShort,
+      dayNames: data.dayNames,
+      dayNamesShort: data.dayNamesShort,
+      dayNamesMin: data.dayNamesMin,
       onSelect: this._handleDateSelect,
       onChangeMonthYear: this._handleChangeMonthYear,
     });

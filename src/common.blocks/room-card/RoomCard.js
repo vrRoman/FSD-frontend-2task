@@ -1,3 +1,5 @@
+import data from './sliderData';
+
 class RoomCard {
   constructor(elem) {
     this.elem = elem;
@@ -8,10 +10,9 @@ class RoomCard {
     this.sliderElem = this.getSliderElem();
 
     $(this.sliderElem).slick({
+      ...data,
       dots: true,
       arrows: true,
-      prevArrow: '<span class="slick-prev slick-arrow material-icons" aria-label="Next"></span>',
-      nextArrow: '<span class="slick-next slick-arrow material-icons" aria-label="Next"></span>',
     });
   }
 
