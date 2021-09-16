@@ -7,7 +7,6 @@ include ../../../common.blocks/items-counter/items-counter
 include ../../../common.blocks/date-picker/date-picker
 include ../../../common.blocks/checkbox-buttons/checkbox-buttons
 include ../../../common.blocks/radio-buttons/radio-buttons
-include ../../../common.blocks/toggle-button/toggle-button
 include ../../../common.blocks/like-button/like-button
 include ../../../common.blocks/rate-button/rate-button
 include ../../../common.blocks/range-slider/range-slider
@@ -225,13 +224,14 @@ block content
                     .form-elements__button-elem-info
                         +elem-info('Toggle')
                     .form-elements__toggle-button
-                        +toggle-button({
-                            text: 'Получать спецпредложения',
-                            checked: true,
+                        +checkbox-buttons({
+                            items: [{ name: 'Получать спецпредложения', checked: true }],
+                            theme: 'toggle',
                         })
                     .form-elements__toggle-button
-                        +toggle-button({
-                            text: 'Получать спецпредложения',
+                        +checkbox-buttons({
+                            items: [{ name: 'Получать спецпредложения' }],
+                            theme: 'toggle',
                         })
                 .form-elements__like-buttons-wrapper
                     .form-elements__button-elem-info

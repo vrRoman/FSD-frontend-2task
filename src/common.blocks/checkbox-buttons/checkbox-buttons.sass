@@ -67,6 +67,7 @@
   &_rich
     .checkbox-buttons__item
       margin-bottom: 9px
+
     .checkbox-buttons__button
       display: flex
       flex-direction: column
@@ -74,3 +75,43 @@
     .checkbox-buttons__name
       font-weight: bold
       color: $dark-shade-75
+
+  &_theme
+    &_toggle
+      .checkbox-buttons__input
+        &:checked
+          + .checkbox-buttons__name
+            &:before
+              background-image: none
+              border-color: $purple
+
+            &:after
+              transform: translateX(20px)
+              background-color: $purple
+
+      .checkbox-buttons__name
+        padding: 0 0 0 50px
+        align-items: center
+
+        font-family: Montserrat, Arial, sans-serif
+        line-height: (24rem / $default-font-size)
+        color: $dark-shade-75
+
+        &:before
+          width: 40px
+          top: unset
+          box-sizing: border-box
+          border: 1px solid $dark-shade-25
+          border-radius: 10px
+          cursor: pointer
+
+        &:after
+          content: ''
+          width: 12px
+          height: 12px
+          position: absolute
+          left: 4px
+          background-color: $dark-shade-25
+          transition: .2s
+          border-radius: 50%
+          cursor: pointer

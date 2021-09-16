@@ -1,7 +1,7 @@
 include ../heading/heading
 include ../button/button
 include ../text-field/text-field
-include ../toggle-button/toggle-button
+include ../checkbox-buttons/checkbox-buttons
 include ../radio-buttons/radio-buttons
 
 mixin signup-card
@@ -63,7 +63,10 @@ mixin signup-card
                     }
                 })
         .signup-card__offers
-            +toggle-button({ text: 'Получать спецпредложения' })
+            +checkbox-buttons({
+                items: [{ name: 'Получать спецпредложения' }],
+                theme: 'toggle',
+            })
         +button({
             text: 'Зарегистрироваться',
             hasLink: true,

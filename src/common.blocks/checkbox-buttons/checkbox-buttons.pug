@@ -1,8 +1,11 @@
-mixin checkbox-buttons({ items, isRich = false })
+mixin checkbox-buttons({ items, isRich = false, theme })
     -
         let className = 'checkbox-buttons';
         if (isRich) {
             className += ' checkbox-buttons_rich';
+        }
+        if (theme === 'toggle') {
+            className += ' checkbox-buttons_theme_toggle';
         }
     ul(class=className)
         each item in items
