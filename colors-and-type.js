@@ -15157,7 +15157,7 @@ pug_html = pug_html + "\n    \u003Cmain\u003E\n      \u003Cmain class=\"landing-
 pug_indent.push('            ');
 pug_mixins["search-card"]();
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cp class=\"landing-page__tagline\"\u003EЛучшие номера для вашей работы,\u003Cbr\u003Eотдыха и просто вдохновения\u003C\u002Fp\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fmain\u003E\n    \u003C\u002Fmain\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cp class=\"landing-page__tagline\"\u003EЛучшие номера для вашей работы, отдыха и просто вдохновения\u003C\u002Fp\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fmain\u003E\n    \u003C\u002Fmain\u003E";
 pug_indent.push('    ');
 pug_mixins["footer"]();
 pug_indent.pop();

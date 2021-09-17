@@ -26203,7 +26203,7 @@ pug_html = pug_html + "\n    \u003Cmain\u003E\n      \u003Cmain class=\"landing-
 pug_indent.push('            ');
 pug_mixins["search-card"]();
 pug_indent.pop();
-pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cp class=\"landing-page__tagline\"\u003EЛучшие номера для вашей работы,\u003Cbr\u003Eотдыха и просто вдохновения\u003C\u002Fp\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fmain\u003E\n    \u003C\u002Fmain\u003E";
+pug_html = pug_html + "\n          \u003C\u002Fdiv\u003E\n          \u003Cp class=\"landing-page__tagline\"\u003EЛучшие номера для вашей работы, отдыха и просто вдохновения\u003C\u002Fp\u003E\n        \u003C\u002Fdiv\u003E\n      \u003C\u002Fmain\u003E\n    \u003C\u002Fmain\u003E";
 pug_indent.push('    ');
 pug_mixins["footer"]();
 pug_indent.pop();
@@ -35407,7 +35407,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var auto_bind__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(18);
 /* harmony import */ var auto_bind__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(auto_bind__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _js_Observable_Observable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(29);
-/* harmony import */ var _datePickerData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
+/* harmony import */ var _date_picker_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(23);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -35482,16 +35482,16 @@ var DatePicker = /*#__PURE__*/function (_Observable) {
         range: 'period',
         minDate: new Date(),
         showButtonPanel: true,
-        currentText: _datePickerData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].clearBtnHTML + _datePickerData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].applyBtnHTML,
+        currentText: _date_picker_data__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].clearBtnHTML + _date_picker_data__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].applyBtnHTML,
         firstDay: 1,
         showOtherMonths: true,
         selectOtherMonths: true,
         dateFormat: this.dateFormat,
-        monthNames: _datePickerData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].monthNames,
-        monthNamesShort: _datePickerData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].monthNamesShort,
-        dayNames: _datePickerData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].dayNames,
-        dayNamesShort: _datePickerData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].dayNamesShort,
-        dayNamesMin: _datePickerData__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].dayNamesMin,
+        monthNames: _date_picker_data__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].monthNames,
+        monthNamesShort: _date_picker_data__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].monthNamesShort,
+        dayNames: _date_picker_data__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].dayNames,
+        dayNamesShort: _date_picker_data__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].dayNamesShort,
+        dayNamesMin: _date_picker_data__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"].dayNamesMin,
         onSelect: this._handleDateSelect,
         onChangeMonthYear: this._handleChangeMonthYear
       });
