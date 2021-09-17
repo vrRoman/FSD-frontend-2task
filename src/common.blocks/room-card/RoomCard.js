@@ -1,4 +1,4 @@
-import data from './sliderData';
+import data from './slider-data';
 
 class RoomCard {
   constructor(elem) {

@@ -1,7 +1,7 @@
 import autoBind from 'auto-bind';
 import Observable from '@/js/Observable/Observable';
 
-import data from './datePickerData';
+import data from './date-picker-data';
 
 class DatePicker extends Observable {
   constructor(element) {

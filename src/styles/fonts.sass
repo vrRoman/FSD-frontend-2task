@@ -1,4 +1,6 @@
-@mixin define-font($name, $folder-name: $name, $file-name, $style: normal, $weight: normal)
+@use 'sass:string'
+
+@mixin define-font($name, $folder-name: string.to-lower-case($name), $file-name, $style: normal, $weight: normal)
   @font-face
     font-family: $name
     src: url("../public/fonts/#{$folder-name}/woff2/#{$file-name}.woff2") format("woff2")
@@ -17,6 +19,6 @@
 @include define-font($name: "Montserrat", $file-name: montserrat-regular)
 @include define-font($name: "Montserrat", $file-name: montserrat-bold, $weight: bold)
 
-@include define-font($name: "Material Icons", $folder-name: MaterialIcons, $file-name: material-icons-regular)
+@include define-font($name: "Material Icons", $folder-name: material-icons, $file-name: material-icons-regular)
 
-@include define-font($name: "Font Awesome 5 Brands", $folder-name: FontAwesomeBrands, $file-name: fa-brands-400, $weight: 400)
+@include define-font($name: "Font Awesome 5 Brands", $folder-name: font-awesome-brands, $file-name: fa-brands-400, $weight: 400)
